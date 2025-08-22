@@ -118,6 +118,54 @@
 
   <build>
     <plugins>
+
+      <!-- Enforcing using the proper version of maven (see https://maven.apache.org/enforcer) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>${maven-enforcer-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <!-- the goal 'enforce' is bound to maven-phase 'validate' -->
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>[3.9.11,)</version>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!--
+          Getting the reports about not up-to-date versions of maven-project's dependencies and plugins:
+          - getting help: "mvn versions:help" or see https://www.mojohaus.org/versions/versions-maven-plugin/index.html
+          - dependencies-updates     ::> "mvn versions:display-dependency-updates"
+          - plugin-updates info      ::> "mvn versions:display-plugin-updates"
+          - properties-updates info  ::> "mvn versions:display-property-updates"
+      -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>${maven-versions-plugin.version}</version>
+        <configuration>
+          <ruleSet>
+            <ignoreVersions>
+              <ignoreVersion>
+                <type>regex</type>
+                <version>(?i).*-(alpha|beta|m|rc)([-.]?\d+)?</version>
+              </ignoreVersion>
+            </ignoreVersions>
+          </ruleSet>
+        </configuration>
+      </plugin>
+
+      <!-- Compiling the Java-sources (including annotation processing with Lombok) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -137,35 +185,8 @@
           <debug>${maven-compiler-plugin.debug}</debug>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>properties</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>properties-maven-plugin</artifactId>
-        <version>1.2.1</version>
-        <executions>
-          <execution>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>write-project-properties</goal>
-            </goals>
-            <configuration>
-              <outputFile>
-                ${project.build.outputDirectory}/maven.project.properties
-              </outputFile>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+
+      <!-- Executing JUnit-tests (using JUnit-5 Platform) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -206,14 +227,14 @@
         <version>${maven.surefire.plugin.version}</version>
       </plugin>
 
+      <!--
+          Executing any main-class for debug-purposes (at this particular case - "CoreUtilsMain")
+      -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.5.1</version>
         <executions>
-          <!--
-              Executing any main-class for debug-purposes (at this particular case - "MyNewTree")
-          -->
           <execution>
             <id>core-utils-main</id>
             <goals>
@@ -222,38 +243,89 @@
             <configuration>
               <includeProjectDependencies>true</includeProjectDependencies>
               <includePluginDependencies>false</includePluginDependencies>
-              <mainClass>org.krmdemo.techlabs.CoreUtilsMain</mainClass>
+              <mainClass>${main-class-name}</mainClass>
               <!-- this option allows to see test-classes -->
               <!-- <classpathScope>test</classpathScope>  -->
             </configuration>
           </execution>
         </executions>
       </plugin>
+
+      <!-- Building the JAR-archive of Java-binaries to be deployed as a main project-artifact -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven-jar-plugin.version}</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>${main-class-name}</mainClass>
+            </manifest>
+            <!-- Manifest-Entries, which are specific for CI/CD-server (in this case it's Git-Hub): -->
+            <manifestEntries>
+              <Project-Build-Url>${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}</Project-Build-Url>
+              <Project-Commit-Url>${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/commit/${env.GITHUB_SHA}</Project-Commit-Url>
+            </manifestEntries>
+            <manifestSections>
+              <manifestSection>
+                <name>git-hub</name>
+                <manifestEntries>
+                  <Github-Server-Url>${env.GITHUB_SERVER_URL}</Github-Server-Url>
+                  <Github-Server-Repository>${env.GITHUB_REPOSITORY}</Github-Server-Repository>
+                  <Github-Sha>${env.GITHUB_SHA}</Github-Sha>
+                  <Github-Ref>${env.GITHUB_REF}</Github-Ref>
+                  <Github-Ref-Name>${env.GITHUB_REF_NAME}</Github-Ref-Name>
+                  <Github-Ref-Type>${env.GITHUB_REF_TYPE}</Github-Ref-Type>
+                  <Github-Head-Ref>${env.GITHUB_HEAD_REF}</Github-Head-Ref>
+                  <Github-Run-Id>${env.GITHUB_RUN_ID}</Github-Run-Id>
+                  <Github-Run-Attempt>${env.GITHUB_RUN_ATTEMPT}</Github-Run-Attempt>
+                  <Github-Run-Number>${env.GITHUB_RUN_NUMBER}</Github-Run-Number>
+                  <Github-Workflow>${env.GITHUB_WORKFLOW}</Github-Workflow>
+                  <Github-Workflow-Event>${env.GITHUB_EVENT_NAME}</Github-Workflow-Event>
+                  <Github-Workflow-Job>${env.GITHUB_JOB}</Github-Workflow-Job>
+                  <Github-Workflow-Ref>${env.GITHUB_WORKFLOW_REF}</Github-Workflow-Ref>
+                  <Github-Workflow-Sha>${env.GITHUB_WORKFLOW_SHA}</Github-Workflow-Sha>
+                </manifestEntries>
+              </manifestSection>
+            </manifestSections>
+          </archive>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 
   <properties>
     <java.version>21</java.version>
     <lombock.version>1.18.38</lombock.version>
-
-    <org.slf4j.version>2.0.16</org.slf4j.version>
-    <ch.qos.logback.version>1.5.17</ch.qos.logback.version>
-
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <maven-compiler-plugin.debug>true</maven-compiler-plugin.debug>
     <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+    <main-class-name>org.krmdemo.techlabs.CoreUtilsMain</main-class-name>
+
+    <org.slf4j.version>2.0.17</org.slf4j.version>
+    <ch.qos.logback.version>1.5.17</ch.qos.logback.version>
+
+    <maven-enforcer-plugin.version>3.6.1</maven-enforcer-plugin.version>
+    <maven-versions-plugin.version>2.18.0</maven-versions-plugin.version>
     <maven.surefire.plugin.version>3.5.3</maven.surefire.plugin.version>
+    <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+    <maven.install.plugin.version>3.1.4</maven.install.plugin.version>
+    <maven.dependency.plugin.version>3.8.1</maven.dependency.plugin.version>
+    <maven.deploy.plugin.version>3.1.4</maven.deploy.plugin.version>
+    <maven.release.plugin.version>3.1.1</maven.release.plugin.version>
 
     <org.junit.jupiter.version>5.13.4</org.junit.jupiter.version>
     <org.junit.platform.version>1.13.4</org.junit.platform.version>
-    <org.assertj.version>3.27.3</org.assertj.version>
-    <org.mockito.version>5.18.0</org.mockito.version>
+    <org.assertj.version>3.27.4</org.assertj.version>
+    <org.mockito.version>5.19.0</org.mockito.version>
 
-    <commons-io.version>2.19.0</commons-io.version>
+    <commons-io.version>2.20.0</commons-io.version>
     <commons-lang.version>3.18.0</commons-lang.version>
-    <commons-text.version>1.13.1</commons-text.version>
-    <com.fasterxml.jackson.version>2.19.0</com.fasterxml.jackson.version>
-    <snakeyaml-engine.version>2.9</snakeyaml-engine.version>
+    <commons-text.version>1.14.0</commons-text.version>
+    <com.fasterxml.jackson.version>2.19.2</com.fasterxml.jackson.version>
+    <snakeyaml-engine.version>2.10</snakeyaml-engine.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
