@@ -1,4 +1,4 @@
-package org.krmdeno.techlabs;
+package org.krmdemo.techlabs;
 
 public class CoreUtilsMain {
 
