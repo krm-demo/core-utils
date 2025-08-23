@@ -25,6 +25,7 @@ jobs:
         run: |
           echo "--------- env-vars before executing the maven: -----------
           env | sort
+          ls -laxo
           echo "----------------------------------------------------------
           mvn -B verify
 

@@ -8,9 +8,6 @@ jobs:
     steps:
       - name: Group of log lines
         run: |
-          echo "::group::My title"
-          echo "Inside group"
+          echo "::group::ls -laxo"
+          ls -laxo
           echo "::endgroup::"
-          echo "----------------------------"
-          env | sort
-          echo "----------------------------"
