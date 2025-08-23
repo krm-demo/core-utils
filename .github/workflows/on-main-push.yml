@@ -23,10 +23,10 @@ jobs:
           cache: 'maven'
       - name: Build with Maven
         run: |
-          echo "--------- env-vars before executing the maven: -----------
+          echo "--------- env-vars before executing the maven: -----------"
           env | sort
           ls -laxo
-          echo "----------------------------------------------------------
+          echo "----------------------------------------------------------"
           mvn -B verify
 
 
