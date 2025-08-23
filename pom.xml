@@ -6,8 +6,17 @@
 
   <groupId>io.github.krm-demo</groupId>
   <artifactId>core-utils</artifactId>
-  <version>21.0.1-SNAPSHOT</version>
+  <version>21.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
+
+  <name>${project.artifactId}</name>
+  <description>Utility-classes to simplify working with core-java API (streams, collections, input-output)</description>
+  <url>https://github.com/krm-demo/core-utils</url>
+
+  <organization>
+    <name>krm-demo/rest-info</name>
+    <url>https://github.com/krm-demo/core-utils</url>
+  </organization>
 
   <dependencyManagement>
     <dependencies>
@@ -165,6 +174,16 @@
         </configuration>
       </plugin>
 
+      <!-- ??? -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${maven.resources.plugin.version}</version>
+        <configuration>
+          <propertiesEncoding>${project.build.sourceEncoding}</propertiesEncoding>
+        </configuration>
+      </plugin>
+
       <!-- Compiling the Java-sources (including annotation processing with Lombok) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -259,11 +278,19 @@
         <configuration>
           <archive>
             <manifest>
-              <addClasspath>true</addClasspath>
+              <addClasspath>false</addClasspath>
+              <addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
               <mainClass>${main-class-name}</mainClass>
             </manifest>
             <!-- Manifest-Entries, which are specific for CI/CD-server (in this case it's Git-Hub): -->
             <manifestEntries>
+              <Build-Date>${maven.build.timestamp}</Build-Date>
+              <Project-Group>${project.groupId}</Project-Group>
+              <Project-Org-Url>${project.organization.url}</Project-Org-Url>
+              <Project-Url>${project.url}</Project-Url>
+              <Env-Path>${env.PATH}</Env-Path>
+              <Env-Pwd>${env.PWD}</Env-Pwd>
               <Project-Build-Url>${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}</Project-Build-Url>
               <Project-Commit-Url>${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/commit/${env.GITHUB_SHA}</Project-Commit-Url>
             </manifestEntries>
@@ -297,6 +324,8 @@
   </build>
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     <java.version>21</java.version>
     <lombock.version>1.18.38</lombock.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
@@ -309,6 +338,7 @@
 
     <maven-enforcer-plugin.version>3.6.1</maven-enforcer-plugin.version>
     <maven-versions-plugin.version>2.18.0</maven-versions-plugin.version>
+    <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
     <maven.surefire.plugin.version>3.5.3</maven.surefire.plugin.version>
     <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven.install.plugin.version>3.1.4</maven.install.plugin.version>
