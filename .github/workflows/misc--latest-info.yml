@@ -33,20 +33,41 @@ jobs:
   bash-example:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: "Checkout the latest version of repo in '${{ github.ref }}'"
+        uses: actions/checkout@v4
       - name: ls -laxo .
         run: ls -laxo ${{ github.workspace }}
       - name: ./.github/scripts/dump-env.sh
         run: ${{ github.workspace }}/.github/scripts/dump-env.sh
-      - name: which java
+      - name: "'which java' before setup-java"
         run: >
           which java || echo "Last Error Code: $?"
-      - name: java --version
+      - name: "'java --version' before setup-java"
         run: >
           java --version || echo "Last Error Code: $?"
-      - name: which mvn
+      - name: "'which mvn' before setup-java"
         run: >
           which mvn || echo "Last Error Code: $?"
-      - name: mvn --version
+      - name: "'mvn --version' before setup-java"
         run: >
           mvn --version || echo "Last Error Code: $?"
+      - name: Set up JDK 21 (Amazon Corretto)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          check-latest: true
+          cache: 'maven'
+      - name: "'which java' after setup-java"
+        run: >
+          which java || echo "Last Error Code: $?"
+      - name: "'java --version' after setup-java"
+        run: >
+          java --version || echo "Last Error Code: $?"
+      - name: "'which mvn' after setup-java"
+        run: >
+          which mvn || echo "Last Error Code: $?"
+      - name: "'mvn --version' after setup-java"
+        run: >
+          mvn --version || echo "Last Error Code: $?"
+
