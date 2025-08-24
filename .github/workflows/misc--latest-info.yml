@@ -38,3 +38,15 @@ jobs:
         run: ls -laxo ${{ github.workspace }}
       - name: ./.github/scripts/dump-env.sh
         run: ${{ github.workspace }}/.github/scripts/dump-env.sh
+      - name: which java
+        run: >
+          which java || echo "Last Error Code: $?"
+      - name: java --version
+        run: >
+          java --version || echo "Last Error Code: $?"
+      - name: which mvn
+        run: >
+          which mvn || echo "Last Error Code: $?"
+      - name: mvn --version
+        run: >
+          mvn --version || echo "Last Error Code: $?"
