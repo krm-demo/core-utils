@@ -31,17 +31,6 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
-      - name: Dump to workspace './.github/vars'-dir
-        run: |
-          # dump the value of {{ github }} into JSON-file
-          echo '$(pwd) = "'$(pwd)'"'
-          echo 'github.workspace = "${{ github.workspace }}"'
-          ls -laxo .
-          ls -laxo $(pwd)
-          tree $(pwd)
-          tree ${{ github.workspace }}
-          echo 'la-la-la !!! la-la-la' > ${{ github.workspace }}/.github/vars/var-github.json
-      - run: ${{ github.workspace }}/.github/vars/dump-to-summary.sh
 
   bash-example:
     runs-on: ubuntu-latest
@@ -83,4 +72,16 @@ jobs:
       - name: "'mvn --version' after setup-java"
         run: >
           mvn --version || echo "Last Error Code: $?"
+
+      - name: Dump to workspace './.github/vars'-dir
+        run: |
+          # dump the value of {{ github }} into JSON-file
+          echo '$(pwd) = "'$(pwd)'"'
+          echo 'github.workspace = "${{ github.workspace }}"'
+          ls -laxo .
+          ls -laxo $(pwd)
+          tree $(pwd)
+          tree ${{ github.workspace }}
+          echo 'la-la-la !!! la-la-la' > ${{ github.workspace }}/.github/vars/var-github.json
+      - run: ${{ github.workspace }}/.github/vars/dump-to-summary.sh
 
