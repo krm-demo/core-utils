@@ -7,17 +7,17 @@ import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.SequencedMap;
 import java.util.SequencedSet;
-import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.propValue;
 
+/**
+ * TODO: provide the comprehensive Java-Doc !!!
+ */
 public class TechlabsCollectors {
 
     /**
@@ -42,6 +42,18 @@ public class TechlabsCollectors {
 
     public static Function<Map.Entry<?,?>, Map.Entry<String, String>> toPropValue() {
         return entry -> propValue(entry.getKey(), entry.getValue());
+    }
+
+    public static <K, U>
+    Collector<Map.Entry<K,U>, ?, NavigableMap<K,U>>
+    toSortedMap() {
+        return toSortedMap(Map.Entry::getKey, Map.Entry::getValue);
+    }
+
+    public static <K, V, U>
+    Collector<Map.Entry<K, V>, ?, NavigableMap<K,U>>
+    toSortedMap(Function<Map.Entry<K, V>, U> valueMapper) {
+        return toSortedMap(Map.Entry::getKey, valueMapper);
     }
 
     /**

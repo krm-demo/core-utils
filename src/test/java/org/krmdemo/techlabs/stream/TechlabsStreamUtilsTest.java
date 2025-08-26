@@ -77,7 +77,7 @@ public class TechlabsStreamUtilsTest {
 
         assertThatIllegalStateException().isThrownBy(() ->
             sortedMap(MergeFunction.THROW, numberWords.stream())
-        ).withMessage("attempt to merge values 'two' and 'couple', which is NOT allowed");
+        ).withMessage("attempt to overwrite the value 'couple' with the value'two', which is NOT allowed");
     }
 
     @Test
@@ -112,6 +112,6 @@ public class TechlabsStreamUtilsTest {
 
         assertThatIllegalStateException().isThrownBy(() ->
             sortedMap(MergeFunction.THROW, numberWords.stream())
-        ).withMessage("attempt to merge values 'two' and 'couple', which is NOT allowed");
+        ).withMessage("attempt to overwrite the value 'couple' with the value'two', which is NOT allowed");
     }
 }

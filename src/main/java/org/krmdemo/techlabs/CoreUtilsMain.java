@@ -1,5 +1,8 @@
 package org.krmdemo.techlabs;
 
+/**
+ * TODO: provide the comprehensive Java-Doc !!!
+ */
 public class CoreUtilsMain {
 
     /**

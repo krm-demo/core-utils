@@ -2,6 +2,9 @@ package org.krmdemo.techlabs.stream;
 
 import java.util.function.BinaryOperator;
 
+/**
+ * TODO: provide the comprehensive Java-Doc !!!
+ */
 public enum MergeFunction {
 
     OVERWRITE {
@@ -23,7 +26,9 @@ public enum MergeFunction {
         <U> BinaryOperator<U> op() {
             return (oldValue, newValue) -> {
                 throw new IllegalStateException(String.format(
-                    "attempt to merge values '%s' and '%s', which is NOT allowed", oldValue, newValue));
+                    "attempt to overwrite the value '%s' with the value'%s', which is NOT allowed",
+                    newValue, oldValue
+                ));
             };
         }
     };
