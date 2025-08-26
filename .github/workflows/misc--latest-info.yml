@@ -79,3 +79,6 @@ jobs:
           echo '${{ toJson(github) }}' > ${{ github.workspace }}/.github/vars/var-github.json
       - run: ${{ github.workspace }}/.github/vars/dump-to-summary.sh
 
+      - name: "Setup JBang"
+        uses: jbangdev/setup-jbang@main
+      - run: jbang properties@jbangdev 'java.v' 'java.r' 'java.s' 'sun.*' 'user.*'
