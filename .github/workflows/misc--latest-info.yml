@@ -37,8 +37,7 @@ jobs:
           cat << EOF > .github/vars/var-github.json
           The current working directory is: ${{ github.workspace }} 
           EOF 
-          ls -laxo .github/vars/
-          ./.github/vars/dump-to-summary.sh
+      - run: .github/vars/dump-to-summary.sh
 
   bash-example:
     runs-on: ubuntu-latest
