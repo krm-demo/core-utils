@@ -3,6 +3,7 @@ run-name: ${{ github.actor }} has executed 'misc--latest-info.yml' ##${{ github.
 on: workflow_dispatch
 
 jobs:
+  
   dump_contexts_to_log:
     runs-on: ubuntu-latest
     steps:
@@ -30,12 +31,14 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
-      - name: Dump to workspace '././github/vars'-dir
+      - name: Dump to workspace './.github/vars'-dir
         run: |
           # dump the value of {{ github }} into JSON-file
-          cat << EOF
+          cat << EOF > ${{ github.workspace }}/.github/vars/var-github.json
           The current working directory is: ${{ github.workspace }} 
           EOF
+          ./.github/vars/dump-to-summary.sh
+
   bash-example:
     runs-on: ubuntu-latest
     steps:

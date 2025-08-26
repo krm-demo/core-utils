@@ -1,0 +1,12 @@
+[
+  {
+    "a": "the value of property '[0].a'",
+    "b": "the value of property '[0].b'"
+  },
+  "the value of element '[1]'",
+  "the value of element '[2]'",
+  [
+    "the value of element '[3][0]'",
+    "the value of element '[3][1]'"
+  ]
+]
