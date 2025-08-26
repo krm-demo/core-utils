@@ -34,7 +34,7 @@ jobs:
       - name: Dump to workspace './.github/vars'-dir
         run: |
           # dump the value of {{ github }} into JSON-file
-          tree  ${{ github.workspace }}/.github
+          tree  ${{ github.workspace }}
           echo 'la-la-la !!! la-la-la' > ${{ github.workspace }}/.github/vars/var-github.json
       - run: ${{ github.workspace }}/.github/vars/dump-to-summary.sh
 
