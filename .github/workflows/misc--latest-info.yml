@@ -11,23 +11,27 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - name: Dump job context
+      - name: Dump 'secrets' context
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+        run: echo "$SECRETS_CONTEXT"
+      - name: Dump 'job' context
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
         run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
+      - name: Dump 'steps' context
         env:
           STEPS_CONTEXT: ${{ toJson(steps) }}
         run: echo "$STEPS_CONTEXT"
-      - name: Dump runner context
+      - name: Dump 'runner' context
         env:
           RUNNER_CONTEXT: ${{ toJson(runner) }}
         run: echo "$RUNNER_CONTEXT"
-      - name: Dump strategy context
+      - name: Dump 'strategy' context
         env:
           STRATEGY_CONTEXT: ${{ toJson(strategy) }}
         run: echo "$STRATEGY_CONTEXT"
-      - name: Dump matrix context
+      - name: Dump 'matrix' context
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
@@ -98,7 +102,8 @@ jobs:
         run: |
           # dump the manual JSON-object value into JSON-file
           echo '{
-            "someProperty": "la-la-la"
+            "someProperty": "la-la-la",
+            "githubToken": "${{ github.token }}"
           }'
 
       - run: .github/vars/dump-to-summary.sh
