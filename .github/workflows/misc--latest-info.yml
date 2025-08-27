@@ -79,9 +79,9 @@ jobs:
 
       - name: Dump Environment-Variables into '.github/vars'-dir
         run: |
-          # dump the output of './src/jbang/DumpEnvVars.java' into JSON-file
-          jbang ./src/jbang/DumpEnvVars.java
-          jbang ./src/jbang/DumpEnvVars.java > ${{ github.workspace }}/.github/vars/var-envVars.json
+          # dump the output of './src/scripts/jbang/DumpEnvVars.java' into JSON-file
+          jbang --quiet ./src/scripts/jbang/DumpEnvVars.java
+          jbang --quiet ./src/scripts/jbang/DumpEnvVars.java > ${{ github.workspace }}/.github/vars/var-envVars.json
 
       - name: Dump Git-Hub context into '.github/vars'-dir
         run: |
