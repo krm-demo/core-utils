@@ -98,13 +98,21 @@ jobs:
           # dump the value of {{ github }} into JSON-file
           echo '${{ toJson(github) }}' > .github/vars/var-github.json
 
+      - name: Dump 'secrets' context into '.github/vars'-dir
+        run: |
+          # dump the value of {{ secrets }} into JSON-file
+          echo '${{ toJson(secrets) }}' > .github/vars/var-secrets.json
+
       - name: Dump some test JSON-content for debug putposes into '.github/vars'-dir
         run: |
           # dump the manual JSON-object value into JSON-file
           echo '{
             "someProperty": "la-la-la",
             "githubToken": "${{ github.token }}",
-            "bla-bla-bla": "${{ github.token }}"
-          }'
+            "bla-bla-bla": "${{ github.token }}",
+            "MY_SECRET_ONE": "${{ secrets.MY_SECRET_ONE }}",
+            "MY_READONLY_TOKEN": "${{ secrets.MY_READONLY_TOKEN }}"
+          }' > .github/vars/var-testDebug.json
+          cat .github/vars/var-testDebug.json
 
       - run: .github/vars/dump-to-summary.sh
