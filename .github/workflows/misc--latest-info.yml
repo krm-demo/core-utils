@@ -103,7 +103,8 @@ jobs:
           # dump the manual JSON-object value into JSON-file
           echo '{
             "someProperty": "la-la-la",
-            "githubToken": "${{ github.token }}"
+            "githubToken": "${{ github.token }}",
+            "bla-bla-bla": "${{ github.token }}"
           }'
 
       - run: .github/vars/dump-to-summary.sh
