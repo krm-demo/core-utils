@@ -4,11 +4,7 @@
 public class DumpEnvVars {
 
     public static void main(String... args) {
-        System.out.printf("Hello from %s !!!%n", DumpEnvVars.class.getSimpleName());
-
-        JBangUtils.dumpEnvVarsEx().forEach( (envName, envValue) -> {
-            System.out.printf("  \"%s\": \"%s\");
-        })
+        System.out.println(JBangUtils.dumpEnvVarsExAsJson());
     }
 
     public boolean isIterable(Object someObject) {
