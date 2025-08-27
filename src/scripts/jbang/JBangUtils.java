@@ -23,6 +23,10 @@ class JBangUtils {
         return valueAsJson(dumpSysProps(), 0);
     }
 
+    public static String dumpSysPropsExAsJson() {
+        return valueAsJson(dumpSysPropsEx(), 0);
+    }
+
     public static String dumpEnvVarsAsJson() {
         return valueAsJson(dumpEnvVars(), 0);
     }
@@ -37,6 +41,42 @@ class JBangUtils {
         return sortedMap(System.getProperties().entrySet().stream().map(toPropValue()));
     }
 
+    public static NavigableMap<String, Object> dumpSysPropsEx() {
+        return dumpSysProps().entrySet().stream()
+            .collect(toSortedMap(e -> transformSysProps(e)));
+    }
+
+    public static NavigableMap<String,String> dumpEnvVars() {
+        return new TreeMap<>(System.getenv());
+    }
+
+    public static NavigableMap<String, Object> dumpEnvVarsEx() {
+        return dumpEnvVars().entrySet().stream()
+            .collect(toSortedMap(e -> transformPathVars(e)));
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    public static <K extends Comparable<K>, V> NavigableMap<K, V>
+    sortedMap(Stream<Map.Entry<K,V>> entries) {
+        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    public static <K, V, U>
+    Collector<Map.Entry<K, V>, ?, NavigableMap<K,U>>
+    toSortedMap(Function<Map.Entry<K, V>, U> valueMapper) {
+        return toSortedMap(Map.Entry::getKey, valueMapper);
+    }
+
+    public static <T, K, U>
+    Collector<T, ?, NavigableMap<K,U>>
+    toSortedMap(Function<? super T, ? extends K> keyMapper,
+                Function<? super T, ? extends U> valueMapper) {
+        return Collectors.toMap(keyMapper, valueMapper, (oldValue, newValue) -> newValue, TreeMap::new);
+    }
+
+    // --------------------------------------------------------------------------------------------
+
     public static Function<Map.Entry<?,?>, Map.Entry<String, String>> toPropValue() {
         return entry -> propValue(entry.getKey(), entry.getValue());
     }
@@ -48,27 +88,12 @@ class JBangUtils {
         );
     }
 
-    public static <K extends Comparable<K>, V> NavigableMap<K, V>
-    sortedMap(Stream<Map.Entry<K,V>> entries) {
-        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));
-    }
-
-    public static <T, K, U>
-    Collector<T, ?, NavigableMap<K,U>>
-    toSortedMap(Function<? super T, ? extends K> keyMapper,
-                Function<? super T, ? extends U> valueMapper) {
-        return Collectors.toMap(keyMapper, valueMapper, (oldValue, newValue) -> newValue, TreeMap::new);
-    }
-
-    public static NavigableMap<String,String> dumpEnvVars() {
-        return new TreeMap<>(System.getenv());
-    }
-
-    // ------------------------------------------------------------------------
-
-    public static NavigableMap<String, Object> dumpEnvVarsEx() {
-        return dumpEnvVars().entrySet().stream()
-            .collect(toSortedMap(e -> transformPathVars(e)));
+    private static Object transformSysProps(Map.Entry<String, ?> entry) {
+        if (!entry.getKey().toUpperCase().endsWith("PATH")) {
+            return entry.getValue();
+        }
+        String pathValue = "" + entry.getValue();
+        return Arrays.stream(pathValue.split(File.pathSeparator)).toList();
     }
 
     private static Object transformPathVars(Map.Entry<String, String> entry) {
@@ -79,12 +104,8 @@ class JBangUtils {
         }
     }
 
-    public static <K, V, U>
-    Collector<Map.Entry<K, V>, ?, NavigableMap<K,U>>
-    toSortedMap(Function<Map.Entry<K, V>, U> valueMapper) {
-        return toSortedMap(Map.Entry::getKey, valueMapper);
-    }
-
+    // --------------------------------------------------------------------------------------------
+    //        All tranformations below are quite the same as Jackson-Pretty-Print provides:
     // --------------------------------------------------------------------------------------------
 
     /**

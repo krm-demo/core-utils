@@ -21,6 +21,10 @@ public class SysDumpUtils {
         return valueAsJson(dumpSysProps(), 0);
     }
 
+    public static String dumpSysPropsExAsJson() {
+        return valueAsJson(dumpSysPropsEx(), 0);
+    }
+
     public static String dumpEnvVarsAsJson() {
         return valueAsJson(dumpEnvVars(), 0);
     }
@@ -39,6 +43,14 @@ public class SysDumpUtils {
     }
 
     /**
+     * @return the same as {@link #dumpEnvVars()}, but the values of {@code xxx.path} properties are transformed to list
+     */
+    public static NavigableMap<String, Object> dumpSysPropsEx() {
+        return dumpSysProps().entrySet().stream()
+            .collect(toSortedMap(e -> transformSysProps(e)));
+    }
+
+    /**
      * @return environment variables as a sorted-map
      */
     public static NavigableMap<String,String> dumpEnvVars() {
@@ -46,11 +58,21 @@ public class SysDumpUtils {
     }
 
     /**
-     * @return the same as {@link #dumpEnvVars()}, but {@code xxxPATH} variables are transformed to list
+     * @return the same as {@link #dumpEnvVars()}, but the values of {@code xxxPATH} variables are transformed to list
      */
     public static NavigableMap<String, Object> dumpEnvVarsEx() {
         return dumpEnvVars().entrySet().stream()
             .collect(toSortedMap(e -> transformPathVars(e)));
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    private static Object transformSysProps(Map.Entry<String, ?> entry) {
+        if (!entry.getKey().toUpperCase().endsWith("PATH")) {
+            return entry.getValue();
+        }
+        String pathValue = "" + entry.getValue();
+        return Arrays.stream(pathValue.split(File.pathSeparator)).toList();
     }
 
     private static Object transformPathVars(Map.Entry<String, String> entry) {
