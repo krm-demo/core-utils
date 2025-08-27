@@ -187,7 +187,51 @@
         </configuration>
       </plugin>
 
-      <!-- ??? -->
+      <!-- Resoling the current, the next and the last released versions of a current maven-project -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>${maven-build-helper-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>parse-version</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>parse-version</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>released-version</id>
+            <phase>validate</phase>
+            <goals>
+              <!-- this goal access the remote repository and has no effect without existing release -->
+              <goal>released-version</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- saving the properties of maven-project into target output-file -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <version>${maven-properties-plugin.version}</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>write-project-properties</goal>
+            </goals>
+            <configuration>
+              <outputFile>
+                ${project.build.outputDirectory}/META-INF/maven/maven-project.properties
+              </outputFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- ??? could be deleted, because it looks like default settings are working fine ??? -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
@@ -260,7 +304,9 @@
       </plugin>
 
       <!--
-          Executing any main-class for debug-purposes (at this particular case - "CoreUtilsMain")
+          Executing any main-class for debug-purposes:
+          - executing the class "...CoreUtilsMain" ::> "mvn exec:java@core-utils-main"
+          - ..., which is the same as              ::> "java -jar core-utils-x.y.z.jar"
       -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -298,7 +344,7 @@
             </manifest>
             <!-- Manifest-Entries, which are specific for CI/CD-server (in this case it's Git-Hub): -->
             <manifestEntries>
-              <Build-Date>${maven.build.timestamp}</Build-Date>
+              <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
               <Project-Group>${project.groupId}</Project-Group>
               <Project-Org-Url>${project.organization.url}</Project-Org-Url>
               <Project-Url>${project.url}</Project-Url>
@@ -347,10 +393,12 @@
     <main-class-name>org.krmdemo.techlabs.CoreUtilsMain</main-class-name>
 
     <org.slf4j.version>2.0.17</org.slf4j.version>
-    <ch.qos.logback.version>1.5.17</ch.qos.logback.version>
+    <ch.qos.logback.version>1.5.18</ch.qos.logback.version>
 
     <maven-enforcer-plugin.version>3.6.1</maven-enforcer-plugin.version>
     <maven-versions-plugin.version>2.18.0</maven-versions-plugin.version>
+    <maven-build-helper-plugin.version>3.6.1</maven-build-helper-plugin.version>
+    <maven-properties-plugin.version>1.2.1</maven-properties-plugin.version>
     <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
     <maven.surefire.plugin.version>3.5.3</maven.surefire.plugin.version>
     <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
@@ -372,6 +420,13 @@
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <maven-project.group>${project.groupId}</maven-project.group>
+    <maven-project.artifact>${project.artifactId}</maven-project.artifact>
+    <maven-project.version>${project.version}</maven-project.version>
+
+    <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSS'Z'</maven.build.timestamp.format>
+    <maven-project.build-date-time>${maven.build.timestamp}</maven-project.build-date-time>
   </properties>
 
   <distributionManagement>

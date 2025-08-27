@@ -23,6 +23,7 @@ import static org.krmdemo.techlabs.stream.TechlabsCollectors.toSortedSet;
 public class TechlabsStreamUtils {
 
     @SafeVarargs
+    @SuppressWarnings("varargs")
     public static <T extends Comparable<T>> NavigableSet<T> sortedSet(T... valuesArr) {
         return sortedSet(Arrays.stream(valuesArr));
     }
@@ -32,6 +33,7 @@ public class TechlabsStreamUtils {
     }
 
     @SafeVarargs
+    @SuppressWarnings("varargs")
     public static <T> SequencedSet<T> linkedSet(T... valuesArr) {
         return linkedSet(Arrays.stream(valuesArr));
     }
@@ -56,12 +58,14 @@ public class TechlabsStreamUtils {
     }
 
     @SafeVarargs
+    @SuppressWarnings("varargs")
     public static <K extends Comparable<K>, V> NavigableMap<K, V>
     sortedMap(Map.Entry<K,V>... entriesArr) {
         return sortedMap(Arrays.stream(entriesArr));
     }
 
     @SafeVarargs
+    @SuppressWarnings("varargs")
     public static <K extends Comparable<K>, V> NavigableMap<K, V>
     sortedMap(MergeFunction mergeFunction, Map.Entry<K,V>... entriesArr) {
         return sortedMap(mergeFunction, Arrays.stream(entriesArr));
@@ -78,12 +82,14 @@ public class TechlabsStreamUtils {
     }
 
     @SafeVarargs
+    @SuppressWarnings("varargs")
     public static <K, V> SequencedMap<K, V>
     linkedMap(Map.Entry<K,V>... entriesArr) {
         return linkedMap(Arrays.stream(entriesArr));
     }
 
     @SafeVarargs
+    @SuppressWarnings("varargs")
     public static <K, V> SequencedMap<K, V>
     linkedMap(MergeFunction mergeFunction, Map.Entry<K,V>... entriesArr) {
         return linkedMap(mergeFunction, Arrays.stream(entriesArr));
