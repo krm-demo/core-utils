@@ -94,4 +94,11 @@ jobs:
           # dump the value of {{ github }} into JSON-file
           echo '${{ toJson(github) }}' > .github/vars/var-github.json
 
+      - name: Dump some test JSON-content for debug putposes into '.github/vars'-dir
+        run: |
+          # dump the manual JSON-object value into JSON-file
+          echo '{
+            "someProperty": "la-la-la"
+          }'
+
       - run: .github/vars/dump-to-summary.sh
