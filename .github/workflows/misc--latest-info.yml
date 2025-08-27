@@ -80,12 +80,18 @@ jobs:
       - name: Dump Environment-Variables into '.github/vars'-dir
         run: |
           # dump the output of './src/scripts/jbang/DumpEnvVars.java' into JSON-file
-          jbang --quiet ./src/scripts/jbang/DumpEnvVars.java
-          jbang --quiet ./src/scripts/jbang/DumpEnvVars.java > ${{ github.workspace }}/.github/vars/var-envVars.json
+          jbang --quiet src/scripts/jbang/DumpEnvVars.java
+          jbang --quiet src/scripts/jbang/DumpEnvVars.java > .github/vars/var-envVars.json
+
+      - name: Dump Java System-Properties into '.github/vars'-dir
+        run: |
+          # dump the output of './src/scripts/jbang/DumpSysProps.java' into JSON-file
+          jbang --quiet src/scripts/jbang/DumpSysProps.java
+          jbang --quiet src/scripts/jbang/DumpSysProps.java > .github/vars/var-sysProps.json
 
       - name: Dump Git-Hub context into '.github/vars'-dir
         run: |
           # dump the value of {{ github }} into JSON-file
-          echo '${{ toJson(github) }}' > ${{ github.workspace }}/.github/vars/var-github.json
+          echo '${{ toJson(github) }}' > .github/vars/var-github.json
 
-      - run: ${{ github.workspace }}/.github/vars/dump-to-summary.sh
+      - run: .github/vars/dump-to-summary.sh
