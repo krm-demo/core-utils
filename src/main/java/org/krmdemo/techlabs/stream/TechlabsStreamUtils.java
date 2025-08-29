@@ -50,13 +50,6 @@ public class TechlabsStreamUtils {
         return keyValue(name, value);
     }
 
-    public static Map.Entry<String, String> propValue(Object propName, Object propValue) {
-        return nameValue(
-            Objects.toString(propName),
-            StringEscapeUtils.escapeJava(Objects.toString(propValue))
-        );
-    }
-
     @SafeVarargs
     @SuppressWarnings("varargs")
     public static <K extends Comparable<K>, V> NavigableMap<K, V>

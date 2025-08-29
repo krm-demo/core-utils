@@ -13,8 +13,6 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.propValue;
-
 /**
  * TODO: provide the comprehensive Java-Doc !!!
  */
@@ -38,10 +36,6 @@ public class TechlabsCollectors {
      */
     public static <T> Collector<T, ?, SequencedSet<T>> toLinkedSet() {
         return Collectors.toCollection(LinkedHashSet::new);
-    }
-
-    public static Function<Map.Entry<?,?>, Map.Entry<String, String>> toPropValue() {
-        return entry -> propValue(entry.getKey(), entry.getValue());
     }
 
     public static <K, U>

@@ -8,7 +8,6 @@ import java.util.NavigableMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import static org.krmdemo.techlabs.stream.TechlabsCollectors.toPropValue;
 import static org.krmdemo.techlabs.stream.TechlabsCollectors.toSortedMap;
 import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.sortedMap;
 
@@ -39,7 +38,9 @@ public class SysDumpUtils {
      * @return Java system-properties as a sorted-map
      */
     public static NavigableMap<String,String> dumpSysProps() {
-        return sortedMap(System.getProperties().entrySet().stream().map(toPropValue()));
+        return sortedMap(System.getProperties().entrySet()
+            .stream()
+            .map(PropertiesUtils::propEntryEsc));
     }
 
     /**
@@ -130,4 +131,9 @@ public class SysDumpUtils {
     }
 
     private static final int INDENT_JSON_PRETTY_PRINT = 2;
+
+    private SysDumpUtils() {
+        // prohibit the creation of utility-class instance
+        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());
+    }
 }
