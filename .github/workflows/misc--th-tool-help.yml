@@ -16,5 +16,6 @@ jobs:
           distribution: 'corretto'
           check-latest: true
           cache: 'maven'
+          cache-dependency-path: pom.xml
 
       - run: .github/th-tool-help.sh

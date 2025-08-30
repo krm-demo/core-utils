@@ -64,6 +64,7 @@ jobs:
           distribution: 'corretto'
           check-latest: true
           cache: 'maven'
+          cache-dependency-path: pom.xml
       - name: "'which java' after setup-java"
         run: >
           which java || echo "Last Error Code: $?"
