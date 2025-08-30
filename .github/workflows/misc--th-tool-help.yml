@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 jobs:
 
-  bash-example:
+  th-tool-help:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout the latest version of repo in '${{ github.ref }}'"
