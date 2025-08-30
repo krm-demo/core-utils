@@ -1,22 +1,22 @@
 package org.krmdemo.techlabs.thymeleaf;
 
-import org.apache.commons.io.IOUtils;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
-import org.krmdemo.techlabs.stream.TechlabsStreamUtils;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.krmdemo.techlabs.sysdump.SysDumpUtils;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-import java.util.stream.Stream;
 
 import static org.krmdemo.techlabs.sysdump.PropertiesUtils.propsMapResource;
 
+/**
+ * This unit-test is just a sandbox for using Thymeleaf-Engine
+ * <hr/>
+ * TODO: verify the usage of Grape, JBang-DEPS and JBang-Bash
+ */
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class ThymeleafTemplateTest {
 
     public final static String RESOURCE__MAVEN_PROPS = "/META-INF/maven/maven-project.properties";
@@ -91,7 +91,7 @@ public class ThymeleafTemplateTest {
     }
 
     @Test
-    void testMarkdown_UsageMaven() throws IOException {
+    void testMarkdown_UsageMaven() {
         TemplateEngine templateEngine = new TemplateEngine();
         Context mavenPropsContext = new Context(Locale.getDefault());
         mavenPropsContext.setVariable("this", this);
@@ -100,6 +100,7 @@ public class ThymeleafTemplateTest {
             propsMapResource(RESOURCE__MAVEN_PROPS)
         );
         String mavenUsageMD = templateEngine.process("""
+            for main-source dependencies:
             ```XML
                 <dependency>
                     <groupId>[[${mavenProps.get("maven-project.group")}]]</groupId>
@@ -107,7 +108,37 @@ public class ThymeleafTemplateTest {
                     <version>[[${mavenProps.get("maven-project.version")}]]</artifactId>
                 </dependency>
             ```
+            for test-source dependencies:
+            ```XML
+                <dependency>
+                    <groupId>[[${mavenProps.get("maven-project.group")}]]</groupId>
+                    <artifactId>[[${mavenProps.get("maven-project.artifact")}]]</artifactId>
+                    <version>[[${mavenProps.get("maven-project.version")}]]</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            ```
             """, mavenPropsContext);
         System.out.printf("mavenUsageMD:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", mavenUsageMD);
+    }
+
+    @Test
+    void testMarkdown_UsageGradle() {
+        TemplateEngine templateEngine = new TemplateEngine();
+        Context mavenPropsContext = new Context(Locale.getDefault());
+        mavenPropsContext.setVariable("this", this);
+        mavenPropsContext.setVariable(
+            "mavenProps",
+            propsMapResource(RESOURCE__MAVEN_PROPS)
+        );
+        String gradleUsageMD = templateEngine.process("""
+            ```Gradle
+                // for main-source implementation dependencies:
+                implementation("[[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]")
+                . . . . . . . . . . . . . .
+                // for test-source implementation dependencies:
+                testImplementation("[[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]")
+            ```
+            """, mavenPropsContext);
+        System.out.printf("gradleUsageMD:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", gradleUsageMD);
     }
 }
