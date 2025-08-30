@@ -1,4 +1,4 @@
-name: latest-info
+name: th-tool-help
 run-name: ${{ github.actor }} has executed 'misc--th-tool-help.yml' ##${{ github.run_number }}
 on: workflow_dispatch
 
