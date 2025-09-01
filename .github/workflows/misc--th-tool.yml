@@ -18,6 +18,10 @@ jobs:
           cache: 'maven'
           cache-dependency-path: pom.xml
 
+      - name: "Setup JBang"
+        uses: jbangdev/setup-jbang@main
+      - run: jbang properties@jbangdev 'java.v' 'java.r' 'java.s' 'sun.*' 'user.*'
+
       - name: Dump Environment-Variables into '.github/vars'-dir
         run: |
           # dump the output of './src/scripts/jbang/DumpEnvVars.java' into JSON-file
