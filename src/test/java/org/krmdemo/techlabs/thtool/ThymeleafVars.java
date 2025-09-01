@@ -1,9 +1,7 @@
 package org.krmdemo.techlabs.thtool;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
-import org.apache.commons.io.FileUtils;
 import org.krmdemo.techlabs.sysdump.PropertiesUtils;
 
 import java.io.File;
@@ -83,7 +81,7 @@ public class ThymeleafVars {
         if (countProperties > 0) {
             System.out.printf(
                 "... %d '%s'-files were loaded as 'th-tool' variables from directory '%s' ...%n",
-                countJson, EXT_PROPS, varsDir
+                countProperties, EXT_PROPS, varsDir
             );
         }
         if (countJson + countProperties == 0) {
