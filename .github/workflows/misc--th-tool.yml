@@ -1,0 +1,21 @@
+name: th-tool
+run-name: ${{ github.actor }} has executed 'misc--th-tool.yml' ##${{ github.run_number }} la-la-la
+on: workflow_dispatch
+
+jobs:
+
+  th-tool-help:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout the latest version of repo in '${{ github.ref }}'"
+        uses: actions/checkout@v4
+      - name: Set up JDK 21 (Amazon Corretto)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          check-latest: true
+          cache: 'maven'
+          cache-dependency-path: pom.xml
+
+      - run: .github/th-tool.sh
