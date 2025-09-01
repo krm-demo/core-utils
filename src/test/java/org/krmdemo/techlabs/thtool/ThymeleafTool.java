@@ -1,11 +1,9 @@
 package org.krmdemo.techlabs.thtool;
 
-import org.krmdemo.techlabs.sysdump.SysDumpUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Model.CommandSpec;
 import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Spec;
 
 import java.io.File;
@@ -35,7 +33,7 @@ public class ThymeleafTool implements Callable<Integer> {
 
     @Option(
         names = {"--vars-dir"},
-        defaultValue = "./th-vars",
+        defaultValue = ".github/th-vars",
         description = "directory with 'var-XXX.json' files (default: '@|blue,bold ${DEFAULT-VALUE}|@')",
         required = true)
     private File inputVarsDir;
@@ -56,8 +54,8 @@ public class ThymeleafTool implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         System.out.println("... executing 'th-tool' with command-line: ...");
-        System.out.printf("- inputVarsDir = '%s';%n", inputVarsDir.getCanonicalPath());
         if (inputVarsDir != null) {
+            System.out.printf("- inputVarsDir = '%s';%n", inputVarsDir.getCanonicalPath());
             vars.processDirectory(inputVarsDir);
         }
         //System.out.println("Java SystemProperties --> " + SysDumpUtils.dumpSysPropsExAsJson());
