@@ -51,10 +51,15 @@ public class ThymeleafTool implements Callable<Integer> {
     @Spec
     CommandSpec spec; // Injected by picocli
 
+    ThymeleafVars vars = new ThymeleafVars();
+
     @Override
     public Integer call() throws Exception {
         System.out.println("... executing 'th-tool' with command-line: ...");
         System.out.printf("- inputVarsDir = '%s';%n", inputVarsDir.getCanonicalPath());
+        if (inputVarsDir != null) {
+            vars.processDirectory(inputVarsDir);
+        }
         //System.out.println("Java SystemProperties --> " + SysDumpUtils.dumpSysPropsExAsJson());
         if (outputLocation == null) {
             System.out.println("- no output location is specified (the result will be printed here)");
