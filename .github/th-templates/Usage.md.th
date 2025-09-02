@@ -1,0 +1,47 @@
+### Installation and Usage of `[[${mavenProps.get("maven-project.artifact")}]]`-library
+
+_Snapshot_-versions are available only after cloning the git-repo locally,
+checking out the proper branch (the most recent snapshot is in `main`-branch).
+In order to build the project it's recommended to use sdkman to install the latest version
+of java and the latest version of maven. After that, staying in the root directory of a project
+it's enough to type:
+```bash
+...> mvn clean install
+```
+The command above installs `[[${mavenProps.get("maven-project.artifact")}]]`-library 
+in the local maven-repository, and it becomes available for usage described below...
+
+#### [Maven](https://maven.apache.org/)
+Dependencies for projects that are using [Apache Maven](https://maven.apache.org/) as a build-tool 
+could be declared in `pom.xml` file in following way:
+- for main-source dependencies:
+    ```XML
+        <dependency>
+            <groupId>[[${mavenProps.get("maven-project.group")}]]</groupId>
+            <artifactId>[[${mavenProps.get("maven-project.artifact")}]]</artifactId>
+            <version>[[${mavenProps.get("maven-project.version")}]]</artifactId>
+        </dependency>
+    ```
+- for test-source dependencies:
+    ```XML
+        <dependency>
+            <groupId>[[${mavenProps.get("maven-project.group")}]]</groupId>
+            <artifactId>[[${mavenProps.get("maven-project.artifact")}]]</artifactId>
+            <version>[[${mavenProps.get("maven-project.version")}]]</artifactId>
+            <scope>test</scope>
+        </dependency>
+    ```
+#### [Gradle](https://gradle.org/)
+Projects that use [**Gradle** Build Tool](https://gradle.org/) should declare the dependencies 
+in either `build.gradle` or `build.gradle.kts` in following way: 
+```Gradle
+    // for main-source implementation dependencies:
+    implementation("[[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]")
+    . . . . . . . . . . . . . .
+    // for test-source implementation dependencies:
+    testImplementation("[[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]")
+```
+
+#### JBang
+TODO: to be described...
+

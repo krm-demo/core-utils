@@ -2,10 +2,9 @@ package org.krmdemo.techlabs.thtool;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
-import org.krmdemo.techlabs.sysdump.PropertiesUtils;
+import org.thymeleaf.context.AbstractContext;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -13,14 +12,22 @@ import java.util.regex.Pattern;
 
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromFile;
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.sortedMap;
+import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromResource;
+import static org.krmdemo.techlabs.sysdump.PropertiesUtils.propsMapFromFile;
+import static org.krmdemo.techlabs.sysdump.PropertiesUtils.propsMapResource;
 
-public class ThymeleafVars {
-
-    /**
-     * The result container of 'th-tool' variables by their names to access from templates
-     */
-    final Map<String, Object> vars = new HashMap<>();
+/**
+ * This class represents the context of {@link ThymeleafTool}, which holds the variables
+ * that are available later in <a href="https://www.thymeleaf.org/">Thymeleaf</a>-templates.
+ * <hr/>
+ * The variables could be loaded in following way:<ul>
+ *     <li>using {@link #processVarFilePair} from a file for individual variable</li>
+ *     <li>using {@link #processVarResourcePair} from a classpath-resource for individual variable</li>
+ *     <li>using {@link #processDirectory} from a directory of files for multiple variables</li>
+ *     <li>using the inherited API like {@link #setVariable(String, Object)}</li>
+ * </ul>
+ */
+public class ThymeleafToolCtx extends AbstractContext {
 
     void processVarFilePair(String varFilePair) {
         System.out.printf("- processing the var-file pair '%s' ", varFilePair);
@@ -45,6 +52,27 @@ public class ThymeleafVars {
         } else {
             throw new IllegalArgumentException(String.format(
                 "unrecognized extension '%s' of var-file '%s'", varFileExt, varFile));
+        }
+    }
+
+    void processVarResourcePair(String varResPair) {
+        System.out.printf("- processing the var-resource pair '%s' ", varResPair);
+        Matcher matcher = PATTERN__VAR_RES_PAIR.matcher(varResPair);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(String.format(
+                "var-resource pair '%s' does not match the pattern /%s/i",
+                varResPair, PATTERN__VAR_RES_PAIR.pattern()));
+        }
+        String varName = matcher.group("varName");
+        String varResPath = matcher.group("resourcePath");
+        String varFileExt = matcher.group("fileExt");
+        if (EXT_JSON.equalsIgnoreCase(varFileExt)) {
+            putVarResourceJson(varName, varResPath);
+        } else if (EXT_PROPS.equalsIgnoreCase(varFileExt)) {
+            putVarResourceProperties(varName, varResPath);
+        } else {
+            throw new IllegalArgumentException(String.format(
+                "unrecognized extension '%s' of var-resource '%s'", varFileExt, varResPath));
         }
     }
 
@@ -89,11 +117,13 @@ public class ThymeleafVars {
         }
     }
 
+    // --------------------------------------------------------------------------------------------
+
     private boolean putVarFileJson(String varName, File jsonFile) {
         JsonNode jsonNode = jsonTreeFromFile(jsonFile);
         if (jsonNode.getNodeType() == JsonNodeType.OBJECT
             || jsonNode.getNodeType() == JsonNodeType.ARRAY) {
-            vars.put(varName, jsonNode);
+            setVariable(varName, jsonNode);
             System.out.printf("(loaded as JSON into variable '%s') --> %s%n",
                 varName, dumpAsJsonPrettyPrint(jsonNode));
             return true;
@@ -104,28 +134,58 @@ public class ThymeleafVars {
     }
 
     private boolean putVarFileProperties(String varName, File propsFile) {
-        Map<String, String> propsMap = sortedMap(PropertiesUtils.propsEntries(propsFile));
+        Map<String, String> propsMap = propsMapFromFile(propsFile);
         if (propsMap.isEmpty()) {
             System.out.println("(no properties were loaded)");
             return false;
         } else {
-            vars.put(varName, propsMap);
+            setVariable(varName, propsMap);
             System.out.printf("(loaded as properties into variable '%s') --> %s%n",
                 varName, dumpAsJsonPrettyPrint(propsMap));
             return true;
         }
     }
 
+    private void putVarResourceJson(String varName, String jsonResPath) {
+        JsonNode jsonNode = jsonTreeFromResource(jsonResPath);
+        if (jsonNode.getNodeType() == JsonNodeType.OBJECT
+            || jsonNode.getNodeType() == JsonNodeType.ARRAY) {
+            setVariable(varName, jsonNode);
+            System.out.printf("(loaded as JSON into variable '%s') --> %s%n",
+                varName, dumpAsJsonPrettyPrint(jsonNode));
+        } else {
+            System.out.println("(not recognized neither as JSON-Object nor as JSON-Array)");
+        }
+    }
+
+    private void putVarResourceProperties(String varName, String propsResPath) {
+        Map<String, String> propsMap = propsMapResource(propsResPath);
+        if (propsMap.isEmpty()) {
+            System.out.println("(no properties were loaded)");
+        } else {
+            setVariable(varName, propsMap);
+            System.out.printf("(loaded as properties into variable '%s') --> %s%n",
+                varName, dumpAsJsonPrettyPrint(propsMap));
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------
+
     private final static String EXT_JSON = ".json";
     private final static String EXT_PROPS = ".properties";
 
     private final static Pattern PATTERN__VAR_FILE_NAME = Pattern.compile(
-        "^var-(?<varName>[^./\\\\<>!$]+)(?<fileExt>\\.(?:json|properties))$",
+        "^var-(?<varName>[^./\\\\<>!$=]+)(?<fileExt>\\.(?:json|properties))$",
         Pattern.CASE_INSENSITIVE
     );
 
     private final static Pattern PATTERN__VAR_FILE_PAIR = Pattern.compile(
-        "^(?<varName>[^./\\\\<>!$]+)=(?<filePath>[^./\\\\<>!$]+(?<fileExt>\\.(?:json|properties)))$",
+        "^(?<varName>[^./\\\\<>!$=]+)=(?<filePath>[^<>!$=]+(?<fileExt>\\.(?:json|properties)))$",
+        Pattern.CASE_INSENSITIVE
+    );
+
+    private final static Pattern PATTERN__VAR_RES_PAIR = Pattern.compile(
+        "^(?<varName>[^./\\\\<>!$=]+)=(?<resourcePath>[^<>!$=]+(?<fileExt>\\.(?:json|properties)))$",
         Pattern.CASE_INSENSITIVE
     );
 }

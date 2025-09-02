@@ -2,19 +2,16 @@ package org.krmdemo.techlabs.sysdump;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.text.StringEscapeUtils;
-import org.krmdemo.techlabs.stream.TechlabsStreamUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Path;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.Properties;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.nameValue;
@@ -24,6 +21,50 @@ import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.sortedMap;
  * TODO: provide the comprehensive Java-Doc !!!
  */
 public class PropertiesUtils {
+
+    public static NavigableMap<String, String> propsMapFromFile(File propsFile) {
+        return sortedMap(propEntriesFromFile(propsFile));
+    }
+
+    public static NavigableMap<String, String> propsMapResource(String propsResourcePath) {
+        return sortedMap(propEntriesResource(propsResourcePath));
+    }
+
+    public static NavigableMap<String, String> propsMapFromURL(URL propsURL) {
+        return sortedMap(propEntriesFromURL(propsURL));
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    public static Stream<Map.Entry<String, String>> propEntriesFromFile(File propsFile) {
+        try (InputStream propsInputStream = new FileInputStream(propsFile)) {
+            Properties props = new Properties();
+            props.load(propsInputStream);
+            return props.entrySet().stream().map(PropertiesUtils::propEntry);
+        } catch (IOException ex) {
+            return Stream.empty();
+        }
+    }
+
+    public static Stream<Map.Entry<String, String>> propEntriesResource(String propsResourcePath) {
+        try {
+            return propEntriesFromURL(IOUtils.resourceToURL(propsResourcePath));
+        } catch (IOException ex) {
+            return Stream.empty();
+        }
+    }
+
+    public static Stream<Map.Entry<String, String>> propEntriesFromURL(URL propsURL) {
+        try (InputStream propsInputStream = propsURL.openStream()) {
+            Properties props = new Properties();
+            props.load(propsInputStream);
+            return props.entrySet().stream().map(PropertiesUtils::propEntry);
+        } catch (IOException ex) {
+            return Stream.empty();
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------
 
     public static Map.Entry<String, String> propEntryEsc(Map.Entry<?,?> entry) {
         return propEntryEsc(entry.getKey(), entry.getValue());
@@ -47,41 +88,7 @@ public class PropertiesUtils {
         );
     }
 
-    public static NavigableMap<String, String> propsMapResource(String propsResourcePath) {
-        return sortedMap(propsEntriesResource(propsResourcePath));
-    }
-
-    public static Stream<Map.Entry<String, String>> propsEntriesResource(String propsResourcePath) {
-        try {
-            return propsEntries(IOUtils.resourceToURL(propsResourcePath));
-        } catch (IOException ex) {
-            return Stream.empty();
-        }
-    }
-
-    public static Stream<Map.Entry<String, String>> propsEntries(URL propsURL) {
-        try (InputStream propsInputStream = propsURL.openStream()) {
-            Properties props = new Properties();
-            props.load(propsInputStream);
-            return props.entrySet().stream().map(PropertiesUtils::propEntry);
-        } catch (IOException ex) {
-            return Stream.empty();
-        }
-    }
-
-    public static Stream<Map.Entry<String, String>> propsEntries(File propsFile) {
-        try (InputStream propsInputStream = new FileInputStream(propsFile)) {
-            Properties props = new Properties();
-            props.load(propsInputStream);
-            return props.entrySet().stream().map(PropertiesUtils::propEntry);
-        } catch (IOException ex) {
-            return Stream.empty();
-        }
-    }
-
-    public static Stream<Map.Entry<String, String>> propsEntries(Path propsPath) {
-        return propsEntries(propsPath.toFile());
-    }
+    // --------------------------------------------------------------------------------------------
 
     private PropertiesUtils() {
         // prohibit the creation of utility-class instance
