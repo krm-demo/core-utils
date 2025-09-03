@@ -1,6 +1,11 @@
 package org.krmdemo.techlabs.sysdump;
 
+import org.krmdemo.techlabs.json.JacksonUtils;
+
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
@@ -8,7 +13,11 @@ import java.util.NavigableMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJson;
+import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 import static org.krmdemo.techlabs.stream.TechlabsCollectors.toSortedMap;
+import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.linkedMap;
+import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.nameValue;
 import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.sortedMap;
 
 /**
@@ -81,6 +90,39 @@ public class SysDumpUtils {
             return entry.getValue();
         } else {
             return Arrays.stream(entry.getValue().split(File.pathSeparator)).toList();
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @param file a file to get the file-attributes of
+     * @return the attributes of {@code file} as JSON
+     */
+    public static String fileAttrsAsJson(File file) {
+        return fileAttrsAsJson(file.toPath());
+    }
+
+    /**
+     * @param filePath a path to the file to get the file-attributes of
+     * @return the attributes of {@code file} as JSON
+     */
+    public static String fileAttrsAsJson(Path filePath) {
+        try {
+            BasicFileAttributes fileAtrrs = Files.readAttributes(filePath, BasicFileAttributes.class);
+            return dumpAsJsonPrettyPrint(linkedMap(
+                nameValue("filePath", filePath),
+                nameValue("fileSize", fileAtrrs.size()),
+                nameValue("creationTime", fileAtrrs.creationTime()),
+                nameValue("lastModifiedTime", fileAtrrs.lastAccessTime()),
+                nameValue("lastModifiedTime", fileAtrrs.lastModifiedTime()),
+                nameValue("isRegular", fileAtrrs.isRegularFile()),
+                nameValue("isDirectory", fileAtrrs.isDirectory()),
+                nameValue("isSymbolicLink", fileAtrrs.isSymbolicLink()),
+                nameValue("isOther", fileAtrrs.isOther())
+            ));
+        } catch (Exception ex) {
+            return dumpAsJson(JacksonUtils.errorFrom(ex));
         }
     }
 

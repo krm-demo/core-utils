@@ -12,11 +12,14 @@ import picocli.CommandLine.Spec;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.sortedSet;
+import static org.krmdemo.techlabs.sysdump.SysDumpUtils.fileAttrsAsJson;
 
 /**
  * This class represents <b>{@code th-tool}</b> that could be used to process {@code *.md.th}, {@code *.html.th}
@@ -137,8 +140,10 @@ public class ThymeleafTool implements Callable<Integer> {
             System.out.println("- no output location is specified (the result will be printed here)");
         } else if (outputLocation.isFile()) {
             System.out.printf("- output location is a file '%s';%n", outputLocation.getCanonicalPath());
+            System.out.println("- attributes of output-file are --> " + fileAttrsAsJson(outputLocation));
         } else {
             System.out.printf("- output location is a directory '%s';%n", outputLocation.getCanonicalPath());
+            System.out.println("- attributes of output-location are --> " + fileAttrsAsJson(outputLocation));
         }
 
         System.out.println("- inputTemplates --> " + Arrays.toString(inputTemplates));
@@ -162,7 +167,7 @@ public class ThymeleafTool implements Callable<Integer> {
             System.out.println("(the file does not exists or the path does not represent the file)");
             return false;
         }
-        String templateContent = fileContent(templateFile);
+        String templateContent = loadFileContent(templateFile);
         if (templateContent == null) {
             System.out.println("(could not read the content of a file)");
             return false;
@@ -173,26 +178,51 @@ public class ThymeleafTool implements Callable<Integer> {
             return false;
         }
         String outputContent = templateEngine.process(templateContent, varsCtx);
-        System.out.println("(successfully processed and printed");
-        System.out.println("--- " + "-".repeat(100) + " ---");
-        System.out.println(outputContent);  // <-- TODO: save to output location properly
-        System.out.println("... " + "-".repeat(100) + " ...");
+
+        if (outputLocation != null && (!outputLocation.exists() || outputLocation.isFile())) {
+            saveFileContent(outputLocation, outputContent);
+            System.out.printf("(successfully saved into '%s')", outputLocation);
+        } else {
+            System.out.println("(successfully processed and printed");
+            System.out.println("--- " + "-".repeat(100) + " ---");
+            System.out.println(outputContent);
+            System.out.println("... " + "-".repeat(100) + " ...");
+            if (outputLocation != null) {
+                System.out.println("... output into location like '%s' is not supported yet ...");
+            }
+        }
 
         return true;
     }
 
     /**
-     * @param file the file to read the content
+     * @param fileToLoad file to read the content
      * @return the content of {@code file} or {@code null} if it's impossible to do
      */
-    private String fileContent(File file) {
+    public static String loadFileContent(File fileToLoad) {
         try {
-            return Files.readString(file.toPath());
+            return Files.readString(fileToLoad.toPath());
         } catch (IOException ioEx) {
             ioEx.printStackTrace(System.err);
             return null;
         }
     }
+
+    /**
+     * Saving the content into the file {@code fileToSave} (if the file is not empty - it will be truncated)
+     *
+     * @param fileToSave the file to save into
+     * @param fileContent the content to be saved
+     * @throws IllegalStateException in case of something goes wrong (which must not really happen)
+     */
+    public static void saveFileContent(File fileToSave, String fileContent) {
+        try {
+            Files.writeString(fileToSave.toPath(), fileContent);
+        } catch (IOException ioEx) {
+            throw new IllegalStateException("could not save the content into the file " + fileToSave, ioEx);
+        }
+    }
+
 
     /**
      * JVM entry-point of <b>{@code th-tool}</b>
