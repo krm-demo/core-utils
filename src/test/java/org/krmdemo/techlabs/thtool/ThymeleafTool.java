@@ -1,7 +1,7 @@
 package org.krmdemo.techlabs.thtool;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.krmdemo.techlabs.json.JacksonUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.thymeleaf.TemplateEngine;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Model.CommandSpec;
@@ -10,27 +10,36 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Spec;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
-import java.util.regex.Pattern;
 
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.sortedSet;
 
 /**
- * This class is an entry-point of <b>{@code th-tool}</b>
- * that is used to process {@code *.md.th} and {@code *.html.th}
+ * This class represents <b>{@code th-tool}</b> that could be used to process {@code *.md.th}, {@code *.html.th}
  * and other <a href="https://www.thymeleaf.org/">Thymeleaf</a>-templates
  * in the current project during the build and preparing the documentation for releases.
+ * <hr/>
+ * This is an internal version that is available in the current project only (mostly via maven-exec plugin)
+ *
+ * @see <a href="https://picocli.info/">
+ *     <b>picocli</b> - a mighty tiny command line interface
+ * </a>
+ * @see <a href="https://www.mojohaus.org/exec-maven-plugin/">
+ *     Exec <b>Maven Plugin</b>
+ * </a>
  *
  * @see <a href="https://belief-driven-design.com/thymeleaf-part-1-basics-3a1d9/">
- *     Templating with Thymeleaf: The Basics (Part 1)
+ *     Templating with <b>Thymeleaf</b>: The Basics (Part 1)
  * </a>
  * @see <a href="https://belief-driven-design.com/thymeleaf-part-2-fragments-reusability-b2e61/">
- *     Templating with Thymeleaf: Fragments and Reusability (Part 2)
+ *     Templating with <b>Thymeleaf</b>: Fragments and Reusability (Part 2)
  * </a>
  * @see <a href="https://belief-driven-design.com/thymeleaf-part-3-custom-dialects-0beee/">
- *     Templating with Thymeleaf: Custom Dialects and More (Part 3)
+ *     Templating with <b>Thymeleaf</b>: Custom Dialects and More (Part 3)
  * </a>
  */
 @Command(name = "th-tool", version = "0.0.1",
@@ -87,8 +96,21 @@ public class ThymeleafTool implements Callable<Integer> {
     @Spec
     CommandSpec spec; // Injected by picocli
 
+    /**
+     * An instance of {@link TemplateEngine Thymeleaf's Template Engine}
+     */
+    final TemplateEngine templateEngine = new TemplateEngine();
+
+    /**
+     * An instance of {@link TemplateEngine Thymeleaf's Context} that holds the variables for templates
+     */
     final ThymeleafToolCtx varsCtx = new ThymeleafToolCtx();
 
+    /**
+     * Entry-point of Pico-Cli Command Line
+     * @return zero if everything is processed successfully and non-zero otherwise
+     * @throws Exception in case of any un-handled error
+     */
     @Override
     public Integer call() throws Exception {
         System.out.println("... executing 'th-tool' via command-line: ...");
@@ -120,16 +142,69 @@ public class ThymeleafTool implements Callable<Integer> {
         }
 
         System.out.println("- inputTemplates --> " + Arrays.toString(inputTemplates));
+        int successCount = 0;
+        for (File templateFile : inputTemplates) {
+            successCount += processTemplate(templateFile) ? 1 : 0;
+        }
+        System.out.printf("... %d input-templates (out of %d) were processed successfully ...%n",
+            successCount, inputTemplates.length);
 
-        return 0;
+        return (successCount == inputTemplates.length) ? 0 : -1;
     }
 
     /**
+     * @param templateFile 'th-tool' template to process with {@link #templateEngine} and {@link #varsCtx}
+     * @return {@code true} if the template was processed successfully (and {@code false} otherwise)
+     */
+    public boolean processTemplate(File templateFile) {
+        System.out.printf("- processing the template '%s' ", templateFile);
+        if (!templateFile.isFile()) {
+            System.out.println("(the file does not exists or the path does not represent the file)");
+            return false;
+        }
+        String templateContent = fileContent(templateFile);
+        if (templateContent == null) {
+            System.out.println("(could not read the content of a file)");
+            return false;
+        }
+        if (StringUtils.isBlank(templateContent)) {
+            // TODO: maybe it's better to ignore this case or handle it in some different way
+            System.out.println("(the content of template is blank)");
+            return false;
+        }
+        String outputContent = templateEngine.process(templateContent, varsCtx);
+        System.out.println("(successfully processed and printed");
+        System.out.println("--- " + "-".repeat(100) + " ---");
+        System.out.println(outputContent);  // <-- TODO: save to output location properly
+        System.out.println("... " + "-".repeat(100) + " ...");
+
+        return true;
+    }
+
+    /**
+     * @param file the file to read the content
+     * @return the content of {@code file} or {@code null} if it's impossible to do
+     */
+    private String fileContent(File file) {
+        try {
+            return Files.readString(file.toPath());
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace(System.err);
+            return null;
+        }
+    }
+
+    /**
+     * JVM entry-point of <b>{@code th-tool}</b>
      *
      * @param args command-line arguments that will be processed by PicoCli-framework
+     *
+     * @see <a href="https://foojay.io/today/creating-a-command-line-tool-with-jbang-and-picocli-to-generate-release-notes/">
+     *     Creating a Command Line Tool with JBang and PicoCLI to Generate Release Notes
+     * </a>
      */
     public static void main(String... args) {
-
+        // TODO: try to introduce and integrate a logger like it's demonstrated at "https://foojay.io/..."
         int exitCode = new CommandLine(new ThymeleafTool()).execute(args);
         System.exit(exitCode);
     }
