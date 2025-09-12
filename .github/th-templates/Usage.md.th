@@ -1,10 +1,10 @@
 ### Installation and Usage of `[[${mavenProps.get("maven-project.artifact")}]]`-library
 
-_Snapshot_-versions are available only after cloning the git-repo locally,
+_Snapshot_-versions are available only after cloning the git-repo locally and
 checking out the proper branch (the most recent snapshot is in `main`-branch).
-In order to build the project it's recommended to use sdkman to install the latest version
-of java and the latest version of maven. After that, staying in the root directory of a project
-it's enough to type:
+In order to build the project it's recommended to use [sdkman](https://sdkman.io/) to install the latest version
+of [java](https://sdkman.io/jdks/) and the latest version of [maven](https://sdkman.io/sdks/maven/). 
+After that, staying in the root directory of a project it's enough to type:
 ```bash
 ...> mvn clean install
 ```

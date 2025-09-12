@@ -1,6 +1,7 @@
 package org.krmdemo.techlabs.thtool;
 
 import org.apache.commons.lang3.StringUtils;
+import org.krmdemo.techlabs.sysdump.SysDumpUtils;
 import org.thymeleaf.TemplateEngine;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -235,6 +236,16 @@ public class ThymeleafTool implements Callable<Integer> {
      */
     public static void main(String... args) {
         // TODO: try to introduce and integrate a logger like it's demonstrated at "https://foojay.io/..."
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(SysDumpUtils.dumpEnvVarsExAsJson());
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(SysDumpUtils.dumpSysPropsExAsJson());
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+//        CommandLine.Help.Ansi ansiMode = CommandLine.Help.Ansi.ON;
+//        new CommandLine.Help.Ansi(ansiMode).out;
+//        int exitCode = new CommandLine(new ThymeleafTool()).execute(new CommandLine.Help.Ansi(ansiMode).out, args);
+
         int exitCode = new CommandLine(new ThymeleafTool()).execute(args);
         System.exit(exitCode);
     }
