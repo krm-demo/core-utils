@@ -1,10 +1,8 @@
 package org.krmdemo.techlabs.classinfo;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.krmdemo.techlabs.sysdump.PropertiesUtils;
 
@@ -18,8 +16,8 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.stream.Stream;
 
-import static org.krmdemo.techlabs.stream.TechlabsCollectors.toSortedMap;
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.sortedMap;
+import static org.krmdemo.techlabs.stream.CoreCollectors.toSortedMap;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.sortedMap;
 
 @JsonPropertyOrder(alphabetic = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

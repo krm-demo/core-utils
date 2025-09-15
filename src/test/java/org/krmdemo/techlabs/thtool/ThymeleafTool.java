@@ -13,13 +13,11 @@ import picocli.CommandLine.Spec;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 
-import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.sortedSet;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.sortedSet;
 import static org.krmdemo.techlabs.sysdump.SysDumpUtils.fileAttrsAsJson;
 
 /**

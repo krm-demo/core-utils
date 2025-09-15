@@ -272,6 +272,12 @@
           <reportFormat>plain</reportFormat>
           <forkCount>1</forkCount>
           <reuseForks>true</reuseForks>
+          <systemProperties>
+            <property>
+              <name>picocli.ansi</name>
+              <value>true</value>
+            </property>
+          </systemProperties>
           <statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
             <disable>false</disable>
             <version>3.0</version>

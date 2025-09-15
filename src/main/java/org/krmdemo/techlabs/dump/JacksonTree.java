@@ -4,14 +4,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.nameValue;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.nameValue;
 
 /**
  * A static-factory that provides an implementation of of {@link TreeDumper.Node}
@@ -102,7 +102,7 @@ public class JacksonTree {
     }
 
     static class MappingsNode extends JacksonNode implements TreeDumper.MappingsNode {
-        private final Set<String> fieldNames = new TreeSet<>();
+        private final Set<String> fieldNames = new LinkedHashSet<>();
         protected MappingsNode (JsonNode jsonNode) {
             super(jsonNode);
             jsonNode.fieldNames().forEachRemaining(fieldNames::add);

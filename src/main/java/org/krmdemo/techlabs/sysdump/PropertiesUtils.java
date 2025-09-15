@@ -14,22 +14,35 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.stream.Stream;
 
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.nameValue;
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.sortedMap;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.nameValue;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.sortedMap;
 
 /**
- * TODO: provide the comprehensive Java-Doc !!!
+ * Utility-class that simplifies the access to environment-variables, Java system-properties
+ * and the content of any other properties-files at file-system or in classpath.
  */
 public class PropertiesUtils {
 
+    /**
+     * @param propsFile the properties-file to load from file-system
+     * @return the loaded properties as {@link NavigableMap sorted-map}
+     */
     public static NavigableMap<String, String> propsMapFromFile(File propsFile) {
         return sortedMap(propEntriesFromFile(propsFile));
     }
 
+    /**
+     * @param propsResourcePath the path to properties-file in classpath
+     * @return the loaded properties as {@link NavigableMap sorted-map}
+     */
     public static NavigableMap<String, String> propsMapResource(String propsResourcePath) {
         return sortedMap(propEntriesResource(propsResourcePath));
     }
 
+    /**
+     * @param propsURL {@link URL} to properties-file
+     * @return the loaded properties as {@link NavigableMap sorted-map}
+     */
     public static NavigableMap<String, String> propsMapFromURL(URL propsURL) {
         return sortedMap(propEntriesFromURL(propsURL));
     }
@@ -66,10 +79,29 @@ public class PropertiesUtils {
 
     // --------------------------------------------------------------------------------------------
 
+    /**
+     * The same as {@link #propEntry(Map.Entry)}, but the values of properties
+     * are escaped with {@link StringEscapeUtils#escapeJava(String)}, which is very useful
+     * and convenient when the content of the result map is going to be represented as JSON or YAML,
+     * but some values like {@link System#lineSeparator()} requires to be escaped.
+     *
+     * @param entry the entry of type {@link Map.Entry Map.Entry&lt;Object,Object&gt;}
+     * @return an instance of type {@link Map.Entry Map.Entry&lt;String,String&gt;}
+     */
     public static Map.Entry<String, String> propEntryEsc(Map.Entry<?,?> entry) {
         return propEntryEsc(entry.getKey(), entry.getValue());
     }
 
+    /**
+     * The same as {@link #propEntry(Object, Object)}, but the values of properties
+     * are escaped with {@link StringEscapeUtils#escapeJava(String)}, which is very useful
+     * and convenient when the content of the result map is going to be represented as JSON or YAML,
+     * but some values like {@link System#lineSeparator()} requires to be escaped.
+     *
+     * @param propName name of property as {@link Object} (the legacy of no generics in {@link Properties}-class)
+     * @param propValue value of property as {@link Object} (the legacy of no generics in {@link Properties}-class)
+     * @return an instance of type {@link Map.Entry Map.Entry&lt;String,String&gt;}
+     */
     public static Map.Entry<String, String> propEntryEsc(Object propName, Object propValue) {
         return nameValue(
             Objects.toString(propName),
@@ -77,10 +109,25 @@ public class PropertiesUtils {
         );
     }
 
+    /**
+     * Transforms the entry of type {@link Map.Entry Map.Entry&lt;Object,Object&gt;}
+     * into the entry of type {@link Map.Entry Map.Entry&lt;String,String&gt;}
+     * with use of standard transformation via {@link Objects#toString(Object)}
+     *
+     * @param entry the entry of type {@link Map.Entry Map.Entry&lt;Object,Object&gt;}
+     * @return the entry of type {@link Map.Entry Map.Entry&lt;String,String&gt;}
+     */
     public static Map.Entry<String, String> propEntry(Map.Entry<?,?> entry) {
         return propEntry(entry.getKey(), entry.getValue());
     }
 
+    /**
+     * A factory-method produce an instance of type {@link Map.Entry Map.Entry&lt;String,String&gt;}
+     *
+     * @param propName name of property as {@link Object} (the legacy of no generics in {@link Properties}-class)
+     * @param propValue value of property as {@link Object} (the legacy of no generics in {@link Properties}-class)
+     * @return an instance of type {@link Map.Entry Map.Entry&lt;String,String&gt;}
+     */
     public static Map.Entry<String, String> propEntry(Object propName, Object propValue) {
         return nameValue(
             Objects.toString(propName),

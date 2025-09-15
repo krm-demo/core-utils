@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJson;
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
-import static org.krmdemo.techlabs.stream.TechlabsCollectors.toSortedMap;
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.linkedMap;
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.nameValue;
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.sortedMap;
+import static org.krmdemo.techlabs.stream.CoreCollectors.toSortedMap;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.linkedMap;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.nameValue;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.sortedMap;
 
 /**
- * TODO: provide the comprehensive Java-Doc !!!
+ * TODO: provide the comprehensive Java-Doc and reuse {@link org.krmdemo.techlabs.dump.ObjectPrinter} !!!
  */
 public class SysDumpUtils {
 

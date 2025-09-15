@@ -22,8 +22,8 @@ import static org.krmdemo.techlabs.json.JacksonUtils.jsonObjFromString;
 import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromResource;
 import static org.krmdemo.techlabs.json.JacksonUtils.jsonValueFromString;
 import static org.krmdemo.techlabs.json.JacksonUtils.prettifyJson;
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.linkedMap;
-import static org.krmdemo.techlabs.stream.TechlabsStreamUtils.nameValue;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.linkedMap;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.nameValue;
 
 public class JacksonUtilsTest {
 
