@@ -57,6 +57,7 @@ public class JacksonTree {
             return TreeDumper.NULL;
         }
         return switch (jsonNode.getNodeType()) {
+            case NULL -> TreeDumper.NULL;
             case ARRAY -> new SequenceNode(jsonNode);
             case OBJECT, POJO -> new MappingsNode(jsonNode);
             default -> new ScalarNode(jsonNode);

@@ -91,6 +91,9 @@ public class CoreStreamUtils {
      * Transform the var-args-arrays of entries into the sorted map,
      * where the entries with the same {@link Map.Entry#getKey() key} are merged
      * with the default merge-function {@link MergeFunction#OVERWRITE}.
+     * <hr/>
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
      *
      * @param entriesArr var-args-arrays of entries
      * @return the sorted map, which is collected from those entries, as {@link NavigableMap},
@@ -101,13 +104,16 @@ public class CoreStreamUtils {
     @SuppressWarnings("varargs")
     public static <K extends Comparable<K>, V> NavigableMap<K, V>
     sortedMap(Map.Entry<K,V>... entriesArr) {
-        return sortedMap(Arrays.stream(entriesArr));
+        return sortedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));
     }
 
     /**
      * Transform the var-args-arrays of entries into the sorted map,
      * where the entries with the same {@link Map.Entry#getKey() key} are merged
      * with the passed {@code mergeFunction}.
+     * <hr/>
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
      *
      * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}
      * @param entriesArr var-args-arrays of entries
@@ -126,6 +132,9 @@ public class CoreStreamUtils {
      * Transform the var-args-arrays of entries into the sorted map,
      * where the entries with the same {@link Map.Entry#getKey() key} are merged
      * with the default merge-function {@link MergeFunction#OVERWRITE}.
+     * <hr/>
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
      *
      * @param entries stream of entries
      * @return the sorted map, which is collected from those entries, as {@link NavigableMap},
@@ -141,6 +150,9 @@ public class CoreStreamUtils {
      * Transform the var-args-arrays of entries into the sorted map,
      * where the entries with the same {@link Map.Entry#getKey() key} are merged
      * with the passed {@code mergeFunction}.
+     * <hr/>
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
      *
      * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}
      * @param entries stream of entries
@@ -157,6 +169,9 @@ public class CoreStreamUtils {
      * Transform the var-args-arrays of entries into the linked map,
      * where the entries with the same {@link Map.Entry#getKey() key} are merged
      * with the default merge-function {@link MergeFunction#OVERWRITE}.
+     * <hr/>
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
      *
      * @param entriesArr var-args-arrays of entries
      * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},
@@ -167,13 +182,16 @@ public class CoreStreamUtils {
     @SuppressWarnings("varargs")
     public static <K, V> SequencedMap<K, V>
     linkedMap(Map.Entry<K,V>... entriesArr) {
-        return linkedMap(Arrays.stream(entriesArr));
+        return linkedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));
     }
 
     /**
      * Transform the var-args-arrays of entries into the linked map,
      * where the entries with the same {@link Map.Entry#getKey() key} are merged
      * with the passed {@code mergeFunction}.
+     * <hr/>
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
      *
      * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}
      * @param entriesArr var-args-arrays of entries
@@ -192,6 +210,9 @@ public class CoreStreamUtils {
      * Transform the stream of entries into the linked map,
      * where the entries with the same {@link Map.Entry#getKey() key} are merged
      * with the default merge-function {@link MergeFunction#OVERWRITE}.
+     * <hr/>
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
      *
      * @param entries stream of entries
      * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},
@@ -207,6 +228,9 @@ public class CoreStreamUtils {
      * Transform the var-args-arrays of entries into the linked map,
      * where the entries with the same {@link Map.Entry#getKey() key} are merged
      * with the passed {@code mergeFunction}.
+     * <hr/>
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
      *
      * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}
      * @param entries stream of entries
@@ -217,6 +241,17 @@ public class CoreStreamUtils {
     public static <K, V> SequencedMap<K, V>
     linkedMap(MergeFunction mergeFunction, Stream<Map.Entry<K,V>> entries) {
         return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));
+    }
+
+    /**
+     * In order to avoid {@link NullPointerException} in JDK's collectors
+     * all entries that are {@code null} or whose key or value is {@code null} should be filtered out.
+     *
+     * @param entry an entry to filter
+     * @return {@code true} if the entry is valid and otherwise - {@code false}
+     */
+    public static boolean entryIsValid(Map.Entry<?,?> entry) {
+        return entry != null && entry.getKey() != null && entry.getValue() != null;
     }
 
     private CoreStreamUtils() {

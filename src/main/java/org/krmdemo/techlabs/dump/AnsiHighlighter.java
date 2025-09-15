@@ -10,6 +10,10 @@ public interface AnsiHighlighter extends Highlighter {
             return Ansi.AUTO.string("@|white " + syntaxSymbol + "|@");
         }
         @Override
+        public String highlightNull() {
+            return Ansi.AUTO.string("@|magenta null|@");
+        }
+        @Override
         public String highlightKey(String keyStr) {
             return Ansi.AUTO.string("@|blue " + keyStr + "|@");
         }

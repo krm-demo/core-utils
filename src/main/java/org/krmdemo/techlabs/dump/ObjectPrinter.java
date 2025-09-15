@@ -43,7 +43,7 @@ public interface ObjectPrinter {
     void printAsYamlSvg(Object objToPrint, Highlighter highlighter);
 
     default void printAsJsonTxt(Object objToPrint) {
-        printAsJsonTxt(objToPrint, Highlighter.NONE);
+        printAsJsonTxt(objToPrint, Highlighter.NONE);  // <-- TODO: think about passing "AnsiHighlighter.DEFAULT"
     }
 
     default void printAsJsonHtml(Object objToPrint) {
@@ -55,7 +55,7 @@ public interface ObjectPrinter {
     }
 
     default void printAsYamlTxt(Object objToPrint) {
-        printAsYamlTxt(objToPrint, Highlighter.NONE);
+        printAsYamlTxt(objToPrint, Highlighter.NONE);  // <-- TODO: think about passing "AnsiHighlighter.DEFAULT"
     }
 
     default void printAsYamlHtml(Object objToPrint) {
