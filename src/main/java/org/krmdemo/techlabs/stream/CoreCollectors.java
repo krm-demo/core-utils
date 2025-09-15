@@ -1,10 +1,12 @@
 package org.krmdemo.techlabs.stream;
 
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.NavigableSet;
+import java.util.Objects;
 import java.util.SequencedMap;
 import java.util.SequencedSet;
 import java.util.TreeMap;
@@ -23,7 +25,7 @@ public class CoreCollectors {
     /**
      * The same as {@link Collectors#toCollection}, but produces {@link LinkedHashSet}.
      *
-     * @return a {@code Collector} which collects all the input elements into a {@link TreeSet}.
+     * @return a {@code Collector} which collects all the input elements into a {@link LinkedHashSet}.
      * @param <T> the type of the elements in stream to collect
      */
     public static <T> Collector<T, ?, SequencedSet<T>> toLinkedSet() {
@@ -33,11 +35,23 @@ public class CoreCollectors {
     /**
      * The same as {@link Collectors#toCollection}, but produces {@link TreeSet}.
      *
-     * @return a {@link Collector}, which collects all the input elements into a {@link TreeSet}.
-     * @param <T> the type of the elements in stream to collect
+     * @return a {@link Collector}, which collects all the input elements into a {@link TreeSet}
+     * @param <T> the type of the elements in stream to collect (must implement {@link Comparable})
      */
     public static <T extends Comparable<T>> Collector<T, ?, NavigableSet<T>> toSortedSet() {
         return Collectors.toCollection(TreeSet::new);
+    }
+
+    /**
+     * The same as {@link #toSortedSet()}, but with {@code comparator} as parameter
+     *
+     * @param comparator a function to compare the elements
+     * @return  a {@link Collector}, which collects all the input elements into a {@link TreeSet}
+     * @param <T> the type of the elements in stream to collect (not necessary to implement {@link Comparable})
+     */
+    public static <T> Collector<T, ?, NavigableSet<T>>
+    toSortedSet(Comparator<T> comparator) {
+        return Collectors.toCollection(() -> new TreeSet<>(Objects.requireNonNull(comparator)));
     }
 
     /**

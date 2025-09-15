@@ -9,12 +9,20 @@ import picocli.CommandLine.Help.Ansi;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.SequencedSet;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.krmdemo.techlabs.stream.CoreCollectors.toSortedSet;
 import static org.krmdemo.techlabs.stream.CoreStreamUtils.linkedMap;
+import static org.krmdemo.techlabs.stream.CoreStreamUtils.linkedSet;
 import static org.krmdemo.techlabs.stream.CoreStreamUtils.nameValue;
 
 /**
@@ -72,9 +80,42 @@ public class ObjectPrinterTest {
     }
 
     @Test
-    void testResultLists(TestInfo testInfo) {
+    void testBooleans() {
+        record MyBools(Boolean boolOne, Boolean boolTwo, Boolean boolThree) {
+            @JsonGetter List<Boolean> boolList() {
+                return Stream.of(boolOne, boolTwo, boolThree).toList();
+            }
+            @JsonGetter boolean[] boolArr() {
+                List<Boolean> listNonNull = boolList().stream().filter(Objects::nonNull).toList();
+                boolean[] arr = new boolean[listNonNull.size()];
+                for (int i = 0; i < listNonNull.size(); i++) {
+                    arr[i] = listNonNull.get(i);
+                }
+                return arr;
+            }
+        }
+        SequencedSet<MyBools> linkedSetMyBools = linkedSet(
+            new MyBools(true, false, null),
+            new MyBools(true, null, true),
+            new MyBools(false, null, null),
+            new MyBools(null, null, null),
+            null
+        );
+        System.out.printf("linkedSetMyBools --> %s%n",
+            DumpUtils.dumpAsJsonTxt(linkedSetMyBools, AnsiHighlighter.DEFAULT));
+        assertThat(linkedSetMyBools).hasSize(5);
+        SortedSet<MyBools> sortedSetMyBools = linkedSetMyBools.stream()
+            .filter(Objects::nonNull)
+            .collect(toSortedSet(Comparator.comparing(MyBools::toString)));
+        System.out.printf("sortedSetMyBools --> %s%n",
+            DumpUtils.dumpAsJsonTxt(sortedSetMyBools, AnsiHighlighter.DEFAULT));
+        assertThat(sortedSetMyBools).hasSize(4);
+    }
+
+    @Test
+    void testMapOfLists(TestInfo testInfo) {
         System.out.printf("---- %s (started): ----%n", testInfo.getDisplayName());
-        Map<String, Object> resultLists = linkedMap(
+        Map<String, Object> mapOfLists = linkedMap(
             (Map.Entry<String,Object>)null, // <-- this entry must be filtered out, because it's null
             nameValue(null, "la-la-la"),  // <-- this also should be filtered out because the key is null
             nameValue("null-value", null),  // <-- when the value is null - the entry is also filtered out
@@ -96,8 +137,8 @@ public class ObjectPrinterTest {
                 }).toList()
             )
         );
-        PrintUtils.printAsJsonTxt(resultLists, AnsiHighlighter.DEFAULT);
-        assertThat(resultLists).hasSize(7);
+        PrintUtils.printAsJsonTxt(mapOfLists, AnsiHighlighter.DEFAULT);
+        assertThat(mapOfLists).hasSize(7);
         System.out.printf("%n... %s (finished). ...%n", testInfo.getDisplayName());
     }
 
