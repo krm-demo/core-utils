@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
+import org.krmdemo.techlabs.dump.render.AnsiHighlighter;
 import picocli.CommandLine.Help.Ansi;
 
 import java.util.Arrays;
@@ -15,7 +16,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.SequencedSet;
 import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 

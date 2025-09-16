@@ -33,4 +33,8 @@ public interface TreeDumper {
     void acceptScalar(ScalarNode scalarNode);
     void acceptSequence(SequenceNode sequenceNode);
     void acceptMappings(MappingsNode mappingsNode);
+
+    default void acceptRoot(Node rootNode) {
+        rootNode.visit(this);
+    }
 }

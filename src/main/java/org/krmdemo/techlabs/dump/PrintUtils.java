@@ -1,10 +1,12 @@
 package org.krmdemo.techlabs.dump;
 
+import org.krmdemo.techlabs.dump.render.Highlighter;
+
 /**
  * Utility-class that is a static facade of {@link ObjectPrinter#DEFAULT_STD_OUT},
  * where the serializing of an object is provided with {@link JacksonTree}.
  * <hr/>
- * Set of methods with the second {@link Highlighter} arguments  
+ * Set of methods with the second {@link Highlighter} arguments
  * allow to suppress the default highlighting by providing {@link Highlighter#NONE}.  
  */
 public class PrintUtils {

@@ -1,4 +1,4 @@
-package org.krmdemo.techlabs.dump;
+package org.krmdemo.techlabs.dump.render;
 
 public interface Highlighter {
 

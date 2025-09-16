@@ -1,5 +1,7 @@
 package org.krmdemo.techlabs.dump;
 
+import org.krmdemo.techlabs.dump.render.Highlighter;
+
 import java.io.File;
 
 /**

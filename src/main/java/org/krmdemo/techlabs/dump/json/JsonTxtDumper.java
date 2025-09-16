@@ -1,4 +1,8 @@
-package org.krmdemo.techlabs.dump;
+package org.krmdemo.techlabs.dump.json;
+
+import org.krmdemo.techlabs.dump.TreeDumper;
+import org.krmdemo.techlabs.dump.render.AnsiHighlighter;
+import org.krmdemo.techlabs.dump.render.Highlighter;
 
 import java.io.PrintStream;
 import java.util.ArrayDeque;
@@ -13,11 +17,7 @@ public class JsonTxtDumper implements TreeDumper {
     final Highlighter highlighter;
     final Deque<String> currentPath = new ArrayDeque<>();
 
-    JsonTxtDumper(PrintStream out) {
-        this(out, AnsiHighlighter.DEFAULT);
-    }
-
-    JsonTxtDumper(PrintStream out, Highlighter highlighter) {
+    public JsonTxtDumper(PrintStream out, Highlighter highlighter) {
         this.out = Objects.requireNonNull(out);
         this.highlighter = Objects.requireNonNull(highlighter);
     }

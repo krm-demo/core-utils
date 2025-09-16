@@ -41,7 +41,7 @@ public class JacksonTree {
             return dumperNode;
         }
         JsonNode root = jacksonMapper.valueToTree(fromValue);
-        return JacksonTree.fromJsonNode(root);
+        return fromJsonNode(root);
     }
 
     /**

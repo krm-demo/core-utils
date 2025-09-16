@@ -1,42 +1,45 @@
-package org.krmdemo.techlabs.dump;
+package org.krmdemo.techlabs.dump.yaml;
+
+import org.krmdemo.techlabs.dump.TreeDumper;
+import org.krmdemo.techlabs.dump.render.Highlighter;
 
 import java.io.PrintStream;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Objects;
 
-public class JsonHtmlDumper implements TreeDumper {
+public class YamlHtmlDumper implements TreeDumper {
 
     final PrintStream out;
     final Highlighter highlighter;
     final Deque<String> currentPath = new ArrayDeque<>();
 
-    JsonHtmlDumper(PrintStream out, Highlighter highlighter) {
+    public YamlHtmlDumper(PrintStream out, Highlighter highlighter) {
         this.out = Objects.requireNonNull(out);
         this.highlighter = Objects.requireNonNull(highlighter);
     }
 
     @Override
     public void acceptNull() {
-        // TODO: implement JsonHtmlDumper.acceptNull()
+        // TODO: implement YamlHtmlDumper.acceptNull()
         throw new UnsupportedOperationException("not implemented yet");
     }
 
     @Override
     public void acceptScalar(ScalarNode scalarNode) {
-        // TODO: implement JsonHtmlDumper.acceptScalar()
+        // TODO: implement YamlHtmlDumper.acceptScalar()
         throw new UnsupportedOperationException("not implemented yet");
     }
 
     @Override
     public void acceptSequence(SequenceNode sequenceNode) {
-        // TODO: implement JsonHtmlDumper.acceptSequence()
+        // TODO: implement YamlHtmlDumper.acceptSequence()
         throw new UnsupportedOperationException("not implemented yet");
     }
 
     @Override
     public void acceptMappings(MappingsNode mappingsNode) {
-        // TODO: implement JsonHtmlDumper.acceptMappings()
+        // TODO: implement YamlHtmlDumper.acceptMappings()
         throw new UnsupportedOperationException("not implemented yet");
     }
 }

@@ -1,6 +1,12 @@
 package org.krmdemo.techlabs.dump;
 
-import org.apache.commons.io.output.StringBuilderWriter;
+import org.krmdemo.techlabs.dump.json.JsonHtmlDumper;
+import org.krmdemo.techlabs.dump.json.JsonSvgDumper;
+import org.krmdemo.techlabs.dump.json.JsonTxtDumper;
+import org.krmdemo.techlabs.dump.render.Highlighter;
+import org.krmdemo.techlabs.dump.yaml.YamlHtmlDumper;
+import org.krmdemo.techlabs.dump.yaml.YamlSvgDumper;
+import org.krmdemo.techlabs.dump.yaml.YamlTxtDumper;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -76,7 +82,7 @@ public interface ObjectPrinter {
         void print(PrintStream out, Object objToPrint, Highlighter highlighter) {
             TreeDumper.Node root = dumperNodeFunc.apply(objToPrint);
             TreeDumper dumper = dumperFactory.apply(out, highlighter);
-            root.visit(dumper);
+            dumper.acceptRoot(root);
         }
     }
 
