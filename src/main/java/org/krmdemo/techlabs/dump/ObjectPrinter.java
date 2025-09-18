@@ -3,7 +3,8 @@ package org.krmdemo.techlabs.dump;
 import org.krmdemo.techlabs.dump.json.JsonHtmlDumper;
 import org.krmdemo.techlabs.dump.json.JsonSvgDumper;
 import org.krmdemo.techlabs.dump.json.JsonTxtDumper;
-import org.krmdemo.techlabs.dump.render.Highlighter;
+import org.krmdemo.techlabs.dump.render.Highlight;
+import org.krmdemo.techlabs.dump.render.RenderSpec;
 import org.krmdemo.techlabs.dump.yaml.YamlHtmlDumper;
 import org.krmdemo.techlabs.dump.yaml.YamlSvgDumper;
 import org.krmdemo.techlabs.dump.yaml.YamlTxtDumper;
@@ -36,52 +37,52 @@ public interface ObjectPrinter {
      */
     StdOut DEFAULT_STD_OUT = new StdOut();
 
-    void printAsJsonTxt(Object objToPrint, Highlighter highlighter);
+    void printAsJsonTxt(Object objToPrint, RenderSpec renderSpec);
 
-    void printAsJsonHtml(Object objToPrint, Highlighter highlighter);
+    void printAsJsonHtml(Object objToPrint, RenderSpec renderSpec);
 
-    void printAsJsonSvg(Object objToPrint, Highlighter highlighter);
+    void printAsJsonSvg(Object objToPrint, RenderSpec renderSpec);
 
-    void printAsYamlTxt(Object objToPrint, Highlighter highlighter);
+    void printAsYamlTxt(Object objToPrint, RenderSpec renderSpec);
 
-    void printAsYamlHtml(Object objToPrint, Highlighter highlighter);
+    void printAsYamlHtml(Object objToPrint, RenderSpec renderSpec);
 
-    void printAsYamlSvg(Object objToPrint, Highlighter highlighter);
+    void printAsYamlSvg(Object objToPrint, RenderSpec renderSpec);
 
     default void printAsJsonTxt(Object objToPrint) {
-        printAsJsonTxt(objToPrint, Highlighter.NONE);  // <-- TODO: think about passing "AnsiHighlighter.DEFAULT"
+        printAsJsonTxt(objToPrint, new RenderSpec(Highlight.NONE));  // <-- TODO: think about passing "Highlight.DEFAULT"
     }
 
     default void printAsJsonHtml(Object objToPrint) {
-        printAsJsonHtml(objToPrint, Highlighter.NONE);
+        printAsJsonHtml(objToPrint, new RenderSpec(Highlight.NONE));
     }
 
     default void printAsJsonSvg(Object objToPrint) {
-        printAsJsonSvg(objToPrint, Highlighter.NONE);
+        printAsJsonSvg(objToPrint, new RenderSpec(Highlight.NONE));
     }
 
     default void printAsYamlTxt(Object objToPrint) {
-        printAsYamlTxt(objToPrint, Highlighter.NONE);  // <-- TODO: think about passing "AnsiHighlighter.DEFAULT"
+        printAsYamlTxt(objToPrint, new RenderSpec(Highlight.NONE));  // <-- TODO: think about passing "Highlight.DEFAULT"
     }
 
     default void printAsYamlHtml(Object objToPrint) {
-        printAsYamlHtml(objToPrint, Highlighter.NONE);
+        printAsYamlHtml(objToPrint, new RenderSpec(Highlight.NONE));
     }
 
     default void printAsYamlSvg(Object objToPrint) {
-        printAsYamlSvg(objToPrint, Highlighter.NONE);
+        printAsYamlSvg(objToPrint, new RenderSpec(Highlight.NONE));
     }
 
     record UnitOp(
         Function<Object, TreeDumper.Node> dumperNodeFunc,
-        BiFunction<PrintStream, Highlighter, TreeDumper> dumperFactory
+        BiFunction<PrintStream, RenderSpec, TreeDumper> dumperFactory
     ) {
-        void printStdOut(Object objToPrint, Highlighter highlighter) {
-            print(System.out, objToPrint, highlighter);
+        void printStdOut(Object objToPrint, RenderSpec renderSpec) {
+            print(System.out, objToPrint, renderSpec);
         }
-        void print(PrintStream out, Object objToPrint, Highlighter highlighter) {
+        void print(PrintStream out, Object objToPrint, RenderSpec renderSpec) {
             TreeDumper.Node root = dumperNodeFunc.apply(objToPrint);
-            TreeDumper dumper = dumperFactory.apply(out, highlighter);
+            TreeDumper dumper = dumperFactory.apply(out, renderSpec);
             dumper.acceptRoot(root);
         }
     }
@@ -101,39 +102,39 @@ public interface ObjectPrinter {
         }
 
         @Override
-        public void printAsJsonTxt(Object objToPrint, Highlighter highlighter) {
+        public void printAsJsonTxt(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonTxtDumper::new);
-            unitOp.printStdOut(objToPrint, highlighter);
+            unitOp.printStdOut(objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsJsonHtml(Object objToPrint, Highlighter highlighter) {
+        public void printAsJsonHtml(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonHtmlDumper::new);
-            unitOp.printStdOut(objToPrint, highlighter);
+            unitOp.printStdOut(objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsJsonSvg(Object objToPrint, Highlighter highlighter) {
+        public void printAsJsonSvg(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonSvgDumper::new);
-            unitOp.printStdOut(objToPrint, highlighter);
+            unitOp.printStdOut(objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsYamlTxt(Object objToPrint, Highlighter highlighter) {
+        public void printAsYamlTxt(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlTxtDumper::new);
-            unitOp.printStdOut(objToPrint, highlighter);
+            unitOp.printStdOut(objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsYamlHtml(Object objToPrint, Highlighter highlighter) {
+        public void printAsYamlHtml(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlHtmlDumper::new);
-            unitOp.printStdOut(objToPrint, highlighter);
+            unitOp.printStdOut(objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsYamlSvg(Object objToPrint, Highlighter highlighter) {
+        public void printAsYamlSvg(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlSvgDumper::new);
-            unitOp.printStdOut(objToPrint, highlighter);
+            unitOp.printStdOut(objToPrint, renderSpec);
         }
     }
 
@@ -162,39 +163,39 @@ public interface ObjectPrinter {
         }
 
         @Override
-        public void printAsJsonTxt(Object objToPrint, Highlighter highlighter) {
+        public void printAsJsonTxt(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonTxtDumper::new);
-            unitOp.print(this.out, objToPrint, highlighter);
+            unitOp.print(this.out, objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsJsonHtml(Object objToPrint, Highlighter highlighter) {
+        public void printAsJsonHtml(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonHtmlDumper::new);
-            unitOp.print(this.out, objToPrint, highlighter);
+            unitOp.print(this.out, objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsJsonSvg(Object objToPrint, Highlighter highlighter) {
+        public void printAsJsonSvg(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonSvgDumper::new);
-            unitOp.print(this.out, objToPrint, highlighter);
+            unitOp.print(this.out, objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsYamlTxt(Object objToPrint, Highlighter highlighter) {
+        public void printAsYamlTxt(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlTxtDumper::new);
-            unitOp.print(this.out, objToPrint, highlighter);
+            unitOp.print(this.out, objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsYamlHtml(Object objToPrint, Highlighter highlighter) {
+        public void printAsYamlHtml(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlHtmlDumper::new);
-            unitOp.print(this.out, objToPrint, highlighter);
+            unitOp.print(this.out, objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsYamlSvg(Object objToPrint, Highlighter highlighter) {
+        public void printAsYamlSvg(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlSvgDumper::new);
-            unitOp.print(this.out, objToPrint, highlighter);
+            unitOp.print(this.out, objToPrint, renderSpec);
         }
     }
 
@@ -223,39 +224,39 @@ public interface ObjectPrinter {
         }
 
         @Override
-        public void printAsJsonTxt(Object objToPrint, Highlighter highlighter) {
+        public void printAsJsonTxt(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonTxtDumper::new);
-            unitOp.print(this.filePrintStream(), objToPrint, highlighter);
+            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsJsonHtml(Object objToPrint, Highlighter highlighter) {
+        public void printAsJsonHtml(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonHtmlDumper::new);
-            unitOp.print(this.filePrintStream(), objToPrint, highlighter);
+            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsJsonSvg(Object objToPrint, Highlighter highlighter) {
+        public void printAsJsonSvg(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonSvgDumper::new);
-            unitOp.print(this.filePrintStream(), objToPrint, highlighter);
+            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsYamlTxt(Object objToPrint, Highlighter highlighter) {
+        public void printAsYamlTxt(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlTxtDumper::new);
-            unitOp.print(this.filePrintStream(), objToPrint, highlighter);
+            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsYamlHtml(Object objToPrint, Highlighter highlighter) {
+        public void printAsYamlHtml(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlHtmlDumper::new);
-            unitOp.print(this.filePrintStream(), objToPrint, highlighter);
+            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);
         }
 
         @Override
-        public void printAsYamlSvg(Object objToPrint, Highlighter highlighter) {
+        public void printAsYamlSvg(Object objToPrint, RenderSpec renderSpec) {
             UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlSvgDumper::new);
-            unitOp.print(this.filePrintStream(), objToPrint, highlighter);
+            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);
         }
     }
 }

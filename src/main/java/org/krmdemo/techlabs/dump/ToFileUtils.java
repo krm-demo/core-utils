@@ -1,6 +1,6 @@
 package org.krmdemo.techlabs.dump;
 
-import org.krmdemo.techlabs.dump.render.Highlighter;
+import org.krmdemo.techlabs.dump.render.RenderSpec;
 
 import java.io.File;
 
@@ -12,61 +12,61 @@ public class ToFileUtils {
     /**
      * @param file the target file to save into
      * @param objToSave object to save the JSON-representation in text-format
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
      */
-    public static void saveAsJsonTxt(File file, Object objToSave, Highlighter highlighter) {
+    public static void saveAsJsonTxt(File file, Object objToSave, RenderSpec renderSpec) {
         ObjectPrinter.ToFile printer = new ObjectPrinter.ToFile(file);
-        printer.printAsJsonTxt(objToSave, highlighter);
+        printer.printAsJsonTxt(objToSave, renderSpec);
     }
 
     /**
      * @param file the target file to save into
      * @param objToSave object to save the JSON-representation in HTML-format
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
      */
-    public static void saveAsJsonHtml(File file, Object objToSave, Highlighter highlighter) {
+    public static void saveAsJsonHtml(File file, Object objToSave, RenderSpec renderSpec) {
         ObjectPrinter.ToFile printer = new ObjectPrinter.ToFile(file);
-        printer.printAsJsonHtml(objToSave, highlighter);
+        printer.printAsJsonHtml(objToSave, renderSpec);
     }
 
     /**
      * @param file the target file to save into
      * @param objToSave object to save the JSON-representation in SVG-format
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
      */
-    public static void saveAsJsonSvg(File file, Object objToSave, Highlighter highlighter) {
+    public static void saveAsJsonSvg(File file, Object objToSave, RenderSpec renderSpec) {
         ObjectPrinter.ToFile printer = new ObjectPrinter.ToFile(file);
-        printer.printAsJsonSvg(objToSave, highlighter);
+        printer.printAsJsonSvg(objToSave, renderSpec);
     }
 
     /**
      * @param file the target file to save into
      * @param objToSave object to save the YAML-representation in text-format
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
      */
-    public static void saveAsYamlTxt(File file, Object objToSave, Highlighter highlighter) {
+    public static void saveAsYamlTxt(File file, Object objToSave, RenderSpec renderSpec) {
         ObjectPrinter.ToFile printer = new ObjectPrinter.ToFile(file);
-        printer.printAsYamlTxt(objToSave, highlighter);
+        printer.printAsYamlTxt(objToSave, renderSpec);
     }
 
     /**
      * @param file the target file to save into
      * @param objToSave object to save the YAML-representation in HTML-format
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
      */
-    public static void saveAsYamlHtml(File file, Object objToSave, Highlighter highlighter) {
+    public static void saveAsYamlHtml(File file, Object objToSave, RenderSpec renderSpec) {
         ObjectPrinter.ToFile printer = new ObjectPrinter.ToFile(file);
-        printer.printAsYamlHtml(objToSave, highlighter);
+        printer.printAsYamlHtml(objToSave, renderSpec);
     }
 
     /**
      * @param file the target file to save into
      * @param objToSave object to save the YAML-representation in SVG-format
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
      */
-    public static void saveAsYamlSvg(File file, Object objToSave, Highlighter highlighter) {
+    public static void saveAsYamlSvg(File file, Object objToSave, RenderSpec renderSpec) {
         ObjectPrinter.ToFile printer = new ObjectPrinter.ToFile(file);
-        printer.printAsYamlSvg(objToSave, highlighter);
+        printer.printAsYamlSvg(objToSave, renderSpec);
     }
 
     // --------------------------------------------------------------------------------------------

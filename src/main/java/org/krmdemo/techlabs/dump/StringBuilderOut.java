@@ -11,8 +11,9 @@ import java.io.Writer;
 import java.util.stream.Stream;
 
 /**
- * A {@link PrintWriter} over {@link org.apache.commons.io.output.StringBuilderWriter}
- * which simplifies the substitution of {@link System#out} and {@link System#err} in unit-tests.
+ * A {@link PrintWriter} over {@link StringBuilderWriter} that could simplify
+ * the substitution of {@link System#out} and {@link System#err} in unit-tests,
+ * and it's also used by other classes of the current package.
  */
 public class StringBuilderOut extends PrintStream implements CharSequence {
     private final StringBuilderWriter sbw;

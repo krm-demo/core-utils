@@ -5,7 +5,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
-import org.krmdemo.techlabs.dump.render.AnsiHighlighter;
+import org.krmdemo.techlabs.dump.render.Highlight;
+import org.krmdemo.techlabs.dump.render.RenderSpec;
 import picocli.CommandLine.Help.Ansi;
 
 import java.util.Arrays;
@@ -102,13 +103,13 @@ public class ObjectPrinterTest {
             null
         );
         System.out.printf("linkedSetMyBools --> %s%n",
-            DumpUtils.dumpAsJsonTxt(linkedSetMyBools, AnsiHighlighter.DEFAULT));
+            DumpUtils.dumpAsJsonTxt(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
         assertThat(linkedSetMyBools).hasSize(5);
         SortedSet<MyBools> sortedSetMyBools = linkedSetMyBools.stream()
             .filter(Objects::nonNull)
             .collect(toSortedSet(Comparator.comparing(MyBools::toString)));
         System.out.printf("sortedSetMyBools --> %s%n",
-            DumpUtils.dumpAsJsonTxt(sortedSetMyBools, AnsiHighlighter.DEFAULT));
+            DumpUtils.dumpAsJsonTxt(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
         assertThat(sortedSetMyBools).hasSize(4);
     }
 
@@ -137,7 +138,7 @@ public class ObjectPrinterTest {
                 }).toList()
             )
         );
-        PrintUtils.printAsJsonTxt(mapOfLists, AnsiHighlighter.DEFAULT);
+        PrintUtils.printAsJsonTxt(mapOfLists, new RenderSpec(Highlight.DEFAULT));
         assertThat(mapOfLists).hasSize(7);
         System.out.printf("%n... %s (finished). ...%n", testInfo.getDisplayName());
     }
@@ -146,7 +147,7 @@ public class ObjectPrinterTest {
     @Test
     void testSingleRecord(TestInfo testInfo) {
         System.out.printf("--- %s: ---%n", testInfo.getDisplayName());
-        PrintUtils.printAsJsonTxt(anglesArr[5], AnsiHighlighter.DEFAULT);
+        PrintUtils.printAsJsonTxt(anglesArr[5], new RenderSpec(Highlight.DEFAULT));
         assertThat(DumpUtils.dumpAsJsonTxt(anglesArr[5])).isEqualTo("""
             {
               "degrees": "40",

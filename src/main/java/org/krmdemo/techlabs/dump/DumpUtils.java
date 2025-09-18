@@ -1,79 +1,79 @@
 package org.krmdemo.techlabs.dump;
 
-import org.krmdemo.techlabs.dump.render.Highlighter;
+import org.krmdemo.techlabs.dump.render.RenderSpec;
 
 /**
  * Utility-class that is a static facade of {@link ObjectPrinter.ToString},
  * where the serializing of an object is provided with {@link JacksonTree}.
  * <hr/>
- * Set of methods with the second {@link Highlighter} arguments
- * allow to suppress the default highlighting by providing {@link Highlighter#NONE}.  
+ * Set of methods with the second {@link RenderSpec} arguments
+ * allow to suppress the default highlighting by providing {@code new RenderSpec(Highlight.HONE, ...)}.
  */
 public class DumpUtils {
 
     /**
      * @param objToDump object to dump
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
      * @return JSON-representation of an object in text-format as {@link String}
      */
-    public static String dumpAsJsonTxt(Object objToDump, Highlighter highlighter) {
+    public static String dumpAsJsonTxt(Object objToDump, RenderSpec renderSpec) {
         ObjectPrinter.ToString printer = new ObjectPrinter.ToString();
-        printer.printAsJsonTxt(objToDump, highlighter);
+        printer.printAsJsonTxt(objToDump, renderSpec);
         return printer.toString();
     }
 
     /**
      * @param objToDump object to dump
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
      * @return JSON-representation of an object in HTML-format as {@link String}
      */
-    public static String dumpAsJsonHtml(Object objToDump, Highlighter highlighter) {
+    public static String dumpAsJsonHtml(Object objToDump, RenderSpec renderSpec) {
         ObjectPrinter.ToString printer = new ObjectPrinter.ToString();
-        printer.printAsJsonHtml(objToDump, highlighter);
+        printer.printAsJsonHtml(objToDump, renderSpec);
         return printer.toString();
     }
 
     /**
      * @param objToDump object to dump
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
      * @return JSON-representation of an object in SVG-format as {@link String}
      */
-    public static String dumpAsJsonSvg(Object objToDump, Highlighter highlighter) {
+    public static String dumpAsJsonSvg(Object objToDump, RenderSpec renderSpec) {
         ObjectPrinter.ToString printer = new ObjectPrinter.ToString();
-        printer.printAsJsonSvg(objToDump, highlighter);
+        printer.printAsJsonSvg(objToDump, renderSpec);
         return printer.toString();
     }
 
     /**
      * @param objToDump object to dump
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
      * @return YAML-representation of an object in text-format as {@link String}
      */
-    public static String dumpAsYamlTxt(Object objToDump, Highlighter highlighter) {
+    public static String dumpAsYamlTxt(Object objToDump, RenderSpec renderSpec) {
         ObjectPrinter.ToString printer = new ObjectPrinter.ToString();
-        printer.printAsYamlTxt(objToDump, highlighter);
+        printer.printAsYamlTxt(objToDump, renderSpec);
         return printer.toString();
     }
 
     /**
      * @param objToDump object to dump
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
      * @return YAML-representation of an object in HTML-format as {@link String}
      */
-    public static String dumpAsYamlHtml(Object objToDump, Highlighter highlighter) {
+    public static String dumpAsYamlHtml(Object objToDump, RenderSpec renderSpec) {
         ObjectPrinter.ToString printer = new ObjectPrinter.ToString();
-        printer.printAsYamlHtml(objToDump, highlighter);
+        printer.printAsYamlHtml(objToDump, renderSpec);
         return printer.toString();
     }
 
     /**
      * @param objToDump object to dump
-     * @param highlighter an instance of {@link Highlighter} to customize some styles JSON-elements
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
      * @return YAML-representation of an object in SVG-format as {@link String}
      */
-    public static String dumpAsYamlSvg(Object objToDump, Highlighter highlighter) {
+    public static String dumpAsYamlSvg(Object objToDump, RenderSpec renderSpec) {
         ObjectPrinter.ToString printer = new ObjectPrinter.ToString();
-        printer.printAsYamlSvg(objToDump, highlighter);
+        printer.printAsYamlSvg(objToDump, renderSpec);
         return printer.toString();
     }
 

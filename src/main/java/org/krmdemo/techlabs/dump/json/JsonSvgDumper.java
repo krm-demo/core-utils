@@ -1,7 +1,7 @@
 package org.krmdemo.techlabs.dump.json;
 
 import org.krmdemo.techlabs.dump.TreeDumper;
-import org.krmdemo.techlabs.dump.render.Highlighter;
+import org.krmdemo.techlabs.dump.render.RenderSpec;
 
 import java.io.PrintStream;
 import java.util.ArrayDeque;
@@ -11,12 +11,12 @@ import java.util.Objects;
 public class JsonSvgDumper implements TreeDumper {
 
     final PrintStream out;
-    final Highlighter highlighter;
+    final RenderSpec renderSpec;
     final Deque<String> currentPath = new ArrayDeque<>();
 
-    public JsonSvgDumper(PrintStream out, Highlighter highlighter) {
+    public JsonSvgDumper(PrintStream out, RenderSpec renderSpec) {
         this.out = Objects.requireNonNull(out);
-        this.highlighter = Objects.requireNonNull(highlighter);
+        this.renderSpec = Objects.requireNonNull(renderSpec);
     }
 
     @Override

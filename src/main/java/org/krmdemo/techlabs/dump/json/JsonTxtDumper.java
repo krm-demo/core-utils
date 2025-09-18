@@ -1,8 +1,8 @@
 package org.krmdemo.techlabs.dump.json;
 
 import org.krmdemo.techlabs.dump.TreeDumper;
-import org.krmdemo.techlabs.dump.render.AnsiHighlighter;
-import org.krmdemo.techlabs.dump.render.Highlighter;
+import org.krmdemo.techlabs.dump.render.Highlight.Structure;
+import org.krmdemo.techlabs.dump.render.RenderSpec;
 
 import java.io.PrintStream;
 import java.util.ArrayDeque;
@@ -14,23 +14,23 @@ import java.util.Objects;
 public class JsonTxtDumper implements TreeDumper {
 
     final PrintStream out;
-    final Highlighter highlighter;
+    final RenderSpec renderSpec;
     final Deque<String> currentPath = new ArrayDeque<>();
 
-    public JsonTxtDumper(PrintStream out, Highlighter highlighter) {
+    public JsonTxtDumper(PrintStream out, RenderSpec renderSpec) {
         this.out = Objects.requireNonNull(out);
-        this.highlighter = Objects.requireNonNull(highlighter);
+        this.renderSpec = Objects.requireNonNull(renderSpec);
     }
 
     @Override
     public void acceptNull() {
-        out.print(highlighter.highlightNull());
+        out.print(renderSpec.highlightNullAnsi(Structure.JSON));
     }
 
     @Override
     public void acceptScalar(ScalarNode scalarNode) {
         out.print(doubleQuotes());
-        out.print(highlighter.highlightValue(scalarNode.text()));
+        out.print(renderSpec.highlightValueAnsi(Structure.JSON, scalarNode.text()));
         out.print(doubleQuotes());
     }
 
@@ -72,7 +72,7 @@ public class JsonTxtDumper implements TreeDumper {
             out.println();
             out.print(indent());
             out.print(doubleQuotes());
-            out.printf(highlighter.highlightKey(entry.getKey()));
+            out.print(renderSpec.highlightKeyAnsi(Structure.JSON, entry.getKey()));
             out.print(doubleQuotes());
             out.print(colonSpace());
             entry.getValue().visit(this);
@@ -90,30 +90,30 @@ public class JsonTxtDumper implements TreeDumper {
     }
 
     private String comma() {
-        return highlighter.syntaxJson(',');
+        return renderSpec.highlightSyntaxAnsi(Structure.JSON, ',');
     }
 
     private String colonSpace() {
-        return highlighter.syntaxJson(": ");
+        return renderSpec.highlightSyntaxAnsi(Structure.JSON, ": ");
     }
 
     private String doubleQuotes() {
-        return highlighter.syntaxJson('"');
+        return renderSpec.highlightSyntaxAnsi(Structure.JSON, '"');
     }
 
     private String openSquareBracket() {
-        return highlighter.syntaxJson('[');
+        return renderSpec.highlightSyntaxAnsi(Structure.JSON, '[');
     }
 
     private String closedSquareBracket() {
-        return highlighter.syntaxJson(']');
+        return renderSpec.highlightSyntaxAnsi(Structure.JSON, ']');
     }
 
     private String openFigureBracket() {
-        return highlighter.syntaxJson('{');
+        return renderSpec.highlightSyntaxAnsi(Structure.JSON, '{');
     }
 
     private String closedFigureBracket() {
-        return highlighter.syntaxJson('}');
+        return renderSpec.highlightSyntaxAnsi(Structure.JSON, '}');
     }
 }
