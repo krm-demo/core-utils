@@ -20,7 +20,8 @@ public class Highlight {
         SYNTAX,
         NULL,
         KEY,
-        VALUE
+        VALUE,
+        BG
     }
 
     /**
@@ -158,6 +159,9 @@ public class Highlight {
         Rule.of(Kind.VALUE, Structure.JSON, Target.TXT_ANSI, "green"),
         Rule.of(Kind.VALUE, Structure.JSON, Target.HTML_STYLE, "color: #008000;"),
         Rule.of(Kind.VALUE, Structure.YAML, Target.TXT_ANSI, "green"),
-        Rule.of(Kind.VALUE, Structure.YAML, Target.HTML_STYLE, "color: #008000;")
+        Rule.of(Kind.VALUE, Structure.YAML, Target.HTML_STYLE, "color: #008000;"),
+
+        Rule.of(Kind.BG, Structure.JSON, Target.HTML_STYLE, "background-color: #FFFFFF;"),
+        Rule.of(Kind.BG, Structure.YAML, Target.HTML_STYLE, "background-color: #FFFFFF;")
     );
 }

@@ -1,6 +1,7 @@
 package org.krmdemo.techlabs.dump;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,10 @@ import org.krmdemo.techlabs.dump.render.Highlight;
 import org.krmdemo.techlabs.dump.render.RenderSpec;
 import picocli.CommandLine.Help.Ansi;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,14 +57,17 @@ public class ObjectPrinterTest {
         double cosinusValue() {
             return cleanupError(Math.cos(radians));
         }
+
         @JsonGetter("formula-sinus")
         String formulaSinus() {
             return String.format("sin(%d°) = sin(~%.3f) = %.4f", degrees, radians, sinusValue());
         }
+
         @JsonGetter("formula-cosinus")
         String formulaCosinus() {
             return String.format("cos(%d°) = cos(~%.3f) = %.4f", degrees, radians, cosinusValue());
         }
+
         @JsonGetter("formulas-result-map")
         Map<String, Double> formulasMap() {
             return linkedMap(
@@ -81,7 +89,9 @@ public class ObjectPrinterTest {
     }
 
     @Test
-    void testBooleans() {
+    void testBooleans(TestInfo testInfo) {
+        System.out.printf("---- %s (started): ----%n", testInfo.getDisplayName());
+
         record MyBools(Boolean boolOne, Boolean boolTwo, Boolean boolThree) {
             @JsonGetter List<Boolean> boolList() {
                 return Stream.of(boolOne, boolTwo, boolThree).toList();
@@ -95,6 +105,7 @@ public class ObjectPrinterTest {
                 return arr;
             }
         }
+
         SequencedSet<MyBools> linkedSetMyBools = linkedSet(
             new MyBools(true, false, null),
             new MyBools(true, null, true),
@@ -111,6 +122,12 @@ public class ObjectPrinterTest {
         System.out.printf("sortedSetMyBools --> %s%n",
             DumpUtils.dumpAsJsonTxt(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
         assertThat(sortedSetMyBools).hasSize(4);
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        PrintUtils.printAsJsonHtml(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT));
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        PrintUtils.printAsJsonHtml(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
+        System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
 
     @Test
@@ -140,7 +157,11 @@ public class ObjectPrinterTest {
         );
         PrintUtils.printAsJsonTxt(mapOfLists, new RenderSpec(Highlight.DEFAULT));
         assertThat(mapOfLists).hasSize(7);
-        System.out.printf("%n... %s (finished). ...%n", testInfo.getDisplayName());
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        PrintUtils.printAsJsonHtml(mapOfLists, new RenderSpec(Highlight.DEFAULT));
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        PrintUtils.printAsJsonHtml(mapOfLists, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
+        System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
 
 
@@ -159,7 +180,44 @@ public class ObjectPrinterTest {
                 "cos": "0.766044443119"
               }
             }""");
-        System.out.printf("%n... %s (finished). ...%n", testInfo.getDisplayName());
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        PrintUtils.printAsJsonHtml(anglesArr[5], new RenderSpec(Highlight.DEFAULT));
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        PrintUtils.printAsJsonHtml(anglesArr[5], new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
+        System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
+    }
+
+    @Test
+    void testArrayOfRecords(TestInfo testInfo) {
+        System.out.printf("--- %s: ---%n", testInfo.getDisplayName());
+        PrintUtils.printAsJsonTxt(anglesArr, new RenderSpec(Highlight.DEFAULT));
+        System.out.println();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        PrintUtils.printAsJsonHtml(anglesArr, new RenderSpec(Highlight.DEFAULT));
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        PrintUtils.printAsJsonHtml(anglesArr, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
+        System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
+
+        assertThat(DumpUtils.dumpAsJsonTxt(anglesArr, new RenderSpec(Highlight.NONE)))
+            .isEqualTo(resourceContent("testArrayOfRecords--expected.json"));
+        assertThat(DumpUtils.dumpAsJsonHtml(anglesArr, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
+            .isEqualTo(resourceContent("testArrayOfRecords--expected.html"));
+    }
+
+    private String resourceContent(String resourcePath) {
+        URL resourceURL = getClass().getResource(resourcePath);
+        assertThat(resourceURL)
+            .describedAs(
+                String.format("resource of class %s with path '%s'",
+                    getClass().getSimpleName(), resourcePath))
+            .isNotNull();
+        try (InputStream resourceStream = resourceURL.openStream()) {
+            return IOUtils.toString(resourceStream, Charset.defaultCharset());
+        } catch (IOException ioEx) {
+            throw new IllegalArgumentException(String.format(
+                "could not read the content of resource '%s' for class %s",
+                resourcePath, getClass().getSimpleName()), ioEx);
+        }
     }
 
     /**

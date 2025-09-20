@@ -65,7 +65,7 @@ public class JsonTxtDumper implements TreeDumper {
         while (itEntry.hasNext()) {
             Map.Entry<String, Node> entry = itEntry.next();
             if (count > 0) {
-                out.print(",");
+                out.print(comma());
             }
             count++;
             currentPath.addLast(String.format("(%s)", entry.getKey()));

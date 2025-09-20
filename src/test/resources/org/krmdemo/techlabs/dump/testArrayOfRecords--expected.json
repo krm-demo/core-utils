@@ -1,0 +1,82 @@
+[
+  {
+    "degrees": "180",
+    "radians": "3.141592653589793",
+    "formula-sinus": "sin(180°) = sin(~3.142) = 0.0000",
+    "formula-cosinus": "cos(180°) = cos(~3.142) = -1.0000",
+    "formulas-result-map": {
+      "sin": "0.0",
+      "cos": "-1.0"
+    }
+  },
+  {
+    "degrees": "120",
+    "radians": "2.0943951023931953",
+    "formula-sinus": "sin(120°) = sin(~2.094) = 0.8660",
+    "formula-cosinus": "cos(120°) = cos(~2.094) = -0.5000",
+    "formulas-result-map": {
+      "sin": "0.866025403784",
+      "cos": "-0.5"
+    }
+  },
+  {
+    "degrees": "90",
+    "radians": "1.5707963267948966",
+    "formula-sinus": "sin(90°) = sin(~1.571) = 1.0000",
+    "formula-cosinus": "cos(90°) = cos(~1.571) = 0.0000",
+    "formulas-result-map": {
+      "sin": "1.0",
+      "cos": "0.0"
+    }
+  },
+  {
+    "degrees": "60",
+    "radians": "1.0471975511965976",
+    "formula-sinus": "sin(60°) = sin(~1.047) = 0.8660",
+    "formula-cosinus": "cos(60°) = cos(~1.047) = 0.5000",
+    "formulas-result-map": {
+      "sin": "0.866025403784",
+      "cos": "0.5"
+    }
+  },
+  {
+    "degrees": "45",
+    "radians": "0.7853981633974483",
+    "formula-sinus": "sin(45°) = sin(~0.785) = 0.7071",
+    "formula-cosinus": "cos(45°) = cos(~0.785) = 0.7071",
+    "formulas-result-map": {
+      "sin": "0.707106781187",
+      "cos": "0.707106781187"
+    }
+  },
+  {
+    "degrees": "40",
+    "radians": "0.6981317007977318",
+    "formula-sinus": "sin(40°) = sin(~0.698) = 0.6428",
+    "formula-cosinus": "cos(40°) = cos(~0.698) = 0.7660",
+    "formulas-result-map": {
+      "sin": "0.642787609687",
+      "cos": "0.766044443119"
+    }
+  },
+  {
+    "degrees": "30",
+    "radians": "0.5235987755982988",
+    "formula-sinus": "sin(30°) = sin(~0.524) = 0.5000",
+    "formula-cosinus": "cos(30°) = cos(~0.524) = 0.8660",
+    "formulas-result-map": {
+      "sin": "0.5",
+      "cos": "0.866025403784"
+    }
+  },
+  {
+    "degrees": "20",
+    "radians": "0.3490658503988659",
+    "formula-sinus": "sin(20°) = sin(~0.349) = 0.3420",
+    "formula-cosinus": "cos(20°) = cos(~0.349) = 0.9397",
+    "formulas-result-map": {
+      "sin": "0.342020143326",
+      "cos": "0.939692620786"
+    }
+  }
+]

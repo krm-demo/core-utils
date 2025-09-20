@@ -14,10 +14,10 @@ public class RenderSpec {
     public enum Feature {
         SHOW_NULL,
         SHOW_EMPTY,
+        RENDER_HTML_DOC,
         USE_HTML_CSS,
         NESTED_SECTIONS,
         INLINE_IMG,
-        SKIP_OUTER_HTML
     }
 
     private final Highlight highlight;
@@ -28,8 +28,17 @@ public class RenderSpec {
         this.featuresSet.addAll(Arrays.asList(featuresArr));
     }
 
-    boolean hasFeature(Feature feature) {
+    public boolean hasFeature(Feature feature) {
         return featuresSet.contains(feature);
+    }
+
+    public String dumpOuterHtml(String innerHTML, Structure struct) {
+        OuterHtml outerHtml = hasFeature(Feature.RENDER_HTML_DOC) ? OuterHtml.DOCUMENT : OuterHtml.FRAGMENT;
+        return outerHtml.outerHtmlStyle(
+            innerHTML,
+            String.format("%s representation (rendered by Core-Utils)", struct),
+            highlight.lookupValue(Place.of(Kind.BG, struct, Target.HTML_STYLE))
+        );
     }
 
     String highlightAnsi(Kind kind, Structure struct, String str) {
