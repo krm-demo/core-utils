@@ -1,0 +1,39 @@
+- boolOne: true
+  boolTwo: false
+  boolThree: null
+  boolList:
+    - true
+    - false
+    - null
+  boolArr:
+    - true
+    - false
+- boolOne: true
+  boolTwo: null
+  boolThree: true
+  boolList:
+    - true
+    - null
+    - true
+  boolArr:
+    - true
+    - true
+- boolOne: false
+  boolTwo: null
+  boolThree: null
+  boolList:
+    - false
+    - null
+    - null
+  boolArr:
+    - false
+- boolOne: null
+  boolTwo: null
+  boolThree: null
+  boolList:
+    - null
+    - null
+    - null
+  boolArr:
+    []
+- null

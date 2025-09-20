@@ -25,10 +25,22 @@ public class Highlight {
     }
 
     /**
-     * The target structure of rendered document
+     * The target logical structure of rendered document (<b>JSON</b> or <b>YAML</b>)
      */
     public enum Structure {
+        /**
+         * <a href="https://www.json.org/json-en.html">JSON</a>-structure of rendered document or fragment
+         * <hr/>
+         * (meaning of acronym is - <b>J</b>ava-<b>S</b>cript <b>O</b>bject <b>N</b>otation)
+         */
         JSON,
+
+        /**
+         * <a href="https://yaml.org/spec/1.2.2/">YAML</a>-structure of rendered document or fragment
+         * <hr/>
+         * (meaning of acronym is - <b>Y</b>AML-<b>A</b>in't <b>M</b>arkup <b>L</b>anguage),<br/>
+         * which mostly means that YAML is a markup-language without markup-tags as XML or HTML
+         */
         YAML
     }
 

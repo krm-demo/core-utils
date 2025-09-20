@@ -38,6 +38,73 @@ import static org.krmdemo.techlabs.stream.CoreStreamUtils.nameValue;
  */
 public class ObjectPrinterTest {
 
+    @Test
+    void testAnsi() {
+        assertThat(Ansi.AUTO.enabled()).isTrue();  // <-- it's possible because of beforeAll()
+        assertThat(Ansi.AUTO.string("this @|blue text|@ is blue")).isEqualTo(
+            "this \u001B[34mtext\u001B[39m\u001B[0m is blue"
+        );
+    }
+
+    @Test
+    void testBooleans(TestInfo testInfo) {
+        System.out.printf("---- %s (started): ----%n", testInfo.getDisplayName());
+
+        record MyBools(Boolean boolOne, Boolean boolTwo, Boolean boolThree) {
+            @JsonGetter List<Boolean> boolList() {
+                return Stream.of(boolOne, boolTwo, boolThree).toList();
+            }
+            @JsonGetter boolean[] boolArr() {
+                List<Boolean> listNonNull = boolList().stream().filter(Objects::nonNull).toList();
+                boolean[] arr = new boolean[listNonNull.size()];
+                for (int i = 0; i < listNonNull.size(); i++) {
+                    arr[i] = listNonNull.get(i);
+                }
+                return arr;
+            }
+        }
+
+        SequencedSet<MyBools> linkedSetMyBools = linkedSet(
+            new MyBools(true, false, null),
+            new MyBools(true, null, true),
+            new MyBools(false, null, null),
+            new MyBools(null, null, null),
+            null
+        );
+        System.out.printf("linkedSetMyBools (as YAML):%n%s%n",
+            DumpUtils.dumpAsYamlTxt(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
+        System.out.println("~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~");
+        System.out.printf("linkedSetMyBools --(as JSON)--> %s%n",
+            DumpUtils.dumpAsJsonTxt(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
+        assertThat(linkedSetMyBools).hasSize(5);
+        assertThat(DumpUtils.dumpAsJsonTxt(linkedSetMyBools, new RenderSpec(Highlight.NONE)))
+            .isEqualTo(resourceContent("linkedSetMyBools--expected.json"));
+        assertThat(DumpUtils.dumpAsYamlTxt(linkedSetMyBools, new RenderSpec(Highlight.NONE)))
+            .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml"));
+
+        SortedSet<MyBools> sortedSetMyBools = linkedSetMyBools.stream()
+            .filter(Objects::nonNull)
+            .collect(toSortedSet(Comparator.comparing(MyBools::toString)));
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.printf("sortedSetMyBools (as YAML):%n%s%n",
+            DumpUtils.dumpAsYamlTxt(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
+        System.out.println("~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~");
+        System.out.printf("sortedSetMyBools --(as JSON)--> %s%n",
+            DumpUtils.dumpAsJsonTxt(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
+        assertThat(sortedSetMyBools).hasSize(4);
+        assertThat(DumpUtils.dumpAsJsonTxt(sortedSetMyBools, new RenderSpec(Highlight.NONE)))
+            .isEqualTo(resourceContent("sortedSetMyBools--expected.json"));
+        assertThat(DumpUtils.dumpAsYamlTxt(sortedSetMyBools, new RenderSpec(Highlight.NONE)))
+            .isEqualTo(resourceContent("sortedSetMyBools--expected.yaml"));
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        PrintUtils.printAsJsonHtml(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        PrintUtils.printAsJsonHtml(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
+        System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
+
+    }
+
     /**
      * An example of Java-record to demonstrate the usage of Jackson-annotations
      *
@@ -79,56 +146,6 @@ public class ObjectPrinterTest {
 
     private final Angle[] anglesArr = IntStream.of(2, 3, 4, 6, 8, 9, 12, 18)
         .mapToObj(Angle::new).toArray(Angle[]::new);
-
-    @Test
-    void testAnsi() {
-        assertThat(Ansi.AUTO.enabled()).isTrue();  // <-- it's possible because of beforeAll()
-        assertThat(Ansi.AUTO.string("this @|blue text|@ is blue")).isEqualTo(
-            "this \u001B[34mtext\u001B[39m\u001B[0m is blue"
-        );
-    }
-
-    @Test
-    void testBooleans(TestInfo testInfo) {
-        System.out.printf("---- %s (started): ----%n", testInfo.getDisplayName());
-
-        record MyBools(Boolean boolOne, Boolean boolTwo, Boolean boolThree) {
-            @JsonGetter List<Boolean> boolList() {
-                return Stream.of(boolOne, boolTwo, boolThree).toList();
-            }
-            @JsonGetter boolean[] boolArr() {
-                List<Boolean> listNonNull = boolList().stream().filter(Objects::nonNull).toList();
-                boolean[] arr = new boolean[listNonNull.size()];
-                for (int i = 0; i < listNonNull.size(); i++) {
-                    arr[i] = listNonNull.get(i);
-                }
-                return arr;
-            }
-        }
-
-        SequencedSet<MyBools> linkedSetMyBools = linkedSet(
-            new MyBools(true, false, null),
-            new MyBools(true, null, true),
-            new MyBools(false, null, null),
-            new MyBools(null, null, null),
-            null
-        );
-        System.out.printf("linkedSetMyBools --> %s%n",
-            DumpUtils.dumpAsJsonTxt(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
-        assertThat(linkedSetMyBools).hasSize(5);
-        SortedSet<MyBools> sortedSetMyBools = linkedSetMyBools.stream()
-            .filter(Objects::nonNull)
-            .collect(toSortedSet(Comparator.comparing(MyBools::toString)));
-        System.out.printf("sortedSetMyBools --> %s%n",
-            DumpUtils.dumpAsJsonTxt(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
-        assertThat(sortedSetMyBools).hasSize(4);
-
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        PrintUtils.printAsJsonHtml(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT));
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        PrintUtils.printAsJsonHtml(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
-        System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
-    }
 
     @Test
     void testMapOfLists(TestInfo testInfo) {

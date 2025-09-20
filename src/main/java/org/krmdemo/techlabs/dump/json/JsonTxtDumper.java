@@ -11,6 +11,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Implementation of {@link TreeDumper} that dumps the tree
+ * in a {@link Structure#JSON JSON} logical structure.
+ */
 public class JsonTxtDumper implements TreeDumper {
 
     final PrintStream out;
