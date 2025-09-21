@@ -14,8 +14,7 @@
     - null
     - null
     - null
-  boolArr:
-    []
+  boolArr: []
 - boolOne: true
   boolTwo: false
   boolThree: null

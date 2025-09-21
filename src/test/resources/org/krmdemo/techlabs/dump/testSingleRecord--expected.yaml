@@ -1,0 +1,7 @@
+degrees: 40
+radians: 0.6981317007977318
+formula-sinus: sin(40°) = sin(~0.698) = 0.6428
+formula-cosinus: cos(40°) = cos(~0.698) = 0.7660
+formulas-result-map:
+  sin: 0.642787609687
+  cos: 0.766044443119

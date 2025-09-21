@@ -44,14 +44,10 @@ public class YamlTxtDumper implements TreeDumper {
 
     @Override
     public void acceptSequence(SequenceNode sequenceNode) {
-        if (!currentPath.isEmpty()) {
-            out.println();
-            out.print(indent());
-        }
         int count = 0;
         Iterator<Node> itNode = sequenceNode.sequenceItems().iterator();
         while (itNode.hasNext()) {
-            if (count > 0) {
+            if (count > 0 || parentIsMapping()) {
                 out.println();
                 out.print(indent());
             }
@@ -68,14 +64,10 @@ public class YamlTxtDumper implements TreeDumper {
 
     @Override
     public void acceptMappings(MappingsNode mappingsNode) {
-        if (parentIsMapping()) {
-            out.println();
-            out.print(indent());
-        }
         int count = 0;
         Iterator<Map.Entry<String, Node>> itEntry = mappingsNode.mappingsItems().iterator();
         while (itEntry.hasNext()) {
-            if (count > 0) {
+            if (count > 0 || parentIsMapping()) {
                 out.println();
                 out.print(indent());
             }
@@ -109,10 +101,10 @@ public class YamlTxtDumper implements TreeDumper {
     }
 
     private String emptySequence() {
-        return renderSpec.highlightSyntaxAnsi(Highlight.Structure.YAML, "[]");
+        return renderSpec.highlightSyntaxAnsi(Highlight.Structure.YAML, " []");
     }
 
     private String emptyMappings() {
-        return renderSpec.highlightSyntaxAnsi(Highlight.Structure.YAML, "{}");
+        return renderSpec.highlightSyntaxAnsi(Highlight.Structure.YAML, " {}");
     }
 }
