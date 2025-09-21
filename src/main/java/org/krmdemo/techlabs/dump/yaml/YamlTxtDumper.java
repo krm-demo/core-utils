@@ -12,8 +12,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- *  Implementation of {@link TreeDumper} that dumps the tree
- *  in a {@link Highlight.Structure#YAML YAML} logical structure.
+ * Implementation of {@link TreeDumper} that dumps into the passed {@link PrintStream}
+ * the tree of a {@link Highlight.Structure#YAML YAML} logical structure
+ * in {@link Highlight.Target#TXT_ANSI ANSI-Txt} target format.
  */
 public class YamlTxtDumper implements TreeDumper {
 

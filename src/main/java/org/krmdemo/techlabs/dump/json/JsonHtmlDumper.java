@@ -13,6 +13,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Implementation of {@link TreeDumper} that dumps into the passed {@link PrintStream}
+ * the tree of a {@link Highlight.Structure#JSON JSON} logical structure
+ * in {@link Highlight.Target#HTML_STYLE HTML-Style} target format (HTML-CSS is coming soon).
+ */
 public class JsonHtmlDumper implements TreeDumper {
 
     final PrintStream out;
@@ -36,14 +41,26 @@ public class JsonHtmlDumper implements TreeDumper {
 
     @Override
     public void acceptNull() {
+        if (currentPath.isEmpty()) {
+            out.print(divRowStart());
+        }
         out.print(renderSpec.highlightNullHtmlStyle(Highlight.Structure.JSON));
+        if (currentPath.isEmpty()) {
+            out.print(divRowEnd());
+        }
     }
 
     @Override
     public void acceptScalar(ScalarNode scalarNode) {
+        if (currentPath.isEmpty()) {
+            out.print(divRowStart());
+        }
         out.print(doubleQuotes());
         out.print(renderSpec.highlightValueHtmlStyle(Highlight.Structure.JSON, scalarNode.text()));
         out.print(doubleQuotes());
+        if (currentPath.isEmpty()) {
+            out.print(divRowEnd());
+        }
     }
 
     @Override

@@ -45,12 +45,36 @@ public class Highlight {
     }
 
     /**
-     * The target format of output (HTML-document/HTML-fragment, console with ANSI-escape sequences)
+     * The target format of output (HTML-document/HTML-fragment, console with ANSI-escape sequences, ...)
      */
     public enum Target {
+
+        /**
+         * Txt-output format is mostly used to print the rendered document into terminal-console,
+         * where ANSI-escape sequences are used to highlight the different elements of documents
+         * <hr/>
+         * When saving intto {@code *.txt}-file - it's recommended to avoid rendering ANSI-escape sequences,
+         * which is automatically skipped by <a href="https://picocli.info/">picocli</a>
+         * <hr/>
+         * In tests and other environments ANSI-escape sequences will be rendered
+         * only of the system-property <b>{@code picocli.ansi}</b> equals to <b>{@code true}</b>
+         */
         TXT_ANSI,
+
+        /**
+         * HTML-format, which does not require additional internal or external HTML-styles (in {@code *.css}-files)
+         */
         HTML_STYLE,
+
+        /**
+         * HTML-format, without direct HTML-styles, but only with CSS-classes for different elements,
+         * that requires an additional internal or external HTML-styles (in {@code *.css}-files)
+         */
         HTML_CSS,
+
+        /**
+         * This format could be used as a standalone SVG-image or HTML-fragment based on <b>{@literal <svg>}</b>-tag
+         */
         SVG
     }
 

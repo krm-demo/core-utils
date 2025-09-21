@@ -83,6 +83,8 @@ public class ObjectPrinterTest {
             .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml"));
         assertThat(DumpUtils.dumpAsJsonHtml(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
             .isEqualTo(resourceContent("linkedSetMyBools--expected.json.html"));
+        assertThat(DumpUtils.dumpAsYamlHtml(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
+            .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml.html"));
 
         SortedSet<MyBools> sortedSetMyBools = linkedSetMyBools.stream()
             .filter(Objects::nonNull)
@@ -100,6 +102,8 @@ public class ObjectPrinterTest {
             .isEqualTo(resourceContent("sortedSetMyBools--expected.yaml"));
         assertThat(DumpUtils.dumpAsJsonHtml(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
             .isEqualTo(resourceContent("sortedSetMyBools--expected.json.html"));
+        assertThat(DumpUtils.dumpAsYamlHtml(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
+            .isEqualTo(resourceContent("sortedSetMyBools--expected.yaml.html"));
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
 
@@ -182,6 +186,8 @@ public class ObjectPrinterTest {
             .isEqualTo(resourceContent("mapOfLists--expected.yaml"));
         assertThat(DumpUtils.dumpAsJsonHtml(mapOfLists, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
             .isEqualTo(resourceContent("mapOfLists--expected.json.html"));
+        assertThat(DumpUtils.dumpAsYamlHtml(mapOfLists, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
+            .isEqualTo(resourceContent("mapOfLists--expected.yaml.html"));
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
 
@@ -211,6 +217,8 @@ public class ObjectPrinterTest {
             .isEqualTo(resourceContent("testSingleRecord--expected.yaml"));
         assertThat(DumpUtils.dumpAsJsonHtml(anglesArr[5], new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
             .isEqualTo(resourceContent("testSingleRecord--expected.json.html"));
+        assertThat(DumpUtils.dumpAsYamlHtml(anglesArr[5], new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
+            .isEqualTo(resourceContent("testSingleRecord--expected.yaml.html"));
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
 
@@ -230,6 +238,8 @@ public class ObjectPrinterTest {
             .isEqualTo(resourceContent("testArrayOfRecords--expected.yaml"));
         assertThat(DumpUtils.dumpAsJsonHtml(anglesArr, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
             .isEqualTo(resourceContent("testArrayOfRecords--expected.json.html"));
+        assertThat(DumpUtils.dumpAsYamlHtml(anglesArr, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
+            .isEqualTo(resourceContent("testArrayOfRecords--expected.yaml.html"));
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
 
