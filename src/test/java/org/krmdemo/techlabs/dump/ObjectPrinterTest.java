@@ -73,7 +73,7 @@ public class ObjectPrinterTest {
         );
         System.out.printf("linkedSetMyBools (as YAML):%n%s%n",
             DumpUtils.dumpAsYamlTxt(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
-        System.out.println("~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~");
+        System.out.println("~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~");
         System.out.printf("linkedSetMyBools --(as JSON)--> %s%n",
             DumpUtils.dumpAsJsonTxt(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
         assertThat(linkedSetMyBools).hasSize(5);
@@ -89,10 +89,10 @@ public class ObjectPrinterTest {
         SortedSet<MyBools> sortedSetMyBools = linkedSetMyBools.stream()
             .filter(Objects::nonNull)
             .collect(toSortedSet(Comparator.comparing(MyBools::toString)));
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.printf("sortedSetMyBools (as YAML):%n%s%n",
             DumpUtils.dumpAsYamlTxt(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
-        System.out.println("~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~");
+        System.out.println("~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~");
         System.out.printf("sortedSetMyBools --(as JSON)--> %s%n",
             DumpUtils.dumpAsJsonTxt(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
         assertThat(sortedSetMyBools).hasSize(4);
@@ -175,10 +175,14 @@ public class ObjectPrinterTest {
             )
         );
         PrintUtils.printAsJsonTxt(mapOfLists, new RenderSpec(Highlight.DEFAULT));
+        System.out.println();
+        System.out.println("~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~");
+        PrintUtils.printAsYamlTxt(mapOfLists, new RenderSpec(Highlight.DEFAULT));
+        System.out.println();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         assertThat(mapOfLists).hasSize(7);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         PrintUtils.printAsJsonHtml(mapOfLists, new RenderSpec(Highlight.DEFAULT));
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         PrintUtils.printAsJsonHtml(mapOfLists, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
         assertThat(DumpUtils.dumpAsJsonTxt(mapOfLists, new RenderSpec(Highlight.NONE)))
             .isEqualTo(resourceContent("mapOfLists--expected.json"));
@@ -196,6 +200,11 @@ public class ObjectPrinterTest {
     void testSingleRecord(TestInfo testInfo) {
         System.out.printf("--- %s: ---%n", testInfo.getDisplayName());
         PrintUtils.printAsJsonTxt(anglesArr[5], new RenderSpec(Highlight.DEFAULT));
+        System.out.println();
+        System.out.println("~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~");
+        PrintUtils.printAsYamlTxt(anglesArr[5], new RenderSpec(Highlight.DEFAULT));
+        System.out.println();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         assertThat(DumpUtils.dumpAsJsonTxt(anglesArr[5])).isEqualTo("""
             {
               "degrees": "40",
@@ -207,9 +216,8 @@ public class ObjectPrinterTest {
                 "cos": "0.766044443119"
               }
             }""");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         PrintUtils.printAsJsonHtml(anglesArr[5], new RenderSpec(Highlight.DEFAULT));
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         PrintUtils.printAsJsonHtml(anglesArr[5], new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
         assertThat(DumpUtils.dumpAsJsonTxt(anglesArr[5], new RenderSpec(Highlight.NONE)))
             .isEqualTo(resourceContent("testSingleRecord--expected.json"));
@@ -227,9 +235,12 @@ public class ObjectPrinterTest {
         System.out.printf("--- %s: ---%n", testInfo.getDisplayName());
         PrintUtils.printAsJsonTxt(anglesArr, new RenderSpec(Highlight.DEFAULT));
         System.out.println();
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~  ~~");
+        PrintUtils.printAsYamlTxt(anglesArr, new RenderSpec(Highlight.DEFAULT));
+        System.out.println();
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         PrintUtils.printAsJsonHtml(anglesArr, new RenderSpec(Highlight.DEFAULT));
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         PrintUtils.printAsJsonHtml(anglesArr, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
 
         assertThat(DumpUtils.dumpAsJsonTxt(anglesArr, new RenderSpec(Highlight.NONE)))
