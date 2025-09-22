@@ -294,6 +294,14 @@ public class ObjectPrinterTest {
             RenderSpec.Feature.EMBEDDED_SVG_IMG)))
             .isEqualTo(resourceContent("testSingleRecord--expected.json.svg.img.html"));
 
+        assertThat(DumpUtils.dumpAsYamlSvg(anglesArr[5], new RenderSpec(Highlight.DEFAULT)))
+            .isEqualTo(resourceContent("testSingleRecord--expected.yaml.svg"));
+        assertThat(DumpUtils.dumpAsYamlSvg(anglesArr[5], new RenderSpec(
+            Highlight.DEFAULT,
+            RenderSpec.Feature.RENDER_HTML_DOC,
+            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
+            .isEqualTo(resourceContent("testSingleRecord--expected.yaml.svg.img.html"));
+
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
 
@@ -327,6 +335,14 @@ public class ObjectPrinterTest {
             RenderSpec.Feature.RENDER_HTML_DOC,
             RenderSpec.Feature.EMBEDDED_SVG_IMG)))
             .isEqualTo(resourceContent("testArrayOfRecords--expected.json.svg.img.html"));
+
+        assertThat(DumpUtils.dumpAsYamlSvg(anglesArr, new RenderSpec(Highlight.DEFAULT)))
+            .isEqualTo(resourceContent("testArrayOfRecords--expected.yaml.svg"));
+        assertThat(DumpUtils.dumpAsYamlSvg(anglesArr, new RenderSpec(
+            Highlight.DEFAULT,
+            RenderSpec.Feature.RENDER_HTML_DOC,
+            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
+            .isEqualTo(resourceContent("testArrayOfRecords--expected.yaml.svg.img.html"));
 
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
