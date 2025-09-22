@@ -3,7 +3,7 @@ package org.krmdemo.techlabs.json;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.util.JsonGeneratorDelegate;
-import org.krmdemo.techlabs.dump.StringBuilderOut;
+import org.krmdemo.techlabs.core.dump.StringBuilderOut;
 
 import java.io.IOException;
 import java.io.OutputStream;

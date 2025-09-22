@@ -433,7 +433,7 @@
     <maven-compiler-plugin.debug>true</maven-compiler-plugin.debug>
     <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
 
-    <main-class-name>org.krmdemo.techlabs.CoreUtilsMain</main-class-name>
+    <main-class-name>org.krmdemo.techlabs.core.CoreUtilsMain</main-class-name>
     <th-tool-class-name>org.krmdemo.techlabs.thtool.ThymeleafTool</th-tool-class-name>
 
     <org.slf4j.version>2.0.17</org.slf4j.version>

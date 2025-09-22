@@ -3,13 +3,13 @@ package org.krmdemo.techlabs.thymeleaf;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.krmdemo.techlabs.sysdump.SysDumpUtils;
+import org.krmdemo.techlabs.core.utils.SysDumpUtils;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.util.Locale;
 
-import static org.krmdemo.techlabs.sysdump.PropertiesUtils.propsMapResource;
+import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 
 /**
  * This unit-test is just a sandbox for using Thymeleaf-Engine

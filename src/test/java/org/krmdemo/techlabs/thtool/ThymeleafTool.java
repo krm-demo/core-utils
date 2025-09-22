@@ -1,7 +1,7 @@
 package org.krmdemo.techlabs.thtool;
 
 import org.apache.commons.lang3.StringUtils;
-import org.krmdemo.techlabs.sysdump.SysDumpUtils;
+import org.krmdemo.techlabs.core.utils.SysDumpUtils;
 import org.thymeleaf.TemplateEngine;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -17,8 +17,8 @@ import java.util.Arrays;
 import java.util.concurrent.Callable;
 
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
-import static org.krmdemo.techlabs.stream.CoreStreamUtils.sortedSet;
-import static org.krmdemo.techlabs.sysdump.SysDumpUtils.fileAttrsAsJson;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedSet;
+import static org.krmdemo.techlabs.core.utils.SysDumpUtils.fileAttrsAsJson;
 
 /**
  * This class represents <b>{@code th-tool}</b> that could be used to process {@code *.md.th}, {@code *.html.th}

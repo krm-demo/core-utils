@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromFile;
 import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromResource;
-import static org.krmdemo.techlabs.sysdump.PropertiesUtils.propsMapFromFile;
-import static org.krmdemo.techlabs.sysdump.PropertiesUtils.propsMapResource;
+import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapFromFile;
+import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 
 /**
  * This class represents the context of {@link ThymeleafTool}, which holds the variables
