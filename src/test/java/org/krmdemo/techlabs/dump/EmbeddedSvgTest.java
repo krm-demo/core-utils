@@ -11,20 +11,33 @@ import java.nio.charset.Charset;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * A unit-test to verify the way how SVG-image is embedded into IMG-tag
+ */
 public class EmbeddedSvgTest {
 
     @Test
     void test_sample_01() {
-        String outerSvgTag = resourceContent("sample--01-fill.json.svg");
+        String outerSvgTag = resourceContent("sample--01-fill.svg");
         String htmlDoc = OuterTagUtils.outerHtml(outerSvgTag,"Result of 'test_sample_01'");
-        System.out.println(htmlDoc);
+        assertThat(htmlDoc).isEqualTo(resourceContent("sample--01-fill.svg.html"));
+        String htmlImgDoc = OuterTagUtils.outerHtml(
+            OuterTagUtils.embeddedSvgTag(outerSvgTag),
+            "Result of 'test_sample_01' (embedded SVG)"
+        );
+        assertThat(htmlImgDoc).isEqualTo(resourceContent("sample--01-fill.svg.img.html"));
     }
 
     @Test
     void test_sample_02() {
-        String outerSvgTag = resourceContent("sample--02-font.json.svg");
+        String outerSvgTag = resourceContent("sample--02-font.svg");
         String htmlDoc = OuterTagUtils.outerHtml(outerSvgTag,"Result of 'test_sample_02'");
-        System.out.println(htmlDoc);
+        assertThat(htmlDoc).isEqualTo(resourceContent("sample--02-font.svg.html"));
+        String htmlImgDoc = OuterTagUtils.outerHtml(
+            OuterTagUtils.embeddedSvgTag(outerSvgTag),
+            "Result of 'test_sample_02' (embedded SVG)"
+        );
+        assertThat(htmlImgDoc).isEqualTo(resourceContent("sample--02-font.svg.img.html"));
     }
 
     private String resourceContent(String sampleSvgName) {

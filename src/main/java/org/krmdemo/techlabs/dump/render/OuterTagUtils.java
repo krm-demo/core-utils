@@ -95,9 +95,9 @@ public class OuterTagUtils {
         return embeddedSvgTag(outerSvgClass(innerSvg, fontSizePX, maxWidth, rowsCount, outerClassName));
     }
 
-    private static String embeddedSvgTag(String outerSvgTag) {
+    public static String embeddedSvgTag(String outerSvgTag) {
         return String.format("""
-                <img alt="embedded SVG-iamge" src="data:image/svg+xml;base64,%s" />""",
+            <img alt="embedded SVG-iamge" src="data:image/svg+xml;base64,%s" />""",
             encodeBase64(outerSvgTag)
         );
     }

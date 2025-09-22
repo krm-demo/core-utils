@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     style="background-color: azure;"
+     width="180px"
+     height="260px">
+<text font-family="monospace" font-size="14px" style="white-space: pre;">
+  <tspan x="0" dy="1.2em"><tspan text-decoration="underline"> default: </tspan><tspan fill="red">|</tspan><tspan text-decoration="underline" font-weight="bold" fill="grey">bold-grey:</tspan></tspan>
+  <tspan x="0" dy="1.2em">1234567890<tspan fill="red">|</tspan><tspan font-weight="bold" fill="grey">0987654321</tspan></tspan>
+  <tspan x="0" dy="1.2em">  34567890<tspan fill="red">|</tspan><tspan font-weight="bold" fill="grey">09876543</tspan></tspan>
+  <tspan x="0" dy="1.2em">    567890<tspan fill="red">|</tspan><tspan font-weight="bold" fill="grey">098765</tspan></tspan>
+  <tspan x="0" dy="1.2em">      7890<tspan fill="red">|</tspan><tspan font-weight="bold" fill="grey">0987</tspan></tspan>
+  <tspan x="0" dy="1.2em">        90<tspan fill="red">|</tspan><tspan font-weight="bold" fill="grey">09</tspan></tspan>
+  <tspan x="0" dy="1.2em">         <tspan fill="red">\|/</tspan></tspan>
+  <tspan x="0" dy="1.2em" fill="purple">        - * -</tspan>
+  <tspan x="0" dy="1.2em">         <tspan fill="red">/|\</tspan></tspan>
+  <tspan x="0" dy="1.2em"><tspan font-style="italic" fill="blue">        90</tspan><tspan fill="red">|</tspan><tspan font-weight="bold" fill="green">09</tspan></tspan>
+  <tspan x="0" dy="1.2em"><tspan font-style="italic" fill="blue">      7890</tspan><tspan fill="red">|</tspan><tspan font-weight="bold" fill="green">0987</tspan></tspan>
+  <tspan x="0" dy="1.2em"><tspan font-style="italic" fill="blue">    567890</tspan><tspan fill="red">|</tspan><tspan font-weight="bold" fill="green">098765</tspan></tspan>
+  <tspan x="0" dy="1.2em"><tspan font-style="italic" fill="blue">  34567890</tspan><tspan fill="red">|</tspan><tspan font-weight="bold" fill="green">09876543</tspan></tspan>
+  <tspan x="0" dy="1.2em"><tspan font-style="italic" fill="blue">1234567890</tspan><tspan fill="red">|</tspan><tspan font-weight="bold" fill="green">0987654321</tspan></tspan>
+  <tspan x="0" dy="1.2em"><tspan text-decoration="overline" font-style="italic" fill="blue"> it.-blue </tspan><tspan fill="red">|</tspan><tspan text-decoration="overline" font-weight="bold" fill="green">bold-green</tspan></tspan>
+</text>
+</svg>

@@ -32,7 +32,7 @@ import static org.krmdemo.techlabs.stream.CoreStreamUtils.linkedSet;
 import static org.krmdemo.techlabs.stream.CoreStreamUtils.nameValue;
 
 /**
- * A unit-test to verify the abilities of implementations of {@link ObjectPrinter} interface
+ * A unit-test to verify the implementations of {@link ObjectPrinter} interface
  * <hr/>
  * TODO: Cover the output of list and map to file
  */
