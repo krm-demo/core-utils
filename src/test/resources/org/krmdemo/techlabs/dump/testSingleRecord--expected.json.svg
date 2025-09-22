@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     style="null"
+     width="474px"
+     height="174px">
+<text font-family="monospace" font-size="14px" style="white-space: pre;">
+  <tspan class="json-svg-row json-svg-row-0" x="0" dy="1.2em"><tspan fill="#808080">{</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-1" x="0" dy="1.2em">  <tspan fill="#808080">"</tspan><tspan fill="#000080">degrees</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">40</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-2" x="0" dy="1.2em">  <tspan fill="#808080">"</tspan><tspan fill="#000080">radians</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">0.6981317007977318</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-3" x="0" dy="1.2em">  <tspan fill="#808080">"</tspan><tspan fill="#000080">formula-sinus</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">sin(40°) = sin(~0.698) = 0.6428</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-4" x="0" dy="1.2em">  <tspan fill="#808080">"</tspan><tspan fill="#000080">formula-cosinus</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">cos(40°) = cos(~0.698) = 0.7660</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-5" x="0" dy="1.2em">  <tspan fill="#808080">"</tspan><tspan fill="#000080">formulas-result-map</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">{</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-6" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">sin</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">0.642787609687</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-7" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">cos</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">0.766044443119</tspan><tspan fill="#808080">"</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-8" x="0" dy="1.2em">  <tspan fill="#808080">}</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-9" x="0" dy="1.2em"><tspan fill="#808080">}</tspan></tspan>
+</text>
+</svg>
