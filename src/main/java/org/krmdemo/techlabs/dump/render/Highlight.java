@@ -212,7 +212,10 @@ public class Highlight {
         Rule.of(Kind.VALUE, Structure.YAML, Target.HTML_STYLE, "color: #008000;"),
         Rule.of(Kind.VALUE, Structure.YAML, Target.SVG_ATTRS, "fill=\"#008000\""),
 
+        // in some other highlight-schema it's worth to try "background-color: transparent" or "opacity: [0.xxx;1.0]"
         Rule.of(Kind.BG, Structure.JSON, Target.HTML_STYLE, "background-color: #FFFFFF;"),
-        Rule.of(Kind.BG, Structure.YAML, Target.HTML_STYLE, "background-color: #FFFFFF;")
+        Rule.of(Kind.BG, Structure.JSON, Target.SVG_ATTRS, "background-color: #FFFFFF;"),
+        Rule.of(Kind.BG, Structure.YAML, Target.HTML_STYLE, "background-color: #FFFFFF;"),
+        Rule.of(Kind.BG, Structure.YAML, Target.SVG_ATTRS, "background-color: #FFFFFF;")
     );
 }

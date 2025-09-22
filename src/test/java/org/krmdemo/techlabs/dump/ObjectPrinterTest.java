@@ -100,6 +100,14 @@ public class ObjectPrinterTest {
                 RenderSpec.Feature.EMBEDDED_SVG_IMG)))
             .isEqualTo(resourceContent("linkedSetMyBools--expected.json.svg.img.html"));
 
+        assertThat(DumpUtils.dumpAsYamlSvg(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)))
+            .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml.svg"));
+        assertThat(DumpUtils.dumpAsYamlSvg(linkedSetMyBools, new RenderSpec(
+            Highlight.DEFAULT,
+            RenderSpec.Feature.RENDER_HTML_DOC,
+            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
+            .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml.svg.img.html"));
+
         SortedSet<MyBools> sortedSetMyBools = linkedSetMyBools.stream()
             .filter(Objects::nonNull)
             .collect(toSortedSet(Comparator.comparing(MyBools::toString)));
@@ -132,6 +140,14 @@ public class ObjectPrinterTest {
                 RenderSpec.Feature.RENDER_HTML_DOC,
                 RenderSpec.Feature.EMBEDDED_SVG_IMG)))
             .isEqualTo(resourceContent("sortedSetMyBools--expected.json.svg.img.html"));
+
+        assertThat(DumpUtils.dumpAsYamlSvg(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)))
+            .isEqualTo(resourceContent("sortedSetMyBools--expected.yaml.svg"));
+        assertThat(DumpUtils.dumpAsYamlSvg(sortedSetMyBools, new RenderSpec(
+            Highlight.DEFAULT,
+            RenderSpec.Feature.RENDER_HTML_DOC,
+            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
+            .isEqualTo(resourceContent("sortedSetMyBools--expected.yaml.svg.img.html"));
 
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
