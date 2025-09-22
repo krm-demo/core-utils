@@ -27,21 +27,21 @@ public class OuterTagUtils {
 
     // --------------------------------------------------------------------------------------------
 
-    public static int totalWidthPX(int fontSizePX, int maxWidth) {
-        return roundFloor(fontSizePX * 0.6 * maxWidth);
+    public static int totalWidthPX(int fontSizePX, int maxRowLen) {
+        return roundCeil(fontSizePX * 0.61 * maxRowLen + 4);
     }
 
     public static int totalHeightPX(int fontSizePX, int rowsCount) {
-        return roundFloor(fontSizePX * 1.2 * rowsCount);
+        return roundCeil(fontSizePX * 1.2 * (rowsCount + 0.2) + 2);
     }
 
-    public static int roundFloor(double valueDouble) {
-        return Math.toIntExact(Math.round(Math.floor(valueDouble)));
+    public static int roundCeil(double valueDouble) {
+        return Math.toIntExact(Math.round(Math.ceil(valueDouble)));
     }
 
     public static String outerSvgAttrs(
             String innerSvg,
-            int fontSizePX, int maxWidth, int rowsCount,
+            int fontSizePX, int maxRowLen, int rowsCount,
             String outerStyle) {
         return String.format("""
                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ public class OuterTagUtils {
                 %s</text>
                 </svg>""",
             outerStyle,
-            totalWidthPX(fontSizePX, maxWidth),
+            totalWidthPX(fontSizePX, maxRowLen),
             totalHeightPX(fontSizePX, rowsCount),
             fontSizePX,
             innerSvg.indent(2)
@@ -61,7 +61,7 @@ public class OuterTagUtils {
 
     public static String outerSvgClass(
             String innerSvg,
-            int fontSizePX, int maxWidth, int rowsCount,
+            int fontSizePX, int maxRowLen, int rowsCount,
             String outerClassName) {
         return String.format("""
                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ public class OuterTagUtils {
                 %s</text>
                 </svg>""",
             outerClassName,
-            totalWidthPX(fontSizePX, maxWidth),
+            totalWidthPX(fontSizePX, maxRowLen),
             totalHeightPX(fontSizePX, rowsCount),
             fontSizePX,
             innerSvg.indent(2)
@@ -83,16 +83,16 @@ public class OuterTagUtils {
 
     public static String outerImgSvgAttrs(
             String innerSvg,
-            int fontSizePX, int maxWidth, int rowsCount,
+            int fontSizePX, int maxRowLen, int rowsCount,
             String outerStyle) {
-        return embeddedSvgTag(outerSvgAttrs(innerSvg, fontSizePX, maxWidth, rowsCount, outerStyle));
+        return embeddedSvgTag(outerSvgAttrs(innerSvg, fontSizePX, maxRowLen, rowsCount, outerStyle));
     }
 
     public static String outerImgSvgClass(
             String innerSvg,
-            int fontSizePX, int maxWidth, int rowsCount,
+            int fontSizePX, int maxRowLen, int rowsCount,
             String outerClassName) {
-        return embeddedSvgTag(outerSvgClass(innerSvg, fontSizePX, maxWidth, rowsCount, outerClassName));
+        return embeddedSvgTag(outerSvgClass(innerSvg, fontSizePX, maxRowLen, rowsCount, outerClassName));
     }
 
     public static String embeddedSvgTag(String outerSvgTag) {
@@ -134,32 +134,32 @@ public class OuterTagUtils {
 
     public static String outerHtmlSvgAttrs(
             String innerSvg,
-            int fontSizePX, int maxWidth, int rowsCount,
+            int fontSizePX, int maxRowLen, int rowsCount,
             String outerStyle, String title) {
-        return outerHtml(outerSvgAttrs(innerSvg, fontSizePX, maxWidth, rowsCount, outerStyle), title);
+        return outerHtml(outerSvgAttrs(innerSvg, fontSizePX, maxRowLen, rowsCount, outerStyle), title);
     }
 
     public static String outerHtmlSvgClass(
             String innerSvg,
-            int fontSizePX, int maxWidth, int rowsCount,
+            int fontSizePX, int maxRowLen, int rowsCount,
             String outerClassName, String title) {
         // TODO: there should be HTML-style section generated properly in HTML-head
-        return outerHtml(outerSvgClass(innerSvg, fontSizePX, maxWidth, rowsCount, outerClassName), title);
+        return outerHtml(outerSvgClass(innerSvg, fontSizePX, maxRowLen, rowsCount, outerClassName), title);
     }
 
     public static String outerHtmlImgSvgAttrs(
         String innerSvg,
-        int fontSizePX, int maxWidth, int rowsCount,
+        int fontSizePX, int maxRowLen, int rowsCount,
         String outerStyle, String title) {
-        return outerHtml(outerImgSvgAttrs(innerSvg, fontSizePX, maxWidth, rowsCount, outerStyle), title);
+        return outerHtml(outerImgSvgAttrs(innerSvg, fontSizePX, maxRowLen, rowsCount, outerStyle), title);
     }
 
     public static String outerHtmlImgSvgClass(
         String innerSvg,
-        int fontSizePX, int maxWidth, int rowsCount,
+        int fontSizePX, int maxRowLen, int rowsCount,
         String outerClassName, String title) {
         // TODO: there should be HTML-style section generated properly in HTML-head
-        return outerHtml(outerImgSvgClass(innerSvg, fontSizePX, maxWidth, rowsCount, outerClassName), title);
+        return outerHtml(outerImgSvgClass(innerSvg, fontSizePX, maxRowLen, rowsCount, outerClassName), title);
     }
 
     // --------------------------------------------------------------------------------------------

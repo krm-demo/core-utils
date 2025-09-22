@@ -24,6 +24,8 @@ public class JsonSvgDumper implements TreeDumper {
     final Deque<String> currentPath = new ArrayDeque<>();
 
     int totalRowCount = 0;
+    int currentRowLen = 0;
+    int maxRowLen = 0;
 
     public JsonSvgDumper(PrintStream out, RenderSpec renderSpec) {
         this.out = Objects.requireNonNull(out);
@@ -37,7 +39,12 @@ public class JsonSvgDumper implements TreeDumper {
         rootNode.visit(innerDumper);
         out.println(renderSpec.dumpOuterSvg(
             innerOut.toString(), Highlight.Structure.JSON,
-            14, 100, innerDumper.totalRowCount));  // <-- TODO: calculate maxWidth !!!
+            14, innerDumper.maxRowLen, innerDumper.totalRowCount));
+    }
+
+    private void addWidth(int delta) {
+        this.currentRowLen += delta;
+        this.maxRowLen = Math.max(this.maxRowLen, this.currentRowLen);
     }
 
     @Override
@@ -46,6 +53,7 @@ public class JsonSvgDumper implements TreeDumper {
             out.print(svgRowStart());
         }
         out.print(renderSpec.highlightNullSvgAttrs(Highlight.Structure.JSON));
+        addWidth(4); // <-- null
         if (currentPath.isEmpty()) {
             out.print(svgRowEnd());
         }
@@ -57,8 +65,9 @@ public class JsonSvgDumper implements TreeDumper {
             out.print(svgRowStart());
         }
         out.print(doubleQuotes());
-        out.print(renderSpec.highlightSyntaxSvgAttrs(Highlight.Structure.JSON, scalarNode.text()));
+        out.print(renderSpec.highlightValueSvgAttrs(Highlight.Structure.JSON, scalarNode.text()));
         out.print(doubleQuotes());
+        addWidth(2 + scalarNode.text().length()); // <-- "value"
         if (currentPath.isEmpty()) {
             out.print(svgRowEnd());
         }
@@ -70,22 +79,26 @@ public class JsonSvgDumper implements TreeDumper {
             out.print(svgRowStart());
         }
         out.print(openSquareBracket());
+        addWidth(1);
         int count = 0;
         Iterator<Node> itNode = sequenceNode.sequenceItems().iterator();
         while (itNode.hasNext()) {
             if (count > 0) {
                 out.print(comma());
+                addWidth(1);
             }
             count++;
             currentPath.addLast(String.format("[%d]", count));
             out.println(svgRowEnd());
             out.print(svgRowStart() + indent());
+            addIndentWidth();
             itNode.next().visit(this);
             currentPath.removeLast();
         }
         if (count > 0) {
             out.println(svgRowEnd());
             out.print(svgRowStart() + indent());
+            addIndentWidth();
         }
         out.print(closedSquareBracket());
         if (currentPath.isEmpty()) {
@@ -99,29 +112,35 @@ public class JsonSvgDumper implements TreeDumper {
             out.print(svgRowStart());
         }
         out.print(openFigureBracket());
+        addWidth(1);
         int count = 0;
         Iterator<Map.Entry<String, Node>> itEntry = mappingsNode.mappingsItems().iterator();
         while (itEntry.hasNext()) {
             Map.Entry<String, Node> entry = itEntry.next();
             if (count > 0) {
                 out.print(comma());
+                addWidth(1);
             }
             count++;
             currentPath.addLast(String.format("(%s)", entry.getKey()));
             out.println(svgRowEnd());
             out.print(svgRowStart() + indent());
+            addIndentWidth();
             out.print(doubleQuotes());
             out.print(renderSpec.highlightKeySvgAttrs(Highlight.Structure.JSON, entry.getKey()));
             out.print(doubleQuotes());
             out.print(colonSpace());
+            addWidth(4 + entry.getKey().length());
             entry.getValue().visit(this);
             currentPath.removeLast();
         }
         if (count > 0) {
             out.println(svgRowEnd());
             out.print(svgRowStart() + indent());
+            addIndentWidth();
         }
         out.print(closedFigureBracket());
+        addWidth(1);
         if (currentPath.isEmpty()) {
             out.print(svgRowEnd());
         }
@@ -135,11 +154,16 @@ public class JsonSvgDumper implements TreeDumper {
     }
 
     private String svgRowEnd() {
+        this.currentRowLen = 0;
         return "</tspan>";
     }
 
     private String indent() {
         return "  ".repeat(currentPath.size());
+    }
+
+    private void addIndentWidth() {
+        addWidth(2 * currentPath.size());
     }
 
     private String comma() {

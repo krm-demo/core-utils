@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     style="null"
+     width="209px"
+     height="913px">
+<text font-family="monospace" font-size="14px" style="white-space: pre;">
+  <tspan class="json-svg-row json-svg-row-0" x="0" dy="1.2em"><tspan fill="#808080">[</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-1" x="0" dy="1.2em">  <tspan fill="#808080">{</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-2" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolOne</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">false</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-3" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolTwo</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-4" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolThree</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-5" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolList</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">[</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-6" x="0" dy="1.2em">      <tspan fill="#808080">"</tspan><tspan fill="#008000">false</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-7" x="0" dy="1.2em">      <tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-8" x="0" dy="1.2em">      <tspan fill="#800080">null</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-9" x="0" dy="1.2em">    <tspan fill="#808080">]</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-10" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolArr</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">[</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-11" x="0" dy="1.2em">      <tspan fill="#808080">"</tspan><tspan fill="#008000">false</tspan><tspan fill="#808080">"</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-12" x="0" dy="1.2em">    <tspan fill="#808080">]</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-13" x="0" dy="1.2em">  <tspan fill="#808080">}</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-14" x="0" dy="1.2em">  <tspan fill="#808080">{</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-15" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolOne</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-16" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolTwo</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-17" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolThree</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-18" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolList</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">[</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-19" x="0" dy="1.2em">      <tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-20" x="0" dy="1.2em">      <tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-21" x="0" dy="1.2em">      <tspan fill="#800080">null</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-22" x="0" dy="1.2em">    <tspan fill="#808080">]</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-23" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolArr</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">[</tspan><tspan fill="#808080">]</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-24" x="0" dy="1.2em">  <tspan fill="#808080">}</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-25" x="0" dy="1.2em">  <tspan fill="#808080">{</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-26" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolOne</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">true</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-27" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolTwo</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">false</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-28" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolThree</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-29" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolList</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">[</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-30" x="0" dy="1.2em">      <tspan fill="#808080">"</tspan><tspan fill="#008000">true</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-31" x="0" dy="1.2em">      <tspan fill="#808080">"</tspan><tspan fill="#008000">false</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-32" x="0" dy="1.2em">      <tspan fill="#800080">null</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-33" x="0" dy="1.2em">    <tspan fill="#808080">]</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-34" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolArr</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">[</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-35" x="0" dy="1.2em">      <tspan fill="#808080">"</tspan><tspan fill="#008000">true</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-36" x="0" dy="1.2em">      <tspan fill="#808080">"</tspan><tspan fill="#008000">false</tspan><tspan fill="#808080">"</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-37" x="0" dy="1.2em">    <tspan fill="#808080">]</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-38" x="0" dy="1.2em">  <tspan fill="#808080">}</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-39" x="0" dy="1.2em">  <tspan fill="#808080">{</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-40" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolOne</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">true</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-41" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolTwo</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-42" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolThree</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">"</tspan><tspan fill="#008000">true</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-43" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolList</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">[</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-44" x="0" dy="1.2em">      <tspan fill="#808080">"</tspan><tspan fill="#008000">true</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-45" x="0" dy="1.2em">      <tspan fill="#800080">null</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-46" x="0" dy="1.2em">      <tspan fill="#808080">"</tspan><tspan fill="#008000">true</tspan><tspan fill="#808080">"</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-47" x="0" dy="1.2em">    <tspan fill="#808080">]</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-48" x="0" dy="1.2em">    <tspan fill="#808080">"</tspan><tspan fill="#000080">boolArr</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">: </tspan><tspan fill="#808080">[</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-49" x="0" dy="1.2em">      <tspan fill="#808080">"</tspan><tspan fill="#008000">true</tspan><tspan fill="#808080">"</tspan><tspan fill="#808080">,</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-50" x="0" dy="1.2em">      <tspan fill="#808080">"</tspan><tspan fill="#008000">true</tspan><tspan fill="#808080">"</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-51" x="0" dy="1.2em">    <tspan fill="#808080">]</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-52" x="0" dy="1.2em">  <tspan fill="#808080">}</tspan></tspan>
+  <tspan class="json-svg-row json-svg-row-53" x="0" dy="1.2em"><tspan fill="#808080">]</tspan></tspan>
+</text>
+</svg>

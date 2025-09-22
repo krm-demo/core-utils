@@ -43,21 +43,21 @@ public class RenderSpec {
         }
     }
 
-    public String dumpOuterSvg(String innerSVG, Structure struct, int fontSizePX, int maxWidth, int rowsCount) {
+    public String dumpOuterSvg(String innerSVG, Structure struct, int fontSizePX, int maxRowLen, int rowsCount) {
         // TODO: move it to SVG-dumpers
         String outerStyle = highlight.lookupValue(Place.of(Kind.BG, struct, Target.SVG_ATTRS));
         if (hasFeature(Feature.RENDER_HTML_DOC)) {
             if (hasFeature(Feature.EMBEDDED_SVG_IMG)) {
                 return OuterTagUtils.outerHtmlImgSvgAttrs(
-                    innerSVG, fontSizePX, maxWidth, rowsCount, outerStyle,
+                    innerSVG, fontSizePX, maxRowLen, rowsCount, outerStyle,
                     String.format("%s as SVG (rendered by Core-Utils)", struct));
             } else {
                 return OuterTagUtils.outerHtmlSvgAttrs(
-                    innerSVG, fontSizePX, maxWidth, rowsCount, outerStyle,
+                    innerSVG, fontSizePX, maxRowLen, rowsCount, outerStyle,
                     String.format("%s as SVG (rendered by Core-Utils)", struct));
             }
         } else {
-            return OuterTagUtils.outerSvgAttrs(innerSVG, fontSizePX, maxWidth, rowsCount, outerStyle);
+            return OuterTagUtils.outerSvgAttrs(innerSVG, fontSizePX, maxRowLen, rowsCount, outerStyle);
         }
     }
 
