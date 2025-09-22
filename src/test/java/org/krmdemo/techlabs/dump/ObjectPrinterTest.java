@@ -77,14 +77,19 @@ public class ObjectPrinterTest {
         System.out.printf("linkedSetMyBools --(as JSON)--> %s%n",
             DumpUtils.dumpAsJsonTxt(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
         assertThat(linkedSetMyBools).hasSize(5);
+
         assertThat(DumpUtils.dumpAsJsonTxt(linkedSetMyBools, new RenderSpec(Highlight.NONE)))
             .isEqualTo(resourceContent("linkedSetMyBools--expected.json"));
         assertThat(DumpUtils.dumpAsYamlTxt(linkedSetMyBools, new RenderSpec(Highlight.NONE)))
             .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml"));
+
         assertThat(DumpUtils.dumpAsJsonHtml(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
             .isEqualTo(resourceContent("linkedSetMyBools--expected.json.html"));
         assertThat(DumpUtils.dumpAsYamlHtml(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
             .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml.html"));
+
+        assertThat(DumpUtils.dumpAsJsonSvg(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)))
+            .isEqualTo(resourceContent("linkedSetMyBools--expected.json.svg"));
 
         SortedSet<MyBools> sortedSetMyBools = linkedSetMyBools.stream()
             .filter(Objects::nonNull)

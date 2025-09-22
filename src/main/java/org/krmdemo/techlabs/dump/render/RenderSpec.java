@@ -15,9 +15,9 @@ public class RenderSpec {
         SHOW_NULL,
         SHOW_EMPTY,
         RENDER_HTML_DOC,
+        EMBEDDED_SVG_IMG,
         USE_HTML_CSS,
-        NESTED_SECTIONS,
-        INLINE_IMG,
+        NESTED_SECTIONS
     }
 
     private final Highlight highlight;
@@ -33,12 +33,31 @@ public class RenderSpec {
     }
 
     public String dumpOuterHtml(String innerHTML, Structure struct) {
+        // TODO: move it to HTML-dumpers
         String outerStyle = highlight.lookupValue(Place.of(Kind.BG, struct, Target.HTML_STYLE));
         if (hasFeature(Feature.RENDER_HTML_DOC)) {
             return OuterTagUtils.outerHtmlDivStyle(innerHTML, outerStyle,
-                String.format("%s representation (rendered by Core-Utils)", struct));
+                String.format("%s as HTML (rendered by Core-Utils)", struct));
         } else {
             return OuterTagUtils.outerDivStyle(innerHTML, outerStyle);
+        }
+    }
+
+    public String dumpOuterSvg(String innerSVG, Structure struct, int fontSizePX, int maxWidth, int rowsCount) {
+        // TODO: move it to SVG-dumpers
+        String outerStyle = highlight.lookupValue(Place.of(Kind.BG, struct, Target.SVG_ATTRS));
+        if (hasFeature(Feature.RENDER_HTML_DOC)) {
+            if (hasFeature(Feature.EMBEDDED_SVG_IMG)) {
+                return OuterTagUtils.outerHtmlImgSvgAttrs(
+                    innerSVG, fontSizePX, maxWidth, rowsCount, outerStyle,
+                    String.format("%s as SVG (rendered by Core-Utils)", struct));
+            } else {
+                return OuterTagUtils.outerHtmlSvgAttrs(
+                    innerSVG, fontSizePX, maxWidth, rowsCount, outerStyle,
+                    String.format("%s as SVG (rendered by Core-Utils)", struct));
+            }
+        } else {
+            return OuterTagUtils.outerSvgAttrs(innerSVG, fontSizePX, maxWidth, rowsCount, outerStyle);
         }
     }
 
