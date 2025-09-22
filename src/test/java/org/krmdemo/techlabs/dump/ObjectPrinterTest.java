@@ -6,14 +6,17 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.platform.commons.util.StringUtils;
 import org.krmdemo.techlabs.dump.render.Highlight;
 import org.krmdemo.techlabs.dump.render.RenderSpec;
 import picocli.CommandLine.Help.Ansi;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -78,35 +81,8 @@ public class ObjectPrinterTest {
             DumpUtils.dumpAsJsonTxt(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
         assertThat(linkedSetMyBools).hasSize(5);
 
-        assertThat(DumpUtils.dumpAsJsonTxt(linkedSetMyBools, new RenderSpec(Highlight.NONE)))
-            .isEqualTo(resourceContent("linkedSetMyBools--expected.json"));
-        assertThat(DumpUtils.dumpAsYamlTxt(linkedSetMyBools, new RenderSpec(Highlight.NONE)))
-            .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml"));
-
-        assertThat(DumpUtils.dumpAsJsonHtml(linkedSetMyBools, new RenderSpec(
-                Highlight.DEFAULT,
-                RenderSpec.Feature.RENDER_HTML_DOC)))
-            .isEqualTo(resourceContent("linkedSetMyBools--expected.json.html"));
-        assertThat(DumpUtils.dumpAsYamlHtml(linkedSetMyBools, new RenderSpec(
-                Highlight.DEFAULT,
-                RenderSpec.Feature.RENDER_HTML_DOC)))
-            .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml.html"));
-
-        assertThat(DumpUtils.dumpAsJsonSvg(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)))
-            .isEqualTo(resourceContent("linkedSetMyBools--expected.json.svg"));
-        assertThat(DumpUtils.dumpAsJsonSvg(linkedSetMyBools, new RenderSpec(
-                Highlight.DEFAULT,
-                RenderSpec.Feature.RENDER_HTML_DOC,
-                RenderSpec.Feature.EMBEDDED_SVG_IMG)))
-            .isEqualTo(resourceContent("linkedSetMyBools--expected.json.svg.img.html"));
-
-        assertThat(DumpUtils.dumpAsYamlSvg(linkedSetMyBools, new RenderSpec(Highlight.DEFAULT)))
-            .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml.svg"));
-        assertThat(DumpUtils.dumpAsYamlSvg(linkedSetMyBools, new RenderSpec(
-            Highlight.DEFAULT,
-            RenderSpec.Feature.RENDER_HTML_DOC,
-            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
-            .isEqualTo(resourceContent("linkedSetMyBools--expected.yaml.svg.img.html"));
+        // verifying several rendered results with different output structure and target format
+        verifyRendered(linkedSetMyBools, testInfo.getTestMethod().orElseThrow(), "linkedSetMyBools");
 
         SortedSet<MyBools> sortedSetMyBools = linkedSetMyBools.stream()
             .filter(Objects::nonNull)
@@ -119,35 +95,8 @@ public class ObjectPrinterTest {
             DumpUtils.dumpAsJsonTxt(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)));
         assertThat(sortedSetMyBools).hasSize(4);
 
-        assertThat(DumpUtils.dumpAsJsonTxt(sortedSetMyBools, new RenderSpec(Highlight.NONE)))
-            .isEqualTo(resourceContent("sortedSetMyBools--expected.json"));
-        assertThat(DumpUtils.dumpAsYamlTxt(sortedSetMyBools, new RenderSpec(Highlight.NONE)))
-            .isEqualTo(resourceContent("sortedSetMyBools--expected.yaml"));
-
-        assertThat(DumpUtils.dumpAsJsonHtml(sortedSetMyBools, new RenderSpec(
-                Highlight.DEFAULT,
-                RenderSpec.Feature.RENDER_HTML_DOC)))
-            .isEqualTo(resourceContent("sortedSetMyBools--expected.json.html"));
-        assertThat(DumpUtils.dumpAsYamlHtml(sortedSetMyBools, new RenderSpec(
-                Highlight.DEFAULT,
-                RenderSpec.Feature.RENDER_HTML_DOC)))
-            .isEqualTo(resourceContent("sortedSetMyBools--expected.yaml.html"));
-
-        assertThat(DumpUtils.dumpAsJsonSvg(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)))
-            .isEqualTo(resourceContent("sortedSetMyBools--expected.json.svg"));
-        assertThat(DumpUtils.dumpAsJsonSvg(sortedSetMyBools, new RenderSpec(
-                Highlight.DEFAULT,
-                RenderSpec.Feature.RENDER_HTML_DOC,
-                RenderSpec.Feature.EMBEDDED_SVG_IMG)))
-            .isEqualTo(resourceContent("sortedSetMyBools--expected.json.svg.img.html"));
-
-        assertThat(DumpUtils.dumpAsYamlSvg(sortedSetMyBools, new RenderSpec(Highlight.DEFAULT)))
-            .isEqualTo(resourceContent("sortedSetMyBools--expected.yaml.svg"));
-        assertThat(DumpUtils.dumpAsYamlSvg(sortedSetMyBools, new RenderSpec(
-            Highlight.DEFAULT,
-            RenderSpec.Feature.RENDER_HTML_DOC,
-            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
-            .isEqualTo(resourceContent("sortedSetMyBools--expected.yaml.svg.img.html"));
+        // verifying several rendered results with different output structure and target format
+        verifyRendered(sortedSetMyBools, testInfo.getTestMethod().orElseThrow(), "sortedSetMyBools");
 
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
@@ -230,23 +179,8 @@ public class ObjectPrinterTest {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         PrintUtils.printAsJsonHtml(mapOfLists, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
 
-        assertThat(DumpUtils.dumpAsJsonTxt(mapOfLists, new RenderSpec(Highlight.NONE)))
-            .isEqualTo(resourceContent("mapOfLists--expected.json"));
-        assertThat(DumpUtils.dumpAsYamlTxt(mapOfLists, new RenderSpec(Highlight.NONE)))
-            .isEqualTo(resourceContent("mapOfLists--expected.yaml"));
-
-        assertThat(DumpUtils.dumpAsJsonHtml(mapOfLists, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
-            .isEqualTo(resourceContent("mapOfLists--expected.json.html"));
-        assertThat(DumpUtils.dumpAsYamlHtml(mapOfLists, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
-            .isEqualTo(resourceContent("mapOfLists--expected.yaml.html"));
-
-        assertThat(DumpUtils.dumpAsJsonSvg(mapOfLists, new RenderSpec(Highlight.DEFAULT)))
-            .isEqualTo(resourceContent("mapOfLists--expected.json.svg"));
-        assertThat(DumpUtils.dumpAsJsonSvg(mapOfLists, new RenderSpec(
-            Highlight.DEFAULT,
-            RenderSpec.Feature.RENDER_HTML_DOC,
-            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
-            .isEqualTo(resourceContent("mapOfLists--expected.json.svg.img.html"));
+        // verifying several rendered results with different output structure and target format
+        verifyRendered(mapOfLists, testInfo.getTestMethod().orElseThrow(), "mapOfLists");
 
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
@@ -276,31 +210,8 @@ public class ObjectPrinterTest {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         PrintUtils.printAsJsonHtml(anglesArr[5], new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
 
-        assertThat(DumpUtils.dumpAsJsonTxt(anglesArr[5], new RenderSpec(Highlight.NONE)))
-            .isEqualTo(resourceContent("testSingleRecord--expected.json"));
-        assertThat(DumpUtils.dumpAsYamlTxt(anglesArr[5], new RenderSpec(Highlight.NONE)))
-            .isEqualTo(resourceContent("testSingleRecord--expected.yaml"));
-
-        assertThat(DumpUtils.dumpAsJsonHtml(anglesArr[5], new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
-            .isEqualTo(resourceContent("testSingleRecord--expected.json.html"));
-        assertThat(DumpUtils.dumpAsYamlHtml(anglesArr[5], new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
-            .isEqualTo(resourceContent("testSingleRecord--expected.yaml.html"));
-
-        assertThat(DumpUtils.dumpAsJsonSvg(anglesArr[5], new RenderSpec(Highlight.DEFAULT)))
-            .isEqualTo(resourceContent("testSingleRecord--expected.json.svg"));
-        assertThat(DumpUtils.dumpAsJsonSvg(anglesArr[5], new RenderSpec(
-            Highlight.DEFAULT,
-            RenderSpec.Feature.RENDER_HTML_DOC,
-            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
-            .isEqualTo(resourceContent("testSingleRecord--expected.json.svg.img.html"));
-
-        assertThat(DumpUtils.dumpAsYamlSvg(anglesArr[5], new RenderSpec(Highlight.DEFAULT)))
-            .isEqualTo(resourceContent("testSingleRecord--expected.yaml.svg"));
-        assertThat(DumpUtils.dumpAsYamlSvg(anglesArr[5], new RenderSpec(
-            Highlight.DEFAULT,
-            RenderSpec.Feature.RENDER_HTML_DOC,
-            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
-            .isEqualTo(resourceContent("testSingleRecord--expected.yaml.svg.img.html"));
+        // verifying several rendered results with different output structure and target format
+        verifyRendered(anglesArr[5], testInfo.getTestMethod().orElseThrow());
 
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
@@ -318,48 +229,85 @@ public class ObjectPrinterTest {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         PrintUtils.printAsJsonHtml(anglesArr, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC));
 
-        assertThat(DumpUtils.dumpAsJsonTxt(anglesArr, new RenderSpec(Highlight.NONE)))
-            .isEqualTo(resourceContent("testArrayOfRecords--expected.json"));
-        assertThat(DumpUtils.dumpAsYamlTxt(anglesArr, new RenderSpec(Highlight.NONE)))
-            .isEqualTo(resourceContent("testArrayOfRecords--expected.yaml"));
-
-        assertThat(DumpUtils.dumpAsJsonHtml(anglesArr, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
-            .isEqualTo(resourceContent("testArrayOfRecords--expected.json.html"));
-        assertThat(DumpUtils.dumpAsYamlHtml(anglesArr, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
-            .isEqualTo(resourceContent("testArrayOfRecords--expected.yaml.html"));
-
-        assertThat(DumpUtils.dumpAsJsonSvg(anglesArr, new RenderSpec(Highlight.DEFAULT)))
-            .isEqualTo(resourceContent("testArrayOfRecords--expected.json.svg"));
-        assertThat(DumpUtils.dumpAsJsonSvg(anglesArr, new RenderSpec(
-            Highlight.DEFAULT,
-            RenderSpec.Feature.RENDER_HTML_DOC,
-            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
-            .isEqualTo(resourceContent("testArrayOfRecords--expected.json.svg.img.html"));
-
-        assertThat(DumpUtils.dumpAsYamlSvg(anglesArr, new RenderSpec(Highlight.DEFAULT)))
-            .isEqualTo(resourceContent("testArrayOfRecords--expected.yaml.svg"));
-        assertThat(DumpUtils.dumpAsYamlSvg(anglesArr, new RenderSpec(
-            Highlight.DEFAULT,
-            RenderSpec.Feature.RENDER_HTML_DOC,
-            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
-            .isEqualTo(resourceContent("testArrayOfRecords--expected.yaml.svg.img.html"));
+        // verifying several rendered results with different output structure and target format
+        verifyRendered(anglesArr, testInfo.getTestMethod().orElseThrow());
 
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
     }
 
-    private String resourceContent(String resourcePath) {
-        URL resourceURL = getClass().getResource(resourcePath);
+    // --------------------------------------------------------------------------------------------
+
+    private void verifyRendered(Object objToDump, Method testMethod) {
+        verifyRendered(objToDump, testMethod.getName());
+    }
+
+    private void verifyRendered(Object objToDump, Method testMethod, String resourceFilePrefix) {
+        verifyRendered(objToDump, testMethod.getName(), resourceFilePrefix);
+    }
+
+    private void verifyRendered(Object objToDump, String testMethodName) {
+        verifyRendered(objToDump, testMethodName, testMethodName);
+    }
+
+    private void verifyRendered(Object objToDump, String testCaseName, String resourceFilePrefix) {
+        Path resourcePathJson = Path.of(testCaseName, resourceFilePrefix + "--expected.json");
+        Path resourcePathYaml = Path.of(testCaseName, resourceFilePrefix + "--expected.yaml");
+        Path resourcePathJsonHtml = Path.of(testCaseName, resourceFilePrefix + "--expected.json.html");;
+        Path resourcePathYamlHtml = Path.of(testCaseName, resourceFilePrefix + "--expected.yaml.html");
+        Path resourcePathJsonSvg = Path.of(testCaseName, resourceFilePrefix + "--expected.json.svg");;
+        Path resourcePathYamlSvg = Path.of(testCaseName, resourceFilePrefix + "--expected.yaml.svg");
+        Path resourcePathJsonSvgImgHtml = Path.of(testCaseName, resourceFilePrefix + "--expected.json.svg.img.html");;
+        Path resourcePathYamlSvgImgHtml = Path.of(testCaseName, resourceFilePrefix + "--expected.yaml.svg.img.html");
+
+        assertThat(DumpUtils.dumpAsJsonTxt(objToDump, new RenderSpec(Highlight.NONE)))
+            .isEqualTo(resourceContent(resourcePathJson));
+        assertThat(DumpUtils.dumpAsYamlTxt(objToDump, new RenderSpec(Highlight.NONE)))
+            .isEqualTo(resourceContent(resourcePathYaml));
+
+        assertThat(DumpUtils.dumpAsJsonHtml(objToDump, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
+            .isEqualTo(resourceContent(resourcePathJsonHtml));
+        assertThat(DumpUtils.dumpAsYamlHtml(objToDump, new RenderSpec(Highlight.DEFAULT, RenderSpec.Feature.RENDER_HTML_DOC)))
+            .isEqualTo(resourceContent(resourcePathYamlHtml));
+
+        assertThat(DumpUtils.dumpAsJsonSvg(objToDump, new RenderSpec(Highlight.DEFAULT)))
+            .isEqualTo(resourceContent(resourcePathJsonSvg));
+        assertThat(DumpUtils.dumpAsJsonSvg(objToDump, new RenderSpec(
+            Highlight.DEFAULT,
+            RenderSpec.Feature.RENDER_HTML_DOC,
+            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
+            .isEqualTo(resourceContent(resourcePathJsonSvgImgHtml));
+
+        assertThat(DumpUtils.dumpAsYamlSvg(objToDump, new RenderSpec(Highlight.DEFAULT)))
+            .isEqualTo(resourceContent(resourcePathYamlSvg));
+        assertThat(DumpUtils.dumpAsYamlSvg(objToDump, new RenderSpec(
+            Highlight.DEFAULT,
+            RenderSpec.Feature.RENDER_HTML_DOC,
+            RenderSpec.Feature.EMBEDDED_SVG_IMG)))
+            .isEqualTo(resourceContent(resourcePathYamlSvgImgHtml));
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    private String resourceContent(Path resourcePath) {
+        return resourceContent(Objects.requireNonNull(resourcePath).toString());
+    }
+
+    private String resourceContent(String resourcePathStr) {
+        if (StringUtils.isBlank(resourcePathStr)) {
+            throw new IllegalArgumentException("'resourcePathStr' is blank");
+        }
+        URL resourceURL = getClass().getResource(resourcePathStr);
         assertThat(resourceURL)
             .describedAs(
                 String.format("resource of class %s with path '%s'",
-                    getClass().getSimpleName(), resourcePath))
+                    getClass().getSimpleName(), resourcePathStr))
             .isNotNull();
         try (InputStream resourceStream = resourceURL.openStream()) {
             return IOUtils.toString(resourceStream, Charset.defaultCharset());
         } catch (IOException ioEx) {
             throw new IllegalArgumentException(String.format(
                 "could not read the content of resource '%s' for class %s",
-                resourcePath, getClass().getSimpleName()), ioEx);
+                resourcePathStr, getClass().getSimpleName()), ioEx);
         }
     }
 

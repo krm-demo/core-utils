@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     style="background-color: #FFFFFF;"
+     width="201px"
+     height="812px">
+<text font-family="monospace" font-size="14px" style="white-space: pre;">
+  <tspan class="yaml-svg-row yaml-svg-row-0" x="0" dy="1.2em"><tspan fill="#000080">empty-list</tspan><tspan fill="#808080">:</tspan><tspan fill="#808080"> []</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-1" x="0" dy="1.2em"><tspan fill="#000080">singleton-null</tspan><tspan fill="#808080">:</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-2" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#800080">null</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-3" x="0" dy="1.2em"><tspan fill="#000080">angles</tspan><tspan fill="#808080">:</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-4" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">180</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-5" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">120</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-6" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">90</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-7" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">60</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-8" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">45</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-9" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">40</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-10" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">30</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-11" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">20</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-12" x="0" dy="1.2em"><tspan fill="#000080">sinuses</tspan><tspan fill="#808080">:</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-13" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.0</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-14" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.866025403784</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-15" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">1.0</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-16" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.866025403784</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-17" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.707106781187</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-18" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.642787609687</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-19" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.5</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-20" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.342020143326</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-21" x="0" dy="1.2em"><tspan fill="#000080">cosinuses</tspan><tspan fill="#808080">:</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-22" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">-1.0</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-23" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">-0.5</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-24" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.0</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-25" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.5</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-26" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.707106781187</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-27" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.766044443119</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-28" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.866025403784</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-29" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.939692620786</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-30" x="0" dy="1.2em"><tspan fill="#000080">tangents</tspan><tspan fill="#808080">:</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-31" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">-0.0</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-32" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">-1.732050807568</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-33" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#800080">null</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-34" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">1.732050807568</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-35" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">1.0</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-36" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.8390996311778574</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-37" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.5773502691899183</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-38" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.3639702342665194</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-39" x="0" dy="1.2em"><tspan fill="#000080">cotangents</tspan><tspan fill="#808080">:</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-40" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#800080">null</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-41" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">-0.5773502691899183</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-42" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.0</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-43" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">0.5773502691899183</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-44" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">1.0</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-45" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">1.19175359259339</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-46" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">1.732050807568</tspan></tspan>
+  <tspan class="yaml-svg-row yaml-svg-row-47" x="0" dy="1.2em">  <tspan fill="#808080">- </tspan><tspan fill="#008000">2.747477419452229</tspan></tspan>
+</text>
+</svg>
