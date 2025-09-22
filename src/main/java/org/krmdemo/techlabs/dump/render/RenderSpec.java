@@ -33,13 +33,16 @@ public class RenderSpec {
     }
 
     public String dumpOuterHtml(String innerHTML, Structure struct) {
-        OuterHtml outerHtml = hasFeature(Feature.RENDER_HTML_DOC) ? OuterHtml.DOCUMENT : OuterHtml.FRAGMENT;
-        return outerHtml.outerHtmlStyle(
-            innerHTML,
-            String.format("%s representation (rendered by Core-Utils)", struct),
-            highlight.lookupValue(Place.of(Kind.BG, struct, Target.HTML_STYLE))
-        );
+        String outerStyle = highlight.lookupValue(Place.of(Kind.BG, struct, Target.HTML_STYLE));
+        if (hasFeature(Feature.RENDER_HTML_DOC)) {
+            return OuterTagUtils.outerHtmlDivStyle(innerHTML, outerStyle,
+                String.format("%s representation (rendered by Core-Utils)", struct));
+        } else {
+            return OuterTagUtils.outerDivStyle(innerHTML, outerStyle);
+        }
     }
+
+    // --------------------------------------------------------------------------------------------
 
     String highlightAnsi(Kind kind, Structure struct, String str) {
         String ansiStyle = highlight.lookupValue(Place.of(kind, struct, Target.TXT_ANSI));
@@ -61,14 +64,36 @@ public class RenderSpec {
     }
 
     String highlightHtmlCss(Kind kind, Structure struct, String str) {
-        String cssClass = highlight.lookupValue(Place.of(kind, struct, Target.HTML_CSS));
-        if (cssClass == null) {
+        String cssClassName = highlight.lookupValue(Place.of(kind, struct, Target.HTML_CSS));
+        if (cssClassName == null) {
             return str;
         }
         return String.format("""
             <span class="%s">%s</span>""",
-            cssClass, str);
+            cssClassName, str);
     }
+
+    String highlightSvgAttrs(Kind kind, Structure struct, String str) {
+        String svgAttrs = highlight.lookupValue(Place.of(kind, struct, Target.SVG_ATTRS));
+        if (svgAttrs == null) {
+            return str;
+        }
+        return String.format("""
+            <tspan %s>%s</tspan>""",
+            svgAttrs, str);
+    }
+
+    String highlightSvgClass(Kind kind, Structure struct, String str) {
+        String svgClassName = highlight.lookupValue(Place.of(kind, struct, Target.SVG_CLASS));
+        if (svgClassName == null) {
+            return str;
+        }
+        return String.format("""
+            <tspan class="%s">%s</tspan>""",
+            svgClassName, str);
+    }
+
+    // --------------------------------------------------------------------------------------------
 
     public String highlightSyntaxAnsi(Structure struct, char syntaxSymbolChar) {
         return highlightSyntaxAnsi(struct, String.valueOf(syntaxSymbolChar));
@@ -82,6 +107,16 @@ public class RenderSpec {
         return highlightSyntaxHtmlCss(struct, String.valueOf(syntaxSymbolChar));
     }
 
+    public String highlightSyntaxSvgAttrs(Structure struct, char syntaxSymbolChar) {
+        return highlightSyntaxSvgAttrs(struct, String.valueOf(syntaxSymbolChar));
+    }
+
+    public String highlightSyntaxSvgClass(Structure struct, char syntaxSymbolChar) {
+        return highlightSyntaxSvgClass(struct, String.valueOf(syntaxSymbolChar));
+    }
+
+    // --------------------------------------------------------------------------------------------
+
     public String highlightSyntaxAnsi(Structure struct, String syntaxSymbol) {
         return highlightAnsi(Kind.SYNTAX, struct, syntaxSymbol);
     }
@@ -93,6 +128,16 @@ public class RenderSpec {
     public String highlightSyntaxHtmlCss(Structure struct, String syntaxSymbol) {
         return highlightHtmlCss(Kind.SYNTAX, struct, syntaxSymbol);
     }
+
+    public String highlightSyntaxSvgAttrs(Structure struct, String syntaxSymbol) {
+        return highlightSvgAttrs(Kind.SYNTAX, struct, syntaxSymbol);
+    }
+
+    public String highlightSyntaxSvgClass(Structure struct, String syntaxSymbol) {
+        return highlightSvgClass(Kind.SYNTAX, struct, syntaxSymbol);
+    }
+
+    // --------------------------------------------------------------------------------------------
 
     public String highlightNullAnsi(Structure struct) {
         return highlightAnsi(Kind.NULL, struct, "null");
@@ -106,6 +151,16 @@ public class RenderSpec {
         return highlightHtmlCss(Kind.NULL, struct, "null");
     }
 
+    public String highlightNullSvgAttrs(Structure struct) {
+        return highlightSvgAttrs(Kind.NULL, struct, "null");
+    }
+
+    public String highlightNullSvgClass(Structure struct) {
+        return highlightSvgClass(Kind.NULL, struct, "null");
+    }
+
+    // --------------------------------------------------------------------------------------------
+
     public String highlightKeyAnsi(Structure struct, String keyStr) {
         return highlightAnsi(Kind.KEY, struct, keyStr);
     }
@@ -118,6 +173,16 @@ public class RenderSpec {
         return highlightHtmlCss(Kind.KEY, struct, keyStr);
     }
 
+    public String highlightKeySvgAttrs(Structure struct, String keyStr) {
+        return highlightSvgAttrs(Kind.KEY, struct, keyStr);
+    }
+
+    public String highlightKeySvgClass(Structure struct, String keyStr) {
+        return highlightSvgClass(Kind.KEY, struct, keyStr);
+    }
+
+    // --------------------------------------------------------------------------------------------
+
     public String highlightValueAnsi(Structure struct, String valueStr) {
         return highlightAnsi(Kind.VALUE, struct, valueStr);
     }
@@ -129,4 +194,13 @@ public class RenderSpec {
     public String highlightValueHtmlCss(Structure struct, String valueStr) {
         return highlightHtmlCss(Kind.VALUE, struct, valueStr);
     }
+
+    public String highlightValueSvgAttrs(Structure struct, String valueStr) {
+        return highlightSvgAttrs(Kind.VALUE, struct, valueStr);
+    }
+
+    public String highlightValueSvgClass(Structure struct, String valueStr) {
+        return highlightSvgClass(Kind.VALUE, struct, valueStr);
+    }
+
 }

@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 /**
- * This interface represents the ability to dump the data JSON-like and YAML-like
+ * This interface represents the ability to dump the data of JSON-like and YAML-like
  * hierarchical structure in multicolor TEXT-base, HTML-base and SVG-base formats
  */
 public interface TreeDumper {

@@ -73,9 +73,16 @@ public class Highlight {
         HTML_CSS,
 
         /**
-         * This format could be used as a standalone SVG-image or HTML-fragment based on <b>{@literal <svg>}</b>-tag
+         * This format could be used as a standalone SVG-image or HTML-fragment based on <b>{@literal <svg>}</b>-tag,
+         * where properties of font and fill-color are specified via attributes of <b>{@literal <tspan>}</b>-tag
          */
-        SVG
+        SVG_ATTRS,
+
+        /**
+         * This format could be used as a standalone SVG-image or HTML-fragment based on <b>{@literal <svg>}</b>-tag,
+         * where SVG-attributes are encapsualted and provided via CSS-class of <b>{@literal <tspan>}</b>-tag
+         */
+        SVG_CLASS
     }
 
     /**
@@ -179,23 +186,31 @@ public class Highlight {
     public static Highlight DEFAULT = highlight(
         Rule.of(Kind.SYNTAX, Structure.JSON, Target.TXT_ANSI, "white"),
         Rule.of(Kind.SYNTAX, Structure.JSON, Target.HTML_STYLE, "color: #808080;"),
+        Rule.of(Kind.SYNTAX, Structure.JSON, Target.SVG_ATTRS, "fill=\"#808080\""),
         Rule.of(Kind.SYNTAX, Structure.YAML, Target.TXT_ANSI, "white"),
         Rule.of(Kind.SYNTAX, Structure.YAML, Target.HTML_STYLE, "color: #808080;"),
+        Rule.of(Kind.SYNTAX, Structure.YAML, Target.SVG_ATTRS, "fill=\"#808080\""),
 
         Rule.of(Kind.NULL, Structure.JSON, Target.TXT_ANSI, "magenta"),
         Rule.of(Kind.NULL, Structure.JSON, Target.HTML_STYLE, "color: #800080;"),
+        Rule.of(Kind.NULL, Structure.JSON, Target.SVG_ATTRS, "fill=\"#800080\""),
         Rule.of(Kind.NULL, Structure.YAML, Target.TXT_ANSI, "magenta"),
         Rule.of(Kind.NULL, Structure.YAML, Target.HTML_STYLE, "color: #800080;"),
+        Rule.of(Kind.NULL, Structure.YAML, Target.SVG_ATTRS, "fill=\"#800080\""),
 
         Rule.of(Kind.KEY, Structure.JSON, Target.TXT_ANSI, "blue"),
         Rule.of(Kind.KEY, Structure.JSON, Target.HTML_STYLE, "color: #000080;"),
+        Rule.of(Kind.KEY, Structure.JSON, Target.SVG_ATTRS, "fill=\"#000080\""),
         Rule.of(Kind.KEY, Structure.YAML, Target.TXT_ANSI, "blue"),
         Rule.of(Kind.KEY, Structure.YAML, Target.HTML_STYLE, "color: #000080;"),
+        Rule.of(Kind.KEY, Structure.YAML, Target.SVG_ATTRS, "fill=\"#000080\""),
 
         Rule.of(Kind.VALUE, Structure.JSON, Target.TXT_ANSI, "green"),
         Rule.of(Kind.VALUE, Structure.JSON, Target.HTML_STYLE, "color: #008000;"),
+        Rule.of(Kind.VALUE, Structure.JSON, Target.SVG_ATTRS, "fill=\"#008000\""),
         Rule.of(Kind.VALUE, Structure.YAML, Target.TXT_ANSI, "green"),
         Rule.of(Kind.VALUE, Structure.YAML, Target.HTML_STYLE, "color: #008000;"),
+        Rule.of(Kind.VALUE, Structure.YAML, Target.SVG_ATTRS, "fill=\"#008000\""),
 
         Rule.of(Kind.BG, Structure.JSON, Target.HTML_STYLE, "background-color: #FFFFFF;"),
         Rule.of(Kind.BG, Structure.YAML, Target.HTML_STYLE, "background-color: #FFFFFF;")

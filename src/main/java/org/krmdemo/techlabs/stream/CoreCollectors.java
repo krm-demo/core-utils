@@ -174,4 +174,11 @@ public class CoreCollectors {
                 MergeFunction mergeFunction) {
         return Collectors.toMap(keyMapper, valueMapper, mergeFunction.op(), LinkedHashMap::new);
     }
+
+    // --------------------------------------------------------------------------------------------
+
+    private CoreCollectors() {
+        // prohibit the creation of utility-class instance
+        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());
+    }
 }

@@ -3,7 +3,6 @@ package org.krmdemo.techlabs.dump.json;
 import org.krmdemo.techlabs.dump.StringBuilderOut;
 import org.krmdemo.techlabs.dump.TreeDumper;
 import org.krmdemo.techlabs.dump.render.Highlight;
-import org.krmdemo.techlabs.dump.render.OuterHtml;
 import org.krmdemo.techlabs.dump.render.RenderSpec;
 
 import java.io.PrintStream;
