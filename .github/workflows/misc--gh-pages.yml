@@ -78,10 +78,12 @@ jobs:
         run: |
           # build and install to local maven repository
           echo 'created by GitHub-Workflow "'$GITHUB_WORKFLOW'" at '$(date) > gh-pages-branch/a.txt
-          tree gh-pages-branch
           cd gh-pages-branch
+          ls -laxo
           git status
-          git add .
+          git add a.txt
+          git config user.email "gh-pages@example.com"
+          git config user.name "$GITHUB_WORKFLOW #$GITHUB_RUN_NUMBER"
           git commit -m "add the test text-file a.txt as a result of GitHub-Workflow '$GITHUB_WORKFLOW' #$GITHUB_RUN_NUMBER"
           git push origin gh-pages
           echo "That's it "'!!!'
