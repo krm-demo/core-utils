@@ -54,7 +54,8 @@ public class ObjectPrinterTest {
     void testBooleans(TestInfo testInfo) {
         System.out.printf("---- %s (started): ----%n", testInfo.getDisplayName());
 
-        @JsonPropertyOrder  // <-- it looks like even presence of this annotation (without names) guarantees the order
+        // the order of properties is necessary to guarantee the same predefined dump
+        @JsonPropertyOrder({"boolOne", "boolTwo", "boolThree", "boolList", "boolArr"})
         record MyBools(Boolean boolOne, Boolean boolTwo, Boolean boolThree) {
             @JsonGetter List<Boolean> boolList() {
                 return Stream.of(boolOne, boolTwo, boolThree).toList();
@@ -105,11 +106,14 @@ public class ObjectPrinterTest {
 
     /**
      * An example of Java-record to demonstrate the usage of Jackson-annotations
+     * <hr/>
+     * The annotation {@link JsonPropertyOrder} is necessary to guarantee the same predefined dump,
+     * which could be un-predictable at different version of JVM if not specified.
      *
      * @param degrees an integer value of angle in degrees
      * @param radians a floating-point value of angle in radians
      */
-    @JsonPropertyOrder  // <-- it looks like even presence of this annotation (without names) guarantees the order
+    @JsonPropertyOrder({"degrees", "radians", "formula-sinus", "formula-cosinus", "formulas-result-map"})
     record Angle(int degrees, double radians) {
         /**
          * @param partOfCircle a part of circle (which is better to be a divisor of {@code 360})
