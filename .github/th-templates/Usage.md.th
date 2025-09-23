@@ -33,7 +33,7 @@ could be declared in `pom.xml` file in following way:
     ```
 #### [Gradle](https://gradle.org/)
 Projects that use [**Gradle** Build Tool](https://gradle.org/) should declare the dependencies 
-in either `build.gradle` or `build.gradle.kts` in following way: 
+in either `build.gradle` or `build.gradle.kts` like following: 
 ```Gradle
     // for main-source implementation dependencies:
     implementation("[[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]")

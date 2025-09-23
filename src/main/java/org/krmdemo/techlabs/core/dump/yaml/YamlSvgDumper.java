@@ -37,7 +37,6 @@ public class YamlSvgDumper implements TreeDumper {
         PrintStream innerOut = StringBuilderOut.create();
         YamlSvgDumper innerDumper = new YamlSvgDumper(innerOut, renderSpec);
         rootNode.visit(innerDumper);
-        System.out.println("innerDumper.maxRowLen = " + innerDumper.maxRowLen);
         out.println(renderSpec.dumpOuterSvg(
             innerOut.toString(), Highlight.Structure.YAML,
             14, innerDumper.maxRowLen, innerDumper.totalRowCount));

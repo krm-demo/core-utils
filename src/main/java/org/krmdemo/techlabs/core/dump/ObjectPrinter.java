@@ -26,9 +26,9 @@ import static org.krmdemo.techlabs.core.dump.JacksonTree.DEFAULT_JACKSON_TREE;
  * <hr/>
  * It's also recommended to use methods from corresponding utility-classes.
  *
- * @see PrintUtils for standard output {@link System#out}
- * @see DumpUtils for output just as {@link String}
- * @see ToFileUtils for output into target {@link File}
+ * @see PrintUtils for standard output into console
+ * @see DumpUtils for output (dump) just as a string
+ * @see ToFileUtils for output into target file at local file-system
  */
 public interface ObjectPrinter {
 

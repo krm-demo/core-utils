@@ -1,6 +1,7 @@
 package org.krmdemo.techlabs.core.dump;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -53,6 +54,7 @@ public class ObjectPrinterTest {
     void testBooleans(TestInfo testInfo) {
         System.out.printf("---- %s (started): ----%n", testInfo.getDisplayName());
 
+        @JsonPropertyOrder  // <-- it looks like even presence of this annotation (without names) guarantees the order
         record MyBools(Boolean boolOne, Boolean boolTwo, Boolean boolThree) {
             @JsonGetter List<Boolean> boolList() {
                 return Stream.of(boolOne, boolTwo, boolThree).toList();
@@ -107,6 +109,7 @@ public class ObjectPrinterTest {
      * @param degrees an integer value of angle in degrees
      * @param radians a floating-point value of angle in radians
      */
+    @JsonPropertyOrder  // <-- it looks like even presence of this annotation (without names) guarantees the order
     record Angle(int degrees, double radians) {
         /**
          * @param partOfCircle a part of circle (which is better to be a divisor of {@code 360})
