@@ -73,6 +73,18 @@ public interface ObjectPrinter {
         printAsYamlSvg(objToPrint, new RenderSpec(Highlight.NONE));
     }
 
+    /**
+     * This Java-record is a kind of element in multidimensional virtual methods' table,
+     * which acts as a bridge between two hierarchies of different implementations of:<ul>
+     *     <li>{@link TreeDumper.Node} (the default factory is {@link JacksonTree#DEFAULT_JACKSON_TREE})</li>
+     *     <li>{@link ObjectPrinter} - {@link StdOut StdOut}, {@link ToString ToString} and {@link ToFile ToFile}</li>
+     * </ul>
+     * Further interaction two hierarchies are performed via well known and very popular
+     * <a href="https://en.wikipedia.org/wiki/Visitor_pattern">Visitor pattern</a>
+     *
+     * @param dumperNodeFunc a factory to create a root {@link TreeDumper.Node} from the object to dump
+     * @param dumperFactory a factory to create a proper instance of {@link TreeDumper}
+     */
     record UnitOp(
         Function<Object, TreeDumper.Node> dumperNodeFunc,
         BiFunction<PrintStream, RenderSpec, TreeDumper> dumperFactory

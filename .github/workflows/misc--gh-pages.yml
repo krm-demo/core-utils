@@ -64,3 +64,12 @@ jobs:
           cd main-branch          
           echo "Current directory is $(pwd)"
           mvn -B clean install
+
+      - name: "Checkout the 'main'-branch of repo '${{ github.ref }}' into './main-branch'"
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages-branch
+
+      - name: "Verify that total working tree contains two branches correctly"
+        run: tree
