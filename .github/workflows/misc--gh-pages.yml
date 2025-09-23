@@ -16,11 +16,11 @@ jobs:
       - name: "Switch to './main-branch' directory in order to perform the build"
         run: |
           # dump the current directory and switch to './main-branch' 
-          pwd
+          echo "Current directory is $(pwd)"
           tree
           ls -laxo
           cd main-branch
-          pwd
+          echo "Current directory is $(pwd)"
           tree
           ls -laxo
 
@@ -31,7 +31,7 @@ jobs:
           distribution: 'corretto'
           check-latest: true
           cache: 'maven'
-          cache-dependency-path: pom.xml
+          cache-dependency-path: main-branch/pom.xml
 
       - name: "Setup JBang"
         uses: jbangdev/setup-jbang@main
@@ -42,6 +42,7 @@ jobs:
       - name: "Dump Environment-Variables into '.github/th-vars'-dir"
         run: |
           # dump the output of './src/scripts/jbang/DumpEnvVars.java' into JSON-file
+          echo "Current directory is $(pwd)"
           jbang --quiet src/scripts/jbang/DumpEnvVars.java
           jbang --quiet src/scripts/jbang/DumpEnvVars.java > .github/th-vars/var-envVars.json
 
