@@ -73,3 +73,15 @@ jobs:
 
       - name: "Verify that total working tree contains two branches correctly"
         run: tree
+
+      - name: "Create, commit and push some test text-file into 'gh-pages'"
+        run: |
+          # build and install to local maven repository
+          echo 'created by GitHub-Workflow "'$GITHUB_WORKFLOW'" at '$(date) > gh-pages-branch/a.txt
+          tree gh-pages-branch
+          cd gh-pages-branch
+          git status
+          git add .
+          git commit -m "add the test text-file a.txt as a result of GitHub-Workflow '$GITHUB_WORKFLOW' #$GITHUB_RUN_NUMBER"
+          git push origin gh-pages
+          echo "That's it "'!!!'
