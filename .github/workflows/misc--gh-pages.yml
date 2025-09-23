@@ -80,7 +80,7 @@ jobs:
       - name: "Create, commit and push some test text-file into 'gh-pages'"
         run: |
           # build and install to local maven repository
-          echo "created by GitHub-Workflow '$GITHUB_WORKFLOW' action #$GITHUB_RUN_NUMBER at $(date)" > gh-pages-branch/a.txt
+          echo "created by GitHub-Workflow '$GITHUB_WORKFLOW' action #$GITHUB_RUN_NUMBER at $(date)" >> gh-pages-branch/a.txt
           cd gh-pages-branch
           git config user.name github-actions
           git config user.email github-actions@github.com
@@ -91,7 +91,7 @@ jobs:
           echo "~~~~~~~~~~~~~ ( 3 ) ~~~~~~~~~~~~~"
           ls -laxo
           echo "~~~~~~~~~~~~~ ( 4 ) ~~~~~~~~~~~~~"
-          git add a.txt
+          git add .
           echo "~~~~~~~~~~~~~ ( 5 ) ~~~~~~~~~~~~~"
           git status
           echo "~~~~~~~~~~~~~ ( 6 ) ~~~~~~~~~~~~~"
