@@ -79,11 +79,20 @@ jobs:
           # build and install to local maven repository
           echo 'created by GitHub-Workflow "'$GITHUB_WORKFLOW'" at '$(date) > gh-pages-branch/a.txt
           cd gh-pages-branch
+          git config user.email "gh-pages@github.action.com"
+          git config user.name "$GITHUB_WORKFLOW #$GITHUB_RUN_NUMBER"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          git remote -v
+          git config --list
+          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
           ls -laxo
+          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
           git status
           git add a.txt
-          git config user.email "gh-pages@example.com"
-          git config user.name "$GITHUB_WORKFLOW #$GITHUB_RUN_NUMBER"
+          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
           git commit -m "add the test text-file a.txt as a result of GitHub-Workflow '$GITHUB_WORKFLOW' #$GITHUB_RUN_NUMBER"
+          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
           git push origin gh-pages
+          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
           echo "That's it "'!!!'
