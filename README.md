@@ -1,6 +1,8 @@
 [![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
-[![Java-Doc](https://img.shields.io/badge/Java--Doc-core--utils.x.y.z-blue)](https://krm-demo.github.io/core-utils/)
+
+[![Java-Doc](https://img.shields.io/badge/GH--Pages-core--utils.x.y.z-blue)](https://krm-demo.github.io/core-utils/)
+[![Java-Doc](https://img.shields.io/badge/GH--Pages-core--utils.x.y.z.SNAPSHOT-blue)](https://krm-demo.github.io/core-utils/)
 
 # core-utils
 Utility-classes to simplify working with core-java API (streams, collections, input-output)
