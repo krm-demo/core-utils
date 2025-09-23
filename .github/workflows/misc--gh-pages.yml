@@ -2,6 +2,9 @@ name: gh-pages
 run-name: ${{ github.actor }} has executed 'misc--gh-pages.yml' №${{ github.run_number }}
 on: workflow_dispatch
 
+permissions:
+  contents: write
+
 jobs:
 
   main-build:
@@ -79,20 +82,26 @@ jobs:
           # build and install to local maven repository
           echo 'created by GitHub-Workflow "'$GITHUB_WORKFLOW'" at '$(date) > gh-pages-branch/a.txt
           cd gh-pages-branch
-          git config user.email "gh-pages@github.action.com"
-          git config user.name "$GITHUB_WORKFLOW #$GITHUB_RUN_NUMBER"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          echo "~~~~~~~~~~~~~ ( 1 ) ~~~~~~~~~~~~~"
           git remote -v
+          echo "~~~~~~~~~~~~~ ( 2 ) ~~~~~~~~~~~~~"
           git config --list
-          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          echo "~~~~~~~~~~~~~ ( 3 ) ~~~~~~~~~~~~~"
           ls -laxo
-          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-          git status
+          echo "~~~~~~~~~~~~~ ( 4 ) ~~~~~~~~~~~~~"
           git add a.txt
-          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          echo "~~~~~~~~~~~~~ ( 5 ) ~~~~~~~~~~~~~"
+          git status
+          echo "~~~~~~~~~~~~~ ( 6 ) ~~~~~~~~~~~~~"
           git commit -m "add the test text-file a.txt as a result of GitHub-Workflow '$GITHUB_WORKFLOW' #$GITHUB_RUN_NUMBER"
-          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-          git push origin gh-pages
-          echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          echo "~~~~~~~~~~~~~ ( 7 ) ~~~~~~~~~~~~~"
+          git push
+          echo "~~~~~~~~~~~~~ ( 8 )~~~~~~~~~~~~~~"
           echo "That's it "'!!!'
+
+
+#git config user.email "gh-pages@github.action.com"
+#git config user.name "$GITHUB_WORKFLOW #$GITHUB_RUN_NUMBER"
+#git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
