@@ -1,3 +1,4 @@
+eb952b4 some minor corrections to JavaDoc #1
 34ea826 attempt to publish git-log and javadoc into gh-pages #3
 70f117c attempt to publish git-log and javadoc into gh-pages #2
 c25d74a attempt to publish git-log and javadoc into gh-pages #1

@@ -23,7 +23,7 @@
 -doctitle
 'JavaDoc for core-utils:21.0.2-SNAPSHOT)'
 -linksource
--nohelp
+-notimestamp
 --add-stylesheet
 '/home/runner/work/core-utils/core-utils/main-branch/src/main/javadoc/javadoc-core-utils.css'
 -use

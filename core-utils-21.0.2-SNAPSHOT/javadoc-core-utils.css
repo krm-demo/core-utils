@@ -2,6 +2,7 @@
  *    This CSS is applied to in addition to standard JavaDoc-styles for "main" code-base
  */
 
+/*
 :root {
     --navbar-background-color: #42787dd9;
 }
@@ -28,29 +29,10 @@ div.block code {
 div.block hr {
     border-color: WhiteSmoke !important;
 }
-/*
-div.block > a > code {
-    background-color: WhiteSmoke !important;
-}
-div.block > b > code {
-    background-color: WhiteSmoke !important;
-}
-*/
 
 small code {
     --code-font-size: 12px;
     background-color: WhiteSmoke !important;
 }
 
-div.taglet-images-debug {
-    font-family: monospace;
-    background-color: Azure;
-    white-space: pre;
-    border-style: ridge;
-    height: 120px;
-    overflow-y: auto;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 8px;
-    padding-left: 8px;
-}
+*/
