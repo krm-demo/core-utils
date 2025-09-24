@@ -1,0 +1,56 @@
+/**
+ *    This CSS is applied to in addition to standard JavaDoc-styles for "main" code-base
+ */
+
+:root {
+    --navbar-background-color: #42787dd9;
+}
+
+h5 {
+    color: DarkGray;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom: 0.15em !important;
+    margin-top: 0.65em !important;
+    font-size: 0.9em;
+}
+
+h5 + pre {
+    color: DarkGray;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 0.9em;
+}
+
+div.block code {
+    background-color: WhiteSmoke !important;
+}
+div.block hr {
+    border-color: WhiteSmoke !important;
+}
+/*
+div.block > a > code {
+    background-color: WhiteSmoke !important;
+}
+div.block > b > code {
+    background-color: WhiteSmoke !important;
+}
+*/
+
+small code {
+    --code-font-size: 12px;
+    background-color: WhiteSmoke !important;
+}
+
+div.taglet-images-debug {
+    font-family: monospace;
+    background-color: Azure;
+    white-space: pre;
+    border-style: ridge;
+    height: 120px;
+    overflow-y: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 8px;
+    padding-left: 8px;
+}
