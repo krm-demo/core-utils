@@ -94,7 +94,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-23">CoreCollectors</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">A factory of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a>s that allows to collect the stream of values into linked or sorted sets
- and the stream of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>entries</code></a> into the linked or the sorted map.
+ and the stream of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>entries</code></a> and any other types into the linked or the sorted map.
  An enumeration <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils"><code>MergeFunction</code></a> could be used to handle the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a>.</div>
 </section>
 <section class="summary">
@@ -116,7 +116,7 @@ U&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toLinkedMap(java.util.function.Function,java.util.function.Function)" class="member-name-link">toLinkedMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends K&gt;&nbsp;keyMapper,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends U&gt;&nbsp;valueMapper)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toMap(java.util.function.Function&lt;? super T, ? extends K&gt;, java.util.function.Function&lt;? super T, ? extends U&gt;)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link"><code>LinkedHashMap</code></a> with overwriting the duplicates.</div>
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toMap(...)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link"><code>LinkedHashMap</code></a> with overwriting the duplicates.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T,<wbr>
 K,<wbr>
@@ -125,19 +125,19 @@ U&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends U&gt;&nbsp;valueMapper,
  <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">The same as <a href="#toLinkedMap(java.util.function.Function,java.util.function.Function)"><code>toLinkedMap(Function, Function)</code></a>,
+<div class="block">The same as <a href="#toLinkedMap(java.util.function.Function,java.util.function.Function)"><code>toLinkedMap(keyMapper,valueMapper)</code></a>,
  but allows to handle duplicates with <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils"><code>mergeFunction</code></a> parameter.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a><wbr>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedSet.html" title="class or interface in java.util" class="external-link">SequencedSet</a>&lt;T&gt;&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toLinkedSet()" class="member-name-link">toLinkedSet</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toCollection(java.util.function.Supplier&lt;C&gt;)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashSet.html" title="class or interface in java.util" class="external-link"><code>LinkedHashSet</code></a>.</div>
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toCollection(...)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashSet.html" title="class or interface in java.util" class="external-link"><code>LinkedHashSet</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;K,<wbr>
 U&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>U&gt;,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>U&gt;&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toSortedMap()" class="member-name-link">toSortedMap</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toMap(java.util.function.Function&lt;? super T, ? extends K&gt;, java.util.function.Function&lt;? super T, ? extends U&gt;)</code></a>, but the elements of collecting stream are required to be
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toMap(...)</code></a>, but the elements of collecting stream are required to be
  of type <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry</code></a>, and the produced sorted-map accepts them one by one like
  if the method <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#putAll(java.util.Map)" title="class or interface in java.util" class="external-link"><code>Map.putAll(java.util.Map&lt;? extends K, ? extends V&gt;)</code></a> would be invoked (the latest entries overwrite the existing ones).</div>
 </div>
@@ -147,7 +147,7 @@ U&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toSortedMap(java.util.function.Function,java.util.function.Function)" class="member-name-link">toSortedMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends K&gt;&nbsp;keyMapper,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends U&gt;&nbsp;valueMapper)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toMap(java.util.function.Function&lt;? super T, ? extends K&gt;, java.util.function.Function&lt;? super T, ? extends U&gt;)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html" title="class or interface in java.util" class="external-link"><code>TreeMap</code></a> with overwriting the duplicates.</div>
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toMap(...)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html" title="class or interface in java.util" class="external-link"><code>TreeMap</code></a> with overwriting the duplicates.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T,<wbr>
 K,<wbr>
@@ -156,7 +156,7 @@ U&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends U&gt;&nbsp;valueMapper,
  <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">The same as <a href="#toSortedMap(java.util.function.Function,java.util.function.Function)"><code>toSortedMap(Function, Function)</code></a>,
+<div class="block">The same as <a href="#toSortedMap(java.util.function.Function,java.util.function.Function)"><code>toSortedMap(keyMapper,valueMapper)</code></a>,
  but allows to handle duplicates with <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils"><code>mergeFunction</code></a> parameter.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;K,<wbr>
@@ -165,14 +165,14 @@ U&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toSortedMap(java.util.function.Function)" class="member-name-link">toSortedMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;,<wbr>U&gt;&nbsp;valueMapper)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">The same as <a href="#toSortedMap()"><code>toSortedMap()</code></a>, but the parameter <code>valueMapper</code> allows to transform
- <b>the whole input entry</b> of type <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry&lt;K,U&gt;</code></a>
+ <b>the whole input entry</b> of type <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry&lt;K,V&gt;</code></a>
  into <b>the value of output entry</b> of type <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry&lt;K,U&gt;</code></a>,
  and the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> of input entry remains the same in output one.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a><wbr>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableSet.html" title="class or interface in java.util" class="external-link">NavigableSet</a>&lt;T&gt;&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toSortedSet()" class="member-name-link">toSortedSet</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toCollection(java.util.function.Supplier&lt;C&gt;)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeSet.html" title="class or interface in java.util" class="external-link"><code>TreeSet</code></a>.</div>
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toCollection(...)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeSet.html" title="class or interface in java.util" class="external-link"><code>TreeSet</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a><wbr>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableSet.html" title="class or interface in java.util" class="external-link">NavigableSet</a>&lt;T&gt;&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toSortedSet(java.util.Comparator)" class="member-name-link">toSortedSet</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;T&gt;&nbsp;comparator)</code></div>
@@ -200,7 +200,7 @@ U&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <section class="detail" id="toLinkedSet()">
 <h3>toLinkedSet</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedSet.html" title="class or interface in java.util" class="external-link">SequencedSet</a>&lt;T&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-31">toLinkedSet</a></span>()</div>
-<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toCollection(java.util.function.Supplier&lt;C&gt;)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashSet.html" title="class or interface in java.util" class="external-link"><code>LinkedHashSet</code></a>.</div>
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toCollection(...)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashSet.html" title="class or interface in java.util" class="external-link"><code>LinkedHashSet</code></a>.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><code>T</code> - the type of the elements in stream to collect</dd>
@@ -214,7 +214,7 @@ U&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <h3>toSortedSet</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;&gt;</span>
 <span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableSet.html" title="class or interface in java.util" class="external-link">NavigableSet</a>&lt;T&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-41">toSortedSet</a></span>()</div>
-<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toCollection(java.util.function.Supplier&lt;C&gt;)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeSet.html" title="class or interface in java.util" class="external-link"><code>TreeSet</code></a>.</div>
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toCollection(java.util.function.Supplier)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toCollection(...)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeSet.html" title="class or interface in java.util" class="external-link"><code>TreeSet</code></a>.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><code>T</code> - the type of the elements in stream to collect (must implement <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link"><code>Comparable</code></a>)</dd>
@@ -244,7 +244,7 @@ U&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>
 U&gt;</span>
 <span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>U&gt;,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-66">toSortedMap</a></span>()</div>
-<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toMap(java.util.function.Function&lt;? super T, ? extends K&gt;, java.util.function.Function&lt;? super T, ? extends U&gt;)</code></a>, but the elements of collecting stream are required to be
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toMap(...)</code></a>, but the elements of collecting stream are required to be
  of type <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry</code></a>, and the produced sorted-map accepts them one by one like
  if the method <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#putAll(java.util.Map)" title="class or interface in java.util" class="external-link"><code>Map.putAll(java.util.Map&lt;? extends K, ? extends V&gt;)</code></a> would be invoked (the latest entries overwrite the existing ones).</div>
 <dl class="notes">
@@ -262,11 +262,15 @@ U&gt;</span>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>
 V,<wbr>
 U&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-84">toSortedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;,<wbr>U&gt;&nbsp;valueMapper)</span></div>
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-88">toSortedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;,<wbr>U&gt;&nbsp;valueMapper)</span></div>
 <div class="block">The same as <a href="#toSortedMap()"><code>toSortedMap()</code></a>, but the parameter <code>valueMapper</code> allows to transform
- <b>the whole input entry</b> of type <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry&lt;K,U&gt;</code></a>
+ <b>the whole input entry</b> of type <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry&lt;K,V&gt;</code></a>
  into <b>the value of output entry</b> of type <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry&lt;K,U&gt;</code></a>,
- and the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> of input entry remains the same in output one.</div>
+ and the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> of input entry remains the same in output one.
+ <hr/>
+ <i>the brief summary is:</i><ul>
+     <li><code>valueMapper</code> function accepts <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry&lt;K,V&gt;</code></a> and returns <code>&lt;U&gt;</code></li>
+ </ul></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><code>K</code> - the type of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> for <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>entries</code></a> in input and output streams</dd>
@@ -275,7 +279,7 @@ U&gt;</span>
 <dt>Parameters:</dt>
 <dd><code>valueMapper</code> - the function to transform the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getValue()" title="class or interface in java.util" class="external-link"><code>value</code></a></dd>
 <dt>Returns:</dt>
-<dd>a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a>, which collects all the input elements into a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html" title="class or interface in java.util" class="external-link"><code>TreeMap</code></a></dd>
+<dd>a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a> that which collects all the input elements into a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html" title="class or interface in java.util" class="external-link"><code>TreeMap</code></a></dd>
 </dl>
 </section>
 </li>
@@ -285,19 +289,24 @@ U&gt;</span>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T,<wbr>
 K,<wbr>
 U&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-104">toSortedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends K&gt;&nbsp;keyMapper,
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-113">toSortedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends K&gt;&nbsp;keyMapper,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends U&gt;&nbsp;valueMapper)</span></div>
-<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toMap(java.util.function.Function&lt;? super T, ? extends K&gt;, java.util.function.Function&lt;? super T, ? extends U&gt;)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html" title="class or interface in java.util" class="external-link"><code>TreeMap</code></a> with overwriting the duplicates.</div>
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toMap(...)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html" title="class or interface in java.util" class="external-link"><code>TreeMap</code></a> with overwriting the duplicates.
+ <hr/>
+ <i>the brief summary is:</i><ul>
+     <li><code>keyMapper</code> function accepts <code>&lt;T&gt;</code> and returns the type of entry-key <code>&lt;K&gt;</code></li>
+     <li><code>valueMapper</code> function accepts <code>&lt;T&gt;</code> and returns the type of entry-value <code>&lt;U&gt;</code></li>
+ </ul></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><code>T</code> - the type of the input elements</dd>
-<dd><code>K</code> - the output type of the key mapping function</dd>
-<dd><code>U</code> - the output type of the value mapping function</dd>
+<dd><code>K</code> - the output type of the <i>key-mapping</i> function</dd>
+<dd><code>U</code> - the output type of the <i>value-mapping</i> function</dd>
 <dt>Parameters:</dt>
 <dd><code>keyMapper</code> - a <i>key-mapping</i> function to produce keys</dd>
 <dd><code>valueMapper</code> - a <i>value-mapping</i> function to produce values</dd>
 <dt>Returns:</dt>
-<dd>a @{link Collector} which collects elements into a @{link Map}
+<dd>a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a> that collects elements into a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link"><code>NavigableMap</code></a>,
  whose keys are the result of applying a <code>keyMapper</code> function to the input elements,
  and whose values are the result of applying a <code>valueMapper</code> function to all input elements
  equal to the key and overwriting the existing values with new ones
@@ -311,22 +320,27 @@ U&gt;</span>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T,<wbr>
 K,<wbr>
 U&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-126">toSortedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends K&gt;&nbsp;keyMapper,
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-140">toSortedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends K&gt;&nbsp;keyMapper,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends U&gt;&nbsp;valueMapper,
  <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction)</span></div>
-<div class="block">The same as <a href="#toSortedMap(java.util.function.Function,java.util.function.Function)"><code>toSortedMap(Function, Function)</code></a>,
- but allows to handle duplicates with <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils"><code>mergeFunction</code></a> parameter.</div>
+<div class="block">The same as <a href="#toSortedMap(java.util.function.Function,java.util.function.Function)"><code>toSortedMap(keyMapper,valueMapper)</code></a>,
+ but allows to handle duplicates with <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils"><code>mergeFunction</code></a> parameter.
+ <hr/>
+ <i>the brief summary is:</i><ul>
+     <li><code>keyMapper</code> function accepts <code>&lt;T&gt;</code> and returns the type of entry-key <code>&lt;K&gt;</code></li>
+     <li><code>valueMapper</code> function accepts <code>&lt;T&gt;</code> and returns the type of entry-value <code>&lt;U&gt;</code></li>
+ </ul></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><code>T</code> - the type of the input elements</dd>
-<dd><code>K</code> - the output type of the key mapping function</dd>
-<dd><code>U</code> - the output type of the value mapping function</dd>
+<dd><code>K</code> - the output type of the <i>key-mapping</i> function</dd>
+<dd><code>U</code> - the output type of the <i>value-mapping</i> function</dd>
 <dt>Parameters:</dt>
-<dd><code>keyMapper</code> - a mapping function to produce keys</dd>
-<dd><code>valueMapper</code> - a mapping function to produce values</dd>
+<dd><code>keyMapper</code> - a <i>key-mapping</i> function to produce keys</dd>
+<dd><code>valueMapper</code> - a <i>value-mapping</i> function to produce values</dd>
 <dd><code>mergeFunction</code> - one of values that are represented by <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils"><code>MergeFunction</code></a>-enum</dd>
 <dt>Returns:</dt>
-<dd>a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a> which collects elements into a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link"><code>NavigableMap</code></a>
+<dd>a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a>, that collects elements into a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html" title="class or interface in java.util" class="external-link"><code>TreeMap</code></a>,
  whose keys are the result of applying a <code>keyMapper</code> function to the input elements,
  and whose values are the result of applying a <code>valueMapper</code> function to all input elements
  equal to the key and combining them using the <code>mergeFunction</code>.</dd>
@@ -339,19 +353,24 @@ U&gt;</span>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T,<wbr>
 K,<wbr>
 U&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-148">toLinkedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends K&gt;&nbsp;keyMapper,
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-167">toLinkedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends K&gt;&nbsp;keyMapper,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends U&gt;&nbsp;valueMapper)</span></div>
-<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>Collectors.toMap(java.util.function.Function&lt;? super T, ? extends K&gt;, java.util.function.Function&lt;? super T, ? extends U&gt;)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link"><code>LinkedHashMap</code></a> with overwriting the duplicates.</div>
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toMap(...)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link"><code>LinkedHashMap</code></a> with overwriting the duplicates.
+ <hr/>
+ <i>the brief summary is:</i><ul>
+     <li><code>keyMapper</code> function accepts <code>&lt;T&gt;</code> and returns the type of entry-key <code>&lt;K&gt;</code></li>
+     <li><code>valueMapper</code> function accepts <code>&lt;T&gt;</code> and returns the type of entry-value <code>&lt;U&gt;</code></li>
+ </ul></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><code>T</code> - the type of the input elements</dd>
-<dd><code>K</code> - the output type of the key mapping function</dd>
-<dd><code>U</code> - the output type of the value mapping function</dd>
+<dd><code>K</code> - the output type of the <i>key-mapping</i>  function</dd>
+<dd><code>U</code> - the output type of the <i>value-mapping</i> function</dd>
 <dt>Parameters:</dt>
 <dd><code>keyMapper</code> - a <i>key-mapping</i> function to produce keys</dd>
 <dd><code>valueMapper</code> - a <i>value-mapping</i> function to produce values</dd>
 <dt>Returns:</dt>
-<dd>a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a> which collects elements into a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link"><code>SequencedMap</code></a>
+<dd>a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a> that collects elements into a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link"><code>LinkedHashMap</code></a>,
  whose keys are the result of applying a <code>keyMapper</code> function to the input elements,
  and whose values are the result of applying a <code>valueMapper</code> function to all input elements
  equal to the key and overwriting the existing values with new ones
@@ -365,22 +384,27 @@ U&gt;</span>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T,<wbr>
 K,<wbr>
 U&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-170">toLinkedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends K&gt;&nbsp;keyMapper,
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link">Collector</a>&lt;T,<wbr>?,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>U&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreCollectors.html#line-194">toLinkedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends K&gt;&nbsp;keyMapper,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;? super T,<wbr>? extends U&gt;&nbsp;valueMapper,
  <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction)</span></div>
-<div class="block">The same as <a href="#toLinkedMap(java.util.function.Function,java.util.function.Function)"><code>toLinkedMap(Function, Function)</code></a>,
- but allows to handle duplicates with <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils"><code>mergeFunction</code></a> parameter.</div>
+<div class="block">The same as <a href="#toLinkedMap(java.util.function.Function,java.util.function.Function)"><code>toLinkedMap(keyMapper,valueMapper)</code></a>,
+ but allows to handle duplicates with <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils"><code>mergeFunction</code></a> parameter.
+ <hr/>
+ <i>the brief summary is:</i><ul>
+     <li><code>keyMapper</code> function accepts <code>&lt;T&gt;</code> and returns the type of entry-key <code>&lt;K&gt;</code></li>
+     <li><code>valueMapper</code> function accepts <code>&lt;T&gt;</code> and returns the type of entry-value <code>&lt;U&gt;</code></li>
+ </ul></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><code>T</code> - the type of the input elements</dd>
-<dd><code>K</code> - the output type of the key mapping function</dd>
-<dd><code>U</code> - the output type of the value mapping function</dd>
+<dd><code>K</code> - the output type of the <i>key-mapping</i>  function</dd>
+<dd><code>U</code> - the output type of the <i>value-mapping</i> function</dd>
 <dt>Parameters:</dt>
-<dd><code>keyMapper</code> - a mapping function to produce keys</dd>
-<dd><code>valueMapper</code> - a mapping function to produce values</dd>
+<dd><code>keyMapper</code> - a <i>key-mapping</i> function to produce keys</dd>
+<dd><code>valueMapper</code> - a <i>value-mapping</i> function to produce values</dd>
 <dd><code>mergeFunction</code> - one of values that are represented by <a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils"><code>MergeFunction</code></a>-enum</dd>
 <dt>Returns:</dt>
-<dd>a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a> which collects elements into a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link"><code>SequencedMap</code></a>,
+<dd>a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a> that collects elements into a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link"><code>LinkedHashMap</code></a>,
  whose keys are the result of applying a <code>keyMapper</code> function to the input elements,
  and whose values are the result of applying a <code>valueMapper</code> function to all input elements
  equal to the key and combining them using the <code>mergeFunction</code>.</dd>
