@@ -77,7 +77,7 @@ jobs:
       - name: "Copy the result of 'javadoc' MOJOs and the output of 'git-log' from 'main-branch' to 'gh-pages-branch'"
         run: |
           cd main-branch
-          git log --onleline > ../gh-pages-branch/git-log.txt
+          git log --oneline > ../gh-pages-branch/git-log.txt
           # going to extract the file-slug (basename without extension) of a target JAR-file
           # and use it as a name of the destination directory to copy the generated Java-Doc
           JAR_FILE_NAME=$(find target -name "core*.jar" -exec basename {} \;) && cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
