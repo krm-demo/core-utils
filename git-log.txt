@@ -1,1 +1,98 @@
+34ea826 attempt to publish git-log and javadoc into gh-pages #3
 70f117c attempt to publish git-log and javadoc into gh-pages #2
+c25d74a attempt to publish git-log and javadoc into gh-pages #1
+187a38c verify append to file and git-add the whole directory as '.'
+e513459 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #9
+08885a3 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #8
+bd9b0f8 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #7
+5ccc853 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #6
+0be7090 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #5
+e3269a4 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #4
+9fbd49a intrdouce 'misc--gh-pages.yml' action to play with gh-pages #3
+b9c9275 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #2
+8eef705 intrdouce 'misc--gh-pages.yml' action to play with gh-pages
+c0bec9b add badge to GH-Pages #2
+2a48829 add badge to GH-Pages
+2a301ce Attempt to fix the build with all names at '@JsonPropertyOrder' annotation
+7c5ac17 intrdouce 'javadoc' MOJO and attempt to fix the build with '@JsonPropertyOrder'
+34d84dd refactor - introduce 'core' sub-package
+f3e6231 refactor assertions of ObjectPrinterTest
+96cd4f2 implementing SVG-dumpers (YAML) #5
+b6d6bf3 implementing SVG-dumpers (YAML) #4
+5f0b925 implementing SVG-dumpers (finish with JSON) #3
+c2afb7d implementing SVG-dumpers (JSON) #2
+22017ea implementing SVG-dumpers (JSON) #1
+5661872 introduce OuterTagUtils #2
+447451a introduce OuterTagUtils
+848620d implementing YAML rendering into HTML #4
+69c4b32 implementing YAML rendering into HTML #3
+5a54755 implementing YAML rendering #2
+f7d27e8 implementing YAML rendering #1
+1c8cb80 implementing HTML rendering #1
+7d60df0 introduce and use RenderSpec with Highlight instead of Highlighter
+0b79c6a provide JavaDoc and refine some tests #4 (minor refactoring))
+898ae4c provide JavaDoc and refine some tests #3 (testBooleans)
+26f2271 provide JavaDoc and refine some tests #2
+5bb624d provide JavaDoc and refine some tests #1
+0a2cd5b provide the default implemntations of ObjectPrinter and introduce utility-facades #1
+c27cecc implementing JarFileInfo.java #1
+0b853ad continue working 'th-tool' #3
+5148a00 continue working 'th-tool' #2
+5edb8fb continue working 'th-tool' #1
+c42c1a3 start working on the first real 'th-tool'-template
+e8eefc5 support of '.properties' extension in ThymeleafVars #2
+4750427 support of '.properties' extension in ThymeleafVars #1
+db1ef0d Working with th-tool (correct vars-dir) #5
+c8f967b Working with th-tool (add a workflow 'th-tool') #4
+0f11159 Working with th-tool (add a workflow 'th-tool') #3
+5a004a5 Working with th-tool (add a workflow 'th-tool') #2
+4ef75eb Working with th-tool (add a workflow 'th-tool')
+426546d Working with th-tool (processing vars)
+0cc9c96 Introduce JacksonUtils.java
+b6216fa Working with th-templates for usage (tuning the maven cache)
+c256030 Working with th-templates for usage #5
+0d6e44c Working with th-templates for usage #4
+fdc9a51 Working with th-templates for usage #3
+d127c0f Working with th-templates for usage #2
+70cbc7c Working with th-templates for usage #1
+83efd0e start working on ThymeleafTool #1
+215d49c play with multi-line github-workflow action-step-run #4
+30945aa play with multi-line github-workflow action-step-run #3
+0c05d10 play with multi-line github-workflow action-step-run #2
+b2d9dc1 play with multi-line github-workflow action-step-run #1
+44d2d9f generate 'META-INF/maven/maven-project.properties' with parsed versions
+07f0fbf improve DumpSysProps
+c7a1020 improve the result of 'dump-to-summary.sh' #3
+ca3f231 improve the result of 'dump-to-summary.sh' #2
+e10a5c4 improve the result of 'dump-to-summary.sh' #1
+9ec47b7 setup jbang in gh-workflow action
+d9b3ede debug dump-to-summary.sh #2
+cc84ae1 debug dump-to-summary.sh #1
+917cab6 playing with dumps #9
+11f9af2 playing with dumps #8
+40d9c73 playing with dumps #7
+521a9ce playing with dumps #6
+7209928 playing with dumps #5
+8fa241c playing with dumps #4
+7996a0c playing with dumps #3
+2af60cc playing with dumps #2
+930d87b playing with dumps #1
+5f62f9e Provide toSortedMap and toLinkedMap
+da0c1ee Play with java and maven #1
+cead81f Play with java and maven #0
+461e198 make bash executable #2
+a6b6fe1 make bash executable
+b68bfd3 add status badge
+2a4d122 playing with GH workflows #5
+3dd8518 playing with GH workflows #4
+d6f0284 playing with GH workflows #3
+c4ed4e5 playing with GH workflows #2
+eaff78a playing with GH workflows
+c975e12 attempt to fix resources
+bd5fc32 adding enforcer, versioner and other pliugins (including manifest generation)
+8f6f5e9 Provide some debug-info #1
+4a59309 Provide maven cache
+ee0dd7a Provide <distributionManagement> section to 'pom.xml'
+380fe36 Introduce some main and test code
+8e4641b Create maven-publish.yml
+f736ec4 Initial commit
