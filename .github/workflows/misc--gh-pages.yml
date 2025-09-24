@@ -7,7 +7,7 @@ permissions:
 
 jobs:
 
-  main-build:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout the 'main'-branch of repo '${{ github.ref }}' into './main-branch'"
@@ -15,6 +15,7 @@ jobs:
         with:
           ref: main
           path: main-branch
+          fetch-depth: 0
 
       - name: "Set up JDK 21 (Amazon Corretto)"
         uses: actions/setup-java@v4
@@ -73,18 +74,23 @@ jobs:
         with:
           ref: gh-pages
           path: gh-pages-branch
+          fetch-depth: 0
 
       - name: "Copy the result of 'javadoc' MOJOs and the output of 'git-log' from 'main-branch' to 'gh-pages-branch'"
         run: |
           cd main-branch
           git log --oneline > ../gh-pages-branch/git-log.txt
+          echo -e "the content of file '$(realpath ../gh-pages-branch/git-log.txt)':\n$(cat ../gh-pages-branch/git-log.txt)"
           # going to extract the file-slug (basename without extension) of a target JAR-file
           # and use it as a name of the destination directory to copy the generated Java-Doc
-          JAR_FILE_NAME=$(find target -name "core*.jar" -exec basename {} \;) && cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
+          JAR_FILE_NAME=$(find target -name "core*.jar" -exec basename {} \;)
+          echo "... going to re-write the content of folder '$(realpath ../gh-pages-branch/${JAR_FILE_NAME%.*})' ..."
+          rm -rf ../gh-pages-branch/${JAR_FILE_NAME%.*}
+          cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
           echo "JAR_FILE_NAME=$JAR_FILE_NAME"
           tree ../gh-pages-branch
 
-      - name: "Create, commit and push some test text-file into 'gh-pages'"
+      - name: "Commit and push the content 'gh-pages-branch' (togther with some test text-files)"
         run: |
           # build and install to local maven repository
           echo "created by GitHub-Workflow '$GITHUB_WORKFLOW' action #$GITHUB_RUN_NUMBER at $(date)" >> gh-pages-branch/a.txt
