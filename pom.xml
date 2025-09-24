@@ -444,8 +444,9 @@
         <configuration>
           <debug>true</debug>
           <doclint>none</doclint>
-          <nohelp>true</nohelp>
-          <!--          <notree>true</notree>-->
+<!--          <nohelp>true</nohelp>-->
+<!--          <notree>true</notree>-->
+          <notimestamp>true</notimestamp>
           <linksource>true</linksource>
           <release>${maven.javadoc.plugin.release}</release>
           <addStylesheets>
