@@ -1,4 +1,4 @@
-### Installation and Usage of `[[${mavenProps.get("maven-project.artifact")}]]`-library
+## Installation and Usage of `[[${mavenProps.get("maven-project.artifact")}]]`-library
 
 _Snapshot_-versions are available only after cloning the git-repo locally and
 checking out the proper branch (the most recent snapshot is in `main`-branch).
@@ -11,7 +11,7 @@ After that, staying in the root directory of a project it's enough to type:
 The command above installs `[[${mavenProps.get("maven-project.artifact")}]]`-library 
 in the local maven-repository, and it becomes available for usage described below...
 
-#### [Maven](https://maven.apache.org/)
+### [Maven](https://maven.apache.org/)
 Dependencies for projects that are using [Apache Maven](https://maven.apache.org/) as a build-tool 
 could be declared in `pom.xml` file in following way:
 - for main-source dependencies:
@@ -31,7 +31,7 @@ could be declared in `pom.xml` file in following way:
             <scope>test</scope>
         </dependency>
     ```
-#### [Gradle](https://gradle.org/)
+### [Gradle](https://gradle.org/)
 Projects that use [**Gradle** Build Tool](https://gradle.org/) should declare the dependencies 
 in either `build.gradle` or `build.gradle.kts` like following: 
 ```Gradle
@@ -42,6 +42,6 @@ in either `build.gradle` or `build.gradle.kts` like following:
     testImplementation("[[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]")
 ```
 
-#### JBang
+### [JBang](https://www.jbang.dev/)
 TODO: to be described...
 

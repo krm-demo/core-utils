@@ -66,7 +66,7 @@ jobs:
           # build and install to local maven repository
           cd main-branch          
           echo "Current directory is $(pwd)"
-          mvn -B clean install
+          mvn -B clean install javadoc:javadoc
 
       - name: "Checkout the 'main'-branch of repo '${{ github.ref }}' into './main-branch'"
         uses: actions/checkout@v4
@@ -74,8 +74,15 @@ jobs:
           ref: gh-pages
           path: gh-pages-branch
 
-      - name: "Verify that total working tree contains two branches correctly"
-        run: tree
+      - name: "Copy the result of 'javadoc' MOJOs and the output of 'git-log' from 'main-branch' to 'gh-pages-branch'"
+        run: |
+          cd main-branch
+          git log --onleline > ../gh-pages-branch/git-log.txt
+          # going to extract the file-slug (basename without extension) of a target JAR-file
+          # and use it as a name of the destination directory to copy the generated Java-Doc
+          JAR_FILE_NAME=$(find target -name "core*.jar" -exec basename {} \;) && cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
+          echo "JAR_FILE_NAME=$JAR_FILE_NAME"
+          tree ../gh-pages-branch
 
       - name: "Create, commit and push some test text-file into 'gh-pages'"
         run: |
