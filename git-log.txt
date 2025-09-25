@@ -1,3 +1,4 @@
+cd0c9ad Switch to JDK '25' and use '(Amazon Corretto)' vendor everywhere in GitHub actions
 a3bf220 temporary use the result of 'javadoc:jar' MOJO #1
 8cd43fa fix the detection of target core-utils-21.0.2-SNAPSHOT.jar
 ee41e52 attach JavaDoc's JAR into the default build-lifecycle
