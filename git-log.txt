@@ -1,3 +1,4 @@
+a3bf220 temporary use the result of 'javadoc:jar' MOJO #1
 8cd43fa fix the detection of target core-utils-21.0.2-SNAPSHOT.jar
 ee41e52 attach JavaDoc's JAR into the default build-lifecycle
 da39c9f some minor corrections to JavaDoc #2
