@@ -17,11 +17,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 21
+
+    - name: "Set up JDK 25 (Amazon Corretto)"
       uses: actions/setup-java@v4
       with:
-        java-version: '21'
-        distribution: 'temurin'
+        java-version: '25'
+        distribution: 'corretto'
         cache: 'maven'
         cache-dependency-path: pom.xml
 #        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml

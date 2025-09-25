@@ -57,14 +57,16 @@ jobs:
       - name: "'mvn --version' before setup-java"
         run: >
           mvn --version || echo "Last Error Code: $?"
-      - name: Set up JDK 21 (Amazon Corretto)
+
+      - name: Set up JDK 25 (Amazon Corretto)
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
+          java-version: '25'
           distribution: 'corretto'
           check-latest: true
           cache: 'maven'
           cache-dependency-path: pom.xml
+
       - name: "'which java' after setup-java"
         run: >
           which java || echo "Last Error Code: $?"
