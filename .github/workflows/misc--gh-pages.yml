@@ -67,7 +67,7 @@ jobs:
           # build and install to local maven repository
           cd main-branch          
           echo "Current directory is $(pwd)"
-          mvn -B clean install javadoc:javadoc
+          mvn -B clean install
 
       - name: "Checkout the 'main'-branch of repo '${{ github.ref }}' into './main-branch'"
         uses: actions/checkout@v4
@@ -116,6 +116,8 @@ jobs:
           echo "~~~~~~~~~~~~~ ( 9 )~~~~~~~~~~~~~~"
           echo "That's it "'!!!'
 
+
+#mvn -B clean install javadoc:javadoc@javadoc
 
 #git config user.email "gh-pages@github.action.com"
 #git config user.name "$GITHUB_WORKFLOW #$GITHUB_RUN_NUMBER"
