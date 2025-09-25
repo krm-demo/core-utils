@@ -21,7 +21,7 @@
 -docfilessubdirs
 -Xdoclint:none
 -doctitle
-'JavaDoc for core-utils:21.0.2-SNAPSHOT)'
+'JavaDoc for core-utils:21.0.2-SNAPSHOT'
 -linksource
 -notimestamp
 --add-stylesheet

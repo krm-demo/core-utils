@@ -1,3 +1,5 @@
+8cd43fa fix the detection of target core-utils-21.0.2-SNAPSHOT.jar
+ee41e52 attach JavaDoc's JAR into the default build-lifecycle
 da39c9f some minor corrections to JavaDoc #2
 eb952b4 some minor corrections to JavaDoc #1
 34ea826 attempt to publish git-log and javadoc into gh-pages #3
