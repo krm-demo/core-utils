@@ -83,7 +83,7 @@ jobs:
           echo -e "the content of file '$(realpath ../gh-pages-branch/git-log.txt)':\n$(cat ../gh-pages-branch/git-log.txt)"
           # going to extract the file-slug (basename without extension) of a target JAR-file
           # and use it as a name of the destination directory to copy the generated Java-Doc
-          JAR_FILE_NAME=$(find target -name "core*.jar" -exec basename {} \;)
+          JAR_FILE_NAME=$(find "./target/" -name "core*.jar" ! -name "*javadoc.jar" -exec basename {} \;)
           echo "... going to re-write the content of folder '$(realpath ../gh-pages-branch/${JAR_FILE_NAME%.*})' ..."
           rm -rf ../gh-pages-branch/${JAR_FILE_NAME%.*}
           cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
