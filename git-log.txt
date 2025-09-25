@@ -1,3 +1,4 @@
+0ca5575 correct dump to summary and delete 'misc--gh-pages.yml' GitHub-workflow
 0635712 Introduce 'maven-source-plugin' and upgrade the maven deps
 ecf464e Add and improve some JavaDoc #1
 0555757 Publish to GH-Pages as a part of 'on-main-push' action for each commit
