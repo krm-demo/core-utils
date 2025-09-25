@@ -1,3 +1,4 @@
+0555757 Publish to GH-Pages as a part of 'on-main-push' action for each commit
 cd0c9ad Switch to JDK '25' and use '(Amazon Corretto)' vendor everywhere in GitHub actions
 a3bf220 temporary use the result of 'javadoc:jar' MOJO #1
 8cd43fa fix the detection of target core-utils-21.0.2-SNAPSHOT.jar
