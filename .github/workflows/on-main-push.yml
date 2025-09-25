@@ -75,7 +75,7 @@ jobs:
           echo "Current directory is $(pwd)"
           mvn -B clean install
           echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary ) ~~~~~~~~~~~~~"
-          echo -e "the result of maven-build (content of \`./target\` directory):\n\`\`\`bash\n$(ls -laxo "./target")\n\`\`\`" >> $$GITHUB_STEP_SUMMARY
+          echo -e "the result of maven-build (content of \`./target\` directory):\n\`\`\`bash\n$(ls -laxo "./target")\n\`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: "Checkout the 'gh-pages'-branch of repo '${{ github.ref }}' into './gh-pages-branch'"
         uses: actions/checkout@v4
