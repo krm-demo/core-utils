@@ -5,9 +5,22 @@ import java.util.stream.Stream;
 
 /**
  * This interface represents the ability to dump the data of JSON-like and YAML-like
- * hierarchical structure in multicolor TEXT-base, HTML-base and SVG-base formats
+ * hierarchical structure in multicolor TEXT-base, HTML-base and SVG-base formats.
+ * <hr/>
+ * The main Object-Oriented Design Pattern that is used in this package is called <b>Visitor</b>
+ * and the <i>visited</i> hierarchy is represented by inner-class {@link Node} and its subclasses,
+ * where this outer interface {@link TreeDumper} is a <i>visitor</i>,
+ * that accepts <i>visit</i>-events and walks through the rest of nodes hierarchy
+ * in a <a href="https://en.wikipedia.org/wiki/Depth-first_search">Depth First Search</a> manner.
+ * <hr/>
+ * Implementations of this interface are responsible for the target logical structure
+ * ({@link org.krmdemo.techlabs.core.dump.render.Highlight.Structure#JSON JSON}
+ * or {@link org.krmdemo.techlabs.core.dump.render.Highlight.Structure#YAML YAML})
+ * and the target output format (see {@link org.krmdemo.techlabs.core.dump.render.Highlight.Target Target}-enum)
  *
- * @see <a href="https://en.wikipedia.org/wiki/Visitor_pattern">(Wikipedia) Visitor pattern</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Visitor_pattern">
+ *     (Wikipedia) Visitor pattern
+ * </a>
  * @see <a href="https://www.baeldung.com/java-visitor-pattern">
  *     (Baeldung) Visitor Design Pattern in Java
  * </a>
