@@ -18,7 +18,7 @@ import static org.krmdemo.techlabs.core.utils.SysDumpUtils.fileAttrsAsJson;
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 
 /**
- * Sub-command {@code process} of <b>th-tool</b> that transforms the input-templates
+ * Sub-command {@code process} of <b>{@code th-tool}</b> that transforms the input-templates
  * by {@link ThymeleafTool#templateEngine Thymeleaf-Engine} with {@link ThymeleafTool#varsCtx th-tool variables}
  */
 @Command(name = "process",
@@ -44,35 +44,18 @@ public class ThymeleafToolProc implements Callable<Integer> {
 
     @Option(names = {"--help"}, usageHelp = true,
         description = "Display this help message for @|bold process|@ command.")
-    boolean usageHelpRequested;
+    boolean usageHelpRequested;  // <-- required to display help option
 
     /**
-     * Entry-point of Pico-Cli Command
+     * Entry-point of Pico-Cli Command {@code process}
      *
      * @return zero if everything is processed successfully and non-zero otherwise
      * @throws Exception in case of any un-handled error
      */
     @Override
     public Integer call() throws Exception {
-        System.out.println("... executing 'th-tool' via command-line: ...");
-        if (tt.varsDir != null) {
-            System.out.printf("- varsDir = '%s';%n", tt.varsDir.getCanonicalPath());
-            tt.varsCtx.processDirectory(tt.varsDir);
-        }
-        if (tt.varFilePairs != null) {
-            System.out.println("- varFilePairs --> " + Arrays.toString(tt.varFilePairs));
-            for (String varPair : tt.varFilePairs) {
-                tt.varsCtx.processVarFilePair(varPair);
-            }
-        }
-        if (tt.varResPairs != null) {
-            System.out.println("- varResPairs --> " + Arrays.toString(tt.varResPairs));
-            for (String varPair : tt.varResPairs) {
-                tt.varsCtx.processVarResourcePair(varPair);
-            }
-        }
-        System.out.println("... variables with following names are available in templates --> " +
-            dumpAsJsonPrettyPrint(sortedSet(tt.varsCtx.getVariableNames().stream())));
+        System.out.println("... executing 'th-tool' to process input-template: ...");
+        tt.initVars();
 
         if (outputLocation == null) {
             System.out.println("- no output location is specified (the result will be printed here)");

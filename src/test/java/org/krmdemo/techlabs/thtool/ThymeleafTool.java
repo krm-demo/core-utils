@@ -9,6 +9,10 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Spec;
 
 import java.io.File;
+import java.util.Arrays;
+
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedSet;
+import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 
 /**
  * This class represents <b>{@code th-tool}</b> that could be used to process {@code *.md.th}, {@code *.html.th}
@@ -75,10 +79,10 @@ public class ThymeleafTool {
     String[] varResPairs;
 
     @Option(names = {"--help"}, usageHelp = true, description = "Display this help message.")
-    boolean usageHelpRequested;
+    boolean usageHelpRequested; // <-- required to display help option
 
     @Spec
-    CommandSpec spec; // Injected by picocli
+    CommandSpec spec; // <-- injected by picocli
 
     /**
      * An instance of {@link TemplateEngine Thymeleaf's Template Engine}
@@ -89,6 +93,32 @@ public class ThymeleafTool {
      * An instance of {@link TemplateEngine Thymeleaf's Context} that holds the variables for templates
      */
     final ThymeleafToolCtx varsCtx = new ThymeleafToolCtx();
+
+    /**
+     * Initialize <b>{@code th-tool}</b> variables to be used in subcommands.
+     *
+     * @throws Exception in case of any un-handled error
+     */
+    void initVars() throws Exception {
+        if (varsDir != null) {
+            System.out.printf("- varsDir = '%s';%n", varsDir.getCanonicalPath());
+            varsCtx.processDirectory(varsDir);
+        }
+        if (varFilePairs != null) {
+            System.out.println("- varFilePairs --> " + Arrays.toString(varFilePairs));
+            for (String varPair : varFilePairs) {
+                varsCtx.processVarFilePair(varPair);
+            }
+        }
+        if (varResPairs != null) {
+            System.out.println("- varResPairs --> " + Arrays.toString(varResPairs));
+            for (String varPair : varResPairs) {
+                varsCtx.processVarResourcePair(varPair);
+            }
+        }
+        System.out.println("... variables with following names are available in templates --> " +
+            dumpAsJsonPrettyPrint(sortedSet(varsCtx.getVariableNames().stream())));
+    }
 
     /**
      * JVM entry-point of <b>{@code th-tool}</b>
