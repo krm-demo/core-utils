@@ -1,7 +1,6 @@
 package org.krmdemo.techlabs.thtool;
 
 import org.apache.commons.lang3.StringUtils;
-import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -13,16 +12,17 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 
-import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedSet;
 import static org.krmdemo.techlabs.core.utils.SysDumpUtils.fileAttrsAsJson;
-import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
+import static org.krmdemo.techlabs.thtool.ThymeleafTool.loadFileContent;
+import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
 
 /**
  * Sub-command {@code process} of <b>{@code th-tool}</b> that transforms the input-templates
  * by {@link ThymeleafTool#templateEngine Thymeleaf-Engine} with {@link ThymeleafTool#varsCtx th-tool variables}
  */
 @Command(name = "process",
-    description = "Process the input-templates by Thymeleaf-Engine"
+    description = "Process the input-templates by Thymeleaf-Engine",
+    mixinStandardHelpOptions = true, usageHelpWidth = 140
 )
 public class ThymeleafToolProc implements Callable<Integer> {
 
@@ -32,7 +32,7 @@ public class ThymeleafToolProc implements Callable<Integer> {
     @Option(
         names = {"--output"},
         paramLabel = "<path>",
-        description = "output directory or a file\n(default: printing to the standard output)")
+        description = "the path to output file or directory\n(default: printing to the standard output)")
     File outputLocation;
 
     @Parameters(
@@ -79,7 +79,8 @@ public class ThymeleafToolProc implements Callable<Integer> {
     }
 
     /**
-     * @param templateFile 'th-tool' template to process by {@link ThymeleafTool#templateEngine Thymeleaf-Engine}
+     * @param templateFile 'th-tool' template-file to process
+     *                     by {@link ThymeleafTool#templateEngine Thymeleaf-Engine}
      *                     with {@link ThymeleafTool#varsCtx th-tool variables}
      * @return {@code true} if the template was processed successfully (and {@code false} otherwise)
      */
@@ -94,12 +95,12 @@ public class ThymeleafToolProc implements Callable<Integer> {
             System.out.println("(could not read the content of a file)");
             return false;
         }
+        String outputContent = tt.processTemplateContent(templateContent);
         if (StringUtils.isBlank(templateContent)) {
             // TODO: maybe it's better to ignore this case or handle it in some different way
             System.out.println("(the content of template is blank)");
             return false;
         }
-        String outputContent = tt.templateEngine.process(templateContent, tt.varsCtx);
 
         if (outputLocation != null && (!outputLocation.exists() || outputLocation.isFile())) {
             saveFileContent(outputLocation, outputContent);
@@ -110,38 +111,9 @@ public class ThymeleafToolProc implements Callable<Integer> {
             System.out.println(outputContent);
             System.out.println("... " + "-".repeat(100) + " ...");
             if (outputLocation != null) {
-                System.out.println("... output into location like '%s' is not supported yet ...");
+                System.out.println("... output into location like '%s' is not supported yet :-( ...");
             }
         }
-
         return true;
-    }
-
-    /**
-     * @param fileToLoad file to read the content
-     * @return the content of {@code file} or {@code null} if it's impossible to do
-     */
-    public static String loadFileContent(File fileToLoad) {
-        try {
-            return Files.readString(fileToLoad.toPath());
-        } catch (IOException ioEx) {
-            ioEx.printStackTrace(System.err);
-            return null;
-        }
-    }
-
-    /**
-     * Saving the content into the file {@code fileToSave} (if the file is not empty - it will be truncated)
-     *
-     * @param fileToSave the file to save into
-     * @param fileContent the content to be saved
-     * @throws IllegalStateException in case of something goes wrong (which must not really happen)
-     */
-    public static void saveFileContent(File fileToSave, String fileContent) {
-        try {
-            Files.writeString(fileToSave.toPath(), fileContent);
-        } catch (IOException ioEx) {
-            throw new IllegalStateException("could not save the content into the file " + fileToSave, ioEx);
-        }
     }
 }

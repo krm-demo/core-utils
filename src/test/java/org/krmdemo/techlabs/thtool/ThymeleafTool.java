@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.thtool;
 
+import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.utils.SysDumpUtils;
 import org.thymeleaf.TemplateEngine;
 import picocli.CommandLine;
@@ -9,6 +10,8 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Spec;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedSet;
@@ -99,7 +102,7 @@ public class ThymeleafTool {
      *
      * @throws Exception in case of any un-handled error
      */
-    void initVars() throws Exception {
+    public void initVars() throws Exception {
         if (varsDir != null) {
             System.out.printf("- varsDir = '%s';%n", varsDir.getCanonicalPath());
             varsCtx.processDirectory(varsDir);
@@ -118,6 +121,20 @@ public class ThymeleafTool {
         }
         System.out.println("... variables with following names are available in templates --> " +
             dumpAsJsonPrettyPrint(sortedSet(varsCtx.getVariableNames().stream())));
+    }
+
+    /**
+     * @param templateContent the content of 'th-tool' template to process
+     *                        by {@link ThymeleafTool#templateEngine Thymeleaf-Engine}
+     *                        with {@link ThymeleafTool#varsCtx th-tool variables}
+     * @return {@code true} if the template was processed successfully (and {@code false} otherwise)
+     */
+    public String processTemplateContent(String templateContent) {
+        if (StringUtils.isBlank(templateContent)) {
+            return null;
+        } else {
+            return templateEngine.process(templateContent, varsCtx);
+        }
     }
 
     /**
@@ -143,5 +160,33 @@ public class ThymeleafTool {
 
         int exitCode = new CommandLine(new ThymeleafTool()).execute(args);
         System.exit(exitCode);
+    }
+
+    /**
+     * @param fileToLoad file to read the content
+     * @return the content of {@code file} or {@code null} if it's impossible to do
+     */
+    public static String loadFileContent(File fileToLoad) {
+        try {
+            return Files.readString(fileToLoad.toPath());
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace(System.err);
+            return null;
+        }
+    }
+
+    /**
+     * Saving the content into the file {@code fileToSave} (if the file is not empty - it will be truncated)
+     *
+     * @param fileToSave the file to save into
+     * @param fileContent the content to be saved
+     * @throws IllegalStateException in case of something goes wrong (which must not really happen)
+     */
+    public static void saveFileContent(File fileToSave, String fileContent) {
+        try {
+            Files.writeString(fileToSave.toPath(), fileContent);
+        } catch (IOException ioEx) {
+            throw new IllegalStateException("could not save the content into the file " + fileToSave, ioEx);
+        }
     }
 }
