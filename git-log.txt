@@ -1,3 +1,4 @@
+e508a30 Introduce 2 subcommands in 'th-tool' #1
 0ca5575 correct dump to summary and delete 'misc--gh-pages.yml' GitHub-workflow
 0635712 Introduce 'maven-source-plugin' and upgrade the maven deps
 ecf464e Add and improve some JavaDoc #1
