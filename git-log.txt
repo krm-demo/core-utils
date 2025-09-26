@@ -1,3 +1,4 @@
+3b0dd90 Introduce 2 subcommands in 'th-tool' #4
 cca85d7 Introduce 2 subcommands in 'th-tool' #3
 deee1a9 Introduce 2 subcommands in 'th-tool' #2
 e508a30 Introduce 2 subcommands in 'th-tool' #1
