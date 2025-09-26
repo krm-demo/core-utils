@@ -1,0 +1,24 @@
+name: release-internal
+run-name: ${{ github.actor }} has executed 'release-internal' №${{ github.run_number }}
+on: workflow_dispatch
+
+jobs:
+
+  release-internal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout the latest version of repo in '${{ github.ref }}'"
+        uses: actions/checkout@v4
+
+      - name: "Set up JDK 25 (Amazon Corretto)"
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'corretto'
+          check-latest: true
+          cache: 'maven'
+          cache-dependency-path: pom.xml
+
+      - name: ""
+        run: |
+          echo "TODO: to be done "'!!!'

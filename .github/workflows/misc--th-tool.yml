@@ -45,4 +45,4 @@ jobs:
           # dump the value of {{ secrets }} into JSON-file
           echo '${{ toJson(secrets) }}' > .github/th-vars/var-secrets.json
 
-      - run: .github/th-tool.sh --output $GITHUB_STEP_SUMMARY --var-file mavenProps=./target/classes/META-INF/maven/maven-project.properties .github/th-templates/Usage.md.th
+      - run: .github/th-tool.sh --output $GITHUB_STEP_SUMMARY --var-file mavenProps=./target/classes/META-INF/maven/maven-project.properties process .github/th-templates/Usage.md.th
