@@ -75,7 +75,7 @@ jobs:
           .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.qualifier")\'' --output ./target/result-qualifierVersion.txt
           .github/th-tool.sh eval mavenProps.get$'\'("maven-project.version")\'' --output ./target/result-projectVersion.txt
           .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.nextMinorVersion")\'' --output ./target/result-nextMinorVersion.txt
-          .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.nextIncrementalVersion")\'' --output ./target/next-nextIncrementalVersion.txt
+          .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.nextIncrementalVersion")\'' --output ./target/result-nextIncrementalVersion.txt
 
           CURRENT_VERSION=$(cat ./target/result-projectVersion.txt)
           INTERNAL_RELEASE_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-minorVersion.txt).$(cat ./target/result-nextIncrementalVersion.txt)
