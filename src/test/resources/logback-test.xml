@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
+  <!--
+    It's very important to avoid logging into console, because in multiple cases
+    the result of invocation of utility and helper classes is standard output.
+    So, any logging is performed into files at "./target/logs" directory.
+  -->
+  <property name="LOG_DIR" value="target/logs"/>
+
+  <!-- file-appender for 'th-tool' -->
+  <appender name="TH_TOOL_LOG" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_DIR}/th-tool.log</file>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+    <append>true</append>
+  </appender>
+
+  <!-- file-appender for the rest of 'core-utils' library -->
+  <appender name="DEFAULT_LOG" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_DIR}/core-utils-default.log</file>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+    <append>true</append>
+  </appender>
+
+  <!-- 'th-tool' logger -->
+  <logger name="org.krmdemo.techlabs.thtool" level="DEBUG" additivity="false">
+    <appender-ref ref="TH_TOOL_LOG"/>
+  </logger>
+
+  <!-- the default logger of 'core-utils' library -->
   <root level="INFO">
-    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="DEFAULT_LOG" />
   </root>
-  <logger name="org.krmdemo.techlabs" level="INFO"/>
+
 </configuration>

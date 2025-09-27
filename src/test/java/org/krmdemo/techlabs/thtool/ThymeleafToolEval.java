@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.thtool;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.StringEscapeUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
@@ -7,8 +8,10 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.ParentCommand;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
 
@@ -19,6 +22,7 @@ import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
     description = "Evaluates the Thymeleaf-Expression and print the result into the standard output",
     mixinStandardHelpOptions = true, usageHelpWidth = 140
 )
+@Slf4j
 public class ThymeleafToolEval implements Callable<Integer> {
 
     @ParentCommand
@@ -48,33 +52,56 @@ public class ThymeleafToolEval implements Callable<Integer> {
      */
     @Override
     public Integer call() throws Exception {
-        System.out.println("... evaluating the passed 'th-tool'-expression: ...");
+        logInfo("... evaluating the passed 'th-tool'-expression: ...");
         tt.initVars();
 
         if (outputFile == null) {
-            System.out.println("- no output location is specified (the result will be printed here)");
+            logDebug("- no output location is specified (the result will be printed)");
         } else if (!outputFile.isFile()) {
-            System.out.printf("- output location is NOT a file '%s';%n", outputFile.getCanonicalPath());
+            logDebug("- output location is NOT a file '%s';", () -> outputFile.getCanonicalPath());
         }
 
         String expression = String.join(" ", expressionsArgs);
-        System.out.printf("- expression is <<%s>>%n", expression);
+        logInfo("- expression is <<%s>>", expression);
 
         String templateContent = String.format("[[${%s}]]", expression);
-        System.out.printf("- templateContent is <<%s>>%n", templateContent);
+        logDebug("- templateContent is <<%s>>", () -> templateContent);
 
         String outputContent = StringEscapeUtils.unescapeHtml4(
             tt.processTemplateContent(templateContent));
 
         if (outputFile != null) {
             saveFileContent(outputFile, outputContent);
-            System.out.printf("(successfully saved into '%s')%n", outputFile.toPath());
+            logInfo("(successfully saved into '%s')", outputFile.toPath());
         } else {
-            System.out.println("(successfully processed and printed");
-            System.out.println("--- " + "-".repeat(100) + " ---");
-            System.out.println(outputContent);
-            System.out.println("... " + "-".repeat(100) + " ...");
+            logInfo("(successfully processed and printed");
+            logDebug("--- %s ---", () -> "-".repeat(100));
+            logDebug(outputContent);
+            logDebug("... %s ...", () -> "-".repeat(100));
+            // The only hit to standard output !!!
+            System.out.print(outputContent);
         }
         return 0;
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    private static void logInfo(String formatString, Object... formatArgs) {
+        if (log.isInfoEnabled()) {
+            log.info(String.format(formatString, formatArgs));
+        }
+    }
+
+    private static void logDebug(String formatString, Callable<?>... formatArgs) {
+        if (log.isDebugEnabled()) {
+            Object[] args = Arrays.stream(formatArgs).map(argFunc -> {
+                try {
+                    return argFunc.call();
+                } catch (Exception ex) {
+                    throw new IllegalStateException(ex);
+                }
+            }).toArray();
+            log.debug(String.format(formatString, args));
+        }
     }
 }

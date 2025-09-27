@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.thtool;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.utils.SysDumpUtils;
 import org.thymeleaf.TemplateEngine;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
+import java.util.concurrent.Callable;
 
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedSet;
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
@@ -50,6 +52,7 @@ import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
     description = "A tool to process the input-templates and evaluate the expressions with Thymeleaf",
     mixinStandardHelpOptions = true, usageHelpWidth = 140
 )
+@Slf4j
 public class ThymeleafTool {
 
     @Option(
@@ -104,23 +107,23 @@ public class ThymeleafTool {
      */
     public void initVars() throws Exception {
         if (varsDir != null) {
-            System.out.printf("- varsDir = '%s';%n", varsDir.getCanonicalPath());
+            logInfo("- varsDir = '%s';", () -> varsDir.getCanonicalPath());
             varsCtx.processDirectory(varsDir);
         }
         if (varFilePairs != null) {
-            System.out.println("- varFilePairs --> " + Arrays.toString(varFilePairs));
+            logInfo("- varFilePairs --> %s", () -> Arrays.toString(varFilePairs));
             for (String varPair : varFilePairs) {
                 varsCtx.processVarFilePair(varPair);
             }
         }
         if (varResPairs != null) {
-            System.out.println("- varResPairs --> " + Arrays.toString(varResPairs));
+            logInfo("- varResPairs --> %s", () -> Arrays.toString(varResPairs));
             for (String varPair : varResPairs) {
                 varsCtx.processVarResourcePair(varPair);
             }
         }
-        System.out.println("... variables with following names are available in templates --> " +
-            dumpAsJsonPrettyPrint(sortedSet(varsCtx.getVariableNames().stream())));
+        logInfo("... variables with following names are available in templates --> %s",
+            () -> dumpAsJsonPrettyPrint(sortedSet(varsCtx.getVariableNames().stream())));
 
         varsCtx.setVariable("mh", new MavenHelper());
     }
@@ -191,4 +194,18 @@ public class ThymeleafTool {
             throw new IllegalStateException("could not save the content into the file " + fileToSave, ioEx);
         }
     }
+
+    private static void logInfo(String formatString, Callable<?>... formatArgs) {
+        if (log.isDebugEnabled()) {
+            Object[] args = Arrays.stream(formatArgs).map(argFunc -> {
+                try {
+                    return argFunc.call();
+                } catch (Exception ex) {
+                    throw new IllegalStateException(ex);
+                }
+            }).toArray();
+            log.debug(String.format(formatString, args));
+        }
+    }
+
 }

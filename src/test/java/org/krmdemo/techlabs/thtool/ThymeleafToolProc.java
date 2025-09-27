@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.thtool;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -7,8 +8,6 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.ParentCommand;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 
@@ -24,6 +23,7 @@ import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
     description = "Process the input-templates by Thymeleaf-Engine",
     mixinStandardHelpOptions = true, usageHelpWidth = 140
 )
+@Slf4j
 public class ThymeleafToolProc implements Callable<Integer> {
 
     @ParentCommand
@@ -58,21 +58,21 @@ public class ThymeleafToolProc implements Callable<Integer> {
         tt.initVars();
 
         if (outputLocation == null) {
-            System.out.println("- no output location is specified (the result will be printed here)");
+            logDebug("- no output location is specified (the result will be printed)");
         } else if (outputLocation.isFile()) {
-            System.out.printf("- output location is a file '%s';%n", outputLocation.getCanonicalPath());
-            System.out.println("- attributes of output-file are --> " + fileAttrsAsJson(outputLocation));
+            logDebug("- output location is a file '%s';", () -> outputLocation.getCanonicalPath());
+            logDebug("- attributes of output-file are --> ", () -> fileAttrsAsJson(outputLocation));
         } else {
-            System.out.printf("- output location is a directory '%s';%n", outputLocation.getCanonicalPath());
-            System.out.println("- attributes of output-location are --> " + fileAttrsAsJson(outputLocation));
+            logDebug("- output location is a directory '%s';", () -> outputLocation.getCanonicalPath());
+            logDebug("- attributes of output-location are --> ", () -> fileAttrsAsJson(outputLocation));
         }
 
-        System.out.println("- inputTemplates --> " + Arrays.toString(inputTemplates));
+        logInfo("- inputTemplates --> %s", Arrays.toString(inputTemplates));
         int successCount = 0;
         for (File templateFile : inputTemplates) {
             successCount += processTemplate(templateFile) ? 1 : 0;
         }
-        System.out.printf("... %d input-templates (out of %d) were processed successfully ...%n",
+        logInfo("... %d input-templates (out of %d) were processed successfully ...",
             successCount, inputTemplates.length);
 
         return (successCount == inputTemplates.length) ? 0 : -1;
@@ -85,35 +85,56 @@ public class ThymeleafToolProc implements Callable<Integer> {
      * @return {@code true} if the template was processed successfully (and {@code false} otherwise)
      */
     public boolean processTemplate(File templateFile) {
-        System.out.printf("- processing the template '%s' ", templateFile);
+        logInfo("- processing the template '%s' ", templateFile);
         if (!templateFile.isFile()) {
-            System.out.println("(the file does not exists or the path does not represent the file)");
+            logInfo("(the file does not exists or the path does not represent the file)");
             return false;
         }
         String templateContent = loadFileContent(templateFile);
         if (templateContent == null) {
-            System.out.println("(could not read the content of a file)");
+            logInfo("(could not read the content of a file)");
             return false;
         }
         String outputContent = tt.processTemplateContent(templateContent);
         if (StringUtils.isBlank(templateContent)) {
             // TODO: maybe it's better to ignore this case or handle it in some different way
-            System.out.println("(the content of template is blank)");
+            logInfo("(the content of template is blank)");
             return false;
         }
 
         if (outputLocation != null && (!outputLocation.exists() || outputLocation.isFile())) {
             saveFileContent(outputLocation, outputContent);
-            System.out.printf("(successfully saved into '%s')%n", outputLocation.toPath());
+            logInfo("(successfully saved into '%s')", outputLocation.toPath());
         } else {
-            System.out.println("(successfully processed and printed");
-            System.out.println("--- " + "-".repeat(100) + " ---");
-            System.out.println(outputContent);
-            System.out.println("... " + "-".repeat(100) + " ...");
+            logInfo("(successfully processed and printed");
+            logDebug("--- %s ---", () -> "~".repeat(100));
+            logDebug(outputContent);
+            logDebug("... %s ...", () -> "~".repeat(100));
             if (outputLocation != null) {
-                System.out.println("... output into location like '%s' is not supported yet :-( ...");
+                logInfo("... output into location like '%s' is not supported yet :-( ...");
             }
         }
         return true;
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    private static void logInfo(String formatString, Object... formatArgs) {
+        if (log.isInfoEnabled()) {
+            log.info(String.format(formatString, formatArgs));
+        }
+    }
+
+    private static void logDebug(String formatString, Callable<?>... formatArgs) {
+        if (log.isDebugEnabled()) {
+            Object[] args = Arrays.stream(formatArgs).map(argFunc -> {
+                try {
+                    return argFunc.call();
+                } catch (Exception ex) {
+                    throw new IllegalStateException(ex);
+                }
+            }).toArray();
+            log.debug(String.format(formatString, args));
+        }
     }
 }

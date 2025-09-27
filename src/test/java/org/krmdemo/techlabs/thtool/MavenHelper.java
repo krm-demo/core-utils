@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.thtool;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.core.utils.PropertiesUtils;
 
@@ -21,6 +22,7 @@ import java.util.NavigableMap;
  *     </a></li>
  * </ul>
  */
+@JsonPropertyOrder(alphabetic = true)
 public class MavenHelper {
 
     /**

@@ -2,19 +2,22 @@ package org.krmdemo.techlabs.thtool;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
+import lombok.extern.slf4j.Slf4j;
 import org.thymeleaf.context.AbstractContext;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapFromFile;
+import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromFile;
 import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromResource;
-import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapFromFile;
-import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 
 /**
  * This class represents the context of {@link ThymeleafTool}, which holds the variables
@@ -27,10 +30,11 @@ import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
  *     <li>using the inherited API like {@link #setVariable(String, Object)}</li>
  * </ul>
  */
+@Slf4j
 public class ThymeleafToolCtx extends AbstractContext {
 
     void processVarFilePair(String varFilePair) {
-        System.out.printf("- processing the var-file pair '%s' ", varFilePair);
+        logInfo("- processing the var-file pair '%s' ", varFilePair);
         Matcher matcher = PATTERN__VAR_FILE_PAIR.matcher(varFilePair);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(String.format(
@@ -56,7 +60,7 @@ public class ThymeleafToolCtx extends AbstractContext {
     }
 
     void processVarResourcePair(String varResPair) {
-        System.out.printf("- processing the var-resource pair '%s' ", varResPair);
+        logInfo("- processing the var-resource pair '%s' ", varResPair);
         Matcher matcher = PATTERN__VAR_RES_PAIR.matcher(varResPair);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(String.format(
@@ -84,36 +88,36 @@ public class ThymeleafToolCtx extends AbstractContext {
         int countJson = 0;
         int countProperties = 0;
         for (File varFile : filesArr) {
-            System.out.printf("- processing the var-file '%s' ", varFile);
             Matcher matcher = PATTERN__VAR_FILE_NAME.matcher(varFile.getName());
             if (!matcher.matches()) {
-                System.out.println("(skipped)");
+                logInfo("- the var-file '%s' is skipped", varFile);
                 continue;
             }
             String varName = matcher.group("varName");
             String varFileExt = matcher.group("fileExt");
             if (EXT_JSON.equalsIgnoreCase(varFileExt)) {
+                logInfo("- the var-file '%s' is processing as JSON", varFile);
                 countJson += putVarFileJson(varName, varFile) ? 1 : 0;
             } else if (EXT_PROPS.equalsIgnoreCase(varFileExt)) {
+                logInfo("- the var-file '%s' is processing as properties-file", varFile);
                 countProperties += putVarFileProperties(varName, varFile) ? 1 : 0;
             } else {
-                System.out.printf("(skipped, because of unrecognized extension '%s')%n", varFileExt);
+                logInfo("- the var-file '%s' is skipped because unrecognized extension",
+                    varFile, varFileExt);
             }
         }
         if (countJson > 0) {
-            System.out.printf(
-                "... %d '%s'-files were loaded as 'th-tool' variables from directory '%s' ...%n",
+            logInfo("... %d '%s'-files were loaded as 'th-tool' variables from directory '%s' ...",
                 countJson, EXT_JSON, varsDir
             );
         }
         if (countProperties > 0) {
-            System.out.printf(
-                "... %d '%s'-files were loaded as 'th-tool' variables from directory '%s' ...%n",
+            logInfo("... %d '%s'-files were loaded as 'th-tool' variables from directory '%s' ...",
                 countProperties, EXT_PROPS, varsDir
             );
         }
         if (countJson + countProperties == 0) {
-            System.out.printf("... no 'th-tool' variables were loaded from directory '%s' ...%n", varsDir);
+            logInfo("... no 'th-tool' variables were loaded from directory '%s' ...", varsDir);
         }
     }
 
@@ -124,11 +128,11 @@ public class ThymeleafToolCtx extends AbstractContext {
         if (jsonNode.getNodeType() == JsonNodeType.OBJECT
             || jsonNode.getNodeType() == JsonNodeType.ARRAY) {
             setVariable(varName, jsonNode);
-//            System.out.printf("(loaded as JSON into variable '%s') --> %s%n",
-//                varName, dumpAsJsonPrettyPrint(jsonNode));
+            logDebug("(loaded as JSON-resource into variable '%s') --> %s",
+                () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
             return true;
         } else {
-            System.out.println("(not recognized neither as JSON-Object nor as JSON-Array)");
+            logDebug("(not recognized neither as JSON-Object nor as JSON-Array)");
             return false;
         }
     }
@@ -136,12 +140,12 @@ public class ThymeleafToolCtx extends AbstractContext {
     private boolean putVarFileProperties(String varName, File propsFile) {
         Map<String, String> propsMap = propsMapFromFile(propsFile);
         if (propsMap.isEmpty()) {
-            System.out.println("(no properties were loaded)");
+            logDebug("(no properties were loaded)");
             return false;
         } else {
             setVariable(varName, propsMap);
-//            System.out.printf("(loaded as properties into variable '%s') --> %s%n",
-//                varName, dumpAsJsonPrettyPrint(propsMap));
+            logDebug("(loaded as properties-file into variable '%s') --> %s",
+                () -> varName, () -> dumpAsJsonPrettyPrint(propsMap));
             return true;
         }
     }
@@ -151,21 +155,21 @@ public class ThymeleafToolCtx extends AbstractContext {
         if (jsonNode.getNodeType() == JsonNodeType.OBJECT
             || jsonNode.getNodeType() == JsonNodeType.ARRAY) {
             setVariable(varName, jsonNode);
-//            System.out.printf("(loaded as JSON into variable '%s') --> %s%n",
-//                varName, dumpAsJsonPrettyPrint(jsonNode));
+            logDebug("(loaded as JSON-file into variable '%s') --> %s",
+                () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
         } else {
-            System.out.println("(not recognized neither as JSON-Object nor as JSON-Array)");
+            logDebug("(not recognized neither as JSON-Object nor as JSON-Array)");
         }
     }
 
     private void putVarResourceProperties(String varName, String propsResPath) {
         Map<String, String> propsMap = propsMapResource(propsResPath);
         if (propsMap.isEmpty()) {
-            System.out.println("(no properties were loaded)");
+            logDebug("(no properties were loaded)");
         } else {
             setVariable(varName, propsMap);
-//            System.out.printf("(loaded as properties into variable '%s') --> %s%n",
-//                varName, dumpAsJsonPrettyPrint(propsMap));
+            logDebug("(loaded as properties-resource into variable '%s') --> %s",
+                () -> varName, () -> dumpAsJsonPrettyPrint(propsMap));
         }
     }
 
@@ -188,4 +192,19 @@ public class ThymeleafToolCtx extends AbstractContext {
         "^(?<varName>[^./\\\\<>!$=]+)=(?<resourcePath>[^<>!$=]+(?<fileExt>\\.(?:json|properties)))$",
         Pattern.CASE_INSENSITIVE
     );
+
+    // --------------------------------------------------------------------------------------------
+
+    private static void logInfo(String formatString, Object... formatArgs) {
+        if (log.isInfoEnabled()) {
+            log.info(String.format(formatString, formatArgs));
+        }
+    }
+
+    private static void logDebug(String formatString, Supplier<?>... formatArgs) {
+        if (log.isDebugEnabled()) {
+            Object[] args = Arrays.stream(formatArgs).map(Supplier::get).toArray();
+            log.debug(String.format(formatString, args));
+        }
+    }
 }
