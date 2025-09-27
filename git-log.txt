@@ -1,3 +1,4 @@
+f437fbc Test and debug th-tool (release versions) #5
 2eb81de Test and debug th-tool (release versions) #5
 0d4104e Test and debug th-tool (release versions) #4
 1d05416 Test and debug th-tool (release versions) #3
