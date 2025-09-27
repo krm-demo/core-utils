@@ -80,7 +80,7 @@ jobs:
           CURRENT_VERSION=$(cat ./target/result-projectVersion.txt)
           INTERNAL_RELEASE_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-minorVersion.txt).$(cat ./target/result-nextIncrementalVersion.txt)
           PUBLIC_RELEASE_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-nextMinorVersion.txt)
-          NEXT_VERSION=$(cat ./target/result-projectVersion.txt).$(cat ./target/result-nextMinorVersion.txt).0-$(cat ./target/result-qualifier.txt)
+          NEXT_VERSION=$(cat ./target/result-projectVersion.txt).$(cat ./target/result-nextMinorVersion.txt).0-$(cat ./target/result-qualifierVersion.txt)
 
           echo "#### Values of current, release and next versions" >> $GITHUB_STEP_SUMMARY
           echo "| Env-Var | Value | Description |" >> $GITHUB_STEP_SUMMARY
