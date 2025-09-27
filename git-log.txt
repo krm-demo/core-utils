@@ -1,3 +1,4 @@
+6545621 Test and debug th-tool #1
 5127dfd Introduce 2 subcommands in 'th-tool' #6
 5b6fc69 Introduce 2 subcommands in 'th-tool' #5
 3b0dd90 Introduce 2 subcommands in 'th-tool' #4
