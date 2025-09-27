@@ -67,7 +67,7 @@ jobs:
           echo -e "\necho \"la-la-la  1212   456 7\nthe second line\":\n$(cat ./target/expr-result-04.txt)" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
-      - name: "Examples of maven-versions expressions by 'th-tool':"
+      - name: "Examples of maven-versions expressions by 'th-tool' from 'mavenProps':"
         run: |
           .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.majorVersion")\'' --output ./target/result-majorVersion.txt
           .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.minorVersion")\'' --output ./target/result-minorVersion.txt
@@ -83,7 +83,7 @@ jobs:
           PUBLIC_RELEASE_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-nextMinorVersion.txt)
           PUBLIC_NEXT_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-nextMinorVersion.txt).0-$(cat ./target/result-qualifierVersion.txt)
 
-          echo "#### Values of current, release and next versions:" >> $GITHUB_STEP_SUMMARY
+          echo "#### Values of current, release and next versions  (by 'mavenProps' resource-var):" >> $GITHUB_STEP_SUMMARY
           echo "| Env-Var | Value | Description |" >> $GITHUB_STEP_SUMMARY
           echo "| --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
           echo "| \`CURRENT_VERSION\` | \`$CURRENT_VERSION\` | Current version of project in `pom.xml` |" >> $GITHUB_STEP_SUMMARY
@@ -91,3 +91,29 @@ jobs:
           echo "| \`INTERNAL_NEXT_VERSION\` | \`$INTERNAL_NEXT_VERSION\` | The next development version **after internal release**|" >> $GITHUB_STEP_SUMMARY
           echo "| \`PUBLIC_RELEASE_VERSION\` | \`$PUBLIC_RELEASE_VERSION\` | The version of next **public release**|" >> $GITHUB_STEP_SUMMARY
           echo "| \`PUBLIC_NEXT_VERSION\` | \`$PUBLIC_NEXT_VERSION\` | The next development version **after public release**|" >> $GITHUB_STEP_SUMMARY
+
+      - name: "Examples of maven-versions expressions by 'th-tool' with 'mh'-helper:"
+        run: |
+          .github/th-tool.sh eval mh.currentProjectVersion --output ./target/result-mh-current.txt
+          .github/th-tool.sh eval mh.calculatedProjectVersion --output ./target/result-mh-calculated.txt
+          .github/th-tool.sh eval mh.internalReleaseVersion --output ./target/result-mh-internal-release.txt
+          .github/th-tool.sh eval mh.internalNextVersion --output ./target/result-mh-internal-next.txt
+          .github/th-tool.sh eval mh.publicReleaseVersion --output ./target/result-mh-public-release.txt
+          .github/th-tool.sh eval mh.publicNextVersion --output ./target/result-mh-public-next.txt
+
+          CURRENT_VERSION=$(cat ./target/result-mh-current.txt)
+          CALCULATED_VERSION=$(cat ./target/result-mh-calculated.txt)
+          INTERNAL_RELEASE_VERSION=$(cat ./target/result-mh-internal-release.txt)
+          INTERNAL_NEXT_VERSION=$(cat ./target/result-mh-internal-next.txt)
+          PUBLIC_RELEASE_VERSION=$(cat ./target/result-mh-public-release.txt)
+          PUBLIC_NEXT_VERSION=$(cat ./target/result-mh-public-next.txt)
+
+          echo "#### Values of current, release and next versions (by 'mh'-helper):" >> $GITHUB_STEP_SUMMARY
+          echo "| th-tool eval \`...\` | Value | Description |" >> $GITHUB_STEP_SUMMARY
+          echo "| --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`mh.currentProjectVersion\` | \`$CURRENT_VERSION\` | Current version of project in `pom.xml` |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`mh.calculatedProjectVersion\` | \`$CALCULATED_VERSION\` | Current version, but calculated from parts |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`mh.internalReleaseVersion\` | \`$INTERNAL_RELEASE_VERSION\` | The version of next **internal release** |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`mh.internalNextVersion\` | \`$INTERNAL_NEXT_VERSION\` | The next development version **after internal release**|" >> $GITHUB_STEP_SUMMARY
+          echo "| \`mh.publicReleaseVersion\` | \`$PUBLIC_RELEASE_VERSION\` | The version of next **public release**|" >> $GITHUB_STEP_SUMMARY
+          echo "| \`mh.publicNextVersion\` | \`$PUBLIC_NEXT_VERSION\` | The next development version **after public release**|" >> $GITHUB_STEP_SUMMARY

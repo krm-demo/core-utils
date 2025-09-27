@@ -121,6 +121,8 @@ public class ThymeleafTool {
         }
         System.out.println("... variables with following names are available in templates --> " +
             dumpAsJsonPrettyPrint(sortedSet(varsCtx.getVariableNames().stream())));
+
+        varsCtx.setVariable("mh", new MavenHelper());
     }
 
     /**
