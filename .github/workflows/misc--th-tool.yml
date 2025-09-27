@@ -52,7 +52,7 @@ jobs:
         run: |
           .github/th-tool.sh eval 1+2 \* 3+4 \* 5 --output ./target/expr-result-00.txt
           .github/th-tool.sh eval xxx.get$'\'("property-one")\'' --output ./target/expr-result-01.txt
-          .github/th-tool.sh eval xxx.get$'\'("property-num")\'' --output ./target/expr-result-02.txt
+          .github/th-tool.sh eval xxx$'\'["property-num"]\'' --output ./target/expr-result-02.txt
           .github/th-tool.sh eval $'\'"la-la-la"\'' --output ./target/expr-result-03.txt
           .github/th-tool.sh eval $'\'"la-la-la  1212   456 7\nthe second line"\'' --output ./target/expr-result-04.txt
 
