@@ -63,7 +63,8 @@ public class ThymeleafToolEval implements Callable<Integer> {
         String templateContent = String.format("[[${%s}]]", expression);
         System.out.printf("- templateContent is <<%s>>%n", templateContent);
 
-        String outputContent = tt.processTemplateContent(templateContent);
+        String outputContent = StringEscapeUtils.unescapeHtml4(
+            tt.processTemplateContent(templateContent));
 
         if (outputFile != null) {
             saveFileContent(outputFile, outputContent);
@@ -71,7 +72,7 @@ public class ThymeleafToolEval implements Callable<Integer> {
         } else {
             System.out.println("(successfully processed and printed");
             System.out.println("--- " + "-".repeat(100) + " ---");
-            System.out.println(StringEscapeUtils.unescapeHtml4(outputContent));
+            System.out.println(outputContent);
             System.out.println("... " + "-".repeat(100) + " ...");
         }
         return 0;
