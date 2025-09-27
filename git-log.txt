@@ -1,3 +1,4 @@
+1d05416 Test and debug th-tool (release versions) #3
 edd9d65 Test and debug th-tool #2
 6545621 Test and debug th-tool #1
 5127dfd Introduce 2 subcommands in 'th-tool' #6
