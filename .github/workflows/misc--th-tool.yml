@@ -50,7 +50,7 @@ jobs:
 
       - name: "Examples of simple expressions by 'th-tool':"
         run: |
-          .github/th-tool.sh eval 1+1 \* 3+4 \* 5 --output ./target/expr-result-00.txt
+          .github/th-tool.sh eval 1+2 \* 3+4 \* 5 --output ./target/expr-result-00.txt
           .github/th-tool.sh eval xxx.get$'\'("property-one")\'' --output ./target/expr-result-01.txt
           .github/th-tool.sh eval xxx.get$'\'("property-num")\'' --output ./target/expr-result-02.txt
           .github/th-tool.sh eval $'\'"la-la-la"\'' --output ./target/expr-result-03.txt
@@ -58,7 +58,7 @@ jobs:
 
           echo "---" >> $GITHUB_STEP_SUMMARY
 
-          echo "#### some simple expressions:"
+          echo "#### some simple expressions:" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
           echo "1+2 * 3+4 * 5 = $(cat ./target/expr-result-00.txt)" >> $GITHUB_STEP_SUMMARY
           echo "xxx.property-one = $(cat ./target/expr-result-01.txt)" >> $GITHUB_STEP_SUMMARY
@@ -82,10 +82,10 @@ jobs:
           PUBLIC_RELEASE_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-nextMinorVersion.txt)
           NEXT_VERSION=$(cat ./target/result-projectVersion.txt).$(cat ./target/result-nextMinorVersion.txt).0-$(cat ./target/result-qualifierVersion.txt)
 
-          echo "#### Values of current, release and next versions" >> $GITHUB_STEP_SUMMARY
+          echo "#### Values of current, release and next versions:" >> $GITHUB_STEP_SUMMARY
           echo "| Env-Var | Value | Description |" >> $GITHUB_STEP_SUMMARY
           echo "| --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
           echo "| \`CURRENT_VERSION\` | \`$CURRENT_VERSION\` | Current version of project in `pom.xml` |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`INTERNAL_RELEASE_VERSION\` | \`INTERNAL_RELEASE_VERSION\` | The version of next internal release |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`PUBLIC_RELEASE_VERSION\` | \`PUBLIC_RELEASE_VERSION\` | The version of next public release |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`NEXT_VERSION\` | \`NEXT_VERSION\` | The next development version |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`INTERNAL_RELEASE_VERSION\` | \`$INTERNAL_RELEASE_VERSION\` | The version of next internal release |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`PUBLIC_RELEASE_VERSION\` | \`$PUBLIC_RELEASE_VERSION\` | The version of next public release |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`NEXT_VERSION\` | \`$NEXT_VERSION\` | The next development version |" >> $GITHUB_STEP_SUMMARY
