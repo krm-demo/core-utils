@@ -124,8 +124,8 @@ public class ThymeleafToolCtx extends AbstractContext {
         if (jsonNode.getNodeType() == JsonNodeType.OBJECT
             || jsonNode.getNodeType() == JsonNodeType.ARRAY) {
             setVariable(varName, jsonNode);
-            System.out.printf("(loaded as JSON into variable '%s') --> %s%n",
-                varName, dumpAsJsonPrettyPrint(jsonNode));
+//            System.out.printf("(loaded as JSON into variable '%s') --> %s%n",
+//                varName, dumpAsJsonPrettyPrint(jsonNode));
             return true;
         } else {
             System.out.println("(not recognized neither as JSON-Object nor as JSON-Array)");
@@ -140,8 +140,8 @@ public class ThymeleafToolCtx extends AbstractContext {
             return false;
         } else {
             setVariable(varName, propsMap);
-            System.out.printf("(loaded as properties into variable '%s') --> %s%n",
-                varName, dumpAsJsonPrettyPrint(propsMap));
+//            System.out.printf("(loaded as properties into variable '%s') --> %s%n",
+//                varName, dumpAsJsonPrettyPrint(propsMap));
             return true;
         }
     }
@@ -151,8 +151,8 @@ public class ThymeleafToolCtx extends AbstractContext {
         if (jsonNode.getNodeType() == JsonNodeType.OBJECT
             || jsonNode.getNodeType() == JsonNodeType.ARRAY) {
             setVariable(varName, jsonNode);
-            System.out.printf("(loaded as JSON into variable '%s') --> %s%n",
-                varName, dumpAsJsonPrettyPrint(jsonNode));
+//            System.out.printf("(loaded as JSON into variable '%s') --> %s%n",
+//                varName, dumpAsJsonPrettyPrint(jsonNode));
         } else {
             System.out.println("(not recognized neither as JSON-Object nor as JSON-Array)");
         }
@@ -164,8 +164,8 @@ public class ThymeleafToolCtx extends AbstractContext {
             System.out.println("(no properties were loaded)");
         } else {
             setVariable(varName, propsMap);
-            System.out.printf("(loaded as properties into variable '%s') --> %s%n",
-                varName, dumpAsJsonPrettyPrint(propsMap));
+//            System.out.printf("(loaded as properties into variable '%s') --> %s%n",
+//                varName, dumpAsJsonPrettyPrint(propsMap));
         }
     }
 

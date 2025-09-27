@@ -55,13 +55,13 @@ jobs:
           echo "1+1 * 3+4 * 5 = $(cat ./target/expr-result-00.txt)"
           echo "xxx.property-one = $(cat ./target/expr-result-01.txt)"
 
-          echo "#### some simple expressions:
+          echo "#### some simple expressions:"
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
           echo "1+1 * 3+4 * 5 = $(cat ./target/expr-result-00.txt)" >> $GITHUB_STEP_SUMMARY 
           echo "xxx.property-one = $(cat ./target/expr-result-01.txt)" >> $GITHUB_STEP_SUMMARY
           echo "xxx.property-num = $(cat ./target/expr-result-02.txt)" >> $GITHUB_STEP_SUMMARY
           echo "\"la-la-la\" = $(cat ./target/expr-result-03.txt)" >> $GITHUB_STEP_SUMMARY
-          echo "\"la-la-la  1212   456 7\nthe second line\" = $(cat ./target/expr-result-04.txt)" >> $GITHUB_STEP_SUMMARY
+          echo -e "\"la-la-la  1212   456 7\nthe second line\" = $(cat ./target/expr-result-04.txt)" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "---" >> $GITHUB_STEP_SUMMARY
 
