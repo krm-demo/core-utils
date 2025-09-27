@@ -10,7 +10,6 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import static org.krmdemo.techlabs.core.utils.SysDumpUtils.fileAttrsAsJson;
 import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
 
 /**
@@ -54,12 +53,8 @@ public class ThymeleafToolEval implements Callable<Integer> {
 
         if (outputFile == null) {
             System.out.println("- no output location is specified (the result will be printed here)");
-        } else {
-            System.out.println("- attributes of output-file are --> " + fileAttrsAsJson(outputFile));
-            if (!outputFile.isFile()) {
-                System.out.printf("- output location is NOT a file '%s';%n", outputFile.getCanonicalPath());
-                return -1;
-            }
+        } else if (!outputFile.isFile()) {
+            System.out.printf("- output location is NOT a file '%s';%n", outputFile.getCanonicalPath());
         }
 
         String expression = String.join(" ", expressionsArgs);
@@ -72,7 +67,7 @@ public class ThymeleafToolEval implements Callable<Integer> {
 
         if (outputFile != null) {
             saveFileContent(outputFile, outputContent);
-            System.out.printf("(successfully saved into '%s')", outputFile);
+            System.out.printf("(successfully saved into '%s'%n)", outputFile);
         } else {
             System.out.println("(successfully processed and printed");
             System.out.println("--- " + "-".repeat(100) + " ---");
