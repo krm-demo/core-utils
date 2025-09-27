@@ -67,7 +67,7 @@ public class ThymeleafToolEval implements Callable<Integer> {
 
         if (outputFile != null) {
             saveFileContent(outputFile, outputContent);
-            System.out.printf("(successfully saved into '%s'%n)", outputFile);
+            System.out.printf("(successfully saved into '%s'%n)", outputFile.toPath());
         } else {
             System.out.println("(successfully processed and printed");
             System.out.println("--- " + "-".repeat(100) + " ---");

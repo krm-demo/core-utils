@@ -53,13 +53,17 @@ jobs:
           .github/th-tool.sh eval $'\'"la-la-la"\'' --output ./target/expr-result-03.txt
           .github/th-tool.sh eval $'\'"la-la-la  1212   456 7\nthe second line"\'' --output ./target/expr-result-04.txt
           echo "1+1 * 3+4 * 5 = $(cat ./target/expr-result-00.txt)"
-          echo "1+1 * 3+4 * 5 = $(cat ./target/expr-result-00.txt)" >> $GITHUB_STEP_SUMMARY 
           echo "xxx.property-one = $(cat ./target/expr-result-01.txt)"
-          echo "xxx.property-one = $(cat ./target/expr-result-01.txt)" >> $GITHUB_STEP_SUMMARY 
+
+          echo "#### some simple expressions:
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "1+1 * 3+4 * 5 = $(cat ./target/expr-result-00.txt)" >> $GITHUB_STEP_SUMMARY 
+          echo "xxx.property-one = $(cat ./target/expr-result-01.txt)" >> $GITHUB_STEP_SUMMARY
+          echo "xxx.property-num = $(cat ./target/expr-result-02.txt)" >> $GITHUB_STEP_SUMMARY
+          echo "\"la-la-la\" = $(cat ./target/expr-result-03.txt)" >> $GITHUB_STEP_SUMMARY
+          echo "\"la-la-la  1212   456 7\nthe second line\" = $(cat ./target/expr-result-04.txt)" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
 
       - name: "Process the template '.github/th-templates/Usage.md.th' via 'th-tool':"
-        run: >
-          .github/th-tool.sh 
-          --var-file mavenProps=./target/classes/META-INF/maven/maven-project.properties 
-          process .github/th-templates/Usage.md.th 
-          --output $GITHUB_STEP_SUMMARY 
+        run: .github/th-tool.sh process .github/th-templates/Usage.md.th --output $GITHUB_STEP_SUMMARY

@@ -147,12 +147,12 @@ public class ThymeleafTool {
      * </a>
      */
     public static void main(String... args) {
-        // TODO: try to introduce and integrate a logger like it's demonstrated at "https://foojay.io/..."
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println(SysDumpUtils.dumpEnvVarsExAsJson());
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println(SysDumpUtils.dumpSysPropsExAsJson());
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        // TODO: try to introduce and integrate a logger like it's demonstrated at "https://foojay.io/..."
+//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        System.out.println(SysDumpUtils.dumpEnvVarsExAsJson());
+//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        System.out.println(SysDumpUtils.dumpSysPropsExAsJson());
+//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 //        CommandLine.Help.Ansi ansiMode = CommandLine.Help.Ansi.ON;
 //        new CommandLine.Help.Ansi(ansiMode).out;

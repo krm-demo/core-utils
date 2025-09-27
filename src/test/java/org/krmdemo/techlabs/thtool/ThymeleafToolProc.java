@@ -104,7 +104,7 @@ public class ThymeleafToolProc implements Callable<Integer> {
 
         if (outputLocation != null && (!outputLocation.exists() || outputLocation.isFile())) {
             saveFileContent(outputLocation, outputContent);
-            System.out.printf("(successfully saved into '%s'%n)", outputLocation);
+            System.out.printf("(successfully saved into '%s'%n)", outputLocation.toPath());
         } else {
             System.out.println("(successfully processed and printed");
             System.out.println("--- " + "-".repeat(100) + " ---");
