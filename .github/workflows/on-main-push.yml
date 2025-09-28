@@ -65,11 +65,17 @@ jobs:
           # dump the value of {{ github }} into JSON-file
           cd main-branch
           echo '${{ toJson(github) }}' > .github/th-vars/var-github.json
+          echo '${{ toJson(inputs) }}' > .github/th-vars/var-githubInputs.json
           echo "~~~~~~~~~~~~~ ( dump the content of './.github/th-vars/var-github.json' into summary ) ~~~~~~~~~~~~~"
           echo "
-          Git-Hub context {{ github }} (content of \`./.github/th-vars/var-github.json\`):
+          Git-Hub context {{ \`github\` }} (content of \`./.github/th-vars/var-github.json\`):
           \`\`\`json
           $(cat ./.github/th-vars/var-github.json)
+          \`\`\`
+
+          Git-Hub context {{ \`inputs\` }} (content of \`./.github/th-vars/var-githubInputs.json\`):
+          \`\`\`json
+          $(cat ./.github/th-vars/var-githubInputs.json)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: "Dump 'secrets' context into '.github/th-vars'-dir"
