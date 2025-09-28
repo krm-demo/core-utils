@@ -100,32 +100,44 @@ jobs:
       - name: "Perform the deployment into Git-Hub Artifactory"
         if: ${{ inputs && inputs.release_type == 'INTERNAL' && inputs.release_phase == 'call-main'}}
         run: |
+          # deploymet to GitHub Artifactory
+          cd main-branch
           echo "
           ---
+
           Going to perform the deployment into internal Git-Hub Artifactory
 
           _ ... to be done ... _
 
           Just deployed version '$(.github/th-tool.sh eval mh.currentProjectVersion)' is now available
           for those who has access to this internal Git-Hub Artifactory
+          
           ---" >> $GITHUB_STEP_SUMMARY
       - name: "Perform the deployment into Maven-Central Artifactory"
         if: ${{ inputs && inputs.release_type == 'PUBLIC' && inputs.release_phase == 'call-main'}}
         run: |
+          # deploymet to Maven-Central Artifactory
+          cd main-branch
           echo "
           ---
+
           Going to perform the deployment into internal Maven-Central Artifactory
 
           _ ... to be done ... _
 
-          Just deployed version '$(.github/th-tool.sh eval mh.currentProjectVersion)' is now available for anyone !!!
+          Just deployed version '$(.github/th-tool.sh eval mh.currentProjectVersion)' is now available for anyone
+          
           ---" >> $GITHUB_STEP_SUMMARY
       - name: "Inform the developers that new SNAPSHOT-version is available"
         if: ${{ inputs && inputs.release_phase == 'call-main-next'}}
         run: |
+          # notify the user or just ignore this case
+          cd main-branch
           echo "
           ---
+
           New snapshot version '$(.github/th-tool.sh eval mh.currentProjectVersion)' requires all local checkouts to be pulled and refreshed
+
           ---" >> $GITHUB_STEP_SUMMARY
       - name: "Specific actions for regular commits (most probably nothing)"
         if: ${{ inputs.release_type != 'INTERNAL' && inputs.release_type != 'PUBLIC' }}
