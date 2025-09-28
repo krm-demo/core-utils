@@ -49,8 +49,13 @@ import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 @Command(name = "th-tool",
     version = "0.0.1", // <-- TODO: inject the version from maven properties via "versionProvider"
     subcommands = { ThymeleafToolEval.class, ThymeleafToolProc.class },
-    description = "A tool to process the input-templates and evaluate the expressions with Thymeleaf",
-    mixinStandardHelpOptions = true, usageHelpWidth = 140
+    mixinStandardHelpOptions = true, usageHelpWidth = 140,
+    description = """
+        A tool to process the input-templates and evaluate the expressions using Thymeleaf.
+        Following helper-objects and props-containers are available out of the box:
+          @|blue mh|@ - to work with maven-project versions;
+          @|blue cu|@ - to invoke most of utility-methods of @|bold,italic core-utils|@ library;
+        Other custom variables could be introduced using folllowing command-line options:"""
 )
 @Slf4j
 public class ThymeleafTool {

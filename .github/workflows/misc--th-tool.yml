@@ -86,7 +86,7 @@ jobs:
           echo "#### Values of current, release and next versions  (by 'mavenProps' resource-var):" >> $GITHUB_STEP_SUMMARY
           echo "| Env-Var | Value | Description |" >> $GITHUB_STEP_SUMMARY
           echo "| --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`CURRENT_VERSION\` | \`$CURRENT_VERSION\` | Current version of project in `pom.xml` |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`CURRENT_VERSION\` | \`$CURRENT_VERSION\` | Current version of project in \`pom.xml\` |" >> $GITHUB_STEP_SUMMARY
           echo "| \`INTERNAL_RELEASE_VERSION\` | \`$INTERNAL_RELEASE_VERSION\` | The version of next **internal release** |" >> $GITHUB_STEP_SUMMARY
           echo "| \`INTERNAL_NEXT_VERSION\` | \`$INTERNAL_NEXT_VERSION\` | The next development version **after internal release**|" >> $GITHUB_STEP_SUMMARY
           echo "| \`PUBLIC_RELEASE_VERSION\` | \`$PUBLIC_RELEASE_VERSION\` | The version of next **public release**|" >> $GITHUB_STEP_SUMMARY
@@ -111,7 +111,7 @@ jobs:
           echo "#### Values of current, release and next versions (by 'mh'-helper):" >> $GITHUB_STEP_SUMMARY
           echo "| th-tool eval \`...\` | Value | Description |" >> $GITHUB_STEP_SUMMARY
           echo "| --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
-          echo "| \`mh.currentProjectVersion\` | \`$CURRENT_VERSION\` | Current version of project in `pom.xml` |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`mh.currentProjectVersion\` | \`$CURRENT_VERSION\` | Current version of project in \`pom.xml\` |" >> $GITHUB_STEP_SUMMARY
           echo "| \`mh.calculatedProjectVersion\` | \`$CALCULATED_VERSION\` | Current version, but calculated from parts |" >> $GITHUB_STEP_SUMMARY
           echo "| \`mh.internalReleaseVersion\` | \`$INTERNAL_RELEASE_VERSION\` | The version of next **internal release** |" >> $GITHUB_STEP_SUMMARY
           echo "| \`mh.internalNextVersion\` | \`$INTERNAL_NEXT_VERSION\` | The next development version **after internal release**|" >> $GITHUB_STEP_SUMMARY

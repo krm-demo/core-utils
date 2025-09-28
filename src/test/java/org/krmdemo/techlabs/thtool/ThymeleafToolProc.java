@@ -20,8 +20,10 @@ import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
  * by {@link ThymeleafTool#templateEngine Thymeleaf-Engine} with {@link ThymeleafTool#varsCtx th-tool variables}
  */
 @Command(name = "process",
-    description = "Process the input-templates by Thymeleaf-Engine",
-    mixinStandardHelpOptions = true, usageHelpWidth = 140
+    mixinStandardHelpOptions = true, usageHelpWidth = 140,
+    description = """
+        Process the input-templates by Thymeleaf-Engine and OGNL.
+        More detailed information for this template engine is available at @|cyan https://www.thymeleaf.org/|@"""
 )
 @Slf4j
 public class ThymeleafToolProc implements Callable<Integer> {
@@ -36,7 +38,7 @@ public class ThymeleafToolProc implements Callable<Integer> {
     File outputLocation;
 
     @Parameters(
-        paramLabel = "input-template-path",
+        paramLabel = "template-path",
         description = "the path to 'th-tool' template that going\nto be processed with 'th-tool' variables",
         arity = "1..*"
     )
@@ -54,7 +56,7 @@ public class ThymeleafToolProc implements Callable<Integer> {
      */
     @Override
     public Integer call() throws Exception {
-        System.out.println("... executing 'th-tool' to process input-template: ...");
+        logInfo("... executing 'th-tool' to process input-template: ...");
         tt.initVars();
 
         if (outputLocation == null) {

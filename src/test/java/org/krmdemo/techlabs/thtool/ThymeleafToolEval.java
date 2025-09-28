@@ -19,8 +19,13 @@ import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
  * Sub-command {@code evaluate} of <b>{@code th-tool}</b> that evaluates the passed expression.
  */
 @CommandLine.Command(name = "eval",
-    description = "Evaluates the Thymeleaf-Expression and print the result into the standard output",
-    mixinStandardHelpOptions = true, usageHelpWidth = 140
+    mixinStandardHelpOptions = true, usageHelpWidth = 140,
+    description = """
+        Evaluates the Thymeleaf-Expression and print the result into the standard output.
+        If the expression contains quotes, brackets and other characters, which are sensitive for shell-script,
+        the whole expression (or its parts) is required to be escaped like following:
+        - example one;
+        - example two.""" // TODO: <-- provide arithmetic and props-access examples
 )
 @Slf4j
 public class ThymeleafToolEval implements Callable<Integer> {
@@ -36,8 +41,8 @@ public class ThymeleafToolEval implements Callable<Integer> {
 
     @Parameters(arity="0..*", paramLabel="expression", description = """
         the tail of command line is treated as the expression to evaluate
-        like it was inline like '@|cyan [[$${...)}]]|@',
-        or as an attribute-value at '@|cyan <xxx th:text="$${...}"></xxx>|@'""")
+        like it was inlined into Thymeleaf-Template like '@|cyan [[$${...)}]]|@',
+        or as an attribute-value like '@|cyan <xxx th:text="$${...}"></xxx>|@'""")
     List<String> expressionsArgs;;
 
     @Option(names = {"--help"}, usageHelp = true,
