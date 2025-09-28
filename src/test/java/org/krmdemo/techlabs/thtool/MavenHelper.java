@@ -122,7 +122,7 @@ public class MavenHelper {
      * which corresponds to the minimal version of JDK this library is built with
      */
     public String getMajorVersion() {
-        return mvnPropsMap.get("parsedVersion.majorVersion");
+        return mvnPropsMap.getOrDefault("parsedVersion.majorVersion", "21");
     }
 
     /**
@@ -136,7 +136,7 @@ public class MavenHelper {
      * @return the minor version corresponds to sequence number of <b>public release</b>
      */
     public String getMinorVersion() {
-        return mvnPropsMap.get("parsedVersion.minorVersion");
+        return mvnPropsMap.getOrDefault("parsedVersion.minorVersion", "0");
     }
 
     /**
@@ -151,7 +151,7 @@ public class MavenHelper {
      * since the last <b>public release</b> (should be {@code 0} right after the public release is performed)
      */
     public String getIncrementalVersion() {
-        return mvnPropsMap.get("parsedVersion.incrementalVersion");
+        return mvnPropsMap.getOrDefault("parsedVersion.incrementalVersion", "0");
     }
 
     /**

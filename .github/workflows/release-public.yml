@@ -1,0 +1,123 @@
+name: release-public
+run-name: ${{ github.actor }} has executed 'release-public' №${{ github.run_number }}
+on: workflow_dispatch
+
+permissions:
+  contents: write
+  packages: write
+
+# this workflow consists of 4 jobs - two phase-jobs, each following by call-workflow
+jobs:
+
+  # the first phase is about updating the project version to 'public release' and PUSH #1
+  release-public-start:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "[1] Checkout the latest version of repo in '${{ github.ref }}'"
+        uses: actions/checkout@v4
+
+      - name: "[1] Set up JDK 25 (Amazon Corretto)"
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'corretto'
+          check-latest: true
+          cache: 'maven'
+          cache-dependency-path: pom.xml
+
+      - name: "[1] Perform the build and install using 'Apache Maven'"
+        run: |
+          # build and install to the local maven repository
+          mvn -B clean install
+          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary ) ~~~~~~~~~~~~~"
+          echo "
+          the result of maven-build before <b>public release</b> (content of \`./target\` directory):
+          \`\`\`bash
+          $(ls -laxo "./target")
+          \`\`\`
+          " >> $GITHUB_STEP_SUMMARY
+
+      - name: "[1] Changing the version of project to public release, creating a tag and PUSH #1"
+        run: |
+          # the first phase pf public release
+          INITIAL_VERSION=$(.github/th-tool.sh eval mh.currentProjectVersion)
+          NEW_RELEASE_VERSION=$(.github/th-tool.sh eval mh.publicReleaseVersion)
+          NEW_VERSION_NEXT=$(.github/th-tool.sh eval mh.publicNextVersion)
+          echo "(1) INITIAL_VERSION = '$INITIAL_VERSION'"
+          echo "(1) NEW_RELEASE_VERSION = '$NEW_RELEASE_VERSION'"
+          echo "(1) NEW_VERSION_NEXT = '$NEW_VERSION_NEXT'"
+
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          echo "- changing the version from '$INITIAL_VERSION' to '$NEW_RELEASE_VERSION';"
+          mvn -B --quiet versions:set -DnewVersion=$NEW_RELEASE_VERSION
+          echo "- going to commit the updated 'pom.xml' into git (THE FIRST COMMIT);"
+          git add pom.xml
+          git commit -m "<< public release >> $NEW_RELEASE_VERSION"
+
+          echo "- going to create a tag '$NEW_RELEASE_VERSION';"
+          git tag $NEW_RELEASE_VERSION
+
+          echo "- going to push the the first commit and tag"
+          git push --force --atomic origin $GITHUB_REF $NEW_RELEASE_VERSION
+
+  # call the workflow 'on-main-push.yml' to build and publish the public release
+  call-main:
+    needs: release-public-start
+    uses: ./.github/workflows/on-main-push.yml
+    with:
+      release_type: "PUBLIC"
+      release_phase: "call-main"
+
+  # the second phase is about updating the project version to the next snapshot version and PUSH #2
+  release-public-next:
+    needs: call-main
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "[2] Checkout the latest version of repo in '${{ github.ref }}'"
+        uses: actions/checkout@v4
+
+      - name: "[2] Set up JDK 25 (Amazon Corretto)"
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'corretto'
+          check-latest: true
+          cache: 'maven'
+          cache-dependency-path: pom.xml
+
+      - name: "[2] Changing the version of project to next snapshot after public release and and PUSH #2"
+        run: |
+          # [2] generate maven-props and compile 'th-tool'
+          mvn -B --quiet test-compile
+
+          # the second phase of public release
+          INITIAL_VERSION=$(.github/th-tool.sh eval mh.currentProjectVersion)
+          NEW_RELEASE_VERSION=$(.github/th-tool.sh eval mh.publicReleaseVersion)
+          NEW_VERSION_NEXT=$(.github/th-tool.sh eval mh.publicNextVersion)
+          echo "(2) INITIAL_VERSION = '$INITIAL_VERSION'"
+          echo "(2) NEW_RELEASE_VERSION = '$NEW_RELEASE_VERSION'"
+          echo "(2) NEW_VERSION_NEXT = '$NEW_VERSION_NEXT'"
+          
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          echo "- changing the version from '$NEW_RELEASE_VERSION' to '$NEW_VERSION_NEXT';"
+          mvn -B --quiet versions:set -DnewVersion=$NEW_VERSION_NEXT
+          echo "- going to commit the updated 'pom.xml' into git (THE SECOND COMMIT);"
+          git add pom.xml
+          git commit -m "<< new snapshot version >> $NEW_VERSION_NEXT"
+
+          echo "- going to push the second commit"
+          git push --force
+
+  # call the workflow 'on-main-push.yml' to build and publish the next snapshot version
+  call-main-next:
+    needs: release-public-next
+    uses: ./.github/workflows/on-main-push.yml
+    with:
+      release_type: "PUBLIC"
+      release_phase: "call-main-next"
