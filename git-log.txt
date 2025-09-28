@@ -1,3 +1,4 @@
+b9b40e0 << public release >> 21.00
 5e2d06f Start working on 'release-public.yml' #1
 4a7725e << new snapshot version >> 21.00.017-SNAPSHOT
 5fc952a continue with release workflows #12
