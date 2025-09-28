@@ -2,16 +2,16 @@ name: release-internal
 run-name: ${{ github.actor }} has executed 'release-internal' №${{ github.run_number }}
 on: workflow_dispatch
 
+permissions:
+  contents: write
+  packages: write
+
 # this workflow consists of 3 jobs - two phase-jobs and one call-workflow between those phases
 jobs:
 
   # the first phase is about updating the project version to 'internal release' and PUSH #1
   release-internal:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-      packages: write
 
     steps:
       - name: "[1] Checkout the latest version of repo in '${{ github.ref }}'"
@@ -71,10 +71,6 @@ jobs:
   # the second phase is about updating the project version to 'internal release' and PUSH #2
   release-internal-next:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-      packages: write
 
     steps:
       - name: "[2] Checkout the latest version of repo in '${{ github.ref }}'"

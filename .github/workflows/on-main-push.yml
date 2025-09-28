@@ -1,6 +1,10 @@
 name: on-main-push
 run-name: on-main-push into ${{ github.ref }} №${{ github.run_number }}
 
+permissions:
+  contents: write
+  packages: write
+
 on:
   push:
     branches: [ "main" ]
@@ -14,10 +18,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-      packages: write
 
     steps:
       - name: "Checkout the 'main'-branch of repo '${{ github.ref }}' into './main-branch'"
