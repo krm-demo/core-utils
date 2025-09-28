@@ -19,6 +19,23 @@ jobs:
           cache: 'maven'
           cache-dependency-path: pom.xml
 
-      - name: ""
+      - name: "Perform the build and install using 'Apache Maven'"
+        run: |
+          # build and install to the local maven repository
+          mvn -B clean install
+          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary ) ~~~~~~~~~~~~~"
+          echo "
+          the result of maven-build before <b>internal release</b> (content of \`./target\` directory):
+          \`\`\`bash
+          $(ls -laxo "./target")
+          \`\`\`
+          " >> $GITHUB_STEP_SUMMARY
+
+      - name: "Changing the version of project to internal release"
+        run: |
+          NEW_RELEASE_VERSION=$(.github/th-tool.sh eval mh.internalReleaseVersion)
+          echo "NEW_RELEASE_VERSION = '$NEW_RELEASE_VERSION'"
+
+      - name: "... to be done ..."
         run: |
           echo "TODO: to be done "'!!!'

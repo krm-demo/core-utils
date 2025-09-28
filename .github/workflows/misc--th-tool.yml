@@ -45,6 +45,9 @@ jobs:
           # dump the value of {{ secrets }} into JSON-file
           echo '${{ toJson(secrets) }}' > .github/th-vars/var-secrets.json
 
+      - name: "Compile 'th-tool' (no tests and no JARs and JavaDoc):"
+        run: mvn test-compile
+
       - name: "Process the template '.github/th-templates/Usage.md.th' via 'th-tool':"
         run: .github/th-tool.sh process .github/th-templates/Usage.md.th --output $GITHUB_STEP_SUMMARY
 
