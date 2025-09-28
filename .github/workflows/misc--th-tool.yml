@@ -84,7 +84,7 @@ jobs:
           INTERNAL_RELEASE_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-minorVersion.txt).$(cat ./target/result-incrementalVersion.txt)
           INTERNAL_NEXT_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-minorVersion.txt).$(cat ./target/result-nextIncrementalVersion.txt)-$(cat ./target/result-qualifierVersion.txt)
           PUBLIC_RELEASE_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-minorVersion.txt)
-          PUBLIC_NEXT_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-nextMinorVersion.txt).0-$(cat ./target/result-qualifierVersion.txt)
+          PUBLIC_NEXT_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-nextMinorVersion.txt).1-$(cat ./target/result-qualifierVersion.txt)
 
           echo "#### Values of current, release and next versions  (by 'mavenProps' resource-var):" >> $GITHUB_STEP_SUMMARY
           echo "| Env-Var | Value | Description |" >> $GITHUB_STEP_SUMMARY

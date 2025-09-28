@@ -36,6 +36,6 @@ public class MavenHelperTest {
         assertThat(mavenHelper.getInternalNextVersion())
             .isEqualTo("21.00.003-SNAPSHOT");
         assertThat(mavenHelper.getPublicNextVersion())
-            .isEqualTo("21.01.000-SNAPSHOT");
+            .isEqualTo("21.01.001-SNAPSHOT");
     }
 }

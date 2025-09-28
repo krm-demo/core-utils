@@ -93,7 +93,7 @@ public class MavenHelper {
         return String.format(SNAPSHOT_VERSION_FORMAT,
             getMajorVersionAsInt(),
             getMinorVersionAsInt() + 1,
-            0,
+            1,
             getVersionQualifier()
         );
     }
