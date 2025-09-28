@@ -6,7 +6,7 @@
 
   <groupId>io.github.krm-demo</groupId>
   <artifactId>core-utils</artifactId>
-  <version>$NEW_RELEASE_VERSION</version>
+  <version>$NEW_VERSION_NEXT</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
