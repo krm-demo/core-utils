@@ -103,7 +103,7 @@ jobs:
           rm -rf ../gh-pages-branch/${JAR_FILE_NAME%.*}
           cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
           echo "JAR_FILE_NAME=$JAR_FILE_NAME"
-          tree ../gh-pages-branch
+          tree -L 3 ../gh-pages-branch
 
       - name: "Commit and push the content 'gh-pages-branch' (togther with some test text-files)"
         run: |
