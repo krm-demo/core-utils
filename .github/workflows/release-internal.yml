@@ -2,7 +2,10 @@ name: release-internal
 run-name: ${{ github.actor }} has executed 'release-internal' №${{ github.run_number }}
 on: workflow_dispatch
 
+# this workflow consists of 3 jobs - two phase-jobs and one call-workflow between those phases
 jobs:
+
+  # the first phase is about updating the project version to 'internal release' and PUSH #1
   release-internal:
     runs-on: ubuntu-latest
 
@@ -11,10 +14,10 @@ jobs:
       packages: write
 
     steps:
-      - name: "Checkout the latest version of repo in '${{ github.ref }}'"
+      - name: "[1] Checkout the latest version of repo in '${{ github.ref }}'"
         uses: actions/checkout@v4
 
-      - name: "Set up JDK 25 (Amazon Corretto)"
+      - name: "[1] Set up JDK 25 (Amazon Corretto)"
         uses: actions/setup-java@v4
         with:
           java-version: '25'
@@ -23,7 +26,7 @@ jobs:
           cache: 'maven'
           cache-dependency-path: pom.xml
 
-      - name: "Perform the build and install using 'Apache Maven'"
+      - name: "[1] Perform the build and install using 'Apache Maven'"
         run: |
           # build and install to the local maven repository
           mvn -B clean install
@@ -39,7 +42,7 @@ jobs:
           echo "NEW_RELEASE_VERSION=$(.github/th-tool.sh eval mh.internalReleaseVersion)" >> "$GITHUB_ENV"
           echo "NEW_VERSION_NEXT=$(.github/th-tool.sh eval mh.internalNextVersion)" >> "$GITHUB_ENV"
 
-      - name: "Changing the version of project to internal release, creating a tag and PUSH #1"
+      - name: "[1] Changing the version of project to internal release, creating a tag and PUSH #1"
         run: |
           # the first phase pf internal release
           echo "(1) INITIAL_VERSION = '$INITIAL_VERSION'"
@@ -61,12 +64,34 @@ jobs:
           echo "- going to push the the first commit and tag"
           git push --force --atomic origin $GITHUB_REF $NEW_RELEASE_VERSION
 
-      - name: "Call the workflow 'on-main-push' to publish just released version"
-        uses: ./.github/workflows/on-main-push.yml
+  # in the middle of two phases it's necessary to call the workflow 'on-main-push.yml'
+  fire-on-main-push:
+    uses: ./.github/workflows/on-main-push.yml
 
-      - name: "Changing the version of project to next snapshot after internal release and and PUSH #2"
+  # the second phase is about updating the project version to 'internal release' and PUSH #2
+  release-internal-next:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: "[2] Checkout the latest version of repo in '${{ github.ref }}'"
+        uses: actions/checkout@v4
+
+      - name: "[2] Set up JDK 25 (Amazon Corretto)"
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'corretto'
+          check-latest: true
+          cache: 'maven'
+          cache-dependency-path: pom.xml
+
+      - name: "[2] Changing the version of project to next snapshot after internal release and and PUSH #2"
         run: |
-          # the second phase pf internal release
+          # the second phase of internal release
           echo "(2) INITIAL_VERSION = '$INITIAL_VERSION'"
           echo "(2) NEW_RELEASE_VERSION = '$NEW_RELEASE_VERSION'"
           echo "(2) NEW_VERSION_NEXT = '$NEW_VERSION_NEXT'"

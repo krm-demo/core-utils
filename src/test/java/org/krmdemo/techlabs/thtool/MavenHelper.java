@@ -1,6 +1,7 @@
 package org.krmdemo.techlabs.thtool;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.core.utils.PropertiesUtils;
 
@@ -164,7 +165,8 @@ public class MavenHelper {
      * @return in this project this method must always return the value {@code "SNAPSHOT"}
      */
     public String getVersionQualifier() {
-        return mvnPropsMap.get("parsedVersion.qualifier");
+        String qualifier = mvnPropsMap.get("parsedVersion.qualifier");
+        return StringUtils.isBlank(qualifier) ? "SNAPSHOT" : qualifier;
     }
 
     @Override
