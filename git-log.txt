@@ -1,3 +1,4 @@
+fa0a5f3 << internal release >> 21.01.001
 59f4fc4 << new snapshot version >> 21.01.001-SNAPSHOT
 5e2d06f Start working on 'release-public.yml' #1
 4a7725e << new snapshot version >> 21.00.017-SNAPSHOT
