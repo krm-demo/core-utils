@@ -98,7 +98,7 @@ jobs:
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: "Perform the deployment into Git-Hub Artifactory"
-        if: ${{ inputs && inputs.release_type == 'INTERNAL' && release_phase == 'call-main'}}
+        if: ${{ inputs && inputs.release_type == 'INTERNAL' && inputs.release_phase == 'call-main'}}
         run: |
           echo "
           ---
@@ -110,7 +110,7 @@ jobs:
           for those who has access to this internal Git-Hub Artifactory
           ---" >> $GITHUB_STEP_SUMMARY
       - name: "Perform the deployment into Maven-Central Artifactory"
-        if: ${{ inputs && inputs.release_type == 'PUBLIC' && release_phase == 'call-main'}}
+        if: ${{ inputs && inputs.release_type == 'PUBLIC' && inputs.release_phase == 'call-main'}}
         run: |
           echo "
           ---
