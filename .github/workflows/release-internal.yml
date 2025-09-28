@@ -99,6 +99,9 @@ jobs:
           echo "(2) NEW_RELEASE_VERSION = '$NEW_RELEASE_VERSION'"
           echo "(2) NEW_VERSION_NEXT = '$NEW_VERSION_NEXT'"
           
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
           echo "- changing the version from '$NEW_RELEASE_VERSION' to '$NEW_VERSION_NEXT';"
           mvn -B --quiet versions:set -DnewVersion=$NEW_VERSION_NEXT
           echo "- going to commit the updated 'pom.xml' into git (THE SECOND COMMIT);"
