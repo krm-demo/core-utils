@@ -67,6 +67,9 @@ jobs:
   call-main:
     needs: release-internal-start
     uses: ./.github/workflows/on-main-push.yml
+    with:
+      release_type: "INTERNAL"
+      release_phase: "call-main"
 
   # the second phase is about updating the project version to the next snapshot version and PUSH #2
   release-internal-next:
@@ -115,3 +118,6 @@ jobs:
   call-main-next:
     needs: release-internal-next
     uses: ./.github/workflows/on-main-push.yml
+    with:
+      release_type: "INTERNAL"
+      release_phase: "call-main-next"

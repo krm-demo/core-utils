@@ -10,7 +10,14 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_call:  # <-- this empty YAML-mapping allows to invoke this workflow from internal/public releases
+  workflow_call:  # <-- this YAML-mapping allows to invoke this workflow from internal/public releases
+    inputs:
+      release_type:
+        type: string
+        required: false
+      release_phase:
+        type: string
+        required: false
 
 jobs:
   build:
