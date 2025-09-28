@@ -10,11 +10,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_call:
-
-#  workflow_run:
-#    workflows: ["release-internal"]
-#    types: [completed]
+  workflow_call:  # <-- this empty YAML-mapping allows to invoke this workflow from internal/public releases
 
 jobs:
   build:
@@ -62,6 +58,12 @@ jobs:
           # dump the value of {{ github }} into JSON-file
           cd main-branch
           echo '${{ toJson(github) }}' > .github/th-vars/var-github.json
+          echo "~~~~~~~~~~~~~ ( dump the content of '.github/th-vars/var-github.json' into summary ) ~~~~~~~~~~~~~"
+          echo "
+          Git-Hub context {{ github }} (content of \`.github/th-vars/var-github.json/` JSON-file):
+          \`\`\`json
+          $(ls -laxo "./.github/th-vars/var-github.json")
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: "Dump 'secrets' context into '.github/th-vars'-dir"
         run: |
@@ -76,7 +78,11 @@ jobs:
           echo "Current directory is $(pwd)"
           mvn -B clean install
           echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary ) ~~~~~~~~~~~~~"
-          echo -e "the result of maven-build (content of \`./target\` directory):\n\`\`\`bash\n$(ls -laxo "./target")\n\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "
+          the result of maven-build (content of \`./target\` directory):
+          `\`\`bash
+          $(ls -laxo "./target")
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: "Checkout the 'gh-pages'-branch of repo '${{ github.ref }}' into './gh-pages-branch'"
         uses: actions/checkout@v4

@@ -64,13 +64,13 @@ jobs:
           git push --force --atomic origin $GITHUB_REF $NEW_RELEASE_VERSION
 
   # call the workflow 'on-main-push.yml' to build and publish the internal release
-  release-internal-call:
+  call-main:
     needs: release-internal-start
     uses: ./.github/workflows/on-main-push.yml
 
   # the second phase is about updating the project version to the next snapshot version and PUSH #2
   release-internal-next:
-    needs: release-internal-call
+    needs: call-main
     runs-on: ubuntu-latest
 
     steps:
@@ -112,6 +112,6 @@ jobs:
           git push --force
 
   # call the workflow 'on-main-push.yml' to build and publish the next snapshot version
-  release-internal-call-next:
+  call-main-next:
     needs: release-internal-next
     uses: ./.github/workflows/on-main-push.yml
