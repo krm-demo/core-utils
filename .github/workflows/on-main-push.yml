@@ -127,8 +127,8 @@ jobs:
           ---
           New snapshot version '$(.github/th-tool.sh eval mh.currentProjectVersion)' requires all local checkouts to be pulled and refreshed
           ---" >> $GITHUB_STEP_SUMMARY
-      - name: "Inform the developers that new SNAPSHOT-version is available"
-        if: ${{ !inputs }}
+      - name: "Specific actions for regular commits (most probably nothing)"
+        if: ${{ inputs.release_type != 'INTERNAL' && inputs.release_type != 'PUBLIC' }}
         run: echo "--- this is a regular commit, that is not related to any releases ---"
 
       - name: "Checkout the 'gh-pages'-branch of repo '${{ github.ref }}' into './gh-pages-branch'"
