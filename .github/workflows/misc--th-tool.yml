@@ -3,9 +3,9 @@ run-name: ${{ github.actor }} has executed 'misc--th-tool.yml' №${{ github.run
 on: workflow_dispatch
 
 jobs:
-
   th-tool:
     runs-on: ubuntu-latest
+
     steps:
       - name: "Checkout the latest version of repo in '${{ github.ref }}'"
         uses: actions/checkout@v4

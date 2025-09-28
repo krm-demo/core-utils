@@ -3,9 +3,13 @@ run-name: ${{ github.actor }} has executed 'release-internal' №${{ github.run_
 on: workflow_dispatch
 
 jobs:
-
   release-internal:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+
     steps:
       - name: "Checkout the latest version of repo in '${{ github.ref }}'"
         uses: actions/checkout@v4
@@ -31,11 +35,29 @@ jobs:
           \`\`\`
           " >> $GITHUB_STEP_SUMMARY
 
-      - name: "Changing the version of project to internal release"
+      - name: "Changing the version of project to internal release, perform two commits and creating a tag"
         run: |
+          CURRENT_VERSION=$(.github/th-tool.sh eval mh.currentProjectVersion)
           NEW_RELEASE_VERSION=$(.github/th-tool.sh eval mh.internalReleaseVersion)
-          echo "NEW_RELEASE_VERSION = '$NEW_RELEASE_VERSION'"
+          NEW_VERSION_NEXT=$(.github/th-tool.sh eval mh.internalNextVersion)
 
-      - name: "... to be done ..."
-        run: |
-          echo "TODO: to be done "'!!!'
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          echo "- changing the version from '$CURRENT_VERSION' to '$NEW_RELEASE_VERSION';"
+          mvn versions:set -DnewVersion='$NEW_RELEASE_VERSION'
+          echo "- going to commit the updated 'pom.xml' into git (THE FIRST COMMIT);"
+          git add pom.xml
+          git commit -m "<< internal release >> $NEW_RELEASE_VERSION"
+
+          echo "- going to create a tag '$NEW_RELEASE_VERSION';"
+          git tag $NEW_RELEASE_VERSION
+
+          echo "- changing the version from '$NEW_RELEASE_VERSION' to '$NEW_VERSION_NEXT';"
+          mvn versions:set -DnewVersion='$NEW_VERSION_NEXT'
+          echo "- going to commit the updated 'pom.xml' into git (THE SECOND COMMIT);"
+          git add pom.xml
+          git commit -m "<< new snapshot version >> $NEW_VERSION_NEXT"
+
+          echo "- going to push the changes in 'pom.xml' and just created tag atomically"
+          git push --atomic origin $GITHUB_REF $NEW_RELEASE_VERSION
