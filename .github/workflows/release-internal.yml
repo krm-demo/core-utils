@@ -37,14 +37,13 @@ jobs:
           $(ls -laxo "./target")
           \`\`\`
           " >> $GITHUB_STEP_SUMMARY
-          echo "~~~~~~~~~~~~~ ( save corresponding versions into GITHUB_ENV ) ~~~~~~~~~~~~~"
-          echo "INITIAL_VERSION=$(.github/th-tool.sh eval mh.currentProjectVersion)" >> "$GITHUB_ENV"
-          echo "NEW_RELEASE_VERSION=$(.github/th-tool.sh eval mh.internalReleaseVersion)" >> "$GITHUB_ENV"
-          echo "NEW_VERSION_NEXT=$(.github/th-tool.sh eval mh.internalNextVersion)" >> "$GITHUB_ENV"
 
       - name: "[1] Changing the version of project to internal release, creating a tag and PUSH #1"
         run: |
           # the first phase pf internal release
+          INITIAL_VERSION=$(.github/th-tool.sh eval mh.currentProjectVersion)
+          NEW_RELEASE_VERSION=$(.github/th-tool.sh eval mh.internalReleaseVersion)
+          NEW_VERSION_NEXT=$(.github/th-tool.sh eval mh.internalNextVersion)
           echo "(1) INITIAL_VERSION = '$INITIAL_VERSION'"
           echo "(1) NEW_RELEASE_VERSION = '$NEW_RELEASE_VERSION'"
           echo "(1) NEW_VERSION_NEXT = '$NEW_VERSION_NEXT'"
@@ -89,16 +88,22 @@ jobs:
 
       - name: "[2] Changing the version of project to next snapshot after internal release and and PUSH #2"
         run: |
+          # generate maven-props and compile 'th-tool'
+          mvn -B --quiet test-compile
+
           # the second phase of internal release
-          echo "(2) INITIAL_VERSION = '${{ env.INITIAL_VERSION }}'"
-          echo "(2) NEW_RELEASE_VERSION = '${{ env.NEW_RELEASE_VERSION }}'"
-          echo "(2) NEW_VERSION_NEXT = '${{ env.NEW_VERSION_NEXT }}'"
+          INITIAL_VERSION=$(.github/th-tool.sh eval mh.currentProjectVersion)
+          NEW_RELEASE_VERSION=$(.github/th-tool.sh eval mh.internalReleaseVersion)
+          NEW_VERSION_NEXT=$(.github/th-tool.sh eval mh.internalNextVersion)
+          echo "(2) INITIAL_VERSION = '$INITIAL_VERSION'"
+          echo "(2) NEW_RELEASE_VERSION = '$NEW_RELEASE_VERSION'"
+          echo "(2) NEW_VERSION_NEXT = '$NEW_VERSION_NEXT'"
           
-          echo "- changing the version from '${{ env.NEW_RELEASE_VERSION }}' to '${{ env.NEW_VERSION_NEXT }}';"
-          mvn -B --quiet versions:set -DnewVersion=${{ env.NEW_VERSION_NEXT }}
+          echo "- changing the version from '$NEW_RELEASE_VERSION' to '$NEW_VERSION_NEXT';"
+          mvn -B --quiet versions:set -DnewVersion=$NEW_VERSION_NEXT
           echo "- going to commit the updated 'pom.xml' into git (THE SECOND COMMIT);"
           git add pom.xml
-          git commit -m "<< new snapshot version >> ${{ env.NEW_VERSION_NEXT }}"
+          git commit -m "<< new snapshot version >> $NEW_VERSION_NEXT"
 
           echo "- going to push the second commit"
           git push --force
