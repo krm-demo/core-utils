@@ -1,0 +1,13 @@
+
+          the result of maven-build (content of `./target` directory):
+          ```bash
+          total 0
+drwxr-xr-x  8 alekseykurmanov 256 Sep 28 04:24 .
+drwxr-xr-x 11 alekseykurmanov 352 Sep 28 15:29 ..
+drwxr-xr-x  4 alekseykurmanov 128 Sep 28 04:24 classes
+drwxr-xr-x  3 alekseykurmanov  96 Sep 28 04:24 generated-sources
+drwxr-xr-x  3 alekseykurmanov  96 Sep 28 04:24 generated-test-sources
+drwxr-xr-x  4 alekseykurmanov 128 Sep 28 04:24 logs
+drwxr-xr-x  3 alekseykurmanov  96 Sep 28 04:24 maven-status
+drwxr-xr-x  6 alekseykurmanov 192 Sep 28 04:24 test-classes
+          ```
