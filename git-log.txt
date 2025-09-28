@@ -1,3 +1,4 @@
+d1e95e1 Use Sl4j everywhere in th-tool #3
 89a0c5c Use Sl4j everywhere in th-tool #2
 139bd4b Use Sl4j everywhere in th-tool #1
 97cb92a Introduce MavenHelper #1
