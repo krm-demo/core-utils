@@ -97,6 +97,40 @@ jobs:
           $(ls -laxo ./target)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
+      - name: "Perform the deployment into Git-Hub Artifactory"
+        if: ${{ inputs.release_type == 'INTERNAL' && release_phase == 'call-main'}}
+        run: |
+          echo "
+          ---
+          Going to perform the deployment into internal Git-Hub Artifactory
+
+          _ ... to be done ... _
+
+          Just deployed version '$(.github/th-tool.sh eval mh.currentProjectVersion)' is now available
+          for those who has access to this internal Git-Hub Artifactory
+          ---" >> $GITHUB_STEP_SUMMARY
+      - name: "Perform the deployment into Maven-Central Artifactory"
+        if: ${{ inputs.release_type == 'PUBLIC' && release_phase == 'call-main'}}
+        run: |
+          echo "
+          ---
+          Going to perform the deployment into internal Maven-Central Artifactory
+
+          _ ... to be done ... _
+
+          Just deployed version '$(.github/th-tool.sh eval mh.currentProjectVersion)' is now available for anyone !!!
+          ---" >> $GITHUB_STEP_SUMMARY
+      - name: "Inform the developers that new SNAPSHOT-version is available"
+        if: ${{ inputs.release_phase == 'call-main-next'}}
+        run: |
+          echo "
+          ---
+          New snapshot version '$(.github/th-tool.sh eval mh.currentProjectVersion)' requires all local checkouts to be pulled and refreshed
+          ---" >> $GITHUB_STEP_SUMMARY
+      - name: "Inform the developers that new SNAPSHOT-version is available"
+        if: ${{ !(inputs.release_type == 'PUBLIC' || inputs.release_type == 'INTERNAL') }}
+        run: echo "--- this is a regular commit, that is not related to any releases ---"
+
       - name: "Checkout the 'gh-pages'-branch of repo '${{ github.ref }}' into './gh-pages-branch'"
         uses: actions/checkout@v4
         with:
@@ -118,10 +152,10 @@ jobs:
           echo "JAR_FILE_NAME=$JAR_FILE_NAME"
           tree -L 3 ../gh-pages-branch
 
-      - name: "Commit and push the content 'gh-pages-branch' (togther with some test text-files)"
+      - name: "Commit and push the content 'gh-pages-branch' (together with some test text-files)"
         run: |
           # build and install to local maven repository
-          echo "created by GitHub-Workflow '$GITHUB_WORKFLOW' action #$GITHUB_RUN_NUMBER at $(date)" >> gh-pages-branch/a.txt
+          echo "created by GitHub-Workflow '$GITHUB_WORKFLOW' action #$GITHUB_RUN_NUMBER with '${{ inputs.release_type }}/{{ inputs.release_phase }}' at $(date)" >> gh-pages-branch/a.txt
           cd gh-pages-branch
           git config user.name github-actions
           git config user.email github-actions@github.com
