@@ -98,7 +98,7 @@ jobs:
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: "Perform the deployment into Git-Hub Artifactory"
-        if: ${{ inputs.release_type == 'INTERNAL' && release_phase == 'call-main'}}
+        if: ${{ inputs && inputs.release_type == 'INTERNAL' && release_phase == 'call-main'}}
         run: |
           echo "
           ---
@@ -110,7 +110,7 @@ jobs:
           for those who has access to this internal Git-Hub Artifactory
           ---" >> $GITHUB_STEP_SUMMARY
       - name: "Perform the deployment into Maven-Central Artifactory"
-        if: ${{ inputs.release_type == 'PUBLIC' && release_phase == 'call-main'}}
+        if: ${{ inputs && inputs.release_type == 'PUBLIC' && release_phase == 'call-main'}}
         run: |
           echo "
           ---
@@ -121,14 +121,14 @@ jobs:
           Just deployed version '$(.github/th-tool.sh eval mh.currentProjectVersion)' is now available for anyone !!!
           ---" >> $GITHUB_STEP_SUMMARY
       - name: "Inform the developers that new SNAPSHOT-version is available"
-        if: ${{ inputs.release_phase == 'call-main-next'}}
+        if: ${{ inputs && inputs.release_phase == 'call-main-next'}}
         run: |
           echo "
           ---
           New snapshot version '$(.github/th-tool.sh eval mh.currentProjectVersion)' requires all local checkouts to be pulled and refreshed
           ---" >> $GITHUB_STEP_SUMMARY
       - name: "Inform the developers that new SNAPSHOT-version is available"
-        if: ${{ !(inputs.release_type == 'PUBLIC' || inputs.release_type == 'INTERNAL') }}
+        if: ${{ !inputs }}
         run: echo "--- this is a regular commit, that is not related to any releases ---"
 
       - name: "Checkout the 'gh-pages'-branch of repo '${{ github.ref }}' into './gh-pages-branch'"
