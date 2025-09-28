@@ -34,17 +34,22 @@ jobs:
           $(ls -laxo "./target")
           \`\`\`
           " >> $GITHUB_STEP_SUMMARY
+          echo "~~~~~~~~~~~~~ ( save corresponding versions into GITHUB_ENV ) ~~~~~~~~~~~~~"
+          echo "INITIAL_VERSION=$(.github/th-tool.sh eval mh.currentProjectVersion)" >> "$GITHUB_ENV"
+          echo "NEW_RELEASE_VERSION=$(.github/th-tool.sh eval mh.internalReleaseVersion)" >> "$GITHUB_ENV"
+          echo "NEW_VERSION_NEXT=$(.github/th-tool.sh eval mh.internalNextVersion)" >> "$GITHUB_ENV"
 
-      - name: "Changing the version of project to internal release, perform two commits and creating a tag"
+      - name: "Changing the version of project to internal release, creating a tag and PUSH #1"
         run: |
-          CURRENT_VERSION=$(.github/th-tool.sh eval mh.currentProjectVersion)
-          NEW_RELEASE_VERSION=$(.github/th-tool.sh eval mh.internalReleaseVersion)
-          NEW_VERSION_NEXT=$(.github/th-tool.sh eval mh.internalNextVersion)
+          # the first phase pf internal release
+          echo "(1) INITIAL_VERSION = '$INITIAL_VERSION'"
+          echo "(1) NEW_RELEASE_VERSION = '$NEW_RELEASE_VERSION'"
+          echo "(1) NEW_VERSION_NEXT = '$NEW_VERSION_NEXT'"
 
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          echo "- changing the version from '$CURRENT_VERSION' to '$NEW_RELEASE_VERSION';"
+          echo "- changing the version from '$INITIAL_VERSION' to '$NEW_RELEASE_VERSION';"
           mvn -B --quiet versions:set -DnewVersion=$NEW_RELEASE_VERSION
           echo "- going to commit the updated 'pom.xml' into git (THE FIRST COMMIT);"
           git add pom.xml
@@ -56,6 +61,16 @@ jobs:
           echo "- going to push the the first commit and tag"
           git push --force --atomic origin $GITHUB_REF $NEW_RELEASE_VERSION
 
+      - name: "Call the workflow 'on-main-push' to publish just released version"
+        uses: ./.github/workflows/on-main-push.yml
+
+      - name: "Changing the version of project to next snapshot after internal release and and PUSH #2"
+        run: |
+          # the second phase pf internal release
+          echo "(2) INITIAL_VERSION = '$INITIAL_VERSION'"
+          echo "(2) NEW_RELEASE_VERSION = '$NEW_RELEASE_VERSION'"
+          echo "(2) NEW_VERSION_NEXT = '$NEW_VERSION_NEXT'"
+          
           echo "- changing the version from '$NEW_RELEASE_VERSION' to '$NEW_VERSION_NEXT';"
           mvn -B --quiet versions:set -DnewVersion=$NEW_VERSION_NEXT
           echo "- going to commit the updated 'pom.xml' into git (THE SECOND COMMIT);"

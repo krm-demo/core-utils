@@ -9,6 +9,7 @@ on:
   workflow_run:
     workflows: ["release-internal"]
     types: [completed]
+  workflow_call:
 
 jobs:
   build:
