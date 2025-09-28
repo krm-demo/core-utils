@@ -1,3 +1,6 @@
+99af350 Working on '.github/workflows/release-internal.yml' #3
+5f8460d << new snapshot version >> 21.00.003-SNAPSHOT
+290d5eb << internal release >> 21.00.002
 6a30075 Working on '.github/workflows/release-internal.yml' #2
 13f6e3d start minor version from '001'
 6742e29 Start working on '.github/workflows/release-internal.yml' #1
