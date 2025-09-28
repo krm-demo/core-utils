@@ -60,9 +60,9 @@ jobs:
           echo '${{ toJson(github) }}' > .github/th-vars/var-github.json
           echo "~~~~~~~~~~~~~ ( dump the content of '.github/th-vars/var-github.json' into summary ) ~~~~~~~~~~~~~"
           echo "
-          Git-Hub context {{ github }} (content of \`.github/th-vars/var-github.json/` JSON-file):
+          Git-Hub context {{ github }} (content of \`.github/th-vars/var-github.json`):
           \`\`\`json
-          $(ls -laxo "./.github/th-vars/var-github.json")
+          $(cat "./.github/th-vars/var-github.json")
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: "Dump 'secrets' context into '.github/th-vars'-dir"
