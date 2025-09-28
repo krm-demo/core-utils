@@ -1,3 +1,5 @@
+6a30075 Working on '.github/workflows/release-internal.yml' #2
+13f6e3d start minor version from '001'
 6742e29 Start working on '.github/workflows/release-internal.yml' #1
 d1e95e1 Use Sl4j everywhere in th-tool #3
 89a0c5c Use Sl4j everywhere in th-tool #2
