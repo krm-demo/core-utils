@@ -66,10 +66,12 @@ jobs:
 
   # in the middle of two phases it's necessary to call the workflow 'on-main-push.yml'
   fire-on-main-push:
+    needs: release-internal
     uses: ./.github/workflows/on-main-push.yml
 
   # the second phase is about updating the project version to 'internal release' and PUSH #2
   release-internal-next:
+    needs: [release-internal, fire-on-main-push]
     runs-on: ubuntu-latest
 
     steps:
