@@ -1,4 +1,4 @@
-52c67ec << internal release >> 21.00.016
+4a7725e << new snapshot version >> 21.00.017-SNAPSHOT
 5fc952a continue with release workflows #12
 83f55ad << new snapshot version >> 21.00.016-SNAPSHOT
 d35517f continue with release workflows #11
