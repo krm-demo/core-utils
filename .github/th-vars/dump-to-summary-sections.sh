@@ -14,7 +14,7 @@ echo "going to dump JSON-files into '$GITHUB_STEP_SUMMARY':"
 for json_file in $(dirname $0)/*.json; do
   if [ -f "$json_file" ]; then
     echo "$(basename $json_file) --> '$json_file'"
-    echo "<details><summary>\`$json_file\`</summary>" >> $GITHUB_STEP_SUMMARY
+    echo "<details><summary><code>$json_file</code></summary>" >> $GITHUB_STEP_SUMMARY
     echo -e "" >> $GITHUB_STEP_SUMMARY
     echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
     cat $json_file >> $GITHUB_STEP_SUMMARY

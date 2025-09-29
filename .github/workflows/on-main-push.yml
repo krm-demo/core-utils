@@ -49,21 +49,6 @@ jobs:
           echo '${{ toJson(secrets)  }}' > .github/th-vars/var-secrets.json
           echo "~~~~~~~~~~~~~ ( dump the content of cotext-variables into summary ) ~~~~~~~~~~~~~"
           .github/th-vars/dump-to-summary-sections.sh
-          echo "
-          (<small>gonna be deleted</small>) Git-Hub context {{ \`github\` }} (content of \`./.github/th-vars/var-github.json\`):
-          \`\`\`json
-          $(cat ./.github/th-vars/var-github.json)
-          \`\`\`
-
-          (<small>gonna be deleted</small>) Git-Hub context {{ \`inputs\` }} (content of \`./.github/th-vars/var-githubInputs.json\`):
-          \`\`\`json
-          $(cat ./.github/th-vars/var-githubInputs.json)
-          \`\`\`
-
-          (<small>gonna be deleted</small>) Git-Hub context {{ \`secrets\` }} (content of \`./.github/th-vars/var-secrets.json\`):
-          \`\`\`json
-          $(cat ./.github/th-vars/var-secrets.json)
-          \`\`\`" >> $GITHUB_STEP_SUMMARY
 
       - name: "Perform the build and install using 'Apache Maven'"
         run: |
