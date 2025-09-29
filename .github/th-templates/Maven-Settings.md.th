@@ -1,0 +1,54 @@
+Each GitHub account has its onw artifactory, which is known as 
+[GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
+The most important thing for us is that artifactory could be used as an additional remote
+[maven repository](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry).
+In order to do refer this particular project - we must add following XML-tags
+into the local file `~/.m2/settings.xml` (or create such file in proper place if it was not created before):
+
+```xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <activeProfiles>
+    <activeProfile>github</activeProfile>
+  </activeProfiles>
+
+  <profiles>
+    <profile>
+      <id>github</id>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+          <id>github-krm-demo</id>
+          <name>GitHub Packages of 'krm-demo/*' repositories</name>
+          <url>https://maven.pkg.github.com/krm-demo/*</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  
+  <servers>
+    <server>
+      <id>github-krm-demo</id>
+      <username>krm-demo</username>
+      <password>ghp_L1&#8203;Eiw9V4CXLZVl0nu2QkqWDVpQE4zl0k&#8203;cYz6</password>
+    </server>
+  </servers>
+</settings>
+```
+
+> [!IMPORTANT]
+> In XML-snippet above the `<password>`-tag corresponds to GitHub-secret `MY_READONLY_TOKEN`,
+> which is not allowed to be displayed in a normal scenario, because it violates
+> the preinciples why those secrets are introduced in GitHub.
+> But here we know definitely that this _secret_ is _not a secret_, 
+> because it allows safe *readonly** access - so, masking it with zero-spaces would be OK. 
+> 
