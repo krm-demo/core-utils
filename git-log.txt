@@ -1,3 +1,4 @@
+967455a Working on 'release-XXX.yml' #1
 690abda << new snapshot version >> 21.01.002-SNAPSHOT
 59f4fc4 << new snapshot version >> 21.01.001-SNAPSHOT
 5e2d06f Start working on 'release-public.yml' #1
