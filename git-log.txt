@@ -1,4 +1,4 @@
-4e01d23 << internal release >> 21.01.003
+bbfcde9 << new snapshot version >> 21.01.004-SNAPSHOT
 cce1fb7 Working on 'release-XXX.yml' #7
 8b89855 << new snapshot version >> 21.01.003-SNAPSHOT
 5e379f2 Working on 'release-XXX.yml' #6
