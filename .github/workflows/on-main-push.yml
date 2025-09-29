@@ -79,7 +79,7 @@ jobs:
           (<small>gonna be deleted</small>) Git-Hub context {{ \`inputs\` }} (content of \`./.github/th-vars/var-githubInputs.json\`):
           \`\`\`json
           $(cat ./.github/th-vars/var-githubInputs.json)
-          \`\`\`" >> $GITHUB_STEP_SUMMARY
+          \`\`\`
 
           (<small>gonna be deleted</small>) Git-Hub context {{ \`secrets\` }} (content of \`./.github/th-vars/var-secrets.json\`):
           \`\`\`json

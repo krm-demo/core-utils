@@ -19,3 +19,8 @@
   { "some json 3": 123.456 }
   ```
   </details>
+
+(<small>gonna be deleted</small>) Git-Hub context {{ `inputs` }} (content of `./.github/th-vars/var-githubInputs.json`):
+```json
+$(cat ./.github/th-vars/var-githubInputs.json)
+```
