@@ -130,7 +130,9 @@ public class ThymeleafTool {
         logInfo("... variables with following names are available in templates --> %s",
             () -> dumpAsJsonPrettyPrint(sortedSet(varsCtx.getVariableNames().stream())));
 
+        // Here the predefined helper-objects are registered in Thymeleaf-Context
         varsCtx.setVariable("mh", new MavenHelper());
+        varsCtx.setVariable("zh", new ZeroSpaceHelper());
     }
 
     /**

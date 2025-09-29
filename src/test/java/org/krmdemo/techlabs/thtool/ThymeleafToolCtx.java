@@ -16,6 +16,10 @@ import java.util.regex.Pattern;
 import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapFromFile;
 import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
+import static org.krmdemo.techlabs.json.JacksonUtils.jsonArrFromFile;
+import static org.krmdemo.techlabs.json.JacksonUtils.jsonArrFromResource;
+import static org.krmdemo.techlabs.json.JacksonUtils.jsonObjFromFile;
+import static org.krmdemo.techlabs.json.JacksonUtils.jsonObjFromResource;
 import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromFile;
 import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromResource;
 
@@ -125,15 +129,20 @@ public class ThymeleafToolCtx extends AbstractContext {
 
     private boolean putVarFileJson(String varName, File jsonFile) {
         JsonNode jsonNode = jsonTreeFromFile(jsonFile);
-        if (jsonNode.getNodeType() == JsonNodeType.OBJECT
-            || jsonNode.getNodeType() == JsonNodeType.ARRAY) {
-            setVariable(varName, jsonNode);
-            logDebug("(loaded as JSON-resource into variable '%s') --> %s",
-                () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
-            return true;
-        } else {
-            logDebug("(not recognized neither as JSON-Object nor as JSON-Array)");
-            return false;
+        switch (jsonNode.getNodeType()) {
+            case JsonNodeType.OBJECT:
+                setVariable(varName, jsonObjFromFile(jsonFile));
+                logDebug("(JSON-file is loaded into variable '%s' as Map<String,?>) --> %s",
+                    () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
+                return true;
+            case JsonNodeType.ARRAY:
+                setVariable(varName, jsonArrFromFile(jsonFile));
+                logDebug("(JSON-file is loaded into variable '%s' as List<?>) --> %s",
+                    () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
+                return true;
+            default:
+                logDebug("(not recognized neither as JSON-Object nor as JSON-Array)");
+                return false;
         }
     }
 
@@ -152,13 +161,19 @@ public class ThymeleafToolCtx extends AbstractContext {
 
     private void putVarResourceJson(String varName, String jsonResPath) {
         JsonNode jsonNode = jsonTreeFromResource(jsonResPath);
-        if (jsonNode.getNodeType() == JsonNodeType.OBJECT
-            || jsonNode.getNodeType() == JsonNodeType.ARRAY) {
-            setVariable(varName, jsonNode);
-            logDebug("(loaded as JSON-file into variable '%s') --> %s",
-                () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
-        } else {
-            logDebug("(not recognized neither as JSON-Object nor as JSON-Array)");
+        switch (jsonNode.getNodeType()) {
+            case JsonNodeType.OBJECT:
+                setVariable(varName, jsonObjFromResource(jsonResPath));
+                logDebug("(loaded from JSON-resource into variable '%s' as Map<String,?>) --> %s",
+                    () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
+                break;
+            case JsonNodeType.ARRAY:
+                setVariable(varName, jsonArrFromResource(jsonResPath));
+                logDebug("(loaded as JSON-resource into variable '%s' as List<?>) --> %s",
+                    () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
+                break;
+            default:
+                logDebug("(not recognized neither as JSON-Object nor as JSON-Array)");
         }
     }
 

@@ -43,7 +43,7 @@ into the local file `~/.m2/settings.xml` (or create such file in proper place if
 </settings>
 ```
 - where the value of `OWNER_NAME` should be <code>krm-demo</code> (you can try another `<username>`)
-- and the value of `MY_READONLY_TOKEN` should be <code>[[${secrets.get("MY_READONLY_TOKEN")}]]</code>
+- and the value of `MY_READONLY_TOKEN` should be <code>[(${zh.mask4(secrets.get("MY_READONLY_TOKEN"))})]</code>
 
 > [!IMPORTANT]
 > In XML-snippet above the `<password>`-tag corresponds to GitHub-secret `MY_READONLY_TOKEN`,
