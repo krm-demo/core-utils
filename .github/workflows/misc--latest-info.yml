@@ -118,4 +118,7 @@ jobs:
           }' > .github/th-vars/var-testDebug.json
           cat .github/th-vars/var-testDebug.json
 
-      - run: .github/th-vars/dump-to-summary.sh
+      - run: |
+          .github/th-vars/dump-to-summary.sh
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          .github/th-vars/dump-to-summary-sections.sh
