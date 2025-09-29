@@ -1,4 +1,4 @@
-0f687e3 << internal release >> 21.02.002
+1de464e << new snapshot version >> 21.02.003-SNAPSHOT
 f1ec2bc Perform the deployment into Git-Hub artifactory #1
 65cb4fe << new snapshot version >> 21.02.002-SNAPSHOT
 da6f23d minor test changes in 'src/main/javadoc/overview.html'
