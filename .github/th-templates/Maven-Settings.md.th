@@ -50,5 +50,41 @@ into the local file `~/.m2/settings.xml` (or create such file in proper place if
 > which is not allowed to be displayed in a normal scenario, because it violates
 > the preinciples why those secrets are introduced in GitHub.
 > But here we know definitely that this _secret_ is _not a secret_, 
-> because it allows safe *readonly** access - so, masking it with zero-spaces would be OK. 
-> 
+> because it allows safe *readonly** access - so, masking it with zero-spaces would be OK.
+
+After that you can use the latest internal release of **`core-utils`** 
+in any maven/gradle project (from command-line and with IDE).
+As for using via JBang - there could be some troubles resolving 
+that additional remote maven-repository and one of single-time workaround
+is to download the corresponding manually with command `mvn dependency:get`:
+```bash
+...> mvn dependency:get -Dartifact=io.github.krm-demo:core-utils:21.02.002
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- dependency:3.7.0:get (default-cli) @ standalone-pom ---
+[INFO] Resolving io.github.krm-demo:core-utils:jar:21.02.002 with transitive dependencies
+Downloading from central: https://repo.maven.apache.org/maven2/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.pom
+Downloading from github: https://maven.pkg.github.com/krm-demo/*/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.pom
+Downloaded from github: https://maven.pkg.github.com/krm-demo/*/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.pom (23 kB at 24 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.jar
+Downloading from github: https://maven.pkg.github.com/krm-demo/*/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.jar
+Downloaded from github: https://maven.pkg.github.com/krm-demo/*/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.jar (90 kB at 134 kB/s)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.549 s
+[INFO] Finished at: 2025-09-29T14:26:04-04:00
+[INFO] ------------------------------------------------------------------------
+```
+
+Once the artifact is downloaded (installed at local maven-repository)
+JBang will recognize it and will work with it as with any other artifact: 
+
+```bash
+...> jbang io.github.krm-demo:core-utils:21.02.002
+This is a Main-class of 'core-utils' library (just a test message here)
+```

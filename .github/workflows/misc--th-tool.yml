@@ -51,6 +51,9 @@ jobs:
       - name: "Process the template '.github/th-templates/Usage.md.th' via 'th-tool':"
         run: .github/th-tool.sh process .github/th-templates/Usage.md.th --output $GITHUB_STEP_SUMMARY
 
+      - name: "Process the template '.github/th-templates/Usage.md.th' via 'th-tool':"
+        run: .github/th-tool.sh process .github/th-templates/Maven-Settings.md.th --output $GITHUB_STEP_SUMMARY
+
       - name: "Examples of simple expressions by 'th-tool':"
         run: |
           .github/th-tool.sh eval 1+2 \* 3+4 \* 5 --output ./target/expr-result-00.txt
