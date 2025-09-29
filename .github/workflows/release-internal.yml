@@ -67,6 +67,7 @@ jobs:
   call-main:
     needs: release-internal-start
     uses: ./.github/workflows/on-main-push.yml
+    secrets: inherit
     with:
       release_type: "INTERNAL"
       release_phase: "call-main"
@@ -118,6 +119,7 @@ jobs:
   call-main-next:
     needs: release-internal-next
     uses: ./.github/workflows/on-main-push.yml
+    secrets: inherit
     with:
       release_type: "INTERNAL"
       release_phase: "call-main-next"
