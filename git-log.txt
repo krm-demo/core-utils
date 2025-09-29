@@ -1,3 +1,4 @@
+9c2e926 Introduce ZeroSpaceHelper
 1de464e << new snapshot version >> 21.02.003-SNAPSHOT
 f1ec2bc Perform the deployment into Git-Hub artifactory #1
 65cb4fe << new snapshot version >> 21.02.002-SNAPSHOT
