@@ -11,6 +11,6 @@ public class CoreUtilsMain {
      * @param args unused command-line arguments
      */
     public static void main(String... args) {
-        System.out.println("This is helper Main-class of 'core-utils' library");
+        System.out.println("This is a Main-class of 'core-utils' library (just a test message here)");
     }
 }

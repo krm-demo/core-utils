@@ -65,6 +65,8 @@ jobs:
 
       - name: "Perform the deployment into Git-Hub Artifactory"
         if: ${{ inputs && inputs.release_type == 'INTERNAL' && inputs.release_phase == 'call-main'}}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           # deploymet to GitHub Artifactory
           cd main-branch
@@ -73,12 +75,12 @@ jobs:
 
           Going to perform the deployment into internal Git-Hub Artifactory
 
-          _... to be done (1) ..._
-
           Just deployed version '$(.github/th-tool.sh eval mh.currentProjectVersion)' is now available
           for those who has access to this internal Git-Hub Artifactory
           
           ---" >> $GITHUB_STEP_SUMMARY
+          mvn -B deploy
+
       - name: "Perform the deployment into Maven-Central Artifactory"
         if: ${{ inputs && inputs.release_type == 'PUBLIC' && inputs.release_phase == 'call-main'}}
         run: |
