@@ -8,7 +8,7 @@ After that, staying in the root directory of a project it's enough to type:
 ```bash
 ...> mvn clean install
 ```
-The command above installs `[[${mavenProps.get("maven-project.artifact")}]]`-library 
+The command above installs **`[[${mavenProps.get("maven-project.artifact")}]]`**-library 
 in the local maven-repository, and it becomes available for usage described below...
 
 ### [Maven](https://maven.apache.org/)
