@@ -1,5 +1,6 @@
 # Git-Hub Workflow generated files
-.github/vars/*.md
+.github/th-vars/*.md
+.github/th-templates/*.md
 
 # Node artifact files
 node_modules/

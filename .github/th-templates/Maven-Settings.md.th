@@ -42,13 +42,13 @@ into the local file `~/.m2/settings.xml` (or create such file in proper place if
   </servers>
 </settings>
 ```
-- where `OWNER_NAME`-tag is <code>krm-demo</code>
-- and `MY_READONLY_TOKEN`-tag is <code>ghp_L1&#8203;Eiw9V4CXLZVl0nu2QkqWDVpQE4zl0k&#8203;cYz6</code>
+- where the value of `OWNER_NAME` should be <code>krm-demo</code> (you can try another `<username>`)
+- and the value of `MY_READONLY_TOKEN` should be <code>[[${secrets.get("MY_READONLY_TOKEN")}]]</code>
 
 > [!IMPORTANT]
 > In XML-snippet above the `<password>`-tag corresponds to GitHub-secret `MY_READONLY_TOKEN`,
 > which is not allowed to be displayed in a normal scenario, because it violates
-> the preinciples why those secrets are introduced in GitHub.
+> the principles why those secrets are introduced in GitHub.
 > But here we know definitely that this _secret_ is _not a secret_, 
 > because it allows safe *readonly** access - so, masking it with zero-spaces would be OK.
 

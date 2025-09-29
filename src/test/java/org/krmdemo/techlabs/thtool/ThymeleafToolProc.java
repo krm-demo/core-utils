@@ -114,6 +114,9 @@ public class ThymeleafToolProc implements Callable<Integer> {
             logDebug("... %s ...", () -> "~".repeat(100));
             if (outputLocation != null) {
                 logInfo("... output into location like '%s' is not supported yet :-( ...");
+            } else {
+                // The only hit to standard output !!!
+                System.out.print(outputContent);
             }
         }
         return true;
