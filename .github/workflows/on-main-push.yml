@@ -52,23 +52,23 @@ jobs:
             - <details>
                 <summary>Git-Hub context-variable {{ \`github\` }}</summary>
                 
-                ```json
+                \`\`\`json
                 $(cat ./.github/th-vars/var-github.json)
-                ```
+                \`\`\`
               </details>
             - <details>
                 <summary>Git-Hub context-variable {{ \`inputs\` }}</summary>
                 
-                ```json
+                \`\`\`json
                 $(cat ./.github/th-vars/var-githubInputs.json)
-                ```
+                \`\`\`
               </details>
             - <details>
                 <summary>Git-Hub context-variable {{ \`secrets\` }}</summary>
                 
-                ```json
+                \`\`\`json
                 $(cat ./.github/th-vars/var-secrets.json)
-                ```
+                \`\`\`
               </details>
 
           (<small>gonna be deleted</small>) Git-Hub context {{ \`github\` }} (content of \`./.github/th-vars/var-github.json\`):
