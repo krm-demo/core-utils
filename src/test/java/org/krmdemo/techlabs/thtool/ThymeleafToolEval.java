@@ -1,8 +1,10 @@
 package org.krmdemo.techlabs.thtool;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import picocli.CommandLine;
+import picocli.CommandLine.Help.Ansi;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.ParentCommand;
@@ -95,6 +97,20 @@ public class ThymeleafToolEval implements Callable<Integer> {
             logDebug(outputContent);
             logDebug("... %s ...", () -> "-".repeat(100));
             // The only hit to standard output !!!
+            if (StringUtils.isEmpty(outputContent)) {
+                outputContent = Ansi.AUTO.string("""
+                    @|red << the result is empty>> |@
+                    @|black,faint,bold most probably because the variable name is wrong|@
+                    """);
+            } else if (StringUtils.isEmpty(outputContent)) {
+                outputContent = Ansi.AUTO.string("""
+                    @|red << the result is blank>> |@
+                    @|black,faint,bold that looks very suspicious|@
+                    """);
+            } else if (outputContent.equals("{}")) {
+                outputContent += Ansi.AUTO.string(
+                    " @|black,faint,bold << the result is empty JSON-Object>>|@\n");
+            }
             System.out.print(outputContent);
         }
         return 0;
