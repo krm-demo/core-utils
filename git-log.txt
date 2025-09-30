@@ -1,4 +1,4 @@
-bc08f42 << public release >> 21.02
+de70e38 << new snapshot version >> 21.03.001-SNAPSHOT
 e6a3188 << new snapshot version >> 21.02.005-SNAPSHOT
 cc900bc Process 'Usage-XXX.md.th' templates in 'on-main-push' workflow #2
 558f112 Process 'Usage-XXX.md.th' templates in 'on-main-push' workflow #1
