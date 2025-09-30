@@ -1,3 +1,4 @@
+8a48bc2 improve the help/usage of 'th-tool' #3
 850ffd9 improve the help/usage of 'th-tool' #2
 c6d50fd improve the help/usage of 'th-tool' #1
 145f6af Introduce (split the original) 3 versions of 'Usage-XXX.md.th' #2
