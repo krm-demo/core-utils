@@ -1,3 +1,12 @@
+This particular version of the project `[[${mh.currentProjectVersion}]]` is a _SNAPSHOT_-version, which consists of:
+- major version `[[${mh.majorVersion}]]` (that corresponds to minimum available version of JDK);
+- minor version `[[${mh.minorVersion}]]` (the ordinal number of _PUBLIC_-release);
+- incremental version  `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
+- the qualifier `[[${mh.versionQualifier}]]` means that it's a _SNAPSHOT_-version (not released yet in any kind)
+
+> [!IMPORTANT]
+> It's highly recommended to use the latest _PUBLIC_-release version, because all others are either outdated or not stable yet
+
 ## Working with SNAPSHOT-version of `[[${mavenProps.get("maven-project.artifact")}]]`-library
 
 > [!NOTE]

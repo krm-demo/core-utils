@@ -1,3 +1,11 @@
+This particular version of the project `[[${mh.currentProjectVersion}]]` is an _INTERNAL_-release version, which consists of
+- major version `[[${mh.majorVersion}]]` (that corresponds to minimum available version of JDK);
+- minor version `[[${mh.minorVersion}]]` (the ordinal number of _PUBLIC_-release);
+- incremental version  `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
+
+> [!IMPORTANT]
+> It's highly recommended to use the latest _PUBLIC_-release version, because all others are either outdated or not stable yet
+
 ## Installation and Usage of INTERNAL-release of `[[${mavenProps.get("maven-project.artifact")}]]`-library
 
 > [!NOTE]
@@ -12,11 +20,10 @@ from corresponding `th-tool` templates (they have `*.md.th` extensiom) via GitHu
 Anyway it's possible to play with _INTERNAL_-release binaries, but in order to do that
 some minor changes should be done in local [`~/.m2/maven-settings`-file](https://maven.apache.org/settings.html).
 
-### Use GitHUb Packages as an additional remote maven-repository
+### Use [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) as an additional remote maven-repository
 Each GitHub account has its onw artifactory, which is known as [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
-The most important thing for us is that artifactory could be used as an additional remote [maven repository](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry).
-In order to do refer this particular project - we must add following XML-tags
-into the local file [`~/.m2/maven-settings`-file](https://maven.apache.org/settings.html) 
+The most important thing for us is that artifactory could be used as an additional [remote maven repository](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry).
+In order to refer this particular project - we must add following XML-tags into the local file [`~/.m2/maven-settings`-file](https://maven.apache.org/settings.html)
 (or create such file in proper place if it was not created before):
 
 ```xml
@@ -67,8 +74,8 @@ into the local file [`~/.m2/maven-settings`-file](https://maven.apache.org/setti
 > In the list above the value of GitHub-secret `MY_READONLY_TOKEN`is displayed _un-masked_ (no asterisks as usually),
 > which is not allowed to be displayed in a normal scenario, because it violates
 > the principles why those secrets are introduced at all (nobody must be able to see and to know them).
-> But if we know definitely that this _secret_ is _not a secret_, 
-> like here where we give the users the safe and *readonly** access - it would be OK to _un-mask_ the value.
+> But if we know definitely that this _secret_ is _not a secret_ (like here where we intentionally give the users the safe and **readonly** access), 
+> it would be OK to _un-mask_ those values and make them readable.
  
 > [!CAUTION] 
 > **AS FOR `github_token` AND `MY_ADMIN_TOKEN` - THEY MUST BE RE-MASKED AND UN-OBFUSCATED** 

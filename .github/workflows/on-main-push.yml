@@ -100,12 +100,6 @@ jobs:
         run: |
           echo "--- handle the phase when new SNAPSHOT-version is created: ---"
           cd main-branch
-          echo "
-          ---
-
-          New snapshot version '$(.github/th-tool.sh eval mh.currentProjectVersion)' requires all local checkouts to be pulled and refreshed
-
-          ---" >> $GITHUB_STEP_SUMMARY
           # Process the template '.github/th-templates/Usage-SNAPSHOT.md.th' via 'th-tool':
           .github/th-tool.sh process .github/th-templates/Usage-SNAPSHOT.md.th --output $GITHUB_STEP_SUMMARY
 

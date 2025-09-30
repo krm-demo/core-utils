@@ -53,8 +53,15 @@ jobs:
 
           echo "- changing the version from '$INITIAL_VERSION' to '$NEW_RELEASE_VERSION';"
           mvn -B --quiet versions:set -DnewVersion=$NEW_RELEASE_VERSION
+
           echo "- going to commit the updated 'pom.xml' into git (THE FIRST COMMIT);"
           git add pom.xml
+
+          echo "- render the root 'README.md' file for the just created INTERNAL-release"
+          .github/th-tool.sh process .github/th-templates/ROOT-Readme.md.th --output ./README.md
+          git add README.md
+
+          echo "- commit the just added changes:"
           git commit -m "<< internal release >> $NEW_RELEASE_VERSION"
 
           echo "- going to create a tag '$NEW_RELEASE_VERSION';"
@@ -108,8 +115,15 @@ jobs:
 
           echo "- changing the version from '$NEW_RELEASE_VERSION' to '$NEW_VERSION_NEXT';"
           mvn -B --quiet versions:set -DnewVersion=$NEW_VERSION_NEXT
+
           echo "- going to commit the updated 'pom.xml' into git (THE SECOND COMMIT);"
           git add pom.xml
+
+          echo "- render the root 'README.md' file for the just created SNAPSHOT-version"
+          .github/th-tool.sh process .github/th-templates/ROOT-Readme.md.th --output ./README.md
+          git add README.md
+
+          echo "- commit the just added changes:"
           git commit -m "<< new snapshot version >> $NEW_VERSION_NEXT"
 
           echo "- going to push the second commit"

@@ -1,3 +1,10 @@
+This particular version of the project `[[${mh.currentProjectVersion}]]` is an _INTERNAL_-release version, which consists of
+- major version `[[${mh.majorVersion}]]` (that corresponds to minimum available version of JDK);
+- minor version `[[${mh.minorVersion}]]` (the ordinal number of _PUBLIC_-release);
+
+> [!TIP]
+> TODO: check whether this _PUBLIC_-release is the latest one and render the warning if it's not
+
 ## Usage of `[[${mavenProps.get("maven-project.artifact")}]]`-library
 
 > [!NOTE]
