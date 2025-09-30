@@ -1,3 +1,5 @@
+cc900bc Process 'Usage-XXX.md.th' templates in 'on-main-push' workflow #2
+558f112 Process 'Usage-XXX.md.th' templates in 'on-main-push' workflow #1
 c49e85c << new snapshot version >> 21.02.004-SNAPSHOT
 8a48bc2 improve the help/usage of 'th-tool' #3
 850ffd9 improve the help/usage of 'th-tool' #2
