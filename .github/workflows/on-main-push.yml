@@ -114,6 +114,7 @@ jobs:
         if: ${{ inputs.release_type != 'INTERNAL' && inputs.release_type != 'PUBLIC' }}
         run: |
           echo "--- this is a regular commit, that is not related to any releases ---"
+          cd main-branch
           # Process the template '.github/th-templates/Usage-SNAPSHOT.md.th' via 'th-tool':
           .github/th-tool.sh process .github/th-templates/Usage-SNAPSHOT.md.th --output $GITHUB_STEP_SUMMARY
 
