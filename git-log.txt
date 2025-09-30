@@ -1,3 +1,4 @@
+a1d6e46 << internal release >> 21.04.001
 dca9819 playing with conditional fragments for 'README.md' #1
 4d91029 << new snapshot version >> 21.04.001-SNAPSHOT
 339ba47 << new snapshot version >> 21.03.002-SNAPSHOT
