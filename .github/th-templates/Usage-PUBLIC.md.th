@@ -1,9 +1,9 @@
 ## Usage of `[[${mavenProps.get("maven-project.artifact")}]]`-library
 
-> [NOTE!]
+> [!NOTE]
 > The _PUBLIC_-release version has only 2 integer parts (_major_ and _minor_) parts **without** _incremental_ part and suffix `-SNAPSHOT`.
 > It's built and deployed into [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
-> artifatcory as a result of manual execution of GitHub workflow [`release-public`](/actions/workflows/release-public.yml).
+> artifatcory as a result of manual execution of GitHub workflow [`release-public`]([[${github.event.repository.html_url}]]/actions/workflows/release-public.yml).
 
 This version is deployed into public [maven central repository](https://central.sonatype.com/) - so, it's available for usage
 without additional downloading steps or local builds. As for Java-Doc it's either available here or will be automatically downloaded by your favorite IDE.

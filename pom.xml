@@ -346,29 +346,6 @@
               <mainClass>${th-tool-class-name}</mainClass>
             </configuration>
           </execution>
-          <execution>
-            <!-- the same as above, but force output ANSI ESC-sequences  -->
-            <id>th-tool{force.ansi}</id>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <configuration>
-              <includeProjectDependencies>true</includeProjectDependencies>
-              <includePluginDependencies>false</includePluginDependencies>
-              <classpathScope>test</classpathScope>
-              <mainClass>${th-tool-class-name}</mainClass>
-              <systemProperties>
-                <systemProperty>
-                  <key>jansi.force</key>
-                  <value>true</value>
-                </systemProperty>
-                <systemProperty>
-                  <key>picocli.ansi</key>
-                  <value>true</value>
-                </systemProperty>
-              </systemProperties>
-            </configuration>
-          </execution>
         </executions>
       </plugin>
 
