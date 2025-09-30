@@ -1,4 +1,4 @@
-45fa7cc << internal release >> 21.02.003
+c49e85c << new snapshot version >> 21.02.004-SNAPSHOT
 8a48bc2 improve the help/usage of 'th-tool' #3
 850ffd9 improve the help/usage of 'th-tool' #2
 c6d50fd improve the help/usage of 'th-tool' #1
