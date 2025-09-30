@@ -21,11 +21,11 @@ import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
 @CommandLine.Command(name = "eval",
     mixinStandardHelpOptions = true, usageHelpWidth = 140,
     description = """
-        Evaluates the Thymeleaf-Expression and print the result into the standard output.
-        If the expression contains quotes, brackets and other characters, which are sensitive for shell-script,
-        the whole expression (or its parts) is required to be escaped like following:
-        - example one;
-        - example two.""" // TODO: <-- provide arithmetic and props-access examples
+        Evaluates the Thymeleaf-Expression and print the result into the standard output,
+        like such expression would be inlined into Thymeleaf-Template like '@|cyan [[$${...)}]]|@'
+        or its unescaped version '@|cyan [($${...)})]|@' (for symbols like @|green &|@, @|green >|@, @|green <|@, ...)
+        or as an attribute-value like '@|cyan <xxx th:text="$${...}"></xxx>|@'
+        """
 )
 @Slf4j
 public class ThymeleafToolEval implements Callable<Integer> {
@@ -40,9 +40,20 @@ public class ThymeleafToolEval implements Callable<Integer> {
     File outputFile;
 
     @Parameters(arity="0..*", paramLabel="expression", description = """
-        the tail of command line is treated as the expression to evaluate
-        like it was inlined into Thymeleaf-Template like '@|cyan [[$${...)}]]|@',
-        or as an attribute-value like '@|cyan <xxx th:text="$${...}"></xxx>|@'""")
+        the tail of command line is treated as the expression to evaluate.
+        If the expression contains quotes, brackets and other characters, which are sensitive for shell-script,
+        the whole expression (or its parts) is required to be escaped like following:
+        - @|italic th-tool eveal|@ @|cyan $'\\' "Hello, " + "World." \\''|@ - the result is @|green Hello, World.|@;
+        - @|italic th-tool eveal|@ @|cyan $'\\' "Hello, " + "World \\\\u0021 \\\\u0021\\\\u0021" \\''|@ - the result is @|green Hello, World !!!|@;
+        - @|italic th-tool eveal|@ @|cyan $'\\' "\\\\\\\\inside back-slashes\\\\\\\\" \\''|@ - the result is @|green \\inside back-slashes\\|@;
+        - @|italic th-tool eveal|@ @|cyan $'\\' 1+2 * 3+4 * 5 \\''|@ - the result is @|green 27|@;
+        - @|italic th-tool eveal|@ @|cyan $'\\' mavenProps["maven-project.artifact"] \\''|@ - the result is @|green core-utils|@;
+        but in most casess and when using the same expression in templates such escaping is not necessary:
+        - @|italic th-tool eveal|@ @|cyan 20 - 30|@ - the result is @|green -10|@;
+        - @|italic th-tool eveal|@ @|cyan 20 + 30|@ - the result is @|green 50|@;
+        - @|italic th-tool eveal|@ @|cyan mh.resourcePath |@ - the result is @|green /META-INF/maven/maven-project.properties|@;
+        """
+    )
     List<String> expressionsArgs;;
 
     @Option(names = {"--help"}, usageHelp = true,
