@@ -22,8 +22,9 @@ import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
 @Command(name = "process",
     mixinStandardHelpOptions = true, usageHelpWidth = 140,
     description = """
-        Process the input-templates by Thymeleaf-Engine and OGNL.
-        More detailed information for this template engine is available at @|cyan https://www.thymeleaf.org/|@"""
+        Process the @|italic th-tool|@-templates at print the rendering result in standard output or into file
+        More detailed information for this template engine is available at @|cyan https://www.thymeleaf.org/|@
+        """
 )
 @Slf4j
 public class ThymeleafToolProc implements Callable<Integer> {

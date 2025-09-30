@@ -21,7 +21,7 @@ import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
 @CommandLine.Command(name = "eval",
     mixinStandardHelpOptions = true, usageHelpWidth = 140,
     description = """
-        Evaluates the Thymeleaf-Expression and print the result into the standard output,
+        Evaluates the Thymeleaf-Expression and print the result in standard output or into file,
         like such expression would be inlined into Thymeleaf-Template like '@|cyan [[$${...)}]]|@'
         or its unescaped version '@|cyan [($${...)})]|@' (for symbols like @|green &|@, @|green >|@, @|green <|@, ...)
         or as an attribute-value like '@|cyan <xxx th:text="$${...}"></xxx>|@'
