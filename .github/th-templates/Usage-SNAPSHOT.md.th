@@ -1,6 +1,14 @@
-## Installation and Usage of `[[${mavenProps.get("maven-project.artifact")}]]`-library
+## Working with SNAPSHOT-version of `[[${mavenProps.get("maven-project.artifact")}]]`-library
 
-_Snapshot_-versions are available only after cloning the git-repo locally and
+> [NOTE!]
+> The SNAPSHOT-version has 3 integer parts (_major_, _minor_ and _incremental_) followed by the suffix `-SNAPSHOT`.
+> It's built by GitHub workflow [`on-main-push`](/actions/workflows/on-main-push.yml) on every `git push` into `main` branch.
+
+The JavaDoc is generated and project-site at [GitHub Pages](https://docs.github.com/en/pages) is updated,
+but **nothing is deployed** neither to [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
+artifactory nor to [maven central repository](https://central.sonatype.com/).
+
+The binaries of _Snapshot_-version are available only after cloning the git-repo locally and
 checking out the proper branch (the most recent snapshot is in `main`-branch).
 In order to build the project it's recommended to use [sdkman](https://sdkman.io/) to install the latest version
 of [java](https://sdkman.io/jdks/) and the latest version of [maven](https://sdkman.io/sdks/maven/). 
@@ -43,11 +51,28 @@ in either `build.gradle` or `build.gradle.kts` like following:
 ```
 
 ### [JBang](https://www.jbang.dev/)
-> [!TIP]
-> TODO: to be described...
+
+If you don't have [JBang](https://www.jbang.dev/) installed - it's very easy to do
+either following by [instructions at their site](https://www.jbang.dev/download/) 
+or using [sdkman](https://sdkman.io/sdks/jbang/). The easiest way to verify that
+both [JBang](https://www.jbang.dev/) and **`[[${mavenProps.get("maven-project.artifact")}]]`**-library 
+are properly installed is to execute following command:
+
+```bash
+...> jbang [[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]
+This is a Main-class of 'core-utils' library (just a test message here)
+```
+You must see quite the same output as above. The versions and other detailed information could also be verified in such way.
+
+Then you can create your own jbang-scripts using following examples:
+- JBang-script to see environment variables
+- JBang-script to see Java system-properties
+- JBang-script to see the detailed information of CLASSPATH at runtime
+- ... some other very useful and helpful scripts ...
+- 
 
 ---
-
 > [!TIP]
-> TODO: insert `Maven-Settings.md.th` as fragment 
+> TODO: examples to be provided... (maybe specific for _SNAPSHOT_-versions)
+---
 

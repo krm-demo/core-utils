@@ -48,12 +48,6 @@ jobs:
       - name: "Compile 'th-tool' (no tests and no JARs and JavaDoc):"
         run: mvn test-compile
 
-      - name: "Process the template '.github/th-templates/Usage.md.th' via 'th-tool':"
-        run: .github/th-tool.sh process .github/th-templates/Usage.md.th --output $GITHUB_STEP_SUMMARY
-
-      - name: "Process the template '.github/th-templates/Usage.md.th' via 'th-tool':"
-        run: .github/th-tool.sh process .github/th-templates/Maven-Settings.md.th --output $GITHUB_STEP_SUMMARY
-
       - name: "Examples of simple expressions by 'th-tool':"
         run: |
           .github/th-tool.sh eval 1+2 \* 3+4 \* 5 --output ./target/expr-result-00.txt
@@ -109,3 +103,13 @@ jobs:
           echo "| \`mh.internalNextVersion\` | \`$(.github/th-tool.sh eval mh.internalNextVersion)\` | The next development version **after internal release**|" >> $GITHUB_STEP_SUMMARY
           echo "| \`mh.publicReleaseVersion\` | \`$(.github/th-tool.sh eval mh.publicReleaseVersion)\` | The version of next **public release**|" >> $GITHUB_STEP_SUMMARY
           echo "| \`mh.publicNextVersion\` | \`$(.github/th-tool.sh eval mh.publicNextVersion)\` | The next development version **after public release**|" >> $GITHUB_STEP_SUMMARY
+
+      - name: "Process the template '.github/th-templates/Usage-SNAPSHOT.md.th' via 'th-tool':"
+        run: .github/th-tool.sh process .github/th-templates/Usage-SNAPSHOT.md.th --output $GITHUB_STEP_SUMMARY
+
+      - name: "Process the template '.github/th-templates/Usage-INTERNAL.md.th' via 'th-tool':"
+        run: .github/th-tool.sh process .github/th-templates/Usage-INTERNAL.md.th --output $GITHUB_STEP_SUMMARY
+
+      - name: "Process the template '.github/th-templates/Usage-PUBLIC.md.th' via 'th-tool':"
+        run: .github/th-tool.sh process .github/th-templates/Usage-PUBLIC.md.th --output $GITHUB_STEP_SUMMARY
+
