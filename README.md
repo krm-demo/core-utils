@@ -4,7 +4,7 @@
 [![Java-Doc](https://img.shields.io/badge/GH--Pages-core--utils.x.y.z-blue)](https://krm-demo.github.io/core-utils/)
 [![Java-Doc](https://img.shields.io/badge/GH--Pages-core--utils.x.y.z.SNAPSHOT-blue)](https://krm-demo.github.io/core-utils/)
 
-# <u>`core-utils:21.03.001-SNAPSHOT`</u>
+# <u>`core-utils:21.03.002-SNAPSHOT`</u>
 
 This Java-library contains utility-classes to simplify working with core-java API (streams, collections, input-output).
 It was initially created as a core and reusable part of **`th-tool`** and some features and approaches could be
