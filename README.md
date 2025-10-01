@@ -27,6 +27,6 @@ but the latest relevant versions (with relation to the current one) are:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-public`](https://github.com/krm-demo/core-utils/actions/runs/18173979650).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18174372597).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
