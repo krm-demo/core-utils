@@ -1,5 +1,19 @@
 This layout contains two inline fragments, included via `~{...}` ( someIntProp = [( ${this.someIntProp} )] ):
 - inlineFragmentA = "[( ${this.inlineFragmentA} )]";
 - inlineFragmentB = "[( ${this.inlineFragmentB} )]";
+- staticFragmentName = "[( ${this.staticFragmentName} )]";
 - <th:block th:replace="~{.github/th-test-inline/test-inline-fragment-A.md.th}"> !!! Error Inline A !!!</th:block>
 - <th:block th:insert= "~{.github/th-test-inline/test-inline-fragment-B.md.th}"> !!! Error Inline B !!!</th:block>
+. . . . .
+- <th:block th:replace="~{${'.github/th-test-inline/test-inline-fragment-A.md.th'}}"> !!! Error Inline A !!!</th:block>
+- <th:block th:insert= "~{${'.github/th-test-inline/test-inline-fragment-B.md.th'}}"> !!! Error Inline B !!!</th:block>
+. . . . .
+- <th:block th:replace="~{${'.github/th-test-inline/' + this.inlineFragmentA}}"> !!! Error Inline A !!!</th:block>
+- <th:block th:insert= "~{${'.github/th-test-inline/' + this.inlineFragmentB}}"> !!! Error Inline B !!!</th:block>
+. . . . . just inline with direct path: . . . . .
+[( ~{.github/th-test-inline/test-static-fragment.md} )]
+. . . . . just inline with calculated path: . . . . .
+- [( ~{${'.github/th-test-inline/' + 'test-static-fragment.md'}} )]
+. . . . . using some variable in calculation the path: . . . . .
+- [( ~{${'.github/th-test-inline/' + this.staticFragmentName}} )]
+. . . . .

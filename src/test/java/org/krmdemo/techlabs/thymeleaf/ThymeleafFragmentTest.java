@@ -27,6 +27,7 @@ public class ThymeleafFragmentTest {
 
     String inlineFragmentA = "test-inline-fragment-A.md.th";
     String inlineFragmentB = "test-inline-fragment-B.md.th";
+    String staticFragmentName = "test-static-fragment.md";
 
     @Test
     void testBlock_FragmentA() {
@@ -154,8 +155,25 @@ public class ThymeleafFragmentTest {
             This layout contains two inline fragments, included via `~{...}` ( someIntProp = 1234 ):
             - inlineFragmentA = "test-inline-fragment-A.md.th";
             - inlineFragmentB = "test-inline-fragment-B.md.th";
+            - staticFragmentName = "test-static-fragment.md";
             - This is the inline **fragment-`A`**: 2 + 3 = 5
             - This is the inline **fragment-`B`**: 3 * someIntProp = 3702
+            . . . . .
+            - This is the inline **fragment-`A`**: 2 + 3 = 5
+            - This is the inline **fragment-`B`**: 3 * someIntProp = 3702
+            . . . . .
+            - This is the inline **fragment-`A`**: 2 + 3 = 5
+            - This is the inline **fragment-`B`**: 3 * someIntProp = 3702
+            . . . . . just inline with direct path: . . . . .
+            This is a **static-fragment** (from `.github/th-test-inline/test-static-fragment.md`),\s
+            that does not contain anything to be process with Thymeleaf-Engine
+            . . . . . just inline with calculated path: . . . . .
+            - This is a **static-fragment** (from `.github/th-test-inline/test-static-fragment.md`),\s
+            that does not contain anything to be process with Thymeleaf-Engine
+            . . . . . using some variable in calculation the path: . . . . .
+            - This is a **static-fragment** (from `.github/th-test-inline/test-static-fragment.md`),\s
+            that does not contain anything to be process with Thymeleaf-Engine
+            . . . . .
             """);
     }
 
