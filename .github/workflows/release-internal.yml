@@ -58,23 +58,23 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          echo "- changing the version from '$INITIAL_VERSION' to '$NEW_RELEASE_VERSION';"
+          echo "- [1] changing the version from '$INITIAL_VERSION' to '$NEW_RELEASE_VERSION';"
           mvn -B --quiet versions:set -DnewVersion=$NEW_RELEASE_VERSION
 
-          echo "- going to commit the updated 'pom.xml' into git (THE FIRST COMMIT);"
+          echo "- [1] going to commit the updated 'pom.xml' into git (THE FIRST COMMIT);"
           git add pom.xml
 
-          echo "- render the root 'README.md' file for the just created INTERNAL-release"
+          echo "- [1] render the root 'README.md' file for the just created INTERNAL-release"
           .github/th-tool.sh process .github/th-templates/ROOT-Readme.md.th --output ./README.md
           git add README.md
 
-          echo "- commit the just added changes:"
+          echo "- [1] commit the just added changes:"
           git commit -m "<< internal release >> $NEW_RELEASE_VERSION"
 
-          echo "- going to create a tag '$NEW_RELEASE_VERSION';"
+          echo "- [1] going to create a tag '$NEW_RELEASE_VERSION';"
           git tag $NEW_RELEASE_VERSION
 
-          echo "- going to push the the first-phase commit and tag"
+          echo "- [1] going to push the the first-phase commit and tag"
           git push --atomic origin $GITHUB_REF $NEW_RELEASE_VERSION
 
   # call the workflow 'on-main-push.yml' to build and publish the internal release
@@ -127,18 +127,21 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          echo "- changing the version from '$NEW_RELEASE_VERSION' to '$NEW_VERSION_NEXT';"
+          echo "- [2] pull the latest changes after previous atomic-push
+          git pull origin
+
+          echo "- [2] changing the version from '$NEW_RELEASE_VERSION' to '$NEW_VERSION_NEXT';"
           mvn -B --quiet versions:set -DnewVersion=$NEW_VERSION_NEXT
           mvn -B --quiet clean test-compile
 
-          echo "- going to commit the updated 'pom.xml' into git (THE SECOND COMMIT);"
+          echo "- [2] going to commit the updated 'pom.xml' into git (THE SECOND COMMIT);"
           git add pom.xml
 
-          echo "- render the root 'README.md' file for the just created SNAPSHOT-version"
+          echo "- [2] render the root 'README.md' file for the just created SNAPSHOT-version"
           .github/th-tool.sh process .github/th-templates/ROOT-Readme.md.th --output ./README.md
           git add README.md
 
-          echo "- commit the just added changes:"
+          echo "- [2] commit the just added changes:"
           git commit -m "<< new snapshot version >> $NEW_VERSION_NEXT"
 
           echo "- going to push the second-phase commit"
