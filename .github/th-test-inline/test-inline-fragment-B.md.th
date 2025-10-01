@@ -1,1 +1,1 @@
-<th:block th:fragment="test">This is the **fragment-`B`**: 3 * someIntProp = [( ${ 3 * this.someIntProp } )]</th:block>
+This is the inline **fragment-`B`**: 3 * someIntProp = [( ${ 3 * this.someIntProp } )]

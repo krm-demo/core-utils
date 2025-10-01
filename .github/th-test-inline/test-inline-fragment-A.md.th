@@ -1,1 +1,1 @@
-<th:block th:fragment="test">This is the **fragment-`A`**: 2 + 3 = [( ${ 2 + 3 } )]</th:block>
+This is the inline **fragment-`A`**: 2 + 3 = [( ${ 2 + 3 } )]

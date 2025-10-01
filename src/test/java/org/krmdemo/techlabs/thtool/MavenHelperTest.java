@@ -17,6 +17,36 @@ public class MavenHelperTest {
         "/org/krmdemo/techlabs/core/thtool/test-03--maven-project.properties");
 
     @Test
+    void testResourcePath() {
+        assertThat(mavenHelper.getResourcePath())
+            .endsWith("test-01--maven-project.properties");
+        assertThat(mavenHelperInternal.getResourcePath())
+            .endsWith("test-02--maven-project.properties");
+        assertThat(mavenHelperPublic.getResourcePath())
+            .endsWith("test-03--maven-project.properties");
+    }
+
+    @Test
+    void testBadgeName() {
+        assertThat(mavenHelper.getProjectBadgeName())
+            .isEqualTo("core--utils:21.0.2--SNAPSHOT");
+        assertThat(mavenHelperInternal.getProjectBadgeName())
+            .isEqualTo("core--utils:21.0.25");
+        assertThat(mavenHelperPublic.getProjectBadgeName())
+            .isEqualTo("core--utils--la--la--la:21.0");
+    }
+
+    @Test
+    void testCatalogName() {
+        assertThat(mavenHelper.getProjectCatalogName())
+            .isEqualTo("core-utils-21.0.2-SNAPSHOT");
+        assertThat(mavenHelperInternal.getProjectCatalogName())
+            .isEqualTo("core-utils-21.0.25");
+        assertThat(mavenHelperPublic.getProjectCatalogName())
+            .isEqualTo("core-utils-la-la-la-21.0");
+    }
+
+    @Test
     void testCurrentVersions() {
         assertThat(mavenHelper.getCalculatedProjectVersion())
             .startsWith(mavenHelper.getInternalReleaseVersion());
@@ -82,18 +112,18 @@ public class MavenHelperTest {
         assertThat(mavenHelperPublic.getCurrentProjectVersion())
             .isEqualTo("21.0");
         assertThat(mavenHelperPublic.getCalculatedProjectVersion())
-            .isEqualTo("21.00.000-SNAPSHOT");
+            .isEqualTo("21.15.000-SNAPSHOT");
         assertThat(mavenHelperPublic.getInternalReleaseVersion())
-            .isEqualTo("21.00.000");
+            .isEqualTo("21.15.000");
         assertThat(mavenHelperPublic.getPublicReleaseVersion())
-            .isEqualTo("21.00");
+            .isEqualTo("21.15");
     }
 
     @Test
     void testNextVersions_Public() {
         assertThat(mavenHelperPublic.getInternalNextVersion())
-            .isEqualTo("21.00.001-SNAPSHOT");
+            .isEqualTo("21.15.001-SNAPSHOT");
         assertThat(mavenHelperPublic.getPublicNextVersion())
-            .isEqualTo("21.01.001-SNAPSHOT");
+            .isEqualTo("21.16.001-SNAPSHOT");
     }
 }

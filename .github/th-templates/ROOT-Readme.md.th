@@ -2,7 +2,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 
 [![Release-Catalog](https://img.shields.io/badge/GH--Pages-Release_Catalog-blue)](https://krm-demo.github.io/core-utils/)
-[![Project-Site](https://img.shields.io/badge/GH--Pages-core--utils:[[${mavenProps.get("maven-project.version")}]]-blue)](https://krm-demo.github.io/core-utils/[[${mavenProps.get("maven-project.artifact")}]]-[[${mavenProps.get("maven-project.version")}]])
+[![Project-Site](https://img.shields.io/badge/GH--Pages-core--utils:[[${mh.projectBadgeName}]]-blue)](https://krm-demo.github.io/core-utils/[[${mh.projectCatalogName}]])
 
 # <u>[[${mavenProps.get("maven-project.artifact")}]]</u>
 
