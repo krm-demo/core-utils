@@ -1,3 +1,4 @@
+dfd063f improve thymeleaf-tests #2
 d273017 improve thymeleaf-tests #1
 7c375ff << new snapshot version >> 21.04.002-SNAPSHOT
 dca9819 playing with conditional fragments for 'README.md' #1
