@@ -127,7 +127,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          echo "- [2] pull the latest changes after previous atomic-push
+          echo "- [2] pull the latest changes after previous atomic-push"
           git pull origin
 
           echo "- [2] changing the version from '$NEW_RELEASE_VERSION' to '$NEW_VERSION_NEXT';"

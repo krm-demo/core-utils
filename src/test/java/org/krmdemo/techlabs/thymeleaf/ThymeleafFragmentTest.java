@@ -67,7 +67,7 @@ public class ThymeleafFragmentTest {
     }
 
     @Test
-    void testBlockLayout_SimpleFragments() {
+    void testBlockLayout_IncludeFragments() {
         TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         Context ctx = new Context(Locale.getDefault());
@@ -108,6 +108,51 @@ public class ThymeleafFragmentTest {
             This is the inline **fragment-`B`**: 3 * someIntProp = 1035""");
     }
 
+    @Test
+    void testInlineLayout_NoFragments() {
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        Context ctx = new Context(Locale.getDefault());
+        ctx.setVariable("this", this);
+        String layoutNoFrags = templateEngine.process(".github/th-test-inline/test-inline-layout-no-frags.md.th", ctx);
+        //System.out.printf("simpleFragments:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", layoutNoFrags);
+        assertThat(layoutNoFrags).isEqualTo("""
+            There are no fragments in this layout, but the properties are still processed:
+            - renderingFragmentA = true;
+            - renderingFragmentB = false;
+            - someIntProp = 1234;
+            """);
+    }
+
+    @Test
+    void testInlineLayout_IncludeFragments_AsBlock() {
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        Context ctx = new Context(Locale.getDefault());
+        ctx.setVariable("this", this);
+        String layoutNoFrags = templateEngine.process(".github/th-test-inline/test-inline-layout-two-frags-as-value.md.th", ctx);
+        //System.out.printf("simpleFragments:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", layoutNoFrags);
+        assertThat(layoutNoFrags).isEqualTo("""
+            This layout contains two inline fragments, included via attr-value ( someIntProp = 1234 ):
+            - This is the inline **fragment-`A`**: 2 + 3 = 5
+            - This is the inline **fragment-`B`**: 3 * someIntProp = 3702
+            """);
+    }
+
+    @Test
+    void testInlineLayout_IncludeFragments_AsInline() {
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        Context ctx = new Context(Locale.getDefault());
+        ctx.setVariable("this", this);
+        String layoutNoFrags = templateEngine.process(".github/th-test-inline/test-inline-layout-two-frags-as-expr.md.th", ctx);
+        //System.out.printf("simpleFragments:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", layoutNoFrags);
+        assertThat(layoutNoFrags).isEqualTo("""
+            This layout contains two inline fragments, included via `~{...}` ( someIntProp = 1234 ):
+            - This is the inline **fragment-`A`**: 2 + 3 = 5
+            - This is the inline **fragment-`B`**: 3 * someIntProp = 3702
+            """);
+    }
 
     // --------------------------------------------------------------------------------------------
 
