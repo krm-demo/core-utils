@@ -4,7 +4,7 @@
 [![Java-Doc](https://img.shields.io/badge/GH--Pages-core--utils.x.y.z-blue)](https://krm-demo.github.io/core-utils/)
 [![Java-Doc](https://img.shields.io/badge/GH--Pages-core--utils.x.y.z.SNAPSHOT-blue)](https://krm-demo.github.io/core-utils/)
 
-# <u>`core-utils:21.04.001-SNAPSHOT`</u>
+# <u>`core-utils:21.04.002-SNAPSHOT`</u>
 
 This Java-library contains utility-classes to simplify working with core-java API (streams, collections, input-output).
 It was initially created as a core and reusable part of **`th-tool`** and some features and approaches could be
@@ -23,17 +23,9 @@ but the latest available versions are:
 > TODO: to be inserted the usage
 
 ---
- test-fragment-A.md.th 
----
- test-fragment-B.md.th 
----
-
-Here the _fragment-`A`_ will be included for SNAPSHOT-versions and _fragment-`B`_ for release versions:
-
-  
- test-fragment-B.md.th 
 
 > [!NOTE]
-> <small>This GitHub-Markdown page is generated with use of **`th-tool`** during GitHub Workflow ''.
-> In order to make changes in this page - edit the "th-tool"</small>
-
+> <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
+> during GitHub Workflow [`on-main-push`](https://github.com/krm-demo/core-utils/actions/runs/18117267395).
+> In order to make changes in this page - edit the `th-tool`-template 
+> [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
