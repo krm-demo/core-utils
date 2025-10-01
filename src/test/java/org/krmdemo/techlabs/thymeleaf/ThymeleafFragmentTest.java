@@ -100,7 +100,10 @@ public class ThymeleafFragmentTest {
         String layoutNoFrags = templateEngine.process(".github/th-templates/test-layout-no-frags.md.th", ctx);
         //System.out.printf("simpleFragments:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", layoutNoFrags);
         assertThat(layoutNoFrags).isEqualTo("""
-            There are no fragments in this layout
+            There are no fragments in this layout, but the properties are still processed:
+            - renderingFragmentA = true;
+            - renderingFragmentB = false;
+            - someIntProp = 1234;
             """);
     }
 
@@ -113,9 +116,9 @@ public class ThymeleafFragmentTest {
         String layoutNoFrags = templateEngine.process(".github/th-templates/test-layout-two-frags.md.th", ctx);
         System.out.printf("simpleFragments:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", layoutNoFrags);
         assertThat(layoutNoFrags).isEqualTo("""
-            This layout contains two fragments ( 123 + 456 = 579 ):
+            This layout contains two fragments ( someIntProp = 1234 ):
             - This is the **fragment-`A`**: 2 + 3 = 5
-            - This is the **fragment-`B`**: 3 + 4 = 7
+            - This is the **fragment-`B`**: 3 * someIntProp = 3702
             """);
     }
 

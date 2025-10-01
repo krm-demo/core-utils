@@ -138,6 +138,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <!-- it looks like this dependency is useless: TODO: get rid of it -->
+      <groupId>nz.net.ultraq.thymeleaf</groupId>
+      <artifactId>thymeleaf-layout-dialect</artifactId>
+      <version>${thymeleaf-layout-dialect.version}</version>
+    </dependency>
+    <dependency>
       <groupId>info.picocli</groupId>
       <artifactId>picocli</artifactId>
       <version>${picocli.version}</version>
@@ -488,6 +494,7 @@
     <ch.qos.logback.version>1.5.18</ch.qos.logback.version>
 
     <org.thymeleaf.version>3.1.3.RELEASE</org.thymeleaf.version>
+    <thymeleaf-layout-dialect.version>3.4.0</thymeleaf-layout-dialect.version>
     <picocli.version>4.7.7</picocli.version>
 
     <maven-build-helper-plugin.version>3.6.1</maven-build-helper-plugin.version>

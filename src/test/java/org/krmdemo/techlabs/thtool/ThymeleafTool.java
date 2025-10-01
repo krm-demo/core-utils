@@ -2,7 +2,6 @@ package org.krmdemo.techlabs.thtool;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.krmdemo.techlabs.core.utils.SysDumpUtils;
 import org.thymeleaf.TemplateEngine;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;

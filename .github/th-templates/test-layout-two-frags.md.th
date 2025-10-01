@@ -1,3 +1,3 @@
-This layout contains two fragments ( 123 + 456 = [( ${ 123 + 456 } )] ):
+This layout contains two fragments ( someIntProp = [( ${this.someIntProp} )] ):
 - <th:block th:replace=".github/th-templates/test-fragment-A.md.th :: test"> !!! Error A !!!</th:block>
 - <th:block th:insert= ".github/th-templates/test-fragment-B.md.th :: test"> !!! Error B !!!</th:block>

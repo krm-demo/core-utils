@@ -23,21 +23,9 @@ but the latest available versions are:
 > TODO: to be inserted the usage
 
 ---
-<!--/*/ <th:block th:include="test-fragment-A.md.th">
-        </th:block> /*/-->
----
-<!--/*/ <th:block th:include="test-fragment-B.md.th">
-        </th:block> /*/-->
----
-
-Here the _fragment-`A`_ will be included for SNAPSHOT-versions and _fragment-`B`_ for release versions:
-
-<!--/*/ <th:block th:include="test-fragment-A.md.th" th:if="${gih.releasing && gih.renderingMainPhase}">
-        </th:block> /*/-->
-<!--/*/ <th:block th:include="test-fragment-B.md.th" th:unless="${gih.releasing && gih.renderingMainPhase}">
-        </th:block> /*/-->
 
 > [!NOTE]
-> <small>This GitHub-Markdown page is generated with use of **`th-tool`** during GitHub Workflow ''.
-> In order to make changes in this page - edit the "th-tool"</small>
-
+> <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
+> during GitHub Workflow [`[[${github.workflow}]]`]([[${github.event.repository.html_url}]]/actions/runs/[[${github.run_id}]]).
+> In order to make changes in this page - edit the `th-tool`-template 
+> [ROOT-Readme.md.th]([[${github.event.repository.html_url}]]/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>

@@ -1,1 +1,4 @@
-There are no fragments in this layout
+There are no fragments in this layout, but the properties are still processed:
+- renderingFragmentA = [[${this.renderingFragmentA}]];
+- renderingFragmentB = [[${this.renderingFragmentB}]];
+- someIntProp = [[${this.someIntProp}]];
