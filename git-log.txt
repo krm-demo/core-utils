@@ -1,3 +1,4 @@
+c29448f attempt not to use 'git push --force ...' during internal release
 7043969 << new snapshot version >> 21.05.001-SNAPSHOT
 7dbdcaa << new snapshot version >> 21.04.010-SNAPSHOT
 c3a4ce5 minor corrections of README and root OVERVIEW #3
