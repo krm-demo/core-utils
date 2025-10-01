@@ -47,6 +47,7 @@ jobs:
           echo '${{ toJson(github) }}' > .github/th-vars/var-github.json
           echo '${{ toJson(inputs) }}' > .github/th-vars/var-githubInputs.json
           echo '${{ toJson(job) }}' > .github/th-vars/var-githubJob.json
+          echo '${{ toJson(steps) }}' > .github/th-vars/var-githubSteps.json
           echo '${{ toJson(secrets)  }}' > .github/th-vars/var-secrets.json
           echo "~~~~~~~~~~~~~ ( dump the content of cotext-variables into summary ) ~~~~~~~~~~~~~"
           .github/th-vars/dump-to-summary-sections.sh
