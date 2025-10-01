@@ -31,6 +31,7 @@ jobs:
           # [1] upgrade 'th-tool' var-files
           echo '${{ toJson(github) }}' > .github/th-vars/var-github.json
           echo '${{ toJson(inputs) }}' > .github/th-vars/var-githubInputs.json
+          echo '${{ toJson(job) }}' > .github/th-vars/var-githubJob.json
           echo '${{ toJson(secrets)  }}' > .github/th-vars/var-secrets.json
 
           # build and install to the local maven repository
@@ -107,6 +108,7 @@ jobs:
           # [2] upgrade 'th-tool' var-files
           echo '${{ toJson(github) }}' > .github/th-vars/var-github.json
           echo '${{ toJson(inputs) }}' > .github/th-vars/var-githubInputs.json
+          echo '${{ toJson(job) }}' > .github/th-vars/var-githubJob.json
           echo '${{ toJson(secrets)  }}' > .github/th-vars/var-secrets.json
           
           # [2] generate maven-props and compile 'th-tool'
@@ -132,7 +134,6 @@ jobs:
 
           echo "- render the root 'README.md' file for the just created SNAPSHOT-version"
           .github/th-tool.sh process .github/th-templates/ROOT-Readme.md.th --output ./README.md
-          .github/th-tool.sh process .github/th-templates/ROOT-Readme.md.th --output $GITHUB_STEP_SUMMARY
           git add README.md
 
           echo "- commit the just added changes:"
