@@ -25,6 +25,9 @@ public class ThymeleafFragmentTest {
     boolean renderingFragmentA = true;
     boolean renderingFragmentB = false;
 
+    String inlineFragmentA = "test-inline-fragment-A.md.th";
+    String inlineFragmentB = "test-inline-fragment-B.md.th";
+
     @Test
     void testBlock_FragmentA() {
         TemplateEngine templateEngine = new TemplateEngine();
@@ -125,7 +128,7 @@ public class ThymeleafFragmentTest {
     }
 
     @Test
-    void testInlineLayout_IncludeFragments_AsBlock() {
+    void testInlineLayout_IncludeFragments_AsValue() {
         TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         Context ctx = new Context(Locale.getDefault());
@@ -149,6 +152,8 @@ public class ThymeleafFragmentTest {
         //System.out.printf("simpleFragments:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", layoutNoFrags);
         assertThat(layoutNoFrags).isEqualTo("""
             This layout contains two inline fragments, included via `~{...}` ( someIntProp = 1234 ):
+            - inlineFragmentA = "test-inline-fragment-A.md.th";
+            - inlineFragmentB = "test-inline-fragment-B.md.th";
             - This is the inline **fragment-`A`**: 2 + 3 = 5
             - This is the inline **fragment-`B`**: 3 * someIntProp = 3702
             """);
