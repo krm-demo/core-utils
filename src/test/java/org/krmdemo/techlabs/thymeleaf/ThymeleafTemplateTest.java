@@ -9,18 +9,18 @@ import org.thymeleaf.context.Context;
 
 import java.util.Locale;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 
 /**
- * This unit-test is just a sandbox for using Thymeleaf-Engine
- * <hr/>
- * TODO: verify the usage of Grape, JBang-DEPS and JBang-Bash
+ * This unit-test is just a sandbox for using Thymeleaf-Engine for expression and iterations
  */
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class ThymeleafTemplateTest {
 
     public final static String RESOURCE__MAVEN_PROPS = "/META-INF/maven/maven-project.properties";
 
+    @SuppressWarnings("unused")  // <-- used inside template !!!
     public boolean isIterable(Object someObject) {
         return someObject instanceof Iterable;
     }
@@ -59,7 +59,14 @@ public class ThymeleafTemplateTest {
                 </tbody>
             </table>
             """, envVarsContext);
-        System.out.printf("envVarsHTML:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", envVarsHTML);
+        //System.out.printf("envVarsHTML:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", envVarsHTML);
+        assertThat(envVarsHTML)
+            .isNotBlank()
+            .startsWith("<table>")
+            .contains("<td>HOME</td>")
+            .contains("<td>PATH</td>")
+            .contains("<td>USER</td>")
+            .endsWith("</table>\n");
     }
 
     @Test
@@ -87,7 +94,32 @@ public class ThymeleafTemplateTest {
                 </tbody>
             </table>
             """, mavenPropsContext);
-        System.out.printf("mavenPropsHTML:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", mavenPropsHTML);
+        //System.out.printf("mavenPropsHTML:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", mavenPropsHTML);
+        String mavenPropsNoGettersHTML = templateEngine.process("""
+            <table>
+                <thead>
+                    <tr>
+                        <th>Maven Build-Property Name</th>
+                        <th>Maven BuildProperty Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="propEntry: ${mavenProps.entrySet()}">
+                        <td th:text="${propEntry.key}"> ...prop-name... </td>
+                        <td th:text="${propEntry.value}"> ...prop-value... </td>
+                    </tr>
+                </tbody>
+            </table>
+            """, mavenPropsContext);
+        //System.out.printf("mavenPropsHTML:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", mavenPropsNoGettersHTML);
+        assertThat(mavenPropsHTML).isEqualTo(mavenPropsNoGettersHTML);
+        assertThat(mavenPropsHTML)
+            .isNotBlank()
+            .startsWith("<table>")
+            .contains("<td>maven-project.build-date-time</td>")
+            .contains("<td>maven-project.version</td>")
+            .containsPattern("<td>maven-project\\.artifact</td>\\s*<td>core-utils</td>")
+            .endsWith("</table>\n");
     }
 
     @Test
@@ -118,7 +150,13 @@ public class ThymeleafTemplateTest {
                 </dependency>
             ```
             """, mavenPropsContext);
-        System.out.printf("mavenUsageMD:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", mavenUsageMD);
+        //System.out.printf("mavenUsageMD:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", mavenUsageMD);
+        assertThat(mavenUsageMD)
+            .isNotBlank()
+            .startsWith("for main-source dependencies:")
+            .contains("core-utils")
+            .containsPattern("(```XML[^`]*```\\s*)[^`]*(```XML[^`]*<scope>test</scope>[^`]*```\\s*)")
+            .endsWith("```\n");
     }
 
     @Test
@@ -139,6 +177,12 @@ public class ThymeleafTemplateTest {
                 testImplementation("[[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]")
             ```
             """, mavenPropsContext);
-        System.out.printf("gradleUsageMD:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", gradleUsageMD);
+        //System.out.printf("gradleUsageMD:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", gradleUsageMD);
+        assertThat(gradleUsageMD)
+            .isNotBlank()
+            .startsWith("```Gradle")
+            .contains("core-utils")
+            .containsPattern("```Gradle[^`]*```\\s*")
+            .endsWith("```\n");
     }
 }
