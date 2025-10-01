@@ -4,6 +4,8 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.krmdemo.techlabs.core.utils.SysDumpUtils;
+import org.krmdemo.techlabs.thtool.MavenHelper;
+import org.krmdemo.techlabs.thtool.ZeroSpaceHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
@@ -184,5 +186,27 @@ public class ThymeleafTemplateTest {
             .contains("core-utils")
             .containsPattern("```Gradle[^`]*```\\s*")
             .endsWith("```\n");
+    }
+
+    @Test
+    void testZeroSpaceHelper() {
+        TemplateEngine templateEngine = new TemplateEngine();
+        Context ctx = new Context(Locale.getDefault());
+        ctx.setVariable("zh", new ZeroSpaceHelper());
+        ctx.setVariable("mh", new MavenHelper());
+        // here the difference between Thymeleaf-Inlines [[...]] and [(..)] is demonstrated:
+        String mvnProps = templateEngine.process("""
+            mh.resourcePath = "[[${mh.resourcePath}]]";  // <-- escaped
+            mh.resourcePath = "[(${mh.resourcePath})]";  // <-- un-escaped
+            zh.mask4(mh.resourcePath) = "[[${zh.mask4(mh.resourcePath)}]]";  // <-- escaped
+            zh.mask4(mh.resourcePath) = "[(${zh.mask4(mh.resourcePath)})]";  // <-- un-escaped
+            """, ctx);
+        //System.out.printf("mvnProps:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", mvnProps);
+        assertThat(mvnProps).isEqualTo("""
+            mh.resourcePath = "/META-INF/maven/maven-project.properties";  // <-- escaped
+            mh.resourcePath = "/META-INF/maven/maven-project.properties";  // <-- un-escaped
+            zh.mask4(mh.resourcePath) = "/MET&amp;#8203;A-INF/maven/maven-project.proper&amp;#8203;ties";  // <-- escaped
+            zh.mask4(mh.resourcePath) = "/MET&#8203;A-INF/maven/maven-project.proper&#8203;ties";  // <-- un-escaped
+            """);
     }
 }

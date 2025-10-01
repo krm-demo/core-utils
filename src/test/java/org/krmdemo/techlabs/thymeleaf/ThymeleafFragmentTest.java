@@ -114,7 +114,7 @@ public class ThymeleafFragmentTest {
         Context ctx = new Context(Locale.getDefault());
         ctx.setVariable("this", this);
         String layoutNoFrags = templateEngine.process(".github/th-templates/test-layout-two-frags.md.th", ctx);
-        System.out.printf("simpleFragments:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", layoutNoFrags);
+        //System.out.printf("simpleFragments:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", layoutNoFrags);
         assertThat(layoutNoFrags).isEqualTo("""
             This layout contains two fragments ( someIntProp = 1234 ):
             - This is the **fragment-`A`**: 2 + 3 = 5

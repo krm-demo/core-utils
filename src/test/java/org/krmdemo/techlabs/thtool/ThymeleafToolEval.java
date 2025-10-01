@@ -46,7 +46,7 @@ public class ThymeleafToolEval implements Callable<Integer> {
         If the expression contains quotes, brackets and other characters, which are sensitive for shell-script,
         the whole expression (or its parts) is required to be escaped like following:
         - @|italic th-tool eval|@ @|cyan $'\\' "Hello, " + "World." \\''|@ - the result is @|green Hello, World.|@;
-        - @|italic th-tool eval|@ @|cyan $'\\' "Hello, " + "World \\\\u0021 \\\\u0021\\\\u0021" \\''|@ - the result is @|green Hello, World !!!|@;
+        - @|italic th-tool eval|@ @|cyan $'\\' "Hello, " + "World \\\\u0021\\\\u0021\\\\u0021" \\''|@ - the result is @|green Hello, World !!!|@;
         - @|italic th-tool eval|@ @|cyan $'\\' "\\\\\\\\inside back-slashes\\\\\\\\" \\''|@ - the result is @|green \\inside back-slashes\\|@;
         - @|italic th-tool eval|@ @|cyan $'\\' 1+2 * 3+4 * 5 \\''|@ - the result is @|green 27|@;
         - @|italic th-tool eval|@ @|cyan $'\\' mavenProps["maven-project.artifact"] \\''|@ - the result is @|green core-utils|@;
