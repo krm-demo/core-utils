@@ -121,6 +121,7 @@ jobs:
 
           echo "- render the root 'README.md' file for the just created SNAPSHOT-version"
           .github/th-tool.sh process .github/th-templates/ROOT-Readme.md.th --output ./README.md
+          .github/th-tool.sh process .github/th-templates/ROOT-Readme.md.th --output $GITHUB_STEP_SUMMARY
           git add README.md
 
           echo "- commit the just added changes:"
