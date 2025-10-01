@@ -1,3 +1,4 @@
+488f762 improve ThymeleafFragmentTest.java #1
 fd53cd9 << new snapshot version >> 21.05.005-SNAPSHOT
 6905545 << internal release >> 21.05.004
 7969501 attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #4
