@@ -2,7 +2,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 
 [![Release-Catalog](https://img.shields.io/badge/GH--Pages-Release_Catalog-blue)](https://krm-demo.github.io/core-utils/)
-[![Project-Site](https://img.shields.io/badge/GH--Pages-core--utils:21.04.008-SNAPSHOT-blue)](https://krm-demo.github.io/core-utils/core-utils-21.04.008-SNAPSHOT)
+[![Project-Site](https://img.shields.io/badge/GH--Pages-core--utils:core--utils:21.04.008--SNAPSHOT-blue)](https://krm-demo.github.io/core-utils/core-utils-21.04.008-SNAPSHOT)
 
 # <u>core-utils</u>
 
@@ -26,6 +26,6 @@ but the latest available versions are:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18168558669).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18170969994).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
