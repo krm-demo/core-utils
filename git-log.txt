@@ -1,3 +1,4 @@
+6905545 << internal release >> 21.05.004
 7969501 attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #4
 bd05dc7 attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #3
 e0ac4f7 << internal release >> 21.05.003
