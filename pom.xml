@@ -432,7 +432,7 @@
           </addStylesheets>
           <docfilessubdirs>true</docfilessubdirs>
           <windowtitle>JavaDoc ${project.name}:${project.version}</windowtitle>
-          <doctitle>JavaDoc for ${project.name}:${project.version}</doctitle>
+          <doctitle>JavaDoc for &lt;u&gt;${project.name}&lt;/u&gt;:${project.version}</doctitle>
         </configuration>
         <executions>
           <execution>
