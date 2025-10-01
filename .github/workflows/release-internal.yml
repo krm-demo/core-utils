@@ -28,6 +28,11 @@ jobs:
 
       - name: "[1] Perform the build and install using 'Apache Maven'"
         run: |
+          # [1] upgrade 'th-tool' var-files
+          echo '${{ toJson(github) }}' > .github/th-vars/var-github.json
+          echo '${{ toJson(inputs) }}' > .github/th-vars/var-githubInputs.json
+          echo '${{ toJson(secrets)  }}' > .github/th-vars/var-secrets.json
+
           # build and install to the local maven repository
           mvn -B clean install
           echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary ) ~~~~~~~~~~~~~"
@@ -99,6 +104,11 @@ jobs:
 
       - name: "[2] Changing the version of project to next snapshot after internal release and and PUSH #2"
         run: |
+          # [2] upgrade 'th-tool' var-files
+          echo '${{ toJson(github) }}' > .github/th-vars/var-github.json
+          echo '${{ toJson(inputs) }}' > .github/th-vars/var-githubInputs.json
+          echo '${{ toJson(secrets)  }}' > .github/th-vars/var-secrets.json
+          
           # [2] generate maven-props and compile 'th-tool'
           mvn -B --quiet test-compile
 
