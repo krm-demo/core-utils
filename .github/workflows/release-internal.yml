@@ -112,7 +112,7 @@ jobs:
           echo '${{ toJson(job) }}' > .github/th-vars/var-githubJob.json
           echo '${{ toJson(steps) }}' > .github/th-vars/var-githubSteps.json
           echo '${{ toJson(secrets)  }}' > .github/th-vars/var-secrets.json
-          
+
           # [2] generate maven-props and compile 'th-tool'
           mvn -B --quiet test-compile
 
@@ -144,7 +144,7 @@ jobs:
           echo "- [2] commit the just added changes:"
           git commit -m "<< new snapshot version >> $NEW_VERSION_NEXT"
 
-          echo "- going to push the second-phase commit"
+          echo "- [2] going to push the second-phase commit"
           git push
 
   # call the workflow 'on-main-push.yml' to build and publish the next snapshot version
