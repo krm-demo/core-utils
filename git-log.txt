@@ -1,3 +1,4 @@
+6932837b << public release >> 21.08
 1c806a41 << new snapshot version >> 21.08.002-SNAPSHOT
 d1f9e861 << internal release >> 21.08.001
 9ec20499 refactor helpers of th-tool #5 (fix badges verification)
