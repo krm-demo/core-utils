@@ -41,6 +41,9 @@ This particular version of the project `21.06.002-SNAPSHOT` is a _SNAPSHOT_-vers
 The JavaDoc is generated and project-site at [GitHub Pages](https://docs.github.com/en/pages) is updated,
 but **nothing is deployed** neither to [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
 artifactory nor to [maven central repository](https://central.sonatype.com/).
+As for content of GitHub Markdown files (like one you are reading now) - they are generated and updated
+during either INTERNAL-release or PUBLIC-release from corresponding `th-tool`-templates (quite all of them
+are located in [this folder](.github/th-templates)).
 
 The binaries of _Snapshot_-version are available only after cloning the git-repo locally and
 checking out the proper branch (the most recent snapshot is in `main`-branch).
@@ -116,6 +119,6 @@ Then you can create your own jbang-scripts using following examples:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18181207293).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18182189526).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
