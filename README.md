@@ -2,7 +2,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 
 [![Release-Catalog](https://img.shields.io/badge/GH--Pages-Release_Catalog-blue)](https://krm-demo.github.io/core-utils/)
-[![Project-Site](https://img.shields.io/badge/GH--Pages-core--utils:21.05.005--SNAPSHOT-blue)](https://krm-demo.github.io/core-utils/core-utils-21.05.005-SNAPSHOT)
+[![Project-Site](https://img.shields.io/badge/GH--Pages-core--utils:21.05.006--SNAPSHOT-blue)](https://krm-demo.github.io/core-utils/core-utils-21.05.006-SNAPSHOT)
 
 # <u>core-utils</u>
 
@@ -11,7 +11,7 @@ It was initially created as a core and reusable part of **`th-tool`** (which is 
 Some features and approaches could be very useful and helpful independently as a separate Java-library
 that could be easily integrated into any Java-project as a maven/gradle artifact or as a dependency to jbang-script.
 
-Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.05.005-SNAPSHOT).
+Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.05.006-SNAPSHOT).
 Other versions of ths project are listed in the [release catalog](https://krm-demo.github.io/core-utils/),
 but the latest relevant versions (with relation to the current one) are:
 
