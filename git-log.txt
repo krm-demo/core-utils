@@ -1,3 +1,4 @@
+cb2d6637 Insert 'Usage' into 'Readme' by replacing the Thymeleaf-Fragment #4
 977795fd << new snapshot version >> 21.07.001-SNAPSHOT
 2f5d0b23 << public release >> 21.06
 32ef1c00 << new snapshot version >> 21.06.004-SNAPSHOT
