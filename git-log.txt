@@ -1,3 +1,4 @@
+b995a69 << new snapshot version >> 21.06.003-SNAPSHOT
 02bbc55 << internal release >> 21.06.002
 eb4c5c3 Insert 'Usage' into 'Readme' by replacing the Thymeleaf-Fragment #2
 8b96f5d << new snapshot version >> 21.06.002-SNAPSHOT
