@@ -23,6 +23,46 @@ but the latest relevant versions (with relation to the current one) are:
 > [!TIP]
 > TODO: to be inserted the usage (conditionally: PUBLIC / INTERNAL / SNAPSHOT)
 
+the content of `GithubInputsHelper` instance is:
+```json
+{
+  "githubInputs": {},
+  "releasing": "false",
+  "releasingInternal": "false",
+  "releasingPublic": "false",
+  "renderingMainPhase": "false",
+  "renderingNextPhase": "false"
+}
+```
+
+the content of `MavenHelper` instance is:
+```json
+{
+  "calculatedProjectVersion": "21.06.003-SNAPSHOT",
+  "currentProjectVersion": "21.06.003-SNAPSHOT",
+  "incrementalAsInt": "3",
+  "incrementalVersion": "3",
+  "internalNextVersion": "21.06.004-SNAPSHOT",
+  "internalReleaseVersion": "21.06.003",
+  "majorVersion": "21",
+  "majorVersionAsInt": "21",
+  "minorVersion": "6",
+  "minorVersionAsInt": "6",
+  "projectArtifact": "core-utils",
+  "projectBadgeName": "core--utils:21.06.003--SNAPSHOT",
+  "projectCatalogName": "core-utils-21.06.003-SNAPSHOT",
+  "projectName": "core-utils:21.06.003-SNAPSHOT",
+  "publicNextVersion": "21.07.001-SNAPSHOT",
+  "publicReleaseVersion": "21.06",
+  "resourcePath": "/META-INF/maven/maven-project.properties",
+  "usageFragmentPath": ".github/th-templates/Usage-SNAPSHOT.md.th",
+  "usageFragmentSuffix": "SNAPSHOT",
+  "versionHasIncrementalPart": "true",
+  "versionHasQualifierPart": "true",
+  "versionQualifier": "SNAPSHOT"
+}
+```
+
 This particular version of the project `21.06.003-SNAPSHOT` is a _SNAPSHOT_-version, which consists of:
 - major version `21` (that corresponds to minimum available version of JDK);
 - minor version `6` (the ordinal number of _PUBLIC_-release);
@@ -119,6 +159,6 @@ Then you can create your own jbang-scripts using following examples:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18182189526).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18183369938).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
