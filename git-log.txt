@@ -1,3 +1,4 @@
+bba4889e refactor helpers of th-tool #1
 99eecece << new snapshot version >> 21.08.001-SNAPSHOT
 fde4a94b << public release >> 21.07
 bb2d5843 << new snapshot version >> 21.07.002-SNAPSHOT
