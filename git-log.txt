@@ -1,3 +1,4 @@
+5121aea << internal release >> 21.05.005
 d5319b6 attempt NOT to use 'git push --force ...' during public release #1
 488f762 improve ThymeleafFragmentTest.java #1
 fd53cd9 << new snapshot version >> 21.05.005-SNAPSHOT
