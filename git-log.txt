@@ -1,3 +1,4 @@
+279a728b refactor helpers of th-tool #3 (fix badges verification)
 f6085489 refactor helpers of th-tool #2
 bba4889e refactor helpers of th-tool #1
 99eecece << new snapshot version >> 21.08.001-SNAPSHOT
