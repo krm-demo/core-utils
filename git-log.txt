@@ -1,259 +1,260 @@
-2f5d0b2 << public release >> 21.06
-32ef1c0 << new snapshot version >> 21.06.004-SNAPSHOT
-d6c8045 << internal release >> 21.06.003
-05d4e6a Insert 'Usage' into 'Readme' by replacing the Thymeleaf-Fragment #3
-b995a69 << new snapshot version >> 21.06.003-SNAPSHOT
-02bbc55 << internal release >> 21.06.002
-eb4c5c3 Insert 'Usage' into 'Readme' by replacing the Thymeleaf-Fragment #2
-8b96f5d << new snapshot version >> 21.06.002-SNAPSHOT
-3c98142 << internal release >> 21.06.001
-25a7db2 Insert 'Usage' into 'Readme' by replacing the Thymeleaf-Fragment #1
-ba72b05 Use FileTemplateResolver in ThymeleafToolProc #1
-0c815a0 << new snapshot version >> 21.06.001-SNAPSHOT
-51df70a << public release >> 21.05
-42a0f48 << new snapshot version >> 21.05.006-SNAPSHOT
-5121aea << internal release >> 21.05.005
-d5319b6 attempt NOT to use 'git push --force ...' during public release #1
-488f762 improve ThymeleafFragmentTest.java #1
-fd53cd9 << new snapshot version >> 21.05.005-SNAPSHOT
-6905545 << internal release >> 21.05.004
-7969501 attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #4
-bd05dc7 attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #3
-e0ac4f7 << internal release >> 21.05.003
-94368a3 attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #2
-64d23c7 << internal release >> 21.05.002
-caba27d attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #1
-ed4a7c0 << internal release >> 21.05.001
-c29448f attempt not to use 'git push --force ...' during internal release
-7043969 << new snapshot version >> 21.05.001-SNAPSHOT
-7dbdcaa << new snapshot version >> 21.04.010-SNAPSHOT
-c3a4ce5 minor corrections of README and root OVERVIEW #3
-80fe8f7 << new snapshot version >> 21.04.009-SNAPSHOT
-9bec0f5 minor corrections of README and root OVERVIEW #2
-3e5e2d9 << new snapshot version >> 21.04.008-SNAPSHOT
-4135ad5 minor corrections of README and root OVERVIEW #1
-4650531 introduce block/inline fragments tests #1
-c2e152a << new snapshot version >> 21.04.007-SNAPSHOT
-aa88d6a put reference to gh-action at the footer of 'Readme.md' #6
-4363906 some minor improvements in escape/unescape tests
-95d80f8 put reference to gh-action at the footer of 'Readme.md' #5
-4947869 << new snapshot version >> 21.04.006-SNAPSHOT
-9b0944c put reference to gh-action at the footer of 'Readme.md' #4
-95f4094 << new snapshot version >> 21.04.005-SNAPSHOT
-a69c1a3 put reference to gh-action at the footer of 'Readme.md' #3
-893d380 << new snapshot version >> 21.04.004-SNAPSHOT
-be523bc put reference to gh-action at the footer of 'Readme.md' #2
-916c4d0 << new snapshot version >> 21.04.003-SNAPSHOT
-16ee76b put reference to gh-action at the footer of 'Readme.md' #1
-dfd063f improve thymeleaf-tests #2
-d273017 improve thymeleaf-tests #1
-7c375ff << new snapshot version >> 21.04.002-SNAPSHOT
-dca9819 playing with conditional fragments for 'README.md' #1
-4d91029 << new snapshot version >> 21.04.001-SNAPSHOT
-339ba47 << new snapshot version >> 21.03.002-SNAPSHOT
-34bc8f8 rendering 'Readme.md' #1
-de70e38 << new snapshot version >> 21.03.001-SNAPSHOT
-e6a3188 << new snapshot version >> 21.02.005-SNAPSHOT
-cc900bc Process 'Usage-XXX.md.th' templates in 'on-main-push' workflow #2
-558f112 Process 'Usage-XXX.md.th' templates in 'on-main-push' workflow #1
-c49e85c << new snapshot version >> 21.02.004-SNAPSHOT
-8a48bc2 improve the help/usage of 'th-tool' #3
-850ffd9 improve the help/usage of 'th-tool' #2
-c6d50fd improve the help/usage of 'th-tool' #1
-145f6af Introduce (split the original) 3 versions of 'Usage-XXX.md.th' #2
-52f0ae2 Introduce (split the original) 3 versions of 'Usage-XXX.md.th'
-46be759 attempt to use 'secrets' var in 'Maven-Settings.md.th' #2
-4377ac6 attempt to use 'secrets' var in 'Maven-Settings.md.th' #1
-510722f process  during  #2
-f6f075b process  during  #1
-4a3f025 inherit secrets when invoking 'on-main-push'
-9c2e926 Introduce ZeroSpaceHelper
-1de464e << new snapshot version >> 21.02.003-SNAPSHOT
-f1ec2bc Perform the deployment into Git-Hub artifactory #1
-65cb4fe << new snapshot version >> 21.02.002-SNAPSHOT
-da6f23d minor test changes in 'src/main/javadoc/overview.html'
-0fd253c << new snapshot version >> 21.02.001-SNAPSHOT
-bbfcde9 << new snapshot version >> 21.01.004-SNAPSHOT
-cce1fb7 Working on 'release-XXX.yml' #7
-8b89855 << new snapshot version >> 21.01.003-SNAPSHOT
-5e379f2 Working on 'release-XXX.yml' #6
-02dcb1c Working on 'release-XXX.yml' #5
-522a674 Working on 'release-XXX.yml' #4
-d6bf5f8 Working on 'release-XXX.yml' #3
-cc491d3 Working on 'release-XXX.yml' #2
-967455a Working on 'release-XXX.yml' #1
-690abda << new snapshot version >> 21.01.002-SNAPSHOT
-59f4fc4 << new snapshot version >> 21.01.001-SNAPSHOT
-5e2d06f Start working on 'release-public.yml' #1
-4a7725e << new snapshot version >> 21.00.017-SNAPSHOT
-5fc952a continue with release workflows #12
-83f55ad << new snapshot version >> 21.00.016-SNAPSHOT
-d35517f continue with release workflows #11
-0181cde continue with release workflows #10
-bc0385a continue with release workflows #9
-bdd4b87 continue with release workflows #8
-e5ab953 << new snapshot version >> 21.00.015-SNAPSHOT
-65c33c9 continue with release workflows #7
-59240f0 << new snapshot version >> 21.00.014-SNAPSHOT
-905d4c2 continue with release workflows #6
-71c2e7d << new snapshot version >> 21.00.013-SNAPSHOT
-d4d9042 continue with release workflows #5
-efc8450 continue with release workflows #4
-e182e2f continue with release workflows #3
-17a730e continue with release workflows #2
-ac54179 continue with release workflows #1
-aa9a20d << new snapshot version >> 21.00.012-SNAPSHOT
-bc628dc Working on '.github/workflows/release-internal.yml' #13
-0c03e00 << new snapshot version >> 21.00.011-SNAPSHOT
-8f44124 Working on '.github/workflows/release-internal.yml' #12
-dee53af << internal release >> 21.00.009
-847e51a Working on '.github/workflows/release-internal.yml' #11
-f4b6995 << internal release >> 21.00.008
-d782c2c Working on '.github/workflows/release-internal.yml' #10
-0a9ade4 << internal release >> 21.00.007
-0b1cf24 Working on '.github/workflows/release-internal.yml' #9
-eb377b1 Working on '.github/workflows/release-internal.yml' #8
-42eba76 Working on '.github/workflows/release-internal.yml' #7
-8ebd971 << internal release >> 21.00.006
-03717c7 Working on '.github/workflows/release-internal.yml' #6
-b3954aa << new snapshot version >> 21.00.006-SNAPSHOT
-deb9047 << internal release >> 21.00.005
-33a97e1 Working on '.github/workflows/release-internal.yml' #5
-d6266ab << new snapshot version >> 21.00.005-SNAPSHOT
-3b04b46 << internal release >> 21.00.004
-810151b Working on '.github/workflows/release-internal.yml' #4
-92b86e7 << new snapshot version >> 21.00.004-SNAPSHOT
-ac6b12f << internal release >> 21.00.003
-99af350 Working on '.github/workflows/release-internal.yml' #3
-5f8460d << new snapshot version >> 21.00.003-SNAPSHOT
-290d5eb << internal release >> 21.00.002
-6a30075 Working on '.github/workflows/release-internal.yml' #2
-13f6e3d start minor version from '001'
-6742e29 Start working on '.github/workflows/release-internal.yml' #1
-d1e95e1 Use Sl4j everywhere in th-tool #3
-89a0c5c Use Sl4j everywhere in th-tool #2
-139bd4b Use Sl4j everywhere in th-tool #1
-97cb92a Introduce MavenHelper #1
-0ac0463 Test and debug th-tool (release versions) #9
-b6e5771 Test and debug th-tool (release versions) #8
-05b11c3 Test and debug th-tool (release versions) #7
-f437fbc Test and debug th-tool (release versions) #5
-2eb81de Test and debug th-tool (release versions) #5
-0d4104e Test and debug th-tool (release versions) #4
-1d05416 Test and debug th-tool (release versions) #3
-edd9d65 Test and debug th-tool #2
-6545621 Test and debug th-tool #1
-5127dfd Introduce 2 subcommands in 'th-tool' #6
-5b6fc69 Introduce 2 subcommands in 'th-tool' #5
-3b0dd90 Introduce 2 subcommands in 'th-tool' #4
-cca85d7 Introduce 2 subcommands in 'th-tool' #3
-deee1a9 Introduce 2 subcommands in 'th-tool' #2
-e508a30 Introduce 2 subcommands in 'th-tool' #1
-0ca5575 correct dump to summary and delete 'misc--gh-pages.yml' GitHub-workflow
-0635712 Introduce 'maven-source-plugin' and upgrade the maven deps
-ecf464e Add and improve some JavaDoc #1
-0555757 Publish to GH-Pages as a part of 'on-main-push' action for each commit
-cd0c9ad Switch to JDK '25' and use '(Amazon Corretto)' vendor everywhere in GitHub actions
-a3bf220 temporary use the result of 'javadoc:jar' MOJO #1
-8cd43fa fix the detection of target core-utils-21.0.2-SNAPSHOT.jar
-ee41e52 attach JavaDoc's JAR into the default build-lifecycle
-da39c9f some minor corrections to JavaDoc #2
-eb952b4 some minor corrections to JavaDoc #1
-34ea826 attempt to publish git-log and javadoc into gh-pages #3
-70f117c attempt to publish git-log and javadoc into gh-pages #2
-c25d74a attempt to publish git-log and javadoc into gh-pages #1
-187a38c verify append to file and git-add the whole directory as '.'
-e513459 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #9
-08885a3 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #8
-bd9b0f8 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #7
-5ccc853 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #6
-0be7090 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #5
-e3269a4 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #4
-9fbd49a intrdouce 'misc--gh-pages.yml' action to play with gh-pages #3
-b9c9275 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #2
-8eef705 intrdouce 'misc--gh-pages.yml' action to play with gh-pages
-c0bec9b add badge to GH-Pages #2
-2a48829 add badge to GH-Pages
-2a301ce Attempt to fix the build with all names at '@JsonPropertyOrder' annotation
-7c5ac17 intrdouce 'javadoc' MOJO and attempt to fix the build with '@JsonPropertyOrder'
-34d84dd refactor - introduce 'core' sub-package
-f3e6231 refactor assertions of ObjectPrinterTest
-96cd4f2 implementing SVG-dumpers (YAML) #5
-b6d6bf3 implementing SVG-dumpers (YAML) #4
-5f0b925 implementing SVG-dumpers (finish with JSON) #3
-c2afb7d implementing SVG-dumpers (JSON) #2
-22017ea implementing SVG-dumpers (JSON) #1
-5661872 introduce OuterTagUtils #2
-447451a introduce OuterTagUtils
-848620d implementing YAML rendering into HTML #4
-69c4b32 implementing YAML rendering into HTML #3
-5a54755 implementing YAML rendering #2
-f7d27e8 implementing YAML rendering #1
-1c8cb80 implementing HTML rendering #1
-7d60df0 introduce and use RenderSpec with Highlight instead of Highlighter
-0b79c6a provide JavaDoc and refine some tests #4 (minor refactoring))
-898ae4c provide JavaDoc and refine some tests #3 (testBooleans)
-26f2271 provide JavaDoc and refine some tests #2
-5bb624d provide JavaDoc and refine some tests #1
-0a2cd5b provide the default implemntations of ObjectPrinter and introduce utility-facades #1
-c27cecc implementing JarFileInfo.java #1
-0b853ad continue working 'th-tool' #3
-5148a00 continue working 'th-tool' #2
-5edb8fb continue working 'th-tool' #1
-c42c1a3 start working on the first real 'th-tool'-template
-e8eefc5 support of '.properties' extension in ThymeleafVars #2
-4750427 support of '.properties' extension in ThymeleafVars #1
-db1ef0d Working with th-tool (correct vars-dir) #5
-c8f967b Working with th-tool (add a workflow 'th-tool') #4
-0f11159 Working with th-tool (add a workflow 'th-tool') #3
-5a004a5 Working with th-tool (add a workflow 'th-tool') #2
-4ef75eb Working with th-tool (add a workflow 'th-tool')
-426546d Working with th-tool (processing vars)
-0cc9c96 Introduce JacksonUtils.java
-b6216fa Working with th-templates for usage (tuning the maven cache)
-c256030 Working with th-templates for usage #5
-0d6e44c Working with th-templates for usage #4
-fdc9a51 Working with th-templates for usage #3
-d127c0f Working with th-templates for usage #2
-70cbc7c Working with th-templates for usage #1
-83efd0e start working on ThymeleafTool #1
-215d49c play with multi-line github-workflow action-step-run #4
-30945aa play with multi-line github-workflow action-step-run #3
-0c05d10 play with multi-line github-workflow action-step-run #2
-b2d9dc1 play with multi-line github-workflow action-step-run #1
-44d2d9f generate 'META-INF/maven/maven-project.properties' with parsed versions
-07f0fbf improve DumpSysProps
-c7a1020 improve the result of 'dump-to-summary.sh' #3
-ca3f231 improve the result of 'dump-to-summary.sh' #2
-e10a5c4 improve the result of 'dump-to-summary.sh' #1
-9ec47b7 setup jbang in gh-workflow action
-d9b3ede debug dump-to-summary.sh #2
-cc84ae1 debug dump-to-summary.sh #1
-917cab6 playing with dumps #9
-11f9af2 playing with dumps #8
-40d9c73 playing with dumps #7
-521a9ce playing with dumps #6
-7209928 playing with dumps #5
-8fa241c playing with dumps #4
-7996a0c playing with dumps #3
-2af60cc playing with dumps #2
-930d87b playing with dumps #1
-5f62f9e Provide toSortedMap and toLinkedMap
-da0c1ee Play with java and maven #1
-cead81f Play with java and maven #0
-461e198 make bash executable #2
-a6b6fe1 make bash executable
-b68bfd3 add status badge
-2a4d122 playing with GH workflows #5
-3dd8518 playing with GH workflows #4
-d6f0284 playing with GH workflows #3
-c4ed4e5 playing with GH workflows #2
-eaff78a playing with GH workflows
-c975e12 attempt to fix resources
-bd5fc32 adding enforcer, versioner and other pliugins (including manifest generation)
-8f6f5e9 Provide some debug-info #1
-4a59309 Provide maven cache
-ee0dd7a Provide <distributionManagement> section to 'pom.xml'
-380fe36 Introduce some main and test code
-8e4641b Create maven-publish.yml
-f736ec4 Initial commit
+977795fd << new snapshot version >> 21.07.001-SNAPSHOT
+2f5d0b23 << public release >> 21.06
+32ef1c00 << new snapshot version >> 21.06.004-SNAPSHOT
+d6c80457 << internal release >> 21.06.003
+05d4e6a3 Insert 'Usage' into 'Readme' by replacing the Thymeleaf-Fragment #3
+b995a69d << new snapshot version >> 21.06.003-SNAPSHOT
+02bbc554 << internal release >> 21.06.002
+eb4c5c3f Insert 'Usage' into 'Readme' by replacing the Thymeleaf-Fragment #2
+8b96f5da << new snapshot version >> 21.06.002-SNAPSHOT
+3c98142b << internal release >> 21.06.001
+25a7db25 Insert 'Usage' into 'Readme' by replacing the Thymeleaf-Fragment #1
+ba72b059 Use FileTemplateResolver in ThymeleafToolProc #1
+0c815a0b << new snapshot version >> 21.06.001-SNAPSHOT
+51df70a8 << public release >> 21.05
+42a0f483 << new snapshot version >> 21.05.006-SNAPSHOT
+5121aea6 << internal release >> 21.05.005
+d5319b6c attempt NOT to use 'git push --force ...' during public release #1
+488f7629 improve ThymeleafFragmentTest.java #1
+fd53cd96 << new snapshot version >> 21.05.005-SNAPSHOT
+69055458 << internal release >> 21.05.004
+79695016 attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #4
+bd05dc77 attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #3
+e0ac4f73 << internal release >> 21.05.003
+94368a34 attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #2
+64d23c75 << internal release >> 21.05.002
+caba27d8 attempt to fix the internal release by making 'git pull origin' before 'mvn versions:set ...' #1
+ed4a7c03 << internal release >> 21.05.001
+c29448f0 attempt not to use 'git push --force ...' during internal release
+70439695 << new snapshot version >> 21.05.001-SNAPSHOT
+7dbdcaa4 << new snapshot version >> 21.04.010-SNAPSHOT
+c3a4ce5f minor corrections of README and root OVERVIEW #3
+80fe8f77 << new snapshot version >> 21.04.009-SNAPSHOT
+9bec0f58 minor corrections of README and root OVERVIEW #2
+3e5e2d94 << new snapshot version >> 21.04.008-SNAPSHOT
+4135ad5c minor corrections of README and root OVERVIEW #1
+46505311 introduce block/inline fragments tests #1
+c2e152a4 << new snapshot version >> 21.04.007-SNAPSHOT
+aa88d6aa put reference to gh-action at the footer of 'Readme.md' #6
+43639068 some minor improvements in escape/unescape tests
+95d80f8a put reference to gh-action at the footer of 'Readme.md' #5
+4947869a << new snapshot version >> 21.04.006-SNAPSHOT
+9b0944cd put reference to gh-action at the footer of 'Readme.md' #4
+95f40949 << new snapshot version >> 21.04.005-SNAPSHOT
+a69c1a32 put reference to gh-action at the footer of 'Readme.md' #3
+893d380e << new snapshot version >> 21.04.004-SNAPSHOT
+be523bc7 put reference to gh-action at the footer of 'Readme.md' #2
+916c4d09 << new snapshot version >> 21.04.003-SNAPSHOT
+16ee76b9 put reference to gh-action at the footer of 'Readme.md' #1
+dfd063ff improve thymeleaf-tests #2
+d2730175 improve thymeleaf-tests #1
+7c375ffa << new snapshot version >> 21.04.002-SNAPSHOT
+dca9819b playing with conditional fragments for 'README.md' #1
+4d910298 << new snapshot version >> 21.04.001-SNAPSHOT
+339ba479 << new snapshot version >> 21.03.002-SNAPSHOT
+34bc8f8a rendering 'Readme.md' #1
+de70e387 << new snapshot version >> 21.03.001-SNAPSHOT
+e6a3188d << new snapshot version >> 21.02.005-SNAPSHOT
+cc900bcc Process 'Usage-XXX.md.th' templates in 'on-main-push' workflow #2
+558f112f Process 'Usage-XXX.md.th' templates in 'on-main-push' workflow #1
+c49e85c6 << new snapshot version >> 21.02.004-SNAPSHOT
+8a48bc2a improve the help/usage of 'th-tool' #3
+850ffd9c improve the help/usage of 'th-tool' #2
+c6d50fdb improve the help/usage of 'th-tool' #1
+145f6af8 Introduce (split the original) 3 versions of 'Usage-XXX.md.th' #2
+52f0ae2e Introduce (split the original) 3 versions of 'Usage-XXX.md.th'
+46be7598 attempt to use 'secrets' var in 'Maven-Settings.md.th' #2
+4377ac65 attempt to use 'secrets' var in 'Maven-Settings.md.th' #1
+510722fc process  during  #2
+f6f075b5 process  during  #1
+4a3f0251 inherit secrets when invoking 'on-main-push'
+9c2e9268 Introduce ZeroSpaceHelper
+1de464e3 << new snapshot version >> 21.02.003-SNAPSHOT
+f1ec2bc0 Perform the deployment into Git-Hub artifactory #1
+65cb4fe6 << new snapshot version >> 21.02.002-SNAPSHOT
+da6f23df minor test changes in 'src/main/javadoc/overview.html'
+0fd253ce << new snapshot version >> 21.02.001-SNAPSHOT
+bbfcde9c << new snapshot version >> 21.01.004-SNAPSHOT
+cce1fb7c Working on 'release-XXX.yml' #7
+8b898550 << new snapshot version >> 21.01.003-SNAPSHOT
+5e379f26 Working on 'release-XXX.yml' #6
+02dcb1cd Working on 'release-XXX.yml' #5
+522a674b Working on 'release-XXX.yml' #4
+d6bf5f81 Working on 'release-XXX.yml' #3
+cc491d34 Working on 'release-XXX.yml' #2
+967455af Working on 'release-XXX.yml' #1
+690abda9 << new snapshot version >> 21.01.002-SNAPSHOT
+59f4fc44 << new snapshot version >> 21.01.001-SNAPSHOT
+5e2d06ff Start working on 'release-public.yml' #1
+4a7725e0 << new snapshot version >> 21.00.017-SNAPSHOT
+5fc952a2 continue with release workflows #12
+83f55add << new snapshot version >> 21.00.016-SNAPSHOT
+d35517f9 continue with release workflows #11
+0181cde4 continue with release workflows #10
+bc0385a0 continue with release workflows #9
+bdd4b87f continue with release workflows #8
+e5ab9539 << new snapshot version >> 21.00.015-SNAPSHOT
+65c33c93 continue with release workflows #7
+59240f00 << new snapshot version >> 21.00.014-SNAPSHOT
+905d4c2f continue with release workflows #6
+71c2e7d1 << new snapshot version >> 21.00.013-SNAPSHOT
+d4d90422 continue with release workflows #5
+efc8450d continue with release workflows #4
+e182e2f1 continue with release workflows #3
+17a730eb continue with release workflows #2
+ac54179b continue with release workflows #1
+aa9a20d3 << new snapshot version >> 21.00.012-SNAPSHOT
+bc628dca Working on '.github/workflows/release-internal.yml' #13
+0c03e00c << new snapshot version >> 21.00.011-SNAPSHOT
+8f441242 Working on '.github/workflows/release-internal.yml' #12
+dee53af8 << internal release >> 21.00.009
+847e51ad Working on '.github/workflows/release-internal.yml' #11
+f4b69955 << internal release >> 21.00.008
+d782c2ce Working on '.github/workflows/release-internal.yml' #10
+0a9ade4f << internal release >> 21.00.007
+0b1cf247 Working on '.github/workflows/release-internal.yml' #9
+eb377b1d Working on '.github/workflows/release-internal.yml' #8
+42eba768 Working on '.github/workflows/release-internal.yml' #7
+8ebd9710 << internal release >> 21.00.006
+03717c7e Working on '.github/workflows/release-internal.yml' #6
+b3954aaa << new snapshot version >> 21.00.006-SNAPSHOT
+deb90477 << internal release >> 21.00.005
+33a97e1a Working on '.github/workflows/release-internal.yml' #5
+d6266aba << new snapshot version >> 21.00.005-SNAPSHOT
+3b04b469 << internal release >> 21.00.004
+810151b4 Working on '.github/workflows/release-internal.yml' #4
+92b86e75 << new snapshot version >> 21.00.004-SNAPSHOT
+ac6b12ff << internal release >> 21.00.003
+99af3508 Working on '.github/workflows/release-internal.yml' #3
+5f8460db << new snapshot version >> 21.00.003-SNAPSHOT
+290d5eb1 << internal release >> 21.00.002
+6a300755 Working on '.github/workflows/release-internal.yml' #2
+13f6e3dd start minor version from '001'
+6742e295 Start working on '.github/workflows/release-internal.yml' #1
+d1e95e17 Use Sl4j everywhere in th-tool #3
+89a0c5c7 Use Sl4j everywhere in th-tool #2
+139bd4bd Use Sl4j everywhere in th-tool #1
+97cb92a9 Introduce MavenHelper #1
+0ac0463a Test and debug th-tool (release versions) #9
+b6e57718 Test and debug th-tool (release versions) #8
+05b11c32 Test and debug th-tool (release versions) #7
+f437fbc9 Test and debug th-tool (release versions) #5
+2eb81de3 Test and debug th-tool (release versions) #5
+0d4104e9 Test and debug th-tool (release versions) #4
+1d054167 Test and debug th-tool (release versions) #3
+edd9d655 Test and debug th-tool #2
+6545621e Test and debug th-tool #1
+5127dfdb Introduce 2 subcommands in 'th-tool' #6
+5b6fc69d Introduce 2 subcommands in 'th-tool' #5
+3b0dd901 Introduce 2 subcommands in 'th-tool' #4
+cca85d74 Introduce 2 subcommands in 'th-tool' #3
+deee1a9f Introduce 2 subcommands in 'th-tool' #2
+e508a303 Introduce 2 subcommands in 'th-tool' #1
+0ca55750 correct dump to summary and delete 'misc--gh-pages.yml' GitHub-workflow
+06357122 Introduce 'maven-source-plugin' and upgrade the maven deps
+ecf464e5 Add and improve some JavaDoc #1
+05557577 Publish to GH-Pages as a part of 'on-main-push' action for each commit
+cd0c9adc Switch to JDK '25' and use '(Amazon Corretto)' vendor everywhere in GitHub actions
+a3bf2205 temporary use the result of 'javadoc:jar' MOJO #1
+8cd43fa3 fix the detection of target core-utils-21.0.2-SNAPSHOT.jar
+ee41e524 attach JavaDoc's JAR into the default build-lifecycle
+da39c9fa some minor corrections to JavaDoc #2
+eb952b49 some minor corrections to JavaDoc #1
+34ea8266 attempt to publish git-log and javadoc into gh-pages #3
+70f117c5 attempt to publish git-log and javadoc into gh-pages #2
+c25d74a9 attempt to publish git-log and javadoc into gh-pages #1
+187a38c3 verify append to file and git-add the whole directory as '.'
+e5134590 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #9
+08885a3b intrdouce 'misc--gh-pages.yml' action to play with gh-pages #8
+bd9b0f87 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #7
+5ccc853c intrdouce 'misc--gh-pages.yml' action to play with gh-pages #6
+0be70901 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #5
+e3269a49 intrdouce 'misc--gh-pages.yml' action to play with gh-pages #4
+9fbd49ae intrdouce 'misc--gh-pages.yml' action to play with gh-pages #3
+b9c9275c intrdouce 'misc--gh-pages.yml' action to play with gh-pages #2
+8eef7054 intrdouce 'misc--gh-pages.yml' action to play with gh-pages
+c0bec9bd add badge to GH-Pages #2
+2a488296 add badge to GH-Pages
+2a301ce2 Attempt to fix the build with all names at '@JsonPropertyOrder' annotation
+7c5ac177 intrdouce 'javadoc' MOJO and attempt to fix the build with '@JsonPropertyOrder'
+34d84dd6 refactor - introduce 'core' sub-package
+f3e62318 refactor assertions of ObjectPrinterTest
+96cd4f28 implementing SVG-dumpers (YAML) #5
+b6d6bf35 implementing SVG-dumpers (YAML) #4
+5f0b9258 implementing SVG-dumpers (finish with JSON) #3
+c2afb7de implementing SVG-dumpers (JSON) #2
+22017ea7 implementing SVG-dumpers (JSON) #1
+56618721 introduce OuterTagUtils #2
+447451a7 introduce OuterTagUtils
+848620db implementing YAML rendering into HTML #4
+69c4b32e implementing YAML rendering into HTML #3
+5a547553 implementing YAML rendering #2
+f7d27e8e implementing YAML rendering #1
+1c8cb80f implementing HTML rendering #1
+7d60df05 introduce and use RenderSpec with Highlight instead of Highlighter
+0b79c6a7 provide JavaDoc and refine some tests #4 (minor refactoring))
+898ae4cd provide JavaDoc and refine some tests #3 (testBooleans)
+26f22718 provide JavaDoc and refine some tests #2
+5bb624d2 provide JavaDoc and refine some tests #1
+0a2cd5b7 provide the default implemntations of ObjectPrinter and introduce utility-facades #1
+c27ceccc implementing JarFileInfo.java #1
+0b853ad2 continue working 'th-tool' #3
+5148a008 continue working 'th-tool' #2
+5edb8fba continue working 'th-tool' #1
+c42c1a39 start working on the first real 'th-tool'-template
+e8eefc5c support of '.properties' extension in ThymeleafVars #2
+4750427f support of '.properties' extension in ThymeleafVars #1
+db1ef0d3 Working with th-tool (correct vars-dir) #5
+c8f967b4 Working with th-tool (add a workflow 'th-tool') #4
+0f111595 Working with th-tool (add a workflow 'th-tool') #3
+5a004a53 Working with th-tool (add a workflow 'th-tool') #2
+4ef75eb4 Working with th-tool (add a workflow 'th-tool')
+426546d7 Working with th-tool (processing vars)
+0cc9c969 Introduce JacksonUtils.java
+b6216fa9 Working with th-templates for usage (tuning the maven cache)
+c2560306 Working with th-templates for usage #5
+0d6e44cf Working with th-templates for usage #4
+fdc9a510 Working with th-templates for usage #3
+d127c0fe Working with th-templates for usage #2
+70cbc7c3 Working with th-templates for usage #1
+83efd0e3 start working on ThymeleafTool #1
+215d49c0 play with multi-line github-workflow action-step-run #4
+30945aa7 play with multi-line github-workflow action-step-run #3
+0c05d101 play with multi-line github-workflow action-step-run #2
+b2d9dc13 play with multi-line github-workflow action-step-run #1
+44d2d9f9 generate 'META-INF/maven/maven-project.properties' with parsed versions
+07f0fbff improve DumpSysProps
+c7a10206 improve the result of 'dump-to-summary.sh' #3
+ca3f2313 improve the result of 'dump-to-summary.sh' #2
+e10a5c42 improve the result of 'dump-to-summary.sh' #1
+9ec47b7a setup jbang in gh-workflow action
+d9b3edee debug dump-to-summary.sh #2
+cc84ae15 debug dump-to-summary.sh #1
+917cab61 playing with dumps #9
+11f9af2c playing with dumps #8
+40d9c738 playing with dumps #7
+521a9ce8 playing with dumps #6
+72099286 playing with dumps #5
+8fa241c2 playing with dumps #4
+7996a0c8 playing with dumps #3
+2af60cc0 playing with dumps #2
+930d87be playing with dumps #1
+5f62f9e4 Provide toSortedMap and toLinkedMap
+da0c1ee6 Play with java and maven #1
+cead81f7 Play with java and maven #0
+461e1983 make bash executable #2
+a6b6fe1f make bash executable
+b68bfd35 add status badge
+2a4d122b playing with GH workflows #5
+3dd8518c playing with GH workflows #4
+d6f0284c playing with GH workflows #3
+c4ed4e59 playing with GH workflows #2
+eaff78ae playing with GH workflows
+c975e12f attempt to fix resources
+bd5fc32e adding enforcer, versioner and other pliugins (including manifest generation)
+8f6f5e95 Provide some debug-info #1
+4a593092 Provide maven cache
+ee0dd7a9 Provide <distributionManagement> section to 'pom.xml'
+380fe362 Introduce some main and test code
+8e4641b7 Create maven-publish.yml
+f736ec49 Initial commit
