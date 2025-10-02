@@ -2,7 +2,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 
 [![Release-Catalog](https://img.shields.io/badge/GH--Pages-Release_Catalog-blue)](https://krm-demo.github.io/core-utils/)
-[![Project-Site](https://img.shields.io/badge/GH--Pages-core--utils:21.06.002--SNAPSHOT-blue)](https://krm-demo.github.io/core-utils/core-utils-21.06.002-SNAPSHOT)
+[![Project-Site](https://img.shields.io/badge/GH--Pages-core--utils:21.06.003--SNAPSHOT-blue)](https://krm-demo.github.io/core-utils/core-utils-21.06.003-SNAPSHOT)
 
 # <u>core-utils</u>
 
@@ -11,7 +11,7 @@ It was initially created as a core and reusable part of **`th-tool`** (which is 
 Some features and approaches could be very useful and helpful independently as a separate Java-library
 that could be easily integrated into any Java-project as a maven/gradle artifact or as a dependency to jbang-script.
 
-Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.06.002-SNAPSHOT).
+Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.06.003-SNAPSHOT).
 Other versions of ths project are listed in the [release catalog](https://krm-demo.github.io/core-utils/),
 but the latest relevant versions (with relation to the current one) are:
 
@@ -23,10 +23,10 @@ but the latest relevant versions (with relation to the current one) are:
 > [!TIP]
 > TODO: to be inserted the usage (conditionally: PUBLIC / INTERNAL / SNAPSHOT)
 
-This particular version of the project `21.06.002-SNAPSHOT` is a _SNAPSHOT_-version, which consists of:
+This particular version of the project `21.06.003-SNAPSHOT` is a _SNAPSHOT_-version, which consists of:
 - major version `21` (that corresponds to minimum available version of JDK);
 - minor version `6` (the ordinal number of _PUBLIC_-release);
-- incremental version  `2` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
+- incremental version  `3` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
 - the qualifier `SNAPSHOT` means that it's a _SNAPSHOT_-version (not released yet in any kind)
 
 > [!IMPORTANT]
@@ -64,7 +64,7 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.06.002-SNAPSHOT</artifactId>
+            <version>21.06.003-SNAPSHOT</artifactId>
         </dependency>
     ```
 - for test-source dependencies:
@@ -72,7 +72,7 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.06.002-SNAPSHOT</artifactId>
+            <version>21.06.003-SNAPSHOT</artifactId>
             <scope>test</scope>
         </dependency>
     ```
@@ -81,10 +81,10 @@ Projects that use [**Gradle** Build Tool](https://gradle.org/) should declare th
 in either `build.gradle` or `build.gradle.kts` like following: 
 ```Gradle
     // for main-source implementation dependencies:
-    implementation("io.github.krm-demo:core-utils:21.06.002-SNAPSHOT")
+    implementation("io.github.krm-demo:core-utils:21.06.003-SNAPSHOT")
     . . . . . . . . . . . . . .
     // for test-source implementation dependencies:
-    testImplementation("io.github.krm-demo:core-utils:21.06.002-SNAPSHOT")
+    testImplementation("io.github.krm-demo:core-utils:21.06.003-SNAPSHOT")
 ```
 
 ### [JBang](https://www.jbang.dev/)
@@ -96,7 +96,7 @@ both [JBang](https://www.jbang.dev/) and **`core-utils`**-library
 are properly installed is to execute following command:
 
 ```bash
-...> jbang io.github.krm-demo:core-utils:21.06.002-SNAPSHOT
+...> jbang io.github.krm-demo:core-utils:21.06.003-SNAPSHOT
 This is a Main-class of 'core-utils' library (just a test message here)
 ```
 You must see quite the same output as above. The versions and other detailed information could also be verified in such way.
