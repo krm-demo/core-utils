@@ -1,3 +1,4 @@
+51df70a << public release >> 21.05
 42a0f48 << new snapshot version >> 21.05.006-SNAPSHOT
 5121aea << internal release >> 21.05.005
 d5319b6 attempt NOT to use 'git push --force ...' during public release #1
