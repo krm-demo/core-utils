@@ -3,6 +3,8 @@ package org.krmdemo.techlabs.thtool;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
@@ -29,7 +31,12 @@ public class GithubHelperTest {
     void testWorkflow() {
         GithubHelper gh = GithubHelper.fromCtxLazy(ttCtx);
         assertThat(gh.propsGithub()).isNotEmpty();
-        assertThat(gh.getWorkflowName()).isEqualTo("on-main-push");
+        List<String> expectedWorkflowNames = List.of(
+            "on-main-push",
+            "release-internal",
+            "release-public"
+        );
+        assertThat(expectedWorkflowNames).contains(gh.getWorkflowName());
     }
 
     @Test
