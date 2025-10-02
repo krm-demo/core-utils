@@ -1,3 +1,4 @@
+d1f9e861 << internal release >> 21.08.001
 9ec20499 refactor helpers of th-tool #5 (fix badges verification)
 5e37ba32 refactor helpers of th-tool #4 (fix badges verification)
 279a728b refactor helpers of th-tool #3 (fix badges verification)
