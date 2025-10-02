@@ -60,6 +60,7 @@ jobs:
 
           echo "- [1] changing the version from '$INITIAL_VERSION' to '$NEW_RELEASE_VERSION';"
           mvn -B --quiet versions:set -DnewVersion=$NEW_RELEASE_VERSION
+          mvn -B --quiet test-compile
 
           echo "- [1] going to commit the updated 'pom.xml' into git (THE FIRST COMMIT);"
           git add pom.xml
