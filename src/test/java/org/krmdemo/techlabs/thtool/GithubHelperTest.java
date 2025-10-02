@@ -29,7 +29,7 @@ public class GithubHelperTest {
     void testWorkflow() {
         GithubHelper gh = GithubHelper.fromCtxLazy(ttCtx);
         assertThat(gh.propsGithub()).isNotEmpty();
-        assertThat(gh.workflowName()).isEqualTo("on-main-push");
+        assertThat(gh.getWorkflowName()).isEqualTo("on-main-push");
     }
 
     @Test

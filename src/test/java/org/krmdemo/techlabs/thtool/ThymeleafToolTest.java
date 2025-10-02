@@ -36,6 +36,7 @@ public class ThymeleafToolTest {
 
         assertThat(sbOut).contains("core-utils");
         assertThat(sbOut).contains("utility-classes to simplify working with core-java API");
+        assertThat(sbOut).contains("on-main-push.yml/badge.svg");
     }
 
     // --------------------------------------------------------------------------------------------

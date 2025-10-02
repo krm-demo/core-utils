@@ -1,4 +1,4 @@
-[![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)
+[[ ${gbh.badgeBuildPassing} ]]
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 
 [![Release-Catalog](https://img.shields.io/badge/GH--Pages-Release_Catalog-blue)](https://krm-demo.github.io/core-utils/)

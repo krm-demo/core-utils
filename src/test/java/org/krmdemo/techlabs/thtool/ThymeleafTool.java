@@ -107,6 +107,7 @@ public class ThymeleafTool {
     final ThymeleafToolCtx varsCtx = new ThymeleafToolCtx();
 
     @SafeVarargs
+    @SuppressWarnings("varargs")
     public ThymeleafTool(Consumer<ThymeleafToolCtx>... ctxInitArr) {
         Arrays.stream(ctxInitArr).forEach(init -> init.accept(varsCtx));
     }
@@ -182,7 +183,7 @@ public class ThymeleafTool {
             GithubInputsHelper::register,
             GithubBadgeHelper::register
         );
-        return new CommandLine(new ThymeleafTool()).execute(args);
+        return new CommandLine(tt).execute(args);
     }
 
     // --------------------------------------------------------------------------------------------

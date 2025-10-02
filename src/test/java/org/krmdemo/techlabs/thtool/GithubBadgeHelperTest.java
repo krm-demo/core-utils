@@ -19,10 +19,10 @@ public class GithubBadgeHelperTest {
     void testBadgePassing() {
         GithubHelper gh = GithubHelper.fromCtxLazy(ttCtx);
         assertThat(gh.propsGithub()).isNotEmpty();
-        assertThat(gh.workflowName()).isEqualTo("on-main-push");
+        assertThat(gh.getWorkflowName()).isEqualTo("on-main-push");
 
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
-        assertThat(gbh.badgeBuildPassing()).isEqualTo("""
-            [![on-main-push](https://github.com/krm-demo/core-utils/on-main-push.yml/badge.svg)](https://github.com/krm-demo/core-utils/on-main-push.yml)""");
+        assertThat(gbh.getBadgeBuildPassing()).isEqualTo("""
+            [![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)""");
     }
 }

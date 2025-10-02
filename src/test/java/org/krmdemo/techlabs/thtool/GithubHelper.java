@@ -1,6 +1,7 @@
 package org.krmdemo.techlabs.thtool;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.util.Map;
 import java.util.Objects;
@@ -53,8 +54,7 @@ public class GithubHelper {
 
     final static String VAR_PROP_NAME__WORKFLOW = "workflow";
 
-    @JsonProperty(VAR_PROP_NAME__WORKFLOW)
-    public String workflowName() {
+    public String getWorkflowName() {
         return ttCtx.propValueStr(propsGithub(), VAR_PROP_NAME__WORKFLOW);
     }
 
@@ -63,5 +63,10 @@ public class GithubHelper {
      */
     public String getProjectRepoHtmlUrl() {
         return ttCtx.propValueStr(propsGithub(), "event", "repository", "html_url");
+    }
+
+    @Override
+    public String toString() {
+        return DumpUtils.dumpAsJsonTxt(this);
     }
 }

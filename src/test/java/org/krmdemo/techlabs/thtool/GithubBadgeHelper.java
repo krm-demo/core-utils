@@ -1,7 +1,7 @@
 package org.krmdemo.techlabs.thtool;
 
-import java.util.Collections;
-import java.util.Map;
+import org.krmdemo.techlabs.core.dump.DumpUtils;
+
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -67,8 +67,8 @@ public class GithubBadgeHelper {
 
     // --------------------------------------------------------------------------------------------
 
-    public String badgeBuildPassing() {
-        return workflowBadgeMarkdown(GithubHelper.fromCtx(ttCtx).workflowName());
+    public String getBadgeBuildPassing() {
+        return workflowBadgeMarkdown(GithubHelper.fromCtx(ttCtx).getWorkflowName());
     }
 
     private String workflowBadgeMarkdown(String workflowName) {
@@ -79,7 +79,13 @@ public class GithubBadgeHelper {
      * @return something like {@code [![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)}
      */
     private String workflowBadgeMarkdown(String workflowName, String workflowSourceName) {
-        String workflowUrl = GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl() + "/" + workflowSourceName;
+        String repoUrl =  GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl();
+        String workflowUrl = repoUrl + "/actions/workflows/" + workflowSourceName;
         return String.format("[![%s](%s/badge.svg)](%s)", workflowName, workflowUrl, workflowUrl);
+    }
+
+    @Override
+    public String toString() {
+        return DumpUtils.dumpAsJsonTxt(this);
     }
 }
