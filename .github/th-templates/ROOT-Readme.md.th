@@ -23,7 +23,17 @@ but the latest relevant versions (with relation to the current one) are:
 > [!TIP]
 > TODO: to be inserted the usage (conditionally: PUBLIC / INTERNAL / SNAPSHOT)
 
-<th:block th:replace="${gih.usageFragmentPath}"> Error replacing the 'Usage'-fragment !!! </th:block>
+the content of `GithubInputsHelper` instance is:
+```json
+[( ${gih} )]
+```
+
+the content of `MavenHelper` instance is:
+```json
+[( ${mh} )]
+```
+
+<th:block th:replace="${mh.usageFragmentPath}"> Error replacing the 'Usage'-fragment !!! </th:block>
 
 ---
 

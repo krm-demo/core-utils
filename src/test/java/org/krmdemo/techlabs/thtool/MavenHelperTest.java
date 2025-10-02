@@ -27,6 +27,16 @@ public class MavenHelperTest {
     }
 
     @Test
+    void testUsageFragmentPath() {
+        assertThat(mavenHelper.getUsageFragmentPath())
+            .endsWith(".github/th-templates/Usage-SNAPSHOT.md.th");
+        assertThat(mavenHelperInternal.getUsageFragmentPath())
+            .endsWith(".github/th-templates/Usage-INTERNAL.md.th");
+        assertThat(mavenHelperPublic.getUsageFragmentPath())
+            .endsWith(".github/th-templates/Usage-PUBLIC.md.th");
+    }
+
+    @Test
     void testBadgeName() {
         assertThat(mavenHelper.getProjectBadgeName())
             .isEqualTo("core--utils:21.0.2--SNAPSHOT");

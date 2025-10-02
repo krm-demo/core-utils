@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.thtool;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
@@ -206,8 +207,12 @@ public class MavenHelper {
     /**
      * @return the value of {@link #getIncrementalVersion()} as {@link Integer}
      */
-    public Integer getIncrementalAsInt() {
-        return Integer.valueOf(getIncrementalVersion());
+    public int getIncrementalAsInt() {
+        try {
+            return Integer.parseInt(getIncrementalVersion());
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     /**
@@ -218,9 +223,33 @@ public class MavenHelper {
         return StringUtils.isBlank(qualifier) ? "SNAPSHOT" : qualifier;
     }
 
+    @JsonProperty("versionHasQualifierPart")
+    public boolean versionHasQualifierPart() {
+        return StringUtils.isNotBlank(mvnPropsMap.get(PROP_NAME__VERSION_QUALIFIER));
+    }
+
+    @JsonProperty("versionHasIncrementalPart")
+    public boolean versionHasIncrementalPart() {
+        return getIncrementalAsInt() > 0;
+    }
+
+    public String getUsageFragmentPath() {
+        return String.format(".github/th-templates/Usage-%s.md.th", getUsageFragmentSuffix());
+    }
+
+    public String getUsageFragmentSuffix() {
+        if (versionHasQualifierPart()) {
+            return "SNAPSHOT";
+        } else if (versionHasIncrementalPart()) {
+            return "INTERNAL";
+        } else {
+            return "PUBLIC";
+        }
+    }
+
     @Override
     public String toString() {
-        return "maven-helper object with properties --> " + DumpUtils.dumpAsJsonTxt(this);
+        return DumpUtils.dumpAsJsonTxt(this);
     }
 
     // --------------------------------------------------------------------------------------------
