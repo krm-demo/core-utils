@@ -99,8 +99,8 @@ public class ThymeleafToolCtx extends AbstractContext {
     }
 
     @SuppressWarnings("unchecked")
-    public Map<String, ?> propsVar(String varName) {
-        return (Map<String, ?>)typedVar(varName, Map.class, Collections.emptyMap());
+    public Map<String, Object> propsVar(String varName) {
+        return (Map<String, Object>)typedVar(varName, Map.class, Collections.emptyMap());
     }
 
     public <T> T typedVar(String varName, Class<T> varClass, T defaultValue) {

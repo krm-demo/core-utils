@@ -46,7 +46,7 @@ public class GithubHelper {
      * @return the main underlying <b>{@code th-tool}</b>-variable as properties-map (similar to initial JSON-Object)
      */
     @JsonProperty(VAR_NAME__GITHUB)
-    public Map<String, ?> propsGithub() {
+    public Map<String, Object> propsGithub() {
         return this.ttCtx.propsVar(VAR_NAME__GITHUB);
     }
 
