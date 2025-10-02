@@ -7,11 +7,14 @@ import org.thymeleaf.context.AbstractContext;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapFromFile;
 import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
@@ -36,6 +39,89 @@ import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromResource;
  */
 @Slf4j
 public class ThymeleafToolCtx extends AbstractContext {
+
+    /**
+     * The default directory for <b>{@code th-tool}</b> var-files.
+     */
+    public static final String DEFAULT_VARS_DIR = ".github/th-vars";
+
+    /**
+     * The same as {@link #DEFAULT_VARS_DIR} but of type {@link File}
+     */
+    public static final File DEFAULT_VARS_DIR__AS_FILE = new File(DEFAULT_VARS_DIR);
+
+
+    public String propValueStr(Object parent, String... propNameChain) {
+        Object propValueObj = propValue(parent, propNameChain);
+        return propValueObj == null ? null : String.valueOf(propValueObj);
+    }
+
+    @SuppressWarnings("rawtypes")
+    public Object propValue(Object parent, String... propNameChain) {
+        Object value = parent;
+        for (int propNameIndex = 0; propNameIndex < propNameChain.length; propNameIndex++) {
+            String propName = propNameChain[propNameIndex];
+            if (value instanceof Map parentMap) {
+                value = parentMap.get(propName);
+            } else {
+                // all values except the last one are expected to be maps
+                throw new IllegalArgumentException(String.format(
+                    "Could not resolve the property-chain '%s' - the tail '%s' is unresolved " +
+                    "(the value of '%s' is expected to be a Map, but %s).",
+                    propChainStr(propNameChain),
+                    propChainTailStr(propNameIndex, propNameChain),
+                    propChainHeadStr(propNameIndex, propNameChain),
+                    wrongValueDescription(value)
+                ));
+            }
+        }
+        return value;
+    }
+
+    public static String wrongValueDescription(Object value) {
+        return value == null ? "it's null" : String.format("it's of type <<%s>>", value.getClass());
+    }
+
+    public static String propChainStr(String... propChain) {
+        return propChainStr(0, propChain.length, propChain);
+    }
+
+    public static String propChainHeadStr(int propIndex, String... propChain) {
+        return propChainStr(0, propIndex, propChain);
+    }
+
+    public static String propChainTailStr(int propIndex, String... propChain) {
+        return propChainStr(propIndex, propChain.length, propChain);
+    }
+
+    public static String propChainStr(int indexFrom, int indexTo, String... propChain) {
+        return Arrays.stream(propChain, indexFrom, indexTo).collect(Collectors.joining("."));
+    }
+
+    @SuppressWarnings("unchecked")
+    public Map<String, ?> propsVar(String varName) {
+        return (Map<String, ?>)typedVar(varName, Map.class, Collections.emptyMap());
+    }
+
+    public <T> T typedVar(String varName, Class<T> varClass, T defaultValue) {
+        T typedVarObj = typedVar(varName, varClass);
+        return typedVarObj == null ? defaultValue : typedVarObj;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T typedVar(String varName, Class<T> varClass) {
+        Object varObj = getVariable(varName);
+        if (varObj == null) {
+            return null;
+        } else if (varClass.isAssignableFrom(varObj.getClass())){
+            return (T)varObj;
+        } else {
+            throw new IllegalStateException(String.format(
+                "Context variable '%s' of type '%s' is not an instance of class %s'",
+                varName, varObj.getClass(), varClass
+            ));
+        }
+    }
 
     void processVarFilePair(String varFilePair) {
         logInfo("- processing the var-file pair '%s' ", varFilePair);

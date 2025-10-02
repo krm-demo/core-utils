@@ -14,14 +14,14 @@ import static org.krmdemo.techlabs.thtool.GithubInputsHelper.VAR_PROP_VALUE__REL
 import static org.krmdemo.techlabs.thtool.GithubInputsHelper.VAR_PROP_VALUE__RELEASE_TYPE_PUBLIC;
 
 /**
- * A unit-test to {@link GithubInputsHelper}
+ * A unit-test to <b>{@code th-tool}</b>-helper {@link GithubInputsHelper}.
  */
 public class GithubInputsHelperTest {
 
     @Test
     void testNoVar() {
-        GithubInputsHelper gih = new GithubInputsHelper(new ThymeleafToolCtx());
-        assertThat(gih.getGithubInputs()).isEmpty();
+        GithubInputsHelper gih = GithubInputsHelper.fromCtxLazy();
+        assertThat(gih.propsGithubInputs()).isEmpty();
         assertThat(gih.isReleasing()).isFalse();
         assertThat(gih.isReleasingInternal()).isFalse();
         assertThat(gih.isReleasingPublic()).isFalse();
@@ -45,8 +45,8 @@ public class GithubInputsHelperTest {
             nameValue(VAR_PROP_NAME__RELEASE_TYPE, VAR_PROP_VALUE__RELEASE_TYPE_INTERNAL),
             nameValue(VAR_PROP_NAME__RELEASE_PHASE, VAR_PROP_VALUE__PHASE_MAIN)
         ));
-        GithubInputsHelper gih = new GithubInputsHelper(ttCtx);
-        assertThat(gih.getGithubInputs()).isNotEmpty();
+        GithubInputsHelper gih = GithubInputsHelper.fromCtxLazy(ttCtx);
+        assertThat(gih.propsGithubInputs()).isNotEmpty();
         assertThat(gih.isReleasing()).isTrue();
         assertThat(gih.isReleasingInternal()).isTrue();
         assertThat(gih.isReleasingPublic()).isFalse();
@@ -73,8 +73,8 @@ public class GithubInputsHelperTest {
             nameValue(VAR_PROP_NAME__RELEASE_TYPE, VAR_PROP_VALUE__RELEASE_TYPE_PUBLIC),
             nameValue(VAR_PROP_NAME__RELEASE_PHASE, VAR_PROP_VALUE__PHASE_MAIN)
         ));
-        GithubInputsHelper gih = new GithubInputsHelper(ttCtx);
-        assertThat(gih.getGithubInputs()).isNotEmpty();
+        GithubInputsHelper gih = GithubInputsHelper.fromCtxLazy(ttCtx);
+        assertThat(gih.propsGithubInputs()).isNotEmpty();
         assertThat(gih.isReleasing()).isTrue();
         assertThat(gih.isReleasingInternal()).isFalse();
         assertThat(gih.isReleasingPublic()).isTrue();
@@ -101,8 +101,8 @@ public class GithubInputsHelperTest {
             nameValue(VAR_PROP_NAME__RELEASE_TYPE, VAR_PROP_VALUE__RELEASE_TYPE_INTERNAL),
             nameValue(VAR_PROP_NAME__RELEASE_PHASE, VAR_PROP_VALUE__PHASE_NEXT)
         ));
-        GithubInputsHelper gih = new GithubInputsHelper(ttCtx);
-        assertThat(gih.getGithubInputs()).isNotEmpty();
+        GithubInputsHelper gih = GithubInputsHelper.fromCtxLazy(ttCtx);
+        assertThat(gih.propsGithubInputs()).isNotEmpty();
         assertThat(gih.isReleasing()).isTrue();
         assertThat(gih.isReleasingInternal()).isTrue();
         assertThat(gih.isReleasingPublic()).isFalse();
@@ -129,8 +129,8 @@ public class GithubInputsHelperTest {
             nameValue(VAR_PROP_NAME__RELEASE_TYPE, VAR_PROP_VALUE__RELEASE_TYPE_PUBLIC),
             nameValue(VAR_PROP_NAME__RELEASE_PHASE, VAR_PROP_VALUE__PHASE_NEXT)
         ));
-        GithubInputsHelper gih = new GithubInputsHelper(ttCtx);
-        assertThat(gih.getGithubInputs()).isNotEmpty();
+        GithubInputsHelper gih = GithubInputsHelper.fromCtxLazy(ttCtx);
+        assertThat(gih.propsGithubInputs()).isNotEmpty();
         assertThat(gih.isReleasing()).isTrue();
         assertThat(gih.isReleasingInternal()).isFalse();
         assertThat(gih.isReleasingPublic()).isTrue();

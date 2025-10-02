@@ -14,9 +14,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedSet;
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
+import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR;
 
 /**
  * This class represents <b>{@code th-tool}</b> that could be used to process {@code *.md.th}, {@code *.html.th}
@@ -62,7 +64,7 @@ public class ThymeleafTool {
     @Option(
         names = {"--vars-dir"},
         paramLabel = "<path>",
-        defaultValue = ".github/th-vars",
+        defaultValue = DEFAULT_VARS_DIR,
         description = """
             directory with files like '@|bold,yellow var-|@@|blue XXX|@@|bold,yellow .json|@' and '@|bold,yellow var-|@@|blue YYY|@@|bold,yellow .properties|@',
             where @|blue XXX|@ and @|blue YYY|@ are going to be the names of corresponding 'th-tool' variables
@@ -104,6 +106,11 @@ public class ThymeleafTool {
      */
     final ThymeleafToolCtx varsCtx = new ThymeleafToolCtx();
 
+    @SafeVarargs
+    public ThymeleafTool(Consumer<ThymeleafToolCtx>... ctxInitArr) {
+        Arrays.stream(ctxInitArr).forEach(init -> init.accept(varsCtx));
+    }
+
     /**
      * Initialize <b>{@code th-tool}</b> variables to be used in subcommands.
      *
@@ -129,7 +136,6 @@ public class ThymeleafTool {
         // Here the predefined helper-objects are registered in Thymeleaf-Context
         varsCtx.setVariable("mh", new MavenHelper());
         varsCtx.setVariable("zh", new ZeroSpaceHelper());
-        varsCtx.setVariable("gih", new GithubInputsHelper(varsCtx));
         logInfo("... variables and helpers with following names are available in templates --> %s",
             () -> dumpAsJsonPrettyPrint(sortedSet(varsCtx.getVariableNames().stream())));
     }
@@ -147,6 +153,8 @@ public class ThymeleafTool {
             return templateEngine.process(templateContent, varsCtx);
         }
     }
+
+    // --------------------------------------------------------------------------------------------
 
     /**
      * JVM entry-point of <b>{@code th-tool}</b>
@@ -169,8 +177,15 @@ public class ThymeleafTool {
      * @return system exit-code ({@code 0} means that everything is OK)
      */
     static int executeMain(String... args) {
+        ThymeleafTool tt = new ThymeleafTool(
+            GithubHelper::register,
+            GithubInputsHelper::register,
+            GithubBadgeHelper::register
+        );
         return new CommandLine(new ThymeleafTool()).execute(args);
     }
+
+    // --------------------------------------------------------------------------------------------
 
     /**
      * @param fileToLoad file to read the content
@@ -199,6 +214,8 @@ public class ThymeleafTool {
             throw new IllegalStateException("could not save the content into the file " + fileToSave, ioEx);
         }
     }
+
+    // --------------------------------------------------------------------------------------------
 
     private static void logInfo(String formatString, Callable<?>... formatArgs) {
         if (log.isDebugEnabled()) {

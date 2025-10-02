@@ -20,7 +20,7 @@ import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class ThymeleafTemplateTest {
 
-    public final static String RESOURCE__MAVEN_PROPS = "/META-INF/maven/maven-project.properties";
+    public static final String RESOURCE__MAVEN_PROPS = "/META-INF/maven/maven-project.properties";
 
     @SuppressWarnings("unused")  // <-- used inside template !!!
     public boolean isIterable(Object someObject) {

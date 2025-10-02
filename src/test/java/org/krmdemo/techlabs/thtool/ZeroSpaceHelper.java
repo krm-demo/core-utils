@@ -3,7 +3,8 @@ package org.krmdemo.techlabs.thtool;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * A helper-class to obfuscate the strings with zero-spaces.
+ * This class represents a <b>{@code th-tool}</b>-helper to obfuscate the strings with zero-spaces.
+ * The properties of this helper are available from <b>{@code th-tool}</b>-templates by name {@code zsh}.
  * <hr/>
  * The methods of this helper-class allows to inject {@code &ZeroWidthSpace;} or {@code &#8203;}
  * or {@code &#x200B;} in the middle of passed sensitive string. In most cases it's enough

@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.concurrent.Callable;
 
 import static org.krmdemo.techlabs.core.utils.SysDumpUtils.fileAttrsAsJson;
-import static org.krmdemo.techlabs.thtool.ThymeleafTool.loadFileContent;
 import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
 
 /**
