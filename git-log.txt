@@ -1,3 +1,4 @@
+3c98142 << internal release >> 21.06.001
 25a7db2 Insert 'Usage' into 'Readme' by replacing the Thymeleaf-Fragment #1
 ba72b05 Use FileTemplateResolver in ThymeleafToolProc #1
 0c815a0 << new snapshot version >> 21.06.001-SNAPSHOT
