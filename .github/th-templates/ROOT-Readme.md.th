@@ -23,6 +23,8 @@ but the latest relevant versions (with relation to the current one) are:
 > [!TIP]
 > TODO: to be inserted the usage (conditionally: PUBLIC / INTERNAL / SNAPSHOT)
 
+<th:block th:replace=".github/th-templates/Usage-SNAPSHOT.md.th"> Error replacing the fragment !!! </th:block>
+
 ---
 
 > [!NOTE]

@@ -1,4 +1,4 @@
-This particular version of the project `[[${mh.currentProjectVersion}]]` is an _INTERNAL_-release version, which consists of
+This particular version of the project `[[${mh.currentProjectVersion}]]` is an _PUBLIC_-release version, which consists of
 - major version `[[${mh.majorVersion}]]` (that corresponds to minimum available version of JDK);
 - minor version `[[${mh.minorVersion}]]` (the ordinal number of _PUBLIC_-release);
 
