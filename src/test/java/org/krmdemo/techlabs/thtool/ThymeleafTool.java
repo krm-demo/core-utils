@@ -158,19 +158,18 @@ public class ThymeleafTool {
      * </a>
      */
     public static void main(String... args) {
-//        // TODO: try to introduce and integrate a logger like it's demonstrated at "https://foojay.io/..."
-//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//        System.out.println(SysDumpUtils.dumpEnvVarsExAsJson());
-//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//        System.out.println(SysDumpUtils.dumpSysPropsExAsJson());
-//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.exit(executeMain(args));
+    }
 
-//        CommandLine.Help.Ansi ansiMode = CommandLine.Help.Ansi.ON;
-//        new CommandLine.Help.Ansi(ansiMode).out;
-//        int exitCode = new CommandLine(new ThymeleafTool()).execute(new CommandLine.Help.Ansi(ansiMode).out, args);
-
-        int exitCode = new CommandLine(new ThymeleafTool()).execute(args);
-        System.exit(exitCode);
+    /**
+     * Used in functional-tests - the same as {@link #main(String...)},
+     * but without invocation of {@link System#exit(int)} to be able to verify things.
+     *
+     * @param args command-line arguments that will be processed by PicoCli-framework
+     * @return system exit-code ({@code 0} means that everything is OK)
+     */
+    static int executeMain(String... args) {
+        return new CommandLine(new ThymeleafTool()).execute(args);
     }
 
     /**

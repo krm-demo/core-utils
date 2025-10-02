@@ -180,10 +180,9 @@ public class ThymeleafFragmentTest {
     // --------------------------------------------------------------------------------------------
 
     private static ITemplateResolver templateResolver() {
-        // 1. Create a FileTemplateResolver instance
         FileTemplateResolver resolver = new FileTemplateResolver();
         resolver.setOrder(1);
-        resolver.setTemplateMode("HTML5");
+        //resolver.setTemplateMode("HTML5");
         resolver.setCharacterEncoding("UTF-8");
         resolver.setCacheable(false); // <-- disable caching for development, enable for production
         resolver.setCheckExistence(true);  // <-- very important for the chain of resolvers

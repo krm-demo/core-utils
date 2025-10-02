@@ -2,6 +2,7 @@ package org.krmdemo.techlabs.thtool;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.thymeleaf.templateresolver.FileTemplateResolver;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -60,6 +61,14 @@ public class ThymeleafToolProc implements Callable<Integer> {
         logInfo("... executing 'th-tool' to process input-template: ...");
         tt.initVars();
 
+        // we have to add the file-resolver to be possible to work with Thymeleaf-Fragments
+        FileTemplateResolver fileResolver = new FileTemplateResolver();
+        fileResolver.setOrder(1);
+        fileResolver.setCharacterEncoding("UTF-8");
+        fileResolver.setCacheable(false); // <-- there's no need to cache things like that for CLI-application
+        fileResolver.setCheckExistence(true);  // <-- very important for the chain of resolvers
+        tt.templateEngine.addTemplateResolver(fileResolver);
+
         if (outputLocation == null) {
             logDebug("- no output location is specified (the result will be printed)");
         } else if (outputLocation.isFile()) {
@@ -93,17 +102,7 @@ public class ThymeleafToolProc implements Callable<Integer> {
             logInfo("(the file does not exists or the path does not represent the file)");
             return false;
         }
-        String templateContent = loadFileContent(templateFile);
-        if (templateContent == null) {
-            logInfo("(could not read the content of a file)");
-            return false;
-        }
-        String outputContent = tt.processTemplateContent(templateContent);
-        if (StringUtils.isBlank(templateContent)) {
-            // TODO: maybe it's better to ignore this case or handle it in some different way
-            logInfo("(the content of template is blank)");
-            return false;
-        }
+        String outputContent = tt.templateEngine.process(templateFile.getPath(), tt.varsCtx);
 
         if (outputLocation != null && (!outputLocation.exists() || outputLocation.isFile())) {
             saveFileContent(outputLocation, outputContent);

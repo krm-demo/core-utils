@@ -85,6 +85,7 @@ public class ThymeleafToolEval implements Callable<Integer> {
         String templateContent = String.format("[[${%s}]]", expression);
         logDebug("- templateContent is <<%s>>", () -> templateContent);
 
+        // TODO: try using `[(...)]` instead of `[[...]]` instead of following statement (or provide an option)
         String outputContent = StringEscapeUtils.unescapeHtml4(
             tt.processTemplateContent(templateContent));
 
@@ -100,17 +101,18 @@ public class ThymeleafToolEval implements Callable<Integer> {
             if (StringUtils.isEmpty(outputContent)) {
                 outputContent = Ansi.AUTO.string("""
                     @|red << the result is empty>> |@
-                    @|black,faint,bold most probably because the variable name is wrong|@
+                    @|black,faint,bold most probably because the single variable's name is wrong|@
                     """);
             } else if (StringUtils.isEmpty(outputContent)) {
                 outputContent = Ansi.AUTO.string("""
                     @|red << the result is blank>> |@
-                    @|black,faint,bold that looks very suspicious|@
+                    @|black,faint,bold that usually looks suspicious|@
                     """);
             } else if (outputContent.equals("{}")) {
                 outputContent += Ansi.AUTO.string(
                     " @|black,faint,bold << the result is empty JSON-Object>>|@\n");
             }
+            // TODO: handle the case when the output is not finished with new-line symbol
             System.out.print(outputContent);
         }
         return 0;
