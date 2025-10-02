@@ -70,6 +70,20 @@ public class GithubInputsHelper {
             getGithubInputs().get(VAR_PROP_NAME__RELEASE_PHASE));
     }
 
+    public String getUsageFragmentPath() {
+        return String.format(".github/th-templates/Usage-%s.md.th", getUsageFragmentSuffix());
+    }
+
+    public String getUsageFragmentSuffix() {
+        if (isReleasingPublic() && isRenderingMainPhase()) {
+            return "PUBLIC";
+        } else if (isReleasingInternal() && isRenderingMainPhase()) {
+            return "INTERNAL";
+        } else {
+            return "SNAPSHOT";
+        }
+    }
+
     @Override
     public String toString() {
         return DumpUtils.dumpAsJsonTxt(this);

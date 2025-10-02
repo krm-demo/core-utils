@@ -27,6 +27,19 @@ public class GithubInputsHelperTest {
         assertThat(gih.isReleasingPublic()).isFalse();
         assertThat(gih.isRenderingMainPhase()).isFalse();
         assertThat(gih.isRenderingNextPhase()).isFalse();
+        assertThat(gih.getUsageFragmentPath()).isEqualTo(
+            ".github/th-templates/Usage-SNAPSHOT.md.th");
+        assertThat("" + gih).isEqualTo("""
+            {
+              "githubInputs": {},
+              "releasing": "false",
+              "releasingInternal": "false",
+              "releasingPublic": "false",
+              "renderingMainPhase": "false",
+              "renderingNextPhase": "false",
+              "usageFragmentPath": ".github/th-templates/Usage-SNAPSHOT.md.th",
+              "usageFragmentSuffix": "SNAPSHOT"
+            }""");
     }
 
     @Test
@@ -43,6 +56,22 @@ public class GithubInputsHelperTest {
         assertThat(gih.isReleasingPublic()).isFalse();
         assertThat(gih.isRenderingMainPhase()).isTrue();
         assertThat(gih.isRenderingNextPhase()).isFalse();
+        assertThat(gih.getUsageFragmentPath()).isEqualTo(
+            ".github/th-templates/Usage-INTERNAL.md.th");
+        assertThat("" + gih).isEqualTo("""
+            {
+              "githubInputs": {
+                "release_type": "INTERNAL",
+                "release_phase": "call-main"
+              },
+              "releasing": "true",
+              "releasingInternal": "true",
+              "releasingPublic": "false",
+              "renderingMainPhase": "true",
+              "renderingNextPhase": "false",
+              "usageFragmentPath": ".github/th-templates/Usage-INTERNAL.md.th",
+              "usageFragmentSuffix": "INTERNAL"
+            }""");
     }
 
     @Test
@@ -59,6 +88,22 @@ public class GithubInputsHelperTest {
         assertThat(gih.isReleasingPublic()).isTrue();
         assertThat(gih.isRenderingMainPhase()).isTrue();
         assertThat(gih.isRenderingNextPhase()).isFalse();
+        assertThat(gih.getUsageFragmentPath()).isEqualTo(
+            ".github/th-templates/Usage-PUBLIC.md.th");
+        assertThat("" + gih).isEqualTo("""
+            {
+              "githubInputs": {
+                "release_type": "PUBLIC",
+                "release_phase": "call-main"
+              },
+              "releasing": "true",
+              "releasingInternal": "false",
+              "releasingPublic": "true",
+              "renderingMainPhase": "true",
+              "renderingNextPhase": "false",
+              "usageFragmentPath": ".github/th-templates/Usage-PUBLIC.md.th",
+              "usageFragmentSuffix": "PUBLIC"
+            }""");
     }
 
     @Test
@@ -75,6 +120,22 @@ public class GithubInputsHelperTest {
         assertThat(gih.isReleasingPublic()).isFalse();
         assertThat(gih.isRenderingMainPhase()).isFalse();
         assertThat(gih.isRenderingNextPhase()).isTrue();
+        assertThat(gih.getUsageFragmentPath()).isEqualTo(
+            ".github/th-templates/Usage-SNAPSHOT.md.th");
+        assertThat("" + gih).isEqualTo("""
+            {
+              "githubInputs": {
+                "release_type": "INTERNAL",
+                "release_phase": "call-main-next"
+              },
+              "releasing": "true",
+              "releasingInternal": "true",
+              "releasingPublic": "false",
+              "renderingMainPhase": "false",
+              "renderingNextPhase": "true",
+              "usageFragmentPath": ".github/th-templates/Usage-SNAPSHOT.md.th",
+              "usageFragmentSuffix": "SNAPSHOT"
+            }""");
     }
 
     @Test
@@ -91,5 +152,21 @@ public class GithubInputsHelperTest {
         assertThat(gih.isReleasingPublic()).isTrue();
         assertThat(gih.isRenderingMainPhase()).isFalse();
         assertThat(gih.isRenderingNextPhase()).isTrue();
+        assertThat(gih.getUsageFragmentPath()).isEqualTo(
+            ".github/th-templates/Usage-SNAPSHOT.md.th");
+        assertThat("" + gih).isEqualTo("""
+            {
+              "githubInputs": {
+                "release_type": "PUBLIC",
+                "release_phase": "call-main-next"
+              },
+              "releasing": "true",
+              "releasingInternal": "false",
+              "releasingPublic": "true",
+              "renderingMainPhase": "false",
+              "renderingNextPhase": "true",
+              "usageFragmentPath": ".github/th-templates/Usage-SNAPSHOT.md.th",
+              "usageFragmentSuffix": "SNAPSHOT"
+            }""");
     }
 }
