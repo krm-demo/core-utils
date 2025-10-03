@@ -20,7 +20,7 @@ but the latest relevant versions (with relation to the current one) are:
 
 ---
 
-<th:block th:replace="${mh.usageFragmentPath}"> Error replacing the 'Usage'-fragment !!! </th:block>
+<th:block th:replace="~{${mh.usageFragmentPath}}"> Error replacing the 'Usage'-fragment !!! </th:block>
 
 ---
 

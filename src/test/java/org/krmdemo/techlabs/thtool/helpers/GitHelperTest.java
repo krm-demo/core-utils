@@ -1,4 +1,4 @@
-package org.krmdemo.techlabs.thtool;
+package org.krmdemo.techlabs.thtool.helpers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jgit.api.Status;

@@ -1,7 +1,8 @@
-package org.krmdemo.techlabs.thtool;
+package org.krmdemo.techlabs.thtool.helpers;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;

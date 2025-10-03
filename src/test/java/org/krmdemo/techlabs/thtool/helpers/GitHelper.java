@@ -1,4 +1,4 @@
-package org.krmdemo.techlabs.thtool;
+package org.krmdemo.techlabs.thtool.helpers;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.Status;
@@ -7,6 +7,7 @@ import org.eclipse.jgit.errors.NoWorkTreeException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.StoredConfig;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
+import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,6 +73,10 @@ public record GitHelper(File gitRepoDir) {
     }
 
     /**
+     * Getting the map of remote local-names (like {@code 'origin'}) to remote URLs
+     * <hr/>
+     * P.S.: useful git-CLI command is also {@code git config --list --show-origin}
+     *
      * @return similar to what {@code git remote -v} returns
      */
     public NavigableMap<String,String> getRemoteUrls() {

@@ -1,6 +1,8 @@
 package org.krmdemo.techlabs.core.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.krmdemo.techlabs.thtool.helpers.GitHelper;
 
 import java.util.List;
 
@@ -15,13 +17,14 @@ import static org.krmdemo.techlabs.core.utils.SysDumpUtils.dumpSysPropsEx;
 import static org.krmdemo.techlabs.core.utils.SysDumpUtils.dumpSysPropsExAsJson;
 
 /**
- * TODO: cover the indents with tests more properly
+ * A unit-test of utility-class {@link SysDumpUtils}.
  */
+@Slf4j
 public class SysDumpUtilsTest {
 
     @Test
     void testDumpSysProps() {
-        System.out.println("dumpSysPropsAsJson() --> " + dumpSysPropsAsJson());
+        log.debug("dumpSysPropsAsJson() --> " + dumpSysPropsAsJson());
         assertThat(dumpSysProps())
             .isNotEmpty()
             .containsKeys(
@@ -39,7 +42,7 @@ public class SysDumpUtilsTest {
 
     @Test
     void testDumpSysPropsEx() {
-        System.out.println("dumpSysPropsExAsJson() --> " + dumpSysPropsExAsJson());
+        log.debug("dumpSysPropsExAsJson() --> " + dumpSysPropsExAsJson());
         assertThat(dumpSysPropsEx()).hasSize(dumpSysProps().size());
         assertThat(dumpSysPropsEx().get("java.class.path")).isInstanceOf(List.class);
         assertThat(dumpSysPropsExAsJson())
@@ -51,7 +54,7 @@ public class SysDumpUtilsTest {
 
     @Test
     void testDumpEnv() {
-        System.out.println("dumpEnvVarsAsJson() --> " + dumpEnvVarsAsJson());
+        log.debug("dumpEnvVarsAsJson() --> " + dumpEnvVarsAsJson());
         assertThat(dumpEnvVars())
             .isNotEmpty()
             .containsKeys(
@@ -68,7 +71,7 @@ public class SysDumpUtilsTest {
 
     @Test
     void testDumpEnvEx() {
-        System.out.println("dumpEnvVarsExAsJson() --> " + dumpEnvVarsExAsJson());
+        log.debug("dumpEnvVarsExAsJson() --> " + dumpEnvVarsExAsJson());
         assertThat(dumpEnvVarsEx()).hasSize(dumpEnvVars().size());
         assertThat(dumpEnvVarsEx().get("PATH")).isInstanceOf(List.class);
         assertThat(dumpEnvVarsExAsJson())

@@ -50,64 +50,42 @@ public class ThymeleafToolCtx extends AbstractContext {
      */
     public static final File DEFAULT_VARS_DIR__AS_FILE = new File(DEFAULT_VARS_DIR);
 
-
-    public String propValueStr(Object parent, String... propNameChain) {
-        Object propValueObj = propValue(parent, propNameChain);
-        return propValueObj == null ? null : String.valueOf(propValueObj);
-    }
-
-    @SuppressWarnings("rawtypes")
-    public Object propValue(Object parent, String... propNameChain) {
-        Object value = parent;
-        for (int propNameIndex = 0; propNameIndex < propNameChain.length; propNameIndex++) {
-            String propName = propNameChain[propNameIndex];
-            if (value instanceof Map parentMap) {
-                value = parentMap.get(propName);
-            } else {
-                // all values except the last one are expected to be maps
-                throw new IllegalArgumentException(String.format(
-                    "Could not resolve the property-chain '%s' - the tail '%s' is unresolved " +
-                    "(the value of '%s' is expected to be a Map, but %s).",
-                    propChainStr(propNameChain),
-                    propChainTailStr(propNameIndex, propNameChain),
-                    propChainHeadStr(propNameIndex, propNameChain),
-                    wrongValueDescription(value)
-                ));
-            }
-        }
-        return value;
-    }
-
-    public static String wrongValueDescription(Object value) {
-        return value == null ? "it's null" : String.format("it's of type <<%s>>", value.getClass());
-    }
-
-    public static String propChainStr(String... propChain) {
-        return propChainStr(0, propChain.length, propChain);
-    }
-
-    public static String propChainHeadStr(int propIndex, String... propChain) {
-        return propChainStr(0, propIndex, propChain);
-    }
-
-    public static String propChainTailStr(int propIndex, String... propChain) {
-        return propChainStr(propIndex, propChain.length, propChain);
-    }
-
-    public static String propChainStr(int indexFrom, int indexTo, String... propChain) {
-        return Arrays.stream(propChain, indexFrom, indexTo).collect(Collectors.joining("."));
-    }
-
+    /**
+     * The same as {@link #typedVar(String, Class, Object)}, but casting to {@link Map Map&lt;String,Object&gt;}
+     * and returning {@link Collections#emptyMap() empty map}, if such variable does not exist.
+     *
+     * @param varName the name of <b>{@code th-tool}</b>-variable
+     * @return the value of variable {@code varName} as {@link Map Map&lt;String,Object&gt;} or
+     * {@link Collections#emptyMap() empty map} if such variable does not exist
+     */
     @SuppressWarnings("unchecked")
     public Map<String, Object> propsVar(String varName) {
         return (Map<String, Object>)typedVar(varName, Map.class, Collections.emptyMap());
     }
 
+    /**
+     * The same as {@link #typedVar(String, Class)}, but returning {@code defaultValue}
+     * if the variable withh name {@code varName} does not exist in this context.
+     *
+     * @param varName the name of <b>{@code th-tool}</b>-variable
+     * @param varClass the class to cast the value of variable to
+     * @param defaultValue the default value to return if variable does not exist
+     * @return the value of variable {@code varName} of type {@code varClass}
+     * @param <T> the type to cast the variable to
+     */
     public <T> T typedVar(String varName, Class<T> varClass, T defaultValue) {
         T typedVarObj = typedVar(varName, varClass);
         return typedVarObj == null ? defaultValue : typedVarObj;
     }
 
+    /**
+     * Getting the value of <b>{@code th-tool}</b>-variable in this context with casting it to proper type
+     *
+     * @param varName the name of <b>{@code th-tool}</b>-variable
+     * @param varClass the class to cast the value of variable to
+     * @return the value of variable {@code varName} of type {@code varClass}
+     * @param <T> the type to cast the variable to
+     */
     @SuppressWarnings("unchecked")
     public <T> T typedVar(String varName, Class<T> varClass) {
         Object varObj = getVariable(varName);
@@ -123,7 +101,20 @@ public class ThymeleafToolCtx extends AbstractContext {
         }
     }
 
-    void processVarFilePair(String varFilePair) {
+    /**
+     * Creating the variable in <b>{@code th-tool}</b>-context, whose name corresponds to the left side
+     * of assignment-expression and whose value corresponds to the content of the file,
+     * whose path in the local file-system is on the right side of assignment-expression
+     * of form {@code varName=path/to/file}.
+     * <hr/>
+     * The extension of file must be either {@code .json} or {@code .properties}
+     * and the content of the file will be processed according to that extension.
+     * In case of any other extension - the {@link IllegalStateException} will be raised.
+     *
+     * @param varFilePair assignment-expression of form {@code varName=path/to/file}
+     * @see ThymeleafTool#varFilePairs
+     */
+    public void processVarFilePair(String varFilePair) {
         logInfo("- processing the var-file pair '%s' ", varFilePair);
         Matcher matcher = PATTERN__VAR_FILE_PAIR.matcher(varFilePair);
         if (!matcher.matches()) {
@@ -149,7 +140,20 @@ public class ThymeleafToolCtx extends AbstractContext {
         }
     }
 
-    void processVarResourcePair(String varResPair) {
+    /**
+     * Creating the variable in <b>{@code th-tool}</b>-context, whose name corresponds to the left side
+     * of assignment-expression and whose value corresponds to the content of the resource,
+     * whose path in {@code CLASSPATH} is on the right side of assignment-expression
+     * of form {@code varName=path/to/file}.
+     * <hr/>
+     * The extension of file must be either {@code .json} or {@code .properties}
+     * and the content of the file will be processed according to that extension.
+     * In case of any other extension - the {@link IllegalStateException} will be raised.
+     *
+     * @param varResPair assignment-expression of form {@code varName=path/to/file}
+     * @see ThymeleafTool#varResPairs
+     */
+    public void processVarResourcePair(String varResPair) {
         logInfo("- processing the var-resource pair '%s' ", varResPair);
         Matcher matcher = PATTERN__VAR_RES_PAIR.matcher(varResPair);
         if (!matcher.matches()) {
@@ -170,7 +174,20 @@ public class ThymeleafToolCtx extends AbstractContext {
         }
     }
 
-    void processDirectory(File varsDir) {
+    /**
+     * Process each file in the directory {@code varsDir} in a way that the name of each file
+     * is used to retrieve the name of <b>{@code th-tool}</b>-variable. The prefix {@code var-}
+     * and the extension {@code *.json} and {@code *.properties} are used as filter and other files
+     * will be ignored. The substring that in the middle of prefix {@code var-} and the extension
+     * will be the target variable name (e.g. the file with name {@code var-githubInputs.json}
+     * will be deserialized as {@code JSON}-file via <a href="https://github.com/FasterXML/jackson">Jackson</a>
+     * and the variable with the name {@code githubInputs} and the value of type {@code Map<String,Object>}
+     * or {@code List} will be created in this context.
+     *
+     * @param varsDir the path of directory on local file-system to process
+     * @see ThymeleafTool#varsDir
+     */
+    public void processDirectory(File varsDir) {
         File[] filesArr = Objects.requireNonNull(varsDir).listFiles();
         if (filesArr == null) {
             throw new IllegalArgumentException("not a directory - " + varsDir);

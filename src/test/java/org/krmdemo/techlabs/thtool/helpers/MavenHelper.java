@@ -1,4 +1,4 @@
-package org.krmdemo.techlabs.thtool;
+package org.krmdemo.techlabs.thtool.helpers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

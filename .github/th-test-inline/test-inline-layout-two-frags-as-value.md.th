@@ -1,3 +1,3 @@
 This layout contains two inline fragments, included via attr-value ( someIntProp = [( ${this.someIntProp} )] ):
-- <th:block th:replace=".github/th-test-inline/test-inline-fragment-A.md.th"> !!! Error Inline A !!!</th:block>
-- <th:block th:insert= ".github/th-test-inline/test-inline-fragment-B.md.th"> !!! Error Inline B !!!</th:block>
+- <th:block th:replace="~{.github/th-test-inline/test-inline-fragment-A.md.th}"> !!! Error Inline A !!!</th:block>
+- <th:block th:insert= "~{.github/th-test-inline/test-inline-fragment-B.md.th}"> !!! Error Inline B !!!</th:block>

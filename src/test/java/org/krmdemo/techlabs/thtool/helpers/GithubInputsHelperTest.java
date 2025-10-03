@@ -1,17 +1,18 @@
-package org.krmdemo.techlabs.thtool;
+package org.krmdemo.techlabs.thtool.helpers;
 
 import org.junit.jupiter.api.Test;
+import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
-import static org.krmdemo.techlabs.thtool.GithubInputsHelper.VAR_NAME__GITHUB_INPUTS;
-import static org.krmdemo.techlabs.thtool.GithubInputsHelper.VAR_PROP_NAME__RELEASE_PHASE;
-import static org.krmdemo.techlabs.thtool.GithubInputsHelper.VAR_PROP_NAME__RELEASE_TYPE;
-import static org.krmdemo.techlabs.thtool.GithubInputsHelper.VAR_PROP_VALUE__PHASE_MAIN;
-import static org.krmdemo.techlabs.thtool.GithubInputsHelper.VAR_PROP_VALUE__PHASE_NEXT;
-import static org.krmdemo.techlabs.thtool.GithubInputsHelper.VAR_PROP_VALUE__RELEASE_TYPE_INTERNAL;
-import static org.krmdemo.techlabs.thtool.GithubInputsHelper.VAR_PROP_VALUE__RELEASE_TYPE_PUBLIC;
+import static org.krmdemo.techlabs.thtool.helpers.GithubInputsHelper.VAR_NAME__GITHUB_INPUTS;
+import static org.krmdemo.techlabs.thtool.helpers.GithubInputsHelper.VAR_PROP_NAME__RELEASE_PHASE;
+import static org.krmdemo.techlabs.thtool.helpers.GithubInputsHelper.VAR_PROP_NAME__RELEASE_TYPE;
+import static org.krmdemo.techlabs.thtool.helpers.GithubInputsHelper.VAR_PROP_VALUE__PHASE_MAIN;
+import static org.krmdemo.techlabs.thtool.helpers.GithubInputsHelper.VAR_PROP_VALUE__PHASE_NEXT;
+import static org.krmdemo.techlabs.thtool.helpers.GithubInputsHelper.VAR_PROP_VALUE__RELEASE_TYPE_INTERNAL;
+import static org.krmdemo.techlabs.thtool.helpers.GithubInputsHelper.VAR_PROP_VALUE__RELEASE_TYPE_PUBLIC;
 
 /**
  * A unit-test to <b>{@code th-tool}</b>-helper {@link GithubInputsHelper}.

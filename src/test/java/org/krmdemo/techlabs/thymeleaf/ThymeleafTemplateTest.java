@@ -4,8 +4,8 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.krmdemo.techlabs.core.utils.SysDumpUtils;
-import org.krmdemo.techlabs.thtool.MavenHelper;
-import org.krmdemo.techlabs.thtool.ZeroSpaceHelper;
+import org.krmdemo.techlabs.thtool.helpers.MavenHelper;
+import org.krmdemo.techlabs.thtool.helpers.ZeroSpaceHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 

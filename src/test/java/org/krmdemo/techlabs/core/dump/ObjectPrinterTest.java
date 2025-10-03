@@ -38,7 +38,7 @@ import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 /**
  * A unit-test to verify the implementations of {@link ObjectPrinter} interface
  * <hr/>
- * TODO: Cover the output of list and map to file
+ * TODO: Cover the output of list and map to file and get rid of extra garbage in standard output
  */
 public class ObjectPrinterTest {
 

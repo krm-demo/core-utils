@@ -1,12 +1,14 @@
-package org.krmdemo.techlabs.thtool;
+package org.krmdemo.techlabs.thtool.helpers;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.krmdemo.techlabs.thtool.ThToolCtxUtils.propValueStr;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
 
 /**
@@ -49,16 +51,16 @@ public class GithubHelperTest {
     @Test
     void testInvalidPropsChain_wrong_first() {
         GithubHelper gh = GithubHelper.fromCtxLazy(ttCtx);
-        assertThat(ttCtx.propValueStr(gh.propsGithub(), "wrongPropName")).isNull();
+        assertThat(propValueStr(gh.propsGithub(), "wrongPropName")).isNull();
         assertThatIllegalArgumentException().isThrownBy(
-            () -> ttCtx.propValueStr(gh.propsGithub(), "wrongPropName", "repository", "html_url")
+            () -> propValueStr(gh.propsGithub(), "wrongPropName", "repository", "html_url")
         ).withMessage(
             "Could not resolve the property-chain 'wrongPropName.repository.html_url' - " +
             "the tail 'repository.html_url' is unresolved " +
             "(the value of 'wrongPropName' is expected to be a Map, but it's null)."
         );
         assertThatIllegalArgumentException().isThrownBy(
-            () -> ttCtx.propValueStr(gh.propsGithub(), "workflow", "repository", "html_url")
+            () -> propValueStr(gh.propsGithub(), "workflow", "repository", "html_url")
         ).withMessage(
             "Could not resolve the property-chain 'workflow.repository.html_url' - " +
             "the tail 'repository.html_url' is unresolved " +
@@ -69,16 +71,16 @@ public class GithubHelperTest {
     @Test
     void testInvalidPropsChain_wrong_second() {
         GithubHelper gh = GithubHelper.fromCtxLazy(ttCtx);
-        assertThat(ttCtx.propValueStr(gh.propsGithub(), "event", "wrongPropName")).isNull();
+        assertThat(propValueStr(gh.propsGithub(), "event", "wrongPropName")).isNull();
         assertThatIllegalArgumentException().isThrownBy(
-            () -> ttCtx.propValueStr(gh.propsGithub(), "event", "wrongPropName", "html_url")
+            () -> propValueStr(gh.propsGithub(), "event", "wrongPropName", "html_url")
         ).withMessage(
             "Could not resolve the property-chain 'event.wrongPropName.html_url' - " +
                 "the tail 'html_url' is unresolved " +
                 "(the value of 'event.wrongPropName' is expected to be a Map, but it's null)."
         );
         assertThatIllegalArgumentException().isThrownBy(
-            () -> ttCtx.propValueStr(gh.propsGithub(), "event", "ref", "html_url")
+            () -> propValueStr(gh.propsGithub(), "event", "ref", "html_url")
         ).withMessage(
             "Could not resolve the property-chain 'event.ref.html_url' - " +
             "the tail 'html_url' is unresolved " +
@@ -89,6 +91,6 @@ public class GithubHelperTest {
     @Test
     void testInvalidPropsChain_wrong_third() {
         GithubHelper gh = GithubHelper.fromCtxLazy(ttCtx);
-        assertThat(ttCtx.propValueStr(gh.propsGithub(), "event", "repository", "wrongPropName")).isNull();
+        assertThat(propValueStr(gh.propsGithub(), "event", "repository", "wrongPropName")).isNull();
     }
 }

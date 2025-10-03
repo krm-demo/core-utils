@@ -31,7 +31,7 @@
     <appender-ref ref="TH_TOOL_LOG"/>
   </logger>
 
-  <!-- the default logger of 'core-utils' library -->
+  <!-- the default logger of 'core-utils' library (not commit DEBUG because a lot of garbage from ThymeLeaf !!!) -->
   <root level="INFO">
     <appender-ref ref="DEFAULT_LOG" />
   </root>

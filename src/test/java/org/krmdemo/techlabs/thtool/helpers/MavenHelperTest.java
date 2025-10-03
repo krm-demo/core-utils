@@ -1,4 +1,4 @@
-package org.krmdemo.techlabs.thtool;
+package org.krmdemo.techlabs.thtool.helpers;
 
 import org.junit.jupiter.api.Test;
 

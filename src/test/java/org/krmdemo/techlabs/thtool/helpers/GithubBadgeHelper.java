@@ -1,6 +1,8 @@
-package org.krmdemo.techlabs.thtool;
+package org.krmdemo.techlabs.thtool.helpers;
 
 import org.krmdemo.techlabs.core.dump.DumpUtils;
+import org.krmdemo.techlabs.thtool.ThymeleafTool;
+import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
 import java.util.Objects;
 import java.util.function.Consumer;

@@ -4,16 +4,12 @@ import lombok.Getter;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.krmdemo.techlabs.core.utils.SysDumpUtils;
-import org.krmdemo.techlabs.thtool.MavenHelper;
-import org.krmdemo.techlabs.thtool.ZeroSpaceHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 
 /**
  * This unit-test is just a sandbox for using Thymeleaf-Engine for conditions

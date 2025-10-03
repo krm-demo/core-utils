@@ -1,6 +1,7 @@
 package org.krmdemo.techlabs.core.classinfo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,10 @@ import java.sql.DriverManager;
 
 import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 
+/**
+ * TODO: get rid of extra garbage in standard output
+ */
+@Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ClassInfoTest {
 

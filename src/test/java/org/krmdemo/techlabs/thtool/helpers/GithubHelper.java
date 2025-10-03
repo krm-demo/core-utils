@@ -1,10 +1,13 @@
-package org.krmdemo.techlabs.thtool;
+package org.krmdemo.techlabs.thtool.helpers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
+import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
 import java.util.Map;
 import java.util.Objects;
+
+import static org.krmdemo.techlabs.thtool.ThToolCtxUtils.propValueStr;
 
 /**
  * This class represents a <b>{@code th-tool}</b>-helper to work with miscellaneous properties of Git-Hub.
@@ -55,14 +58,14 @@ public class GithubHelper {
     final static String VAR_PROP_NAME__WORKFLOW = "workflow";
 
     public String getWorkflowName() {
-        return ttCtx.propValueStr(propsGithub(), VAR_PROP_NAME__WORKFLOW);
+        return propValueStr(propsGithub(), VAR_PROP_NAME__WORKFLOW);
     }
 
     /**
      * @return the same as {@code ${github.event.repository.html_url}} in <b>{@code th-tool}</b> expression
      */
     public String getProjectRepoHtmlUrl() {
-        return ttCtx.propValueStr(propsGithub(), "event", "repository", "html_url");
+        return propValueStr(propsGithub(), "event", "repository", "html_url");
     }
 
     @Override
