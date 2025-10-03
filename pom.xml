@@ -132,16 +132,17 @@
     </dependency>
 
     <dependency>
+      <groupId>org.eclipse.jgit</groupId>
+      <artifactId>org.eclipse.jgit</artifactId>
+      <version>7.3.0.202506031305-r</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf</artifactId>
       <version>${org.thymeleaf.version}</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <!-- it looks like this dependency is useless: TODO: get rid of it -->
-      <groupId>nz.net.ultraq.thymeleaf</groupId>
-      <artifactId>thymeleaf-layout-dialect</artifactId>
-      <version>${thymeleaf-layout-dialect.version}</version>
     </dependency>
     <dependency>
       <groupId>info.picocli</groupId>

@@ -179,6 +179,7 @@ public class ThymeleafTool {
      */
     static int executeMain(String... args) {
         ThymeleafTool tt = new ThymeleafTool(
+            GitHelper::register,
             GithubHelper::register,
             GithubInputsHelper::register,
             GithubBadgeHelper::register

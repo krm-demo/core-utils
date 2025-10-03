@@ -58,7 +58,7 @@ public class SysDumpUtils {
      */
     public static NavigableMap<String, Object> dumpSysPropsEx() {
         return dumpSysProps().entrySet().stream()
-            .collect(toSortedMap(e -> transformSysProps(e)));
+            .collect(toSortedMap(SysDumpUtils::transformSysProps));
     }
 
     /**
@@ -73,7 +73,7 @@ public class SysDumpUtils {
      */
     public static NavigableMap<String, Object> dumpEnvVarsEx() {
         return dumpEnvVars().entrySet().stream()
-            .collect(toSortedMap(e -> transformPathVars(e)));
+            .collect(toSortedMap(SysDumpUtils::transformPathVars));
     }
 
     // --------------------------------------------------------------------------------------------
