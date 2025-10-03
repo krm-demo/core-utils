@@ -26,6 +26,6 @@ public class GithubBadgeHelperTest {
         assertThat(gh.getWorkflowName()).isEqualTo("expected-workflow-name");
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
         assertThat(gbh.getBadgeBuildPassing()).isEqualTo("""
-            [![expected-workflow-name](https://github.com/krm-demo/core-utils/actions/workflows/expected-workflow-name.yml/badge.svg)](https://github.com/krm-demo/core-utils/actions/workflows/expected-workflow-name.yml)""");
+            [![expected-workflow-name](https://github.com/krm-demo/core-utils/actions/workflows/expected-workflow-name.yml/badge.svg?event=push)](https://github.com/krm-demo/core-utils/actions/workflows/expected-workflow-name.yml)""");
     }
 }

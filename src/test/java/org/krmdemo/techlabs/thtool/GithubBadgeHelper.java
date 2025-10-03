@@ -81,7 +81,7 @@ public class GithubBadgeHelper {
     private String workflowBadgeMarkdown(String workflowName, String workflowSourceName) {
         String repoUrl =  GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl();
         String workflowUrl = repoUrl + "/actions/workflows/" + workflowSourceName;
-        return String.format("[![%s](%s/badge.svg)](%s)", workflowName, workflowUrl, workflowUrl);
+        return String.format("[![%s](%s/badge.svg?event=push)](%s)", workflowName, workflowUrl, workflowUrl);
     }
 
     @Override

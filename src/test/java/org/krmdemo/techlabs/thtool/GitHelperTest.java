@@ -18,9 +18,9 @@ public class GitHelperTest {
     @Test
     void testRemoteUrls() {
         System.out.println("remoteURLs = " + gitLogHelper.getRemoteUrls());
-        assertThat(gitLogHelper.getRemoteUrls())
-            .containsKeys("origin")
-            .containsValues("https://github.com/krm-demo/core-utils.git");
+        assertThat(gitLogHelper.getRemoteUrls()).containsOnlyKeys("origin");
+        assertThat(gitLogHelper.getRemoteUrls().get("origin"))
+            .startsWith("https://github.com/krm-demo/core-utils");
     }
 
     @Test
