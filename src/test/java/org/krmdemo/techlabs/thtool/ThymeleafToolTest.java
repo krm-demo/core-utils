@@ -36,12 +36,8 @@ public class ThymeleafToolTest {
 
         assertThat(sbOut).contains("core-utils");
         assertThat(sbOut).contains("utility-classes to simplify working with core-java API");
-        assertThat(sbOut).containsAnyOf(
-            // one of 3 possible "build-passing"-badges must be present:
-            "on-main-push.yml/badge.svg",
-            "release-internal.yml/badge.svg",
-            "release-public.yml/badge.svg"
-        );
+        assertThat(sbOut).contains("utility-classes to simplify working with core-java API");
+        assertThat(sbOut).containsAnyOf("on-main-push.yml/badge.svg?event=push");
     }
 
     // --------------------------------------------------------------------------------------------

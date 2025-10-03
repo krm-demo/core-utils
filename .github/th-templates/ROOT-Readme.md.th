@@ -47,7 +47,3 @@ the content of `MavenHelper` (`th-tool`-expression `${mh}`) instance is:
 [( ${mh} )]
 ```
 
-the content of `GithubHelper` (`th-tool`-expression `${gh}`) instance is:
-```json
-[( ${gh} )]
-```

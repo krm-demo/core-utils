@@ -68,10 +68,10 @@ public class GithubBadgeHelper {
     // --------------------------------------------------------------------------------------------
 
     public String getBadgeBuildPassing() {
-        return workflowBadgeMarkdown(GithubHelper.fromCtx(ttCtx).getWorkflowName());
+        return workflowBadgeMarkdown("on-main-push");
     }
 
-    private String workflowBadgeMarkdown(String workflowName) {
+    public String workflowBadgeMarkdown(String workflowName) {
         return workflowBadgeMarkdown(workflowName, workflowName + ".yml");
     }
 
