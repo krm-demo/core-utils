@@ -59,14 +59,6 @@ public class CommitInfo implements Consumer<Ref> {
         return versionTag != null && versionTag.isPublicRelease();
     }
 
-    public boolean isInternalRelease() {
-        return versionTag != null && versionTag.isInternalRelease();
-    }
-
-    public boolean isSnapshotVersion() {
-        return hasVersionTag() && versionTag.isSnapshot();
-    }
-
     @JsonGetter
     public Object getMessage() {
         if (messageLines.size() > 1) {
