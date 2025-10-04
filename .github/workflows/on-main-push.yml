@@ -67,11 +67,7 @@ jobs:
           .github/th-tool.sh process .github/th-templates/GH-PAGES--overview.html.th --output src/main/javadoc/overview.html
           cat src/main/javadoc/overview.html
 
-          mvn -B --quiet test-compile
-          .github/th-tool.sh process .github/th-templates/GH-PAGES--Release-Catalog.html.th --output target/GH-PAGES--Release-Catalog.html
-          cat target/GH-PAGES--Release-Catalog.html
-          
-          mvn -B clean install
+          mvn -B install
           echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary ) ~~~~~~~~~~~~~"
           echo "
           the result of maven-build (content of \`./target/\` directory):
