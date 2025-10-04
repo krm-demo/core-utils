@@ -156,9 +156,14 @@ public record GitHelper(File gitRepoDir) {
             Repository repo = git.getRepository();
             repo.getRefDatabase().getRefsByPrefix(Constants.R_TAGS).forEach(tagRef -> {
                 String commitID = tagRefCommitID(repo, tagRef);
-                CommitInfo ci = commitsMap.get(commitID);
+                CommitInfo ciOld = commitsMap.get(commitID);
+                if (ciOld != null) {
+                    ciOld.accept(tagRef);
+                }
+                CommitTagInfo cti = new CommitTagInfo(repo, tagRef);
+                CommitInfo ci = commitsMap.get(cti.commitID);
                 if (ci != null) {
-                    ci.accept(tagRef);
+                    ci.acceptTagInfo(cti);
                 }
             });
             return commitsMap;
@@ -169,16 +174,29 @@ public record GitHelper(File gitRepoDir) {
         }
     }
 
+    @Deprecated
     private static String tagRefCommitID(Repository repo, Ref tagRef) {
-        if (!tagRef.isPeeled()) {
-            return tagRef.getObjectId().getName();
+        String tagRefObjName = tagRef.getObjectId().getName();
+        Ref peelRef = peelRef(repo, tagRef);
+        if (peelRef == null || peelRef.getPeeledObjectId() == null) {
+            return tagRefObjName;
         }
+        String peelRefObjName = peelRef.getPeeledObjectId().getName();
+        System.out.printf("tag = '%s' tagRefObjName = %s; peelRefObjName = %s; peelRef.ObjectId = %s;%n",
+            tagRef.getName(),
+            tagRefObjName,
+            peelRefObjName,
+            peelRef.getObjectId()
+        );
+        return peelRefObjName;
+    }
+
+    @Deprecated
+    private static Ref peelRef(Repository repo, Ref tagRef) {
         try {
-            return repo.getRefDatabase().peel(tagRef).getPeeledObjectId().getName();
-        } catch (IOException ioEx) {
-            throw new IllegalStateException(String.format(
-                "could not detect the commitID by annotated tag '%s'",
-                tagRef.getName()), ioEx);
+            return repo.getRefDatabase().peel(tagRef);
+        } catch (IOException e) {
+            return null;
         }
     }
 

@@ -10,7 +10,9 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NavigableMap;
 import java.util.NavigableSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -22,24 +24,25 @@ public class CommitInfo implements Consumer<Ref> {
     final int commitTime;
     final String commitID;
 
-    @JsonIgnore final String messageFirstLine;
     @JsonIgnore final String messageFull;
     @JsonIgnore final String messageShort;
     @JsonIgnore final List<String> messageLines;
 
-    final String authorName;
-    final String authorEmail;
+    @JsonIgnore final String authorName;
+    @JsonIgnore final String authorEmail;
     final String committerName;
     final String committerEmail;
 
     VersionTag versionTag;
     NavigableSet<String> allTags = new TreeSet<>();
 
+    CommitTagInfo tagInfo;
+    NavigableMap<String, CommitTagInfo> tagInfoAll = new TreeMap<>();
+
     CommitInfo(RevCommit revCommit) {
         this.commitTime = revCommit.getCommitTime();
         this.commitID = revCommit.getId().getName();
 
-        this.messageFirstLine = revCommit.getFirstMessageLine();
         this.messageFull = revCommit.getFullMessage();
         this.messageShort = revCommit.getShortMessage();
         this.messageLines = this.messageFull.lines().toList();
@@ -69,10 +72,21 @@ public class CommitInfo implements Consumer<Ref> {
     }
 
     @Override
+    @Deprecated
     public void accept(Ref tagRef) {
         String tagName = tagRef.getName();
         this.allTags.add(tagName);
         this.versionTag = VersionTag.parse(tagName);
     }
 
+    public void acceptTagInfo(CommitTagInfo tagInfo) {
+        this.tagInfoAll.put(tagInfo.tagName, tagInfo);
+        VersionTag versionTag = VersionTag.parse(tagInfo.tagName);
+        if (versionTag != null && versionTag.isValid()) {
+            this.versionTag = versionTag;
+            this.tagInfo = tagInfo;
+        } else if (this.tagInfo == null) {
+            this.tagInfo = tagInfo;
+        }
+    }
 }
