@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Matcher;
@@ -14,18 +15,27 @@ import java.util.regex.Pattern;
  * @param incremental incremental part
  * @param qualifier qualifier part
  */
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public record VersionTag(
     String major,
     String minor,
     String incremental,
-    String qualifier
+    String qualifier // <-- TODO: BULL SHIT !!! The version-tag must not have qualifier
 ) {
     public boolean isPublicRelease() {
-        return StringUtils.isBlank(incremental) && StringUtils.isBlank(qualifier);
+        return isValid() &&
+            StringUtils.isBlank(incremental) &&
+            StringUtils.isBlank(qualifier);
     }
 
     public boolean isInternalRelease() {
-        return StringUtils.isBlank(qualifier);
+        return isValid() && StringUtils.isBlank(qualifier);
+    }
+
+    public boolean isSnapshot() {
+        return isValid() &&
+            StringUtils.isNotBlank(incremental) &&
+            StringUtils.isNotBlank(qualifier);
     }
 
     public boolean isValid() {
@@ -69,7 +79,7 @@ public record VersionTag(
     private final static String QUALIFIER_SNAPSHOT = "SNAPSHOT";
 
     private final static Pattern PATTERN__TAG_NAME = Pattern.compile(
-        "^(?<major>[^.]*)\\.?(?<minor>[^.]*)?\\.?(?<incremental>[^-]*)?-?(?<qualifier>.*)$",
+        "^(?:refs/tags/)?(?<major>[^.]*)\\.?(?<minor>[^.]*)?\\.?(?<incremental>[^-]*)?-?(?<qualifier>.*)$",
         Pattern.CASE_INSENSITIVE
     );
 

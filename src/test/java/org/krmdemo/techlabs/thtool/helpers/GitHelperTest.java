@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.util.Map;
+import java.util.SequencedSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,14 +34,10 @@ public class GitHelperTest {
     }
 
     @Test
-    void testGitTags() {
-        gitLogHelper.getGitTags().forEach(ref -> {
-            log.info(String.format("- %s (peeled = %b; symbolic = %b) |%s|%n",
-                ref.getName(),
-                ref.isPeeled(), ref.isSymbolic(),
-                ref.getObjectId().getName()
-            ));
-        });
+    void testVersionTags() {
+        SequencedSet<VersionTag> versionTags = gitLogHelper.getVersionTags();
+        System.out.printf("--- testVersionTags(): %d version tags were found ---%n", versionTags.size());
+        System.out.println(DumpUtils.dumpAsYamlTxt(versionTags));
     }
 
     @Test

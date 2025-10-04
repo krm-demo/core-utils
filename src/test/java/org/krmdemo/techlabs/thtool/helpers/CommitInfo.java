@@ -50,6 +50,23 @@ public class CommitInfo implements Consumer<Ref> {
         this.committerEmail = revCommit.getCommitterIdent().getEmailAddress();
     }
 
+    @JsonGetter("hasVersionTag")
+    public boolean hasVersionTag() {
+        return versionTag != null && versionTag.isValid();
+    }
+
+    public boolean isPublicRelease() {
+        return versionTag != null && versionTag.isPublicRelease();
+    }
+
+    public boolean isInternalRelease() {
+        return versionTag != null && versionTag.isInternalRelease();
+    }
+
+    public boolean isSnapshotVersion() {
+        return hasVersionTag() && versionTag.isSnapshot();
+    }
+
     @JsonGetter
     public Object getMessage() {
         if (messageLines.size() > 1) {

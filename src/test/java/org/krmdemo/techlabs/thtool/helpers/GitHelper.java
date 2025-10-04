@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.SequencedMap;
+import java.util.SequencedSet;
 import java.util.Spliterator;
 import java.util.TreeSet;
 import java.util.function.Function;
@@ -34,6 +35,7 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedSet;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 
 /**
@@ -131,15 +133,11 @@ public record GitHelper(File gitRepoDir) {
      * @return similar to what {@code git tag} returns
      */
     @JsonIgnore
-    public List<Ref> getGitTags() {
-        try (Git git = Git.open(gitRepoDir)) {
-            Repository repo = git.getRepository();
-            return repo.getRefDatabase().getRefsByPrefix(Constants.R_TAGS);
-        } catch (IOException | NoWorkTreeException gitEx) {
-            throw new IllegalStateException(String.format(
-                "Could not get the list of tags from the local git-repository '%s'",
-                gitRepoDir.getPath()), gitEx);
-        }
+    public SequencedSet<VersionTag> getVersionTags() {
+        return getGitLog().values().stream()
+            .filter(CommitInfo::hasVersionTag)
+            .map(CommitInfo::getVersionTag)
+            .collect(toLinkedSet());
     }
 
     /**
