@@ -5,6 +5,8 @@ import org.eclipse.jgit.api.Status;
 import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -33,20 +35,18 @@ public class GitHelperTest {
     @Test
     void testGitTags() {
         gitLogHelper.getGitTags().forEach(ref -> {
-            System.out.printf("- %s (peeled = %b; symbolic = %b) |%s|%n",
+            log.info(String.format("- %s (peeled = %b; symbolic = %b) |%s|%n",
                 ref.getName(),
                 ref.isPeeled(), ref.isSymbolic(),
-                ref.getObjectId().getName());
+                ref.getObjectId().getName()
+            ));
         });
     }
 
     @Test
     void testGitLog() {
-        gitLogHelper.getGitLog().forEach(ci -> {
-            System.out.printf("- %s \"%s\"%n", ci.getCommitID(), ci.getMessageFirstLine());
-        });
+        Map<String, CommitInfo> commitsMap = gitLogHelper.getGitLog();
+        System.out.println("commitsMap.size = " + commitsMap.size());
+        System.out.println(DumpUtils.dumpAsYamlTxt(commitsMap));
     }
-
-
-
 }

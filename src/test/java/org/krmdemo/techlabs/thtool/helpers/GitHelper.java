@@ -7,6 +7,7 @@ import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.errors.NoWorkTreeException;
 import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.StoredConfig;
@@ -19,15 +20,20 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
+import java.util.NavigableSet;
 import java.util.SequencedMap;
 import java.util.Spliterator;
+import java.util.TreeSet;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 
 /**
@@ -140,11 +146,24 @@ public record GitHelper(File gitRepoDir) {
      * @return similar to what {@code git log} returns
      */
     @JsonIgnore
-    public Stream<CommitInfo> getGitLog() {
+    public SequencedMap<String, CommitInfo> getGitLog() {
         try (Git git = Git.open(gitRepoDir)) {
             Spliterator<RevCommit> revCommitsSI = git.log().call().spliterator();
-            Stream<RevCommit> revCommits = StreamSupport.stream(revCommitsSI, false);
-            return revCommits.map(CommitInfo::new);
+            SequencedMap<String, CommitInfo> commitsMap = StreamSupport.stream(revCommitsSI, false)
+                .map(CommitInfo::new)
+                .collect(toLinkedMap(
+                    CommitInfo::getCommitID,
+                    Function.identity()
+                ));
+            Repository repo = git.getRepository();
+            repo.getRefDatabase().getRefsByPrefix(Constants.R_TAGS).forEach(tagRef -> {
+                String commitID = tagRefCommitID(repo, tagRef);
+                CommitInfo ci = commitsMap.get(commitID);
+                if (ci != null) {
+                    ci.accept(tagRef);
+                }
+            });
+            return commitsMap;
         } catch (IOException | GitAPIException | NoWorkTreeException gitEx) {
             throw new IllegalStateException(String.format(
                 "Could not get the status of a local git-repository '%s'",
@@ -152,29 +171,16 @@ public record GitHelper(File gitRepoDir) {
         }
     }
 
-    @Getter
-    public static class CommitInfo {
-        int commitTime;
-        String commitID;
-        String messageFirstLine;
-        String messageFull;
-        String authorName;
-        String authorEmail;
-        Instant authorWhen;
-        String committerName;
-        String committerEmail;
-        Instant committerWhen;
-        private CommitInfo(RevCommit revCommit) {
-            this.commitTime = revCommit.getCommitTime();
-            this.commitID = revCommit.getId().getName();
-            this.messageFirstLine = revCommit.getFirstMessageLine();
-            this.messageFull = revCommit.getFullMessage();
-            this.authorName = revCommit.getAuthorIdent().getName();
-            this.authorEmail = revCommit.getAuthorIdent().getEmailAddress();
-            this.authorWhen = revCommit.getAuthorIdent().getWhenAsInstant();
-            this.committerName = revCommit.getCommitterIdent().getName();
-            this.committerEmail = revCommit.getCommitterIdent().getEmailAddress();
-            this.committerWhen = revCommit.getCommitterIdent().getWhenAsInstant();
+    private static String tagRefCommitID(Repository repo, Ref tagRef) {
+        if (!tagRef.isPeeled()) {
+            return tagRef.getObjectId().getName();
+        }
+        try {
+            return repo.getRefDatabase().peel(tagRef).getPeeledObjectId().getName();
+        } catch (IOException ioEx) {
+            throw new IllegalStateException(String.format(
+                "could not detect the commitID by annotated tag '%s'",
+                tagRef.getName()), ioEx);
         }
     }
 

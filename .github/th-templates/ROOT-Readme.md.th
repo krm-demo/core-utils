@@ -1,5 +1,6 @@
 [[ ${gbh.badgeBuildPassing} ]]
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
+![GitHub recent commits](https://img.shields.io/github/commits-since/krm-demo/core-utils/21.07)
 
 [![Release-Catalog](https://img.shields.io/badge/GH--Pages-Release_Catalog-blue)](https://krm-demo.github.io/core-utils/)
 [![Project-Site](https://img.shields.io/badge/GH--Pages-[[${mh.projectBadgeName}]]-blue)](https://krm-demo.github.io/core-utils/[[${mh.projectCatalogName}]])
