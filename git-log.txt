@@ -1,3 +1,4 @@
+46130119 get rid of 'VersionTag.qualifier'
 4a7c513d Introducing 'gitHelper.versionTags' and going to delete snapshot versions
 8b0ddea8 introduce VersionTag #1
 d7382c71 working with templates '.github/th-templates/GH-PAGES--xxx' #2
