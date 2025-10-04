@@ -1,0 +1,16 @@
+<body>
+This is an entry point of standard project documentation without test-results,
+test-coverage and more advanced examples and samples of usage.
+
+<hr>
+<div style="border: 1px solid red">
+  I'm a DIV from <code>'./src/main/javadoc/overview.html'</code>
+  <br/>
+  This line is a part of test that must appear in the next <b>internal release</b>
+</div>
+<hr>
+
+<h3>Last commits since the last INTERNAL/PUBLIC release</h3>
+TODO: make in a similar way like it's done for 'Release Catalog'
+
+</body>

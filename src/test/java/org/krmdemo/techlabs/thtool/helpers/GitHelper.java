@@ -1,11 +1,16 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.errors.NoWorkTreeException;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.StoredConfig;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
@@ -13,8 +18,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Instant;
+import java.util.List;
+import java.util.Map;
 import java.util.NavigableMap;
+import java.util.SequencedMap;
+import java.util.Spliterator;
 import java.util.function.Function;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 
@@ -106,6 +118,63 @@ public record GitHelper(File gitRepoDir) {
             throw new IllegalStateException(String.format(
                 "Could not get the status of a local git-repository '%s'",
                 gitRepoDir.getPath()), gitEx);
+        }
+    }
+
+    /**
+     * @return similar to what {@code git tag} returns
+     */
+    @JsonIgnore
+    public List<Ref> getGitTags() {
+        try (Git git = Git.open(gitRepoDir)) {
+            Repository repo = git.getRepository();
+            return repo.getRefDatabase().getRefsByPrefix(Constants.R_TAGS);
+        } catch (IOException | NoWorkTreeException gitEx) {
+            throw new IllegalStateException(String.format(
+                "Could not get the list of tags from the local git-repository '%s'",
+                gitRepoDir.getPath()), gitEx);
+        }
+    }
+
+    /**
+     * @return similar to what {@code git log} returns
+     */
+    @JsonIgnore
+    public Stream<CommitInfo> getGitLog() {
+        try (Git git = Git.open(gitRepoDir)) {
+            Spliterator<RevCommit> revCommitsSI = git.log().call().spliterator();
+            Stream<RevCommit> revCommits = StreamSupport.stream(revCommitsSI, false);
+            return revCommits.map(CommitInfo::new);
+        } catch (IOException | GitAPIException | NoWorkTreeException gitEx) {
+            throw new IllegalStateException(String.format(
+                "Could not get the status of a local git-repository '%s'",
+                gitRepoDir.getPath()), gitEx);
+        }
+    }
+
+    @Getter
+    public static class CommitInfo {
+        int commitTime;
+        String commitID;
+        String messageFirstLine;
+        String messageFull;
+        String authorName;
+        String authorEmail;
+        Instant authorWhen;
+        String committerName;
+        String committerEmail;
+        Instant committerWhen;
+        private CommitInfo(RevCommit revCommit) {
+            this.commitTime = revCommit.getCommitTime();
+            this.commitID = revCommit.getId().getName();
+            this.messageFirstLine = revCommit.getFirstMessageLine();
+            this.messageFull = revCommit.getFullMessage();
+            this.authorName = revCommit.getAuthorIdent().getName();
+            this.authorEmail = revCommit.getAuthorIdent().getEmailAddress();
+            this.authorWhen = revCommit.getAuthorIdent().getWhenAsInstant();
+            this.committerName = revCommit.getCommitterIdent().getName();
+            this.committerEmail = revCommit.getCommitterIdent().getEmailAddress();
+            this.committerWhen = revCommit.getCommitterIdent().getWhenAsInstant();
         }
     }
 

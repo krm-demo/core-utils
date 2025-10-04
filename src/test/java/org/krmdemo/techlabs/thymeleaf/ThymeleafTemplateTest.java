@@ -55,8 +55,6 @@ public class ThymeleafTemplateTest {
                                 <li th:each="item: ${envVar.getValue()}" th:text="${item}">... item value ...</li>
                             </ul>
                         </td>
-                    </ul>
-                    </th:block>
                     </tr>
                 </tbody>
             </table>

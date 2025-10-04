@@ -57,6 +57,20 @@ jobs:
           # build and install to local maven repository
           cd main-branch
           echo "Current directory is $(pwd)"
+
+          echo "~~~~~~~~~~~~~ ( generate 'Release Catalog' root ) ~~~~~~~~~~~~~"
+          mvn -B --quiet test-compile
+          .github/th-tool.sh process .github/th-templates/GH-PAGES--Release-Catalog.html.th --output target/GH-PAGES--Release-Catalog.html
+          cat target/GH-PAGES--Release-Catalog.html
+
+          echo "~~~~~~~~~~~~~ ( generate JavaDoc 'overview' root ) ~~~~~~~~~~~~~"
+          .github/th-tool.sh process .github/th-templates/GH-PAGES--overview.html.th --output src/main/javadoc/overview.html
+          cat src/main/javadoc/overview.html
+          
+          mvn -B --quiet test-compile
+          .github/th-tool.sh process .github/th-templates/GH-PAGES--Release-Catalog.html.th --output target/GH-PAGES--Release-Catalog.html
+          cat target/GH-PAGES--Release-Catalog.html
+          
           mvn -B clean install
           echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary ) ~~~~~~~~~~~~~"
           echo "
@@ -121,11 +135,12 @@ jobs:
           path: gh-pages-branch
           fetch-depth: 0
 
-      - name: "Copy the result of 'javadoc' MOJOs and the output of 'git-log' from 'main-branch' to './gh-pages-branch'"
+      - name: "Copy the result of 'javadoc' MOJOs and update 'Release Catalog'"
         run: |
           cd main-branch
           git log --oneline > ../gh-pages-branch/git-log.txt
           echo "the content of git log is $(wc --lines --bytes ../gh-pages-branch/git-log.txt)"
+
           # going to extract the file-slug (basename without extension) of a target JAR-file
           # and use it as a name of the destination directory to copy the generated Java-Doc
           JAR_FILE_NAME=$(find "./target/" -name "core*.jar" ! -name "*javadoc.jar" ! -name "*sources.jar" -exec basename {} \;)
@@ -133,7 +148,10 @@ jobs:
           rm -rf ../gh-pages-branch/*-SNAPSHOT
           cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
           echo "JAR_FILE_NAME=$JAR_FILE_NAME"
-
+          
+          echo "... copy the previously generated 'Release Catalog' page
+          cp target/GH-PAGES--Release-Catalog.html ../gh-pages-branch/index.html
+          
           #tree -L 2 ../gh-pages-branch
           ls -laxo ../gh-pages-branch
 
