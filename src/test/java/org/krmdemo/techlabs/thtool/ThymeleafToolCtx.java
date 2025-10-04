@@ -13,8 +13,6 @@ import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapFromFile;
 import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;

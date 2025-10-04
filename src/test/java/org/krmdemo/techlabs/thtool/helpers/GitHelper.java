@@ -1,14 +1,11 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.errors.NoWorkTreeException;
 import org.eclipse.jgit.lib.Constants;
-import org.eclipse.jgit.lib.ObjectId;
-import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.StoredConfig;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -19,19 +16,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.NavigableMap;
-import java.util.NavigableSet;
 import java.util.SequencedMap;
 import java.util.SequencedSet;
 import java.util.Spliterator;
-import java.util.TreeSet;
 import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
@@ -140,6 +129,20 @@ public record GitHelper(File gitRepoDir) {
             .collect(toLinkedSet());
     }
 
+    @JsonIgnore
+    public SequencedSet<CommitTagInfo> getTagInfos() {
+        try (Git git = Git.open(gitRepoDir)) {
+            Repository repo = git.getRepository();
+            return repo.getRefDatabase().getRefsByPrefix(Constants.R_TAGS).stream()
+                .map(tagRef -> new CommitTagInfo(repo, tagRef))
+                .collect(toLinkedSet());
+        } catch (IOException | NoWorkTreeException gitEx) {
+            throw new IllegalStateException(String.format(
+                "Could not get the linked-set of tags from a local git-repository '%s'",
+                gitRepoDir.getPath()), gitEx);
+        }
+    }
+
     /**
      * @return similar to what {@code git log} returns
      */
@@ -155,11 +158,6 @@ public record GitHelper(File gitRepoDir) {
                 ));
             Repository repo = git.getRepository();
             repo.getRefDatabase().getRefsByPrefix(Constants.R_TAGS).forEach(tagRef -> {
-                String commitID = tagRefCommitID(repo, tagRef);
-                CommitInfo ciOld = commitsMap.get(commitID);
-                if (ciOld != null) {
-                    ciOld.accept(tagRef);
-                }
                 CommitTagInfo cti = new CommitTagInfo(repo, tagRef);
                 CommitInfo ci = commitsMap.get(cti.commitID);
                 if (ci != null) {
@@ -169,34 +167,8 @@ public record GitHelper(File gitRepoDir) {
             return commitsMap;
         } catch (IOException | GitAPIException | NoWorkTreeException gitEx) {
             throw new IllegalStateException(String.format(
-                "Could not get the status of a local git-repository '%s'",
+                "Could not get the log of commits with tags from a local git-repository '%s'",
                 gitRepoDir.getPath()), gitEx);
-        }
-    }
-
-    @Deprecated
-    private static String tagRefCommitID(Repository repo, Ref tagRef) {
-        String tagRefObjName = tagRef.getObjectId().getName();
-        Ref peelRef = peelRef(repo, tagRef);
-        if (peelRef == null || peelRef.getPeeledObjectId() == null) {
-            return tagRefObjName;
-        }
-        String peelRefObjName = peelRef.getPeeledObjectId().getName();
-        System.out.printf("tag = '%s' tagRefObjName = %s; peelRefObjName = %s; peelRef.ObjectId = %s;%n",
-            tagRef.getName(),
-            tagRefObjName,
-            peelRefObjName,
-            peelRef.getObjectId()
-        );
-        return peelRefObjName;
-    }
-
-    @Deprecated
-    private static Ref peelRef(Repository repo, Ref tagRef) {
-        try {
-            return repo.getRefDatabase().peel(tagRef);
-        } catch (IOException e) {
-            return null;
         }
     }
 

@@ -13,7 +13,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.function.Supplier;
 
 import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
 

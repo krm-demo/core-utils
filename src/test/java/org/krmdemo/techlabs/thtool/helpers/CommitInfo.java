@@ -4,22 +4,15 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
-import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
 
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NavigableMap;
-import java.util.NavigableSet;
 import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.function.Consumer;
-import java.util.regex.Pattern;
 
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class CommitInfo implements Consumer<Ref> {
+public class CommitInfo {
 
     final int commitTime;
     final String commitID;
@@ -33,10 +26,8 @@ public class CommitInfo implements Consumer<Ref> {
     final String committerName;
     final String committerEmail;
 
-    VersionTag versionTag;
-    NavigableSet<String> allTags = new TreeSet<>();
-
     CommitTagInfo tagInfo;
+    VersionTag versionTag;
     NavigableMap<String, CommitTagInfo> tagInfoAll = new TreeMap<>();
 
     CommitInfo(RevCommit revCommit) {
@@ -51,6 +42,11 @@ public class CommitInfo implements Consumer<Ref> {
         this.authorEmail = revCommit.getAuthorIdent().getEmailAddress();
         this.committerName = revCommit.getCommitterIdent().getName();
         this.committerEmail = revCommit.getCommitterIdent().getEmailAddress();
+    }
+
+    @JsonGetter("hasInfoTag")
+    public boolean hasInfoTag() {
+        return tagInfo != null;
     }
 
     @JsonGetter("hasVersionTag")
@@ -69,14 +65,6 @@ public class CommitInfo implements Consumer<Ref> {
         } else {
             return messageShort;
         }
-    }
-
-    @Override
-    @Deprecated
-    public void accept(Ref tagRef) {
-        String tagName = tagRef.getName();
-        this.allTags.add(tagName);
-        this.versionTag = VersionTag.parse(tagName);
     }
 
     public void acceptTagInfo(CommitTagInfo tagInfo) {

@@ -7,13 +7,12 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTag;
 import org.eclipse.jgit.revwalk.RevWalk;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Getter
@@ -90,5 +89,19 @@ public class CommitTagInfo {
             log.error("IOException while loading 'peelRef' for tag - " + tagRef.getName(), ioEx);
             return null;
         }
+    }
+
+    @Override
+    public final boolean equals(Object thatObj) {
+        if (!(thatObj instanceof CommitTagInfo that)) {
+            return false;
+        } else {
+            return Objects.equals(this.tagName, that.tagName);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(tagName);
     }
 }
