@@ -1,3 +1,4 @@
+f3041643 continue with CommitTagInfo #3
 c1d6fe0a continue with CommitTagInfo #2
 6b098d73 introduce CommitTagInfo #1
 46130119 get rid of 'VersionTag.qualifier'
