@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
+/**
+ * This class represents the information about git-commit.
+ */
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CommitInfo {

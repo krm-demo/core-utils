@@ -14,6 +14,30 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class represents the information about <b>{@code git}</b>-tag.
+ * <hr/>
+ * The most important things to remember that <b>{@code git}</b> supports two kind of tags:<ul>
+ *     <li>
+ *         A regular or <b>lightweight tag</b> (that does not have persistence state in repository),
+ *         which us usually created from command-line as {@code git tag <tag-name>}.
+ *         As for properties of given class - for lightweight tag the values {@link #tagID}
+ *         and {@link #commitID} are the same and correspond to tagged <b>{@code git}</b>-commit,
+ *         and properties, which are related to tag-message, are always {@code null}.
+ *     </li>
+ *     <li>
+ *         An <b>annotated tag</b> (that has persistence state in repository),
+ *         which us usually created from command-line as {@code git tag -a <tag-name> -m <annotated-message>}.
+ *         As for annotated tags the values of {@link #tagID} and {@link #commitID} are different
+ *         and in addition to that properties, which are related to tag-message, are not {@code null}.
+ *     </li>
+ * </ul>
+ * As for properties of given class -
+ *
+ * @see <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging">
+ *     2.6 Git Basics - Tagging
+ * </a>
+ */
 @Slf4j
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
