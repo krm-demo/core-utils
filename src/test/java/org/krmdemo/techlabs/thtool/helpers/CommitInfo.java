@@ -8,6 +8,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 
 import java.util.List;
 import java.util.NavigableMap;
+import java.util.Objects;
 import java.util.TreeMap;
 
 /**
@@ -79,5 +80,24 @@ public class CommitInfo {
         } else if (this.tagInfo == null) {
             this.tagInfo = tagInfo;
         }
+    }
+
+    public String dumpOneLine() {
+        return String.format("%6s | %d |  %s",
+            commitID, commitTime, messageShort);
+    }
+
+    @Override
+    public final boolean equals(Object thatObj) {
+        if (!(thatObj instanceof CommitInfo that)) {
+            return false;
+        } else {
+            return Objects.equals(this.commitID, that.commitID);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(commitID);
     }
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.util.Map;
+import java.util.SequencedMap;
 import java.util.SequencedSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,14 +44,18 @@ public class GitHelperTest {
     @Test
     void testTagInfos() {
         SequencedSet<CommitTagInfo> tagInfos = gitLogHelper.getTagInfos();
-        log.info(String.format("%n--- testTagInfos(): %d version tags were found ---%n", tagInfos.size()));
+        log.info(String.format("%n--- testTagInfos(): %d version tags were found ---", tagInfos.size()));
         log.info(DumpUtils.dumpAsYamlTxt(tagInfos));
     }
 
     @Test
     void testGitLog() {
-        Map<String, CommitInfo> commitsMap = gitLogHelper.getGitLog();
-        log.info(String.format("%n--- testGitLog(): %d version tags were found ---%n", commitsMap.size()));
+        SequencedMap<String, CommitInfo> commitsMap = gitLogHelper.getGitLog();
+        log.info(String.format("%n--- testGitLog(): %d version tags were found ---", commitsMap.size()));
         log.info(DumpUtils.dumpAsYamlTxt(commitsMap));
+
+        ReleaseCatalog releaseCatalog = new ReleaseCatalog(commitsMap);
+        System.out.println("--------------  Release Catalog: ----------------");
+        System.out.println(DumpUtils.dumpAsYamlTxt(releaseCatalog));
     }
 }
