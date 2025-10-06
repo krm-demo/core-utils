@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.NavigableMap;
+import java.util.Objects;
 import java.util.SequencedMap;
 import java.util.SequencedSet;
 import java.util.Spliterator;
@@ -48,10 +49,8 @@ import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
  * @see <a href="https://wiki.eclipse.org/JGit/User_Guide">
  *     <b>JGit</b> / User Guide
  * </a>
- *
- * @param gitRepoDir a directory at local file-system that represents a local git-repository
  */
-public record GitHelper(File gitRepoDir) {
+public class GitHelper {
 
     public static final String VAR_NAME__HELPER = "git";
 
@@ -73,13 +72,31 @@ public record GitHelper(File gitRepoDir) {
         this(".");
     }
 
+    private final File gitRepoDir;
+    private ReleaseCatalog releaseCatalog = null;
+
+    /**
+     * @param girRepoDirPathStr a directory at local file-system that represents a local git-repository (as {@link String})
+     */
     public GitHelper(String girRepoDirPathStr) {
         this(Paths.get(girRepoDirPathStr));
     }
 
+    /**
+     * @param gitRepoDirPath a directory at local file-system that represents a local git-repository (as {@link Path})
+     */
     public GitHelper(Path gitRepoDirPath) {
         this(gitRepoDirPath.toFile());
     }
+
+    /**
+     * @param gitRepoDir a directory at local file-system that represents a local git-repository (as {@link File})
+     */
+    private GitHelper(File gitRepoDir) {
+        this.gitRepoDir = Objects.requireNonNull(gitRepoDir);
+    }
+
+    // --------------------------------------------------------------------------------------------
 
     /**
      * Getting the map of remote local-names (like {@code 'origin'}) to remote URLs
@@ -170,6 +187,19 @@ public record GitHelper(File gitRepoDir) {
                 "Could not get the log of commits with tags from a local git-repository '%s'",
                 gitRepoDir.getPath()), gitEx);
         }
+    }
+
+    /**
+     * Build the release catalog from the <b>{@code git}</b>-log (returned by {@link #getGitLog()}.
+     * Once invoked the same result will be returned in the same instance of this {@link GitHelper}.
+     *
+     * @return new or previously built instance of {@link ReleaseCatalog release-catalog}
+     */
+    public ReleaseCatalog getReleaseCatalog() {
+        if (this.releaseCatalog == null) {
+            this.releaseCatalog = new ReleaseCatalog(this.getGitLog());
+        }
+        return this.releaseCatalog;
     }
 
     @Override

@@ -45,7 +45,7 @@ public class CommitGroupMinor {
     }
 
     @JsonGetter("minor-group-info")
-    public String groupInfo() {
+    public String getGroupInfo() {
         if (!isFinalized()) {
             return String.format("<< unreleased >> %d commits", commitsMap.size());
         } else if (versionTag().isPublicRelease()) {

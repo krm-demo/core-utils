@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -39,17 +40,17 @@ public class ReleaseCatalog {
     }
 
     @JsonIgnore
-    public CommitGroupMinor currentMinor() {
+    public CommitGroupMinor getSnapshotGroup() {
         return currentMajor.currentMinor();
     }
 
     @JsonIgnore
-    public CommitGroupMinor finalMinor() {
+    public CommitGroupMinor getFinalMinor() {
         return currentMajor.finalMinor();
     }
 
     @JsonIgnore
-    public CommitGroupMajor finalMajor() {
+    public CommitGroupMajor getFinalMajor() {
         return majorGroupsMap.isEmpty() ? null : majorGroupsMap.firstEntry().getValue();
     }
 
@@ -59,13 +60,17 @@ public class ReleaseCatalog {
     }
 
     @JsonGetter("current-minor-groups")
-    public Collection<CommitGroupMinor> minorGroups() {
-        return currentMajor.minorGroups();
+    public Collection<CommitGroupMinor> getMinorGroups() {
+        return currentMajor.getMinorGroups();
     }
 
     @JsonGetter("major-groups")
-    public Collection<CommitGroupMajor> majorGroups() {
+    public Collection<CommitGroupMajor> getMajorGroups() {
         return majorGroupsMap.values();
     }
 
+    @Override
+    public String toString() {
+        return DumpUtils.dumpAsYamlTxt(this);
+    }
 }

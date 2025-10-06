@@ -97,7 +97,7 @@ public class CommitInfo {
 
     public String dumpOneLine() {
         return String.format("%6s | %s |  %s",
-            commitID.substring(0, 8),
+            commitID.substring(0, 7),
             localCommitTimeStr(),
             messageShort
         );

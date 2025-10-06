@@ -53,9 +53,11 @@ public class GitHelperTest {
         SequencedMap<String, CommitInfo> commitsMap = gitLogHelper.getGitLog();
         log.info(String.format("%n--- testGitLog(): %d version tags were found ---", commitsMap.size()));
         log.info(DumpUtils.dumpAsYamlTxt(commitsMap));
+    }
 
-        ReleaseCatalog releaseCatalog = new ReleaseCatalog(commitsMap);
+    @Test
+    void testReleaseCatalog() {
         System.out.println("--------------  Release Catalog: ----------------");
-        System.out.println(DumpUtils.dumpAsYamlTxt(releaseCatalog));
+        System.out.println(gitLogHelper.getReleaseCatalog());
     }
 }

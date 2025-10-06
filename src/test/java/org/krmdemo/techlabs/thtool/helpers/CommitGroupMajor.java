@@ -46,7 +46,7 @@ public class CommitGroupMajor {
     }
 
     @JsonGetter("major-group-info")
-    public String groupInfo() {
+    public String getGroupInfo() {
         if (isEmpty()) {
             return "empty current major group";
         } else if (isFinalized()) {
@@ -77,7 +77,7 @@ public class CommitGroupMajor {
     }
 
     @JsonGetter("minor-groups")
-    public Collection<CommitGroupMinor> minorGroups() {
+    public Collection<CommitGroupMinor> getMinorGroups() {
         return minorGroupsMap.values();
     }
 
