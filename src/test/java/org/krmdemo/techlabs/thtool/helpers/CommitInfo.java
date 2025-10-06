@@ -6,10 +6,16 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import org.eclipse.jgit.revwalk.RevCommit;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.TreeMap;
+
+import static org.krmdemo.techlabs.core.utils.CoreDateTimeUtils.systemZoneOffset;
 
 /**
  * This class represents the information about git-commit.
@@ -48,6 +54,17 @@ public class CommitInfo {
         this.committerEmail = revCommit.getCommitterIdent().getEmailAddress();
     }
 
+    public void acceptTagInfo(CommitTagInfo tagInfo) {
+        this.tagInfoAll.put(tagInfo.tagName, tagInfo);
+        VersionTag versionTag = VersionTag.parse(tagInfo.tagName);
+        if (versionTag != null && versionTag.isValid()) {
+            this.versionTag = versionTag;
+            this.tagInfo = tagInfo;
+        } else if (this.tagInfo == null) {
+            this.tagInfo = tagInfo;
+        }
+    }
+
     @JsonGetter("hasInfoTag")
     public boolean hasInfoTag() {
         return tagInfo != null;
@@ -71,20 +88,19 @@ public class CommitInfo {
         }
     }
 
-    public void acceptTagInfo(CommitTagInfo tagInfo) {
-        this.tagInfoAll.put(tagInfo.tagName, tagInfo);
-        VersionTag versionTag = VersionTag.parse(tagInfo.tagName);
-        if (versionTag != null && versionTag.isValid()) {
-            this.versionTag = versionTag;
-            this.tagInfo = tagInfo;
-        } else if (this.tagInfo == null) {
-            this.tagInfo = tagInfo;
-        }
+    @JsonGetter("local-date-time")
+    public String localCommitTimeStr() {
+        LocalDateTime ldt = LocalDateTime.ofEpochSecond(commitTime, 0, systemZoneOffset());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd EEE HH:mm:ss");
+        return dtf.format(ldt);
     }
 
     public String dumpOneLine() {
-        return String.format("%6s | %d |  %s",
-            commitID, commitTime, messageShort);
+        return String.format("%6s | %s |  %s",
+            commitID.substring(0, 8),
+            localCommitTimeStr(),
+            messageShort
+        );
     }
 
     @Override
