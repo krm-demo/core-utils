@@ -1,3 +1,5 @@
+d7b76702 working on 'GH-PAGES--Release-Catalog.html.th' #1
+43da185d Format commit-time (about 30 minutes before Sunday's midnight)
 09df4f51 initial version of Release-Catalog back-end - the second line of commit - and the third and the last line of commit
 f3041643 continue with CommitTagInfo #3
 c1d6fe0a continue with CommitTagInfo #2
