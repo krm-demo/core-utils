@@ -40,6 +40,11 @@ public class CommitGroupMinor {
     }
 
     @JsonIgnore
+    public String finalDateTimeStr() {
+        return isEmpty() ? null : finalCommit().localCommitTimeStr();
+    }
+
+    @JsonIgnore
     public Collection<CommitInfo> commits() {
         return commitsMap.values();
     }

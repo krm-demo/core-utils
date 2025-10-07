@@ -45,6 +45,11 @@ public class CommitGroupMajor {
         return minorGroupsMap.isEmpty() ? null : minorGroupsMap.firstEntry().getValue();
     }
 
+    @JsonIgnore
+    public String finalDateTimeStr() {
+        return minorGroupsMap.isEmpty() ? null : finalMinor().finalDateTimeStr();
+    }
+
     @JsonGetter("major-group-info")
     public String getGroupInfo() {
         if (isEmpty()) {
