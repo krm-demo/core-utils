@@ -26,24 +26,36 @@
         text-align: right;
         padding-right: 5px;
         display: inline-block;
-        width: 200px;
+        width: 210px;
+      }
+      .snapshot-group-date-time {
+        text-align: right;
+        padding-right: 5px;
+        font-size: 0.9rem;
+        display: inline-block;
+        width: 210px;
       }
       .minor-group-date-time {
         text-align: right;
         padding-right: 5px;
         font-size: 0.9rem;
         display: inline-block;
-        width: 200px;
+        width: 210px;
       }
       .commit-date-time {
         text-align: right;
         padding-right: 5px;
         font-size: 0.8rem;
         display: inline-block;
-        width: 200px;
+        width: 210px;
       }
 
       .major-group-version {
+        display: inline-block;
+        width: 250px;
+      }
+      .snapshot-group-version {
+        font-size: 0.9rem;
         display: inline-block;
         width: 250px;
       }
@@ -60,6 +72,9 @@
 
       .major-group-info {
         font-size: 1rem;
+      }
+      .snapshot-group-info {
+        font-size: 0.9rem;
       }
       .minor-group-info {
         font-size: 0.9rem;
@@ -91,18 +106,20 @@
         <h3>List of All Released Versions</h3>
 
           <div class="current-snapshot">
-            <div class="major-group-header">
+            <div class="snapshot-group-header">
               <span class="major-group-date-time" th:text="${git.releaseCatalog.snapshotGroup.finalDateTimeStr()}">
                 current-snapshot-group-date-time
               </span>
-              <span class="major-group-version">
-                SNAPSHOT-VERSION
+              <span class="snapshot-group-version">
+                <a th:href="${mh.projectCatalogName}">
+                  [[${mh.projectCatalogName}]]
+                </a>
               </span>
-              <span class="major-group-info" th:text="${git.releaseCatalog.snapshotGroup.groupInfo}">
+              <span class="snapshot-group-info" th:text="${git.releaseCatalog.snapshotGroup.groupInfo}">
                 current-snapshot-group-info
               </span>
             </div>
-            <div class="major-group-commits">
+            <div class="snapshot-group-commits">
               <span class="commit-date-time" th:text="${git.releaseCatalog.snapshotGroup.finalDateTimeStr()}">
                 COMMIT-TIME-#0.1
               </span>
@@ -122,7 +139,9 @@
                   current-minor-group-date-time
                 </span>
                 <span class="minor-group-version">
-                  CURRENT-MINOR
+                  <a th:href="${mh.projectArtifact + '-' + minorGroup.versionTag}">
+                    [[${mh.projectArtifact + '-' + minorGroup.versionTag}]]
+                  </a>
                 </span>
                 <span class="minor-group-info" th:text="${minorGroup.groupInfo}">
                   current-minor-group-info
@@ -148,7 +167,9 @@
                 major-group-date-time
               </span>
               <span class="major-group-version">
-                PUBLIC-VERSION
+                <a th:href="${mh.projectArtifact + '-' + majorGroup.versionTag}">
+                  [[${mh.projectArtifact + '-' + majorGroup.versionTag}]]
+                </a>
               </span>
               <span class="major-group-info" th:text="${majorGroup.groupInfo}">
                 major-group-info
@@ -173,7 +194,9 @@
                     current-minor-group-date-time
                   </span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a th:href="${mh.projectArtifact + '-' + minorGroup.versionTag}">
+                      [[${mh.projectArtifact + '-' + minorGroup.versionTag}]]
+                    </a>
                   </span>
                   <span class="minor-group-info" th:text="${minorGroup.groupInfo}">
                     minor-group-info
