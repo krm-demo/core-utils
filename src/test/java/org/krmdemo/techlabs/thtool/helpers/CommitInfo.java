@@ -24,6 +24,11 @@ import static org.krmdemo.techlabs.core.utils.CoreDateTimeUtils.systemZoneOffset
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CommitInfo {
 
+    /**
+     * The number of hexadecimal digits of <b>{@code git}</b>-commit hash to display
+     */
+    public static final int SHORT_COMMIT_HASH_LENGTH = 7;
+
     final int commitTime;
     final String commitID;
 
@@ -65,6 +70,11 @@ public class CommitInfo {
         }
     }
 
+    @JsonGetter("short-commit-hash")
+    public String getShortCommitHash() {
+        return commitID.substring(0, SHORT_COMMIT_HASH_LENGTH);
+    }
+
     @JsonGetter("hasInfoTag")
     public boolean hasInfoTag() {
         return tagInfo != null;
@@ -97,7 +107,7 @@ public class CommitInfo {
 
     public String dumpOneLine() {
         return String.format("%6s | %s |  %s",
-            commitID.substring(0, 7),
+            getShortCommitHash(),
             localCommitTimeStr(),
             messageShort
         );

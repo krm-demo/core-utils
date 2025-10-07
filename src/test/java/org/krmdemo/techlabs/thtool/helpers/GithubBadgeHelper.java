@@ -69,6 +69,15 @@ public class GithubBadgeHelper {
 
     // --------------------------------------------------------------------------------------------
 
+    public String githubCommitUrl(CommitInfo commitInfo) {
+        return githubCommitUrl(commitInfo.commitID);
+    }
+
+    public String githubCommitUrl(String commitID) {
+        String repoUrl =  GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl();
+        return String.format("%s/commit/%s", repoUrl, commitID);
+    }
+
     public String getBadgeBuildPassing() {
         return workflowBadgeMarkdown("on-main-push");
     }
