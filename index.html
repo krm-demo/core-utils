@@ -26,24 +26,36 @@
         text-align: right;
         padding-right: 5px;
         display: inline-block;
-        width: 200px;
+        width: 210px;
+      }
+      .snapshot-group-date-time {
+        text-align: right;
+        padding-right: 5px;
+        font-size: 0.9rem;
+        display: inline-block;
+        width: 210px;
       }
       .minor-group-date-time {
         text-align: right;
         padding-right: 5px;
         font-size: 0.9rem;
         display: inline-block;
-        width: 200px;
+        width: 210px;
       }
       .commit-date-time {
         text-align: right;
         padding-right: 5px;
         font-size: 0.8rem;
         display: inline-block;
-        width: 200px;
+        width: 210px;
       }
 
       .major-group-version {
+        display: inline-block;
+        width: 250px;
+      }
+      .snapshot-group-version {
+        font-size: 0.9rem;
         display: inline-block;
         width: 250px;
       }
@@ -60,6 +72,9 @@
 
       .major-group-info {
         font-size: 1rem;
+      }
+      .snapshot-group-info {
+        font-size: 0.9rem;
       }
       .minor-group-info {
         font-size: 0.9rem;
@@ -91,15 +106,17 @@
         <h3>List of All Released Versions</h3>
 
           <div class="current-snapshot">
-            <div class="major-group-header">
-              <span class="major-group-date-time">2025-10-07 Tue 00:37:09</span>
-              <span class="major-group-version">
-                SNAPSHOT-VERSION
+            <div class="snapshot-group-header">
+              <span class="major-group-date-time">2025-10-07 Tue 01:17:46</span>
+              <span class="snapshot-group-version">
+                <a href="core-utils-21.09.002-SNAPSHOT">
+                  core-utils-21.09.002-SNAPSHOT
+                </a>
               </span>
-              <span class="major-group-info">&lt;&lt; unreleased &gt;&gt; 15 commits</span>
+              <span class="snapshot-group-info">&lt;&lt; unreleased &gt;&gt; 16 commits</span>
             </div>
-            <div class="major-group-commits">
-              <span class="commit-date-time">2025-10-07 Tue 00:37:09</span>
+            <div class="snapshot-group-commits">
+              <span class="commit-date-time">2025-10-07 Tue 01:17:46</span>
               <span class="commit-ID">
                 COMMIT-ID-#0.1
               </span>
@@ -114,12 +131,14 @@
               <div class="major-group-header">
                 <span class="minor-group-date-time">2025-10-03 Fri 03:26:44</span>
                 <span class="minor-group-version">
-                  CURRENT-MINOR
+                  <a href="core-utils-21.09.001">
+                    core-utils-21.09.001
+                  </a>
                 </span>
                 <span class="minor-group-info">&lt;&lt; INTERNAL 21.09.001 &gt;&gt; 4 working commits</span>
               </div>
               <div class="minor-group-commits">
-                <span class="commit-date-time">2025-10-07 Tue 00:37:09</span>
+                <span class="commit-date-time">2025-10-07 Tue 01:17:46</span>
                   <span class="commit-ID">
                   COMMIT-ID-#1.1
                 </span>
@@ -134,7 +153,9 @@
             <div class="major-group-header">
               <span class="major-group-date-time">2025-10-02 Thu 21:00:21</span>
               <span class="major-group-version">
-                PUBLIC-VERSION
+                <a href="core-utils-21.08">
+                  core-utils-21.08
+                </a>
               </span>
               <span class="major-group-info">21.08 (finalized major group with 1 finalized minor groups)</span>
             </div>
@@ -153,7 +174,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-10-02 Thu 21:00:21</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.08.001">
+                      core-utils-21.08.001
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.08.001 &gt;&gt; 6 working commits</span>
                 </div>
@@ -174,7 +197,9 @@
             <div class="major-group-header">
               <span class="major-group-date-time">2025-10-02 Thu 04:56:16</span>
               <span class="major-group-version">
-                PUBLIC-VERSION
+                <a href="core-utils-21.07">
+                  core-utils-21.07
+                </a>
               </span>
               <span class="major-group-info">21.07 (finalized major group with 1 finalized minor groups)</span>
             </div>
@@ -193,7 +218,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-10-02 Thu 04:56:16</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.07.001">
+                      core-utils-21.07.001
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.07.001 &gt;&gt; 2 working commits</span>
                 </div>
@@ -214,7 +241,9 @@
             <div class="major-group-header">
               <span class="major-group-date-time">2025-10-02 Thu 04:28:54</span>
               <span class="major-group-version">
-                PUBLIC-VERSION
+                <a href="core-utils-21.06">
+                  core-utils-21.06
+                </a>
               </span>
               <span class="major-group-info">21.06 (finalized major group with 3 finalized minor groups)</span>
             </div>
@@ -233,7 +262,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-10-02 Thu 04:28:54</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.06.003">
+                      core-utils-21.06.003
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.06.003 &gt;&gt; 2 working commits</span>
                 </div>
@@ -254,7 +285,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-10-02 Thu 03:10:42</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.06.002">
+                      core-utils-21.06.002
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.06.002 &gt;&gt; 2 working commits</span>
                 </div>
@@ -275,7 +308,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-10-02 Thu 02:09:40</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.06.001">
+                      core-utils-21.06.001
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.06.001 &gt;&gt; 3 working commits</span>
                 </div>
@@ -296,7 +331,9 @@
             <div class="major-group-header">
               <span class="major-group-date-time">2025-10-02 Thu 00:09:21</span>
               <span class="major-group-version">
-                PUBLIC-VERSION
+                <a href="core-utils-21.05">
+                  core-utils-21.05
+                </a>
               </span>
               <span class="major-group-info">21.05 (finalized major group with 15 finalized minor groups)</span>
             </div>
@@ -315,7 +352,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-10-02 Thu 00:09:21</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.05.005">
+                      core-utils-21.05.005
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.05.005 &gt;&gt; 3 working commits</span>
                 </div>
@@ -336,7 +375,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-10-01 Wed 22:16:14</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.05.004">
+                      core-utils-21.05.004
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.05.004 &gt;&gt; 2 working commits</span>
                 </div>
@@ -357,7 +398,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-10-01 Wed 21:42:43</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.05.003">
+                      core-utils-21.05.003
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.05.003 &gt;&gt; 1 working commits</span>
                 </div>
@@ -378,7 +421,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-10-01 Wed 20:58:45</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.05.002">
+                      core-utils-21.05.002
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.05.002 &gt;&gt; 1 working commits</span>
                 </div>
@@ -399,7 +444,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-10-01 Wed 20:14:42</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.05.001">
+                      core-utils-21.05.001
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.05.001 &gt;&gt; 82 working commits</span>
                 </div>
@@ -420,7 +467,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-09-28 Sun 08:03:33</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.00.009">
+                      core-utils-21.00.009
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.00.009 &gt;&gt; 1 working commits</span>
                 </div>
@@ -441,7 +490,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-09-28 Sun 07:40:36</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.00.008">
+                      core-utils-21.00.008
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.00.008 &gt;&gt; 1 working commits</span>
                 </div>
@@ -462,7 +513,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-09-28 Sun 07:17:09</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.00.007">
+                      core-utils-21.00.007
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.00.007 &gt;&gt; 3 working commits</span>
                 </div>
@@ -483,7 +536,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-09-28 Sun 05:56:39</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.00.006">
+                      core-utils-21.00.006
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.00.006 &gt;&gt; 2 working commits</span>
                 </div>
@@ -504,7 +559,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-09-28 Sun 05:15:53</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.00.005">
+                      core-utils-21.00.005
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.00.005 &gt;&gt; 2 working commits</span>
                 </div>
@@ -525,7 +582,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-09-28 Sun 04:35:32</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.00.004">
+                      core-utils-21.00.004
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.00.004 &gt;&gt; 2 working commits</span>
                 </div>
@@ -546,7 +605,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-09-28 Sun 04:04:45</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.00.003">
+                      core-utils-21.00.003
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.00.003 &gt;&gt; 2 working commits</span>
                 </div>
@@ -567,7 +628,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-09-28 Sun 03:37:58</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.00.002">
+                      core-utils-21.00.002
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.00.002 &gt;&gt; 122 working commits</span>
                 </div>
@@ -588,7 +651,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-08-23 Sat 03:43:09</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.0.2">
+                      core-utils-21.0.2
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.0.2 &gt;&gt; only one technical commit</span>
                 </div>
@@ -609,7 +674,9 @@
                 <div class="major-group-header">
                   <span class="minor-group-date-time">2025-08-22 Fri 20:48:44</span>
                   <span class="minor-group-version">
-                    INTERNAL-VERSION
+                    <a href="core-utils-21.0.1">
+                      core-utils-21.0.1
+                    </a>
                   </span>
                   <span class="minor-group-info">&lt;&lt; INTERNAL 21.0.1 &gt;&gt; 6 working commits</span>
                 </div>
