@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>core-utils (gh-pages initial version)</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<div class="container-fluid p-1 bg-primary text-white text-center">
+  <h1>Hi! You are at test-site</h1>
+  <p>This is a common header (each page of site has the exact copy of this)</p>
+</div>
+
+<!-- Body (Content) -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Navigation Links</h3>
+      <a href="index.html">home</a>
+      <ul>
+        <li><b>root-one</b></li>
+        <li><a href="root-two.html">root-two</a></li>
+        <li><a href="sub-dir-a/index.html">sub-dir-a</a></li>
+        <li><a href="sub-dir-b/index.html">sub-dir-b</a></li>
+        <ul>
+          <li><a href="sub-dir-b/sub-dir-b-1/index.html">sub-dir-b-1</a></li>
+        </ul>
+      </ul>
+    </div>
+    <div class="col-sm-8">
+      <div class="row border border-secondary rounded">
+        <h3>Some Page-Specific Information</h3>
+        <p>
+          This is the first root-page of the whole site.
+        <div class="text-center fs-6">Each page has its own content here.</div>
+        </p>
+      </div>
+      <div class="row border border-secondary rounded mt-5">
+        <h3>Some Technical Information</h3>
+        <p>
+          The content of this section has <b><code>th-tool</code></b>-tags
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="p-1 text-center fixed-bottom ">
+  <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.1)">
+    some footer, which is also exactly the same for all pages
+  </div>
+</footer>
+
+</body>
+</html>

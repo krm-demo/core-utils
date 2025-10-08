@@ -435,7 +435,7 @@
           <windowtitle>JavaDoc ${project.name}:${project.version}</windowtitle>
           <doctitle>JavaDoc for &lt;u&gt;${project.name}&lt;/u&gt;:${project.version}</doctitle>
 <!--          <header>&lt;u&gt;${project.name}&lt;/u&gt;:${project.version}</header>-->
-          <header>${env.JAVADOC_HEADER}</header>
+          <header>[(${mh.projectCatalogName})]</header>
         </configuration>
         <executions>
           <execution>

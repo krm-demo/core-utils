@@ -3,9 +3,13 @@ package org.krmdemo.techlabs.thtool;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.core.dump.StringBuilderOut;
 
+import java.io.File;
 import java.io.PrintStream;
+import java.net.URL;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,6 +42,18 @@ public class ThymeleafToolTest {
         assertThat(sbOut).contains("utility-classes to simplify working with core-java API");
         assertThat(sbOut).contains("utility-classes to simplify working with core-java API");
         assertThat(sbOut).containsAnyOf("on-main-push.yml/badge.svg?event=push");
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    //@Test
+    void testExtractDir() {
+        extractResourceDir(".", null);
+    }
+
+    private static void extractResourceDir(String resourcePath, File targetDir) {
+        List<URL> resourceURLs = ThymeleafToolTest.class.getClassLoader().resources(resourcePath).toList();
+        System.out.println(DumpUtils.dumpAsYamlTxt(resourceURLs));
     }
 
     // --------------------------------------------------------------------------------------------

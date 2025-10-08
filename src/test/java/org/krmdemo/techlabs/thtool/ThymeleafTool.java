@@ -55,7 +55,7 @@ import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR;
  */
 @Command(name = "th-tool",
     version = "0.0.1", // <-- TODO: inject the version from maven properties via "versionProvider"
-    subcommands = { ThymeleafToolEval.class, ThymeleafToolProc.class },
+    subcommands = { ThymeleafToolEval.class, ThymeleafToolProc.class, ThymeleafToolProcDir.class },
     mixinStandardHelpOptions = true, usageHelpWidth = 140,
     description = """
         A tool to process the input-templates and evaluate the expressions using Thymeleaf.

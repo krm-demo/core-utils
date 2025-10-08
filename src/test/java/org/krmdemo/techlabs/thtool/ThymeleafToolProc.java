@@ -21,7 +21,7 @@ import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
 @Command(name = "process",
     mixinStandardHelpOptions = true, usageHelpWidth = 140,
     description = """
-        Process the @|italic th-tool|@-templates at print the rendering result in standard output or into file
+        Process the @|italic th-tool|@-templates and print the rendering result in standard output or into the file
         More detailed information for this template engine is available at @|cyan https://www.thymeleaf.org/|@
         """
 )
