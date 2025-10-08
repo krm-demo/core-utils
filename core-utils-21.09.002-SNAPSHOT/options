@@ -23,6 +23,8 @@
 -Xdoclint:none
 -doctitle
 'JavaDoc for <u>core-utils</u>:21.09.002-SNAPSHOT'
+-header
+'[(${mh.projectCatalogName})]'
 -linksource
 -notimestamp
 --add-stylesheet
