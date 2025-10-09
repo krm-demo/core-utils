@@ -16,12 +16,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Spec;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.PathMatcher;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
@@ -194,36 +189,6 @@ public class ThymeleafTool {
             GithubBadgeHelper::register
         );
         return new CommandLine(tt).execute(args);
-    }
-
-    // --------------------------------------------------------------------------------------------
-
-    /**
-     * @param fileToLoad file to read the content
-     * @return the content of {@code file} or {@code null} if it's impossible to do
-     */
-    public static String loadFileContent(File fileToLoad) {
-        try {
-            return Files.readString(fileToLoad.toPath());
-        } catch (IOException ioEx) {
-            ioEx.printStackTrace(System.err);
-            return null;
-        }
-    }
-
-    /**
-     * Saving the content into the file {@code fileToSave} (if the file is not empty - it will be truncated)
-     *
-     * @param fileToSave the file to save into
-     * @param fileContent the content to be saved
-     * @throws IllegalStateException in case of something goes wrong (which must not really happen)
-     */
-    public static void saveFileContent(File fileToSave, String fileContent) {
-        try {
-            Files.writeString(fileToSave.toPath(), fileContent);
-        } catch (IOException ioEx) {
-            throw new IllegalStateException("could not save the content into the file " + fileToSave, ioEx);
-        }
     }
 
     // --------------------------------------------------------------------------------------------

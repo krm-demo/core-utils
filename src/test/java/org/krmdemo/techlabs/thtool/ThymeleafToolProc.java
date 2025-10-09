@@ -11,8 +11,8 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.saveFileContent;
 import static org.krmdemo.techlabs.core.utils.SysDumpUtils.fileAttrsAsJson;
-import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
 
 /**
  * Sub-command {@code process} of <b>{@code th-tool}</b> that transforms the input-templates

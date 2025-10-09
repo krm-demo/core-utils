@@ -9,9 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
-import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 import picocli.CommandLine.ParentCommand;
 
 import java.io.File;
@@ -24,6 +24,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -31,8 +32,11 @@ import java.util.SortedSet;
 import java.util.concurrent.Callable;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingInt;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedSet;
-import static org.krmdemo.techlabs.core.utils.SysDumpUtils.fileAttrsAsJson;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.copyFile;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.saveFileContent;
 
 /**
  * Sub-command {@code process} of <b>{@code th-tool}</b> that transforms the input-templates
@@ -67,7 +71,7 @@ public class ThymeleafToolProcDir implements Callable<Integer> {
         description = "the path of the target directory to copy the processed files @|bold into|@")
     File outputLocation;
 
-    @CommandLine.Parameters(
+    @Parameters(
         paramLabel = "pattern-to-process",
         description = "file-matcher patterns to narrow the files to process",
         arity = "0..*"
@@ -104,14 +108,24 @@ public class ThymeleafToolProcDir implements Callable<Integer> {
         }
 
         if (outputLocation == null) {
-            System.out.println("- no processing because output directory is not specified;");
+            System.out.println("- no processing and copying because output directory is not specified;");
         } else {
             System.out.println("- outputLocation --> " + outputLocation);
         }
 
         Result result = new Result();
-        System.out.println("- processing result is --> " + DumpUtils.dumpAsJsonTxt(result));
+        System.out.println("- processing result before --> " + DumpUtils.dumpAsJsonTxt(result));
+        result.processPairs.forEach(Result.Pair::handle);
+        System.out.println("- processing result after ---> " + DumpUtils.dumpAsJsonTxt(result));
+
         return 0;
+    }
+
+    private enum HandleStatus {
+        UNHANDLED,
+        NO_OUTPUT,
+        COPIED,
+        PROCESSED
     }
 
     @JsonPropertyOrder(alphabetic = true)
@@ -143,11 +157,22 @@ public class ThymeleafToolProcDir implements Callable<Integer> {
                 .collect(toSortedSet());
         }
 
+        @JsonGetter("result-status-map")
+        public EnumMap<HandleStatus, Integer> resultStatusMap() {
+            return new EnumMap<>(processPairs.stream().collect(
+                groupingBy(
+                    Pair::getHandleStatus,
+                    summingInt(v -> 1)
+                )
+            ));
+        }
+
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         private class Pair {
             @Getter private final File input;
             @Getter private final File output;
             @Getter private final boolean processing;
+            @Getter private HandleStatus handleStatus = HandleStatus.UNHANDLED;
             private Pair(Path walkPath) throws IOException {
                 Path inputDirPath = inputLocation.toPath().toAbsolutePath();
                 Path relativePath = inputDirPath.relativize(walkPath.toAbsolutePath());
@@ -157,6 +182,18 @@ public class ThymeleafToolProcDir implements Callable<Integer> {
                     relativePath.toString()
                 ).toFile();
                 this.processing = shouldProcess(walkPath) && !shouldSkip(walkPath);
+            }
+            private void handle() {
+                if (output == null) {
+                    handleStatus = HandleStatus.NO_OUTPUT;
+                } else if (isProcessing()) {
+                    String outputContent = tt.templateEngine.process(input.getPath(), tt.varsCtx);
+                    saveFileContent(output, outputContent);
+                    handleStatus = HandleStatus.PROCESSED;
+                } else {
+                    copyFile(input, output);
+                    handleStatus = HandleStatus.COPIED;
+                }
             }
         }
 

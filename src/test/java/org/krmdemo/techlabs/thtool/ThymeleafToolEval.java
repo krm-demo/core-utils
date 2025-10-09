@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import static org.krmdemo.techlabs.thtool.ThymeleafTool.saveFileContent;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.saveFileContent;
 
 /**
  * Sub-command {@code evaluate} of <b>{@code th-tool}</b> that evaluates the passed expression.
