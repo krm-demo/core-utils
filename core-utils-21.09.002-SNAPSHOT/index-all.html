@@ -146,6 +146,11 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/TreeDumper.Node.html#comment()" class="member-name-link">comment()</a> - Method in interface org.krmdemo.techlabs.core.dump.<a href="org/krmdemo/techlabs/core/dump/TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.Node</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#copyFile(java.io.File,java.io.File)" class="member-name-link">copyFile(File, File)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
+<dd>
+<div class="block">Copy the file <code>sourceFile</code> to the file <code>targetFile</code>
+and creates all missing parent directories if necessary.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreCollectors.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.utils">CoreCollectors</a> - Class in <a href="org/krmdemo/techlabs/core/utils/package-summary.html">org.krmdemo.techlabs.core.utils</a></dt>
 <dd>
 <div class="block">A factory of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a>s that allows to collect the stream of values into linked or sorted sets
@@ -154,6 +159,13 @@ and the stream of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/ja
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreDateTimeUtils.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.utils">CoreDateTimeUtils</a> - Class in <a href="org/krmdemo/techlabs/core/utils/package-summary.html">org.krmdemo.techlabs.core.utils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreDateTimeUtils.html#%3Cinit%3E()" class="member-name-link">CoreDateTimeUtils()</a> - Constructor for class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreDateTimeUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a> - Class in <a href="org/krmdemo/techlabs/core/utils/package-summary.html">org.krmdemo.techlabs.core.utils</a></dt>
+<dd>
+<div class="block">Utility-class that invokes standard JDK utilities, but wraps <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>
+into <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a> and creates missing parent directories.</div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#%3Cinit%3E()" class="member-name-link">CoreFileUtils()</a> - Constructor for class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a> - Class in <a href="org/krmdemo/techlabs/core/utils/package-summary.html">org.krmdemo.techlabs.core.utils</a></dt>
 <dd>
@@ -598,6 +610,8 @@ with the passed <code>mergeFunction</code>.</div>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#linkedSet(T...)" class="member-name-link">linkedSet(T...)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#loadFileContent(java.io.File)" class="member-name-link">loadFileContent(File)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/render/Highlight.html#lookupValue(org.krmdemo.techlabs.core.dump.render.Highlight.Place)" class="member-name-link">lookupValue(Highlight.Place)</a> - Method in class org.krmdemo.techlabs.core.dump.render.<a href="org/krmdemo/techlabs/core/dump/render/Highlight.html" title="class in org.krmdemo.techlabs.core.dump.render">Highlight</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -896,6 +910,10 @@ and the content of any other properties-files at file-system or in classpath.</d
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/ToFileUtils.html#saveAsYamlTxt(java.io.File,java.lang.Object,org.krmdemo.techlabs.core.dump.render.RenderSpec)" class="member-name-link">saveAsYamlTxt(File, Object, RenderSpec)</a> - Static method in class org.krmdemo.techlabs.core.dump.<a href="org/krmdemo/techlabs/core/dump/ToFileUtils.html" title="class in org.krmdemo.techlabs.core.dump">ToFileUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#saveFileContent(java.io.File,java.lang.String)" class="member-name-link">saveFileContent(File, String)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
+<dd>
+<div class="block">Saving the content into the file <code>fileToSave</code> (if the file is not empty - it will be truncated).</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/SysDumpUtils.html#seqAsJson(java.util.Collection,int)" class="member-name-link">seqAsJson(Collection, int)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/SysDumpUtils.html" title="class in org.krmdemo.techlabs.core.utils">SysDumpUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/TreeDumper.SequenceNode.html#sequenceItems()" class="member-name-link">sequenceItems()</a> - Method in interface org.krmdemo.techlabs.core.dump.<a href="org/krmdemo/techlabs/core/dump/TreeDumper.SequenceNode.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.SequenceNode</a></dt>
