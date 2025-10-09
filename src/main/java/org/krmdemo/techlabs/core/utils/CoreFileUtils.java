@@ -3,6 +3,7 @@ package org.krmdemo.techlabs.core.utils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 /**
@@ -11,11 +12,20 @@ import java.nio.file.StandardCopyOption;
  */
 public class CoreFileUtils {
 
+    public static String loadFileContent(String pathToLoadStr) {
+        return loadFileContent(Paths.get(pathToLoadStr).toFile());
+    }
+
     /**
      * @param fileToLoad file to read the content
      * @return the content of {@code file} or {@code null} if it's impossible to do
      */
     public static String loadFileContent(File fileToLoad) {
+        if (fileToLoad == null || !fileToLoad.isFile()) {
+            throw new IllegalStateException(String.format(
+                "could not load the file %s because it does not exist or it's not a normal file",
+                fileToLoad == null ? "<< NULL >>" : "'" + fileToLoad + "'"));
+        }
         try {
             return Files.readString(fileToLoad.toPath());
         } catch (IOException ioEx) {

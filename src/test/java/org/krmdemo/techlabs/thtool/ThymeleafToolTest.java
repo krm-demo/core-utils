@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileContent;
 
 /**
  * A functional-test for {@link ThymeleafTool} that executes it as the command-line application from the same JVM
@@ -40,20 +41,42 @@ public class ThymeleafToolTest {
 
         assertThat(sbOut).contains("core-utils");
         assertThat(sbOut).contains("utility-classes to simplify working with core-java API");
-        assertThat(sbOut).contains("utility-classes to simplify working with core-java API");
         assertThat(sbOut).containsAnyOf("on-main-push.yml/badge.svg?event=push");
     }
 
-    // --------------------------------------------------------------------------------------------
-
-    //@Test
-    void testExtractDir() {
-        extractResourceDir(".", null);
+    @Test
+    void testProcessDir_DryRun() {
+        int exitCode = ThymeleafTool.executeMain(
+            "--var-file",
+            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
+            "process-dir",
+            "--input-dir",
+            ".github/th-test-process-dir/input-dir"
+        );
+        assertThat(exitCode).isZero();
+        assertThat(sbErr).isEmpty();
+        assertThat(sbOut).isNotBlank();
+        //stdOut.println(sbOut);
     }
 
-    private static void extractResourceDir(String resourcePath, File targetDir) {
-        List<URL> resourceURLs = ThymeleafToolTest.class.getClassLoader().resources(resourcePath).toList();
-        System.out.println(DumpUtils.dumpAsYamlTxt(resourceURLs));
+    @Test
+    void testProcessDir_ProcessAll() {
+        int exitCode = ThymeleafTool.executeMain(
+            "--var-file",
+            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
+            "process-dir",
+            "--input-dir",
+            ".github/th-test-process-dir/input-dir",
+            "--output-dir",
+            "./target/th-test-process-dir/process-all"
+        );
+        assertThat(exitCode).isZero();
+        assertThat(sbErr).isEmpty();
+        assertThat(sbOut).isNotBlank();
+
+        //stdOut.println(sbOut);
+        assertThat(loadFileContent("./target/th-test-process-dir/process-all/root-one.html"))
+            .contains("mh.projectCatalogName = core-utils-21");
     }
 
     // --------------------------------------------------------------------------------------------
