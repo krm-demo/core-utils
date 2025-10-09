@@ -18,7 +18,7 @@
 <!-- Body (Content) -->
 <div class="container mt-5">
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
       <h3>Navigation Links</h3>
       <a href="../index.html">home</a>
       <ul>
@@ -31,19 +31,30 @@
         </ul>
       </ul>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-9">
       <div class="row border border-secondary rounded">
         <h3>Some Page-Specific Information</h3>
         <p>
-          This is the root-page of <code>sub-dir-a</code>.
-        <div class="text-center fs-6">Each page has its own content here.</div>
+          This is the index-page of <code>/sub-dir-a</code>.
         </p>
+        <p>
+          After executing the tests (<code>mvn clean verify</code> from command line),<br/>
+          the processed site become available in the directory <code>./target/th-test-process-dir</code>.
+        </p>
+        <div class="text-center bg-light fst-italic text-sm mb-1">Each page has its own content here.</div>
       </div>
       <div class="row border border-secondary rounded mt-5">
         <h3>Some Technical Information</h3>
         <p>
-          The content of this section has <b><code>th-tool</code></b>-tags
+          The content of this section has <b><var>th-tool</var></b>-tags,
+          which performs the access to the basic <b><var>th-tool</var></b>-helpers:
         </p>
+        <code>[&#8203;[${ mh.projectCatalogName }]&#8203;] = [[${ mh.projectCatalogName }]]</code><br/>
+        <code>[&#8203;[${ mh.projectArtifact }]&#8203;] = [[${ mh.projectArtifact }]]</code><br/>
+        <code>[&#8203;[${ mh.currentProjectVersion }]&#8203;] = [[${ mh.currentProjectVersion }]]</code><br/>
+        <div class="text-center bg-light fst-italic text-sm mb-1">
+          Each page has the same calculated content here.
+        </div>
       </div>
     </div>
   </div>

@@ -2,7 +2,9 @@ package org.krmdemo.techlabs.thtool;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.core.dump.StringBuilderOut;
 
@@ -17,6 +19,7 @@ import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileContent;
 /**
  * A functional-test for {@link ThymeleafTool} that executes it as the command-line application from the same JVM
  */
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class ThymeleafToolTest {
 
     @Test
@@ -76,7 +79,7 @@ public class ThymeleafToolTest {
 
         //stdOut.println(sbOut);
         assertThat(loadFileContent("./target/th-test-process-dir/process-all/root-one.html"))
-            .contains("mh.projectCatalogName = core-utils-21");
+            .contains("[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21");
     }
 
     // --------------------------------------------------------------------------------------------
