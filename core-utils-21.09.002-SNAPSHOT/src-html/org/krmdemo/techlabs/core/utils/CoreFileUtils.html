@@ -17,77 +17,87 @@
 <span class="source-line-no">003</span><span id="line-3">import java.io.File;</span>
 <span class="source-line-no">004</span><span id="line-4">import java.io.IOException;</span>
 <span class="source-line-no">005</span><span id="line-5">import java.nio.file.Files;</span>
-<span class="source-line-no">006</span><span id="line-6">import java.nio.file.StandardCopyOption;</span>
-<span class="source-line-no">007</span><span id="line-7"></span>
-<span class="source-line-no">008</span><span id="line-8">/**</span>
-<span class="source-line-no">009</span><span id="line-9"> * Utility-class that invokes standard JDK utilities, but wraps {@link java.io.IOException}</span>
-<span class="source-line-no">010</span><span id="line-10"> * into {@link IllegalStateException} and creates missing parent directories.</span>
-<span class="source-line-no">011</span><span id="line-11"> */</span>
-<span class="source-line-no">012</span><span id="line-12">public class CoreFileUtils {</span>
-<span class="source-line-no">013</span><span id="line-13"></span>
-<span class="source-line-no">014</span><span id="line-14">    /**</span>
-<span class="source-line-no">015</span><span id="line-15">     * @param fileToLoad file to read the content</span>
-<span class="source-line-no">016</span><span id="line-16">     * @return the content of {@code file} or {@code null} if it's impossible to do</span>
-<span class="source-line-no">017</span><span id="line-17">     */</span>
-<span class="source-line-no">018</span><span id="line-18">    public static String loadFileContent(File fileToLoad) {</span>
-<span class="source-line-no">019</span><span id="line-19">        try {</span>
-<span class="source-line-no">020</span><span id="line-20">            return Files.readString(fileToLoad.toPath());</span>
-<span class="source-line-no">021</span><span id="line-21">        } catch (IOException ioEx) {</span>
-<span class="source-line-no">022</span><span id="line-22">            ioEx.printStackTrace(System.err);</span>
-<span class="source-line-no">023</span><span id="line-23">            return null;</span>
-<span class="source-line-no">024</span><span id="line-24">        }</span>
-<span class="source-line-no">025</span><span id="line-25">    }</span>
-<span class="source-line-no">026</span><span id="line-26"></span>
-<span class="source-line-no">027</span><span id="line-27">    /**</span>
-<span class="source-line-no">028</span><span id="line-28">     * Saving the content into the file {@code fileToSave} (if the file is not empty - it will be truncated).</span>
-<span class="source-line-no">029</span><span id="line-29">     * All missing parent directories will be created if necessary.</span>
-<span class="source-line-no">030</span><span id="line-30">     *</span>
-<span class="source-line-no">031</span><span id="line-31">     * @param fileToSave the file to save into</span>
-<span class="source-line-no">032</span><span id="line-32">     * @param fileContent the content to be saved</span>
-<span class="source-line-no">033</span><span id="line-33">     * @throws IllegalStateException in case of something goes wrong (which must not really happen)</span>
-<span class="source-line-no">034</span><span id="line-34">     */</span>
-<span class="source-line-no">035</span><span id="line-35">    public static void saveFileContent(File fileToSave, String fileContent) {</span>
-<span class="source-line-no">036</span><span id="line-36">        if (fileToSave == null) {</span>
-<span class="source-line-no">037</span><span id="line-37">            throw new IllegalStateException(</span>
-<span class="source-line-no">038</span><span id="line-38">                "could not save the file content, because fileToSave is null");</span>
-<span class="source-line-no">039</span><span id="line-39">        }</span>
-<span class="source-line-no">040</span><span id="line-40">        try {</span>
-<span class="source-line-no">041</span><span id="line-41">            if (fileToSave.getParentFile() != null) {</span>
-<span class="source-line-no">042</span><span id="line-42">                Files.createDirectories(fileToSave.getParentFile().toPath());</span>
-<span class="source-line-no">043</span><span id="line-43">            }</span>
-<span class="source-line-no">044</span><span id="line-44">            Files.writeString(fileToSave.toPath(), fileContent);</span>
-<span class="source-line-no">045</span><span id="line-45">        } catch (IOException ioEx) {</span>
-<span class="source-line-no">046</span><span id="line-46">            throw new IllegalStateException("could not save the content into the file " + fileToSave, ioEx);</span>
-<span class="source-line-no">047</span><span id="line-47">        }</span>
-<span class="source-line-no">048</span><span id="line-48">    }</span>
-<span class="source-line-no">049</span><span id="line-49"></span>
-<span class="source-line-no">050</span><span id="line-50">    /**</span>
-<span class="source-line-no">051</span><span id="line-51">     * Copy the file {@code sourceFile} to the file {@code targetFile}</span>
-<span class="source-line-no">052</span><span id="line-52">     * and creates all missing parent directories if necessary.</span>
-<span class="source-line-no">053</span><span id="line-53">     */</span>
-<span class="source-line-no">054</span><span id="line-54">    public static void copyFile(File sourceFile, File targetFile) {</span>
-<span class="source-line-no">055</span><span id="line-55">        if (sourceFile == null || !sourceFile.isFile()) {</span>
-<span class="source-line-no">056</span><span id="line-56">            throw new IllegalStateException(String.format(</span>
-<span class="source-line-no">057</span><span id="line-57">                "could not copy the file %s because it's not a normal file",</span>
-<span class="source-line-no">058</span><span id="line-58">                sourceFile == null ? "&lt;&lt; NULL &gt;&gt;" : "'" + sourceFile + "'"));</span>
-<span class="source-line-no">059</span><span id="line-59">        }</span>
-<span class="source-line-no">060</span><span id="line-60">        if (targetFile == null) {</span>
-<span class="source-line-no">061</span><span id="line-61">            throw new IllegalStateException(String.format(</span>
-<span class="source-line-no">062</span><span id="line-62">                "could not copy the file '%s' because target file is null", sourceFile));</span>
-<span class="source-line-no">063</span><span id="line-63">        }</span>
-<span class="source-line-no">064</span><span id="line-64">        try {</span>
-<span class="source-line-no">065</span><span id="line-65">            if (targetFile.getParentFile() != null) {</span>
-<span class="source-line-no">066</span><span id="line-66">                Files.createDirectories(targetFile.getParentFile().toPath());</span>
-<span class="source-line-no">067</span><span id="line-67">            }</span>
-<span class="source-line-no">068</span><span id="line-68">            Files.copy(sourceFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);</span>
-<span class="source-line-no">069</span><span id="line-69">        } catch (IOException ioEx) {</span>
-<span class="source-line-no">070</span><span id="line-70">            throw new IllegalStateException(String.format(</span>
-<span class="source-line-no">071</span><span id="line-71">                "could not copy the file '%s' into '%s' because of IOException",</span>
-<span class="source-line-no">072</span><span id="line-72">                sourceFile, targetFile), ioEx);</span>
+<span class="source-line-no">006</span><span id="line-6">import java.nio.file.Paths;</span>
+<span class="source-line-no">007</span><span id="line-7">import java.nio.file.StandardCopyOption;</span>
+<span class="source-line-no">008</span><span id="line-8"></span>
+<span class="source-line-no">009</span><span id="line-9">/**</span>
+<span class="source-line-no">010</span><span id="line-10"> * Utility-class that invokes standard JDK utilities, but wraps {@link java.io.IOException}</span>
+<span class="source-line-no">011</span><span id="line-11"> * into {@link IllegalStateException} and creates missing parent directories.</span>
+<span class="source-line-no">012</span><span id="line-12"> */</span>
+<span class="source-line-no">013</span><span id="line-13">public class CoreFileUtils {</span>
+<span class="source-line-no">014</span><span id="line-14"></span>
+<span class="source-line-no">015</span><span id="line-15">    public static String loadFileContent(String pathToLoadStr) {</span>
+<span class="source-line-no">016</span><span id="line-16">        return loadFileContent(Paths.get(pathToLoadStr).toFile());</span>
+<span class="source-line-no">017</span><span id="line-17">    }</span>
+<span class="source-line-no">018</span><span id="line-18"></span>
+<span class="source-line-no">019</span><span id="line-19">    /**</span>
+<span class="source-line-no">020</span><span id="line-20">     * @param fileToLoad file to read the content</span>
+<span class="source-line-no">021</span><span id="line-21">     * @return the content of {@code file} or {@code null} if it's impossible to do</span>
+<span class="source-line-no">022</span><span id="line-22">     */</span>
+<span class="source-line-no">023</span><span id="line-23">    public static String loadFileContent(File fileToLoad) {</span>
+<span class="source-line-no">024</span><span id="line-24">        if (fileToLoad == null || !fileToLoad.isFile()) {</span>
+<span class="source-line-no">025</span><span id="line-25">            throw new IllegalStateException(String.format(</span>
+<span class="source-line-no">026</span><span id="line-26">                "could not load the file %s because it does not exist or it's not a normal file",</span>
+<span class="source-line-no">027</span><span id="line-27">                fileToLoad == null ? "&lt;&lt; NULL &gt;&gt;" : "'" + fileToLoad + "'"));</span>
+<span class="source-line-no">028</span><span id="line-28">        }</span>
+<span class="source-line-no">029</span><span id="line-29">        try {</span>
+<span class="source-line-no">030</span><span id="line-30">            return Files.readString(fileToLoad.toPath());</span>
+<span class="source-line-no">031</span><span id="line-31">        } catch (IOException ioEx) {</span>
+<span class="source-line-no">032</span><span id="line-32">            ioEx.printStackTrace(System.err);</span>
+<span class="source-line-no">033</span><span id="line-33">            return null;</span>
+<span class="source-line-no">034</span><span id="line-34">        }</span>
+<span class="source-line-no">035</span><span id="line-35">    }</span>
+<span class="source-line-no">036</span><span id="line-36"></span>
+<span class="source-line-no">037</span><span id="line-37">    /**</span>
+<span class="source-line-no">038</span><span id="line-38">     * Saving the content into the file {@code fileToSave} (if the file is not empty - it will be truncated).</span>
+<span class="source-line-no">039</span><span id="line-39">     * All missing parent directories will be created if necessary.</span>
+<span class="source-line-no">040</span><span id="line-40">     *</span>
+<span class="source-line-no">041</span><span id="line-41">     * @param fileToSave the file to save into</span>
+<span class="source-line-no">042</span><span id="line-42">     * @param fileContent the content to be saved</span>
+<span class="source-line-no">043</span><span id="line-43">     * @throws IllegalStateException in case of something goes wrong (which must not really happen)</span>
+<span class="source-line-no">044</span><span id="line-44">     */</span>
+<span class="source-line-no">045</span><span id="line-45">    public static void saveFileContent(File fileToSave, String fileContent) {</span>
+<span class="source-line-no">046</span><span id="line-46">        if (fileToSave == null) {</span>
+<span class="source-line-no">047</span><span id="line-47">            throw new IllegalStateException(</span>
+<span class="source-line-no">048</span><span id="line-48">                "could not save the file content, because fileToSave is null");</span>
+<span class="source-line-no">049</span><span id="line-49">        }</span>
+<span class="source-line-no">050</span><span id="line-50">        try {</span>
+<span class="source-line-no">051</span><span id="line-51">            if (fileToSave.getParentFile() != null) {</span>
+<span class="source-line-no">052</span><span id="line-52">                Files.createDirectories(fileToSave.getParentFile().toPath());</span>
+<span class="source-line-no">053</span><span id="line-53">            }</span>
+<span class="source-line-no">054</span><span id="line-54">            Files.writeString(fileToSave.toPath(), fileContent);</span>
+<span class="source-line-no">055</span><span id="line-55">        } catch (IOException ioEx) {</span>
+<span class="source-line-no">056</span><span id="line-56">            throw new IllegalStateException("could not save the content into the file " + fileToSave, ioEx);</span>
+<span class="source-line-no">057</span><span id="line-57">        }</span>
+<span class="source-line-no">058</span><span id="line-58">    }</span>
+<span class="source-line-no">059</span><span id="line-59"></span>
+<span class="source-line-no">060</span><span id="line-60">    /**</span>
+<span class="source-line-no">061</span><span id="line-61">     * Copy the file {@code sourceFile} to the file {@code targetFile}</span>
+<span class="source-line-no">062</span><span id="line-62">     * and creates all missing parent directories if necessary.</span>
+<span class="source-line-no">063</span><span id="line-63">     */</span>
+<span class="source-line-no">064</span><span id="line-64">    public static void copyFile(File sourceFile, File targetFile) {</span>
+<span class="source-line-no">065</span><span id="line-65">        if (sourceFile == null || !sourceFile.isFile()) {</span>
+<span class="source-line-no">066</span><span id="line-66">            throw new IllegalStateException(String.format(</span>
+<span class="source-line-no">067</span><span id="line-67">                "could not copy the file %s because it's not a normal file",</span>
+<span class="source-line-no">068</span><span id="line-68">                sourceFile == null ? "&lt;&lt; NULL &gt;&gt;" : "'" + sourceFile + "'"));</span>
+<span class="source-line-no">069</span><span id="line-69">        }</span>
+<span class="source-line-no">070</span><span id="line-70">        if (targetFile == null) {</span>
+<span class="source-line-no">071</span><span id="line-71">            throw new IllegalStateException(String.format(</span>
+<span class="source-line-no">072</span><span id="line-72">                "could not copy the file '%s' because target file is null", sourceFile));</span>
 <span class="source-line-no">073</span><span id="line-73">        }</span>
-<span class="source-line-no">074</span><span id="line-74">    }</span>
-<span class="source-line-no">075</span><span id="line-75"></span>
-<span class="source-line-no">076</span><span id="line-76">}</span>
+<span class="source-line-no">074</span><span id="line-74">        try {</span>
+<span class="source-line-no">075</span><span id="line-75">            if (targetFile.getParentFile() != null) {</span>
+<span class="source-line-no">076</span><span id="line-76">                Files.createDirectories(targetFile.getParentFile().toPath());</span>
+<span class="source-line-no">077</span><span id="line-77">            }</span>
+<span class="source-line-no">078</span><span id="line-78">            Files.copy(sourceFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);</span>
+<span class="source-line-no">079</span><span id="line-79">        } catch (IOException ioEx) {</span>
+<span class="source-line-no">080</span><span id="line-80">            throw new IllegalStateException(String.format(</span>
+<span class="source-line-no">081</span><span id="line-81">                "could not copy the file '%s' into '%s' because of IOException",</span>
+<span class="source-line-no">082</span><span id="line-82">                sourceFile, targetFile), ioEx);</span>
+<span class="source-line-no">083</span><span id="line-83">        }</span>
+<span class="source-line-no">084</span><span id="line-84">    }</span>
+<span class="source-line-no">085</span><span id="line-85"></span>
+<span class="source-line-no">086</span><span id="line-86">}</span>
 
 
 
