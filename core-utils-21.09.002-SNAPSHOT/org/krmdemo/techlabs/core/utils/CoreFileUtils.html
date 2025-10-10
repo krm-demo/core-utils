@@ -69,6 +69,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#loadFileContent(java.io.File)" tabindex="0">loadFileContent(File)</a></li>
 <li><a href="#saveFileContent(java.io.File,java.lang.String)" tabindex="0">saveFileContent(File, String)</a></li>
 <li><a href="#copyFile(java.io.File,java.io.File)" tabindex="0">copyFile(File, File)</a></li>
+<li><a href="#removePathSilent(java.nio.file.Path)" tabindex="0">removePathSilent(Path)</a></li>
+<li><a href="#removeSilent(java.io.File)" tabindex="0">removeSilent(File)</a></li>
 </ol>
 </li>
 </ol>
@@ -84,7 +86,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-13">CoreFileUtils</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-16">CoreFileUtils</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Utility-class that invokes standard JDK utilities, but wraps <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>
 into <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a> and creates missing parent directories.</div>
@@ -125,10 +127,25 @@ and creates all missing parent directories if necessary.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#loadFileContent(java.io.File)" class="member-name-link">loadFileContent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToLoad)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Loading the content of <code>file</code> as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a> (it's better to use for text-files only)
+and returning <code>null</code> if the content of file could not be loaded for any reason.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#loadFileContent(java.lang.String)" class="member-name-link">loadFileContent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pathToLoadStr)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">The same as <a href="#loadFileContent(java.io.File)"><code>loadFileContent(File)</code></a>, but accept the path to that file as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a></div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#removePathSilent(java.nio.file.Path)" class="member-name-link">removePathSilent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;pathToRemove)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Files.html#deleteIfExists(java.nio.file.Path)" title="class or interface in java.nio.file" class="external-link"><code>Files.deleteIfExists(Path)</code></a>, but ignore any kind of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#removeSilent(java.io.File)" class="member-name-link">removeSilent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileOrDirToRemove)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Recursively removes either a single file or the whole directory and returns the number of removed items</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#saveFileContent(java.io.File,java.lang.String)" class="member-name-link">saveFileContent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToSave,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileContent)</code></div>
@@ -156,7 +173,7 @@ and creates all missing parent directories if necessary.</div>
 <section class="detail" id="&lt;init&gt;()">
 <h3>CoreFileUtils</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-13">CoreFileUtils</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-16">CoreFileUtils</a></span>()</div>
 </div>
 </section>
 </li>
@@ -172,7 +189,14 @@ and creates all missing parent directories if necessary.</div>
 <section class="detail" id="loadFileContent(java.lang.String)">
 <h3>loadFileContent</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-15">loadFileContent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pathToLoadStr)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-24">loadFileContent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pathToLoadStr)</span></div>
+<div class="block">The same as <a href="#loadFileContent(java.io.File)"><code>loadFileContent(File)</code></a>, but accept the path to that file as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>pathToLoadStr</code> - the path of file to laod as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a></dd>
+<dt>Returns:</dt>
+<dd>the content of that file as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a> or <code>null</code> if it's impossible to do</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -180,12 +204,14 @@ and creates all missing parent directories if necessary.</div>
 <section class="detail" id="loadFileContent(java.io.File)">
 <h3>loadFileContent</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-23">loadFileContent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToLoad)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-35">loadFileContent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToLoad)</span></div>
+<div class="block">Loading the content of <code>file</code> as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a> (it's better to use for text-files only)
+and returning <code>null</code> if the content of file could not be loaded for any reason.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>fileToLoad</code> - file to read the content</dd>
 <dt>Returns:</dt>
-<dd>the content of <code>file</code> or <code>null</code> if it's impossible to do</dd>
+<dd>the content of <code>file</code> as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a> or <code>null</code> if it's impossible to do</dd>
 </dl>
 </div>
 </section>
@@ -194,7 +220,7 @@ and creates all missing parent directories if necessary.</div>
 <section class="detail" id="saveFileContent(java.io.File,java.lang.String)">
 <h3>saveFileContent</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-45">saveFileContent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToSave,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-56">saveFileContent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToSave,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileContent)</span></div>
 <div class="block">Saving the content into the file <code>fileToSave</code> (if the file is not empty - it will be truncated).
 All missing parent directories will be created if necessary.</div>
@@ -212,10 +238,43 @@ All missing parent directories will be created if necessary.</div>
 <section class="detail" id="copyFile(java.io.File,java.io.File)">
 <h3>copyFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-64">copyFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;sourceFile,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-75">copyFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;sourceFile,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;targetFile)</span></div>
 <div class="block">Copy the file <code>sourceFile</code> to the file <code>targetFile</code>
 and creates all missing parent directories if necessary.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="removePathSilent(java.nio.file.Path)">
+<h3>removePathSilent</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-106">removePathSilent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;pathToRemove)</span></div>
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Files.html#deleteIfExists(java.nio.file.Path)" title="class or interface in java.nio.file" class="external-link"><code>Files.deleteIfExists(Path)</code></a>, but ignore any kind of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>.
+<hr/>
+<u><i>Note:</i></u> For non-empty directory the method <a href="#removeSilent(java.io.File)"><code>removeSilent(File)</code></a> should be used,
+because this method will always return <code>false</code> for non-empty directory and remove nothing.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>pathToRemove</code> - the path to either a file or an empty directory to remove</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if the item (file or empty directory) is removed, or <code>false</code> otherwise</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="removeSilent(java.io.File)">
+<h3>removeSilent</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-123">removeSilent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileOrDirToRemove)</span></div>
+<div class="block">Recursively removes either a single file or the whole directory and returns the number of removed items</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>fileOrDirToRemove</code> - path to either a file or a directory to remove recursively</dd>
+<dt>Returns:</dt>
+<dd>the number of removed items</dd>
+</dl>
 </div>
 </section>
 </li>
