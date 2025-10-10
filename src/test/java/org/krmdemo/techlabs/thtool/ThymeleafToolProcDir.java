@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
+import org.krmdemo.techlabs.core.utils.CoreFileUtils;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -60,20 +61,36 @@ public class ThymeleafToolProcDir implements Callable<Integer> {
 
     @Option(
         names = {"--input-dir"},
-        paramLabel = "<path>",
+        paramLabel = "<input-path>",
         required = true,
         description = "the path of the source directory to copy and process files @|bold from|@")
     File inputLocation;
 
     @Option(
         names = {"--output-dir"},
-        paramLabel = "<path>",
+        paramLabel = "<output-path>",
         description = "the path of the target directory to copy the processed files @|bold into|@")
     File outputLocation;
 
+    @Option(
+        names = {"--clean-output"},
+        paramLabel = "<path>",
+        defaultValue = "false",
+        description = """
+            if specified, the output directory (if it's provided with option @|yellow --output-dir|@) will be cleaned
+            if @|italic at least one file|@ is going to be copied despite of whether that file processed or just copied as is;
+            by default the output directory is not cleaned (this is a boolean option - no need to provide @|yellow true|@ or @|yellow false|@)""")
+    boolean cleanOutput;
+
     @Parameters(
-        paramLabel = "pattern-to-process",
-        description = "file-matcher patterns to narrow the files to process",
+        paramLabel = "patterns",
+        description = """
+            file-matcher patterns to narrow the files to process (by default all files are going to be processed);
+            if the file is not processed (its name is not satisfied any of the passed @|yellow patterns|@)
+            it will be just copied as is (without transformation as Thymeleaf-template)
+            The syntax of pattern corresponds to JDK-method @|cyan java.nio.file.FileSystem#getPathMatcher|@,
+            but the value of each pattern is prepended like @|blue "glob:|@<@|white,bold input-path|@>@|blue /**|@<@|white,bold pattern|@>@|blue "|@,
+            if the pattern is not started with prefix @|blue "glob:"|@ or @|blue "regex:"|@""",
         arity = "0..*"
     )
     String[] matcherPatterns;
@@ -115,6 +132,13 @@ public class ThymeleafToolProcDir implements Callable<Integer> {
 
         Result result = new Result();
         System.out.println("- processing result before --> " + DumpUtils.dumpAsJsonTxt(result));
+        if (result.countTotal() > 0 && outputLocation != null && cleanOutput) {
+            int removedCount = CoreFileUtils.removeSilent(outputLocation);
+            if (removedCount > 0) {
+                System.out.printf("- output directory has been cleaned (%d items were removed);%n", removedCount);
+            }
+        }
+
         result.processPairs.forEach(Result.Pair::handle);
         System.out.println("- processing result after ---> " + DumpUtils.dumpAsJsonTxt(result));
 

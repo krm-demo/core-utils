@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>core-utils (gh-pages initial version)</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<div class="container-fluid p-1 bg-primary text-white text-center">
+  <h1>Hi! You are at test-site</h1>
+  <p>This is a common header (each page of site has the exact copy of this)</p>
+</div>
+
+<!-- Body (Content) -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-3">
+      <h3>Navigation Links</h3>
+      <a href="../index.html">home</a>
+      <ul>
+        <li><a href="../root-one.html">root-one</a></li>
+        <li><a href="../root-two.html">root-two</a></li>
+        <li><b>sub-dir-a</b></li>
+        <li><a href="../sub-dir-b/index.html">sub-dir-b</a></li>
+        <ul>
+          <li><a href="../sub-dir-b/sub-dir-b-1/index.html">sub-dir-b-1</a></li>
+        </ul>
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      <div class="row border border-secondary rounded">
+        <h3>Some Page-Specific Information</h3>
+        <p>
+          This is the index-page of <code>/sub-dir-a</code>.
+        </p>
+        <p>
+          After executing the tests (<code>"...&gt; mvn clean verify"</code> from command line),<br/>
+          the processed site become available in the directory <code>./target/th-test-process-dir</code>.
+        </p>
+        <div class="text-center bg-light fst-italic text-sm mb-1">Each page has its own content here.</div>
+      </div>
+      <div class="row border border-secondary rounded mt-5">
+        <h3>Some Technical Information</h3>
+        <p>
+          The content of this section has <b><var>th-tool</var></b>-tags,
+          which performs the access to the basic <b><var>th-tool</var></b>-helpers:
+        </p>
+        <code>[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21.09.002-SNAPSHOT</code><br/>
+        <code>[&#8203;[${ mh.projectArtifact }]&#8203;] = core-utils</code><br/>
+        <code>[&#8203;[${ mh.currentProjectVersion }]&#8203;] = 21.09.002-SNAPSHOT</code><br/>
+        <div class="text-center bg-light fst-italic text-sm mb-1">
+          Each page has the same calculated content here.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="p-1 text-center fixed-bottom ">
+  <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.1)">
+    some footer, which is also exactly the same for all pages
+  </div>
+</footer>
+
+</body>
+</html>

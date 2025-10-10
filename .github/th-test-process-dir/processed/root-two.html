@@ -20,10 +20,10 @@
   <div class="row">
     <div class="col-sm-3">
       <h3>Navigation Links</h3>
-      <b>home</b>
+      <a href="index.html">home</a>
       <ul>
         <li><a href="root-one.html">root-one</a></li>
-        <li><a href="root-two.html">root-two</a></li>
+        <li><b>root-two</b></li>
         <li><a href="sub-dir-a/index.html">sub-dir-a</a></li>
         <li><a href="sub-dir-b/index.html">sub-dir-b</a></li>
         <ul>
@@ -35,13 +35,14 @@
       <div class="row border border-secondary rounded">
         <h3>Some Page-Specific Information</h3>
         <p>
-          This is an index (default) page of the whole site.
+          This is the second root-page of the whole site.
         </p>
         <p>
           After executing the tests (<code>"...&gt; mvn clean verify"</code> from command line),<br/>
           the processed site become available in the directory <code>./target/th-test-process-dir</code>.
         </p>
         <div class="text-center bg-light fst-italic text-sm mb-1">Each page has its own content here.</div>
+
       </div>
       <div class="row border border-secondary rounded mt-5">
         <h3>Some Technical Information</h3>
@@ -49,9 +50,9 @@
           The content of this section has <b><var>th-tool</var></b>-tags,
           which performs the access to the basic <b><var>th-tool</var></b>-helpers:
         </p>
-        <code>[&#8203;[${ mh.projectCatalogName }]&#8203;] = [[${ mh.projectCatalogName }]]</code><br/>
-        <code>[&#8203;[${ mh.projectArtifact }]&#8203;] = [[${ mh.projectArtifact }]]</code><br/>
-        <code>[&#8203;[${ mh.currentProjectVersion }]&#8203;] = [[${ mh.currentProjectVersion }]]</code><br/>
+        <code>[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21.09.002-SNAPSHOT</code><br/>
+        <code>[&#8203;[${ mh.projectArtifact }]&#8203;] = core-utils</code><br/>
+        <code>[&#8203;[${ mh.currentProjectVersion }]&#8203;] = 21.09.002-SNAPSHOT</code><br/>
         <div class="text-center bg-light fst-italic text-sm mb-1">
           Each page has the same calculated content here.
         </div>

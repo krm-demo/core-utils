@@ -5,13 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.core.dump.StringBuilderOut;
 
-import java.io.File;
 import java.io.PrintStream;
-import java.net.URL;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileContent;
@@ -54,12 +50,13 @@ public class ThymeleafToolTest {
             "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
             "process-dir",
             "--input-dir",
-            ".github/th-test-process-dir/input-dir"
+            ".github/th-test-process-dir/original"
         );
+//        stdOut.println(sbOut);
+//        stdErr.println(sbErr);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
-        //stdOut.println(sbOut);
     }
 
     @Test
@@ -69,16 +66,18 @@ public class ThymeleafToolTest {
             "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
             "process-dir",
             "--input-dir",
-            ".github/th-test-process-dir/input-dir",
+            ".github/th-test-process-dir/original",
             "--output-dir",
-            "./target/th-test-process-dir/process-all"
+            ".github/th-test-process-dir/processed",
+            "--clean-output"
         );
+//        stdOut.println(sbOut);
+//        stdErr.println(sbErr);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
 
-        //stdOut.println(sbOut);
-        assertThat(loadFileContent("./target/th-test-process-dir/process-all/root-one.html"))
+        assertThat(loadFileContent(".github/th-test-process-dir/processed/root-one.html"))
             .contains("[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21");
     }
 
