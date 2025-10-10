@@ -11,14 +11,42 @@
 
 <!-- Header -->
 <div class="container-fluid p-1 bg-primary text-white text-center">
-  <h1>Hi! You are at test-site</h1>
-  <p>This is a common header (each page of site has the exact copy of this)</p>
+  <h1>
+    <a href="../.." style="float: left; margin-left: 10px;">
+      <img alt="an imagege to return back to the project-site"
+           src="../../images/git-hub-logo--jd-navbar.svg"
+           width="38px" height="38px"
+           style="background-color: white; border: 3px solid #4D7A97" />
+    </a>
+    <span style="font-family: monospace; font-weight: 600">core-utils</span>
+    (<small>test site</small>)
+    <a href="https://github.com/krm-demo/core-utils" style="float: right; margin-right: 10px;">
+      <img alt="an imagege to return back to the project-site"
+           src="../../images/git-hub-logo--white-inv.svg"
+           width="32px" height="32px" />
+    </a>
+  </h1>
 </div>
 
 <!-- Body (Content) -->
-<div class="container mt-5">
+<div class="container mt-4">
   <div class="row">
     <div class="col-sm-3">
+
+      <div style="text-align: center">
+        <!-- following two DIV-s are mutually exclusively displayed via "th:style" attribute: -->
+        <div style="display: block" th:style="|display: none|">
+          <a href="#" class="btn btn-primary disabled">original</a>
+          <a href="../../../processed/sub-dir-b/sub-dir-b-1/index.html" class="btn btn-link">processed</a>
+          <hr/>
+        </div>
+        <div style="display: none" th:style="|display: block|">
+          <a href="../../../processed/sub-dir-b/sub-dir-b-1/index.html" class="btn btn-link">original</a>
+          <a href="#" class="btn btn-primary disabled">processed</a>
+          <hr/>
+        </div>
+      </div>
+
       <h3>Navigation Links</h3>
       <a href="../../index.html">home</a>
       <ul>

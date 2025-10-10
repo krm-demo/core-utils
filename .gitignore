@@ -1,6 +1,7 @@
 # Git-Hub Workflow generated files
 .github/th-vars/*.md
 .github/th-templates/*.md
+.github/th-test-process-dir/processed
 
 # Node artifact files
 node_modules/
