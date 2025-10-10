@@ -50,7 +50,7 @@ public class ThymeleafToolTest {
             "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
             "process-dir",
             "--input-dir",
-            ".github/th-test-process-dir/original"
+            ".github/th-test-site/original"
         );
 //        stdOut.println(sbOut);
 //        stdErr.println(sbErr);
@@ -66,9 +66,9 @@ public class ThymeleafToolTest {
             "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
             "process-dir",
             "--input-dir",
-            ".github/th-test-process-dir/original",
+            ".github/th-test-site/original",
             "--output-dir",
-            ".github/th-test-process-dir/processed",
+            ".github/th-test-site/processed",
             "--clean-output"
         );
 //        stdOut.println(sbOut);
@@ -77,7 +77,7 @@ public class ThymeleafToolTest {
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
 
-        assertThat(loadFileContent(".github/th-test-process-dir/processed/root-one.html"))
+        assertThat(loadFileContent(".github/th-test-site/processed/root-one.html"))
             .contains("[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21");
     }
 

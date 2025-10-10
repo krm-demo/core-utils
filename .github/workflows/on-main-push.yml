@@ -143,6 +143,7 @@ jobs:
           echo "... going to re-write the content of folder '$(realpath ../gh-pages-branch/${JAR_FILE_NAME%.*})' ..."
           rm -rf ../gh-pages-branch/*-SNAPSHOT
           cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
+          cp -r .github/th-test-site ../gh-pages-branch/${JAR_FILE_NAME%.*}
           echo "JAR_FILE_NAME=$JAR_FILE_NAME"
 
           echo "... copy the previously generated 'Release Catalog' page ..."
