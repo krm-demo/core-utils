@@ -1,3 +1,4 @@
+0218c49d play with test-site #2
 b74c01a2 introduce 'CoreFileUtils.removeSilent' and play with SVG-images and test-site
 9cb88424 playing with test-site and 'empty' Java-Doc #1
 5d7d8c8f working on ThymeleafToolProcDir #2 (playing with test-site)
