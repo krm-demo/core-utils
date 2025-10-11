@@ -54,16 +54,27 @@ loadScripts(document, 'script');</script>
 <div class="block">This is an entry point of standard project documentation without test-results,
 test-coverage and more advanced examples and samples of usage.
 
-<hr>
+<hr/>
 <div style="border: 1px solid red">
   I'm a DIV from <code>'./src/main/javadoc/overview.html'</code>
   <br/>
   This line is a part of test that must appear in the next <b>internal release</b>
 </div>
-<hr>
+<hr/>
 
 <h3 id="last-commits-since-the-last-internal-public-release-heading">Last commits since the last INTERNAL/PUBLIC release</h3>
-TODO: make in a similar way like it's done for 'Release Catalog'</div>
+TODO: make in a similar way like it's done for 'Release Catalog'
+
+<hr/>
+Examples of using <b><code>th-tool</code></b> to process the directories
+is demonstrated at simple <a href="th-test-site/original">test site</a>,
+which is very straight-forward with a lot of duplicated elements,
+but it's exactly how most of generated sites look like. So, <b><code>th-tool</code></b>-tags
+and expression are inserted <b>before</b> and processed <b>after</b> that third-party site-generator.
+In our main build-flow that third-party site-generator is a standard <b><code>javadoc</code></b>-tool,
+which comes with every installation of JDK. As for our <a href="th-test-site/original">test site</a>
+- it's just a demonstration and emulation of some typical cases.
+<hr/></div>
 <div id="all-packages-table">
 <div class="caption"><span>Packages</span></div>
 <div class="summary-table two-column-summary">
