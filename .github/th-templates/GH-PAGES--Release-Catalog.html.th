@@ -27,27 +27,12 @@
     <!-- ========= START OF TOP NAVBAR ======= -->
     <div class="top-nav" id="navbar-top">
       <div class="nav-content">
-        <div class="nav-menu-button"><button id="navbar-toggle-button" aria-controls="navbar-top" aria-expanded="false" aria-label="Toggle navigation links"><span class="nav-bar-toggle-icon">&nbsp;</span><span class="nav-bar-toggle-icon">&nbsp;</span><span class="nav-bar-toggle-icon">&nbsp;</span></button></div>
-        <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
-        <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
-          <li class="nav-bar-cell1-rev">Overview</li>
-        </ul>
-        <div class="about-language">[(${mh.projectCatalogName})]</div>
-      </div>
-    </div>
-    <div class="sub-nav">
-      <div class="nav-content">
-        <ol class="sub-nav-list"></ol>
+        <h2>[[${ mh.projectArtifact }]] <small>(Release Catalog)</small></h2>
       </div>
     </div>
     <!-- ========= END OF TOP NAVBAR ========= -->
-    <span class="skip-nav" id="skip-navbar-top"></span></nav>
+  </nav>
 </header>
-
-<!-- Header -->
-<div class="container-fluid p-1 bg-primary text-white text-center">
-    <h2><u>[[${ mh.projectArtifact }]]</u> <small>(Release Catalog)</small></h2>
-</div>
 
 <!-- Body (Content) -->
 <div class="container mt-3">

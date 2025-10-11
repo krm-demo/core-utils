@@ -2,6 +2,7 @@
 .github/th-vars/*.md
 .github/th-templates/*.md
 .github/th-test-site/processed
+.github/th-test-release-catalog/index.html
 
 # Node artifact files
 node_modules/

@@ -27,23 +27,6 @@ public class ThymeleafToolTest {
     }
 
     @Test
-    void testProcess_Readme() {
-        int exitCode = ThymeleafTool.executeMain(
-            "--var-file",
-            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
-            "process",
-            ".github/th-templates/ROOT-Readme.md.th"
-        );
-        assertThat(exitCode).isZero();
-        assertThat(sbErr).isEmpty();
-        assertThat(sbOut).isNotBlank();
-
-        assertThat(sbOut).contains("core-utils");
-        assertThat(sbOut).contains("utility-classes to simplify working with core-java API");
-        assertThat(sbOut).containsAnyOf("on-main-push.yml/badge.svg?event=push");
-    }
-
-    @Test
     void testProcessDir_DryRun() {
         int exitCode = ThymeleafTool.executeMain(
             "--var-file",
@@ -79,6 +62,41 @@ public class ThymeleafToolTest {
 
         assertThat(loadFileContent(".github/th-test-site/processed/root-one.html"))
             .contains("[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21");
+    }
+
+    @Test
+    void testProcess_Readme() {
+        int exitCode = ThymeleafTool.executeMain(
+            "--var-file",
+            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
+            "process",
+            ".github/th-templates/ROOT-Readme.md.th"
+        );
+        assertThat(exitCode).isZero();
+        assertThat(sbErr).isEmpty();
+        assertThat(sbOut).isNotBlank();
+
+        assertThat(sbOut).contains("core-utils");
+        assertThat(sbOut).contains("utility-classes to simplify working with core-java API");
+        assertThat(sbOut).containsAnyOf("on-main-push.yml/badge.svg?event=push");
+    }
+
+    @Test
+    void testProcess_ReleaseCatalog() {
+        int exitCode = ThymeleafTool.executeMain(
+            "--var-file",
+            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
+            "process",
+            "--output",
+            ".github/th-test-release-catalog/index.html",
+            ".github/th-templates/GH-PAGES--Release-Catalog.html.th"
+        );
+        assertThat(exitCode).isZero();
+        assertThat(sbErr).isEmpty();
+        assertThat(sbOut).isEmpty();
+
+        assertThat(loadFileContent(".github/th-test-release-catalog/index.html"))
+            .contains("core-utils (Release Catalog)");
     }
 
     // --------------------------------------------------------------------------------------------

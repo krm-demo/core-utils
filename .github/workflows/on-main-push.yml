@@ -146,8 +146,10 @@ jobs:
           cp -r .github/th-test-site ../gh-pages-branch/${JAR_FILE_NAME%.*}
           echo "JAR_FILE_NAME=$JAR_FILE_NAME"
 
+          # TODO: all copy-commands in this step could be done via "th-tool" - think about that...
+
           echo "... copy the previously generated 'Release Catalog' page ..."
-          cp target/GH-PAGES--Release-Catalog.html ../gh-pages-branch/index.html
+          cp -r .github/th-test-release-catalog ../gh-pages-branch
 
           #tree -L 2 ../gh-pages-branch
           ls -laxo ../gh-pages-branch
