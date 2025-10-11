@@ -1,3 +1,4 @@
+266c50bf reanimate 'Release Catalog' #1
 510a2ebe publish the test-site during 'on-main-push' workflow (put the link inro 'overview') #6
 98cfc9a2 publish the test-site during 'on-main-push' workflow (put the link inro 'overview') #5
 506564b1 publish the test-site during 'on-main-push' workflow (put the link inro 'overview') #4
