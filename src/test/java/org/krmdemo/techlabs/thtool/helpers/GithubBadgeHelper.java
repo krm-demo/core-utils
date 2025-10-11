@@ -17,6 +17,13 @@ import java.util.function.Consumer;
  * @see <a href="https://shields.io/badges">
  *     (Shields.io) Static Badge
  * </a>
+ * @see <a href="https://github.com/simple-icons/simple-icons/blob/master/slugs.md">
+ *     Simple Icons slugs
+ * </a>
+ * @see <a href="https://img.shields.io/badge/lleft--part-right--part-blue?logo=github&logoColor=red&labelColor=green">
+ *     an example of badge <br/>
+ *     (git-hub-logo|left-part|right-part)
+ * </a>
  */
 public class GithubBadgeHelper {
 
