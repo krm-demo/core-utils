@@ -149,7 +149,7 @@ jobs:
           # TODO: all copy-commands in this step could be done via "th-tool" - think about that...
 
           echo "... copy the previously generated 'Release Catalog' page ..."
-          cp -r .github/th-test-release-catalog ../gh-pages-branch
+          cp -r .github/th-test-release-catalog/* ../gh-pages-branch
 
           #tree -L 2 ../gh-pages-branch
           ls -laxo ../gh-pages-branch
