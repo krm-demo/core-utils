@@ -15,12 +15,12 @@ TODO: make in a similar way like it's done for 'Release Catalog'
 
 <hr/>
 Examples of using <b><code>th-tool</code></b> to process the directories
-is demonstrated at simple <a href="th-test-site/original">test site</a>,
+is demonstrated at simple <a href="th-test-site/original/index.html">test site</a>,
 which is very straight-forward with a lot of duplicated elements,
 but it's exactly how most of generated sites look like. So, <b><code>th-tool</code></b>-tags
 and expression are inserted <b>before</b> and processed <b>after</b> that third-party site-generator.
 In our main build-flow that third-party site-generator is a standard <b><code>javadoc</code></b>-tool,
-which comes with every installation of JDK. As for our <a href="th-test-site/original">test site</a>
+which comes with every installation of JDK. As for our <a href="th-test-site/original/index.html">test site</a>
 - it's just a demonstration and emulation of some typical cases.
 <hr/>
 
