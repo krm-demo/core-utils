@@ -1,9 +1,11 @@
 /**
  *  This CSS contains the styles for the root (index.html) release-catalog page
  */
+:root {
+    --major-group-border: 3px dashed green;
+}
 
 .current-snapshot {
-    border: 3px dotted green;
     margin-bottom: 5px;
 }
 .current-minor-groups {
@@ -48,6 +50,9 @@
     width: 150px;
 }
 .snapshot-group-version {
+    border-top-left-radius: 10px;
+    border-top: var(--major-group-border);
+    border-left: var(--major-group-border);
     font-size: 0.9rem;
     display: inline-block;
     width: 250px;
@@ -72,9 +77,15 @@
 }
 
 .major-group-info {
+    border-top-right-radius: 10px;
+    border-top: var(--major-group-border);
+    border-right: var(--major-group-border);
     font-size: 1rem;
 }
 .snapshot-group-info {
+    border-top-right-radius: 10px;
+    border-top: var(--major-group-border);
+    border-right: var(--major-group-border);
     font-size: 0.9rem;
 }
 .minor-group-info {

@@ -1,0 +1,256 @@
+/**
+ *  This CSS contains the styles for the root (index.html) release-catalog page
+ */
+:root {
+    --major-group-border: 3px dashed green;
+}
+
+.nav-content h1 {
+    margin: 0;
+    padding-top: 7px;
+    color: var(--navbar-text-color);
+    font-size: 2em;
+}
+
+/* ************* **************** *************** */
+/* ************* **************** *************** */
+/* ************* **************** *************** */
+
+.container {
+  border: 1px dotted green;
+  position: relative;
+}
+
+.item1 {
+  top: 0;
+  background: azure;
+  z-index: 2;
+}
+
+.item2 {
+  top: 0;
+  left: 40px;
+  position: absolute;
+  background: red;
+  z-index: 3;
+}
+
+/* ************* **************** *************** */
+/* ************* **************** *************** */
+/* ************* **************** *************** */
+
+.major-grid-container {
+    position: relative;
+}
+
+.major-grid-title-row-over {
+    top: 0;
+    right: 40px;
+    display: grid;
+    background: white;
+    width: calc(100% - 40px);
+    grid-template-columns: 50px 50px 50px 200px auto;
+    position: absolute;
+    z-index: 3;
+}
+
+.major-grid-title-row {
+    display: grid;
+    grid-template-columns: 50px 50px 50px 200px auto
+}
+.major-grid-commit-row {
+    display: grid;
+    grid-template-columns: 50px 50px 50px 120px auto
+}
+
+.major-grid-title-row .col-1 {
+    border: 0;
+}
+.major-grid-title-row .col-2 {
+    border: 0;
+}
+.major-grid-title-row .col-3 {
+    border: 0;
+}
+.major-grid-title-row .col-4 {
+    border-left: 1px solid blue;
+}
+.major-grid-title-row .col-5 {
+    border-right: 1px solid blue;
+}
+
+.major-grid-commit-row .col-1 {
+    border: 0;
+}
+.major-grid-commit-row .col-2 {
+    border: 0;
+}
+.major-grid-commit-row .col-3 {
+    border: 0;
+}
+.major-grid-commit-row .col-4 {
+    border-left: 1px solid blue;
+}
+.major-grid-commit-row .col-5 {
+    border-right: 1px solid blue;
+}
+
+/* ************* **************** *************** */
+/* ************* **************** *************** */
+/* ************* **************** *************** */
+
+
+.major-group {
+    border: 3px dotted magenta;
+    margin-bottom: 5px;
+}
+
+.major-group-date-time {
+    text-align: right;
+    padding-right: 5px;
+    font-size: 1.1rem;
+    display: inline-block;
+    width: 210px;
+}
+.minor-group-date-time {
+    text-align: right;
+    padding-right: 5px;
+    font-size: 0.9rem;
+    display: inline-block;
+    width: 210px;
+}
+.commit-date-time {
+    text-align: right;
+    padding-right: 5px;
+    font-size: 0.8rem;
+    display: inline-block;
+    width: 210px;
+}
+
+.major-group-version {
+    border-top-left-radius: 10px;
+    border-top: var(--major-group-border);
+    border-left: var(--major-group-border);
+    font-size: 1.2rem;
+    display: inline-block;
+    width: 150px;
+}
+.snapshot-group-version {
+    font-size: 0.9rem;
+    display: inline-block;
+    width: 250px;
+}
+.minor-group-version {
+    font-size: 0.9rem;
+    display: inline-block;
+    width: 150px;
+}
+.commit-ID {
+    font-size: 0.9rem;
+    display: inline-block;
+    width: 100px;
+}
+.commit-ID a {
+    color: #59636e;
+    text-decoration: none;
+}
+.commit-ID a:hover {
+    color: ##0969da;
+    text-decoration: underline;
+}
+
+.major-group-info {
+    border-top-right-radius: 10px;
+    border-top: var(--major-group-border);
+    border-right: var(--major-group-border);
+    font-size: 1rem;
+}
+.minor-group-info {
+    font-size: 0.9rem;
+}
+.commit-message {
+    font-size: 0.8rem;
+}
+
+
+/* ------------------------ */
+
+summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+summary::after {
+    content: '';
+    width: 18px;
+    height: 10px;
+    background: url('up-down-triangle--jd-navbar.svg') no-repeat;
+    background-size: cover;
+}
+
+details[open] > summary::after {
+    transform: rotate(180deg);
+}
+summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/*
+@layer setupPage, step2styles;
+
+summary {
+  position: relative;
+}
+summary::marker {
+  content: none;
+}
+summary::before,
+summary::after {
+  content: '';
+}
+summary::before,
+summary::after {
+    width: 0.75em;
+    height: 0;
+    border-bottom: 2px solid;
+    position: absolute;
+    top: calc(50% - 1px);
+    right: 0;
+    transform: translateY(-50%);
+  }
+summary::after {
+  transform: rotate(90deg);
+  transform-origin: 50% 50%;
+}
+[open] summary::after {
+  transform: rotate(0deg);
+}
+
+summary {
+    padding: 0;
+    cursor: pointer;
+}
+
+/* styles ported over from the second example * /
+@layer step2styles {
+  details + details {
+    border-top: none;
+  }
+  details[open] {
+      padding-bottom: 1em;
+  }
+  summary {
+    padding: 0;
+    cursor: pointer;
+  }
+}
+*/
+/* cascade layer: page setup. Doesn't impact the accordion * /
+@layer setupPage {
+* {
+  box-sizing: border-box;
+}}
+*/
