@@ -16,29 +16,6 @@
 /* ************* **************** *************** */
 /* ************* **************** *************** */
 
-.container {
-  border: 1px dotted green;
-  position: relative;
-}
-
-.item1 {
-  top: 0;
-  background: azure;
-  z-index: 2;
-}
-
-.item2 {
-  top: 0;
-  left: 40px;
-  position: absolute;
-  background: red;
-  z-index: 3;
-}
-
-/* ************* **************** *************** */
-/* ************* **************** *************** */
-/* ************* **************** *************** */
-
 .major-grid-container {
     position: relative;
 }
@@ -53,15 +30,28 @@
     position: absolute;
     z-index: 3;
 }
-
 .major-grid-title-row {
     display: grid;
-    grid-template-columns: 50px 50px 50px 200px auto
+    grid-template-columns: 50px 50px 50px 200px auto;
 }
 .major-grid-commit-row {
     display: grid;
-    grid-template-columns: 50px 50px 50px 120px auto
+    grid-template-columns: 50px 50px 50px 120px auto;
 }
+
+.major-grid-title-row-over .col-4{
+    border-left: 1px solid blue;
+}
+.major-grid-title-row-over .col-5{
+    border-right: 1px solid blue;
+}
+.major-grid-title-row-over .col-4 last {
+    border-bottom: 1px solid blue;
+}
+.major-grid-title-row-over .col-5 last {
+    border-bottom: 1px solid blue;
+}
+
 
 .major-grid-title-row .col-1 {
     border: 0;
@@ -73,7 +63,6 @@
     border: 0;
 }
 .major-grid-title-row .col-4 {
-    border-left: 1px solid blue;
 }
 .major-grid-title-row .col-5 {
     border-right: 1px solid blue;
