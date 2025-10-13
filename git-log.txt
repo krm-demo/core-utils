@@ -1,3 +1,4 @@
+8c29c0e6 << public release >> 21.11
 7421280e remove depreceated method MavenHelper.getProjectBadgeName()
 a3f61322 << new snapshot version >> 21.11.002-SNAPSHOT
 5b49ae00 << internal release >> 21.11.001
