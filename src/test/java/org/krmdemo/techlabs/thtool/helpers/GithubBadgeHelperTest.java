@@ -38,6 +38,7 @@ public class GithubBadgeHelperTest {
     @Test
     void testBadgeLatestPublicJavaDoc() {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        assertThat(gbh.isLatestPublicAvailable()).isTrue();
         assertThat(gbh.getBadgeUrlLatestPublicJavaDoc()).isEqualTo(
             "https://img.shields.io/badge/core--utils-21.09-blue?logo=github&logoColor=f8981d&labelColor=4D7A97");
         assertThat(gbh.getBadgeLatestPublicJavaDoc()).isEqualTo("""
