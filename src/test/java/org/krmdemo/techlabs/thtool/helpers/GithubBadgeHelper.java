@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
+import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafTool;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
@@ -74,6 +75,58 @@ public class GithubBadgeHelper {
         this.ttCtx = Objects.requireNonNull(ttCtx);
     }
 
+    // --------------------------------------------------------------------------------------------
+
+    private final static String LOGO_SLUG_NAME__GIT_HUB = "github";
+    private final static String LABEL_COLOR__JAVADOC_NAVBAR = "4D7A97";
+    private final static String LOGO_COLOR__JAVADOC_SELECTED = "f8981d";
+
+    public String getBadgeUrlReleaseCatalog() {
+        return badgeUrlShiedsIO("Release_Catalog", null, LABEL_COLOR__JAVADOC_NAVBAR,
+            LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+    }
+
+    /**
+     * Returning the URL to the static-badge, which will be rendered by
+     * <a href="https://shields.io/badges/static-badge">Shields IO</a>
+     *
+     * @param leftPart the left part of badge-name
+     * @param rightPart the right-part of badge-name
+     * @param colorPart the color of right-part background (or the whole badge-name background if one part is missing)
+     * @param logoSlugName the logo-slug, provided by
+     *                     <a href="https://github.com/simple-icons/simple-icons/blob/master/slugs.md">
+     *                     Simple Icons
+     *                     </a>
+     * @param colorLogo the fill-color of logo-icon
+     * @param colorLabel the background color of logo-icon
+     * @return the URL to be inserted on your site
+     */
+    private String badgeUrlShiedsIO(String leftPart, String rightPart, String colorPart,
+                                 String logoSlugName, String colorLogo, String colorLabel) {
+        leftPart = escapeBadgeName(leftPart);
+        rightPart = escapeBadgeName(rightPart);
+        if (StringUtils.isNotBlank(leftPart) && StringUtils.isNotBlank(rightPart)) {
+            return String.format("https://img.shields.io/badge/%s-%s-%s?logo=%s&logoColor=%s&labelColor=%s",
+                leftPart, rightPart, colorPart, logoSlugName, colorLogo, colorLabel);
+        }
+        String singlePart = StringUtils.isNotBlank(leftPart) ? leftPart : rightPart;
+        if (StringUtils.isBlank(singlePart)) {
+            throw new IllegalArgumentException("either left and right part of badge name must be NOT blank");
+        }
+        return String.format("https://img.shields.io/badge/%s-%s?logo=%s&logoColor=%s&labelColor=%s",
+            singlePart, colorPart, logoSlugName, colorLogo, colorLabel);
+    }
+
+    private static String escapeBadgeName(String namePart) {
+        if (StringUtils.isBlank(namePart)) {
+            return namePart;
+        }
+        namePart = namePart.replace("-", "--");
+        namePart = namePart.replace("_", "__");
+        return namePart;
+    }
+
+// https://img.shields.io/badge/lleft--part-right--part-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97
     // --------------------------------------------------------------------------------------------
 
     public String githubCommitUrl(CommitInfo commitInfo) {
