@@ -141,7 +141,7 @@ public class GithubBadgeHelper {
      */
     @JsonIgnore
     public String getBadgeLatestPublicJavaDocHTML() {
-        return !isLatestInternalAvailable() ? "" :
+        return !isLatestPublicAvailable() ? "" :
             String.format("""
                 <a href="https://krm-demo.github.io/core-utils/%s-%s">
                   <img alt="a badge to the latest PUBLIC-version" src="%s" />
@@ -236,7 +236,7 @@ public class GithubBadgeHelper {
      */
     @JsonIgnore
     public String getBadgeSnapshotJavaDocHTML() {
-        return !isLatestInternalAvailable() ? "" :
+        return !isMavenSnapshot() ? "" :
             String.format("""
                 <a href="https://krm-demo.github.io/core-utils/%s-%s">
                   <img alt="a badge to the latest SNAPSHOT-version" src="%s" />
