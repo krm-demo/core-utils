@@ -104,6 +104,26 @@ public class GithubBadgeHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
+     * @return {@code true} if the latest PUBLIC-release is available for this project, or {@code false} - otherwise
+     */
+    public boolean isLatestPublicAvailable() {
+        return releaseCatalog().getFinalMajor() != null;
+    }
+
+    /**
+     * @return the version to the latest PUBLIC-release or empty string if it's not available
+     */
+    public String getLatestPublicVersion() {
+        if (!isLatestPublicAvailable()) {
+            return "";
+        } else if (isLatestInternalAvailable()) {
+            return "" + releaseCatalog().getFinalMajor().versionTag();
+        } else {
+            return MavenHelper.fromCtx(ttCtx).getPublicReleaseVersion();
+        }
+    }
+
+    /**
      * @return the GitHub-Markdown'-badge to the latest PUBLIC-release (to be inserted at 'README.md')
      */
     public String getBadgeLatestPublicJavaDoc() {
@@ -122,21 +142,27 @@ public class GithubBadgeHelper {
                 LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
     }
 
-    /**
-     * @return {@code true} if the latest PUBLIC-release is available for this project, or {@code false} - otherwise
-     */
-    public boolean isLatestPublicAvailable() {
-        return releaseCatalog().getFinalMajor() != null;
-    }
-
-    /**
-     * @return the version to the latest PUBLIC-release or empty string if it's not available
-     */
-    public String getLatestPublicVersion() {
-        return isLatestPublicAvailable() ? "" + releaseCatalog().getFinalMajor().versionTag() : "";
-    }
-
     // --------------------------------------------------------------------------------------------
+
+    /**
+     * @return {@code true} if the latest INTERNAL-release is available for this project, or {@code false} - otherwise
+     */
+    public boolean isLatestInternalAvailable() {
+        return releaseCatalog().getFinalMinor() != null;
+    }
+
+    /**
+     * @return the version of the latest INTERNAL-release or empty string if it's not available
+     */
+    public String getLatestInternalVersion() {
+        if (!isLatestInternalAvailable()) {
+            return "";
+        } else if (isSnapshotAvailable()) {
+            return "" + releaseCatalog().getFinalMinor().versionTag();
+        } else {
+            return MavenHelper.fromCtx(ttCtx).getInternalReleaseVersion();
+        }
+    }
 
     /**
      * @return the GitHub-Markdown'-badge to the latest INTERNAL-release (to be inserted at 'README.md')
@@ -157,21 +183,21 @@ public class GithubBadgeHelper {
                 LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
     }
 
-    /**
-     * @return {@code true} if the latest INTERNAL-release is available for this project, or {@code false} - otherwise
-     */
-    public boolean isLatestInternalAvailable() {
-        return releaseCatalog().getFinalMinor() != null;
-    }
-
-    /**
-     * @return the version of the latest INTERNAL-release or empty string if it's not available
-     */
-    public String getLatestInternalVersion() {
-        return isLatestInternalAvailable() ? "" + releaseCatalog().getFinalMinor().versionTag() : "";
-    }
-
     // --------------------------------------------------------------------------------------------
+
+    /**
+     * @return {@code true} if the latest SNAPSHOT-version is available for this project, or {@code false} - otherwise
+     */
+    public boolean isSnapshotAvailable() {
+        return MavenHelper.fromCtx(ttCtx).versionHasQualifierPart();
+    }
+
+    /**
+     * @return the current version of maven-project via {@link MavenHelper#getCurrentProjectVersion()}
+     */
+    public String getSnapshotVersion() {
+        return MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion();
+    }
 
     /**
      * @return the GitHub-Markdown'-badge to the latest SNAPSHOT-version (to be inserted at 'README.md')
@@ -190,20 +216,6 @@ public class GithubBadgeHelper {
         return !isSnapshotAvailable() ? "" :
             badgeUrlShiedsIO(repoName(), getSnapshotVersion(), LABEL_COLOR__VERSION,
                 LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
-    }
-
-    /**
-     * @return {@code true} if the latest SNAPSHOT-version is available for this project, or {@code false} - otherwise
-     */
-    public boolean isSnapshotAvailable() {
-        return MavenHelper.fromCtx(ttCtx).versionHasQualifierPart();
-    }
-
-    /**
-     * @return the current version of maven-project via {@link MavenHelper#getCurrentProjectVersion()}
-     */
-    public String getSnapshotVersion() {
-        return MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion();
     }
 
     // --------------------------------------------------------------------------------------------
