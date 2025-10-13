@@ -49,10 +49,20 @@ public class GithubBadgeHelperTest {
     @Test
     void testBadgeLatestInternalJavaDoc() {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
-        assumeThat(gbh.isLatestInternalAvailable()).isTrue(); // <-- in some cases it's not available
+        assumeThat(gbh.isLatestInternalAvailable()).isTrue(); // <-- in some cases it's not available (PUBLIC-release)
         assertThat(gbh.getBadgeUrlLatestInternalJavaDoc()).matches(
             "https://img.shields.io/badge/core--utils-21\\.\\d\\d\\.\\d\\d\\d-blue\\?logo=github&logoColor=f8981d&labelColor=4D7A97");
         assertThat(gbh.getBadgeLatestInternalJavaDoc()).matches("""
             \\[!\\[Latest-Internal]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d-blue\\?logo=github&logoColor=f8981d&labelColor=4D7A97\\)]\\(https://krm-demo.github.io/core-utils/core-utils-21\\.\\d\\d\\.\\d\\d\\d\\)""");
+    }
+
+    @Test
+    void testBadgeSnapshotJavaDoc() {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        assumeThat(gbh.isSnapshotAvailable()).isTrue(); // <-- in some cases it's not available (PUBLIC-release and INTERNAL-release)
+        assertThat(gbh.getBadgeUrlSnapshotJavaDoc()).matches(
+            "https://img.shields.io/badge/core--utils-21\\.\\d\\d\\.\\d\\d\\d--SNAPSHOT-blue\\?logo=github&logoColor=f8981d&labelColor=4D7A97");
+        assertThat(gbh.getBadgeSnapshotJavaDoc()).matches("""
+            \\[!\\[Latest-Internal]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d--SNAPSHOT-blue\\?logo=github&logoColor=f8981d&labelColor=4D7A97\\)]\\(https://krm-demo.github.io/core-utils/core-utils-21\\.\\d\\d\\.\\d\\d\\d-SNAPSHOT\\)""");
     }
 }
