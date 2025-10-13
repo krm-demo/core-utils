@@ -107,9 +107,10 @@ public class GithubBadgeHelper {
      * @return the GitHub-Markdown'-badge to the latest PUBLIC-release (to be inserted at 'README.md')
      */
     public String getBadgeLatestPublicJavaDoc() {
-        return String.format(
-            "[![Latest-Public](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
-            getBadgeUrlLatestPublicJavaDoc(), repoName(), getLatestPublicVersion());
+        return !isLatestPublicAvailable() ? "" :
+            String.format(
+                "[![Latest-Public](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
+                getBadgeUrlLatestPublicJavaDoc(), repoName(), getLatestPublicVersion());
     }
 
     /**
@@ -141,9 +142,10 @@ public class GithubBadgeHelper {
      * @return the GitHub-Markdown'-badge to the latest INTERNAL-release (to be inserted at 'README.md')
      */
     public String getBadgeLatestInternalJavaDoc() {
-        return String.format(
-            "[![Latest-Internal](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
-            getBadgeUrlLatestInternalJavaDoc(), repoName(), getLatestInternalVersion());
+        return !isLatestInternalAvailable() ? "" :
+            String.format(
+                "[![Latest-Internal](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
+                getBadgeUrlLatestInternalJavaDoc(), repoName(), getLatestInternalVersion());
     }
 
     /**
@@ -172,16 +174,17 @@ public class GithubBadgeHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
-     * @return the GitHub-Markdown'-badge to the latest INTERNAL-release (to be inserted at 'README.md')
+     * @return the GitHub-Markdown'-badge to the latest SNAPSHOT-version (to be inserted at 'README.md')
      */
     public String getBadgeSnapshotJavaDoc() {
-        return String.format(
-            "[![Latest-Internal](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
-            getBadgeUrlSnapshotJavaDoc(), repoName(), getSnapshotVersion());
+        return !isSnapshotAvailable() ? "" :
+            String.format(
+                "[![Snapshot-Version](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
+                getBadgeUrlSnapshotJavaDoc(), repoName(), getSnapshotVersion());
     }
 
     /**
-     * @return the URL to the badge to the latest INTERNAL-release
+     * @return the URL to the badge to the latest SNAPSHOT-version
      */
     public String getBadgeUrlSnapshotJavaDoc() {
         return !isSnapshotAvailable() ? "" :
@@ -190,7 +193,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return {@code true} if the latest INTERNAL-release is available for this project, or {@code false} - otherwise
+     * @return {@code true} if the latest SNAPSHOT-version is available for this project, or {@code false} - otherwise
      */
     public boolean isSnapshotAvailable() {
         return MavenHelper.fromCtx(ttCtx).versionHasQualifierPart();
