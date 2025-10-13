@@ -91,7 +91,7 @@ In order to refer this particular project - we must add following XML-tags into 
 - where the value of `OWNER_NAME` should be <code>krm-demo</code> (you can try another `<username>`)
 - and the value of `MY_READONLY_TOKEN` should be <code>ghp_&#8203;L1Eiw9V4CXLZVl0nu2QkqWDVpQE4zl0k&#8203;cYz6</code>
 - (should be re-masked!) the value of `MY_ADMIN_TOKEN` should be <code>ghp_&#8203;UIEgLpCQoqASXtbxGrbpgfPXNYC94T19&#8203;NqXg</code>
-- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;IID4cf6cEXSdyljJxYv1Hm5egKT0qE36&#8203;lxbl</code>
+- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;RoCmMnS4WHK9X78XjYaJ8H20eVlwOW1O&#8203;8nJc</code>
 
 > [!IMPORTANT]
 > In the list above the value of GitHub-secret `MY_READONLY_TOKEN`is displayed _un-masked_ (no asterisks as usually),
@@ -199,7 +199,7 @@ Then you can create your own jbang-scripts using following examples:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18471844896).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18472391952).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
 
@@ -210,8 +210,10 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
 {
   "releaseCatalog": {
     "current-snapshot-group": {
-      "minor-group-info": "<< unreleased >> 2 commits",
+      "minor-group-info": "<< unreleased >> 4 commits",
       "commits-one-line": [
+        "c6c25a1 | 2025-10-13 Mon 16:21:04 |  display the bage with Snapshot-JavaDoc #3",
+        "7850732 | 2025-10-13 Mon 16:13:10 |  << internal release >> 21.10.004",
         "e921ad2 | 2025-10-13 Mon 16:10:43 |  display the bage with Snapshot-JavaDoc #2",
         "b76bc72 | 2025-10-13 Mon 14:48:43 |  << new snapshot version >> 21.10.004-SNAPSHOT"
       ]
