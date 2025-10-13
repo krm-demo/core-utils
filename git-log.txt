@@ -1,3 +1,4 @@
+a34ed9c1 << internal release >> 21.09.002
 1d4e7ac8 introduce rendering of 'Shields IO' static badges by GithubBadgeHelper #1
 430ea714 put the link to the root of Git-Hub project into the right upper cordner of 'Release Catalog' page
 fd13c834 playing with css-sandbox--release-catalog #5
