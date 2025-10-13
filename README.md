@@ -2,8 +2,8 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 ![GitHub recent commits](https://img.shields.io/github/commits-since/krm-demo/core-utils/21.07)
 
-[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/) [![Latest-Public](https://img.shields.io/badge/core--utils-21.11-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.11)  [![Snapshot-Version](https://img.shields.io/badge/core--utils-21.11.001--SNAPSHOT-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.11.001-SNAPSHOT)  
-[![Project-Site](https://img.shields.io/badge/GH--Pages-core--utils:21.11.001--SNAPSHOT-blue)](https://krm-demo.github.io/core-utils/core-utils-21.11.001-SNAPSHOT)
+[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/) [![Latest-Public](https://img.shields.io/badge/core--utils-21.10-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.10)    
+[![Project-Site](https://img.shields.io/badge/GH--Pages-core--utils:21.11.001-blue)](https://krm-demo.github.io/core-utils/core-utils-21.11.001)
 
 # <u>core-utils</u>
 
@@ -12,7 +12,7 @@ It was initially created as a core and reusable part of **`th-tool`** (which is 
 Some features and approaches could be very useful and helpful independently as a separate Java-library
 that could be easily integrated into any Java-project as a maven/gradle artifact or as a dependency to jbang-script.
 
-Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.11.001-SNAPSHOT).
+Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.11.001).
 Other versions of ths project are listed in the [release catalog](https://krm-demo.github.io/core-utils/),
 but the latest relevant versions (with relation to the current one) are:
 
@@ -21,38 +21,121 @@ but the latest relevant versions (with relation to the current one) are:
 
 ---
 
-This particular version of the project `21.11.001-SNAPSHOT` is a _SNAPSHOT_-version, which consists of:
+This particular version of the project `21.11.001` is an _INTERNAL_-release version, which consists of
 - major version `21` (that corresponds to minimum available version of JDK);
 - minor version `11` (the ordinal number of _PUBLIC_-release);
 - incremental version  `1` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
-- the qualifier `SNAPSHOT` means that it's a _SNAPSHOT_-version (not released yet in any kind)
 
 > [!IMPORTANT]
 > It's highly recommended to use the latest _PUBLIC_-release version, because all others are either outdated or not stable yet
 
-## Working with SNAPSHOT-version of `core-utils`-library
+## Installation and Usage of INTERNAL-release of `core-utils`-library
 
 > [!NOTE]
-> The SNAPSHOT-version has 3 integer parts (_major_, _minor_ and _incremental_) followed by the suffix `-SNAPSHOT`.
-> It's built by GitHub workflow [`on-main-push`](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml) on every `git push` into `main` branch.
+> The _INTERNAL_-release version has 3 integer parts (_major_, _minor_ and _incremental_) parts **without** suffix `-SNAPSHOT`.
+> It's built and deployed into [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) 
+> artifatcory as a result of manual execution of GitHub workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/workflows/release-internal.yml).
 
-The JavaDoc is generated and project-site at [GitHub Pages](https://docs.github.com/en/pages) is updated,
-but **nothing is deployed** neither to [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
-artifactory nor to [maven central repository](https://central.sonatype.com/).
-As for content of GitHub Markdown files (like one you are reading now) - they are generated and updated
-during either INTERNAL-release or PUBLIC-release from corresponding `th-tool`-templates (quite all of them
-are located in [this folder](.github/th-templates)).
+The main purpose of _INTERNAL_-release is the final verification before _PUBLIC_-release 
+and in addition to that it's the only true-way to verify the generation of `*.md`-files
+from corresponding `th-tool` templates (they have `*.md.th` extensiom) via GitHub workflows.
 
-The binaries of _Snapshot_-version are available only after cloning the git-repo locally and
-checking out the proper branch (the most recent snapshot is in `main`-branch).
-In order to build the project it's recommended to use [sdkman](https://sdkman.io/) to install the latest version
-of [java](https://sdkman.io/jdks/) and the latest version of [maven](https://sdkman.io/sdks/maven/). 
-After that, staying in the root directory of a project it's enough to type:
-```bash
-...> mvn clean install
+Anyway it's possible to play with _INTERNAL_-release binaries, but in order to do that
+some minor changes should be done in local [`~/.m2/maven-settings`-file](https://maven.apache.org/settings.html).
+
+### Use [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) as an additional remote maven-repository
+Each GitHub account has its onw artifactory, which is known as [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
+The most important thing for us is that artifactory could be used as an additional [remote maven repository](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry).
+In order to refer this particular project - we must add following XML-tags into the local file [`~/.m2/maven-settings`-file](https://maven.apache.org/settings.html)
+(or create such file in proper place if it was not created before):
+
+```xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <activeProfiles>
+    <activeProfile>github</activeProfile>
+  </activeProfiles>
+
+  <profiles>
+    <profile>
+      <id>github</id>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+          <id>github-krm-demo</id>
+          <name>GitHub Packages of 'krm-demo/*' repositories</name>
+          <url>https://maven.pkg.github.com/krm-demo/*</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  
+  <servers>
+    <server>
+      <id>github-krm-demo</id>
+      <username>OWNER_NAME</username>
+      <password>MY_READONLY_TOKEN</password>
+    </server>
+  </servers>
+</settings>
 ```
-The command above installs **`core-utils`**-library 
-in the local maven-repository, and it becomes available for usage described below...
+- where the value of `OWNER_NAME` should be <code>krm-demo</code> (you can try another `<username>`)
+- and the value of `MY_READONLY_TOKEN` should be <code>ghp_&#8203;L1Eiw9V4CXLZVl0nu2QkqWDVpQE4zl0k&#8203;cYz6</code>
+- (should be re-masked!) the value of `MY_ADMIN_TOKEN` should be <code>ghp_&#8203;UIEgLpCQoqASXtbxGrbpgfPXNYC94T19&#8203;NqXg</code>
+- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;0jHOa8bE9Ur7vosK2WZUUejmQ1eTM100&#8203;vTc7</code>
+
+> [!IMPORTANT]
+> In the list above the value of GitHub-secret `MY_READONLY_TOKEN`is displayed _un-masked_ (no asterisks as usually),
+> which is not allowed to be displayed in a normal scenario, because it violates
+> the principles why those secrets are introduced at all (nobody must be able to see and to know them).
+> But if we know definitely that this _secret_ is _not a secret_ (like here where we intentionally give the users the safe and **readonly** access), 
+> it would be OK to _un-mask_ those values and make them readable.
+ 
+> [!CAUTION] 
+> **AS FOR `github_token` AND `MY_ADMIN_TOKEN` - THEY MUST BE RE-MASKED AND UN-OBFUSCATED** 
+
+After that you can use the latest internal release of **`core-utils`**
+in any maven/gradle project (from command-line and with IDE).
+As for using via JBang - there could be some troubles resolving
+that additional remote maven-repository and one of single-time workaround
+is to download the corresponding manually with command `mvn dependency:get`:
+```bash
+...> mvn dependency:get -Dartifact=io.github.krm-demo:core-utils:21.11.001
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- dependency:3.7.0:get (default-cli) @ standalone-pom ---
+[INFO] Resolving io.github.krm-demo:core-utils:jar:21.02.002 with transitive dependencies
+Downloading from central: https://repo.maven.apache.org/maven2/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.pom
+Downloading from github: https://maven.pkg.github.com/krm-demo/*/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.pom
+Downloaded from github: https://maven.pkg.github.com/krm-demo/*/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.pom (23 kB at 24 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.jar
+Downloading from github: https://maven.pkg.github.com/krm-demo/*/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.jar
+Downloaded from github: https://maven.pkg.github.com/krm-demo/*/io/github/krm-demo/core-utils/21.02.002/core-utils-21.02.002.jar (90 kB at 134 kB/s)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.549 s
+[INFO] Finished at: 2025-09-29T14:26:04-04:00
+[INFO] ------------------------------------------------------------------------
+```
+TODO: the snippet above is incorrect - either get rid of it or make it's content consistent and up-to-date !!!
+
+Once the artifact is downloaded (installed at local maven-repository)
+JBang will recognize it and will work with it as with any other artifact:
+
 
 ### [Maven](https://maven.apache.org/)
 Dependencies for projects that are using [Apache Maven](https://maven.apache.org/) as a build-tool 
@@ -62,7 +145,7 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.11.001-SNAPSHOT</artifactId>
+            <version>21.11.001</artifactId>
         </dependency>
     ```
 - for test-source dependencies:
@@ -70,7 +153,7 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.11.001-SNAPSHOT</artifactId>
+            <version>21.11.001</artifactId>
             <scope>test</scope>
         </dependency>
     ```
@@ -79,22 +162,21 @@ Projects that use [**Gradle** Build Tool](https://gradle.org/) should declare th
 in either `build.gradle` or `build.gradle.kts` like following: 
 ```Gradle
     // for main-source implementation dependencies:
-    implementation("io.github.krm-demo:core-utils:21.11.001-SNAPSHOT")
+    implementation("io.github.krm-demo:core-utils:21.11.001")
     . . . . . . . . . . . . . .
     // for test-source implementation dependencies:
-    testImplementation("io.github.krm-demo:core-utils:21.11.001-SNAPSHOT")
+    testImplementation("io.github.krm-demo:core-utils:21.11.001")
 ```
 
 ### [JBang](https://www.jbang.dev/)
-
 If you don't have [JBang](https://www.jbang.dev/) installed - it's very easy to do
-either following by [instructions at their site](https://www.jbang.dev/download/) 
+either following by [instructions at their site](https://www.jbang.dev/download/)
 or using [sdkman](https://sdkman.io/sdks/jbang/). The easiest way to verify that
-both [JBang](https://www.jbang.dev/) and **`core-utils`**-library 
+both [JBang](https://www.jbang.dev/) and **`core-utils`**-library
 are properly installed is to execute following command:
 
 ```bash
-...> jbang io.github.krm-demo:core-utils:21.11.001-SNAPSHOT
+...> jbang io.github.krm-demo:core-utils:21.11.001
 This is a Main-class of 'core-utils' library (just a test message here)
 ```
 You must see quite the same output as above. The versions and other detailed information could also be verified in such way.
@@ -104,11 +186,11 @@ Then you can create your own jbang-scripts using following examples:
 - JBang-script to see Java system-properties
 - JBang-script to see the detailed information of CLASSPATH at runtime
 - ... some other very useful and helpful scripts ...
-- 
+-
 
 ---
 > [!TIP]
-> TODO: examples to be provided... (maybe specific for _SNAPSHOT_-versions)
+> TODO: examples to be provided... (maybe specific for _INTERNAL_-releases)
 ---
 
 
@@ -117,7 +199,7 @@ Then you can create your own jbang-scripts using following examples:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-public`](https://github.com/krm-demo/core-utils/actions/runs/18474270117).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18479130719).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
 
@@ -127,6 +209,14 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
 ```json
 {
   "releaseCatalog": {
+    "current-snapshot-group": {
+      "minor-group-info": "<< unreleased >> 3 commits",
+      "commits-one-line": [
+        "2073ddb | 2025-10-13 Mon 21:39:57 |  playing with MD- and HTML- badges #2",
+        "8e40f1b | 2025-10-13 Mon 20:49:34 |  playing with MD- and HTML- badges #1",
+        "99c28ed | 2025-10-13 Mon 18:04:26 |  << new snapshot version >> 21.11.001-SNAPSHOT"
+      ]
+    },
     "major-groups": [
       {
         "major-group-info": "21.10 (finalized major group with 5 finalized minor groups)",
@@ -690,6 +780,8 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
     "untrackedFolders": [],
     "conflictingStageState": {},
     "ignoredNotInIndex": [
+      ".github/th-test-site/processed",
+      ".github/th-test-release-catalog/index.html",
       "target"
     ],
     "uncommittedChanges": [
@@ -720,7 +812,7 @@ the content of `MavenHelper` (`th-tool`-expression `${mh}`) instance is:
 ```json
 {
   "calculatedProjectVersion": "21.11.001-SNAPSHOT",
-  "currentProjectVersion": "21.11.001-SNAPSHOT",
+  "currentProjectVersion": "21.11.001",
   "incrementalAsInt": "1",
   "incrementalVersion": "1",
   "internalNextVersion": "21.11.002-SNAPSHOT",
@@ -730,16 +822,16 @@ the content of `MavenHelper` (`th-tool`-expression `${mh}`) instance is:
   "minorVersion": "11",
   "minorVersionAsInt": "11",
   "projectArtifact": "core-utils",
-  "projectBadgeName": "core--utils:21.11.001--SNAPSHOT",
-  "projectCatalogName": "core-utils-21.11.001-SNAPSHOT",
-  "projectName": "core-utils:21.11.001-SNAPSHOT",
+  "projectBadgeName": "core--utils:21.11.001",
+  "projectCatalogName": "core-utils-21.11.001",
+  "projectName": "core-utils:21.11.001",
   "publicNextVersion": "21.12.001-SNAPSHOT",
   "publicReleaseVersion": "21.11",
   "resourcePath": "/META-INF/maven/maven-project.properties",
-  "usageFragmentPath": ".github/th-templates/Usage-SNAPSHOT.md.th",
-  "usageFragmentSuffix": "SNAPSHOT",
+  "usageFragmentPath": ".github/th-templates/Usage-INTERNAL.md.th",
+  "usageFragmentSuffix": "INTERNAL",
   "versionHasIncrementalPart": "true",
-  "versionHasQualifierPart": "true",
+  "versionHasQualifierPart": "false",
   "versionQualifier": "SNAPSHOT"
 }
 ```
