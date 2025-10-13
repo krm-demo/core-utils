@@ -1,3 +1,4 @@
+32a1c702 introduce rendering of 'Shields IO' static badges by GithubBadgeHelper #2
 dd279c92 << new snapshot version >> 21.09.003-SNAPSHOT
 a34ed9c1 << internal release >> 21.09.002
 1d4e7ac8 introduce rendering of 'Shields IO' static badges by GithubBadgeHelper #1
