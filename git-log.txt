@@ -1,3 +1,5 @@
+c6c25a1d display the bage with Snapshot-JavaDoc #3
+78507324 << internal release >> 21.10.004
 e921ad2c display the bage with Snapshot-JavaDoc #2
 b76bc724 << new snapshot version >> 21.10.004-SNAPSHOT
 aac00af0 << internal release >> 21.10.003
