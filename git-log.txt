@@ -1,3 +1,4 @@
+430ea714 put the link to the root of Git-Hub project into the right upper cordner of 'Release Catalog' page
 fd13c834 playing with css-sandbox--release-catalog #5
 426c4db8 playing with css-sandbox--release-catalog #4
 816c7026 playing with css-sandbox--release-catalog #3
