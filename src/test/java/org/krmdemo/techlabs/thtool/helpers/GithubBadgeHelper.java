@@ -1,5 +1,7 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafTool;
@@ -26,6 +28,7 @@ import java.util.function.Consumer;
  *     (git-hub-logo|left-part|right-part)
  * </a>
  */
+@JsonPropertyOrder(alphabetic = true)
 public class GithubBadgeHelper {
 
     /**
@@ -116,7 +119,7 @@ public class GithubBadgeHelper {
     public String getLatestPublicVersion() {
         if (!isLatestPublicAvailable()) {
             return "";
-        } else if (isLatestInternalAvailable()) {
+        } else if (isMavenInternal()) {
             return "" + releaseCatalog().getFinalMajor().versionTag();
         } else {
             return MavenHelper.fromCtx(ttCtx).getPublicReleaseVersion();
@@ -126,11 +129,24 @@ public class GithubBadgeHelper {
     /**
      * @return the GitHub-Markdown'-badge to the latest PUBLIC-release (to be inserted at 'README.md')
      */
-    public String getBadgeLatestPublicJavaDoc() {
+    public String getBadgeLatestPublicJavaDocMD() {
         return !isLatestPublicAvailable() ? "" :
             String.format(
                 "[![Latest-Public](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
                 getBadgeUrlLatestPublicJavaDoc(), repoName(), getLatestPublicVersion());
+    }
+
+    /**
+     * @return the HTML-badge to the latest PUBLIC-release (to be inserted at 'overview.html' and other places)
+     */
+    @JsonIgnore
+    public String getBadgeLatestPublicJavaDocHTML() {
+        return !isLatestInternalAvailable() ? "" :
+            String.format("""
+                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                  <img alt="a badge to the latest PUBLIC-version" src="%s" />
+                </a>""",
+                repoName(), getLatestPublicVersion(), getBadgeUrlLatestPublicJavaDoc());
     }
 
     /**
@@ -148,7 +164,7 @@ public class GithubBadgeHelper {
      * @return {@code true} if the latest INTERNAL-release is available for this project, or {@code false} - otherwise
      */
     public boolean isLatestInternalAvailable() {
-        return releaseCatalog().getFinalMinor() != null;
+        return isMavenInternal() && releaseCatalog().getFinalMinor() != null;
     }
 
     /**
@@ -157,7 +173,7 @@ public class GithubBadgeHelper {
     public String getLatestInternalVersion() {
         if (!isLatestInternalAvailable()) {
             return "";
-        } else if (isSnapshotAvailable()) {
+        } else if (isMavenSnapshot()) {
             return "" + releaseCatalog().getFinalMinor().versionTag();
         } else {
             return MavenHelper.fromCtx(ttCtx).getInternalReleaseVersion();
@@ -167,11 +183,24 @@ public class GithubBadgeHelper {
     /**
      * @return the GitHub-Markdown'-badge to the latest INTERNAL-release (to be inserted at 'README.md')
      */
-    public String getBadgeLatestInternalJavaDoc() {
+    public String getBadgeLatestInternalJavaDocMD() {
         return !isLatestInternalAvailable() ? "" :
             String.format(
                 "[![Latest-Internal](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
                 getBadgeUrlLatestInternalJavaDoc(), repoName(), getLatestInternalVersion());
+    }
+
+    /**
+     * @return the HTML-badge to the latest INTERNAL-release (to be inserted at 'overview.html' and other places)
+     */
+    @JsonIgnore
+    public String getBadgeLatestInternalJavaDocHTML() {
+        return !isLatestInternalAvailable() ? "" :
+            String.format("""
+                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                  <img alt="a badge to the latest INTERNAL-version" src="%s" />
+                </a>""",
+                repoName(), getLatestInternalVersion(), getBadgeUrlLatestInternalJavaDoc());
     }
 
     /**
@@ -186,13 +215,6 @@ public class GithubBadgeHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
-     * @return {@code true} if the latest SNAPSHOT-version is available for this project, or {@code false} - otherwise
-     */
-    public boolean isSnapshotAvailable() {
-        return MavenHelper.fromCtx(ttCtx).versionHasQualifierPart();
-    }
-
-    /**
      * @return the current version of maven-project via {@link MavenHelper#getCurrentProjectVersion()}
      */
     public String getSnapshotVersion() {
@@ -202,20 +224,49 @@ public class GithubBadgeHelper {
     /**
      * @return the GitHub-Markdown'-badge to the latest SNAPSHOT-version (to be inserted at 'README.md')
      */
-    public String getBadgeSnapshotJavaDoc() {
-        return !isSnapshotAvailable() ? "" :
+    public String getBadgeSnapshotJavaDocMD() {
+        return !isMavenSnapshot() ? "" :
             String.format(
                 "[![Snapshot-Version](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
                 getBadgeUrlSnapshotJavaDoc(), repoName(), getSnapshotVersion());
     }
 
     /**
+     * @return the HTML-badge to the latest SNAPSHOT-version (to be inserted at 'overview.html' and other places)
+     */
+    @JsonIgnore
+    public String getBadgeSnapshotJavaDocHTML() {
+        return !isLatestInternalAvailable() ? "" :
+            String.format("""
+                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                  <img alt="a badge to the latest SNAPSHOT-version" src="%s" />
+                </a>""",
+                repoName(), getSnapshotVersion(), getBadgeUrlSnapshotJavaDoc());
+    }
+
+    /**
      * @return the URL to the badge to the latest SNAPSHOT-version
      */
     public String getBadgeUrlSnapshotJavaDoc() {
-        return !isSnapshotAvailable() ? "" :
+        return !isMavenSnapshot() ? "" :
             badgeUrlShiedsIO(repoName(), getSnapshotVersion(), LABEL_COLOR__VERSION,
                 LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @return {@code true} if the maven-version has SNAPSHOT-qualifier for this project, or {@code false} - otherwise
+     */
+    public boolean isMavenSnapshot() {
+        return MavenHelper.fromCtx(ttCtx).versionHasQualifierPart();
+    }
+
+    /**
+     * @return {@code true} if the maven-version has incremental part for this project, or {@code false} - otherwise
+     */
+    public boolean isMavenInternal() {
+        return MavenHelper.fromCtx(ttCtx).versionHasIncrementalPart();
     }
 
     // --------------------------------------------------------------------------------------------

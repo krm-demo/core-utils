@@ -27,7 +27,7 @@ public class ThymeleafToolTest {
     }
 
     @Test
-    void testProcessDir_DryRun() {
+    void testProcessDir_TestSite_DryRun() {
         int exitCode = ThymeleafTool.executeMain(
             "--var-file",
             "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
@@ -43,7 +43,7 @@ public class ThymeleafToolTest {
     }
 
     @Test
-    void testProcessDir_ProcessAll() {
+    void testProcessDir_TestSite() {
         int exitCode = ThymeleafTool.executeMain(
             "--var-file",
             "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
@@ -72,6 +72,8 @@ public class ThymeleafToolTest {
             "process",
             ".github/th-templates/ROOT-Readme.md.th"
         );
+//        stdErr.println(sbErr);
+//        stdErr.println(sbOut);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
