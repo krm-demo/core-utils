@@ -27,7 +27,14 @@
     <!-- ========= START OF TOP NAVBAR ======= -->
     <div class="top-nav" id="navbar-top">
       <div class="nav-content">
-        <h2>[[${ mh.projectArtifact }]] <small>(Release Catalog)</small></h2>
+        <h2>[[${ mh.projectArtifact }]] <small>(Release Catalog)</small>
+          <a href="https://github.com/krm-demo/core-utils/"
+             style="float: right; margin-right: 10px;">
+            <img alt="an image to return back to the project-site"
+                 src="resource-files/git-hub-logo--white-inv.svg"
+                 width="32px" height="32px" />
+          </a>
+        </h2>
       </div>
     </div>
     <!-- ========= END OF TOP NAVBAR ========= -->
