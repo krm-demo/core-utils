@@ -1,3 +1,4 @@
+e1cf4ad2 << new snapshot version >> 21.12.002-SNAPSHOT
 9b8ada06 << internal release >> 21.12.001
 d7a4fe3d << new snapshot version >> 21.12.001-SNAPSHOT
 8c29c0e6 << public release >> 21.11
