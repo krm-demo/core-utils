@@ -37,16 +37,6 @@ public class MavenHelperTest {
     }
 
     @Test
-    void testBadgeName() {
-        assertThat(mavenHelper.getProjectBadgeName())
-            .isEqualTo("core--utils:21.0.2--SNAPSHOT");
-        assertThat(mavenHelperInternal.getProjectBadgeName())
-            .isEqualTo("core--utils:21.0.25");
-        assertThat(mavenHelperPublic.getProjectBadgeName())
-            .isEqualTo("core--utils--la--la--la:21.0");
-    }
-
-    @Test
     void testCatalogName() {
         assertThat(mavenHelper.getProjectCatalogName())
             .isEqualTo("core-utils-21.0.2-SNAPSHOT");

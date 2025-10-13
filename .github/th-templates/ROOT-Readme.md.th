@@ -3,7 +3,6 @@
 ![GitHub recent commits](https://img.shields.io/github/commits-since/krm-demo/core-utils/21.07)
 
 [( ${gbh.badgeReleaseCatalog} )] [( ${gbh.badgeLatestPublicJavaDocMD} )] [( ${gbh.badgeLatestInternalJavaDocMD} )] [( ${gbh.badgeSnapshotJavaDocMD} )]  
-[![Project-Site](https://img.shields.io/badge/GH--Pages-[[${mh.projectBadgeName}]]-blue)](https://krm-demo.github.io/core-utils/[[${mh.projectCatalogName}]])
 
 # <u>[[${mavenProps.get("maven-project.artifact")}]]</u>
 
