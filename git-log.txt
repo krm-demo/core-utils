@@ -1,3 +1,4 @@
+8e40f1bf playing with MD- and HTML- badges #1
 99c28ed3 << new snapshot version >> 21.11.001-SNAPSHOT
 761dc5bb << public release >> 21.10
 9cacedbb << new snapshot version >> 21.10.006-SNAPSHOT
