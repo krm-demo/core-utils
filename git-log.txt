@@ -1,3 +1,4 @@
+483f6297 << internal release >> 21.10.001
 87851a5e introduce rendering of 'Shields IO' static badges by GithubBadgeHelper (use fetch-depth:0) #4
 c054d0a5 introduce rendering of 'Shields IO' static badges by GithubBadgeHelper #3
 cf1c12f9 << new snapshot version >> 21.10.001-SNAPSHOT
