@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
 
 /**
@@ -38,10 +39,20 @@ public class GithubBadgeHelperTest {
     @Test
     void testBadgeLatestPublicJavaDoc() {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
-        assertThat(gbh.isLatestPublicAvailable()).isTrue();
-        assertThat(gbh.getBadgeUrlLatestPublicJavaDoc()).isEqualTo(
-            "https://img.shields.io/badge/core--utils-21.09-blue?logo=github&logoColor=f8981d&labelColor=4D7A97");
-        assertThat(gbh.getBadgeLatestPublicJavaDoc()).isEqualTo("""
-            [![Latest-Public](https://img.shields.io/badge/core--utils-21.09-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.09)""");
+        assumeThat(gbh.isLatestPublicAvailable()).isTrue(); // <-- in some initial cases it's not available
+        assertThat(gbh.getBadgeUrlLatestPublicJavaDoc()).matches(
+            "https://img.shields.io/badge/core--utils-21\\.\\d\\d-blue\\?logo=github&logoColor=f8981d&labelColor=4D7A97");
+        assertThat(gbh.getBadgeLatestPublicJavaDoc()).matches("""
+            \\[!\\[Latest-Public]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d-blue\\?logo=github&logoColor=f8981d&labelColor=4D7A97\\)]\\(https://krm-demo.github.io/core-utils/core-utils-21\\.\\d\\d\\)""");
+    }
+
+    @Test
+    void testBadgeLatestInternalJavaDoc() {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        assumeThat(gbh.isLatestInternalAvailable()).isTrue(); // <-- in some cases it's not available
+        assertThat(gbh.getBadgeUrlLatestInternalJavaDoc()).matches(
+            "https://img.shields.io/badge/core--utils-21\\.\\d\\d\\.\\d\\d\\d-blue\\?logo=github&logoColor=f8981d&labelColor=4D7A97");
+        assertThat(gbh.getBadgeLatestInternalJavaDoc()).matches("""
+            \\[!\\[Latest-Internal]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d-blue\\?logo=github&logoColor=f8981d&labelColor=4D7A97\\)]\\(https://krm-demo.github.io/core-utils/core-utils-21\\.\\d\\d\\.\\d\\d\\d\\)""");
     }
 }

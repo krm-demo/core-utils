@@ -103,7 +103,7 @@ public class GithubBadgeHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
-     * @return the GitHub-Markdown'-badge to 'Release Catalog' (to be inserted at 'README.md')
+     * @return the GitHub-Markdown'-badge to the latest PUBLIC-release (to be inserted at 'README.md')
      */
     public String getBadgeLatestPublicJavaDoc() {
         return String.format(
@@ -112,25 +112,60 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the URL to the badge of 'Release Catalog'
+     * @return the URL to the latest PUBLIC-release
      */
     public String getBadgeUrlLatestPublicJavaDoc() {
-        return badgeUrlShiedsIO("core-utils", getLatestPublicVersion(), LABEL_COLOR__VERSION,
-            LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+        return !isLatestPublicAvailable() ? "" :
+            badgeUrlShiedsIO("core-utils", getLatestPublicVersion(), LABEL_COLOR__VERSION,
+                LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
     }
 
     /**
-     * @return {@code true} if the latest public release is available for this project, or {@code false} - otherwise
+     * @return {@code true} if the latest PUBLIC-release is available for this project, or {@code false} - otherwise
      */
     public boolean isLatestPublicAvailable() {
         return releaseCatalog().getFinalMajor() != null;
     }
 
     /**
-     * @return the version of the latest public release or empty string if it's not available
+     * @return the version to the latest PUBLIC-release or empty string if it's not available
      */
     public String getLatestPublicVersion() {
         return isLatestPublicAvailable() ? "" + releaseCatalog().getFinalMajor().versionTag() : "";
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @return the GitHub-Markdown'-badge to the latest INTERNAL-release (to be inserted at 'README.md')
+     */
+    public String getBadgeLatestInternalJavaDoc() {
+        return String.format(
+            "[![Latest-Internal](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
+            getBadgeUrlLatestInternalJavaDoc(), repoName(), getLatestInternalVersion());
+    }
+
+    /**
+     * @return the URL to the badge to the latest INTERNAL-release
+     */
+    public String getBadgeUrlLatestInternalJavaDoc() {
+        return !isLatestInternalAvailable() ? "" :
+            badgeUrlShiedsIO("core-utils", getLatestInternalVersion(), LABEL_COLOR__VERSION,
+                LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+    }
+
+    /**
+     * @return {@code true} if the latest INTERNAL-release is available for this project, or {@code false} - otherwise
+     */
+    public boolean isLatestInternalAvailable() {
+        return releaseCatalog().getFinalMinor() != null;
+    }
+
+    /**
+     * @return the version of the latest INTERNAL-release or empty string if it's not available
+     */
+    public String getLatestInternalVersion() {
+        return isLatestInternalAvailable() ? "" + releaseCatalog().getFinalMinor().versionTag() : "";
     }
 
     // --------------------------------------------------------------------------------------------

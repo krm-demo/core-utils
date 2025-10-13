@@ -108,6 +108,8 @@ Downloaded from github: https://maven.pkg.github.com/krm-demo/*/io/github/krm-de
 [INFO] Finished at: 2025-09-29T14:26:04-04:00
 [INFO] ------------------------------------------------------------------------
 ```
+TODO: the snippet above is incorrect - either get rid of it or make it's content consistent and up-to-date !!!
+
 Once the artifact is downloaded (installed at local maven-repository)
 JBang will recognize it and will work with it as with any other artifact:
 
