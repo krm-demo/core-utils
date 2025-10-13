@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -18,6 +19,13 @@ import java.util.SequencedMap;
 public class CommitGroupMinor {
 
     private final SequencedMap<String, CommitInfo> commitsMap = new LinkedHashMap<>();
+
+    void acceptCommit(CommitInfo commitInfo) {
+        if (isFinalized()) {
+            throw new IllegalStateException("minor commit-group is already finalized !!!");
+        }
+        commitsMap.putFirst(commitInfo.commitID, commitInfo);
+    }
 
     @JsonIgnore
     public boolean isEmpty() {
@@ -79,10 +87,8 @@ public class CommitGroupMinor {
         return commits().stream().map(CommitInfo::dumpOneLine).toList();
     }
 
-    void acceptCommit(CommitInfo commitInfo) {
-        if (isFinalized()) {
-            throw new IllegalStateException("minor commit-group is already finalized !!!");
-        }
-        commitsMap.putFirst(commitInfo.commitID, commitInfo);
+    @Override
+    public String toString() {
+        return DumpUtils.dumpAsYamlTxt(this);
     }
 }

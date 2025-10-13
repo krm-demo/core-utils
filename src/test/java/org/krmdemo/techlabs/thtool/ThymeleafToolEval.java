@@ -40,7 +40,7 @@ public class ThymeleafToolEval implements Callable<Integer> {
         description = "the path to output file\n(default: printing to the standard output)")
     File outputFile;
 
-    @Parameters(arity="0..*", paramLabel="expression", description = """
+    @Parameters(arity="1..*", paramLabel="expression", description = """
         the tail of command line is treated as the expression to evaluate.
         If the expression contains quotes, brackets and other characters, which are sensitive for shell-script,
         the whole expression (or its parts) is required to be escaped like following:

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -19,6 +20,17 @@ public class CommitGroupMajor {
 
     private CommitGroupMinor currentMinor = new CommitGroupMinor();
     private final SequencedMap<VersionTag, CommitGroupMinor> minorGroupsMap = new LinkedHashMap<>();
+
+    void acceptCommit(CommitInfo commitInfo) {
+        if (isFinalized()) {
+            throw new IllegalStateException("major commit-group is already finalized !!!");
+        }
+        currentMinor.acceptCommit(commitInfo);
+        if (currentMinor.isFinalized() && !currentMinor.versionTag().isPublicRelease()) {
+            minorGroupsMap.putFirst(currentMinor.versionTag(), currentMinor);
+            currentMinor = new CommitGroupMinor();
+        }
+    }
 
     @JsonIgnore
     public boolean isEmpty() {
@@ -86,14 +98,8 @@ public class CommitGroupMajor {
         return minorGroupsMap.values();
     }
 
-    void acceptCommit(CommitInfo commitInfo) {
-        if (isFinalized()) {
-            throw new IllegalStateException("major commit-group is already finalized !!!");
-        }
-        currentMinor.acceptCommit(commitInfo);
-        if (currentMinor.isFinalized() && !currentMinor.versionTag().isPublicRelease()) {
-            minorGroupsMap.putFirst(currentMinor.versionTag(), currentMinor);
-            currentMinor = new CommitGroupMinor();
-        }
+    @Override
+    public String toString() {
+        return DumpUtils.dumpAsYamlTxt(this);
     }
 }

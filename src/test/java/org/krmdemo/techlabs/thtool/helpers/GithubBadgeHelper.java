@@ -42,6 +42,7 @@ public class GithubBadgeHelper {
         if (helper == null) {
             GithubBadgeHelper.register(ttCtx);
             GithubHelper.register(ttCtx);
+            GitHelper.register(ttCtx);
             helper = fromCtx(ttCtx);
         }
         return helper;
@@ -78,6 +79,7 @@ public class GithubBadgeHelper {
     // --------------------------------------------------------------------------------------------
 
     private final static String LOGO_SLUG_NAME__GIT_HUB = "github";
+    private final static String LABEL_COLOR__VERSION = "blue";
     private final static String LABEL_COLOR__JAVADOC_NAVBAR = "4D7A97";
     private final static String LOGO_COLOR__JAVADOC_SELECTED = "f8981d";
 
@@ -98,9 +100,48 @@ public class GithubBadgeHelper {
             LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
     }
 
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @return the GitHub-Markdown'-badge to 'Release Catalog' (to be inserted at 'README.md')
+     */
+    public String getBadgeLatestPublicJavaDoc() {
+        return String.format(
+            "[![Latest-Public](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
+            getBadgeUrlLatestPublicJavaDoc(), repoName(), getLatestPublicVersion());
+    }
+
+    /**
+     * @return the URL to the badge of 'Release Catalog'
+     */
+    public String getBadgeUrlLatestPublicJavaDoc() {
+        return badgeUrlShiedsIO("core-utils", getLatestPublicVersion(), LABEL_COLOR__VERSION,
+            LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+    }
+
+    /**
+     * @return {@code true} if the latest public release is available for this project, or {@code false} - otherwise
+     */
+    public boolean isLatestPublicAvailable() {
+        return releaseCatalog().getFinalMajor() != null;
+    }
+
+    /**
+     * @return the version of the latest public release or empty string if it's not available
+     */
+    public String getLatestPublicVersion() {
+        return isLatestPublicAvailable() ? "" + releaseCatalog().getFinalMajor().versionTag() : "";
+    }
+
+    // --------------------------------------------------------------------------------------------
+
     /**
      * Returning the URL to the static-badge, which will be rendered by
-     * <a href="https://shields.io/badges/static-badge">Shields IO</a>
+     * <a href="https://shields.io/badges/static-badge">Shields IO</a>.
+     * <hr/>
+     * This is <a href="https://img.shields.io/badge/left--part-right--part-blue?logo=github&logoColor=f8981d&labelColor=4D7A97">
+     *     an example of such URL
+     * </a>
      *
      * @param leftPart the left part of badge-name
      * @param rightPart the right-part of badge-name
@@ -139,7 +180,14 @@ public class GithubBadgeHelper {
         return namePart;
     }
 
-// https://img.shields.io/badge/lleft--part-right--part-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97
+    private ReleaseCatalog releaseCatalog() {
+        return GitHelper.fromCtx(ttCtx).getReleaseCatalog();
+    }
+
+    private String repoName() {
+        return GithubHelper.fromCtx(ttCtx).getRepoName();
+    }
+
     // --------------------------------------------------------------------------------------------
 
     public String githubCommitUrl(CommitInfo commitInfo) {
@@ -147,7 +195,7 @@ public class GithubBadgeHelper {
     }
 
     public String githubCommitUrl(String commitID) {
-        String repoUrl =  GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl();
+        String repoUrl = GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl();
         return String.format("%s/commit/%s", repoUrl, commitID);
     }
 

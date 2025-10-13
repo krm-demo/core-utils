@@ -27,16 +27,20 @@ public class GithubBadgeHelperTest {
     }
 
     @Test
-    void testBadgeUrlReleaseCatalog() {
+    void testBadgeReleaseCatalog() {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
         assertThat(gbh.getBadgeUrlReleaseCatalog()).isEqualTo(
             "https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97");
+        assertThat(gbh.getBadgeReleaseCatalog()).isEqualTo("""
+            [![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/)""");
     }
 
     @Test
-    void testBadgeReleaseCatalog() {
+    void testBadgeLatestPublicJavaDoc() {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
-        assertThat(gbh.getBadgeReleaseCatalog()).isEqualTo("""
-            [![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/)""");
+        assertThat(gbh.getBadgeUrlLatestPublicJavaDoc()).isEqualTo(
+            "https://img.shields.io/badge/core--utils-21.09-blue?logo=github&logoColor=f8981d&labelColor=4D7A97");
+        assertThat(gbh.getBadgeLatestPublicJavaDoc()).isEqualTo("""
+            [![Latest-Public](https://img.shields.io/badge/core--utils-21.09-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.09)""");
     }
 }

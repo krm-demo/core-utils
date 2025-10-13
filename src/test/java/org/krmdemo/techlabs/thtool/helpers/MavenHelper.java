@@ -73,6 +73,7 @@ public class MavenHelper {
 
     /**
      * @return the same as {@link #getProjectName()}, but dash({@code '-'})-symbol is duplicated like {@code "--"}
+     * @deprecated use {@link GithubBadgeHelper} methods
      */
     public String getProjectBadgeName() {
         return getProjectName().replace("-", "--");

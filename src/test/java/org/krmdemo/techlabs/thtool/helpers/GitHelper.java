@@ -191,7 +191,7 @@ public class GitHelper {
 
     /**
      * Build the release catalog from the <b>{@code git}</b>-log (returned by {@link #getGitLog()}.
-     * Once invoked the same result will be returned in the same instance of this {@link GitHelper}.
+     * Once invoked the same result will be returned subsequently in the same instance of this {@link GitHelper}.
      *
      * @return new or previously built instance of {@link ReleaseCatalog release-catalog}
      */

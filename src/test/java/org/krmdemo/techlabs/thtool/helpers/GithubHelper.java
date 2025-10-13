@@ -62,6 +62,16 @@ public class GithubHelper {
     }
 
     /**
+     * Getting the name of current GitHub-Repository  {@code "core-utils"},
+     * which is exactly the same as {@link MavenHelper#getProjectArtifact() maven artifact-name}.
+     *
+     * @return the same as {@code ${github.event.repository.name}} in <b>{@code th-tool}</b> expression
+     */
+    public String getRepoName() {
+        return propValueStr(propsGithub(), "event", "repository", "name");
+    }
+
+    /**
      * @return the same as {@code ${github.event.repository.html_url}} in <b>{@code th-tool}</b> expression
      */
     public String getProjectRepoHtmlUrl() {
