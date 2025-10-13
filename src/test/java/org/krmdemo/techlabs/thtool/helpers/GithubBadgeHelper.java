@@ -164,7 +164,7 @@ public class GithubBadgeHelper {
      * @return {@code true} if the latest INTERNAL-release is available for this project, or {@code false} - otherwise
      */
     public boolean isLatestInternalAvailable() {
-        return isMavenInternal() && releaseCatalog().getFinalMinor() != null;
+        return isMavenInternal() || (isMavenSnapshot() && releaseCatalog().getFinalMinor() != null);
     }
 
     /**
