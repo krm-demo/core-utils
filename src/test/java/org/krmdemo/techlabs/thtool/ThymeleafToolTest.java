@@ -79,6 +79,9 @@ public class ThymeleafToolTest {
         assertThat(sbOut).contains("core-utils");
         assertThat(sbOut).contains("utility-classes to simplify working with core-java API");
         assertThat(sbOut).containsAnyOf("on-main-push.yml/badge.svg?event=push");
+
+        assertThat(sbOut).contains("""
+            [![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/)""");
     }
 
     @Test

@@ -81,8 +81,20 @@ public class GithubBadgeHelper {
     private final static String LABEL_COLOR__JAVADOC_NAVBAR = "4D7A97";
     private final static String LOGO_COLOR__JAVADOC_SELECTED = "f8981d";
 
+    /**
+     * @return the GitHub-Markdown'-badge to 'Release Catalog' (to be inserted at 'README.md')
+     */
+    public String getBadgeReleaseCatalog() {
+        return String.format(
+            "[![Release-Catalog](%s)](https://krm-demo.github.io/core-utils/)",
+            getBadgeUrlReleaseCatalog());
+    }
+
+    /**
+     * @return the URL to the badge of 'Release Catalog'
+     */
     public String getBadgeUrlReleaseCatalog() {
-        return badgeUrlShiedsIO("Release_Catalog", null, LABEL_COLOR__JAVADOC_NAVBAR,
+        return badgeUrlShiedsIO("Release Catalog", null, LABEL_COLOR__JAVADOC_NAVBAR,
             LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
     }
 
@@ -123,6 +135,7 @@ public class GithubBadgeHelper {
         }
         namePart = namePart.replace("-", "--");
         namePart = namePart.replace("_", "__");
+        namePart = namePart.replace(" ", "_");
         return namePart;
     }
 
@@ -138,6 +151,9 @@ public class GithubBadgeHelper {
         return String.format("%s/commit/%s", repoUrl, commitID);
     }
 
+    /**
+     * @return the GitHub-Markdown'-badge to the results of 'on-main-push' workflow (to be inserted at 'README.md')
+     */
     public String getBadgeBuildPassing() {
         return workflowBadgeMarkdown("on-main-push");
     }

@@ -27,9 +27,16 @@ public class GithubBadgeHelperTest {
     }
 
     @Test
-    void testBadgeReleaseCatalog() {
+    void testBadgeUrlReleaseCatalog() {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
         assertThat(gbh.getBadgeUrlReleaseCatalog()).isEqualTo(
-            "https://img.shields.io/badge/Release__Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97");
+            "https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97");
+    }
+
+    @Test
+    void testBadgeReleaseCatalog() {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        assertThat(gbh.getBadgeReleaseCatalog()).isEqualTo("""
+            [![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/)""");
     }
 }
