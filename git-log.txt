@@ -1,3 +1,4 @@
+99c28ed3 << new snapshot version >> 21.11.001-SNAPSHOT
 761dc5bb << public release >> 21.10
 9cacedbb << new snapshot version >> 21.10.006-SNAPSHOT
 aecec104 << internal release >> 21.10.005
