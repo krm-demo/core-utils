@@ -1,6 +1,6 @@
-[![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg?event=push)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)  [![Latest-Public](https://img.shields.io/badge/core--utils-21.13-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.13)  
+[![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg?event=push)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)  [![Latest-Public](https://img.shields.io/badge/core--utils-21.13-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.13) [![Latest-Internal](https://img.shields.io/badge/core--utils-21.14.001-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.14.001) [![Snapshot-Version](https://img.shields.io/badge/core--utils-21.14.001--SNAPSHOT-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils)
 
-[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/) [![Latest-Public](https://img.shields.io/badge/core--utils-21.13-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.13)    
+[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/) [![Latest-Public](https://img.shields.io/badge/core--utils-21.13-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.13) [![Latest-Internal](https://img.shields.io/badge/core--utils-21.14.001-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.14.001) [![Snapshot-Version](https://img.shields.io/badge/core--utils-21.14.001--SNAPSHOT-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.14.001-SNAPSHOT)  
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 ![GitHub recent commits](https://img.shields.io/github/commits-since/krm-demo/core-utils/21.07)
@@ -12,7 +12,7 @@ It was initially created as a core and reusable part of **`th-tool`** (which is 
 Some features and approaches could be very useful and helpful independently as a separate Java-library
 that could be easily integrated into any Java-project as a maven/gradle artifact or as a dependency to jbang-script.
 
-Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.13).
+Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.14.001-SNAPSHOT).
 Other versions of ths project are listed in the [release catalog](https://krm-demo.github.io/core-utils/),
 but the latest relevant versions (with relation to the current one) are:
 
@@ -21,25 +21,38 @@ but the latest relevant versions (with relation to the current one) are:
 
 ---
 
-This particular version of the project `21.13` is an _PUBLIC_-release version, which consists of
+This particular version of the project `21.14.001-SNAPSHOT` is a _SNAPSHOT_-version, which consists of:
 - major version `21` (that corresponds to minimum available version of JDK);
-- minor version `13` (the ordinal number of _PUBLIC_-release);
+- minor version `14` (the ordinal number of _PUBLIC_-release);
+- incremental version  `1` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
+- the qualifier `SNAPSHOT` means that it's a _SNAPSHOT_-version (not released yet in any kind)
 
-> [!TIP]
-> TODO: check whether this _PUBLIC_-release is the latest one and render the warning if it's not
+> [!IMPORTANT]
+> It's highly recommended to use the latest _PUBLIC_-release version, because all others are either outdated or not stable yet
 
-## Usage of `core-utils`-library
+## Working with SNAPSHOT-version of `core-utils`-library
 
 > [!NOTE]
-> The _PUBLIC_-release version has only 2 integer parts (_major_ and _minor_) parts **without** _incremental_ part and suffix `-SNAPSHOT`.
-> It's built and deployed into [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
-> artifatcory as a result of manual execution of GitHub workflow [`release-public`](https://github.com/krm-demo/core-utils/actions/workflows/release-public.yml).
+> The SNAPSHOT-version has 3 integer parts (_major_, _minor_ and _incremental_) followed by the suffix `-SNAPSHOT`.
+> It's built by GitHub workflow [`on-main-push`](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml) on every `git push` into `main` branch.
 
-This version is deployed into public [maven central repository](https://central.sonatype.com/) - so, it's available for usage
-without additional downloading steps or local builds. As for Java-Doc it's either available here or will be automatically downloaded by your favorite IDE.
+The JavaDoc is generated and project-site at [GitHub Pages](https://docs.github.com/en/pages) is updated,
+but **nothing is deployed** neither to [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
+artifactory nor to [maven central repository](https://central.sonatype.com/).
+As for content of GitHub Markdown files (like one you are reading now) - they are generated and updated
+during either INTERNAL-release or PUBLIC-release from corresponding `th-tool`-templates (quite all of them
+are located in [this folder](.github/th-templates)).
 
-But in order your maven/gradle project or jbang-script to use `core-utils`-library
-you must declare it as dependency in the way described below.
+The binaries of _Snapshot_-version are available only after cloning the git-repo locally and
+checking out the proper branch (the most recent snapshot is in `main`-branch).
+In order to build the project it's recommended to use [sdkman](https://sdkman.io/) to install the latest version
+of [java](https://sdkman.io/jdks/) and the latest version of [maven](https://sdkman.io/sdks/maven/). 
+After that, staying in the root directory of a project it's enough to type:
+```bash
+...> mvn clean install
+```
+The command above installs **`core-utils`**-library 
+in the local maven-repository, and it becomes available for usage described below...
 
 ### [Maven](https://maven.apache.org/)
 Dependencies for projects that are using [Apache Maven](https://maven.apache.org/) as a build-tool 
@@ -49,7 +62,7 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.13</artifactId>
+            <version>21.14.001-SNAPSHOT</artifactId>
         </dependency>
     ```
 - for test-source dependencies:
@@ -57,31 +70,31 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.13</artifactId>
+            <version>21.14.001-SNAPSHOT</artifactId>
             <scope>test</scope>
         </dependency>
     ```
-
 ### [Gradle](https://gradle.org/)
 Projects that use [**Gradle** Build Tool](https://gradle.org/) should declare the dependencies 
 in either `build.gradle` or `build.gradle.kts` like following: 
 ```Gradle
     // for main-source implementation dependencies:
-    implementation("io.github.krm-demo:core-utils:21.13")
+    implementation("io.github.krm-demo:core-utils:21.14.001-SNAPSHOT")
     . . . . . . . . . . . . . .
     // for test-source implementation dependencies:
-    testImplementation("io.github.krm-demo:core-utils:21.13")
+    testImplementation("io.github.krm-demo:core-utils:21.14.001-SNAPSHOT")
 ```
 
 ### [JBang](https://www.jbang.dev/)
+
 If you don't have [JBang](https://www.jbang.dev/) installed - it's very easy to do
-either following by [instructions at their site](https://www.jbang.dev/download/)
+either following by [instructions at their site](https://www.jbang.dev/download/) 
 or using [sdkman](https://sdkman.io/sdks/jbang/). The easiest way to verify that
-both [JBang](https://www.jbang.dev/) and **`core-utils`**-library
+both [JBang](https://www.jbang.dev/) and **`core-utils`**-library 
 are properly installed is to execute following command:
 
 ```bash
-...> jbang io.github.krm-demo:core-utils:21.13
+...> jbang io.github.krm-demo:core-utils:21.14.001-SNAPSHOT
 This is a Main-class of 'core-utils' library (just a test message here)
 ```
 You must see quite the same output as above. The versions and other detailed information could also be verified in such way.
@@ -91,11 +104,11 @@ Then you can create your own jbang-scripts using following examples:
 - JBang-script to see Java system-properties
 - JBang-script to see the detailed information of CLASSPATH at runtime
 - ... some other very useful and helpful scripts ...
--
+- 
 
 ---
 > [!TIP]
-> TODO: examples to be provided... (maybe specific for _PUBLIC_-releases)
+> TODO: examples to be provided... (maybe specific for _SNAPSHOT_-versions)
 ---
 
 
@@ -114,13 +127,17 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
 ```json
 {
   "releaseCatalog": {
-    "current-snapshot-group": {
-      "minor-group-info": "<< unreleased >> 1 commits",
-      "commits-one-line": [
-        "65e53c0 | 2025-10-14 Tue 02:38:21 |  playing with MD- and HTML- badges #6"
-      ]
-    },
     "major-groups": [
+      {
+        "major-group-info": "21.13 (finalized major group with 0 finalized minor groups)",
+        "final-minor-group": {
+          "minor-group-info": "<< PUBLIC 21.13 >> 1 working commits",
+          "commits-one-line": [
+            "9601948 | 2025-10-14 Tue 02:41:42 |  << public release >> 21.13",
+            "65e53c0 | 2025-10-14 Tue 02:38:21 |  playing with MD- and HTML- badges #6"
+          ]
+        }
+      },
       {
         "major-group-info": "21.12 (finalized major group with 3 finalized minor groups)",
         "final-minor-group": {
@@ -742,8 +759,6 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
     "untrackedFolders": [],
     "conflictingStageState": {},
     "ignoredNotInIndex": [
-      ".github/th-test-site/processed",
-      ".github/th-test-release-catalog/index.html",
       "target"
     ],
     "uncommittedChanges": [
@@ -772,26 +787,26 @@ the content of `GithubInputsHelper` (`th-tool`-expression `${gih}`) instance is:
 the content of `MavenHelper` (`th-tool`-expression `${mh}`) instance is:
 ```json
 {
-  "calculatedProjectVersion": "21.13.000-SNAPSHOT",
-  "currentProjectVersion": "21.13",
-  "incrementalAsInt": "0",
-  "incrementalVersion": "0",
-  "internalNextVersion": "21.13.001-SNAPSHOT",
-  "internalReleaseVersion": "21.13.000",
+  "calculatedProjectVersion": "21.14.001-SNAPSHOT",
+  "currentProjectVersion": "21.14.001-SNAPSHOT",
+  "incrementalAsInt": "1",
+  "incrementalVersion": "1",
+  "internalNextVersion": "21.14.002-SNAPSHOT",
+  "internalReleaseVersion": "21.14.001",
   "majorVersion": "21",
   "majorVersionAsInt": "21",
-  "minorVersion": "13",
-  "minorVersionAsInt": "13",
+  "minorVersion": "14",
+  "minorVersionAsInt": "14",
   "projectArtifact": "core-utils",
-  "projectCatalogName": "core-utils-21.13",
-  "projectName": "core-utils:21.13",
-  "publicNextVersion": "21.14.001-SNAPSHOT",
-  "publicReleaseVersion": "21.13",
+  "projectCatalogName": "core-utils-21.14.001-SNAPSHOT",
+  "projectName": "core-utils:21.14.001-SNAPSHOT",
+  "publicNextVersion": "21.15.001-SNAPSHOT",
+  "publicReleaseVersion": "21.14",
   "resourcePath": "/META-INF/maven/maven-project.properties",
-  "usageFragmentPath": ".github/th-templates/Usage-PUBLIC.md.th",
-  "usageFragmentSuffix": "PUBLIC",
-  "versionHasIncrementalPart": "false",
-  "versionHasQualifierPart": "false",
+  "usageFragmentPath": ".github/th-templates/Usage-SNAPSHOT.md.th",
+  "usageFragmentSuffix": "SNAPSHOT",
+  "versionHasIncrementalPart": "true",
+  "versionHasQualifierPart": "true",
   "versionQualifier": "SNAPSHOT"
 }
 ```
