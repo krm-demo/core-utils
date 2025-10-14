@@ -96,8 +96,9 @@
                 <span class="minor-group-version">
                   [(${ gbh.badgeJavaDocHTML(minorGroup) })]
                 </span>
-                <span class="minor-group-info" th:text="${minorGroup.groupInfo}">
-                  current-minor-group-info
+                <span class="minor-group-info">
+                  [(${ gbh.badgeGitHubHTML(minorGroup) })]
+                  [[${ minorGroup.groupInfo }]]
                 </span>
               </div>
               <div class="minor-group-commits" th:each="commitInfo: ${minorGroup.commits}">
@@ -129,8 +130,9 @@
               <span class="major-group-version">
                 [(${ gbh.badgeJavaDocHTML(majorGroup) })]
               </span>
-              <span class="major-group-info" th:text="${majorGroup.groupInfo}">
-                major-group-info
+              <span class="major-group-info">
+                [(${ gbh.badgeGitHubHTML(majorGroup) })]
+                [[${ majorGroup.groupInfo }]]
               </span>
             </div>
             <div class="major-group-commits" th:each="commitInfo: ${majorGroup.currentMinor().commits}">
@@ -161,8 +163,9 @@
                   <span class="minor-group-version">
                     [(${ gbh.badgeJavaDocHTML(minorGroup) })]
                   </span>
-                  <span class="minor-group-info" th:text="${minorGroup.groupInfo}">
-                    minor-group-info
+                  <span class="minor-group-info">
+                    [(${ gbh.badgeGitHubHTML(minorGroup) })]
+                    [[${ minorGroup.groupInfo }]]
                   </span>
                 </div>
                 <div class="minor-group-commits" th:each="commitInfo: ${minorGroup.commits}">
