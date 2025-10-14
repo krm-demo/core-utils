@@ -59,12 +59,11 @@
                 current-snapshot-group-date-time
               </span>
               <span class="snapshot-group-version">
-                <a th:href="${mh.projectCatalogName}">
-                  [[${mh.projectCatalogName}]]
-                </a>
+                [(${ gbh.badgeSnapshotJavaDocHTML })]
               </span>
-              <span class="snapshot-group-info" th:text="${git.releaseCatalog.snapshotGroup.groupInfo}">
-                current-snapshot-group-info
+              <span class="snapshot-group-info">
+                [(${ gbh.badgeSnapshotGitHubHTML })]
+                [[${ git.releaseCatalog.snapshotGroup.groupInfo }]]
               </span>
             </div>
             <div class="snapshot-group-commits" th:each="commitInfo: ${git.releaseCatalog.snapshotGroup.commits}">
