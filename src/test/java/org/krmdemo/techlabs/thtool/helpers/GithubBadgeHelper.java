@@ -210,7 +210,7 @@ public class GithubBadgeHelper {
     public String getLatestInternalVersion() {
         if (!isLatestInternalAvailable()) {
             return "";
-        } else if (isMavenSnapshot()) {
+        } else if (!isMavenSnapshot()) {
             return "" + releaseCatalog().getFinalMinor().versionTag();
         } else {
             return MavenHelper.fromCtx(ttCtx).getInternalReleaseVersion();
