@@ -85,7 +85,9 @@ public class GithubBadgeHelper {
     private final static String LOGO_SLUG_NAME__GIT_HUB = "github";
     private final static String LABEL_COLOR__VERSION = "blue";
     private final static String LABEL_COLOR__JAVADOC_NAVBAR = "4D7A97";
+    private final static String LABEL_COLOR__GITHUB = "black";
     private final static String LOGO_COLOR__JAVADOC_SELECTED = "f8981d";
+    private final static String LOGO_COLOR__GITHUB = "white";
 
     /**
      * @return the GitHub-Markdown'-badge to 'Release Catalog' (to be inserted at 'README.md')
@@ -127,7 +129,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the GitHub-Markdown'-badge to the latest PUBLIC-release (to be inserted at 'README.md')
+     * @return the GitHub-Markdown'-badge to the latest PUBLIC-release JavaDoc (to be inserted at 'README.md')
      */
     public String getBadgeLatestPublicJavaDocMD() {
         return !isLatestPublicAvailable() ? "" :
@@ -137,7 +139,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the HTML-badge to the latest PUBLIC-release (to be inserted at 'overview.html' and other places)
+     * @return the HTML-badge to the latest PUBLIC-release JavaDoc (to be inserted at 'overview.html' and other places)
      */
     @JsonIgnore
     public String getBadgeLatestPublicJavaDocHTML() {
@@ -150,12 +152,44 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the URL to the latest PUBLIC-release
+     * @return the URL to the latest PUBLIC-release JavaDoc
      */
     public String getBadgeUrlLatestPublicJavaDoc() {
         return !isLatestPublicAvailable() ? "" :
             badgeUrlShiedsIO(repoName(), getLatestPublicVersion(), LABEL_COLOR__VERSION,
                 LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+    }
+
+    /**
+     * @return the GitHub-Markdown'-badge to the latest PUBLIC-release project (to be inserted at 'README.md')
+     */
+    public String getBadgeLatestPublicGitHubMD() {
+        return !isLatestPublicAvailable() ? "" :
+            String.format(
+                "[![Latest-Public](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
+                getBadgeUrlLatestPublicGitHub(), repoName(), getLatestPublicVersion());
+    }
+
+    /**
+     * @return the HTML-badge to the latest PUBLIC-release project (to be inserted at 'overview.html' and other places)
+     */
+    @JsonIgnore
+    public String getBadgeLatestPublicGitHubHTML() {
+        return !isLatestPublicAvailable() ? "" :
+            String.format("""
+                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                  <img alt="a badge to the latest PUBLIC-version" src="%s" />
+                </a>""",
+                repoName(), getLatestPublicVersion(), getBadgeUrlLatestPublicGitHub());
+    }
+
+    /**
+     * @return the URL to the latest PUBLIC-release project
+     */
+    public String getBadgeUrlLatestPublicGitHub() {
+        return !isLatestPublicAvailable() ? "" :
+            badgeUrlShiedsIO(repoName(), getLatestPublicVersion(), LABEL_COLOR__VERSION,
+                LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__GITHUB, LABEL_COLOR__GITHUB);
     }
 
     // --------------------------------------------------------------------------------------------
@@ -181,7 +215,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the GitHub-Markdown'-badge to the latest INTERNAL-release (to be inserted at 'README.md')
+     * @return the GitHub-Markdown'-badge to the latest INTERNAL-release JavaDoc (to be inserted at 'README.md')
      */
     public String getBadgeLatestInternalJavaDocMD() {
         return !isLatestInternalAvailable() ? "" :
@@ -191,7 +225,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the HTML-badge to the latest INTERNAL-release (to be inserted at 'overview.html' and other places)
+     * @return the HTML-badge to the latest INTERNAL-release JavaDoc (to be inserted at 'overview.html' and other places)
      */
     @JsonIgnore
     public String getBadgeLatestInternalJavaDocHTML() {
@@ -204,12 +238,44 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the URL to the badge to the latest INTERNAL-release
+     * @return the URL to the badge to the latest INTERNAL-release JavaDoc
      */
     public String getBadgeUrlLatestInternalJavaDoc() {
         return !isLatestInternalAvailable() ? "" :
             badgeUrlShiedsIO(repoName(), getLatestInternalVersion(), LABEL_COLOR__VERSION,
                 LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+    }
+
+    /**
+     * @return the GitHub-Markdown'-badge to the latest PUBLIC-release project (to be inserted at 'README.md')
+     */
+    public String getBadgeLatestInternalGitHubMD() {
+        return !isLatestInternalAvailable() ? "" :
+            String.format(
+                "[![Latest-Internal](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
+                getBadgeUrlLatestInternalGitHub(), repoName(), getLatestInternalVersion());
+    }
+
+    /**
+     * @return the HTML-badge to the latest PUBLIC-release project (to be inserted at 'overview.html' and other places)
+     */
+    @JsonIgnore
+    public String getBadgeLatestInternalGitHubHTML() {
+        return !isLatestInternalAvailable() ? "" :
+            String.format("""
+                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                  <img alt="a badge to the latest PUBLIC-version" src="%s" />
+                </a>""",
+                repoName(), getLatestInternalVersion(), getBadgeUrlLatestInternalGitHub());
+    }
+
+    /**
+     * @return the URL to the latest PUBLIC-release project
+     */
+    public String getBadgeUrlLatestInternalGitHub() {
+        return !isLatestInternalAvailable() ? "" :
+            badgeUrlShiedsIO(repoName(), getLatestInternalVersion(), LABEL_COLOR__VERSION,
+                LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__GITHUB, LABEL_COLOR__GITHUB);
     }
 
     // --------------------------------------------------------------------------------------------
@@ -251,6 +317,38 @@ public class GithubBadgeHelper {
         return !isMavenSnapshot() ? "" :
             badgeUrlShiedsIO(repoName(), getSnapshotVersion(), LABEL_COLOR__VERSION,
                 LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+    }
+
+    /**
+     * @return the GitHub-Markdown'-badge to the latest PUBLIC-release project (to be inserted at 'README.md')
+     */
+    public String getBadgeSnapshotGitHubMD() {
+        return !isMavenSnapshot() ? "" :
+            String.format(
+                "[![Snapshot-Version](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
+                getBadgeUrlSnapshotGitHub(), repoName(), getSnapshotVersion());
+    }
+
+    /**
+     * @return the HTML-badge to the latest PUBLIC-release project (to be inserted at 'overview.html' and other places)
+     */
+    @JsonIgnore
+    public String getBadgeSnapshotGitHubHTML() {
+        return !isMavenSnapshot() ? "" :
+            String.format("""
+                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                  <img alt="a badge to the latest PUBLIC-version" src="%s" />
+                </a>""",
+                repoName(), getSnapshotVersion(), getBadgeUrlSnapshotGitHub());
+    }
+
+    /**
+     * @return the URL to the latest PUBLIC-release project
+     */
+    public String getBadgeUrlSnapshotGitHub() {
+        return !isMavenSnapshot() ? "" :
+            badgeUrlShiedsIO(repoName(), getSnapshotVersion(), LABEL_COLOR__VERSION,
+                LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__GITHUB, LABEL_COLOR__GITHUB);
     }
 
     // --------------------------------------------------------------------------------------------
