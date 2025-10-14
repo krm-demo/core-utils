@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -18,7 +19,7 @@ import java.util.TreeMap;
 import static org.krmdemo.techlabs.core.utils.CoreDateTimeUtils.systemZoneOffset;
 
 /**
- * This class represents the information about git-commit.
+ * This class represents the information about <b>{@code git}</b>-commit.
  */
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -125,5 +126,10 @@ public class CommitInfo {
     @Override
     public int hashCode() {
         return Objects.hashCode(commitID);
+    }
+
+    @Override
+    public String toString() {
+        return DumpUtils.dumpAsJsonTxt(this);
     }
 }

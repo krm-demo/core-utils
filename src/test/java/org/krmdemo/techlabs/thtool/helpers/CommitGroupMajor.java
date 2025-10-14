@@ -8,7 +8,9 @@ import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 import java.util.SequencedMap;
+import java.util.function.Supplier;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonPropertyOrder({
@@ -18,23 +20,33 @@ import java.util.SequencedMap;
 })
 public class CommitGroupMajor {
 
-    private CommitGroupMinor currentMinor = new CommitGroupMinor();
     private final SequencedMap<VersionTag, CommitGroupMinor> minorGroupsMap = new LinkedHashMap<>();
+    private CommitGroupMinor currentMinor;
+    private final Supplier<CommitGroupMinor> minorGroupSupplier;
+
+    public CommitGroupMajor(Supplier<CommitGroupMinor> minorGroupSupplier) {
+        this.minorGroupSupplier = Objects.requireNonNull(minorGroupSupplier);
+        this.currentMinor = this.minorGroupSupplier.get();
+    }
+
+    public CommitGroupMajor() {
+        this(CommitGroupMinor::new);
+    }
 
     void acceptCommit(CommitInfo commitInfo) {
         if (isFinalized()) {
             throw new IllegalStateException("major commit-group is already finalized !!!");
         }
-        currentMinor.acceptCommit(commitInfo);
+        currentMinor().acceptCommit(commitInfo);
         if (currentMinor.isFinalized() && !currentMinor.versionTag().isPublicRelease()) {
-            minorGroupsMap.putFirst(currentMinor.versionTag(), currentMinor);
-            currentMinor = new CommitGroupMinor();
+            minorGroupsMap.putFirst(currentMinor.versionTag(), currentMinor());
+            currentMinor = this.minorGroupSupplier.get();
         }
     }
 
     @JsonIgnore
     public boolean isEmpty() {
-        return currentMinor.isEmpty() && minorGroupsMap.isEmpty();
+        return currentMinor().isEmpty() && minorGroupsMap.isEmpty();
     }
 
     @JsonIgnore
@@ -44,7 +56,7 @@ public class CommitGroupMajor {
 
     @JsonIgnore
     public VersionTag versionTag() {
-        return currentMinor.versionTag();
+        return currentMinor().versionTag();
     }
 
     @JsonIgnore

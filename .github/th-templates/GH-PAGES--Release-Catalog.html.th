@@ -94,9 +94,7 @@
                   current-minor-group-date-time
                 </span>
                 <span class="minor-group-version">
-                  <a th:href="${mh.projectArtifact + '-' + minorGroup.versionTag}">
-                    [[${ mh.projectArtifact + '-' + minorGroup.versionTag }]]
-                  </a>
+                  [(${ gbh.badgeJavaDocHTML(minorGroup) })]
                 </span>
                 <span class="minor-group-info" th:text="${minorGroup.groupInfo}">
                   current-minor-group-info
@@ -129,9 +127,7 @@
                 major-group-date-time
               </span>
               <span class="major-group-version">
-                <a th:href="${mh.projectArtifact + '-' + majorGroup.versionTag}">
-                  [[${mh.projectArtifact + '-' + majorGroup.versionTag}]]
-                </a>
+                [(${ gbh.badgeJavaDocHTML(majorGroup) })]
               </span>
               <span class="major-group-info" th:text="${majorGroup.groupInfo}">
                 major-group-info
@@ -163,9 +159,7 @@
                     current-minor-group-date-time
                   </span>
                   <span class="minor-group-version">
-                    <a th:href="${mh.projectArtifact + '-' + minorGroup.versionTag}">
-                      [[${mh.projectArtifact + '-' + minorGroup.versionTag}]]
-                    </a>
+                    [(${ gbh.badgeJavaDocHTML(minorGroup) })]
                   </span>
                   <span class="minor-group-info" th:text="${minorGroup.groupInfo}">
                     minor-group-info

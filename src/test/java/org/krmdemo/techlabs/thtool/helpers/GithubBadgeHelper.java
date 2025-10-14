@@ -431,6 +431,123 @@ public class GithubBadgeHelper {
 
     // --------------------------------------------------------------------------------------------
 
+    /**
+     * @return HTML-badge to GitHub-project of the version that corresponds to the passed {@code commitGroupMinor}
+     */
+    @JsonIgnore
+    public String badgeJavaDocHTML(CommitGroupMinor commitGroupMinor) {
+        return String.format("""
+            <a href="https://krm-demo.github.io/core-utils/%s-%s">
+              <img alt="a badge to the GitHub-project '%s' of git-tag '%s'" src="%s" />
+            </a>""",
+            repoName(),
+            versionStr(commitGroupMinor),
+            repoName(),
+            versionStr(commitGroupMinor),
+            badgeUrlJavaDoc(commitGroupMinor));
+    }
+
+    /**
+     * @return HTML-badge to GitHub-project of the version that corresponds to the passed {@code commitGroupMinor}
+     */
+    @JsonIgnore
+    public String badgeJavaDocHTML(CommitGroupMajor commitGroupMajor) {
+        return String.format("""
+            <a href="https://krm-demo.github.io/core-utils/%s-%s">
+              <img alt="a badge to the GitHub-project '%s' of git-tag '%s'" src="%s" />
+            </a>""",
+            repoName(),
+            versionStr(commitGroupMajor),
+            repoName(),
+            versionStr(commitGroupMajor),
+            badgeUrlJavaDoc(commitGroupMajor));
+    }
+
+    /**
+     * @return the URL to the JavaDoc of GitHub project represented by passed {@code commitGroupMinor}
+     */
+    public String badgeUrlJavaDoc(CommitGroupMinor commitGroupMinor) {
+        return !isMavenSnapshot() ? "" :
+            badgeUrlShiedsIO(repoName(), versionStr(commitGroupMinor), LABEL_COLOR__VERSION,
+                LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+    }
+
+    /**
+     * @return the URL to the JavaDoc of GitHub project represented by passed {@code commitGroupMajor}
+     */
+    public String badgeUrlJavaDoc(CommitGroupMajor commitGroupMajor) {
+        return !isMavenSnapshot() ? "" :
+            badgeUrlShiedsIO(repoName(), versionStr(commitGroupMajor), LABEL_COLOR__VERSION,
+                LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+    }
+
+    /**
+     * @return HTML-badge to GitHub-project of the version that corresponds to the passed {@code commitGroupMinor}
+     */
+    @JsonIgnore
+    public String badgeGitHubHTML(CommitGroupMinor commitGroupMinor) {
+        return String.format("""
+            <a href="%s/tree/%s">
+              <img alt="a badge to the GitHub-project '%s' of git-tag '%s'" src="%s" />
+            </a>""",
+            repoHtmlUrl(),
+            versionStr(commitGroupMinor),
+            repoName(),
+            versionStr(commitGroupMinor),
+            badgeUrlGitHub(commitGroupMinor));
+    }
+
+    /**
+     * @return HTML-badge to GitHub-project of the version that corresponds to the passed {@code commitGroupMinor}
+     */
+    @JsonIgnore
+    public String badgeGitHubHTML(CommitGroupMajor commitGroupMajor) {
+        return String.format("""
+            <a href="%s/tree/%s">
+              <img alt="a badge to the GitHub-project '%s' of git-tag '%s'" src="%s" />
+            </a>""",
+            repoHtmlUrl(),
+            versionStr(commitGroupMajor),
+            repoName(),
+            versionStr(commitGroupMajor),
+            badgeUrlGitHub(commitGroupMajor));
+    }
+
+    /**
+     * @return the URL to the version of GitHub project represented by passed {@code commitGroupMinor}
+     */
+    public String badgeUrlGitHub(CommitGroupMinor commitGroupMinor) {
+        return badgeUrlShiedsIO(repoName(), versionStr(commitGroupMinor),
+            LABEL_COLOR__VERSION, LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__GITHUB, LABEL_COLOR__GITHUB);
+    }
+
+    /**
+     * @return the URL to the version of GitHub project represented by passed {@code commitGroupMajor}
+     */
+    public String badgeUrlGitHub(CommitGroupMajor commitGroupMajor) {
+        return badgeUrlShiedsIO(repoName(), versionStr(commitGroupMajor),
+            LABEL_COLOR__VERSION, LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__GITHUB, LABEL_COLOR__GITHUB);
+    }
+
+    private String versionStr(CommitGroupMajor commitGroupMajor) {
+        return "" + commitGroupMajor.versionTag();
+    }
+
+    private String versionStr(CommitGroupMinor commitGroupMinor) {
+        return "" + commitGroupMinor.versionTag();
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * This method is invoked from <b>{@code th-tool}</b>-template like "Release Catalog" via expression
+     * <pre>{@code <a th:href="${gbh.githubCommitUrl(commitInfo)}"></a>}</pre>
+     * in order to display the link to <b>{@code git}</b>-commit at the GitHub-site.
+     *
+     * @param commitInfo information about <b>{@code git}</b>-commit that is fetched by {@link GitHelper}
+     * @return a URL reference to be rendered inside HTML-tag {@code <a href="...">...</a>}
+     */
+    @SuppressWarnings("unused")
     public String githubCommitUrl(CommitInfo commitInfo) {
         return githubCommitUrl(commitInfo.commitID);
     }
