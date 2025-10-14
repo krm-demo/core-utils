@@ -1,6 +1,6 @@
-[![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg?event=push)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)  [![Latest-Public](https://img.shields.io/badge/core--utils-21.12-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.12)  
+[![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg?event=push)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)  [![Latest-Public](https://img.shields.io/badge/core--utils-21.13-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.13)  
 
-[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/) [![Latest-Public](https://img.shields.io/badge/core--utils-21.12-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.12)    
+[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/) [![Latest-Public](https://img.shields.io/badge/core--utils-21.13-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.13)    
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 ![GitHub recent commits](https://img.shields.io/github/commits-since/krm-demo/core-utils/21.07)
@@ -12,7 +12,7 @@ It was initially created as a core and reusable part of **`th-tool`** (which is 
 Some features and approaches could be very useful and helpful independently as a separate Java-library
 that could be easily integrated into any Java-project as a maven/gradle artifact or as a dependency to jbang-script.
 
-Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.12).
+Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.13).
 Other versions of ths project are listed in the [release catalog](https://krm-demo.github.io/core-utils/),
 but the latest relevant versions (with relation to the current one) are:
 
@@ -21,9 +21,9 @@ but the latest relevant versions (with relation to the current one) are:
 
 ---
 
-This particular version of the project `21.12` is an _PUBLIC_-release version, which consists of
+This particular version of the project `21.13` is an _PUBLIC_-release version, which consists of
 - major version `21` (that corresponds to minimum available version of JDK);
-- minor version `12` (the ordinal number of _PUBLIC_-release);
+- minor version `13` (the ordinal number of _PUBLIC_-release);
 
 > [!TIP]
 > TODO: check whether this _PUBLIC_-release is the latest one and render the warning if it's not
@@ -49,7 +49,7 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.12</artifactId>
+            <version>21.13</artifactId>
         </dependency>
     ```
 - for test-source dependencies:
@@ -57,7 +57,7 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.12</artifactId>
+            <version>21.13</artifactId>
             <scope>test</scope>
         </dependency>
     ```
@@ -67,10 +67,10 @@ Projects that use [**Gradle** Build Tool](https://gradle.org/) should declare th
 in either `build.gradle` or `build.gradle.kts` like following: 
 ```Gradle
     // for main-source implementation dependencies:
-    implementation("io.github.krm-demo:core-utils:21.12")
+    implementation("io.github.krm-demo:core-utils:21.13")
     . . . . . . . . . . . . . .
     // for test-source implementation dependencies:
-    testImplementation("io.github.krm-demo:core-utils:21.12")
+    testImplementation("io.github.krm-demo:core-utils:21.13")
 ```
 
 ### [JBang](https://www.jbang.dev/)
@@ -81,7 +81,7 @@ both [JBang](https://www.jbang.dev/) and **`core-utils`**-library
 are properly installed is to execute following command:
 
 ```bash
-...> jbang io.github.krm-demo:core-utils:21.12
+...> jbang io.github.krm-demo:core-utils:21.13
 This is a Main-class of 'core-utils' library (just a test message here)
 ```
 You must see quite the same output as above. The versions and other detailed information could also be verified in such way.
@@ -104,7 +104,7 @@ Then you can create your own jbang-scripts using following examples:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-public`](https://github.com/krm-demo/core-utils/actions/runs/18482867654).
+> during GitHub Workflow [`release-public`](https://github.com/krm-demo/core-utils/actions/runs/18483801035).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
 
@@ -117,36 +117,46 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
     "current-snapshot-group": {
       "minor-group-info": "<< unreleased >> 1 commits",
       "commits-one-line": [
-        "02018b6 | 2025-10-14 Tue 01:25:09 |  << new snapshot version >> 21.12.004-SNAPSHOT"
+        "65e53c0 | 2025-10-14 Tue 02:38:21 |  playing with MD- and HTML- badges #6"
       ]
     },
-    "current-minor-groups": [
-      {
-        "minor-group-info": "<< INTERNAL 21.12.003 >> 3 working commits",
-        "commits-one-line": [
-          "b47e5b9 | 2025-10-14 Tue 01:22:58 |  << internal release >> 21.12.003",
-          "b6eae1a | 2025-10-14 Tue 01:15:31 |  playing with MD- and HTML- badges #5",
-          "a24f73a | 2025-10-14 Tue 00:42:11 |  playing with MD- and HTML- badges #4",
-          "feba0c1 | 2025-10-13 Mon 23:20:18 |  << new snapshot version >> 21.12.003-SNAPSHOT"
-        ]
-      },
-      {
-        "minor-group-info": "<< INTERNAL 21.12.002 >> 2 working commits",
-        "commits-one-line": [
-          "4f58c4c | 2025-10-13 Mon 23:17:53 |  << internal release >> 21.12.002",
-          "5e861b0 | 2025-10-13 Mon 23:14:42 |  playing with MD- and HTML- badges #3",
-          "e1cf4ad | 2025-10-13 Mon 22:37:53 |  << new snapshot version >> 21.12.002-SNAPSHOT"
-        ]
-      },
-      {
-        "minor-group-info": "<< INTERNAL 21.12.001 >> 1 working commits",
-        "commits-one-line": [
-          "9b8ada0 | 2025-10-13 Mon 22:35:26 |  << internal release >> 21.12.001",
-          "d7a4fe3 | 2025-10-13 Mon 22:18:44 |  << new snapshot version >> 21.12.001-SNAPSHOT"
-        ]
-      }
-    ],
     "major-groups": [
+      {
+        "major-group-info": "21.12 (finalized major group with 3 finalized minor groups)",
+        "final-minor-group": {
+          "minor-group-info": "<< PUBLIC 21.12 >> 1 working commits",
+          "commits-one-line": [
+            "77499ca | 2025-10-14 Tue 01:41:57 |  << public release >> 21.12",
+            "02018b6 | 2025-10-14 Tue 01:25:09 |  << new snapshot version >> 21.12.004-SNAPSHOT"
+          ]
+        },
+        "minor-groups": [
+          {
+            "minor-group-info": "<< INTERNAL 21.12.003 >> 3 working commits",
+            "commits-one-line": [
+              "b47e5b9 | 2025-10-14 Tue 01:22:58 |  << internal release >> 21.12.003",
+              "b6eae1a | 2025-10-14 Tue 01:15:31 |  playing with MD- and HTML- badges #5",
+              "a24f73a | 2025-10-14 Tue 00:42:11 |  playing with MD- and HTML- badges #4",
+              "feba0c1 | 2025-10-13 Mon 23:20:18 |  << new snapshot version >> 21.12.003-SNAPSHOT"
+            ]
+          },
+          {
+            "minor-group-info": "<< INTERNAL 21.12.002 >> 2 working commits",
+            "commits-one-line": [
+              "4f58c4c | 2025-10-13 Mon 23:17:53 |  << internal release >> 21.12.002",
+              "5e861b0 | 2025-10-13 Mon 23:14:42 |  playing with MD- and HTML- badges #3",
+              "e1cf4ad | 2025-10-13 Mon 22:37:53 |  << new snapshot version >> 21.12.002-SNAPSHOT"
+            ]
+          },
+          {
+            "minor-group-info": "<< INTERNAL 21.12.001 >> 1 working commits",
+            "commits-one-line": [
+              "9b8ada0 | 2025-10-13 Mon 22:35:26 |  << internal release >> 21.12.001",
+              "d7a4fe3 | 2025-10-13 Mon 22:18:44 |  << new snapshot version >> 21.12.001-SNAPSHOT"
+            ]
+          }
+        ]
+      },
       {
         "major-group-info": "21.11 (finalized major group with 1 finalized minor groups)",
         "final-minor-group": {
@@ -762,21 +772,21 @@ the content of `GithubInputsHelper` (`th-tool`-expression `${gih}`) instance is:
 the content of `MavenHelper` (`th-tool`-expression `${mh}`) instance is:
 ```json
 {
-  "calculatedProjectVersion": "21.12.000-SNAPSHOT",
-  "currentProjectVersion": "21.12",
+  "calculatedProjectVersion": "21.13.000-SNAPSHOT",
+  "currentProjectVersion": "21.13",
   "incrementalAsInt": "0",
   "incrementalVersion": "0",
-  "internalNextVersion": "21.12.001-SNAPSHOT",
-  "internalReleaseVersion": "21.12.000",
+  "internalNextVersion": "21.13.001-SNAPSHOT",
+  "internalReleaseVersion": "21.13.000",
   "majorVersion": "21",
   "majorVersionAsInt": "21",
-  "minorVersion": "12",
-  "minorVersionAsInt": "12",
+  "minorVersion": "13",
+  "minorVersionAsInt": "13",
   "projectArtifact": "core-utils",
-  "projectCatalogName": "core-utils-21.12",
-  "projectName": "core-utils:21.12",
-  "publicNextVersion": "21.13.001-SNAPSHOT",
-  "publicReleaseVersion": "21.12",
+  "projectCatalogName": "core-utils-21.13",
+  "projectName": "core-utils:21.13",
+  "publicNextVersion": "21.14.001-SNAPSHOT",
+  "publicReleaseVersion": "21.13",
   "resourcePath": "/META-INF/maven/maven-project.properties",
   "usageFragmentPath": ".github/th-templates/Usage-PUBLIC.md.th",
   "usageFragmentSuffix": "PUBLIC",
