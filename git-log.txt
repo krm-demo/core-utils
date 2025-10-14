@@ -1,3 +1,4 @@
+78c74662 integrate GithubBadgeHelper badges into 'Release Catalog' #2
 8fb420dc integrate GithubBadgeHelper badges into 'Release Catalog' #1
 9e289d4d << new snapshot version >> 21.16.002-SNAPSHOT
 a2c14007 << internal release >> 21.16.001
