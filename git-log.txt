@@ -1,3 +1,4 @@
+65e53c03 playing with MD- and HTML- badges #6
 77499ca7 << public release >> 21.12
 02018b6e << new snapshot version >> 21.12.004-SNAPSHOT
 b47e5b98 << internal release >> 21.12.003
