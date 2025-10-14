@@ -211,9 +211,9 @@ public class GithubBadgeHelper {
         if (!isLatestInternalAvailable()) {
             return "";
         } else if (!isMavenSnapshot()) {
-            return "" + releaseCatalog().getFinalMinor().versionTag();
-        } else {
             return MavenHelper.fromCtx(ttCtx).getInternalReleaseVersion();
+        } else {
+            return "" + releaseCatalog().getFinalMinor().versionTag();
         }
     }
 
