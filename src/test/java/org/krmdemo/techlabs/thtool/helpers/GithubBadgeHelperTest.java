@@ -82,7 +82,7 @@ public class GithubBadgeHelperTest {
         assertThat(gbh.getBadgeUrlLatestPublicGitHub()).matches(
             "https://img.shields.io/badge/core--utils-21\\.\\d\\d-blue\\?logo=github&logoColor=white&labelColor=black");
         assertThat(gbh.getBadgeLatestPublicGitHubMD()).matches("""
-            \\[!\\[Latest-Public]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d-blue\\?logo=github&logoColor=white&labelColor=black\\)]\\(https://krm-demo.github.io/core-utils/core-utils-21\\.\\d\\d\\)""");
+            \\[!\\[Latest-Public]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d-blue\\?logo=github&logoColor=white&labelColor=black\\)]\\(https://github.com/krm-demo/core-utils/tree/21\\.\\d\\d\\)""");
         assertThat(gbh.getBadgeLatestPublicGitHubHTML()).matches("""
             (?s).*https://img.shields.io/badge/core--utils-21\\.\\d\\d-blue\\?logo=github&logoColor=white&labelColor=black.*""");
     }
@@ -94,7 +94,7 @@ public class GithubBadgeHelperTest {
         assertThat(gbh.getBadgeUrlLatestInternalGitHub()).matches(
             "https://img.shields.io/badge/core--utils-21\\.\\d\\d\\.\\d\\d\\d-blue\\?logo=github&logoColor=white&labelColor=black");
         assertThat(gbh.getBadgeLatestInternalGitHubMD()).matches("""
-            \\[!\\[Latest-Internal]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d-blue\\?logo=github&logoColor=white&labelColor=black\\)]\\(https://krm-demo.github.io/core-utils/core-utils-21\\.\\d\\d\\.\\d\\d\\d\\)""");
+            \\[!\\[Latest-Internal]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d-blue\\?logo=github&logoColor=white&labelColor=black\\)]\\(https://github.com/krm-demo/core-utils/tree/21\\.\\d\\d\\.\\d\\d\\d\\)""");
         assertThat(gbh.getBadgeLatestInternalGitHubHTML()).matches("""
             (?s).*https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d-blue\\?logo=github&logoColor=white&labelColor=black.*""");
     }
@@ -106,7 +106,7 @@ public class GithubBadgeHelperTest {
         assertThat(gbh.getBadgeUrlSnapshotGitHub()).matches(
             "https://img.shields.io/badge/core--utils-21\\.\\d\\d\\.\\d\\d\\d--SNAPSHOT-blue\\?logo=github&logoColor=white&labelColor=black");
         assertThat(gbh.getBadgeSnapshotGitHubMD()).matches("""
-            \\[!\\[Snapshot-Version]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d--SNAPSHOT-blue\\?logo=github&logoColor=white&labelColor=black\\)]\\(https://krm-demo.github.io/core-utils/core-utils-21\\.\\d\\d\\.\\d\\d\\d-SNAPSHOT\\)""");
+            \\[!\\[Snapshot-Version]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d--SNAPSHOT-blue\\?logo=github&logoColor=white&labelColor=black\\)]\\(https://github.com/krm-demo/core-utils\\)""");
         assertThat(gbh.getBadgeSnapshotGitHubHTML()).matches("""
             (?s).*https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d--SNAPSHOT-blue\\?logo=github&logoColor=white&labelColor=black.*""");
     }

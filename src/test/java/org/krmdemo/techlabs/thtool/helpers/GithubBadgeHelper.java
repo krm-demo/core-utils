@@ -166,8 +166,8 @@ public class GithubBadgeHelper {
     public String getBadgeLatestPublicGitHubMD() {
         return !isLatestPublicAvailable() ? "" :
             String.format(
-                "[![Latest-Public](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
-                getBadgeUrlLatestPublicGitHub(), repoName(), getLatestPublicVersion());
+                "[![Latest-Public](%s)](%s/tree/%s)",
+                getBadgeUrlLatestPublicGitHub(), repoHtmlUrl(), getLatestPublicVersion());
     }
 
     /**
@@ -177,11 +177,14 @@ public class GithubBadgeHelper {
     public String getBadgeLatestPublicGitHubHTML() {
         return !isLatestPublicAvailable() ? "" :
             String.format("""
-                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                <a href="%s/tree/%s">
                   <img alt="a badge to the latest PUBLIC-version" src="%s" />
                 </a>""",
-                repoName(), getLatestPublicVersion(), getBadgeUrlLatestPublicGitHub());
+                repoHtmlUrl(), getLatestPublicVersion(), getBadgeUrlLatestPublicGitHub());
     }
+
+    // https://github.com/krm-demo/core-utils/tree/21.11
+    // https://krm-demo.github.io/core-utils/core-utils-21.11/
 
     /**
      * @return the URL to the latest PUBLIC-release project
@@ -252,8 +255,8 @@ public class GithubBadgeHelper {
     public String getBadgeLatestInternalGitHubMD() {
         return !isLatestInternalAvailable() ? "" :
             String.format(
-                "[![Latest-Internal](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
-                getBadgeUrlLatestInternalGitHub(), repoName(), getLatestInternalVersion());
+                "[![Latest-Internal](%s)](%s/tree/%s)",
+                getBadgeUrlLatestInternalGitHub(), repoHtmlUrl(), getLatestInternalVersion());
     }
 
     /**
@@ -263,10 +266,10 @@ public class GithubBadgeHelper {
     public String getBadgeLatestInternalGitHubHTML() {
         return !isLatestInternalAvailable() ? "" :
             String.format("""
-                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                <a href="%s/tree/%s">
                   <img alt="a badge to the latest PUBLIC-version" src="%s" />
                 </a>""",
-                repoName(), getLatestInternalVersion(), getBadgeUrlLatestInternalGitHub());
+                repoHtmlUrl(), getLatestInternalVersion(), getBadgeUrlLatestInternalGitHub());
     }
 
     /**
@@ -325,8 +328,8 @@ public class GithubBadgeHelper {
     public String getBadgeSnapshotGitHubMD() {
         return !isMavenSnapshot() ? "" :
             String.format(
-                "[![Snapshot-Version](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
-                getBadgeUrlSnapshotGitHub(), repoName(), getSnapshotVersion());
+                "[![Snapshot-Version](%s)](%s)",
+                getBadgeUrlSnapshotGitHub(), repoHtmlUrl());
     }
 
     /**
@@ -336,10 +339,10 @@ public class GithubBadgeHelper {
     public String getBadgeSnapshotGitHubHTML() {
         return !isMavenSnapshot() ? "" :
             String.format("""
-                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                <a href="%s">
                   <img alt="a badge to the latest PUBLIC-version" src="%s" />
                 </a>""",
-                repoName(), getSnapshotVersion(), getBadgeUrlSnapshotGitHub());
+                repoHtmlUrl(), getBadgeUrlSnapshotGitHub());
     }
 
     /**
@@ -422,6 +425,10 @@ public class GithubBadgeHelper {
         return GithubHelper.fromCtx(ttCtx).getRepoName();
     }
 
+    private String repoHtmlUrl() {
+        return GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl();
+    }
+
     // --------------------------------------------------------------------------------------------
 
     public String githubCommitUrl(CommitInfo commitInfo) {
@@ -429,8 +436,7 @@ public class GithubBadgeHelper {
     }
 
     public String githubCommitUrl(String commitID) {
-        String repoUrl = GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl();
-        return String.format("%s/commit/%s", repoUrl, commitID);
+        return String.format("%s/commit/%s", repoHtmlUrl(), commitID);
     }
 
     /**
