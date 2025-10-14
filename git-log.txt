@@ -1,3 +1,4 @@
+a24f73a9 playing with MD- and HTML- badges #4
 feba0c1c << new snapshot version >> 21.12.003-SNAPSHOT
 4f58c4cc << internal release >> 21.12.002
 5e861b06 playing with MD- and HTML- badges #3

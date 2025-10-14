@@ -69,8 +69,27 @@
           After executing the tests (<code>"...&gt; mvn clean verify"</code> from command line),<br/>
           the processed site become available in the directory <code>./target/th-test-process-dir</code>.
         </p>
+        <p>
+        <details>
+          <summary>
+            JSON-properties of <a href="https://github.com/krm-demo/core-utils/blob/main/src/test/java/org/krmdemo/techlabs/thtool/helpers/GithubBadgeHelper.java">
+            GithubBadgeHelper
+          </a>:
+            <code>[&#8203;(${ gbh })&#8203;]</code>
+          </summary>
+          <pre>[(${ gbh })]</pre>
+        </details>
+        </p>
+        <p>
+          PUBLIC-release badge: <code>[(${ gbh.badgeLatestPublicGitHubHTML })]</code>
+        </p>
+        <p>
+          INTERNAL-release badge: <code>[(${ gbh.badgeLatestInternalGitHubHTML })]</code>
+        </p>
+        <p>
+          SNAPSHOT-version badge: <code>[(${ gbh.badgeSnapshotGitHubHTML })]</code>
+        </p>
         <div class="text-center bg-light fst-italic text-sm mb-1">Each page has its own content here.</div>
-
       </div>
       <div class="row border border-secondary rounded mt-5">
         <h3>Some Technical Information</h3>
