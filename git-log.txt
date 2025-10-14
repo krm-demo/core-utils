@@ -1,3 +1,4 @@
+5e8ad340 << new snapshot version >> 21.14.001-SNAPSHOT
 96019488 << public release >> 21.13
 65e53c03 playing with MD- and HTML- badges #6
 77499ca7 << public release >> 21.12
