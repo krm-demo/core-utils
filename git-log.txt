@@ -1,3 +1,4 @@
+cfe19ca1 << new snapshot version >> 21.15.001-SNAPSHOT
 fbb9f6fe << public release >> 21.14
 f00d111d playing with MD- and HTML- badges #7
 5e8ad340 << new snapshot version >> 21.14.001-SNAPSHOT
