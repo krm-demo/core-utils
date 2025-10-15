@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This Java-record is used to parse the git-tag that represents the version of maven-project,
+ * This Java-record is used to parse the <b>{@code git}</b>-tag that represents the version of maven-project,
  * which must look like {@code <major>.<minor>.<incremental>} (without qualifier !!!).
  * <hr/>
  * <u><i>Note:</i></u> Snapshots-Versions must not have tags - so, such versions of maven-project
@@ -23,10 +23,16 @@ public record VersionTag(
     String minor,
     String incremental
 ) {
+    /**
+     * @return {@code true} if this instance corresponds to PUBLIC-release version of a project (and otherwise - {@code false})
+     */
     public boolean isPublicRelease() {
         return isValid() && StringUtils.isBlank(incremental);
     }
 
+    /**
+     * @return {@code true} if this instance corresponds to valid version-tag (and otherwise - {@code false})
+     */
     public boolean isValid() {
         try {
             if (Integer.parseInt(major) < 0) {
@@ -63,6 +69,13 @@ public record VersionTag(
         Pattern.CASE_INSENSITIVE
     );
 
+    /**
+     * Parsing the {@link String}-representation of <b>{@code git}</b>-tag
+     * and returning either the instance of {@link VersionTag}
+     * or {@code null} if the passed tagName does not correspond to {@link #isValid() valid} version-tag.
+     * @param tagName
+     * @return
+     */
     public static VersionTag parse(String tagName) {
         if (StringUtils.isBlank(tagName)) {
             return null;

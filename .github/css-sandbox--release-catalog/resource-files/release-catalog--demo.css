@@ -26,17 +26,17 @@
     display: grid;
     background: white;
     width: calc(100% - 25px);
-    grid-template-columns: 50px 50px 50px 200px auto;
+    grid-template-columns: 75px 50px 50px 200px auto;
     position: absolute;
     z-index: 3;
 }
 .major-grid-title-row {
     display: grid;
-    grid-template-columns: 50px 50px 50px 200px auto;
+    grid-template-columns: 75px 50px 50px 200px auto;
 }
 .major-grid-commit-row {
     display: grid;
-    grid-template-columns: 50px 50px 50px 120px auto 25px;
+    grid-template-columns: 75px 50px 50px 120px auto 25px;
 }
 
 .major-grid-title-row-over .col-4{
@@ -54,6 +54,7 @@
     border-bottom: 1px solid blue;
 }
 
+/*
 .major-grid-title-row .col-1 {
     border: 0;
 }
@@ -63,12 +64,14 @@
 .major-grid-title-row .col-3 {
     border: 0;
 }
+*/
 .major-grid-title-row .col-4 {
 }
 .major-grid-title-row .col-5 {
     border-right: 1px solid blue;
 }
 
+/*
 .major-grid-commit-row .col-1 {
     border: 0;
 }
@@ -78,6 +81,7 @@
 .major-grid-commit-row .col-3 {
     border: 0;
 }
+*/
 .major-grid-commit-row .col-4 {
     border-left: 1px solid blue;
 }
@@ -95,6 +99,35 @@
 
 .major-grid-commit-row .col-6 {
     text-align: right;
+}
+
+.col-1 {
+    text-align: right;
+}
+.col-2 {
+    text-align: center;
+    border-left: 1px dotted blue;
+    border-right: 1px dotted blue;
+}
+.col-3 {
+    text-align: left;
+}
+
+.vertical-start {
+    border-top: 8px double #eee;
+}
+
+hr.vertical-1 {
+  width: 0px;
+  height: 100%;
+  margin-top: 0;
+  border: 1px solid #eaeaea;
+}
+hr.vertical-3 {
+  width: 0px;
+  height: 100%;
+  margin-top: 0;
+  border: 2px solid #efefef;
 }
 
 /* ************* **************** *************** */

@@ -5,14 +5,13 @@ import org.eclipse.jgit.api.Status;
 import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
-import java.util.Map;
 import java.util.SequencedMap;
 import java.util.SequencedSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * A unit-test to <b>{@code th-tool}</b>-helper {@link GitHelper}.
+ * A unit-test for <b>{@code th-tool}</b>-helper {@link GitHelper}.
  */
 @Slf4j
 public class GitHelperTest {

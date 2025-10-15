@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
 
 /**
- * A unit-test to <b>{@code th-tool}</b>-helper {@link GithubBadgeHelper}.
+ * A unit-test for <b>{@code th-tool}</b>-helper {@link GithubBadgeHelper}.
  */
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class GithubBadgeHelperTest {

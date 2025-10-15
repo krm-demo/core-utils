@@ -12,7 +12,7 @@ import static org.krmdemo.techlabs.thtool.ThToolCtxUtils.propValueStr;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
 
 /**
- * A unit-test to <b>{@code th-tool}</b>-helper {@link GithubHelper}.
+ * A unit-test for <b>{@code th-tool}</b>-helper {@link GithubHelper}.
  */
 public class GithubHelperTest {
 

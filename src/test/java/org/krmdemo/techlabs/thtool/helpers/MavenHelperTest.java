@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * A unit-test for {@link MavenHelper}
+ * A unit-test for <b>{@code th-tool}</b>-helper
  */
 public class MavenHelperTest {
 

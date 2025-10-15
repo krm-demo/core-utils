@@ -15,7 +15,7 @@ import static org.krmdemo.techlabs.thtool.helpers.GithubInputsHelper.VAR_PROP_VA
 import static org.krmdemo.techlabs.thtool.helpers.GithubInputsHelper.VAR_PROP_VALUE__RELEASE_TYPE_PUBLIC;
 
 /**
- * A unit-test to <b>{@code th-tool}</b>-helper {@link GithubInputsHelper}.
+ * A unit-test for <b>{@code th-tool}</b>-helper {@link GithubInputsHelper}.
  */
 public class GithubInputsHelperTest {
 
