@@ -68,6 +68,18 @@ loadScripts(document, 'script');</script>
 <li><a href="#%3Cinit%3E(java.time.LocalDateTime)" tabindex="0">LinkedTriplet(LocalDateTime)</a></li>
 </ol>
 </li>
+<li><a href="#method-detail" tabindex="0">Method Details</a>
+<ol class="toc-list">
+<li><a href="#isTheSameAsPrev()" tabindex="0">isTheSameAsPrev()</a></li>
+<li><a href="#isTheSameAsNext()" tabindex="0">isTheSameAsNext()</a></li>
+<li><a href="#isYearAnMonthTheSameAsPrev()" tabindex="0">isYearAnMonthTheSameAsPrev()</a></li>
+<li><a href="#isYearAnMonthTheSameAsNext()" tabindex="0">isYearAnMonthTheSameAsNext()</a></li>
+<li><a href="#isDayOfMonthAndWeekTheSameAsPrev()" tabindex="0">isDayOfMonthAndWeekTheSameAsPrev()</a></li>
+<li><a href="#isDayOfMonthAndWeekTheSameAsNext()" tabindex="0">isDayOfMonthAndWeekTheSameAsNext()</a></li>
+<li><a href="#isHoursMinutesTheSameAsPrev()" tabindex="0">isHoursMinutesTheSameAsPrev()</a></li>
+<li><a href="#isHoursMinutesTheSameAsNext()" tabindex="0">isHoursMinutesTheSameAsNext()</a></li>
+</ol>
+</li>
 </ol>
 <button class="hide-sidebar"><span>Hide sidebar&nbsp;</span><img src="../../../../../resource-files/left.svg" alt="Hide sidebar"></button><button class="show-sidebar"><img src="../../../../../resource-files/right.svg" alt="Show sidebar"><span>&nbsp;Show sidebar</span></button></nav>
 <main role="main">
@@ -128,6 +140,52 @@ with sequentially previous and next triplets in corresponding collection or map.
 <li>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
+<div id="method-summary-table">
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDayOfMonthAndWeekTheSameAsNext()" class="member-name-link">isDayOfMonthAndWeekTheSameAsNext</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the next</b> linked value</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDayOfMonthAndWeekTheSameAsPrev()" class="member-name-link">isDayOfMonthAndWeekTheSameAsPrev</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the previous</b> linked value</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isHoursMinutesTheSameAsNext()" class="member-name-link">isHoursMinutesTheSameAsNext</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Comparing on equality on <b>the third part</b> of triplet with <b>the next</b> linked value</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isHoursMinutesTheSameAsPrev()" class="member-name-link">isHoursMinutesTheSameAsPrev</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Comparing on equality on <b>the third part</b> of triplet with <b>the previous</b> linked value</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isTheSameAsNext()" class="member-name-link">isTheSameAsNext</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isTheSameAsPrev()" class="member-name-link">isTheSameAsPrev</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isYearAnMonthTheSameAsNext()" class="member-name-link">isYearAnMonthTheSameAsNext</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Comparing on equality on <b>the first part</b> of triplet with <b>the next</b> linked value</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isYearAnMonthTheSameAsPrev()" class="member-name-link">isYearAnMonthTheSameAsPrev</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Comparing on equality on <b>the first part</b> of triplet with <b>the previous</b> linked value</div>
+</div>
+</div>
+</div>
+</div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.krmdemo.techlabs.core.datetime.DateTimeTriplet">Methods inherited from class&nbsp;<a href="DateTimeTriplet.html#method-summary" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></h3>
 <code><a href="DateTimeTriplet.html#dump()" title="dump()">dump</a>, <a href="DateTimeTriplet.html#dumpNoWeek()" title="dumpNoWeek()">dumpNoWeek</a>, <a href="DateTimeTriplet.html#equals(java.lang.Object)" title="equals(Object)">equals</a>, <a href="DateTimeTriplet.html#getDayOfMonthAndWeek()" title="getDayOfMonthAndWeek()">getDayOfMonthAndWeek</a>, <a href="DateTimeTriplet.html#getDayOfMoth()" title="getDayOfMoth()">getDayOfMoth</a>, <a href="DateTimeTriplet.html#getDayOfWeek()" title="getDayOfWeek()">getDayOfWeek</a>, <a href="DateTimeTriplet.html#getHours()" title="getHours()">getHours</a>, <a href="DateTimeTriplet.html#getHoursMinutes()" title="getHoursMinutes()">getHoursMinutes</a>, <a href="DateTimeTriplet.html#getLocalDateTime()" title="getLocalDateTime()">getLocalDateTime</a>, <a href="DateTimeTriplet.html#getMinutes()" title="getMinutes()">getMinutes</a>, <a href="DateTimeTriplet.html#getMonth()" title="getMonth()">getMonth</a>, <a href="DateTimeTriplet.html#getYear()" title="getYear()">getYear</a>, <a href="DateTimeTriplet.html#getYearAndMonth()" title="getYearAndMonth()">getYearAndMonth</a>, <a href="DateTimeTriplet.html#hashCode()" title="hashCode()">hashCode</a>, <a href="DateTimeTriplet.html#now()" title="now()">now</a>, <a href="DateTimeTriplet.html#toString()" title="toString()">toString</a></code></div>
@@ -175,6 +233,114 @@ with sequentially previous and next triplets in corresponding collection or map.
 <h3>LinkedTriplet</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-57">LinkedTriplet</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;localDateTimeUTC)</span></div>
+</div>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<!-- ============ METHOD DETAIL ========== -->
+<li>
+<section class="method-details" id="method-detail">
+<h2>Method Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="isTheSameAsPrev()">
+<h3>isTheSameAsPrev</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-61">isTheSameAsPrev</a></span>()</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isTheSameAsNext()">
+<h3>isTheSameAsNext</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-65">isTheSameAsNext</a></span>()</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isYearAnMonthTheSameAsPrev()">
+<h3>isYearAnMonthTheSameAsPrev</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-75">isYearAnMonthTheSameAsPrev</a></span>()</div>
+<div class="block">Comparing on equality on <b>the first part</b> of triplet with <b>the previous</b> linked value</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if <b>the previous</b> item exists and has the same property <a href="DateTimeTriplet.html#getYearAndMonth()"><code>DateTimeTriplet.getYearAndMonth()</code></a>
+         (and <code>false</code> - otherwise)</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isYearAnMonthTheSameAsNext()">
+<h3>isYearAnMonthTheSameAsNext</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-85">isYearAnMonthTheSameAsNext</a></span>()</div>
+<div class="block">Comparing on equality on <b>the first part</b> of triplet with <b>the next</b> linked value</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if <b>the next</b> item exists and has the same property <a href="DateTimeTriplet.html#getYearAndMonth()"><code>DateTimeTriplet.getYearAndMonth()</code></a>
+         (and <code>false</code> - otherwise)</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isDayOfMonthAndWeekTheSameAsPrev()">
+<h3>isDayOfMonthAndWeekTheSameAsPrev</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-95">isDayOfMonthAndWeekTheSameAsPrev</a></span>()</div>
+<div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the previous</b> linked value</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if <b>the previous</b> item exists and has the same property <a href="DateTimeTriplet.html#getDayOfMonthAndWeek()"><code>DateTimeTriplet.getDayOfMonthAndWeek()</code></a>
+         (and <code>false</code> - otherwise)</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isDayOfMonthAndWeekTheSameAsNext()">
+<h3>isDayOfMonthAndWeekTheSameAsNext</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-105">isDayOfMonthAndWeekTheSameAsNext</a></span>()</div>
+<div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the next</b> linked value</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if <b>the next</b> item exists and has the same property <a href="DateTimeTriplet.html#getDayOfMonthAndWeek()"><code>DateTimeTriplet.getDayOfMonthAndWeek()</code></a>
+         (and <code>false</code> - otherwise)</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isHoursMinutesTheSameAsPrev()">
+<h3>isHoursMinutesTheSameAsPrev</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-115">isHoursMinutesTheSameAsPrev</a></span>()</div>
+<div class="block">Comparing on equality on <b>the third part</b> of triplet with <b>the previous</b> linked value</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if t<b>he previous</b> item exists and has the same property <a href="DateTimeTriplet.html#getHoursMinutes()"><code>DateTimeTriplet.getHoursMinutes()</code></a>
+         (and <code>false</code> - otherwise)</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isHoursMinutesTheSameAsNext()">
+<h3>isHoursMinutesTheSameAsNext</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-125">isHoursMinutesTheSameAsNext</a></span>()</div>
+<div class="block">Comparing on equality on <b>the third part</b> of triplet with <b>the next</b> linked value</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if <b>the next</b> item exists and has the same property <a href="DateTimeTriplet.html#getHoursMinutes()"><code>DateTimeTriplet.getHoursMinutes()</code></a>
+         (and <code>false</code> - otherwise)</dd>
+</dl>
 </div>
 </section>
 </li>

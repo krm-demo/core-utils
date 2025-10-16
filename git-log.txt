@@ -1,3 +1,5 @@
+51a5a11e playing with LinkedDateTimeTripletMap and GitLogInfo #3 (fix the build)
+8e2ff457 introduce LinkedDateTimeTripletMap and GitLogInfo #2
 1cf175a4 introduce LinkedDateTimeTripletMap
 32b89558 introduce DateTimeTriplet #1
 e9d1c164 integrate GithubBadgeHelper badges into 'Release Catalog' #3
