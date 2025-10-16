@@ -72,8 +72,8 @@ public class ThymeleafToolTest {
             "process",
             ".github/th-templates/ROOT-Readme.md.th"
         );
-//        stdErr.println(sbErr);
-//        stdErr.println(sbOut);
+        stdErr.println(sbErr);
+        stdErr.println(sbOut);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();

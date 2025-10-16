@@ -192,6 +192,7 @@ public class GitHelper {
     /**
      * @return similar to what {@code git log --oneline} returns
      */
+    @JsonIgnore
     public GitLogInfo getGitLogInfo() {
         return new GitLogInfo(this.getGitLog());
     }
