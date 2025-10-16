@@ -36,7 +36,7 @@
 <span class="source-line-no">022</span><span id="line-22"> * &lt;table&gt;</span>
 <span class="source-line-no">023</span><span id="line-23"> *     &lt;tr&gt;&lt;th&gt;method&lt;/th&gt;&lt;th&gt;value&lt;/th&gt;&lt;/tr&gt;</span>
 <span class="source-line-no">024</span><span id="line-24"> *     &lt;tr&gt;&lt;td&gt;{@link #getYearAndMonth()}&lt;/td&gt;&lt;td&gt;{@code "2025-10"}&lt;/td&gt;&lt;/tr&gt;</span>
-<span class="source-line-no">025</span><span id="line-25"> *     &lt;tr&gt;&lt;td&gt;{@link #getDayOfMonthAndWeek()}&lt;/td&gt;&lt;td&gt;{@code "-15 (Wed) "}&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="source-line-no">025</span><span id="line-25"> *     &lt;tr&gt;&lt;td&gt;{@link #getDayOfMonthAndWeek()}&lt;/td&gt;&lt;td&gt;{@code "15 (Wed)"}&lt;/td&gt;&lt;/tr&gt;</span>
 <span class="source-line-no">026</span><span id="line-26"> *     &lt;tr&gt;&lt;td&gt;{@link #getHoursMinutes()}&lt;/td&gt;&lt;td&gt;{@code "06:03"}&lt;/td&gt;&lt;/tr&gt;</span>
 <span class="source-line-no">027</span><span id="line-27"> *     &lt;tr&gt;&lt;td&gt;{@link #dumpNoWeek()}&lt;/td&gt;&lt;td&gt;{@code "2025-10-15 06:03"}&lt;/td&gt;&lt;/tr&gt;</span>
 <span class="source-line-no">028</span><span id="line-28"> *     &lt;tr&gt;&lt;td&gt;{@link #dump()}&lt;/td&gt;&lt;td&gt;{@code "2025-10-15 (Wed) 06:03"}&lt;/td&gt;&lt;/tr&gt;</span>
@@ -155,7 +155,7 @@
 <span class="source-line-no">141</span><span id="line-141">            DAY_OF_WEEK__TEXT_STYLE.get(),</span>
 <span class="source-line-no">142</span><span id="line-142">            DAY_OF_WEEK__LOCALE.get()</span>
 <span class="source-line-no">143</span><span id="line-143">        );</span>
-<span class="source-line-no">144</span><span id="line-144">        return String.format("-%02d (%s) ", this.getDayOfMoth(), dayOfWeekStr);</span>
+<span class="source-line-no">144</span><span id="line-144">        return String.format("%02d (%s)", this.getDayOfMoth(), dayOfWeekStr);</span>
 <span class="source-line-no">145</span><span id="line-145">    }</span>
 <span class="source-line-no">146</span><span id="line-146"></span>
 <span class="source-line-no">147</span><span id="line-147">    /**</span>
@@ -173,7 +173,7 @@
 <span class="source-line-no">159</span><span id="line-159">    }</span>
 <span class="source-line-no">160</span><span id="line-160"></span>
 <span class="source-line-no">161</span><span id="line-161">    /**</span>
-<span class="source-line-no">162</span><span id="line-162">     * @return &lt;b&gt;the third part&lt;/b&gt; of date-time triplet that contains colon(':')-separated</span>
+<span class="source-line-no">162</span><span id="line-162">     * @return &lt;b&gt;the third part&lt;/b&gt; of date-time triplet that contains colon{@code ':'}-separated</span>
 <span class="source-line-no">163</span><span id="line-163">     *          {@link #getHours() hours} and {@link #getMinutes() minutes}</span>
 <span class="source-line-no">164</span><span id="line-164">     */</span>
 <span class="source-line-no">165</span><span id="line-165">    public String getHoursMinutes() {</span>
@@ -181,38 +181,42 @@
 <span class="source-line-no">167</span><span id="line-167">    }</span>
 <span class="source-line-no">168</span><span id="line-168"></span>
 <span class="source-line-no">169</span><span id="line-169">    /**</span>
-<span class="source-line-no">170</span><span id="line-170">     * @return concatenation of 3 parts: {@link #getYearAndMonth()} + {@link #getDayOfMonthAndWeek()} + {@link #getHoursMinutes()}</span>
-<span class="source-line-no">171</span><span id="line-171">     */</span>
-<span class="source-line-no">172</span><span id="line-172">    public String dump() {</span>
-<span class="source-line-no">173</span><span id="line-173">        return getYearAndMonth() + getDayOfMonthAndWeek() + getHoursMinutes();</span>
-<span class="source-line-no">174</span><span id="line-174">    }</span>
-<span class="source-line-no">175</span><span id="line-175"></span>
-<span class="source-line-no">176</span><span id="line-176">    /**</span>
-<span class="source-line-no">177</span><span id="line-177">     * @return the same as {@link #dump()}, but without day of week</span>
-<span class="source-line-no">178</span><span id="line-178">     */</span>
-<span class="source-line-no">179</span><span id="line-179">    public String dumpNoWeek() {</span>
-<span class="source-line-no">180</span><span id="line-180">        return String.format("%s-%02d %s", getYearAndMonth(), getDayOfMoth(), getHoursMinutes());</span>
-<span class="source-line-no">181</span><span id="line-181">    }</span>
-<span class="source-line-no">182</span><span id="line-182"></span>
-<span class="source-line-no">183</span><span id="line-183">    @Override</span>
-<span class="source-line-no">184</span><span id="line-184">    public boolean equals(Object thatObj) {</span>
-<span class="source-line-no">185</span><span id="line-185">        if (thatObj instanceof DateTimeTriplet that) {</span>
-<span class="source-line-no">186</span><span id="line-186">            return this.localDateTimeUTC.equals(that.localDateTimeUTC);</span>
-<span class="source-line-no">187</span><span id="line-187">        } else {</span>
-<span class="source-line-no">188</span><span id="line-188">            return false;</span>
-<span class="source-line-no">189</span><span id="line-189">        }</span>
-<span class="source-line-no">190</span><span id="line-190">    }</span>
-<span class="source-line-no">191</span><span id="line-191"></span>
-<span class="source-line-no">192</span><span id="line-192">    @Override</span>
-<span class="source-line-no">193</span><span id="line-193">    public int hashCode() {</span>
-<span class="source-line-no">194</span><span id="line-194">        return this.localDateTimeUTC.hashCode();</span>
-<span class="source-line-no">195</span><span id="line-195">    }</span>
-<span class="source-line-no">196</span><span id="line-196"></span>
-<span class="source-line-no">197</span><span id="line-197">    @Override</span>
-<span class="source-line-no">198</span><span id="line-198">    public String toString() {</span>
-<span class="source-line-no">199</span><span id="line-199">        return this.dump();</span>
-<span class="source-line-no">200</span><span id="line-200">    }</span>
-<span class="source-line-no">201</span><span id="line-201">}</span>
+<span class="source-line-no">170</span><span id="line-170">     * @return concatenation of 3 parts: &lt;pre&gt;</span>
+<span class="source-line-no">171</span><span id="line-171">     * {@link #getYearAndMonth() yearAndMonth}{@link #getDayOfMonthAndWeek() '-'dayOfMonthAndWeek}{@link #getHoursMinutes() ' 'hoursMinutes}</span>
+<span class="source-line-no">172</span><span id="line-172">     * &lt;/pre&gt;</span>
+<span class="source-line-no">173</span><span id="line-173">     */</span>
+<span class="source-line-no">174</span><span id="line-174">    public String dump() {</span>
+<span class="source-line-no">175</span><span id="line-175">        return String.format("%s-%s %s", getYearAndMonth(), getDayOfMonthAndWeek(), getHoursMinutes());</span>
+<span class="source-line-no">176</span><span id="line-176">    }</span>
+<span class="source-line-no">177</span><span id="line-177"></span>
+<span class="source-line-no">178</span><span id="line-178">    /**</span>
+<span class="source-line-no">179</span><span id="line-179">     * @return the same as {@link #dump()}, but without day of week:&lt;pre&gt;</span>
+<span class="source-line-no">180</span><span id="line-180">     * {@link #getYearAndMonth() yearAndMonth}{@link #getDayOfMoth() '-'dayOfMonth}{@link #getHoursMinutes() ' 'hoursMinutes}</span>
+<span class="source-line-no">181</span><span id="line-181">     * &lt;/pre&gt;</span>
+<span class="source-line-no">182</span><span id="line-182">     */</span>
+<span class="source-line-no">183</span><span id="line-183">    public String dumpNoWeek() {</span>
+<span class="source-line-no">184</span><span id="line-184">        return String.format("%s-%02d %s", getYearAndMonth(), getDayOfMoth(), getHoursMinutes());</span>
+<span class="source-line-no">185</span><span id="line-185">    }</span>
+<span class="source-line-no">186</span><span id="line-186"></span>
+<span class="source-line-no">187</span><span id="line-187">    @Override</span>
+<span class="source-line-no">188</span><span id="line-188">    public boolean equals(Object thatObj) {</span>
+<span class="source-line-no">189</span><span id="line-189">        if (thatObj instanceof DateTimeTriplet that) {</span>
+<span class="source-line-no">190</span><span id="line-190">            return this.localDateTimeUTC.equals(that.localDateTimeUTC);</span>
+<span class="source-line-no">191</span><span id="line-191">        } else {</span>
+<span class="source-line-no">192</span><span id="line-192">            return false;</span>
+<span class="source-line-no">193</span><span id="line-193">        }</span>
+<span class="source-line-no">194</span><span id="line-194">    }</span>
+<span class="source-line-no">195</span><span id="line-195"></span>
+<span class="source-line-no">196</span><span id="line-196">    @Override</span>
+<span class="source-line-no">197</span><span id="line-197">    public int hashCode() {</span>
+<span class="source-line-no">198</span><span id="line-198">        return this.localDateTimeUTC.hashCode();</span>
+<span class="source-line-no">199</span><span id="line-199">    }</span>
+<span class="source-line-no">200</span><span id="line-200"></span>
+<span class="source-line-no">201</span><span id="line-201">    @Override</span>
+<span class="source-line-no">202</span><span id="line-202">    public String toString() {</span>
+<span class="source-line-no">203</span><span id="line-203">        return this.dump();</span>
+<span class="source-line-no">204</span><span id="line-204">    }</span>
+<span class="source-line-no">205</span><span id="line-205">}</span>
 
 
 

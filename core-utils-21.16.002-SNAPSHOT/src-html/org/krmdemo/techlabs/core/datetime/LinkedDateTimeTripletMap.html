@@ -139,76 +139,98 @@
 <span class="source-line-no">125</span><span id="line-125">        public boolean isHoursMinutesTheSameAsNext() {</span>
 <span class="source-line-no">126</span><span id="line-126">            return equalProps(this, next, DateTimeTriplet::getHoursMinutes);</span>
 <span class="source-line-no">127</span><span id="line-127">        }</span>
-<span class="source-line-no">128</span><span id="line-128">    }</span>
-<span class="source-line-no">129</span><span id="line-129"></span>
-<span class="source-line-no">130</span><span id="line-130">    /**</span>
-<span class="source-line-no">131</span><span id="line-131">     * Private-constructor to force using factory-methods</span>
-<span class="source-line-no">132</span><span id="line-132">     */</span>
-<span class="source-line-no">133</span><span id="line-133">    private LinkedDateTimeTripletMap() {</span>
-<span class="source-line-no">134</span><span id="line-134">    }</span>
-<span class="source-line-no">135</span><span id="line-135"></span>
-<span class="source-line-no">136</span><span id="line-136">    /**</span>
-<span class="source-line-no">137</span><span id="line-137">     * Builds a chronological sequence of {@link LinkedTriplet}s over the original sequence map,</span>
-<span class="source-line-no">138</span><span id="line-138">     * where the passed {@code instantFunc} is used to extract that date-time chronological property</span>
-<span class="source-line-no">139</span><span id="line-139">     *</span>
-<span class="source-line-no">140</span><span id="line-140">     * @param originalMap an original map over any values that has chronological property</span>
-<span class="source-line-no">141</span><span id="line-141">     * @param instantFunc a reference to getter that is used to extract that date-time chronological property</span>
-<span class="source-line-no">142</span><span id="line-142">     * @return the linked-map with the same keys and sequence, but with {@link LinkedTriplet} as value</span>
-<span class="source-line-no">143</span><span id="line-143">     * @param &lt;Key&gt; a type of original map's key</span>
-<span class="source-line-no">144</span><span id="line-144">     * @param &lt;Value&gt; a type of original map's value</span>
-<span class="source-line-no">145</span><span id="line-145">     */</span>
-<span class="source-line-no">146</span><span id="line-146">    public static &lt;Key, Value&gt;</span>
-<span class="source-line-no">147</span><span id="line-147">    LinkedDateTimeTripletMap&lt;Key&gt;</span>
-<span class="source-line-no">148</span><span id="line-148">    create(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Instant&gt; instantFunc) {</span>
-<span class="source-line-no">149</span><span id="line-149">        LinkedDateTimeTripletMap&lt;Key&gt; dttMap = new LinkedDateTimeTripletMap&lt;&gt;();</span>
-<span class="source-line-no">150</span><span id="line-150">        originalMap.forEach((Key key, Value value) -&gt; {</span>
-<span class="source-line-no">151</span><span id="line-151">            Instant instant = instantFunc.apply(value);</span>
-<span class="source-line-no">152</span><span id="line-152">            LinkedTriplet dtt = new LinkedTriplet(instant);</span>
-<span class="source-line-no">153</span><span id="line-153">            if (!dttMap.isEmpty()) {</span>
-<span class="source-line-no">154</span><span id="line-154">                dtt.linkPrev(dttMap.lastEntry().getValue());</span>
-<span class="source-line-no">155</span><span id="line-155">            }</span>
-<span class="source-line-no">156</span><span id="line-156">            dttMap.putLast(key, dtt);</span>
-<span class="source-line-no">157</span><span id="line-157">        });</span>
-<span class="source-line-no">158</span><span id="line-158">        return dttMap;</span>
-<span class="source-line-no">159</span><span id="line-159">    }</span>
-<span class="source-line-no">160</span><span id="line-160"></span>
-<span class="source-line-no">161</span><span id="line-161">    /**</span>
-<span class="source-line-no">162</span><span id="line-162">     * The same as {@link #create(SequencedMap, Function)},</span>
-<span class="source-line-no">163</span><span id="line-163">     * but the getter-function {@code epochSecondsFunc} extracts epoch-seconds as {@link Long}</span>
-<span class="source-line-no">164</span><span id="line-164">     *</span>
-<span class="source-line-no">165</span><span id="line-165">     * @param originalMap an original map over any values that has chronological property</span>
-<span class="source-line-no">166</span><span id="line-166">     * @param epochSecondsFunc a reference to getter that is used to extract epoch-seconds as {@link Long}</span>
-<span class="source-line-no">167</span><span id="line-167">     * @return the linked-map with the same keys and sequence, but with {@link LinkedTriplet} as value</span>
-<span class="source-line-no">168</span><span id="line-168">     * @param &lt;Key&gt; a type of original map's key</span>
-<span class="source-line-no">169</span><span id="line-169">     * @param &lt;Value&gt; a type of original map's value</span>
-<span class="source-line-no">170</span><span id="line-170">     */</span>
-<span class="source-line-no">171</span><span id="line-171">    public static &lt;Key, Value&gt;</span>
-<span class="source-line-no">172</span><span id="line-172">    LinkedDateTimeTripletMap&lt;Key&gt;</span>
-<span class="source-line-no">173</span><span id="line-173">    createByEpochSeconds(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Long&gt; epochSecondsFunc) {</span>
-<span class="source-line-no">174</span><span id="line-174">        Function&lt;Value, Instant&gt; instantFunc = (Value value) -&gt; {</span>
-<span class="source-line-no">175</span><span id="line-175">            Long epochSeconds = epochSecondsFunc.apply(value);</span>
-<span class="source-line-no">176</span><span id="line-176">            return Instant.ofEpochSecond(epochSeconds);</span>
-<span class="source-line-no">177</span><span id="line-177">        };</span>
-<span class="source-line-no">178</span><span id="line-178">        return create(originalMap, instantFunc);</span>
-<span class="source-line-no">179</span><span id="line-179">    }</span>
-<span class="source-line-no">180</span><span id="line-180"></span>
-<span class="source-line-no">181</span><span id="line-181">    /**</span>
-<span class="source-line-no">182</span><span id="line-182">     * The same as {@link #createByEpochSeconds(SequencedMap, Function)},</span>
-<span class="source-line-no">183</span><span id="line-183">     * but the function that extracts epoch-seconds returns {@link Integer} (not {@link Long})</span>
-<span class="source-line-no">184</span><span id="line-184">     *</span>
-<span class="source-line-no">185</span><span id="line-185">     * @param originalMap an original map over any values that has chronological property</span>
-<span class="source-line-no">186</span><span id="line-186">     * @param epochSecondsIntFunc a reference to getter that is used to extract epoch-seconds as {@link Integer}</span>
-<span class="source-line-no">187</span><span id="line-187">     * @return the linked-map with the same keys and sequence, but with {@link LinkedTriplet} as value</span>
-<span class="source-line-no">188</span><span id="line-188">     * @param &lt;Key&gt; a type of original map's key</span>
-<span class="source-line-no">189</span><span id="line-189">     * @param &lt;Value&gt; a type of original map's value</span>
-<span class="source-line-no">190</span><span id="line-190">     */</span>
-<span class="source-line-no">191</span><span id="line-191">    public static &lt;Key, Value&gt;</span>
-<span class="source-line-no">192</span><span id="line-192">    LinkedDateTimeTripletMap&lt;Key&gt;</span>
-<span class="source-line-no">193</span><span id="line-193">    createByEpochSecondsInt(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Integer&gt; epochSecondsIntFunc) {</span>
-<span class="source-line-no">194</span><span id="line-194">        Function&lt;Value, Long&gt; epochSecondsFunc = (Value value) -&gt; epochSecondsIntFunc.apply(value).longValue();</span>
-<span class="source-line-no">195</span><span id="line-195">        return createByEpochSeconds(originalMap, epochSecondsFunc);</span>
-<span class="source-line-no">196</span><span id="line-196">    }</span>
-<span class="source-line-no">197</span><span id="line-197">}</span>
+<span class="source-line-no">128</span><span id="line-128"></span>
+<span class="source-line-no">129</span><span id="line-129">        /**</span>
+<span class="source-line-no">130</span><span id="line-130">         * @return the same as inherited {@link #dump()}, but skip displaying the values of parts,</span>
+<span class="source-line-no">131</span><span id="line-131">         *          if they repeat the same of the &lt;b&gt;previous&lt;/b&gt; item in sequence</span>
+<span class="source-line-no">132</span><span id="line-132">         */</span>
+<span class="source-line-no">133</span><span id="line-133">        public String dumpLinked() {</span>
+<span class="source-line-no">134</span><span id="line-134">            return String.format("%8s%8s%6s",</span>
+<span class="source-line-no">135</span><span id="line-135">                this.isYearAnMonthTheSameAsPrev() ? "" : this.getYearAndMonth() + "-",</span>
+<span class="source-line-no">136</span><span id="line-136">                this.isDayOfMonthAndWeekTheSameAsPrev() ? "" : this.getDayOfMonthAndWeek(),</span>
+<span class="source-line-no">137</span><span id="line-137">                this.isHoursMinutesTheSameAsPrev() ? "--:--" : this.getHoursMinutes());</span>
+<span class="source-line-no">138</span><span id="line-138">        }</span>
+<span class="source-line-no">139</span><span id="line-139"></span>
+<span class="source-line-no">140</span><span id="line-140">        /**</span>
+<span class="source-line-no">141</span><span id="line-141">         * @return the same as inherited {@link #dump()}, but skip displaying the values of parts,</span>
+<span class="source-line-no">142</span><span id="line-142">         *          if they repeat the same of the &lt;b&gt;next&lt;/b&gt; item in sequence</span>
+<span class="source-line-no">143</span><span id="line-143">         */</span>
+<span class="source-line-no">144</span><span id="line-144">        public String dumpLinkedReversed() {</span>
+<span class="source-line-no">145</span><span id="line-145">            return String.format("%8s%8s%6s",</span>
+<span class="source-line-no">146</span><span id="line-146">                this.isYearAnMonthTheSameAsNext() ? "" : this.getYearAndMonth() + "-",</span>
+<span class="source-line-no">147</span><span id="line-147">                this.isDayOfMonthAndWeekTheSameAsNext() ? "" : this.getDayOfMonthAndWeek(),</span>
+<span class="source-line-no">148</span><span id="line-148">                this.isHoursMinutesTheSameAsNext() ? "--:--" : this.getHoursMinutes());</span>
+<span class="source-line-no">149</span><span id="line-149">        }</span>
+<span class="source-line-no">150</span><span id="line-150">    }</span>
+<span class="source-line-no">151</span><span id="line-151"></span>
+<span class="source-line-no">152</span><span id="line-152">    /**</span>
+<span class="source-line-no">153</span><span id="line-153">     * Private-constructor to force using factory-methods</span>
+<span class="source-line-no">154</span><span id="line-154">     */</span>
+<span class="source-line-no">155</span><span id="line-155">    private LinkedDateTimeTripletMap() {</span>
+<span class="source-line-no">156</span><span id="line-156">    }</span>
+<span class="source-line-no">157</span><span id="line-157"></span>
+<span class="source-line-no">158</span><span id="line-158">    /**</span>
+<span class="source-line-no">159</span><span id="line-159">     * Builds a chronological sequence of {@link LinkedTriplet}s over the original sequence map,</span>
+<span class="source-line-no">160</span><span id="line-160">     * where the passed {@code instantFunc} is used to extract that date-time chronological property</span>
+<span class="source-line-no">161</span><span id="line-161">     *</span>
+<span class="source-line-no">162</span><span id="line-162">     * @param originalMap an original map over any values that has chronological property</span>
+<span class="source-line-no">163</span><span id="line-163">     * @param instantFunc a reference to getter that is used to extract that date-time chronological property</span>
+<span class="source-line-no">164</span><span id="line-164">     * @return the linked-map with the same keys and sequence, but with {@link LinkedTriplet} as value</span>
+<span class="source-line-no">165</span><span id="line-165">     * @param &lt;Key&gt; a type of original map's key</span>
+<span class="source-line-no">166</span><span id="line-166">     * @param &lt;Value&gt; a type of original map's value</span>
+<span class="source-line-no">167</span><span id="line-167">     */</span>
+<span class="source-line-no">168</span><span id="line-168">    public static &lt;Key, Value&gt;</span>
+<span class="source-line-no">169</span><span id="line-169">    LinkedDateTimeTripletMap&lt;Key&gt;</span>
+<span class="source-line-no">170</span><span id="line-170">    create(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Instant&gt; instantFunc) {</span>
+<span class="source-line-no">171</span><span id="line-171">        LinkedDateTimeTripletMap&lt;Key&gt; dttMap = new LinkedDateTimeTripletMap&lt;&gt;();</span>
+<span class="source-line-no">172</span><span id="line-172">        originalMap.forEach((Key key, Value value) -&gt; {</span>
+<span class="source-line-no">173</span><span id="line-173">            Instant instant = instantFunc.apply(value);</span>
+<span class="source-line-no">174</span><span id="line-174">            LinkedTriplet dtt = new LinkedTriplet(instant);</span>
+<span class="source-line-no">175</span><span id="line-175">            if (!dttMap.isEmpty()) {</span>
+<span class="source-line-no">176</span><span id="line-176">                dtt.linkPrev(dttMap.lastEntry().getValue());</span>
+<span class="source-line-no">177</span><span id="line-177">            }</span>
+<span class="source-line-no">178</span><span id="line-178">            dttMap.putLast(key, dtt);</span>
+<span class="source-line-no">179</span><span id="line-179">        });</span>
+<span class="source-line-no">180</span><span id="line-180">        return dttMap;</span>
+<span class="source-line-no">181</span><span id="line-181">    }</span>
+<span class="source-line-no">182</span><span id="line-182"></span>
+<span class="source-line-no">183</span><span id="line-183">    /**</span>
+<span class="source-line-no">184</span><span id="line-184">     * The same as {@link #create(SequencedMap, Function)},</span>
+<span class="source-line-no">185</span><span id="line-185">     * but the getter-function {@code epochSecondsFunc} extracts epoch-seconds as {@link Long}</span>
+<span class="source-line-no">186</span><span id="line-186">     *</span>
+<span class="source-line-no">187</span><span id="line-187">     * @param originalMap an original map over any values that has chronological property</span>
+<span class="source-line-no">188</span><span id="line-188">     * @param epochSecondsFunc a reference to getter that is used to extract epoch-seconds as {@link Long}</span>
+<span class="source-line-no">189</span><span id="line-189">     * @return the linked-map with the same keys and sequence, but with {@link LinkedTriplet} as value</span>
+<span class="source-line-no">190</span><span id="line-190">     * @param &lt;Key&gt; a type of original map's key</span>
+<span class="source-line-no">191</span><span id="line-191">     * @param &lt;Value&gt; a type of original map's value</span>
+<span class="source-line-no">192</span><span id="line-192">     */</span>
+<span class="source-line-no">193</span><span id="line-193">    public static &lt;Key, Value&gt;</span>
+<span class="source-line-no">194</span><span id="line-194">    LinkedDateTimeTripletMap&lt;Key&gt;</span>
+<span class="source-line-no">195</span><span id="line-195">    createByEpochSeconds(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Long&gt; epochSecondsFunc) {</span>
+<span class="source-line-no">196</span><span id="line-196">        Function&lt;Value, Instant&gt; instantFunc = (Value value) -&gt; {</span>
+<span class="source-line-no">197</span><span id="line-197">            Long epochSeconds = epochSecondsFunc.apply(value);</span>
+<span class="source-line-no">198</span><span id="line-198">            return Instant.ofEpochSecond(epochSeconds);</span>
+<span class="source-line-no">199</span><span id="line-199">        };</span>
+<span class="source-line-no">200</span><span id="line-200">        return create(originalMap, instantFunc);</span>
+<span class="source-line-no">201</span><span id="line-201">    }</span>
+<span class="source-line-no">202</span><span id="line-202"></span>
+<span class="source-line-no">203</span><span id="line-203">    /**</span>
+<span class="source-line-no">204</span><span id="line-204">     * The same as {@link #createByEpochSeconds(SequencedMap, Function)},</span>
+<span class="source-line-no">205</span><span id="line-205">     * but the function that extracts epoch-seconds returns {@link Integer} (not {@link Long})</span>
+<span class="source-line-no">206</span><span id="line-206">     *</span>
+<span class="source-line-no">207</span><span id="line-207">     * @param originalMap an original map over any values that has chronological property</span>
+<span class="source-line-no">208</span><span id="line-208">     * @param epochSecondsIntFunc a reference to getter that is used to extract epoch-seconds as {@link Integer}</span>
+<span class="source-line-no">209</span><span id="line-209">     * @return the linked-map with the same keys and sequence, but with {@link LinkedTriplet} as value</span>
+<span class="source-line-no">210</span><span id="line-210">     * @param &lt;Key&gt; a type of original map's key</span>
+<span class="source-line-no">211</span><span id="line-211">     * @param &lt;Value&gt; a type of original map's value</span>
+<span class="source-line-no">212</span><span id="line-212">     */</span>
+<span class="source-line-no">213</span><span id="line-213">    public static &lt;Key, Value&gt;</span>
+<span class="source-line-no">214</span><span id="line-214">    LinkedDateTimeTripletMap&lt;Key&gt;</span>
+<span class="source-line-no">215</span><span id="line-215">    createByEpochSecondsInt(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Integer&gt; epochSecondsIntFunc) {</span>
+<span class="source-line-no">216</span><span id="line-216">        Function&lt;Value, Long&gt; epochSecondsFunc = (Value value) -&gt; epochSecondsIntFunc.apply(value).longValue();</span>
+<span class="source-line-no">217</span><span id="line-217">        return createByEpochSeconds(originalMap, epochSecondsFunc);</span>
+<span class="source-line-no">218</span><span id="line-218">    }</span>
+<span class="source-line-no">219</span><span id="line-219">}</span>
 
 
 

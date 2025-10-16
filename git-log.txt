@@ -1,3 +1,4 @@
+c3dec746 playing with LinkedDateTimeTripletMap and GitLogInfo #4
 51a5a11e playing with LinkedDateTimeTripletMap and GitLogInfo #3 (fix the build)
 8e2ff457 introduce LinkedDateTimeTripletMap and GitLogInfo #2
 1cf175a4 introduce LinkedDateTimeTripletMap

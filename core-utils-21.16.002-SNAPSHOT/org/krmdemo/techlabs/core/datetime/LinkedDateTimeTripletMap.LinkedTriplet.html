@@ -78,6 +78,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#isDayOfMonthAndWeekTheSameAsNext()" tabindex="0">isDayOfMonthAndWeekTheSameAsNext()</a></li>
 <li><a href="#isHoursMinutesTheSameAsPrev()" tabindex="0">isHoursMinutesTheSameAsPrev()</a></li>
 <li><a href="#isHoursMinutesTheSameAsNext()" tabindex="0">isHoursMinutesTheSameAsNext()</a></li>
+<li><a href="#dumpLinked()" tabindex="0">dumpLinked()</a></li>
+<li><a href="#dumpLinkedReversed()" tabindex="0">dumpLinkedReversed()</a></li>
 </ol>
 </li>
 </ol>
@@ -147,6 +149,12 @@ with sequentially previous and next triplets in corresponding collection or map.
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dumpLinked()" class="member-name-link">dumpLinked</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dumpLinkedReversed()" class="member-name-link">dumpLinkedReversed</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDayOfMonthAndWeekTheSameAsNext()" class="member-name-link">isDayOfMonthAndWeekTheSameAsNext</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -340,6 +348,32 @@ with sequentially previous and next triplets in corresponding collection or map.
 <dt>Returns:</dt>
 <dd><code>true</code> if <b>the next</b> item exists and has the same property <a href="DateTimeTriplet.html#getHoursMinutes()"><code>DateTimeTriplet.getHoursMinutes()</code></a>
          (and <code>false</code> - otherwise)</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="dumpLinked()">
+<h3>dumpLinked</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-133">dumpLinked</a></span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the same as inherited <a href="DateTimeTriplet.html#dump()"><code>DateTimeTriplet.dump()</code></a>, but skip displaying the values of parts,
+         if they repeat the same of the <b>previous</b> item in sequence</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="dumpLinkedReversed()">
+<h3>dumpLinkedReversed</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-144">dumpLinkedReversed</a></span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the same as inherited <a href="DateTimeTriplet.html#dump()"><code>DateTimeTriplet.dump()</code></a>, but skip displaying the values of parts,
+         if they repeat the same of the <b>next</b> item in sequence</dd>
 </dl>
 </div>
 </section>

@@ -123,7 +123,7 @@ the properties of this class will be:
 <table>
     <tr><th>method</th><th>value</th></tr>
     <tr><td><a href="#getYearAndMonth()"><code>getYearAndMonth()</code></a></td><td><code>"2025-10"</code></td></tr>
-    <tr><td><a href="#getDayOfMonthAndWeek()"><code>getDayOfMonthAndWeek()</code></a></td><td><code>"-15 (Wed) "</code></td></tr>
+    <tr><td><a href="#getDayOfMonthAndWeek()"><code>getDayOfMonthAndWeek()</code></a></td><td><code>"15 (Wed)"</code></td></tr>
     <tr><td><a href="#getHoursMinutes()"><code>getHoursMinutes()</code></a></td><td><code>"06:03"</code></td></tr>
     <tr><td><a href="#dumpNoWeek()"><code>dumpNoWeek()</code></a></td><td><code>"2025-10-15 06:03"</code></td></tr>
     <tr><td><a href="#dump()"><code>dump()</code></a></td><td><code>"2025-10-15 (Wed) 06:03"</code></td></tr>
@@ -484,7 +484,7 @@ all it's parts for UTC time-zone and day of week corresponds to <a href="https:/
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-165">getHoursMinutes</a></span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd><b>the third part</b> of date-time triplet that contains colon(':')-separated
+<dd><b>the third part</b> of date-time triplet that contains colon<code>':'</code>-separated
          <a href="#getHours()"><code>hours</code></a> and <a href="#getMinutes()"><code>minutes</code></a></dd>
 </dl>
 </div>
@@ -494,10 +494,12 @@ all it's parts for UTC time-zone and day of week corresponds to <a href="https:/
 <section class="detail" id="dump()">
 <h3>dump</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-172">dump</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-174">dump</a></span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>concatenation of 3 parts: <a href="#getYearAndMonth()"><code>getYearAndMonth()</code></a> + <a href="#getDayOfMonthAndWeek()"><code>getDayOfMonthAndWeek()</code></a> + <a href="#getHoursMinutes()"><code>getHoursMinutes()</code></a></dd>
+<dd>concatenation of 3 parts: <pre>
+<a href="#getYearAndMonth()"><code>yearAndMonth</code></a><a href="#getDayOfMonthAndWeek()"><code>'-'dayOfMonthAndWeek</code></a><a href="#getHoursMinutes()"><code>' 'hoursMinutes</code></a>
+</pre></dd>
 </dl>
 </div>
 </section>
@@ -506,10 +508,12 @@ all it's parts for UTC time-zone and day of week corresponds to <a href="https:/
 <section class="detail" id="dumpNoWeek()">
 <h3>dumpNoWeek</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-179">dumpNoWeek</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-183">dumpNoWeek</a></span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the same as <a href="#dump()"><code>dump()</code></a>, but without day of week</dd>
+<dd>the same as <a href="#dump()"><code>dump()</code></a>, but without day of week:<pre>
+<a href="#getYearAndMonth()"><code>yearAndMonth</code></a><a href="#getDayOfMoth()"><code>'-'dayOfMonth</code></a><a href="#getHoursMinutes()"><code>' 'hoursMinutes</code></a>
+</pre></dd>
 </dl>
 </div>
 </section>
@@ -518,7 +522,7 @@ all it's parts for UTC time-zone and day of week corresponds to <a href="https:/
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-183">equals</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;thatObj)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-187">equals</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;thatObj)</span></div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
@@ -530,7 +534,7 @@ all it's parts for UTC time-zone and day of week corresponds to <a href="https:/
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-192">hashCode</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-196">hashCode</a></span>()</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
@@ -542,7 +546,7 @@ all it's parts for UTC time-zone and day of week corresponds to <a href="https:/
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-197">toString</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#line-201">toString</a></span>()</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
