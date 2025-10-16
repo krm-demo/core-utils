@@ -22,7 +22,7 @@ import java.util.function.Supplier;
  * <table>
  *     <tr><th>method</th><th>value</th></tr>
  *     <tr><td>{@link #getYearAndMonth()}</td><td>{@code "2025-10"}</td></tr>
- *     <tr><td>{@link #getDayOfMonthAndWeek()}</td><td>{@code "-15 (Wed) "}</td></tr>
+ *     <tr><td>{@link #getDayOfMonthAndWeek()}</td><td>{@code "15 (Wed)"}</td></tr>
  *     <tr><td>{@link #getHoursMinutes()}</td><td>{@code "06:03"}</td></tr>
  *     <tr><td>{@link #dumpNoWeek()}</td><td>{@code "2025-10-15 06:03"}</td></tr>
  *     <tr><td>{@link #dump()}</td><td>{@code "2025-10-15 (Wed) 06:03"}</td></tr>
@@ -141,7 +141,7 @@ public class DateTimeTriplet {
             DAY_OF_WEEK__TEXT_STYLE.get(),
             DAY_OF_WEEK__LOCALE.get()
         );
-        return String.format("-%02d (%s) ", this.getDayOfMoth(), dayOfWeekStr);
+        return String.format("%02d (%s)", this.getDayOfMoth(), dayOfWeekStr);
     }
 
     /**
@@ -159,7 +159,7 @@ public class DateTimeTriplet {
     }
 
     /**
-     * @return <b>the third part</b> of date-time triplet that contains colon(':')-separated
+     * @return <b>the third part</b> of date-time triplet that contains colon{@code ':'}-separated
      *          {@link #getHours() hours} and {@link #getMinutes() minutes}
      */
     public String getHoursMinutes() {
@@ -167,14 +167,18 @@ public class DateTimeTriplet {
     }
 
     /**
-     * @return concatenation of 3 parts: {@link #getYearAndMonth()} + {@link #getDayOfMonthAndWeek()} + {@link #getHoursMinutes()}
+     * @return concatenation of 3 parts: <pre>
+     * {@link #getYearAndMonth() yearAndMonth}{@link #getDayOfMonthAndWeek() '-'dayOfMonthAndWeek}{@link #getHoursMinutes() ' 'hoursMinutes}
+     * </pre>
      */
     public String dump() {
-        return getYearAndMonth() + getDayOfMonthAndWeek() + getHoursMinutes();
+        return String.format("%s-%s %s", getYearAndMonth(), getDayOfMonthAndWeek(), getHoursMinutes());
     }
 
     /**
-     * @return the same as {@link #dump()}, but without day of week
+     * @return the same as {@link #dump()}, but without day of week:<pre>
+     * {@link #getYearAndMonth() yearAndMonth}{@link #getDayOfMoth() '-'dayOfMonth}{@link #getHoursMinutes() ' 'hoursMinutes}
+     * </pre>
      */
     public String dumpNoWeek() {
         return String.format("%s-%02d %s", getYearAndMonth(), getDayOfMoth(), getHoursMinutes());

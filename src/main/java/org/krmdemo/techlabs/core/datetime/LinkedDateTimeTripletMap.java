@@ -125,6 +125,28 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
         public boolean isHoursMinutesTheSameAsNext() {
             return equalProps(this, next, DateTimeTriplet::getHoursMinutes);
         }
+
+        /**
+         * @return the same as inherited {@link #dump()}, but skip displaying the values of parts,
+         *          if they repeat the same of the <b>previous</b> item in sequence
+         */
+        public String dumpLinked() {
+            return String.format("%8s%8s%6s",
+                this.isYearAnMonthTheSameAsPrev() ? "" : this.getYearAndMonth() + "-",
+                this.isDayOfMonthAndWeekTheSameAsPrev() ? "" : this.getDayOfMonthAndWeek(),
+                this.isHoursMinutesTheSameAsPrev() ? "--:--" : this.getHoursMinutes());
+        }
+
+        /**
+         * @return the same as inherited {@link #dump()}, but skip displaying the values of parts,
+         *          if they repeat the same of the <b>next</b> item in sequence
+         */
+        public String dumpLinkedReversed() {
+            return String.format("%8s%8s%6s",
+                this.isYearAnMonthTheSameAsNext() ? "" : this.getYearAndMonth() + "-",
+                this.isDayOfMonthAndWeekTheSameAsNext() ? "" : this.getDayOfMonthAndWeek(),
+                this.isHoursMinutesTheSameAsNext() ? "--:--" : this.getHoursMinutes());
+        }
     }
 
     /**
