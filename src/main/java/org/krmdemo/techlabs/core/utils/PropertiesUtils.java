@@ -18,8 +18,7 @@ import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
 
 /**
- * Utility-class that simplifies the access to environment-variables, Java system-properties
- * and the content of any other properties-files at file-system or in classpath.
+ * Utility-class that simplifies the access to the content of any properties-files at file-system or in classpath.
  */
 public class PropertiesUtils {
 

@@ -7,7 +7,7 @@ import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 import java.util.Map;
 import java.util.Objects;
 
-import static org.krmdemo.techlabs.thtool.ThToolCtxUtils.propValueStr;
+import static org.krmdemo.techlabs.core.utils.CorePropsUtils.propValueStr;
 
 /**
  * This class represents a <b>{@code th-tool}</b>-helper to work with miscellaneous properties of Git-Hub.

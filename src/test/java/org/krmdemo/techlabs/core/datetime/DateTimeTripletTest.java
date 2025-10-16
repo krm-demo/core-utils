@@ -1,4 +1,4 @@
-package org.krmdemo.techlabs.thtool.helpers;
+package org.krmdemo.techlabs.core.datetime;
 
 import org.junit.jupiter.api.Test;
 

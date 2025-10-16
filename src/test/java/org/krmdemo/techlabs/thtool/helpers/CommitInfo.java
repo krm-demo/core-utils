@@ -8,15 +8,13 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import static org.krmdemo.techlabs.core.utils.CoreDateTimeUtils.systemZoneOffset;
+import static org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils.systemZoneOffset;
 
 /**
  * This class represents the information about <b>{@code git}</b>-commit.

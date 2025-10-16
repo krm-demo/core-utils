@@ -1,4 +1,4 @@
-package org.krmdemo.techlabs.thtool.helpers;
+package org.krmdemo.techlabs.core.datetime;
 
 import java.time.DayOfWeek;
 import java.time.Instant;
@@ -7,6 +7,7 @@ import java.time.Month;
 import java.time.ZoneOffset;
 import java.time.format.TextStyle;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -61,7 +62,7 @@ public class DateTimeTriplet {
      * @param localDateTimeUTC a date-time in {@link ZoneOffset#UTC} time-zone as {@link LocalDateTime}
      */
     public DateTimeTriplet(LocalDateTime localDateTimeUTC) {
-        this.localDateTimeUTC = localDateTimeUTC;
+        this.localDateTimeUTC = Objects.requireNonNull(localDateTimeUTC);
     }
 
     /**
@@ -124,7 +125,7 @@ public class DateTimeTriplet {
     }
 
     /**
-     * @return a day of week as enumartion {@link DayOfWeek
+     * @return a day of week as enumartion {@link DayOfWeek}
      */
     public DayOfWeek getDayOfWeek() {
         return localDateTimeUTC.getDayOfWeek();
@@ -162,7 +163,7 @@ public class DateTimeTriplet {
      *          {@link #getHours() hours} and {@link #getMinutes() minutes}
      */
     public String getHoursMinutes() {
-        return this.getHours() + ":" + this.getMinutes();
+        return String.format("%02d:%02d", this.getHours(), this.getMinutes());
     }
 
     /**
@@ -177,6 +178,20 @@ public class DateTimeTriplet {
      */
     public String dumpNoWeek() {
         return String.format("%s-%02d %s", getYearAndMonth(), getDayOfMoth(), getHoursMinutes());
+    }
+
+    @Override
+    public boolean equals(Object thatObj) {
+        if (thatObj instanceof DateTimeTriplet that) {
+            return this.localDateTimeUTC.equals(that.localDateTimeUTC);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return this.localDateTimeUTC.hashCode();
     }
 
     @Override

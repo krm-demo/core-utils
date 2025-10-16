@@ -1,13 +1,31 @@
-package org.krmdemo.techlabs.thtool;
+package org.krmdemo.techlabs.core.utils;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Utility-class to work with nested properties
+ * Utility-class to work with properties of any Java-object (some extension to JDK's reflection)
  */
-public class ThToolCtxUtils {
+public class CorePropsUtils {
+
+    /**
+     * Comparing on equality of the same property of two objects of the same type.
+     *
+     * @param objOne the first object
+     * @param objTwo the second object
+     * @param getterFunc the reference to getter-method
+     * @return {@code true} if the properties are equal or both are eventually {@code null} (and otherwise - {@code false})
+     * @param <T> the type of both objects
+     * @param <V> the type of properties (that is inferred once the method reference is provided)
+     */
+    public static <T, V> boolean equalProps(T objOne, T objTwo, Function<T, V> getterFunc) {
+        V propOne = objOne == null ? null : getterFunc.apply(objOne);
+        V propTwo = objTwo == null ? null : getterFunc.apply(objTwo);
+        return Objects.equals(propOne, propTwo);
+    }
 
     /**
      * The same as {@link #propValue(Object, String...)}, but cast the final value to string,
@@ -77,7 +95,7 @@ public class ThToolCtxUtils {
 
     // --------------------------------------------------------------------------------------------
 
-    private ThToolCtxUtils() {
+    private CorePropsUtils() {
         // prohibit the creation of utility-class instance
         throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());
     }

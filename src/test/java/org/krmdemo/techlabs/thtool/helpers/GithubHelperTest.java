@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.krmdemo.techlabs.thtool.ThToolCtxUtils.propValueStr;
+import static org.krmdemo.techlabs.core.utils.CorePropsUtils.propValueStr;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
 
 /**

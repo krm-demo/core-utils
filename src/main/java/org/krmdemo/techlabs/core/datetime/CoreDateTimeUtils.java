@@ -1,9 +1,8 @@
-package org.krmdemo.techlabs.core.utils;
+package org.krmdemo.techlabs.core.datetime;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.zone.ZoneRules;
 
 public class CoreDateTimeUtils {
 
