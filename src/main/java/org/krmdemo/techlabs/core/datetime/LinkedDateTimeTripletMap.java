@@ -23,7 +23,7 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
 
     @Serial
     private static final long serialVersionUID = 1234567890L;
-    
+
     /**
      * Extension to {@link DateTimeTriplet} that allows to link that triplet
      * with sequentially previous and next triplets in corresponding collection or map.
@@ -58,11 +58,11 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
             super(localDateTimeUTC);
         }
 
-        boolean isTheSameAsPrev() {
+        public boolean isTheSameAsPrev() {
             return Objects.equals(this, prev);
         }
 
-        boolean isTheSameAsNext() {
+        public boolean isTheSameAsNext() {
             return Objects.equals(this, next);
         }
 
@@ -72,7 +72,7 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
          * @return {@code true} if <b>the previous</b> item exists and has the same property {@link #getYearAndMonth}
          *          (and {@code false} - otherwise)
          */
-        boolean isYearAnMonthTheSameAsPrev() {
+        public boolean isYearAnMonthTheSameAsPrev() {
             return equalProps(this, prev, DateTimeTriplet::getYearAndMonth);
         }
 
@@ -82,7 +82,7 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
          * @return {@code true} if <b>the next</b> item exists and has the same property {@link #getYearAndMonth}
          *          (and {@code false} - otherwise)
          */
-        boolean isYearAnMonthTheSameAsNext() {
+        public boolean isYearAnMonthTheSameAsNext() {
             return equalProps(this, next, DateTimeTriplet::getYearAndMonth);
         }
 
@@ -92,7 +92,7 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
          * @return {@code true} if <b>the previous</b> item exists and has the same property {@link #getDayOfMonthAndWeek}
          *          (and {@code false} - otherwise)
          */
-        boolean isDayOfMonthAndWeekTheSameAsPrev() {
+        public boolean isDayOfMonthAndWeekTheSameAsPrev() {
             return equalProps(this, prev, DateTimeTriplet::getDayOfMonthAndWeek);
         }
 
@@ -102,7 +102,7 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
          * @return {@code true} if <b>the next</b> item exists and has the same property {@link #getDayOfMonthAndWeek}
          *          (and {@code false} - otherwise)
          */
-        boolean isDayOfMonthAndWeekTheSameAsNext() {
+        public boolean isDayOfMonthAndWeekTheSameAsNext() {
             return equalProps(this, next, DateTimeTriplet::getDayOfMonthAndWeek);
         }
 
@@ -112,7 +112,7 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
          * @return {@code true} if t<b>he previous</b> item exists and has the same property {@link #getHoursMinutes}
          *          (and {@code false} - otherwise)
          */
-        boolean isHoursMinutesTheSameAsPrev() {
+        public boolean isHoursMinutesTheSameAsPrev() {
             return equalProps(this, prev, DateTimeTriplet::getHoursMinutes);
         }
 
@@ -122,7 +122,7 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
          * @return {@code true} if <b>the next</b> item exists and has the same property {@link #getHoursMinutes}
          *          (and {@code false} - otherwise)
          */
-        boolean isHoursMinutesTheSameAsNext() {
+        public boolean isHoursMinutesTheSameAsNext() {
             return equalProps(this, next, DateTimeTriplet::getHoursMinutes);
         }
     }

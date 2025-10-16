@@ -12,7 +12,8 @@ import java.util.SequencedMap;
 
 /**
  * This class represents the 2-level hierarchy of <b>{@code git}</b>-commits
- * based on sequences of INTERNAL-releases and PUBLIC-releases.
+ * based on sequences of INTERNAL-releases and PUBLIC-releases,
+ * which are organized as <b>{@code git}</b>-tags to concrete specific commits.
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonPropertyOrder({

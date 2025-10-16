@@ -55,6 +55,12 @@ public class GitHelperTest {
     }
 
     @Test
+    void testGitLogInfo() {
+        System.out.println("--------------  GitLogInfo: ----------------");
+        System.out.println(gitLogHelper.getGitLogInfo());
+    }
+
+    @Test
     void testReleaseCatalog() {
         System.out.println("--------------  Release Catalog: ----------------");
         System.out.println(gitLogHelper.getReleaseCatalog());

@@ -190,6 +190,13 @@ public class GitHelper {
     }
 
     /**
+     * @return similar to what {@code git log --oneline} returns
+     */
+    public GitLogInfo getGitLogInfo() {
+        return new GitLogInfo(this.getGitLog());
+    }
+
+    /**
      * Build the release catalog from the <b>{@code git}</b>-log (returned by {@link #getGitLog()}.
      * Once invoked the same result will be returned subsequently in the same instance of this {@link GitHelper}.
      *
