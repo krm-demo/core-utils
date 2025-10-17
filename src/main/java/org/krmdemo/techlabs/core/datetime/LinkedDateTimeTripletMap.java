@@ -22,7 +22,7 @@ import static org.krmdemo.techlabs.core.utils.CorePropsUtils.equalProps;
 public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDateTimeTripletMap.LinkedTriplet> {
 
     @Serial
-    private static final long serialVersionUID = 1234567890L;
+    private static final long serialVersionUID = 123456789_001L;
 
     /**
      * Extension to {@link DateTimeTriplet} that allows to link that triplet

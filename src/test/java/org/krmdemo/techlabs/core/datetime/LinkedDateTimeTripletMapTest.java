@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
+import static org.krmdemo.techlabs.core.utils.CoreStringUtils.multiLine;
 
 /**
  * A unit-test for {@link LinkedDateTimeTripletMap}
@@ -163,7 +164,7 @@ public class LinkedDateTimeTripletMapTest {
     private String buildSchedule(SequencedMap<Integer, Event> eventsMap) {
         return eventsMap.values().stream()
             .map(Event::scheduleLine)
-            .collect(Collectors.joining(System.lineSeparator()));
+            .collect(multiLine());
     }
 
     private String buildScheduleLinked(SequencedMap<Integer, Event> eventsMap) {
@@ -175,7 +176,7 @@ public class LinkedDateTimeTripletMapTest {
             Event event = eventsMap.get(eventNum);
             LinkedTriplet linkedTriplet = linkedTripletsMap.get(eventNum);
             return String.format("|%3d) %s | %s", eventNum, linkedTriplet.dumpLinked(), event.subject);
-        }).collect(Collectors.joining(System.lineSeparator()));
+        }).collect(multiLine());
     }
 
     private String buildScheduleLinkedReversed(SequencedMap<Integer, Event> eventsMap) {
@@ -187,6 +188,6 @@ public class LinkedDateTimeTripletMapTest {
             Event event = eventsMap.get(eventNum);
             LinkedTriplet linkedTriplet = linkedTripletsMap.get(eventNum);
             return String.format("|%3d) %s | %s", eventNum, linkedTriplet.dumpLinkedReversed(), event.subject);
-        }).collect(Collectors.joining(System.lineSeparator()));
+        }).collect(multiLine());
     }
 }

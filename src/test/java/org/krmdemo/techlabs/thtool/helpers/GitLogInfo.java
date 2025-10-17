@@ -7,6 +7,8 @@ import org.krmdemo.techlabs.core.datetime.LinkedDateTimeTripletMap.LinkedTriplet
 import java.util.SequencedMap;
 import java.util.stream.Collectors;
 
+import static org.krmdemo.techlabs.core.utils.CoreStringUtils.multiLine;
+
 /**
  * This class represents a plain sequence of <b>{@code git}</b>-commits.
  */
@@ -35,7 +37,7 @@ public class GitLogInfo {
                 linkedTripletsMap.get(entry.getKey()).dumpLinked(),
                 entry.getKey(),
                 entry.getValue().getMessageShort()))
-            .collect(Collectors.joining(System.lineSeparator()));
+            .collect(multiLine());
     }
 
     @Override

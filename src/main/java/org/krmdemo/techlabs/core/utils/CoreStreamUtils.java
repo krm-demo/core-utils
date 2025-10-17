@@ -1,16 +1,22 @@
 package org.krmdemo.techlabs.core.utils;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.SequencedMap;
 import java.util.SequencedSet;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedListReversed;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedSet;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toListReversed;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedSet;
 
@@ -20,6 +26,52 @@ import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedSet;
  * An enumeration {@link MergeFunction} could be used to handle the entries with the same {@link Map.Entry#getKey() key}.
  */
 public class CoreStreamUtils {
+
+    // ===========================================================================================
+    //        Utility-methods to create a reverse streams from the given array or list
+    // ===========================================================================================
+
+    public static IntStream reversed(int... valuesArr) {
+        return IntStream.rangeClosed(1, valuesArr.length).map(i -> valuesArr[valuesArr.length - i]);
+    }
+    public static IntStream reversed(List<Integer> valuesList) {
+        return IntStream.rangeClosed(1, valuesList.size()).map(i -> valuesList.get(valuesList.size() - i));
+    }
+
+    public static int[] reversedArr(int... valuesArr) {
+        return reversed(valuesArr).toArray();
+    }
+    public static int[] reversedArr(java.util.stream.IntStream values) {
+        return reversedArr(values.toArray());
+    }
+
+    public static ArrayList<Integer> reversedList(int... valuesArr) {
+        return reversedList(Arrays.stream(valuesArr).boxed());
+    }
+    public static ArrayList<Integer> reversedList(IntStream values) {
+        return reversedList(values.boxed());
+    }
+    public static <T> ArrayList<T> reversedList(Stream<T> boxedStream) {
+        return boxedStream.collect(toListReversed());
+    }
+    public static <T> ArrayList<T> reversedList(List<T> valuesList) {
+        return reversedList(valuesList.stream());
+    }
+
+    public static LinkedList<Integer> reversedLinkedList(int... valuesArr) {
+        return reversedLinkedList(Arrays.stream(valuesArr).boxed());
+    }
+    public static LinkedList<Integer> reversedLinkedList(IntStream values) {
+        return reversedLinkedList(values.boxed());
+    }
+    public static <T> LinkedList<T> reversedLinkedList(Stream<T> boxedStream) {
+        return boxedStream.collect(toLinkedListReversed());
+    }
+    public static <T> LinkedList<T> reversedLinkedList(List<T> valuesList) {
+        return reversedLinkedList(valuesList.stream());
+    }
+
+    // --------------------------------------------------------------------------------------------
 
     /**
      * @param valuesArr var-args-arrays of values

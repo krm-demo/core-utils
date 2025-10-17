@@ -1,16 +1,6 @@
 package org.krmdemo.techlabs.core.utils;
 
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.NavigableMap;
-import java.util.NavigableSet;
-import java.util.Objects;
-import java.util.SequencedMap;
-import java.util.SequencedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -21,6 +11,77 @@ import java.util.stream.Collectors;
  * An enumeration {@link MergeFunction} could be used to handle the entries with the same {@link Map.Entry#getKey() key}.
  */
 public class CoreCollectors {
+
+    /**
+     * The same as {@link Collectors#toList()}, but tp collect the items in <b>reverse order</b>.
+     *
+     * @return a {@code Collector} which collects all the input elements into an {@link ArrayList} in <b>reverse order</b>.
+     * @param <T> the type of the elements in stream to collect
+     */
+    public static <T> Collector<T, ?, ArrayList<T>> toListReversed() {
+        return Collector.of(
+            ArrayList::new,
+            ArrayList::addFirst,
+            (left, right) -> {
+                right.addAll(0, left);
+                return right;
+            }
+        );
+    }
+
+    /**
+     * The same as {@link Collectors#toCollection JDK's toCollection(...)}, but produces {@link LinkedList}.
+     *
+     * @return a {@code Collector} which collects all the input elements into a {@link LinkedList}.
+     * @param <T> the type of the elements in stream to collect
+     */
+    public static <T> Collector<T, ?, List<T>> toLinkedList() {
+        return Collectors.toCollection(LinkedList::new);
+    }
+
+    /**
+     * The same as {@link #toLinkedList()}, but collecting the items in <b>reverse order</b>.
+     *
+     * @return a {@code Collector} which collects all the input elements into a {@link LinkedList} in <b>reverse order</b>.
+     * @param <T> the type of the elements in stream to collect
+     */
+    public static <T> Collector<T, ?, LinkedList<T>> toLinkedListReversed() {
+        return Collector.of(
+            LinkedList::new,
+            LinkedList::addFirst,
+            (left, right) -> {
+                right.addAll(0, left);
+                return right;
+            }
+        );
+    }
+
+    /**
+     * The same as {@link Collectors#toCollection JDK's toCollection(...)}, but produces {@link ArrayDeque}.
+     *
+     * @return a {@code Collector} which collects all the input elements into a {@link ArrayDeque}.
+     * @param <T> the type of the elements in stream to collect
+     */
+    public static <T> Collector<T, ?, Deque<T>> toDeque() {
+        return Collectors.toCollection(ArrayDeque::new);
+    }
+
+    /**
+     * The same as {@link #toDeque()}, but collecting the items in <b>reverse order</b>.
+     *
+     * @return a {@code Collector} which collects all the input elements into a {@link ArrayDeque} in <b>reverse order</b>.
+     * @param <T> the type of the elements in stream to collect
+     */
+    public static <T> Collector<T, ?, Deque<T>> toDequeReversed() {
+        return Collector.of(
+            ArrayDeque::new,
+            Deque::addFirst,
+            (left, right) -> {
+                right.addAll(left);
+                return right;
+            }
+        );
+    }
 
     /**
      * The same as {@link Collectors#toCollection JDK's toCollection(...)}, but produces {@link LinkedHashSet}.
