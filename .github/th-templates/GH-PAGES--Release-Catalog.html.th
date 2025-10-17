@@ -100,9 +100,10 @@
                 <span class="commit-ID">
                   [(${ gbh.badgeCommit(commitInfo) })]
                 </span>
-                  <span class="commit-message" th:text="${commitInfo.messageShort}">
+                <span class="commit-message" th:text="${commitInfo.messageShort}">
                   commit-message #1.1
                 </span>
+                |<code>[(${git.releaseCatalog.linkedTriplet(commitInfo)})]</code>|
               </div>
             </div>
           </div>

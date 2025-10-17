@@ -21,16 +21,14 @@ import java.util.SequencedMap;
     "current-minor-groups",
     "major-groups"
 })
-public class ReleaseCatalog {
+public class ReleaseCatalog extends GitLogInfo {
 
     private CommitGroupMajor currentMajor = new CommitGroupMajor();
     private final SequencedMap<VersionTag, CommitGroupMajor> majorGroupsMap = new LinkedHashMap<>();
 
-    public ReleaseCatalog(SequencedMap<String, CommitInfo> gitLog) {
-        if (gitLog == null || gitLog.isEmpty()) {
-            return;
-        }
-        gitLog.sequencedEntrySet().reversed().forEach(entry -> {
+    public ReleaseCatalog(SequencedMap<String, CommitInfo> commitsMap) {
+        super(commitsMap);
+        commitsMap.sequencedEntrySet().reversed().forEach(entry -> {
             currentMajor.acceptCommit(entry.getValue());
             if (!currentMajor.isFinalized()) {
                 return;

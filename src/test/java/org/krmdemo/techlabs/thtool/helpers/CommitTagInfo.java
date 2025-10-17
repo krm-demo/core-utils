@@ -110,17 +110,18 @@ public class CommitTagInfo {
         try {
             return repo.getRefDatabase().peel(tagRef);
         } catch (IOException ioEx) {
-            log.error("IOException while loading 'peelRef' for tag - " + tagRef.getName(), ioEx);
+            String errMsg = "IOException while loading 'peelRef' for tag - " + tagRef.getName();
+            log.error(errMsg, ioEx);
             return null;
         }
     }
 
     @Override
     public final boolean equals(Object thatObj) {
-        if (!(thatObj instanceof CommitTagInfo that)) {
-            return false;
-        } else {
+        if (thatObj instanceof CommitTagInfo that) {
             return Objects.equals(this.tagName, that.tagName);
+        } else {
+            return false;
         }
     }
 

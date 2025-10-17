@@ -17,7 +17,9 @@ import java.util.TreeMap;
 import static org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils.systemZoneOffset;
 
 /**
- * This class represents the information about <b>{@code git}</b>-commit.
+ * This class represents the information about <b>{@code git}</b>-commit
+ * and appears to be a light-weight wrapper (not holding the instance) over {@link RevCommit} from
+ * <a href="https://wiki.eclipse.org/JGit/User_Guide"><b>JGit</b></a>-library
  */
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -28,7 +30,20 @@ public class CommitInfo {
      */
     public static final int SHORT_COMMIT_HASH_LENGTH = 7;
 
+    /**
+     * The UTC epoch-seconds of the time when <b>{@code git}</b>-commit was made
+     *
+     * @see <a href="https://en.wikipedia.org/wiki/Unix_time">Unix (epoch) time</a>
+     */
     final int commitTime;
+
+    /**
+     * 40-character SHA-1 hash of <b>{@code git}</b>-commit.
+     *
+     * @see <a href="https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection">
+     *     7.1 Git Tools - Revision Selection
+     * </a>
+     */
     final String commitID;
 
     @JsonIgnore final String messageFull;
