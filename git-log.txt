@@ -1,3 +1,4 @@
+798fe049 add more utility-methods from another tech-labs project (without tests though !!!)
 c8ee2ba2 introduce GithubBadgeHelper.badgeCommit(commitInfo)
 c3dec746 playing with LinkedDateTimeTripletMap and GitLogInfo #4
 51a5a11e playing with LinkedDateTimeTripletMap and GitLogInfo #3 (fix the build)

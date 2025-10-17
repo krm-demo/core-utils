@@ -59,6 +59,18 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
+<li><a href="#reversed(int...)" tabindex="0">reversed(int...)</a></li>
+<li><a href="#reversed(java.util.List)" tabindex="0">reversed(List)</a></li>
+<li><a href="#reversedArr(int...)" tabindex="0">reversedArr(int...)</a></li>
+<li><a href="#reversedArr(java.util.stream.IntStream)" tabindex="0">reversedArr(IntStream)</a></li>
+<li><a href="#reversedList(int...)" tabindex="0">reversedList(int...)</a></li>
+<li><a href="#reversedList(java.util.stream.IntStream)" tabindex="0">reversedList(IntStream)</a></li>
+<li><a href="#reversedList(java.util.stream.Stream)" tabindex="0">reversedList(Stream)</a></li>
+<li><a href="#reversedList(java.util.List)" tabindex="0">reversedList(List)</a></li>
+<li><a href="#reversedLinkedList(int...)" tabindex="0">reversedLinkedList(int...)</a></li>
+<li><a href="#reversedLinkedList(java.util.stream.IntStream)" tabindex="0">reversedLinkedList(IntStream)</a></li>
+<li><a href="#reversedLinkedList(java.util.stream.Stream)" tabindex="0">reversedLinkedList(Stream)</a></li>
+<li><a href="#reversedLinkedList(java.util.List)" tabindex="0">reversedLinkedList(List)</a></li>
 <li><a href="#sortedSet(T...)" tabindex="0">sortedSet(T...)</a></li>
 <li><a href="#sortedSet(java.util.stream.Stream)" tabindex="0">sortedSet(Stream)</a></li>
 <li><a href="#linkedSet(T...)" tabindex="0">linkedSet(T...)</a></li>
@@ -89,7 +101,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-22">CoreStreamUtils</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-28">CoreStreamUtils</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Utility-class that provides methods to transform the stream or var-args-arrays of values into linked or sorted sets
 and stream or var-args-arrays of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>entries</code></a> into linked or sorted map.
@@ -164,6 +176,42 @@ with the passed <code>mergeFunction</code>.</div>
 <div class="block">The same as <a href="#keyValue(K,V)"><code>keyValue(K key, V value)</code></a>,
 but when the type of <code>key</code> is <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a> (we can call such <code>key</code> as <code>name</code> in this case).</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversed(int...)" class="member-name-link">reversed</a><wbr>(int...&nbsp;valuesArr)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversed(java.util.List)" class="member-name-link">reversed</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;valuesList)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversedArr(int...)" class="member-name-link">reversedArr</a><wbr>(int...&nbsp;valuesArr)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversedArr(java.util.stream.IntStream)" class="member-name-link">reversedArr</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a>&nbsp;values)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedList.html" title="class or interface in java.util" class="external-link">LinkedList</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversedLinkedList(int...)" class="member-name-link">reversedLinkedList</a><wbr>(int...&nbsp;valuesArr)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedList.html" title="class or interface in java.util" class="external-link">LinkedList</a><wbr>&lt;T&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversedLinkedList(java.util.List)" class="member-name-link">reversedLinkedList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;valuesList)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedList.html" title="class or interface in java.util" class="external-link">LinkedList</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversedLinkedList(java.util.stream.IntStream)" class="member-name-link">reversedLinkedList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a>&nbsp;values)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedList.html" title="class or interface in java.util" class="external-link">LinkedList</a><wbr>&lt;T&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversedLinkedList(java.util.stream.Stream)" class="member-name-link">reversedLinkedList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;T&gt;&nbsp;boxedStream)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversedList(int...)" class="member-name-link">reversedList</a><wbr>(int...&nbsp;valuesArr)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a><wbr>&lt;T&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversedList(java.util.List)" class="member-name-link">reversedList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;valuesList)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversedList(java.util.stream.IntStream)" class="member-name-link">reversedList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a>&nbsp;values)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a><wbr>&lt;T&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#reversedList(java.util.stream.Stream)" class="member-name-link">reversedList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;T&gt;&nbsp;boxedStream)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;K extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;K&gt;, V&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a><wbr>&lt;K,<wbr>V&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sortedMap(java.util.Map.Entry...)" class="member-name-link">sortedMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;...&nbsp;entriesArr)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
@@ -218,12 +266,108 @@ with the passed <code>mergeFunction</code>.</div>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="reversed(int...)">
+<h3>reversed</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-34">reversed</a></span><wbr><span class="parameters">(int...&nbsp;valuesArr)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversed(java.util.List)">
+<h3>reversed</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-37">reversed</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;valuesList)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversedArr(int...)">
+<h3>reversedArr</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-41">reversedArr</a></span><wbr><span class="parameters">(int...&nbsp;valuesArr)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversedArr(java.util.stream.IntStream)">
+<h3>reversedArr</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-44">reversedArr</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a>&nbsp;values)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversedList(int...)">
+<h3>reversedList</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-48">reversedList</a></span><wbr><span class="parameters">(int...&nbsp;valuesArr)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversedList(java.util.stream.IntStream)">
+<h3>reversedList</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-51">reversedList</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a>&nbsp;values)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversedList(java.util.stream.Stream)">
+<h3>reversedList</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-54">reversedList</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;T&gt;&nbsp;boxedStream)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversedList(java.util.List)">
+<h3>reversedList</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-57">reversedList</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;valuesList)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversedLinkedList(int...)">
+<h3>reversedLinkedList</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedList.html" title="class or interface in java.util" class="external-link">LinkedList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-61">reversedLinkedList</a></span><wbr><span class="parameters">(int...&nbsp;valuesArr)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversedLinkedList(java.util.stream.IntStream)">
+<h3>reversedLinkedList</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedList.html" title="class or interface in java.util" class="external-link">LinkedList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-64">reversedLinkedList</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a>&nbsp;values)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversedLinkedList(java.util.stream.Stream)">
+<h3>reversedLinkedList</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedList.html" title="class or interface in java.util" class="external-link">LinkedList</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-67">reversedLinkedList</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;T&gt;&nbsp;boxedStream)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="reversedLinkedList(java.util.List)">
+<h3>reversedLinkedList</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedList.html" title="class or interface in java.util" class="external-link">LinkedList</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-70">reversedLinkedList</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;valuesList)</span></div>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="sortedSet(T...)">
 <h3 id="sortedSet(java.lang.Comparable[])">sortedSet</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/SafeVarargs.html" title="class or interface in java.lang" class="external-link">@SafeVarargs</a>
 </span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableSet.html" title="class or interface in java.util" class="external-link">NavigableSet</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-29">sortedSet</a></span><wbr><span class="parameters">(T...&nbsp;valuesArr)</span></div>
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableSet.html" title="class or interface in java.util" class="external-link">NavigableSet</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-81">sortedSet</a></span><wbr><span class="parameters">(T...&nbsp;valuesArr)</span></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><span id="sortedSet(T...)-type-param-T"><code>T</code> - the type of value</span></dd>
@@ -240,7 +384,7 @@ with the passed <code>mergeFunction</code>.</div>
 <h3>sortedSet</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableSet.html" title="class or interface in java.util" class="external-link">NavigableSet</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-40">sortedSet</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;T&gt;&nbsp;values)</span></div>
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableSet.html" title="class or interface in java.util" class="external-link">NavigableSet</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-92">sortedSet</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;T&gt;&nbsp;values)</span></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><span id="sortedSet(java.util.stream.Stream)-type-param-T"><code>T</code> - the type of value</span></dd>
@@ -257,7 +401,7 @@ with the passed <code>mergeFunction</code>.</div>
 <h3 id="linkedSet(java.lang.Object[])">linkedSet</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/SafeVarargs.html" title="class or interface in java.lang" class="external-link">@SafeVarargs</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedSet.html" title="class or interface in java.util" class="external-link">SequencedSet</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-49">linkedSet</a></span><wbr><span class="parameters">(T...&nbsp;valuesArr)</span></div>
+</span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedSet.html" title="class or interface in java.util" class="external-link">SequencedSet</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-101">linkedSet</a></span><wbr><span class="parameters">(T...&nbsp;valuesArr)</span></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><span id="linkedSet(T...)-type-param-T"><code>T</code> - the type of value</span></dd>
@@ -273,7 +417,7 @@ with the passed <code>mergeFunction</code>.</div>
 <section class="detail" id="linkedSet(java.util.stream.Stream)">
 <h3>linkedSet</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedSet.html" title="class or interface in java.util" class="external-link">SequencedSet</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-60">linkedSet</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;T&gt;&nbsp;values)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedSet.html" title="class or interface in java.util" class="external-link">SequencedSet</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-112">linkedSet</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;T&gt;&nbsp;values)</span></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><span id="linkedSet(java.util.stream.Stream)-type-param-T"><code>T</code> - the type of value</span></dd>
@@ -289,7 +433,7 @@ with the passed <code>mergeFunction</code>.</div>
 <section class="detail" id="keyValue(K,V)">
 <h3 id="keyValue(java.lang.Object,java.lang.Object)">keyValue</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-73">keyValue</a></span><wbr><span class="parameters">(K&nbsp;key,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-125">keyValue</a></span><wbr><span class="parameters">(K&nbsp;key,
  V&nbsp;value)</span></div>
 <div class="block">A factory-method to produce an instance of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry</code></a> from <code>key</code> and <code>value</code>.</div>
 <dl class="notes">
@@ -309,7 +453,7 @@ with the passed <code>mergeFunction</code>.</div>
 <section class="detail" id="nameValue(java.lang.String,V)">
 <h3 id="nameValue(java.lang.String,java.lang.Object)">nameValue</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-86">nameValue</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-138">nameValue</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
  V&nbsp;value)</span></div>
 <div class="block">The same as <a href="#keyValue(K,V)"><code>keyValue(K key, V value)</code></a>,
 but when the type of <code>key</code> is <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a> (we can call such <code>key</code> as <code>name</code> in this case).</div>
@@ -331,7 +475,7 @@ but when the type of <code>key</code> is <a href="https://docs.oracle.com/en/jav
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/SafeVarargs.html" title="class or interface in java.lang" class="external-link">@SafeVarargs</a>
 </span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;K&gt;, V&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-103">sortedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;...&nbsp;entriesArr)</span></div>
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-155">sortedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;...&nbsp;entriesArr)</span></div>
 <div class="block">Transform the var-args-arrays of entries into the sorted map,
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
 with the default merge-function <a href="MergeFunction.html#OVERWRITE"><code>MergeFunction.OVERWRITE</code></a>.
@@ -356,7 +500,7 @@ where the filter is based on using <a href="#entryIsValid(java.util.Map.Entry)">
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/SafeVarargs.html" title="class or interface in java.lang" class="external-link">@SafeVarargs</a>
 </span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;K&gt;, V&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-124">sortedMap</a></span><wbr><span class="parameters">(<a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction,
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-176">sortedMap</a></span><wbr><span class="parameters">(<a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;...&nbsp;entriesArr)</span></div>
 <div class="block">Transform the var-args-arrays of entries into the sorted map,
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
@@ -382,7 +526,7 @@ where the filter is based on using <a href="#entryIsValid(java.util.Map.Entry)">
 <h3>sortedMap</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;K&gt;, V&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-144">sortedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;&gt;&nbsp;entries)</span></div>
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-196">sortedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;&gt;&nbsp;entries)</span></div>
 <div class="block">Transform the var-args-arrays of entries into the sorted map,
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
 with the default merge-function <a href="MergeFunction.html#OVERWRITE"><code>MergeFunction.OVERWRITE</code></a>.
@@ -406,7 +550,7 @@ where the filter is based on using <a href="#entryIsValid(java.util.Map.Entry)">
 <h3>sortedMap</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;K&gt;, V&gt;</span>
-<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-163">sortedMap</a></span><wbr><span class="parameters">(<a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction,
+<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-215">sortedMap</a></span><wbr><span class="parameters">(<a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;&gt;&nbsp;entries)</span></div>
 <div class="block">Transform the var-args-arrays of entries into the sorted map,
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
@@ -432,7 +576,7 @@ where the filter is based on using <a href="#entryIsValid(java.util.Map.Entry)">
 <h3>linkedMap</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/SafeVarargs.html" title="class or interface in java.lang" class="external-link">@SafeVarargs</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-181">linkedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;...&nbsp;entriesArr)</span></div>
+</span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-233">linkedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;...&nbsp;entriesArr)</span></div>
 <div class="block">Transform the var-args-arrays of entries into the linked map,
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
 with the default merge-function <a href="MergeFunction.html#OVERWRITE"><code>MergeFunction.OVERWRITE</code></a>.
@@ -456,7 +600,7 @@ where the filter is based on using <a href="#entryIsValid(java.util.Map.Entry)">
 <h3>linkedMap</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/SafeVarargs.html" title="class or interface in java.lang" class="external-link">@SafeVarargs</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-202">linkedMap</a></span><wbr><span class="parameters">(<a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction,
+</span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-254">linkedMap</a></span><wbr><span class="parameters">(<a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;...&nbsp;entriesArr)</span></div>
 <div class="block">Transform the var-args-arrays of entries into the linked map,
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
@@ -481,7 +625,7 @@ where the filter is based on using <a href="#entryIsValid(java.util.Map.Entry)">
 <section class="detail" id="linkedMap(java.util.stream.Stream)">
 <h3>linkedMap</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-222">linkedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;&gt;&nbsp;entries)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-274">linkedMap</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;&gt;&nbsp;entries)</span></div>
 <div class="block">Transform the stream of entries into the linked map,
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
 with the default merge-function <a href="MergeFunction.html#OVERWRITE"><code>MergeFunction.OVERWRITE</code></a>.
@@ -504,7 +648,7 @@ where the filter is based on using <a href="#entryIsValid(java.util.Map.Entry)">
 <section class="detail" id="linkedMap(org.krmdemo.techlabs.core.utils.MergeFunction,java.util.stream.Stream)">
 <h3>linkedMap</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-241">linkedMap</a></span><wbr><span class="parameters">(<a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;K,<wbr>V&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html" title="class or interface in java.util" class="external-link">SequencedMap</a>&lt;K,<wbr>V&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-293">linkedMap</a></span><wbr><span class="parameters">(<a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a>&nbsp;mergeFunction,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;K,<wbr>V&gt;&gt;&nbsp;entries)</span></div>
 <div class="block">Transform the var-args-arrays of entries into the linked map,
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
@@ -529,7 +673,7 @@ where the filter is based on using <a href="#entryIsValid(java.util.Map.Entry)">
 <section class="detail" id="entryIsValid(java.util.Map.Entry)">
 <h3>entryIsValid</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-253">entryIsValid</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;?,<wbr>?&gt;&nbsp;entry)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#line-305">entryIsValid</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;?,<wbr>?&gt;&nbsp;entry)</span></div>
 <div class="block">In order to avoid <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link"><code>NullPointerException</code></a> in JDK's collectors
 all entries that are <code>null</code> or whose key or value is <code>null</code> should be filtered out.</div>
 <dl class="notes">

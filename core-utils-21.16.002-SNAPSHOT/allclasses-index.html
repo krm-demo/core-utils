@@ -80,9 +80,20 @@ into <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/
 <div class="block">Utility-class that provides methods to transform the stream or var-args-arrays of values into linked or sorted sets
 and stream or var-args-arrays of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>entries</code></a> into linked or sorted map.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/CoreUtilsMain.html" title="class in org.krmdemo.techlabs.core">CoreUtilsMain</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/utils/CoreStringUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStringUtils</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Utility-class to work with strings, words and characters
+(some extension to JDK and <code>StringUtils</code>)</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/CoreUtilsMain.html" title="class in org.krmdemo.techlabs.core">CoreUtilsMain</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">TODO: provide the comprehensive Java-Doc !!!</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/utils/CountingUtils.html" title="class in org.krmdemo.techlabs.core.utils">CountingUtils</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Utility-Class to build a counting-map from the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link"><code>Stream</code></a> of any objects
+that have properly implemented <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link"><code>Object.equals(Object)</code></a> and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link"><code>Object.hashCode()</code></a>
+(and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html#compareTo(T)" title="class or interface in java.lang" class="external-link"><code>for sorted counting-maps</code></a>).</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
@@ -203,58 +214,62 @@ where the serializing of an object is provided with <a href="org/krmdemo/techlab
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Utility-class that simplifies the access to the content of any properties-files at file-system or in classpath.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/render/RenderSpec.html" title="class in org.krmdemo.techlabs.core.dump.render">RenderSpec</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab3"><a href="org/krmdemo/techlabs/core/dump/render/RenderSpec.Feature.html" title="enum class in org.krmdemo.techlabs.core.dump.render">RenderSpec.Feature</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/StringBuilderOut.html" title="class in org.krmdemo.techlabs.core.dump">StringBuilderOut</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Helper-wrapper over standard <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Random.html" title="class or interface in java.util" class="external-link"><code>Random</code></a> to generate random arrays and collections</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/render/RenderSpec.html" title="class in org.krmdemo.techlabs.core.dump.render">RenderSpec</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="org/krmdemo/techlabs/core/dump/render/RenderSpec.Feature.html" title="enum class in org.krmdemo.techlabs.core.dump.render">RenderSpec.Feature</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/StringBuilderOut.html" title="class in org.krmdemo.techlabs.core.dump">StringBuilderOut</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">A <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/PrintWriter.html" title="class or interface in java.io" class="external-link"><code>PrintWriter</code></a> over <code>StringBuilderWriter</code> that could simplify
 the substitution of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/System.html#out" title="class or interface in java.lang" class="external-link"><code>System.out</code></a> and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/System.html#err" title="class or interface in java.lang" class="external-link"><code>System.err</code></a> in unit-tests,
 and it's also used by other classes of the current package.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/utils/SysDumpUtils.html" title="class in org.krmdemo.techlabs.core.utils">SysDumpUtils</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/utils/SysDumpUtils.html" title="class in org.krmdemo.techlabs.core.utils">SysDumpUtils</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">TODO: provide the comprehensive Java-Doc and reuse <a href="org/krmdemo/techlabs/core/dump/ObjectPrinter.html" title="interface in org.krmdemo.techlabs.core.dump"><code>ObjectPrinter</code></a> !!!</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/classinfo/SystemInfo.html" title="class in org.krmdemo.techlabs.core.classinfo">SystemInfo</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/classinfo/SystemInfo.html" title="class in org.krmdemo.techlabs.core.classinfo">SystemInfo</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">A wrapper over <code>SystemUtils</code>,
 that allows to access important system properties via singleton instance
 
 TODO: complete it</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/ToFileUtils.html" title="class in org.krmdemo.techlabs.core.dump">ToFileUtils</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/ToFileUtils.html" title="class in org.krmdemo.techlabs.core.dump">ToFileUtils</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Utility-class that is a static facade of <a href="org/krmdemo/techlabs/core/dump/ObjectPrinter.ToFile.html" title="class in org.krmdemo.techlabs.core.dump"><code>ObjectPrinter.ToFile</code></a></div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="org/krmdemo/techlabs/core/dump/TreeDumper.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="org/krmdemo/techlabs/core/dump/TreeDumper.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
 <div class="block">This interface represents the ability to dump the data of JSON-like and YAML-like
 hierarchical structure in multicolor TEXT-base, HTML-base and SVG-base formats.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="org/krmdemo/techlabs/core/dump/TreeDumper.MappingsNode.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.MappingsNode</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="org/krmdemo/techlabs/core/dump/TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.Node</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="org/krmdemo/techlabs/core/dump/TreeDumper.MappingsNode.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.MappingsNode</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="org/krmdemo/techlabs/core/dump/TreeDumper.ScalarNode.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.ScalarNode</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="org/krmdemo/techlabs/core/dump/TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.Node</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="org/krmdemo/techlabs/core/dump/TreeDumper.SequenceNode.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.SequenceNode</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="org/krmdemo/techlabs/core/dump/TreeDumper.ScalarNode.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.ScalarNode</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/yaml/YamlHtmlDumper.html" title="class in org.krmdemo.techlabs.core.dump.yaml">YamlHtmlDumper</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="org/krmdemo/techlabs/core/dump/TreeDumper.SequenceNode.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.SequenceNode</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/yaml/YamlHtmlDumper.html" title="class in org.krmdemo.techlabs.core.dump.yaml">YamlHtmlDumper</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Implementation of <a href="org/krmdemo/techlabs/core/dump/TreeDumper.html" title="interface in org.krmdemo.techlabs.core.dump"><code>TreeDumper</code></a> that dumps into the passed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link"><code>PrintStream</code></a>
 the tree of a <a href="org/krmdemo/techlabs/core/dump/render/Highlight.Structure.html#YAML"><code>YAML</code></a> logical structure
 in <a href="org/krmdemo/techlabs/core/dump/render/Highlight.Target.html#HTML_STYLE"><code>HTML</code></a> target format (HTML-CSS is coming soon).</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/yaml/YamlSvgDumper.html" title="class in org.krmdemo.techlabs.core.dump.yaml">YamlSvgDumper</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/yaml/YamlSvgDumper.html" title="class in org.krmdemo.techlabs.core.dump.yaml">YamlSvgDumper</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Implementation of <a href="org/krmdemo/techlabs/core/dump/TreeDumper.html" title="interface in org.krmdemo.techlabs.core.dump"><code>TreeDumper</code></a> that dumps into the passed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link"><code>PrintStream</code></a>
 the tree of a <a href="org/krmdemo/techlabs/core/dump/render/Highlight.Structure.html#YAML"><code>YAML</code></a> logical structure
 in <a href="org/krmdemo/techlabs/core/dump/render/Highlight.Target.html#SVG_ATTRS"><code>SVG-Attrs</code></a> target format (SVG-Class is coming soon).</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/yaml/YamlTxtDumper.html" title="class in org.krmdemo.techlabs.core.dump.yaml">YamlTxtDumper</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org/krmdemo/techlabs/core/dump/yaml/YamlTxtDumper.html" title="class in org.krmdemo.techlabs.core.dump.yaml">YamlTxtDumper</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Implementation of <a href="org/krmdemo/techlabs/core/dump/TreeDumper.html" title="interface in org.krmdemo.techlabs.core.dump"><code>TreeDumper</code></a> that dumps into the passed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link"><code>PrintStream</code></a>
 the tree of a <a href="org/krmdemo/techlabs/core/dump/render/Highlight.Structure.html#YAML"><code>YAML</code></a> logical structure
 in <a href="org/krmdemo/techlabs/core/dump/render/Highlight.Target.html#TXT_ANSI"><code>ANSI-Txt</code></a> target format.</div>
