@@ -1,14 +1,19 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.PersonIdent;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
+import org.mockito.Mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
+import static org.mockito.Mockito.when;
 
 /**
  * A unit-test for <b>{@code th-tool}</b>-helper {@link GithubBadgeHelper}.
@@ -156,6 +161,23 @@ public class GithubBadgeHelperTest {
     }
 
     @Test
+    void testBadgeCommit() {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        CommitInfo commitInfo = new CommitInfo(mockRevCommit("32b8955806a5e53e5f4065f738555d1aefeacf0b"));
+        assertThat(gbh.badgeCommit(commitInfo)).isEqualTo("""
+            <a href="https://github.com/krm-demo/core-utils/commit/32b8955806a5e53e5f4065f738555d1aefeacf0b">
+              <svg aria-hidden="true" focusable="false"
+                   viewBox="0 0 16 16" width="16" height="16"
+                   stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
+                <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
+              </svg>
+              <code>32b8955</code>
+            </a>""");
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    @Test
     void testCommitGroup_toString() {
         System.out.println("---- ---- minorGroup(...).toString() test: ---- ----");
         System.out.println(minorGroup("12.34"));
@@ -181,5 +203,33 @@ public class GithubBadgeHelperTest {
                 return VersionTag.parse(versionStr);
             }
         };
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    @SuppressWarnings("SameParameterValue")
+    private static RevCommit mockRevCommit(String commitID) {
+        return mockRevCommit(commitID,
+            String.format("some test-message for mock-commid #%s",  commitID.substring(0, 7)));
+    }
+
+    private static RevCommit mockRevCommit(String commitID, String message) {
+        ObjectId mockObjectId = Mockito.mock(ObjectId.class);
+        when(mockObjectId.getName()).thenReturn(commitID);
+
+        PersonIdent authorIdent = Mockito.mock(PersonIdent.class);
+        when(authorIdent.getName()).thenReturn("test-author");
+        when(authorIdent.getEmailAddress()).thenReturn("test.author@junit5.com");
+        PersonIdent commiterIdent = Mockito.mock(PersonIdent.class);
+        when(commiterIdent.getName()).thenReturn("test-commiter");
+        when(commiterIdent.getEmailAddress()).thenReturn("test.commiter@junit5.com");
+
+        RevCommit mockRevCommit = Mockito.mock(RevCommit.class);
+        when(mockRevCommit.getAuthorIdent()).thenReturn(authorIdent);
+        when(mockRevCommit.getCommitterIdent()).thenReturn(commiterIdent);
+        when(mockRevCommit.getShortMessage()).thenReturn(message);
+        when(mockRevCommit.getFullMessage()).thenReturn(message);
+        when(mockRevCommit.getId()).thenReturn(mockObjectId);
+        return mockRevCommit;
     }
 }

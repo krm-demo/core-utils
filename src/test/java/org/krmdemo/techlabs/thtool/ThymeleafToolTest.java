@@ -72,8 +72,8 @@ public class ThymeleafToolTest {
             "process",
             ".github/th-templates/ROOT-Readme.md.th"
         );
-        stdErr.println(sbErr);
-        stdErr.println(sbOut);
+//        stdErr.println(sbErr);
+//        stdErr.println(sbOut);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
@@ -103,7 +103,8 @@ public class ThymeleafToolTest {
         assertThat(sbOut).isEmpty();
 
         assertThat(loadFileContent(".github/th-test-release-catalog/index.html"))
-            .contains("core-utils (Release Catalog)");
+            .contains("core-utils (Release Catalog)")
+            .contains("https://github.com/krm-demo/core-utils/commit/");
     }
 
     // --------------------------------------------------------------------------------------------

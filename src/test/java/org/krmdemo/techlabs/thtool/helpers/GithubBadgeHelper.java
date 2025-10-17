@@ -539,6 +539,20 @@ public class GithubBadgeHelper {
 
     // --------------------------------------------------------------------------------------------
 
+    public String badgeCommit(CommitInfo commitInfo) {
+        return String.format("""
+            <a href="%s">
+              <svg aria-hidden="true" focusable="false"
+                   viewBox="0 0 16 16" width="16" height="16"
+                   stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
+                <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
+              </svg>
+              <code>%s</code>
+            </a>""",
+            githubCommitUrl(commitInfo),
+            commitInfo.getShortCommitHash());
+    }
+
     /**
      * This method is invoked from <b>{@code th-tool}</b>-template like "Release Catalog" via expression
      * <pre>{@code <a th:href="${gbh.githubCommitUrl(commitInfo)}"></a>}</pre>
