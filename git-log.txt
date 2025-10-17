@@ -1,3 +1,4 @@
+6f66bfb8 add some useful bash-scripts to execute particular test with maven
 e9786f7d start working on integrating date-time-triplet to 'Release Catalog' page #1
 798fe049 add more utility-methods from another tech-labs project (without tests though !!!)
 c8ee2ba2 introduce GithubBadgeHelper.badgeCommit(commitInfo)
