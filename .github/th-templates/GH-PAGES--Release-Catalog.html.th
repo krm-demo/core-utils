@@ -10,45 +10,126 @@
   <meta name="generator" content="th-tool">
   <link rel="stylesheet" type="text/css" href="resource-files/stylesheet.css" title="Style">
   <link rel="stylesheet" type="text/css" href="resource-files/release-catalog.css" title="Style">
-
-  <!-- TODO: think about not using Bootstrap at all in order to be consistent with the rest of Java-Doc -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </head>
 
 <body class="package-index-page">
-<script type="text/javascript"></script>
-<noscript>
-  <div>JavaScript is disabled on your browser.</div>
-</noscript>
+
 <header role="banner">
   <nav role="navigation">
     <!-- ========= START OF TOP NAVBAR ======= -->
     <div class="top-nav" id="navbar-top">
       <div class="nav-content">
-        <h2>[[${ mh.projectArtifact }]] <small>(Release Catalog)</small>
-          <a href="https://github.com/krm-demo/core-utils/"
-             style="float: right; margin-right: 10px;">
+        <h1 class="title">
+          <span>[[${ mh.projectArtifact }]]</span>
+          (<small>Release Catalog</small>)
+          <a href="https://github.com/krm-demo/core-utils/">
             <img alt="an image to return back to the project-site"
                  src="resource-files/git-hub-logo--white-inv.svg"
                  width="32px" height="32px" />
           </a>
-        </h2>
+        </h1>
       </div>
     </div>
     <!-- ========= END OF TOP NAVBAR ========= -->
   </nav>
 </header>
 
-<!-- Body (Content) -->
-<div class="container mt-3">
+<div class="main-grid">
+  <main role="main">
+
+    <div class="header">
+      <h2 class="title">Current Snapshot Version:</h2>
+    </div>
+
     <div class="row">
-    <div class="col-sm-10">
-        <div class="row mb-4">
-        <h3>Recently Released Versions</h3>
-        TODO: display all recent commits and latest INTREANL / PUBLIC Release
+      <div class="major-grid-container">
+        <div class="major-grid-title-row-over">
+          <div class="col-1">2025-10</div>
+          <div class="col-2">-12 Sun</div>
+          <div class="col-3">20:14</div>
+          <div class="col-4"> core-utils-21.09.002-SNAPSHOT</div>
+          <div class="col-5">--- unreleased --- commits</div>
         </div>
+      </div>
+      <details open>
+        <summary>
+          <div class="major-grid-title-row">
+            <div class="col-1">????-??</div>
+            <div class="col-2">-?? ???</div>
+            <div class="col-3">??:??</div>
+            <div class="col-4"> core-utils-??.??.???-SNAPSHOT</div>
+            <div class="col-5">--- group-info-??? ---</div>
+          </div>
+        </summary>
+        <div class="major-grid-commit-row">
+          <div class="col-1 vertical-start">
+            <hr class="vertical-3"/>
+          </div>
+          <div class="col-2 vertical-start">
+            <hr class="vertical-1"/>
+          </div>
+          <div class="col-3">C1.1.3</div>
+          <div class="col-4">
+            <a>
+              <svg aria-hidden="true" focusable="false"
+                   viewBox="0 0 16 16" width="16" height="16"
+                   stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
+                <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
+              </svg>
+              <code>1111-01</code>
+            </a>
+          </div>
+          <div class="col-5">C1.1.5</div>
+          <div class="col-6">...</div>
+        </div>
+        <div class="major-grid-commit-row">
+          <div class="col-1">
+            <hr class="vertical-3"/>
+          </div>
+          <div class="col-2">C1.2.2</div>
+          <div class="col-3">C1.2.3</div>
+          <div class="col-4">
+            <a>
+              <svg aria-hidden="true" focusable="false"
+                   viewBox="0 0 16 16" width="16" height="16"
+                   stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
+                <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
+              </svg>
+              <code>1111-02</code>
+            </a>
+          </div>
+          <div class="col-5">C1.2.5</div>
+          <div class="col-6">...</div>
+        </div>
+        <div class="major-grid-commit-row">
+          <div class="col-1">C1.3.1</div>
+          <div class="col-2">C1.3.2</div>
+          <div class="col-3">C1.3.3</div>
+          <div class="col-4-last">
+            <a>
+              <svg aria-hidden="true" focusable="false"
+                   viewBox="0 0 16 16" width="16" height="16"
+                   stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
+                <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
+              </svg>
+              <code>1111-03</code>
+            </a>
+          </div>
+          <div class="col-5-last">C1.3.5</div>
+          <div class="col-6">...</div>
+        </div>
+      </details>
+    </div>
+
+    <div class="header">
+      <h2 class="title">Recent Internal Release:</h2>
+    </div>
+    TODO: to be displayed
+
+    <div class="header">
+      <h1 class="title">Public Releases:</h1>
+    </div>
+    TODO: to be corrected
 
         <div class="row">
         <h3>List of All Released Versions</h3>
@@ -163,16 +244,8 @@
           </div>
 
         </div>
-    </div>
 
-    <div class="col-sm-2">
-        <h4>Table Of Contents</h4>
-        <ul>
-            <li>Recently Released</li>
-            <li>All Released Versions</li>
-        </ul>
-    </div>
-    </div>
+  </main>
 </div>
 
 <!-- Footer -->
