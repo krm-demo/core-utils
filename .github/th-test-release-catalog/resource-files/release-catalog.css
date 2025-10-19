@@ -7,6 +7,9 @@
     --release-date-time-color: #4D7A97AA;
 }
 
+header {
+    z-index: 5;
+}
 .top-nav {
     height: 44px;
 }
@@ -16,11 +19,9 @@
     color: var(--navbar-text-color);
     font-size: 2em;
 }
-
 .title span {
     font-family: monospace; font-weight: 600;
 }
-
 .title a {
     float: right;
     margin-right: 10px;
@@ -68,10 +69,10 @@ h2 {
 
 .major-grid-title-row-over {
     top: 0;
-    right: 25px;
+    right: 35px;
     display: grid;
     background: white;
-    width: calc(100% - 25px);
+    width: calc(100% - 35px);
     grid-template-columns: 53px 53px 35px 250px auto;
     position: absolute;
     z-index: 3;
@@ -82,7 +83,7 @@ h2 {
 }
 .major-grid-commit-row {
     display: grid;
-    grid-template-columns: 53px 53px 35px 120px auto 25px;
+    grid-template-columns: 53px 53px 35px 90px auto 35px;
 }
 
 .major-grid-title-row-over .col-4 {
@@ -189,10 +190,10 @@ h2 {
 
 .minor-grid-title-row-over {
     top: 0;
-    right: 25px;
+    right: 35px;
     display: grid;
     background: white;
-    width: calc(100% - 25px);
+    width: calc(100% - 35px);
     grid-template-columns: 53px 53px 35px 250px auto;
     position: absolute;
     z-index: 3;
@@ -203,7 +204,7 @@ h2 {
 }
 .minor-grid-commit-row {
     display: grid;
-    grid-template-columns: 53px 53px 35px 120px auto 25px;
+    grid-template-columns: 53px 53px 35px 90px auto 35px;
 }
 
 .minor-grid-title-row-over .col-4 {
