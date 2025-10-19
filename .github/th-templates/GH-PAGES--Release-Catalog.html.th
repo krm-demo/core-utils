@@ -46,10 +46,10 @@
       <div class="major-grid-container">
         <div class="major-grid-title-row-over">
           <div class="col-1">
-            [[${ git.releaseCatalog.snapshotYearAndMonth }]]
+            [[${ git.releaseCatalog.snapshotYearAndMonth }]]-
           </div>
           <div class="col-2">
-            -[[${ git.releaseCatalog.snapshotDayOfMonthAndWeek }]]
+            [[${ git.releaseCatalog.snapshotDayOfMonthAndWeek }]]
           </div>
           <div class="col-3">
             [[${ git.releaseCatalog.snapshotHoursMinutes }]]
@@ -66,10 +66,10 @@
           <summary>
             <div class="major-grid-title-row">
               <div class="col-1">
-                [[${ git.releaseCatalog.snapshotYearAndMonth }]]
+                [[${ git.releaseCatalog.snapshotYearAndMonth }]]-
               </div>
               <div class="col-2">
-                -[[${ git.releaseCatalog.snapshotDayOfMonthAndWeek }]]
+                [[${ git.releaseCatalog.snapshotDayOfMonthAndWeek }]]
               </div>
               <div class="col-3">
                 [[${ git.releaseCatalog.snapshotHoursMinutes }]]
@@ -86,13 +86,13 @@
 
           <div class="major-grid-commit-row" th:each="commitInfo: ${git.releaseCatalog.snapshotGroup.commits}">
             <div class="col-1">
-              [[${ git.releaseCatalog.linkedTriplet(commitInfo).yearAndMonth }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedYearAndMonth }]]
             </div>
             <div class="col-2">
-              -[[${ git.releaseCatalog.linkedTriplet(commitInfo).dayOfMonthAndWeek }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedDayOfMonthAndWeek }]]
             </div>
             <div class="col-3">
-              [[${ git.releaseCatalog.linkedTriplet(commitInfo).hoursMinutes }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedHoursMinutes }]]
             </div>
             <div class="col-4">
               [(${ gbh.badgeCommit(commitInfo) })]
@@ -110,10 +110,10 @@
       <div class="minor-grid-container" th:each="minorGroup: ${git.releaseCatalog.minorGroups}">
         <div class="minor-grid-title-row-over">
           <div class="col-1">
-            [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]
+            [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]-
           </div>
           <div class="col-2">
-            -[[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
+            [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
           </div>
           <div class="col-3">
             [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).hoursMinutes }]]
@@ -130,10 +130,10 @@
           <summary>
             <div class="minor-grid-title-row">
               <div class="col-1">
-                [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]
+                [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]-
               </div>
               <div class="col-2">
-                -[[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
+                [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
               </div>
               <div class="col-3">
                 [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).hoursMinutes }]]
@@ -150,13 +150,13 @@
 
           <div class="minor-grid-commit-row" th:each="commitInfo: ${minorGroup.commits}">
             <div class="col-1">
-              [[${ git.releaseCatalog.linkedTriplet(commitInfo).yearAndMonth }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedYearAndMonth }]]
             </div>
             <div class="col-2">
-              -[[${ git.releaseCatalog.linkedTriplet(commitInfo).dayOfMonthAndWeek }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedDayOfMonthAndWeek }]]
             </div>
             <div class="col-3">
-              [[${ git.releaseCatalog.linkedTriplet(commitInfo).hoursMinutes }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedHoursMinutes }]]
             </div>
             <div class="col-4">
               [(${ gbh.badgeCommit(commitInfo) })]
@@ -182,10 +182,10 @@
       <div class="major-grid-container">
         <div class="major-grid-title-row-over">
           <div class="col-1">
-            [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).yearAndMonth }]]
+            [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).yearAndMonth }]]-
           </div>
           <div class="col-2">
-            -[[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).dayOfMonthAndWeek }]]
+            [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).dayOfMonthAndWeek }]]
           </div>
           <div class="col-3">
             [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).hoursMinutes }]]
@@ -202,10 +202,10 @@
           <summary>
             <div class="major-grid-title-row">
               <div class="col-1">
-                [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).yearAndMonth }]]
+                [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).yearAndMonth }]]-
               </div>
               <div class="col-2">
-                -[[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).dayOfMonthAndWeek }]]
+                [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).dayOfMonthAndWeek }]]
               </div>
               <div class="col-3">
                 [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).hoursMinutes }]]
@@ -222,13 +222,13 @@
 
           <div class="major-grid-commit-row" th:each="commitInfo: ${majorGroup.currentMinor().commits}">
             <div class="col-1">
-              [[${ git.releaseCatalog.linkedTriplet(commitInfo).yearAndMonth }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedYearAndMonth }]]
             </div>
             <div class="col-2">
-              -[[${ git.releaseCatalog.linkedTriplet(commitInfo).dayOfMonthAndWeek }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedDayOfMonthAndWeek }]]
             </div>
             <div class="col-3">
-              [[${ git.releaseCatalog.linkedTriplet(commitInfo).hoursMinutes }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedHoursMinutes }]]
             </div>
             <div class="col-4">
               [(${ gbh.badgeCommit(commitInfo) })]
@@ -246,10 +246,10 @@
       <div class="minor-grid-container" th:each="minorGroup: ${majorGroup.minorGroups}">
         <div class="minor-grid-title-row-over">
           <div class="col-1">
-            [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]
+            [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]-
           </div>
           <div class="col-2">
-            -[[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
+            [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
           </div>
           <div class="col-3">
             [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).hoursMinutes }]]
@@ -266,10 +266,10 @@
           <summary>
             <div class="minor-grid-title-row">
               <div class="col-1">
-                [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]
+                [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]-
               </div>
               <div class="col-2">
-                -[[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
+                [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
               </div>
               <div class="col-3">
                 [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).hoursMinutes }]]
@@ -286,13 +286,13 @@
 
           <div class="minor-grid-commit-row" th:each="commitInfo: ${minorGroup.commits}">
             <div class="col-1">
-              [[${ git.releaseCatalog.linkedTriplet(commitInfo).yearAndMonth }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedYearAndMonth }]]
             </div>
             <div class="col-2">
-              -[[${ git.releaseCatalog.linkedTriplet(commitInfo).dayOfMonthAndWeek }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedDayOfMonthAndWeek }]]
             </div>
             <div class="col-3">
-              [[${ git.releaseCatalog.linkedTriplet(commitInfo).hoursMinutes }]]
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedHoursMinutes }]]
             </div>
             <div class="col-4">
               [(${ gbh.badgeCommit(commitInfo) })]

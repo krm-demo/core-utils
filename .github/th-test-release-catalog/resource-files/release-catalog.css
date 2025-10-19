@@ -3,6 +3,8 @@
  */
 :root {
     --major-group-border: 3px dashed green;
+    --release-title-background-color: #4D7A9733;
+    --release-date-time-color: #4D7A97AA;
 }
 
 .top-nav {
@@ -39,6 +41,25 @@ h2 {
     margin-bottom: 2em;
 }
 
+.col-1 {
+    text-align: right;
+    color: var(--release-date-time-color);
+    font-family: var(--body-font-family);
+    font-size: 0.95em;
+}
+.col-2 {
+    text-align: left;
+    color: var(--release-date-time-color);
+    font-size: 0.95em;
+}
+.col-3 {
+    text-align: left;
+    color: var(--release-date-time-color);
+    font-family: monospace;
+    font-size: 0.7em;
+    padding-top: 0.3em;
+}
+
 /* ------------------------ ------------------------ Major Grid ------------------------ ------------------------ */
 
 .major-grid-container {
@@ -51,24 +72,24 @@ h2 {
     display: grid;
     background: white;
     width: calc(100% - 25px);
-    grid-template-columns: 50px 65px 35px 250px auto;
+    grid-template-columns: 53px 53px 35px 250px auto;
     position: absolute;
     z-index: 3;
 }
 .major-grid-title-row {
     display: grid;
-    grid-template-columns: 50px 65px 35px 250px auto;
+    grid-template-columns: 53px 53px 35px 250px auto;
 }
 .major-grid-commit-row {
     display: grid;
-    grid-template-columns: 50px 65px 35px 120px auto 25px;
+    grid-template-columns: 53px 53px 35px 120px auto 25px;
 }
 
 .major-grid-title-row-over .col-4 {
     border-top: 2px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
     border-top-left-radius: 10px;
-    background-color: #4D7A9733; /*var(--navbar-background-color);*/
+    background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
     padding-left: 10px;
     padding-top: 7px;
     padding-bottom: 3px;
@@ -85,7 +106,7 @@ h2 {
     border-top: 2px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
     border-top-left-radius: 10px;
-    background-color: #4D7A9733; /*var(--navbar-background-color);*/
+    background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
     padding-left: 10px;
     padding-top: 7px;
     padding-bottom: 3px;
@@ -124,39 +145,6 @@ h2 {
     text-align: right;
     padding-right: 6px;
     border-right: 2px solid var(--navbar-background-color);
-}
-
-.col-1 {
-    text-align: right;
-    font-family: var(--body-font-family);
-    font-size: var(--body-font-size);
-}
-.col-2 {
-    text-align: left;
-    border-left: 1px dotted blue;
-    border-right: 1px dotted blue;
-}
-.col-3 {
-    text-align: left;
-    font-family: monospace;
-    font-size: 0.7em;
-}
-
-.vertical-start {
-    border-top: 8px double #eee;
-}
-
-hr.vertical-1 {
-  width: 0px;
-  height: 100%;
-  margin-top: 0;
-  border: 1px solid #eaeaea;
-}
-hr.vertical-3 {
-  width: 0px;
-  height: 100%;
-  margin-top: 0;
-  border: 2px solid #efefef;
 }
 
 /* ------------------------ ------------------------ ------------------------ ------------------------ */
@@ -205,23 +193,23 @@ hr.vertical-3 {
     display: grid;
     background: white;
     width: calc(100% - 25px);
-    grid-template-columns: 50px 65px 35px 250px auto;
+    grid-template-columns: 53px 53px 35px 250px auto;
     position: absolute;
     z-index: 3;
 }
 .minor-grid-title-row {
     display: grid;
-    grid-template-columns: 50px 65px 35px 250px auto;
+    grid-template-columns: 53px 53px 35px 250px auto;
 }
 .minor-grid-commit-row {
     display: grid;
-    grid-template-columns: 50px 65px 35px 120px auto 25px;
+    grid-template-columns: 53px 53px 35px 120px auto 25px;
 }
 
 .minor-grid-title-row-over .col-4 {
     border-top: 2px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
-    background-color: #4D7A9733; /*var(--navbar-background-color);*/
+    background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
     text-align: right;
     padding-right: 15px;
     padding-top: 7px;
@@ -238,7 +226,7 @@ hr.vertical-3 {
 .minor-grid-title-row .col-4 {
     border-top: 2px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
-    background-color: #4D7A9733; /*var(--navbar-background-color);*/
+    background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
     text-align: right;
     padding-right: 15px;
     padding-top: 7px;
