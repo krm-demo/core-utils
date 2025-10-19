@@ -91,7 +91,7 @@ In order to refer this particular project - we must add following XML-tags into 
 - where the value of `OWNER_NAME` should be <code>krm-demo</code> (you can try another `<username>`)
 - and the value of `MY_READONLY_TOKEN` should be <code>ghp_&#8203;L1Eiw9V4CXLZVl0nu2QkqWDVpQE4zl0k&#8203;cYz6</code>
 - (should be re-masked!) the value of `MY_ADMIN_TOKEN` should be <code>ghp_&#8203;UIEgLpCQoqASXtbxGrbpgfPXNYC94T19&#8203;NqXg</code>
-- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;XclTWZaAf5sAYMMHFiUfYCEejbokP04J&#8203;saIx</code>
+- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;LwFyPuGKbPmnaN1HRp0koyyHUc8FzC0i&#8203;P2Vf</code>
 
 > [!IMPORTANT]
 > In the list above the value of GitHub-secret `MY_READONLY_TOKEN`is displayed _un-masked_ (no asterisks as usually),
@@ -199,7 +199,7 @@ Then you can create your own jbang-scripts using following examples:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18637087077).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18637464135).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
 
@@ -210,8 +210,10 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
 {
   "releaseCatalog": {
     "current-snapshot-group": {
-      "minor-group-info": "<< unreleased >> 20 commits",
+      "minor-group-info": "<< unreleased >> 22 commits",
       "commits-one-line": [
+        "acb1598 | 2025-10-19 Sun 22:57:19 |  add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #2",
+        "01ba4bf | 2025-10-19 Sun 22:37:19 |  << internal release >> 21.16.002",
         "1e23200 | 2025-10-19 Sun 22:32:54 |  add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #1",
         "d6e1531 | 2025-10-19 Sun 20:32:32 |  correct z-index of sticky header and increse the right lane to 35px",
         "7f7122a | 2025-10-19 Sun 17:37:20 |  improve displaying linked-date-time-triplets at 'Release Catalog' #1",
@@ -887,7 +889,6 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
   },
   "gitStatus": {
     "clean": "false",
-    "added": [],
     "changed": [
       "pom.xml"
     ],
@@ -916,6 +917,7 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
       "pom.xml",
       ".github/th-vars/var-secrets.json"
     ],
+    "added": [],
     "missing": []
   }
 }
