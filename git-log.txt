@@ -1,3 +1,4 @@
+66fa2a9c << internal release >> 21.16.002
 acb1598c add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #2
 01ba4bf4 << internal release >> 21.16.002
 1e232009 add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #1
