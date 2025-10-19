@@ -478,18 +478,16 @@ public class GithubBadgeHelper {
      * @return the URL to the JavaDoc of GitHub project represented by passed {@code commitGroupMinor}
      */
     public String badgeUrlJavaDoc(CommitGroupMinor commitGroupMinor) {
-        return !isMavenSnapshot() ? "" :
-            badgeUrlShiedsIO(repoName(), versionStr(commitGroupMinor), LABEL_COLOR__VERSION,
-                LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+        return badgeUrlShiedsIO(repoName(), versionStr(commitGroupMinor), LABEL_COLOR__VERSION,
+            LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
     }
 
     /**
      * @return the URL to the JavaDoc of GitHub project represented by passed {@code commitGroupMajor}
      */
     public String badgeUrlJavaDoc(CommitGroupMajor commitGroupMajor) {
-        return !isMavenSnapshot() ? "" :
-            badgeUrlShiedsIO(repoName(), versionStr(commitGroupMajor), LABEL_COLOR__VERSION,
-                LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
+        return badgeUrlShiedsIO(repoName(), versionStr(commitGroupMajor), LABEL_COLOR__VERSION,
+            LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__JAVADOC_SELECTED, LABEL_COLOR__JAVADOC_NAVBAR);
     }
 
     /**
