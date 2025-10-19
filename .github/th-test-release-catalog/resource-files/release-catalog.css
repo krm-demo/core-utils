@@ -51,17 +51,17 @@ h2 {
     display: grid;
     background: white;
     width: calc(100% - 25px);
-    grid-template-columns: 75px 65px 50px 250px auto;
+    grid-template-columns: 50px 65px 35px 250px auto;
     position: absolute;
     z-index: 3;
 }
 .major-grid-title-row {
     display: grid;
-    grid-template-columns: 75px 65px 50px 250px auto;
+    grid-template-columns: 50px 65px 35px 250px auto;
 }
 .major-grid-commit-row {
     display: grid;
-    grid-template-columns: 75px 65px 50px 120px auto 25px;
+    grid-template-columns: 50px 65px 35px 120px auto 25px;
 }
 
 .major-grid-title-row-over .col-4 {
@@ -138,6 +138,8 @@ h2 {
 }
 .col-3 {
     text-align: left;
+    font-family: monospace;
+    font-size: 0.7em;
 }
 
 .vertical-start {
@@ -203,17 +205,17 @@ hr.vertical-3 {
     display: grid;
     background: white;
     width: calc(100% - 25px);
-    grid-template-columns: 75px 65px 50px 250px auto;
+    grid-template-columns: 50px 65px 35px 250px auto;
     position: absolute;
     z-index: 3;
 }
 .minor-grid-title-row {
     display: grid;
-    grid-template-columns: 75px 65px 50px 250px auto;
+    grid-template-columns: 50px 65px 35px 250px auto;
 }
 .minor-grid-commit-row {
     display: grid;
-    grid-template-columns: 75px 65px 50px 120px auto 25px;
+    grid-template-columns: 50px 65px 35px 120px auto 25px;
 }
 
 .minor-grid-title-row-over .col-4 {
