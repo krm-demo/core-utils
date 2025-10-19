@@ -31,6 +31,14 @@
 TODO: play with hover-image like it's described here: https://stackoverflow.com/questions/18813299/changing-image-on-hover-with-css-html
 */
 
+
+h2 {
+    font-size: 1.5em;
+}
+.release-catalog-section {
+    margin-bottom: 2em;
+}
+
 /* ------------------------ ------------------------ Major Grid ------------------------ ------------------------ */
 
 .major-grid-container {
@@ -212,7 +220,8 @@ hr.vertical-3 {
     border-top: 2px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
     background-color: #4D7A9733; /*var(--navbar-background-color);*/
-    padding-left: 10px;
+    text-align: right;
+    padding-right: 15px;
     padding-top: 7px;
     padding-bottom: 3px;
 }
@@ -228,7 +237,8 @@ hr.vertical-3 {
     border-top: 2px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
     background-color: #4D7A9733; /*var(--navbar-background-color);*/
-    padding-left: 10px;
+    text-align: right;
+    padding-right: 15px;
     padding-top: 7px;
     padding-bottom: 3px;
 }
