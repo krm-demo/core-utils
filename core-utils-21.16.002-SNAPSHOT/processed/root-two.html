@@ -37,11 +37,11 @@
         <!-- following two DIV-s are mutually exclusively displayed via "th:style" attribute: -->
         <div style="display: none">
           <a href="#" class="btn btn-primary disabled">original</a>
-          <a href="../processed/root-one.html" class="btn btn-link">processed</a>
+          <a href="../processed/root-two.html" class="btn btn-link">processed</a>
           <hr/>
         </div>
         <div style="display: block">
-          <a href="../original/root-one.html" class="btn btn-link">original</a>
+          <a href="../original/root-two.html" class="btn btn-link">original</a>
           <a href="#" class="btn btn-primary disabled">processed</a>
           <hr/>
         </div>
@@ -50,8 +50,8 @@
       <h3>Navigation Links</h3>
       <a href="index.html">home</a>
       <ul>
-        <li><b>root-one</b></li>
-        <li><a href="root-two.html">root-two</a></li>
+        <li><a href="root-one.html">root-one</a></li>
+        <li><b>root-two</b></li>
         <li><a href="sub-dir-a/index.html">sub-dir-a</a></li>
         <li><a href="sub-dir-b/index.html">sub-dir-b</a></li>
         <ul>
@@ -60,30 +60,33 @@
       </ul>
     </div>
     <div class="col-sm-9">
-      <div class="row border border-secondary rounded pb-0">
+      <div class="row border border-secondary rounded">
         <h3>Some Page-Specific Information</h3>
         <p>
-          This is the first root-page of the whole site.
+          This is the second root-page of the whole site.
         </p>
         <p>
           After executing the tests (<code>"...&gt; mvn clean verify"</code> from command line),<br/>
           the processed site become available in the directory <code>./target/th-test-site/processed</code>.
         </p>
         <p>
-          <details>
-            <summary>
-              JSON-properties of <a href="https://github.com/krm-demo/core-utils/blob/main/src/test/java/org/krmdemo/techlabs/thtool/helpers/GithubBadgeHelper.java">
-                GithubBadgeHelper
-              </a>:
-              <code>[&#8203;(${ gbh })&#8203;]</code>
-            </summary>
-            <pre>{
+        <details>
+          <summary>
+            JSON-properties of <a href="https://github.com/krm-demo/core-utils/blob/main/src/test/java/org/krmdemo/techlabs/thtool/helpers/GithubBadgeHelper.java">
+            GithubBadgeHelper
+          </a>:
+            <code>[&#8203;(${ gbh })&#8203;]</code>
+          </summary>
+          <pre>{
   "badgeBuildPassing": "[![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg?event=push)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)",
   "badgeLatestInternalGitHubMD": "[![Latest-Internal](https://img.shields.io/badge/core--utils-21.16.001-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.16.001)",
   "badgeLatestInternalJavaDocMD": "[![Latest-Internal](https://img.shields.io/badge/core--utils-21.16.001-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.16.001)",
   "badgeLatestPublicGitHubMD": "[![Latest-Public](https://img.shields.io/badge/core--utils-21.15-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.15)",
   "badgeLatestPublicJavaDocMD": "[![Latest-Public](https://img.shields.io/badge/core--utils-21.15-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.15)",
-  "badgeReleaseCatalog": "[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/)",
+  "badgeReleaseCatalogHTML": "<a href="https://krm-demo.github.io/core-utils/">
+  <img alt="a badge to 'Release Catalog'" src="https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97" />
+</a>",
+  "badgeReleaseCatalogMD": "[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/)",
   "badgeSnapshotGitHubMD": "[![Snapshot-Version](https://img.shields.io/badge/core--utils-21.16.002--SNAPSHOT-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils)",
   "badgeSnapshotJavaDocMD": "[![Snapshot-Version](https://img.shields.io/badge/core--utils-21.16.002--SNAPSHOT-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.16.002-SNAPSHOT)",
   "badgeUrlLatestInternalGitHub": "https://img.shields.io/badge/core--utils-21.16.001-blue?logo=github&logoColor=white&labelColor=black",
@@ -101,21 +104,21 @@
   "mavenSnapshot": "true",
   "snapshotVersion": "21.16.002-SNAPSHOT"
 }</pre>
-          </details>
+        </details>
         </p>
         <p>
-          PUBLIC-release badge: <code><a href="https://krm-demo.github.io/core-utils/core-utils-21.15">
-  <img alt="a badge to the latest PUBLIC-version" src="https://img.shields.io/badge/core--utils-21.15-blue?logo=github&logoColor=f8981d&labelColor=4D7A97" />
+          PUBLIC-release badge: <code><a href="https://github.com/krm-demo/core-utils/tree/21.15">
+  <img alt="a badge to the latest PUBLIC-version" src="https://img.shields.io/badge/core--utils-21.15-blue?logo=github&logoColor=white&labelColor=black" />
 </a></code>
         </p>
         <p>
-          INTERNAL-release badge: <code><a href="https://krm-demo.github.io/core-utils/core-utils-21.16.001">
-  <img alt="a badge to the latest INTERNAL-version" src="https://img.shields.io/badge/core--utils-21.16.001-blue?logo=github&logoColor=f8981d&labelColor=4D7A97" />
+          INTERNAL-release badge: <code><a href="https://github.com/krm-demo/core-utils/tree/21.16.001">
+  <img alt="a badge to the latest PUBLIC-version" src="https://img.shields.io/badge/core--utils-21.16.001-blue?logo=github&logoColor=white&labelColor=black" />
 </a></code>
         </p>
         <p>
-          SNAPSHOT-version badge: <code><a href="https://krm-demo.github.io/core-utils/core-utils-21.16.002-SNAPSHOT">
-  <img alt="a badge to the latest SNAPSHOT-version" src="https://img.shields.io/badge/core--utils-21.16.002--SNAPSHOT-blue?logo=github&logoColor=f8981d&labelColor=4D7A97" />
+          SNAPSHOT-version badge: <code><a href="https://github.com/krm-demo/core-utils">
+  <img alt="a badge to the latest PUBLIC-version" src="https://img.shields.io/badge/core--utils-21.16.002--SNAPSHOT-blue?logo=github&logoColor=white&labelColor=black" />
 </a></code>
         </p>
         <div class="text-center bg-light fst-italic text-sm mb-1">Each page has its own content here.</div>
@@ -123,8 +126,8 @@
       <div class="row border border-secondary rounded mt-5">
         <h3>Some Technical Information</h3>
         <p>
-        The content of this section has <b><var>th-tool</var></b>-tags,
-        which performs the access to the basic <b><var>th-tool</var></b>-helpers:
+          The content of this section has <b><var>th-tool</var></b>-tags,
+          which performs the access to the basic <b><var>th-tool</var></b>-helpers:
         </p>
         <code>[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21.16.002-SNAPSHOT</code><br/>
         <code>[&#8203;[${ mh.projectArtifact }]&#8203;] = core-utils</code><br/>

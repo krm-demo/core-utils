@@ -1,3 +1,4 @@
+1e232009 add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #1
 d6e1531d correct z-index of sticky header and increse the right lane to 35px
 7f7122a9 improve displaying linked-date-time-triplets at 'Release Catalog' #1
 75cec7c0 working on integrating date-time-triplet to 'Release Catalog' page #5

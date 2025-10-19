@@ -24,7 +24,7 @@
 -doctitle
 'JavaDoc for <u>core-utils</u>:21.16.002-SNAPSHOT'
 -header
-'[(${mh.projectCatalogName})]'
+'[(${gbh.badgeReleaseCatalogHTML})]'
 -linksource
 -notimestamp
 --add-stylesheet
