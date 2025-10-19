@@ -41,7 +41,8 @@
       <h2 class="title">Current Snapshot Version and Internal Releases:</h2>
     </div>
 
-    <div class="row">
+    <div class="release-catalog-section">
+
       <div class="major-grid-container">
         <div class="major-grid-title-row-over">
           <div class="col-1">
@@ -230,126 +231,142 @@
     <!-- ------------------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------------------ -->
     <!-- ------------------------------------------------------------------------------------ -->
-
     <div class="header">
-      <h1 class="title">Public Releases:</h1>
+      <h2 class="title">Public Releases:</h2>
     </div>
-    TODO: to be corrected
 
-        <div class="row">
-        <h3>List of All Released Versions</h3>
+    <div class="release-catalog-section" th:each="majorGroup: ${git.releaseCatalog.majorGroups}">
 
-          <div class="current-snapshot">
-            <div class="snapshot-group-header">
-              <span class="major-group-date-time" th:text="${git.releaseCatalog.snapshotGroup.finalDateTimeStr()}">
-                current-snapshot-group-date-time
-              </span>
-              <span class="snapshot-group-version">
-                [(${ gbh.badgeSnapshotJavaDocHTML })]
-              </span>
-              <span class="snapshot-group-info">
-                [(${ gbh.badgeSnapshotGitHubHTML })]
-                [[${ git.releaseCatalog.snapshotGroup.groupInfo }]]
-              </span>
-            </div>
-            <div class="snapshot-group-commits" th:each="commitInfo: ${git.releaseCatalog.snapshotGroup.commits}">
-              <span class="commit-date-time" th:text="${commitInfo.localCommitTimeStr()}">
-                COMMIT-TIME-#0.1
-              </span>
-              <span class="commit-ID">
-                [(${ gbh.badgeCommit(commitInfo) })]
-              </span>
-              <span class="commit-message" th:text="${commitInfo.messageShort}">
-                commit-message #0.1
-              </span>
-            </div>
+      <div class="major-grid-container">
+        <div class="major-grid-title-row-over">
+          <div class="col-1">
+            [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).yearAndMonth }]]
           </div>
-
-          <div class="current-minor-groups" th:each="minorGroup: ${git.releaseCatalog.minorGroups}">
-            <div class="minor-group">
-              <div class="major-group-header">
-                <span class="minor-group-date-time" th:text="${minorGroup.finalDateTimeStr()}">
-                  current-minor-group-date-time
-                </span>
-                <span class="minor-group-version">
-                  [(${ gbh.badgeJavaDocHTML(minorGroup) })]
-                </span>
-                <span class="minor-group-info">
-                  [(${ gbh.badgeGitHubHTML(minorGroup) })]
-                  [[${ minorGroup.groupInfo }]]
-                </span>
-              </div>
-              <div class="minor-group-commits" th:each="commitInfo: ${minorGroup.commits}">
-                <span class="commit-date-time" th:text="${commitInfo.localCommitTimeStr()}">
-                  COMMIT-TIME-#1.1
-                </span>
-                <span class="commit-ID">
-                  [(${ gbh.badgeCommit(commitInfo) })]
-                </span>
-                <span class="commit-message" th:text="${commitInfo.messageShort}">
-                  commit-message #1.1
-                </span>
-                |<code>[(${git.releaseCatalog.linkedTriplet(commitInfo)})]</code>|
-              </div>
-            </div>
+          <div class="col-2">
+            -[[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).dayOfMonthAndWeek }]]
           </div>
-
-          <div class="major-group" th:each="majorGroup: ${git.releaseCatalog.majorGroups}">
-            <div class="major-group-header">
-              <span class="major-group-date-time" th:text="${majorGroup.finalDateTimeStr()}">
-                major-group-date-time
-              </span>
-              <span class="major-group-version">
-                [(${ gbh.badgeJavaDocHTML(majorGroup) })]
-              </span>
-              <span class="major-group-info">
-                [(${ gbh.badgeGitHubHTML(majorGroup) })]
-                [[${ majorGroup.groupInfo }]]
-              </span>
-            </div>
-            <div class="major-group-commits" th:each="commitInfo: ${majorGroup.currentMinor().commits}">
-              <span class="commit-date-time" th:text="${commitInfo.localCommitTimeStr()}">
-                COMMIT-TIME-#2.0.1
-              </span>
-              <span class="commit-ID">
-                [(${ gbh.badgeCommit(commitInfo) })]
-              </span>
-                <span class="commit-message" th:text="${commitInfo.messageShort}">
-                commit-message #2.0.1
-              </span>
-            </div>
-
-            <div class="minor-groups" th:each="minorGroup: ${majorGroup.minorGroups}">
-              <div class="minor-group">
-                <div class="major-group-header">
-                  <span class="minor-group-date-time" th:text="${minorGroup.finalDateTimeStr()}">
-                    current-minor-group-date-time
-                  </span>
-                  <span class="minor-group-version">
-                    [(${ gbh.badgeJavaDocHTML(minorGroup) })]
-                  </span>
-                  <span class="minor-group-info">
-                    [(${ gbh.badgeGitHubHTML(minorGroup) })]
-                    [[${ minorGroup.groupInfo }]]
-                  </span>
-                </div>
-                <div class="minor-group-commits" th:each="commitInfo: ${minorGroup.commits}">
-                  <span class="commit-date-time" th:text="${commitInfo.localCommitTimeStr()}">
-                    COMMIT-TIME-#2.1.1
-                  </span>
-                  <span class="commit-ID">
-                    [(${ gbh.badgeCommit(commitInfo) })]
-                  </span>
-                  <span class="commit-message" th:text="${commitInfo.messageShort}">
-                    commit-message #2.1.1
-                  </span>
-                </div>
-              </div>
-            </div>
+          <div class="col-3">
+            [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).hoursMinutes }]]
           </div>
-
+          <div class="col-4">
+            [(${ gbh.badgeJavaDocHTML(majorGroup) })]
+          </div>
+          <div class="col-5">
+            [(${ gbh.badgeGitHubHTML(majorGroup) })]
+            <span>[[${ majorGroup.groupInfo }]]</span>
+          </div>
         </div>
+        <details open>
+          <summary>
+            <div class="major-grid-title-row">
+              <div class="col-1">
+                [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).yearAndMonth }]]
+              </div>
+              <div class="col-2">
+                -[[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).dayOfMonthAndWeek }]]
+              </div>
+              <div class="col-3">
+                [[${ git.releaseCatalog.linkedTriplet(majorGroup.currentMinor().finalCommit).hoursMinutes }]]
+              </div>
+              <div class="col-4">
+                [(${ gbh.badgeJavaDocHTML(majorGroup) })]
+              </div>
+              <div class="col-5">
+                [(${ gbh.badgeGitHubHTML(majorGroup) })]
+                <span>[[${ majorGroup.groupInfo }]]</span>
+              </div>
+            </div>
+          </summary>
 
+          <div class="major-grid-commit-row" th:each="commitInfo: ${majorGroup.currentMinor().commits}">
+            <div class="col-1">
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).yearAndMonth }]]
+            </div>
+            <div class="col-2">
+              -[[${ git.releaseCatalog.linkedTriplet(commitInfo).dayOfMonthAndWeek }]]
+            </div>
+            <div class="col-3">
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).hoursMinutes }]]
+            </div>
+            <div class="col-4">
+              [(${ gbh.badgeCommit(commitInfo) })]
+            </div>
+            <div class="col-5">
+              [[${ commitInfo.messageShort }]]
+            </div>
+            <div class="col-6">...</div>
+          </div>
+        </details>
+      </div>
+
+      <!-- ------------------------------------------------------------------------------------ -->
+
+      <div class="minor-grid-container" th:each="minorGroup: ${majorGroup.minorGroups}">
+        <div class="minor-grid-title-row-over">
+          <div class="col-1">
+            [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]
+          </div>
+          <div class="col-2">
+            -[[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
+          </div>
+          <div class="col-3">
+            [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).hoursMinutes }]]
+          </div>
+          <div class="col-4">
+            [(${ gbh.badgeJavaDocHTML(minorGroup) })]
+          </div>
+          <div class="col-5">
+            [(${ gbh.badgeGitHubHTML(minorGroup) })]
+            <span>[[${ minorGroup.groupInfo }]]</span>
+          </div>
+        </div>
+        <details open>
+          <summary>
+            <div class="minor-grid-title-row">
+              <div class="col-1">
+                [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]
+              </div>
+              <div class="col-2">
+                -[[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
+              </div>
+              <div class="col-3">
+                [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).hoursMinutes }]]
+              </div>
+              <div class="col-4">
+                [(${ gbh.badgeJavaDocHTML(minorGroup) })]
+              </div>
+              <div class="col-5">
+                [(${ gbh.badgeGitHubHTML(minorGroup) })]
+                <span>[[${ minorGroup.groupInfo }]]</span>
+              </div>
+            </div>
+          </summary>
+
+          <div class="minor-grid-commit-row" th:each="commitInfo: ${minorGroup.commits}">
+            <div class="col-1">
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).yearAndMonth }]]
+            </div>
+            <div class="col-2">
+              -[[${ git.releaseCatalog.linkedTriplet(commitInfo).dayOfMonthAndWeek }]]
+            </div>
+            <div class="col-3">
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).hoursMinutes }]]
+            </div>
+            <div class="col-4">
+              [(${ gbh.badgeCommit(commitInfo) })]
+            </div>
+            <div class="col-5">
+              [[${ commitInfo.messageShort }]]
+            </div>
+            <div class="col-6">...</div>
+          </div>
+        </details>
+      </div>
+      <hr/>
+    </div>
+    <!-- ------------------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------------------ -->
   </main>
 </div>
 

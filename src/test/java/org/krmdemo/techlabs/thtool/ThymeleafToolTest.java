@@ -98,6 +98,8 @@ public class ThymeleafToolTest {
             ".github/th-test-release-catalog/index.html",
             ".github/th-templates/GH-PAGES--Release-Catalog.html.th"
         );
+//        stdErr.println(sbErr);
+//        stdErr.println(sbOut);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isEmpty();
