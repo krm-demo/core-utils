@@ -78,6 +78,9 @@ loadScripts(document, 'script');</script>
 <li><a href="#isDayOfMonthAndWeekTheSameAsNext()" tabindex="0">isDayOfMonthAndWeekTheSameAsNext()</a></li>
 <li><a href="#isHoursMinutesTheSameAsPrev()" tabindex="0">isHoursMinutesTheSameAsPrev()</a></li>
 <li><a href="#isHoursMinutesTheSameAsNext()" tabindex="0">isHoursMinutesTheSameAsNext()</a></li>
+<li><a href="#getLinkedYearAndMonth()" tabindex="0">getLinkedYearAndMonth()</a></li>
+<li><a href="#getLinkedDayOfMonthAndWeek()" tabindex="0">getLinkedDayOfMonthAndWeek()</a></li>
+<li><a href="#getLinkedHoursMinutes()" tabindex="0">getLinkedHoursMinutes()</a></li>
 <li><a href="#dumpLinked()" tabindex="0">dumpLinked()</a></li>
 <li><a href="#dumpLinkedReversed()" tabindex="0">dumpLinkedReversed()</a></li>
 </ol>
@@ -155,40 +158,49 @@ with sequentially previous and next triplets in corresponding collection or map.
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dumpLinkedReversed()" class="member-name-link">dumpLinkedReversed</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDayOfMonthAndWeekTheSameAsNext()" class="member-name-link">isDayOfMonthAndWeekTheSameAsNext</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the next</b> linked value</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDayOfMonthAndWeekTheSameAsPrev()" class="member-name-link">isDayOfMonthAndWeekTheSameAsPrev</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the previous</b> linked value</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isHoursMinutesTheSameAsNext()" class="member-name-link">isHoursMinutesTheSameAsNext</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Comparing on equality on <b>the third part</b> of triplet with <b>the next</b> linked value</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isHoursMinutesTheSameAsPrev()" class="member-name-link">isHoursMinutesTheSameAsPrev</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Comparing on equality on <b>the third part</b> of triplet with <b>the previous</b> linked value</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isTheSameAsNext()" class="member-name-link">isTheSameAsNext</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLinkedDayOfMonthAndWeek()" class="member-name-link">getLinkedDayOfMonthAndWeek</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLinkedHoursMinutes()" class="member-name-link">getLinkedHoursMinutes</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLinkedYearAndMonth()" class="member-name-link">getLinkedYearAndMonth</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isTheSameAsPrev()" class="member-name-link">isTheSameAsPrev</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDayOfMonthAndWeekTheSameAsNext()" class="member-name-link">isDayOfMonthAndWeekTheSameAsNext</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the next</b> linked value</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isYearAnMonthTheSameAsNext()" class="member-name-link">isYearAnMonthTheSameAsNext</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDayOfMonthAndWeekTheSameAsPrev()" class="member-name-link">isDayOfMonthAndWeekTheSameAsPrev</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Comparing on equality on <b>the first part</b> of triplet with <b>the next</b> linked value</div>
+<div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the previous</b> linked value</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isYearAnMonthTheSameAsPrev()" class="member-name-link">isYearAnMonthTheSameAsPrev</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isHoursMinutesTheSameAsNext()" class="member-name-link">isHoursMinutesTheSameAsNext</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Comparing on equality on <b>the third part</b> of triplet with <b>the next</b> linked value</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isHoursMinutesTheSameAsPrev()" class="member-name-link">isHoursMinutesTheSameAsPrev</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Comparing on equality on <b>the third part</b> of triplet with <b>the previous</b> linked value</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isTheSameAsNext()" class="member-name-link">isTheSameAsNext</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isTheSameAsPrev()" class="member-name-link">isTheSameAsPrev</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isYearAnMonthTheSameAsNext()" class="member-name-link">isYearAnMonthTheSameAsNext</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Comparing on equality on <b>the first part</b> of triplet with <b>the next</b> linked value</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isYearAnMonthTheSameAsPrev()" class="member-name-link">isYearAnMonthTheSameAsPrev</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Comparing on equality on <b>the first part</b> of triplet with <b>the previous</b> linked value</div>
 </div>
 </div>
@@ -353,10 +365,51 @@ with sequentially previous and next triplets in corresponding collection or map.
 </section>
 </li>
 <li>
+<section class="detail" id="getLinkedYearAndMonth()">
+<h3>getLinkedYearAndMonth</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-133">getLinkedYearAndMonth</a></span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the value of <a href="DateTimeTriplet.html#getYearAndMonth()"><code>DateTimeTriplet.getYearAndMonth()</code></a> followed by dash<code>'-'</code>-symbol,
+     if it's not the same as in previous item in sequence (otherwise - empty string)</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getLinkedDayOfMonthAndWeek()">
+<h3>getLinkedDayOfMonthAndWeek</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-142">getLinkedDayOfMonthAndWeek</a></span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the value of <a href="DateTimeTriplet.html#getDayOfMonthAndWeek()"><code>DateTimeTriplet.getDayOfMonthAndWeek()</code></a>, if <a href="#getLinkedYearAndMonth()"><code>getLinkedYearAndMonth()</code></a> is not empty
+     and if <a href="DateTimeTriplet.html#getDayOfMonthAndWeek()"><code>DateTimeTriplet.getDayOfMonthAndWeek()</code></a> is not the same as of the previous item in sequence
+     (otherwise - empty string)</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getLinkedHoursMinutes()">
+<h3>getLinkedHoursMinutes</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-151">getLinkedHoursMinutes</a></span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the value of <a href="DateTimeTriplet.html#getDayOfMonthAndWeek()"><code>DateTimeTriplet.getDayOfMonthAndWeek()</code></a>, if <a href="#getLinkedYearAndMonth()"><code>getLinkedYearAndMonth()</code></a> is not empty
+     and if <a href="DateTimeTriplet.html#getHoursMinutes()"><code>DateTimeTriplet.getHoursMinutes()</code></a> is not the same as of the previous item in sequence
+     (otherwise - dash<code>'-'</code>-symbol instead of digits)</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="dumpLinked()">
 <h3>dumpLinked</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-133">dumpLinked</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-159">dumpLinked</a></span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the same as inherited <a href="DateTimeTriplet.html#dump()"><code>DateTimeTriplet.dump()</code></a>, but skip displaying the values of parts,
@@ -369,7 +422,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="dumpLinkedReversed()">
 <h3>dumpLinkedReversed</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-144">dumpLinkedReversed</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-170">dumpLinkedReversed</a></span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the same as inherited <a href="DateTimeTriplet.html#dump()"><code>DateTimeTriplet.dump()</code></a>, but skip displaying the values of parts,

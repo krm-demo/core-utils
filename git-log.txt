@@ -1,3 +1,4 @@
+7f7122a9 improve displaying linked-date-time-triplets at 'Release Catalog' #1
 75cec7c0 working on integrating date-time-triplet to 'Release Catalog' page #5
 f15936a0 working on integrating date-time-triplet to 'Release Catalog' page #4
 d32782bf working on integrating date-time-triplet to 'Release Catalog' page #3
