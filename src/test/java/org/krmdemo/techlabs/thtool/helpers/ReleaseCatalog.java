@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.krmdemo.techlabs.core.datetime.LinkedDateTimeTripletMap;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.util.Collection;
@@ -41,6 +42,26 @@ public class ReleaseCatalog extends GitLogInfo {
     @JsonIgnore
     public CommitGroupMinor getSnapshotGroup() {
         return currentMajor.currentMinor();
+    }
+
+    @JsonIgnore
+    public LinkedDateTimeTripletMap.LinkedTriplet getSnapshotLinkedTriplet() {
+        return getSnapshotGroup().isEmpty() ? null : linkedTriplet(getSnapshotGroup().finalCommit());
+    }
+
+    @JsonIgnore
+    public String getSnapshotYearAndMonth() {
+        return getSnapshotLinkedTriplet() == null ? null : getSnapshotLinkedTriplet().getYearAndMonth();
+    }
+
+    @JsonIgnore
+    public String getSnapshotDayOfMonthAndWeek() {
+        return getSnapshotLinkedTriplet() == null ? null : getSnapshotLinkedTriplet().getDayOfMonthAndWeek();
+    }
+
+    @JsonIgnore
+    public String getSnapshotHoursMinutes() {
+        return getSnapshotLinkedTriplet() == null ? null : getSnapshotLinkedTriplet().getHoursMinutes();
     }
 
     @JsonIgnore

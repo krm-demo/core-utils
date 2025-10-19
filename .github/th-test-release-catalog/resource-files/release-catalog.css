@@ -31,7 +31,7 @@
 TODO: play with hover-image like it's described here: https://stackoverflow.com/questions/18813299/changing-image-on-hover-with-css-html
 */
 
-/* ------------------------ ------------------------ ------------------------ ------------------------ */
+/* ------------------------ ------------------------ Major Grid ------------------------ ------------------------ */
 
 .major-grid-container {
     position: relative;
@@ -43,87 +43,88 @@ TODO: play with hover-image like it's described here: https://stackoverflow.com/
     display: grid;
     background: white;
     width: calc(100% - 25px);
-    grid-template-columns: 75px 50px 50px 200px auto;
+    grid-template-columns: 75px 65px 50px 250px auto;
     position: absolute;
     z-index: 3;
 }
 .major-grid-title-row {
     display: grid;
-    grid-template-columns: 75px 50px 50px 200px auto;
+    grid-template-columns: 75px 65px 50px 250px auto;
 }
 .major-grid-commit-row {
     display: grid;
-    grid-template-columns: 75px 50px 50px 120px auto 25px;
+    grid-template-columns: 75px 65px 50px 120px auto 25px;
 }
 
-.major-grid-title-row-over .col-4{
-    border-left: 1px solid blue;
-}
-.major-grid-title-row-over .col-5{
-    border-right: 1px solid blue;
-}
 .major-grid-title-row-over .col-4 {
-    border-top: 1px solid blue;
-    border-bottom: 1px solid blue;
+    border-top: 2px solid var(--navbar-background-color);
+    border-left: 2px solid var(--navbar-background-color);
+    border-top-left-radius: 10px;
+    background-color: #4D7A9733; /*var(--navbar-background-color);*/
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 3px;
 }
 .major-grid-title-row-over .col-5 {
-    border-top: 1px solid blue;
-    border-bottom: 1px solid blue;
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides any content that overflows the element's box */
+    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
+    border-top: 2px solid var(--navbar-background-color);
+    padding-top: 7px;
 }
 
-/*
-.major-grid-title-row .col-1 {
-    border: 0;
-}
-.major-grid-title-row .col-2 {
-    border: 0;
-}
-.major-grid-title-row .col-3 {
-    border: 0;
-}
-*/
 .major-grid-title-row .col-4 {
+    border-top: 2px solid var(--navbar-background-color);
+    border-left: 2px solid var(--navbar-background-color);
+    border-top-left-radius: 10px;
+    background-color: #4D7A9733; /*var(--navbar-background-color);*/
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 3px;
 }
 .major-grid-title-row .col-5 {
-    border-right: 1px solid blue;
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides any content that overflows the element's box */
+    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
+    border-top: 2px solid var(--navbar-background-color);
+    padding-top: 7px;
 }
 
-/*
-.major-grid-commit-row .col-1 {
-    border: 0;
-}
-.major-grid-commit-row .col-2 {
-    border: 0;
-}
-.major-grid-commit-row .col-3 {
-    border: 0;
-}
-*/
 .major-grid-commit-row .col-4 {
-    border-left: 1px solid blue;
+    border-left: 2px solid var(--navbar-background-color);
+    padding-left: 10px;
 }
 .major-grid-commit-row .col-5 {
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides any content that overflows the element's box */
+    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
     border-right: 1px solid blue;
 }
 .major-grid-commit-row .col-4-last {
-    border-left: 1px solid blue;
-    border-bottom: 1px solid blue;
+    border-left: 2px solid var(--navbar-background-color);
+    padding-left: 10px;
 }
 .major-grid-commit-row .col-5-last {
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides any content that overflows the element's box */
+    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
     border-right: 1px solid blue;
     border-bottom: 1px solid blue;
 }
 
 .major-grid-commit-row .col-6 {
     text-align: right;
-    padding-right: 4px;
+    padding-right: 6px;
+    border-right: 2px solid var(--navbar-background-color);
 }
 
 .col-1 {
     text-align: right;
+    font-family: var(--body-font-family);
+    font-size: var(--body-font-size);
 }
 .col-2 {
-    text-align: center;
+    text-align: left;
     border-left: 1px dotted blue;
     border-right: 1px dotted blue;
 }
@@ -150,28 +151,157 @@ hr.vertical-3 {
 
 /* ------------------------ ------------------------ ------------------------ ------------------------ */
 
-summary {
+.major-grid-container summary {
     list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0;
+    padding-right: 7px;
+    border-top: 2px solid var(--navbar-background-color);
+    border-right: 2px solid var(--navbar-background-color);
+    border-top-right-radius: 10px;
 }
-summary::after {
+.major-grid-container details[open] > summary {
+    padding-right: 7px;
+    border-top: 2px solid var(--navbar-background-color);
+    border-right: 2px solid var(--navbar-background-color);
+    border-top-right-radius: 10px;
+}
+
+.major-grid-container summary::after {
     content: '';
     width: 18px;
     height: 10px;
     background: url('up-down-triangle--jd-navbar.svg') no-repeat;
     background-size: cover;
 }
-
-details[open] > summary::after {
+.major-grid-container details[open] > summary::after {
     transform: rotate(180deg);
 }
-summary::-webkit-details-marker {
+.major-grid-container summary::-webkit-details-marker {
     display: none;
 }
 
+/* ------------------------ ------------------------ Minor Grid ------------------------ ------------------------ */
+
+.minor-grid-container {
+    position: relative;
+}
+
+.minor-grid-title-row-over {
+    top: 0;
+    right: 25px;
+    display: grid;
+    background: white;
+    width: calc(100% - 25px);
+    grid-template-columns: 75px 65px 50px 250px auto;
+    position: absolute;
+    z-index: 3;
+}
+.minor-grid-title-row {
+    display: grid;
+    grid-template-columns: 75px 65px 50px 250px auto;
+}
+.minor-grid-commit-row {
+    display: grid;
+    grid-template-columns: 75px 65px 50px 120px auto 25px;
+}
+
+.minor-grid-title-row-over .col-4 {
+    border-top: 2px solid var(--navbar-background-color);
+    border-left: 2px solid var(--navbar-background-color);
+    background-color: #4D7A9733; /*var(--navbar-background-color);*/
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 3px;
+}
+.minor-grid-title-row-over .col-5 {
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides any content that overflows the element's box */
+    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
+    border-top: 2px solid var(--navbar-background-color);
+    padding-top: 7px;
+}
+
+.minor-grid-title-row .col-4 {
+    border-top: 2px solid var(--navbar-background-color);
+    border-left: 2px solid var(--navbar-background-color);
+    background-color: #4D7A9733; /*var(--navbar-background-color);*/
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 3px;
+}
+.minor-grid-title-row .col-5 {
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides any content that overflows the element's box */
+    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
+    border-top: 2px solid var(--navbar-background-color);
+    padding-top: 7px;
+}
+
+.minor-grid-commit-row .col-4 {
+    border-left: 2px solid var(--navbar-background-color);
+    padding-left: 10px;
+}
+.minor-grid-commit-row .col-5 {
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides any content that overflows the element's box */
+    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
+    border-right: 1px solid blue;
+}
+.minor-grid-commit-row .col-4-last {
+    border-left: 2px solid var(--navbar-background-color);
+    padding-left: 10px;
+}
+.minor-grid-commit-row .col-5-last {
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides any content that overflows the element's box */
+    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
+    border-right: 1px solid blue;
+    border-bottom: 1px solid blue;
+}
+
+.minor-grid-commit-row .col-6 {
+    text-align: right;
+    padding-right: 6px;
+    border-right: 2px solid var(--navbar-background-color);
+}
+
+/* ------------------------ ------------------------ ------------------------ ------------------------ */
+
+.minor-grid-container summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    padding-right: 7px;
+    border-top: 2px solid var(--navbar-background-color);
+    border-right: 2px solid var(--navbar-background-color);
+}
+.minor-grid-container details[open] > summary {
+    padding-right: 7px;
+    border-top: 2px solid var(--navbar-background-color);
+    border-right: 2px solid var(--navbar-background-color);
+}
+
+.minor-grid-container summary::after {
+    content: '';
+    width: 18px;
+    height: 10px;
+    background: url('up-down-triangle--jd-navbar.svg') no-repeat;
+    background-size: cover;
+}
+.minor-grid-container details[open] > summary::after {
+    transform: rotate(180deg);
+}
+.minor-grid-container summary::-webkit-details-marker {
+    display: none;
+}
+
+/* ------------------------ ------------------------ ------------------------ ------------------------ */
+/* ------------------------ ------------------------ ------------------------ ------------------------ */
 /* ------------------------ ------------------------ ------------------------ ------------------------ */
 
 .current-snapshot {

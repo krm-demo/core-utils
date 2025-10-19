@@ -38,93 +38,198 @@
   <main role="main">
 
     <div class="header">
-      <h2 class="title">Current Snapshot Version:</h2>
+      <h2 class="title">Current Snapshot Version and Internal Releases:</h2>
     </div>
 
     <div class="row">
       <div class="major-grid-container">
         <div class="major-grid-title-row-over">
-          <div class="col-1">2025-10</div>
-          <div class="col-2">-12 Sun</div>
-          <div class="col-3">20:14</div>
-          <div class="col-4"> core-utils-21.09.002-SNAPSHOT</div>
-          <div class="col-5">--- unreleased --- commits</div>
-        </div>
-      </div>
-      <details open>
-        <summary>
-          <div class="major-grid-title-row">
-            <div class="col-1">????-??</div>
-            <div class="col-2">-?? ???</div>
-            <div class="col-3">??:??</div>
-            <div class="col-4"> core-utils-??.??.???-SNAPSHOT</div>
-            <div class="col-5">--- group-info-??? ---</div>
-          </div>
-        </summary>
-        <div class="major-grid-commit-row">
-          <div class="col-1 vertical-start">
-            <hr class="vertical-3"/>
-          </div>
-          <div class="col-2 vertical-start">
-            <hr class="vertical-1"/>
-          </div>
-          <div class="col-3">C1.1.3</div>
-          <div class="col-4">
-            <a>
-              <svg aria-hidden="true" focusable="false"
-                   viewBox="0 0 16 16" width="16" height="16"
-                   stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
-                <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
-              </svg>
-              <code>1111-01</code>
-            </a>
-          </div>
-          <div class="col-5">C1.1.5</div>
-          <div class="col-6">...</div>
-        </div>
-        <div class="major-grid-commit-row">
           <div class="col-1">
-            <hr class="vertical-3"/>
+            [[${ git.releaseCatalog.snapshotYearAndMonth }]]
           </div>
-          <div class="col-2">C1.2.2</div>
-          <div class="col-3">C1.2.3</div>
+          <div class="col-2">
+            -[[${ git.releaseCatalog.snapshotDayOfMonthAndWeek }]]
+          </div>
+          <div class="col-3">
+            [[${ git.releaseCatalog.snapshotHoursMinutes }]]
+          </div>
           <div class="col-4">
-            <a>
-              <svg aria-hidden="true" focusable="false"
-                   viewBox="0 0 16 16" width="16" height="16"
-                   stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
-                <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
-              </svg>
-              <code>1111-02</code>
-            </a>
+            [(${ gbh.badgeSnapshotJavaDocHTML })]
           </div>
-          <div class="col-5">C1.2.5</div>
-          <div class="col-6">...</div>
-        </div>
-        <div class="major-grid-commit-row">
-          <div class="col-1">C1.3.1</div>
-          <div class="col-2">C1.3.2</div>
-          <div class="col-3">C1.3.3</div>
-          <div class="col-4-last">
-            <a>
-              <svg aria-hidden="true" focusable="false"
-                   viewBox="0 0 16 16" width="16" height="16"
-                   stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
-                <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
-              </svg>
-              <code>1111-03</code>
-            </a>
+          <div class="col-5">
+            [(${ gbh.badgeSnapshotGitHubHTML })]
+            <span>[[${ git.releaseCatalog.snapshotGroup.groupInfo }]]</span>
           </div>
-          <div class="col-5-last">C1.3.5</div>
-          <div class="col-6">...</div>
         </div>
-      </details>
-    </div>
+        <details open>
+          <summary>
+            <div class="major-grid-title-row">
+              <div class="col-1">
+                [[${ git.releaseCatalog.snapshotYearAndMonth }]]
+              </div>
+              <div class="col-2">
+                -[[${ git.releaseCatalog.snapshotDayOfMonthAndWeek }]]
+              </div>
+              <div class="col-3">
+                [[${ git.releaseCatalog.snapshotHoursMinutes }]]
+              </div>
+              <div class="col-4">
+                [(${ gbh.badgeSnapshotJavaDocHTML })]
+              </div>
+              <div class="col-5">
+                [(${ gbh.badgeSnapshotGitHubHTML })]
+                <span>[[${ git.releaseCatalog.snapshotGroup.groupInfo }]]</span>
+              </div>
+            </div>
+          </summary>
 
-    <div class="header">
-      <h2 class="title">Recent Internal Release:</h2>
+          <div class="major-grid-commit-row" th:each="commitInfo: ${git.releaseCatalog.snapshotGroup.commits}">
+            <div class="col-1">
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).yearAndMonth }]]
+            </div>
+            <div class="col-2">
+              -[[${ git.releaseCatalog.linkedTriplet(commitInfo).dayOfMonthAndWeek }]]
+            </div>
+            <div class="col-3">
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).hoursMinutes }]]
+            </div>
+            <div class="col-4">
+              [(${ gbh.badgeCommit(commitInfo) })]
+            </div>
+            <div class="col-5">
+              [[${ commitInfo.messageShort }]]
+            </div>
+            <div class="col-6">...</div>
+          </div>
+
+          <div class="major-grid-commit-row">
+            <div class="col-1 vertical-start">
+              <hr class="vertical-3"/>
+            </div>
+            <div class="col-2 vertical-start">
+              <hr class="vertical-1"/>
+            </div>
+            <div class="col-3">C1.1.3</div>
+            <div class="col-4">
+              <a>
+                <svg aria-hidden="true" focusable="false"
+                     viewBox="0 0 16 16" width="16" height="16"
+                     stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
+                  <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
+                </svg>
+                <code>1111-01</code>
+              </a>
+            </div>
+            <div class="col-5">C1.1.5</div>
+            <div class="col-6">...</div>
+          </div>
+          <div class="major-grid-commit-row">
+            <div class="col-1">
+              <hr class="vertical-3"/>
+            </div>
+            <div class="col-2">C1.2.2</div>
+            <div class="col-3">C1.2.3</div>
+            <div class="col-4">
+              <a>
+                <svg aria-hidden="true" focusable="false"
+                     viewBox="0 0 16 16" width="16" height="16"
+                     stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
+                  <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
+                </svg>
+                <code>1111-02</code>
+              </a>
+            </div>
+            <div class="col-5">C1.2.5</div>
+            <div class="col-6">...</div>
+          </div>
+          <div class="major-grid-commit-row">
+            <div class="col-1">C1.3.1</div>
+            <div class="col-2">C1.3.2</div>
+            <div class="col-3">C1.3.3</div>
+            <div class="col-4-last">
+              <a>
+                <svg aria-hidden="true" focusable="false"
+                     viewBox="0 0 16 16" width="16" height="16"
+                     stroke="#59636e" overflow="visible" style="vertical-align:text-bottom">
+                  <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
+                </svg>
+                <code>1111-03</code>
+              </a>
+            </div>
+            <div class="col-5-last">C1.3.5</div>
+            <div class="col-6">...</div>
+          </div>
+        </details>
+      </div>
+
+      <!-- ------------------------------------------------------------------------------------ -->
+
+      <div class="minor-grid-container" th:each="minorGroup: ${git.releaseCatalog.minorGroups}">
+        <div class="minor-grid-title-row-over">
+          <div class="col-1">
+            [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]
+          </div>
+          <div class="col-2">
+            -[[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
+          </div>
+          <div class="col-3">
+            [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).hoursMinutes }]]
+          </div>
+          <div class="col-4">
+            [(${ gbh.badgeJavaDocHTML(minorGroup) })]
+          </div>
+          <div class="col-5">
+            [(${ gbh.badgeGitHubHTML(minorGroup) })]
+            <span>[[${ minorGroup.groupInfo }]]</span>
+          </div>
+        </div>
+        <details open>
+          <summary>
+            <div class="minor-grid-title-row">
+              <div class="col-1">
+                [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).yearAndMonth }]]
+              </div>
+              <div class="col-2">
+                -[[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).dayOfMonthAndWeek }]]
+              </div>
+              <div class="col-3">
+                [[${ git.releaseCatalog.linkedTriplet(minorGroup.finalCommit).hoursMinutes }]]
+              </div>
+              <div class="col-4">
+                [(${ gbh.badgeJavaDocHTML(minorGroup) })]
+              </div>
+              <div class="col-5">
+                [(${ gbh.badgeGitHubHTML(minorGroup) })]
+                <span>[[${ minorGroup.groupInfo }]]</span>
+              </div>
+            </div>
+          </summary>
+
+          <div class="minor-grid-commit-row" th:each="commitInfo: ${minorGroup.commits}">
+            <div class="col-1">
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).yearAndMonth }]]
+            </div>
+            <div class="col-2">
+              -[[${ git.releaseCatalog.linkedTriplet(commitInfo).dayOfMonthAndWeek }]]
+            </div>
+            <div class="col-3">
+              [[${ git.releaseCatalog.linkedTriplet(commitInfo).hoursMinutes }]]
+            </div>
+            <div class="col-4">
+              [(${ gbh.badgeCommit(commitInfo) })]
+            </div>
+            <div class="col-5">
+              [[${ commitInfo.messageShort }]]
+            </div>
+            <div class="col-6">...</div>
+          </div>
+        </details>
+      </div>
+
     </div>
-    TODO: to be displayed
+    <!-- ------------------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------------------ -->
 
     <div class="header">
       <h1 class="title">Public Releases:</h1>
