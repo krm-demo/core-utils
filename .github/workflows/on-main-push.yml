@@ -140,13 +140,14 @@ jobs:
           # going to extract the file-slug (basename without extension) of a target JAR-file
           # and use it as a name of the destination directory to copy the generated Java-Doc
           JAR_FILE_NAME=$(find "./target/" -name "core*.jar" ! -name "*javadoc.jar" ! -name "*sources.jar" -exec basename {} \;)
-          echo "... going to re-write the content of folder '$(realpath ../gh-pages-branch/${JAR_FILE_NAME%.*})' ..."
+          echo "... going to re-write the content of folder '$(realpath ../gh-pages-branch/${JAR_FILE_NAME%.*})': ..."
           rm -rf ../gh-pages-branch/*-SNAPSHOT
-          cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
+          #cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
           cp -r .github/th-test-site ../gh-pages-branch/${JAR_FILE_NAME%.*}
           echo "JAR_FILE_NAME=$JAR_FILE_NAME"
-
-          # TODO: all copy-commands in this step could be done via "th-tool" - think about that...
+          
+          echo "... process generated JavaDoc-report with 'th-tool': ..."
+          .github/th-tool.sh process-dir --input-dir target/reports/apidocs/ --output-dir ../gh-pages-branch/${JAR_FILE_NAME%.*} .html
 
           echo "... copy the previously generated 'Release Catalog' page ..."
           cp -r .github/th-test-release-catalog/* ../gh-pages-branch

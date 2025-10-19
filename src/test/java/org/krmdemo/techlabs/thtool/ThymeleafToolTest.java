@@ -8,8 +8,11 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.krmdemo.techlabs.core.dump.StringBuilderOut;
 
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileContent;
 
 /**
@@ -40,28 +43,6 @@ public class ThymeleafToolTest {
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
-    }
-
-    @Test
-    void testProcessDir_TestSite() {
-        int exitCode = ThymeleafTool.executeMain(
-            "--var-file",
-            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
-            "process-dir",
-            "--input-dir",
-            ".github/th-test-site/original",
-            "--output-dir",
-            ".github/th-test-site/processed",
-            "--clean-output"
-        );
-//        stdOut.println(sbOut);
-//        stdErr.println(sbErr);
-        assertThat(exitCode).isZero();
-        assertThat(sbErr).isEmpty();
-        assertThat(sbOut).isNotBlank();
-
-        assertThat(loadFileContent(".github/th-test-site/processed/root-one.html"))
-            .contains("[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21");
     }
 
     @Test
@@ -107,6 +88,54 @@ public class ThymeleafToolTest {
         assertThat(loadFileContent(".github/th-test-release-catalog/index.html"))
             .contains("core-utils (Release Catalog)")
             .contains("https://github.com/krm-demo/core-utils/commit/");
+    }
+
+    @Test
+    void testProcessDir_TestSite() {
+        int exitCode = ThymeleafTool.executeMain(
+            "--var-file",
+            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
+            "process-dir",
+            "--input-dir",
+            ".github/th-test-site/original",
+            "--output-dir",
+            ".github/th-test-site/processed",
+            "--clean-output"
+        );
+//        stdOut.println(sbOut);
+//        stdErr.println(sbErr);
+        assertThat(exitCode).isZero();
+        assertThat(sbErr).isEmpty();
+        assertThat(sbOut).isNotBlank();
+
+        assertThat(loadFileContent(".github/th-test-site/processed/root-one.html"))
+            .contains("[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21");
+    }
+
+    @Test
+    void testProcessDir_JavaDoc() {
+        final String JAVADOC_REPORT__INPUT = "target/reports/apidocs";
+        final String JAVADOC_REPORT__OUTPUT = "target/reports/apidocs-processed";
+        assumeTrue(Files.exists(Path.of(JAVADOC_REPORT__INPUT)),
+            String.format("input directory '%s' to process the JavaDoc-report does not exist",
+                JAVADOC_REPORT__INPUT));
+
+        int exitCode = ThymeleafTool.executeMain(
+            "--var-file",
+            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
+            "process-dir",
+            "--input-dir",
+            JAVADOC_REPORT__INPUT,
+            "--output-dir",
+            JAVADOC_REPORT__OUTPUT,
+            "--clean-output",
+            ".html" // <-- it's very important to specify the process-pattern (otherwise - troubles with jquery-...js)
+        );
+//        stdOut.println(sbOut);
+        stdErr.println(sbErr);
+        assertThat(exitCode).isZero();
+        assertThat(sbErr).isEmpty();
+        assertThat(sbOut).isNotBlank();
     }
 
     // --------------------------------------------------------------------------------------------

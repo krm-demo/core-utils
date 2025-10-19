@@ -1,6 +1,6 @@
 [[ ${gbh.badgeBuildPassing} ]]  [( ${gbh.badgeLatestPublicGitHubMD} )] [( ${gbh.badgeLatestInternalGitHubMD} )] [( ${gbh.badgeSnapshotGitHubMD} )]
 
-[( ${gbh.badgeReleaseCatalog} )] [( ${gbh.badgeLatestPublicJavaDocMD} )] [( ${gbh.badgeLatestInternalJavaDocMD} )] [( ${gbh.badgeSnapshotJavaDocMD} )]  
+[( ${gbh.badgeReleaseCatalogMD} )] [( ${gbh.badgeLatestPublicJavaDocMD} )] [( ${gbh.badgeLatestInternalJavaDocMD} )] [( ${gbh.badgeSnapshotJavaDocMD} )]  
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 ![GitHub recent commits](https://img.shields.io/github/commits-since/krm-demo/core-utils/21.07)

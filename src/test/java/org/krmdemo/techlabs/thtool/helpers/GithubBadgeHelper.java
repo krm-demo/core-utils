@@ -92,9 +92,20 @@ public class GithubBadgeHelper {
     /**
      * @return the GitHub-Markdown'-badge to 'Release Catalog' (to be inserted at 'README.md')
      */
-    public String getBadgeReleaseCatalog() {
+    public String getBadgeReleaseCatalogMD() {
         return String.format(
             "[![Release-Catalog](%s)](https://krm-demo.github.io/core-utils/)",
+            getBadgeUrlReleaseCatalog());
+    }
+
+    /**
+     * @return the HTML-badge to 'Release Catalog' (to be inserted at each HTML-page in processed JavaDoc-report)
+     */
+    public String getBadgeReleaseCatalogHTML() {
+        return String.format("""
+            <a href="https://krm-demo.github.io/core-utils/">
+              <img alt="a badge to 'Release Catalog'" src="%s" />
+            </a>""",
             getBadgeUrlReleaseCatalog());
     }
 
