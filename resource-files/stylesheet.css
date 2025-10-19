@@ -1069,8 +1069,8 @@ ul.help-subtoc > li::before {
     font-style: italic;
 }
 /*
- * Indicator icon for external links.
- */
+ * Indicator icon for external links ( commented out for 'Release Catalog !!!').
+ * ---------------------- comment-out start ------------------------ *
 main a[href*="://"]::after {
     content:"";
     display:inline-block;
@@ -1093,6 +1093,9 @@ main a[href*="://"]:focus::after {
         132-240 240 120 120 240-240 132 132V0z" fill="%23bb7a2a"/>\
       </svg>');
 }
+ * ---------------------- comment-out finish ------------------------ *
+ */
+
 /*
  * Styles for header/section anchor links
  */
