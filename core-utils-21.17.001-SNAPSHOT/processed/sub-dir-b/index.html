@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>core-utils (gh-pages initial version)</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<div class="container-fluid p-1 bg-primary text-white text-center">
+  <h1>
+    <a href="../../.." style="float: left; margin-left: 10px;">
+      <img alt="an imagege to return back to the project-site"
+           src="../images/git-hub-logo--jd-navbar.svg"
+           width="38px" height="38px"
+           style="background-color: white; border: 3px solid #4D7A97" />
+    </a>
+    <span style="font-family: monospace; font-weight: 600">core-utils</span>
+    (<small>test site</small>)
+    <a href="https://github.com/krm-demo/core-utils/tree/main/.github/th-test-site/original" style="float: right; margin-right: 10px;">
+      <img alt="an imagege to return back to the project-site"
+           src="../images/git-hub-logo--white-inv.svg"
+           width="32px" height="32px" />
+    </a>
+  </h1>
+</div>
+
+<!-- Body (Content) -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-3">
+
+      <div style="text-align: center">
+        <!-- following two DIV-s are mutually exclusively displayed via "th:style" attribute: -->
+        <div style="display: none">
+          <a href="#" class="btn btn-primary disabled">original</a>
+          <a href="../../processed/sub-dir-b/index.html" class="btn btn-link">processed</a>
+          <hr/>
+        </div>
+        <div style="display: block">
+          <a href="../../original/sub-dir-b/index.html" class="btn btn-link">original</a>
+          <a href="#" class="btn btn-primary disabled">processed</a>
+          <hr/>
+        </div>
+      </div>
+
+      <h3>Navigation Links</h3>
+      <a href="../index.html">home</a>
+      <ul>
+        <li><a href="../root-one.html">root-one</a></li>
+        <li><a href="../root-two.html">root-two</a></li>
+        <li><a href="../sub-dir-a/index.html">sub-dir-a</a></li>
+        <li><b>sub-dir-b</b></li>
+        <ul>
+          <li><a href="sub-dir-b-1/index.html">sub-dir-b-1</a></li>
+        </ul>
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      <div class="row border border-secondary rounded">
+        <h3>Some Page-Specific Information</h3>
+        <p>
+          This is the index-page of <code>/sub-dir-b</code>.
+        </p>
+        <p>
+          After executing the tests (<code>"...&gt; mvn clean verify"</code> from command line),<br/>
+          the processed site become available in the directory <code>./target/th-test-site/processed</code>.
+        </p>
+        <div class="text-center bg-light fst-italic text-sm mb-1">Each page has its own content here.</div>
+      </div>
+      <div class="row border border-secondary rounded mt-5">
+        <h3>Some Technical Information</h3>
+        <p>
+          The content of this section has <b><var>th-tool</var></b>-tags,
+          which performs the access to the basic <b><var>th-tool</var></b>-helpers:
+        </p>
+        <code>[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21.17.001-SNAPSHOT</code><br/>
+        <code>[&#8203;[${ mh.projectArtifact }]&#8203;] = core-utils</code><br/>
+        <code>[&#8203;[${ mh.currentProjectVersion }]&#8203;] = 21.17.001-SNAPSHOT</code><br/>
+        <div class="text-center bg-light fst-italic text-sm mb-1">
+          Each page has the same calculated content here.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="p-1 text-center fixed-bottom ">
+  <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.1)">
+    some footer, which is also exactly the same for all pages
+  </div>
+</footer>
+
+</body>
+</html>

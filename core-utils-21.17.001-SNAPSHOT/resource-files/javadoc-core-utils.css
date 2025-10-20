@@ -1,0 +1,46 @@
+/**
+ *    This CSS is applied to in addition to standard JavaDoc-styles for "main" code-base
+ */
+
+img.release-catalog-badge {
+    border: 1px solid var(--selected-background-color);
+    border-radius: 5px;
+}
+a.release-catalog-badge-link:hover img.release-catalog-badge {
+    border: 1px solid var(--navbar-text-color);
+}
+
+/*
+:root {
+    --navbar-background-color: #42787dd9;
+}
+
+h5 {
+    color: DarkGray;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom: 0.15em !important;
+    margin-top: 0.65em !important;
+    font-size: 0.9em;
+}
+
+h5 + pre {
+    color: DarkGray;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 0.9em;
+}
+
+div.block code {
+    background-color: WhiteSmoke !important;
+}
+div.block hr {
+    border-color: WhiteSmoke !important;
+}
+
+small code {
+    --code-font-size: 12px;
+    background-color: WhiteSmoke !important;
+}
+
+*/
