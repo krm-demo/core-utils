@@ -12,12 +12,20 @@
 <!-- Header -->
 <div class="container-fluid p-1 bg-primary text-white text-center">
   <h1>
+    <!--
     <a href="../.." style="float: left; margin-left: 10px;">
       <img alt="an imagege to return back to the project-site"
            src="images/git-hub-logo--jd-navbar.svg"
            width="38px" height="38px"
            style="background-color: white; border: 3px solid #4D7A97" />
     </a>
+    -->
+    <span style="float: left; font-size: 0.3em; margin-left: 10px; margin-top: 4px; text-align: left;">
+      [(${ gbh.badgeReleaseCatalogHTML })]
+      <hr style="height: 1px; margin: 4px; padding: 0;"/>
+      [(${ gbh.badgeHomeJavaDocHTML })]
+    </span>
+
     <span style="font-family: monospace; font-weight: 600">core-utils</span>
     (<small>test site</small>)
     <a href="https://github.com/krm-demo/core-utils/tree/main/.github/th-test-site/original"
@@ -92,7 +100,8 @@
 <!-- Footer -->
 <footer class="p-1 text-center fixed-bottom ">
   <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.1)">
-    some footer, which is also exactly the same for all pages
+    some footer, which is also exactly the same for all pages;
+    (the name of th-template is '<code>[(${ #execInfo.templateName })]</code>')
   </div>
 </footer>
 
