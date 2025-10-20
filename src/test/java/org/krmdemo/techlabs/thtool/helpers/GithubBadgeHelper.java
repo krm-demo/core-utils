@@ -103,8 +103,8 @@ public class GithubBadgeHelper {
      */
     public String getBadgeReleaseCatalogHTML() {
         return String.format("""
-            <a href="https://krm-demo.github.io/core-utils/">
-              <img alt="a badge to 'Release Catalog'" src="%s" />
+            <a href="https://krm-demo.github.io/core-utils/" class="release-catalog-badge-link">
+              <img alt="a badge to 'Release Catalog'" src="%s" class="release-catalog-badge"/>
             </a>""",
             getBadgeUrlReleaseCatalog());
     }

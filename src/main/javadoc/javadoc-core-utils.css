@@ -2,6 +2,14 @@
  *    This CSS is applied to in addition to standard JavaDoc-styles for "main" code-base
  */
 
+img.release-catalog-badge {
+    border: 1px solid var(--selected-background-color);
+    border-radius: 5px;
+}
+a.release-catalog-badge-link:hover img.release-catalog-badge {
+    border: 1px solid var(--navbar-text-color);
+}
+
 /*
 :root {
     --navbar-background-color: #42787dd9;
