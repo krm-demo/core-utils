@@ -1,3 +1,4 @@
+ec41af57 << new snapshot version >> 21.18.001-SNAPSHOT
 cd516fd8 << public release >> 21.17
 7d4c0235 rename 'th-test-release-catalog' to 'th-release-catalog' and attempt to prevent breaking the line at the second column of 'data-time-triplet' where the month and day of week should always be displayed at the same line (otherwise the page at my phone 'Google Pixel 6' looks ugly)
 2e5e9a53 correct 'th-test-site' (add home JavaDoc badge) #2
