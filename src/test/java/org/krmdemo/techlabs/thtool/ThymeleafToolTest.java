@@ -76,7 +76,7 @@ public class ThymeleafToolTest {
             "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
             "process",
             "--output",
-            ".github/th-test-release-catalog/index.html",
+            ".github/th-release-catalog/index.html",
             ".github/th-templates/GH-PAGES--Release-Catalog.html.th"
         );
 //        stdErr.println(sbErr);
@@ -85,7 +85,7 @@ public class ThymeleafToolTest {
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isEmpty();
 
-        assertThat(loadFileContent(".github/th-test-release-catalog/index.html"))
+        assertThat(loadFileContent(".github/th-release-catalog/index.html"))
             .contains("core-utils (Release Catalog)")
             .contains("https://github.com/krm-demo/core-utils/commit/");
     }

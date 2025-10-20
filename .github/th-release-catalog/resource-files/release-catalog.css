@@ -52,6 +52,8 @@ h2 {
     text-align: left;
     color: var(--release-date-time-color);
     font-size: 0.95em;
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides any content that overflows the element's box */
 }
 .col-3 {
     text-align: left;
