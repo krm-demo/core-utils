@@ -1,3 +1,4 @@
+c3240b9e add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #3
 a560e529 << new snapshot version >> 21.16.003-SNAPSHOT
 66fa2a9c << internal release >> 21.16.002
 acb1598c add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #2
