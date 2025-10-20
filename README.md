@@ -1,6 +1,6 @@
-[![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg?event=push)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)  [![Latest-Public](https://img.shields.io/badge/core--utils-21.16-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.16)  
+[![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg?event=push)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)  [![Latest-Public](https://img.shields.io/badge/core--utils-21.16-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.16)  [![Snapshot-Version](https://img.shields.io/badge/core--utils-21.17.001--SNAPSHOT-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils)
 
-[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/) [![Latest-Public](https://img.shields.io/badge/core--utils-21.16-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.16)    
+[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/) [![Latest-Public](https://img.shields.io/badge/core--utils-21.16-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.16)  [![Snapshot-Version](https://img.shields.io/badge/core--utils-21.17.001--SNAPSHOT-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.17.001-SNAPSHOT)  
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 ![GitHub recent commits](https://img.shields.io/github/commits-since/krm-demo/core-utils/21.07)
@@ -12,7 +12,7 @@ It was initially created as a core and reusable part of **`th-tool`** (which is 
 Some features and approaches could be very useful and helpful independently as a separate Java-library
 that could be easily integrated into any Java-project as a maven/gradle artifact or as a dependency to jbang-script.
 
-Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.16).
+Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.17.001-SNAPSHOT).
 Other versions of ths project are listed in the [release catalog](https://krm-demo.github.io/core-utils/),
 but the latest relevant versions (with relation to the current one) are:
 
@@ -21,25 +21,38 @@ but the latest relevant versions (with relation to the current one) are:
 
 ---
 
-This particular version of the project `21.16` is an _PUBLIC_-release version, which consists of
+This particular version of the project `21.17.001-SNAPSHOT` is a _SNAPSHOT_-version, which consists of:
 - major version `21` (that corresponds to minimum available version of JDK);
-- minor version `16` (the ordinal number of _PUBLIC_-release);
+- minor version `17` (the ordinal number of _PUBLIC_-release);
+- incremental version  `1` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
+- the qualifier `SNAPSHOT` means that it's a _SNAPSHOT_-version (not released yet in any kind)
 
-> [!TIP]
-> TODO: check whether this _PUBLIC_-release is the latest one and render the warning if it's not
+> [!IMPORTANT]
+> It's highly recommended to use the latest _PUBLIC_-release version, because all others are either outdated or not stable yet
 
-## Usage of `core-utils`-library
+## Working with SNAPSHOT-version of `core-utils`-library
 
 > [!NOTE]
-> The _PUBLIC_-release version has only 2 integer parts (_major_ and _minor_) parts **without** _incremental_ part and suffix `-SNAPSHOT`.
-> It's built and deployed into [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
-> artifatcory as a result of manual execution of GitHub workflow [`release-public`](https://github.com/krm-demo/core-utils/actions/workflows/release-public.yml).
+> The SNAPSHOT-version has 3 integer parts (_major_, _minor_ and _incremental_) followed by the suffix `-SNAPSHOT`.
+> It's built by GitHub workflow [`on-main-push`](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml) on every `git push` into `main` branch.
 
-This version is deployed into public [maven central repository](https://central.sonatype.com/) - so, it's available for usage
-without additional downloading steps or local builds. As for Java-Doc it's either available here or will be automatically downloaded by your favorite IDE.
+The JavaDoc is generated and project-site at [GitHub Pages](https://docs.github.com/en/pages) is updated,
+but **nothing is deployed** neither to [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
+artifactory nor to [maven central repository](https://central.sonatype.com/).
+As for content of GitHub Markdown files (like one you are reading now) - they are generated and updated
+during either INTERNAL-release or PUBLIC-release from corresponding `th-tool`-templates (quite all of them
+are located in [this folder](.github/th-templates)).
 
-But in order your maven/gradle project or jbang-script to use `core-utils`-library
-you must declare it as dependency in the way described below.
+The binaries of _Snapshot_-version are available only after cloning the git-repo locally and
+checking out the proper branch (the most recent snapshot is in `main`-branch).
+In order to build the project it's recommended to use [sdkman](https://sdkman.io/) to install the latest version
+of [java](https://sdkman.io/jdks/) and the latest version of [maven](https://sdkman.io/sdks/maven/). 
+After that, staying in the root directory of a project it's enough to type:
+```bash
+...> mvn clean install
+```
+The command above installs **`core-utils`**-library 
+in the local maven-repository, and it becomes available for usage described below...
 
 ### [Maven](https://maven.apache.org/)
 Dependencies for projects that are using [Apache Maven](https://maven.apache.org/) as a build-tool 
@@ -49,7 +62,7 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.16</artifactId>
+            <version>21.17.001-SNAPSHOT</artifactId>
         </dependency>
     ```
 - for test-source dependencies:
@@ -57,31 +70,31 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.16</artifactId>
+            <version>21.17.001-SNAPSHOT</artifactId>
             <scope>test</scope>
         </dependency>
     ```
-
 ### [Gradle](https://gradle.org/)
 Projects that use [**Gradle** Build Tool](https://gradle.org/) should declare the dependencies 
 in either `build.gradle` or `build.gradle.kts` like following: 
 ```Gradle
     // for main-source implementation dependencies:
-    implementation("io.github.krm-demo:core-utils:21.16")
+    implementation("io.github.krm-demo:core-utils:21.17.001-SNAPSHOT")
     . . . . . . . . . . . . . .
     // for test-source implementation dependencies:
-    testImplementation("io.github.krm-demo:core-utils:21.16")
+    testImplementation("io.github.krm-demo:core-utils:21.17.001-SNAPSHOT")
 ```
 
 ### [JBang](https://www.jbang.dev/)
+
 If you don't have [JBang](https://www.jbang.dev/) installed - it's very easy to do
-either following by [instructions at their site](https://www.jbang.dev/download/)
+either following by [instructions at their site](https://www.jbang.dev/download/) 
 or using [sdkman](https://sdkman.io/sdks/jbang/). The easiest way to verify that
-both [JBang](https://www.jbang.dev/) and **`core-utils`**-library
+both [JBang](https://www.jbang.dev/) and **`core-utils`**-library 
 are properly installed is to execute following command:
 
 ```bash
-...> jbang io.github.krm-demo:core-utils:21.16
+...> jbang io.github.krm-demo:core-utils:21.17.001-SNAPSHOT
 This is a Main-class of 'core-utils' library (just a test message here)
 ```
 You must see quite the same output as above. The versions and other detailed information could also be verified in such way.
@@ -91,11 +104,11 @@ Then you can create your own jbang-scripts using following examples:
 - JBang-script to see Java system-properties
 - JBang-script to see the detailed information of CLASSPATH at runtime
 - ... some other very useful and helpful scripts ...
--
+- 
 
 ---
 > [!TIP]
-> TODO: examples to be provided... (maybe specific for _PUBLIC_-releases)
+> TODO: examples to be provided... (maybe specific for _SNAPSHOT_-versions)
 ---
 
 
@@ -114,51 +127,55 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
 ```json
 {
   "releaseCatalog": {
-    "current-snapshot-group": {
-      "minor-group-info": "<< unreleased >> 2 commits",
-      "commits-one-line": [
-        "c3240b9 | 2025-10-20 Mon 00:05:04 |  add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #3",
-        "a560e52 | 2025-10-19 Sun 23:15:06 |  << new snapshot version >> 21.16.003-SNAPSHOT"
-      ]
-    },
-    "current-minor-groups": [
+    "major-groups": [
       {
-        "minor-group-info": "<< INTERNAL 21.16.002 >> 22 working commits",
-        "commits-one-line": [
-          "66fa2a9 | 2025-10-19 Sun 23:12:29 |  << internal release >> 21.16.002",
-          "acb1598 | 2025-10-19 Sun 22:57:19 |  add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #2",
-          "01ba4bf | 2025-10-19 Sun 22:37:19 |  << internal release >> 21.16.002",
-          "1e23200 | 2025-10-19 Sun 22:32:54 |  add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #1",
-          "d6e1531 | 2025-10-19 Sun 20:32:32 |  correct z-index of sticky header and increse the right lane to 35px",
-          "7f7122a | 2025-10-19 Sun 17:37:20 |  improve displaying linked-date-time-triplets at 'Release Catalog' #1",
-          "75cec7c | 2025-10-19 Sun 04:03:21 |  working on integrating date-time-triplet to 'Release Catalog' page #5",
-          "f15936a | 2025-10-19 Sun 03:17:00 |  working on integrating date-time-triplet to 'Release Catalog' page #4",
-          "d32782b | 2025-10-19 Sun 01:38:59 |  working on integrating date-time-triplet to 'Release Catalog' page #3",
-          "272d107 | 2025-10-18 Sat 06:12:54 |  working on integrating date-time-triplet to 'Release Catalog' page #2",
-          "6f66bfb | 2025-10-17 Fri 23:32:13 |  add some useful bash-scripts to execute particular test with maven",
-          "e9786f7 | 2025-10-17 Fri 22:03:16 |  start working on integrating date-time-triplet to 'Release Catalog' page #1",
-          "798fe04 | 2025-10-17 Fri 17:20:07 |  add more utility-methods from another tech-labs project (without tests though !!!)",
-          "c8ee2ba | 2025-10-17 Fri 00:22:12 |  introduce GithubBadgeHelper.badgeCommit(commitInfo)",
-          "c3dec74 | 2025-10-16 Thu 20:43:32 |  playing with LinkedDateTimeTripletMap and GitLogInfo #4",
-          "51a5a11 | 2025-10-16 Thu 06:04:41 |  playing with LinkedDateTimeTripletMap and GitLogInfo #3 (fix the build)",
-          "8e2ff45 | 2025-10-16 Thu 05:55:09 |  introduce LinkedDateTimeTripletMap and GitLogInfo #2",
-          "1cf175a | 2025-10-16 Thu 00:18:25 |  introduce LinkedDateTimeTripletMap",
-          "32b8955 | 2025-10-15 Wed 15:53:34 |  introduce DateTimeTriplet #1",
-          "e9d1c16 | 2025-10-14 Tue 23:51:37 |  integrate GithubBadgeHelper badges into 'Release Catalog' #3",
-          "78c7466 | 2025-10-14 Tue 23:09:47 |  integrate GithubBadgeHelper badges into 'Release Catalog' #2",
-          "8fb420d | 2025-10-14 Tue 22:48:57 |  integrate GithubBadgeHelper badges into 'Release Catalog' #1",
-          "9e289d4 | 2025-10-14 Tue 04:16:26 |  << new snapshot version >> 21.16.002-SNAPSHOT"
+        "major-group-info": "21.16 (finalized major group with 2 finalized minor groups)",
+        "final-minor-group": {
+          "minor-group-info": "<< PUBLIC 21.16 >> 2 working commits",
+          "commits-one-line": [
+            "05b6208 | 2025-10-20 Mon 00:17:30 |  << public release >> 21.16",
+            "c3240b9 | 2025-10-20 Mon 00:05:04 |  add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #3",
+            "a560e52 | 2025-10-19 Sun 23:15:06 |  << new snapshot version >> 21.16.003-SNAPSHOT"
+          ]
+        },
+        "minor-groups": [
+          {
+            "minor-group-info": "<< INTERNAL 21.16.002 >> 22 working commits",
+            "commits-one-line": [
+              "66fa2a9 | 2025-10-19 Sun 23:12:29 |  << internal release >> 21.16.002",
+              "acb1598 | 2025-10-19 Sun 22:57:19 |  add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #2",
+              "01ba4bf | 2025-10-19 Sun 22:37:19 |  << internal release >> 21.16.002",
+              "1e23200 | 2025-10-19 Sun 22:32:54 |  add 'Release Catalog' badge at every HTML-page of processed JavaDoc-report #1",
+              "d6e1531 | 2025-10-19 Sun 20:32:32 |  correct z-index of sticky header and increse the right lane to 35px",
+              "7f7122a | 2025-10-19 Sun 17:37:20 |  improve displaying linked-date-time-triplets at 'Release Catalog' #1",
+              "75cec7c | 2025-10-19 Sun 04:03:21 |  working on integrating date-time-triplet to 'Release Catalog' page #5",
+              "f15936a | 2025-10-19 Sun 03:17:00 |  working on integrating date-time-triplet to 'Release Catalog' page #4",
+              "d32782b | 2025-10-19 Sun 01:38:59 |  working on integrating date-time-triplet to 'Release Catalog' page #3",
+              "272d107 | 2025-10-18 Sat 06:12:54 |  working on integrating date-time-triplet to 'Release Catalog' page #2",
+              "6f66bfb | 2025-10-17 Fri 23:32:13 |  add some useful bash-scripts to execute particular test with maven",
+              "e9786f7 | 2025-10-17 Fri 22:03:16 |  start working on integrating date-time-triplet to 'Release Catalog' page #1",
+              "798fe04 | 2025-10-17 Fri 17:20:07 |  add more utility-methods from another tech-labs project (without tests though !!!)",
+              "c8ee2ba | 2025-10-17 Fri 00:22:12 |  introduce GithubBadgeHelper.badgeCommit(commitInfo)",
+              "c3dec74 | 2025-10-16 Thu 20:43:32 |  playing with LinkedDateTimeTripletMap and GitLogInfo #4",
+              "51a5a11 | 2025-10-16 Thu 06:04:41 |  playing with LinkedDateTimeTripletMap and GitLogInfo #3 (fix the build)",
+              "8e2ff45 | 2025-10-16 Thu 05:55:09 |  introduce LinkedDateTimeTripletMap and GitLogInfo #2",
+              "1cf175a | 2025-10-16 Thu 00:18:25 |  introduce LinkedDateTimeTripletMap",
+              "32b8955 | 2025-10-15 Wed 15:53:34 |  introduce DateTimeTriplet #1",
+              "e9d1c16 | 2025-10-14 Tue 23:51:37 |  integrate GithubBadgeHelper badges into 'Release Catalog' #3",
+              "78c7466 | 2025-10-14 Tue 23:09:47 |  integrate GithubBadgeHelper badges into 'Release Catalog' #2",
+              "8fb420d | 2025-10-14 Tue 22:48:57 |  integrate GithubBadgeHelper badges into 'Release Catalog' #1",
+              "9e289d4 | 2025-10-14 Tue 04:16:26 |  << new snapshot version >> 21.16.002-SNAPSHOT"
+            ]
+          },
+          {
+            "minor-group-info": "<< INTERNAL 21.16.001 >> 1 working commits",
+            "commits-one-line": [
+              "a2c1400 | 2025-10-14 Tue 04:14:04 |  << internal release >> 21.16.001",
+              "608f310 | 2025-10-14 Tue 04:09:09 |  << new snapshot version >> 21.16.001-SNAPSHOT"
+            ]
+          }
         ]
       },
-      {
-        "minor-group-info": "<< INTERNAL 21.16.001 >> 1 working commits",
-        "commits-one-line": [
-          "a2c1400 | 2025-10-14 Tue 04:14:04 |  << internal release >> 21.16.001",
-          "608f310 | 2025-10-14 Tue 04:09:09 |  << new snapshot version >> 21.16.001-SNAPSHOT"
-        ]
-      }
-    ],
-    "major-groups": [
       {
         "major-group-info": "21.15 (finalized major group with 1 finalized minor groups)",
         "final-minor-group": {
@@ -821,8 +838,6 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
     "untrackedFolders": [],
     "conflictingStageState": {},
     "ignoredNotInIndex": [
-      ".github/th-test-site/processed",
-      ".github/th-test-release-catalog/index.html",
       "target"
     ],
     "uncommittedChanges": [
@@ -851,26 +866,26 @@ the content of `GithubInputsHelper` (`th-tool`-expression `${gih}`) instance is:
 the content of `MavenHelper` (`th-tool`-expression `${mh}`) instance is:
 ```json
 {
-  "calculatedProjectVersion": "21.16.000-SNAPSHOT",
-  "currentProjectVersion": "21.16",
-  "incrementalAsInt": "0",
-  "incrementalVersion": "0",
-  "internalNextVersion": "21.16.001-SNAPSHOT",
-  "internalReleaseVersion": "21.16.000",
+  "calculatedProjectVersion": "21.17.001-SNAPSHOT",
+  "currentProjectVersion": "21.17.001-SNAPSHOT",
+  "incrementalAsInt": "1",
+  "incrementalVersion": "1",
+  "internalNextVersion": "21.17.002-SNAPSHOT",
+  "internalReleaseVersion": "21.17.001",
   "majorVersion": "21",
   "majorVersionAsInt": "21",
-  "minorVersion": "16",
-  "minorVersionAsInt": "16",
+  "minorVersion": "17",
+  "minorVersionAsInt": "17",
   "projectArtifact": "core-utils",
-  "projectCatalogName": "core-utils-21.16",
-  "projectName": "core-utils:21.16",
-  "publicNextVersion": "21.17.001-SNAPSHOT",
-  "publicReleaseVersion": "21.16",
+  "projectCatalogName": "core-utils-21.17.001-SNAPSHOT",
+  "projectName": "core-utils:21.17.001-SNAPSHOT",
+  "publicNextVersion": "21.18.001-SNAPSHOT",
+  "publicReleaseVersion": "21.17",
   "resourcePath": "/META-INF/maven/maven-project.properties",
-  "usageFragmentPath": ".github/th-templates/Usage-PUBLIC.md.th",
-  "usageFragmentSuffix": "PUBLIC",
-  "versionHasIncrementalPart": "false",
-  "versionHasQualifierPart": "false",
+  "usageFragmentPath": ".github/th-templates/Usage-SNAPSHOT.md.th",
+  "usageFragmentSuffix": "SNAPSHOT",
+  "versionHasIncrementalPart": "true",
+  "versionHasQualifierPart": "true",
   "versionQualifier": "SNAPSHOT"
 }
 ```
