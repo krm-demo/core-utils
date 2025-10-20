@@ -438,7 +438,7 @@
           <windowtitle>JavaDoc ${project.name}:${project.version}</windowtitle>
           <doctitle>JavaDoc for &lt;u&gt;${project.name}&lt;/u&gt;:${project.version}</doctitle>
 <!--          <header>&lt;u&gt;${project.name}&lt;/u&gt;:${project.version}</header>-->
-          <header>[(${gbh.badgeReleaseCatalogHTML})]</header>
+          <header>[(${jdh.navBarRight})]</header>
           <excludePackageNames>empty</excludePackageNames>
         </configuration>
         <executions>

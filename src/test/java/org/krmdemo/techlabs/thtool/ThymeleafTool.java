@@ -6,6 +6,7 @@ import org.krmdemo.techlabs.thtool.helpers.GitHelper;
 import org.krmdemo.techlabs.thtool.helpers.GithubBadgeHelper;
 import org.krmdemo.techlabs.thtool.helpers.GithubHelper;
 import org.krmdemo.techlabs.thtool.helpers.GithubInputsHelper;
+import org.krmdemo.techlabs.thtool.helpers.JavaDocHelper;
 import org.krmdemo.techlabs.thtool.helpers.MavenHelper;
 import org.krmdemo.techlabs.thtool.helpers.ZeroSpaceHelper;
 import org.thymeleaf.TemplateEngine;
@@ -186,7 +187,8 @@ public class ThymeleafTool {
             GitHelper::register,
             GithubHelper::register,
             GithubInputsHelper::register,
-            GithubBadgeHelper::register
+            GithubBadgeHelper::register,
+            JavaDocHelper::register
         );
         return new CommandLine(tt).execute(args);
     }
