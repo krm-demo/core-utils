@@ -49,6 +49,12 @@ public class GithubBadgeHelperTest {
     }
 
     @Test
+    void testBadgeHomeJavaDocHTML() {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        assertThat(gbh.getBadgeHomeJavaDocHTML()).isNotBlank();
+    }
+
+    @Test
     void testBadgeLatestPublicJavaDoc() {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
         assumeThat(gbh.isLatestPublicAvailable()).isTrue(); // <-- in some initial cases it's not available

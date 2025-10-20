@@ -142,12 +142,13 @@ jobs:
           JAR_FILE_NAME=$(find "./target/" -name "core*.jar" ! -name "*javadoc.jar" ! -name "*sources.jar" -exec basename {} \;)
           echo "... going to re-write the content of folder '$(realpath ../gh-pages-branch/${JAR_FILE_NAME%.*})': ..."
           rm -rf ../gh-pages-branch/*-SNAPSHOT
-          #cp -r target/reports/apidocs/ ../gh-pages-branch/${JAR_FILE_NAME%.*}
-          cp -r .github/th-test-site ../gh-pages-branch/${JAR_FILE_NAME%.*}
           echo "JAR_FILE_NAME=$JAR_FILE_NAME"
           
-          echo "... process generated JavaDoc-report with 'th-tool': ..."
+          echo "... process generated JavaDoc-report with 'th-tool' (and output it as the project-site): ..."
           .github/th-tool.sh process-dir --input-dir target/reports/apidocs/ --output-dir ../gh-pages-branch/${JAR_FILE_NAME%.*} .html
+
+          echo "... copy the 'test-site' that was generated in scope of 'mvn test -Dtest=ThymeleafToolTest#testProcessDir_TestSite': ..."
+          cp -r .github/th-test-site ../gh-pages-branch/${JAR_FILE_NAME%.*}
 
           echo "... copy the previously generated 'Release Catalog' page ..."
           cp -r .github/th-test-release-catalog/* ../gh-pages-branch

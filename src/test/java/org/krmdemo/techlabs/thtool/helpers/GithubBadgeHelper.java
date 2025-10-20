@@ -120,6 +120,22 @@ public class GithubBadgeHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
+     * This property is used at 'th-test-site', where standard JavaDoc 'Overview' link is not present.
+     *
+     * @return the HTML-badge that corresponds to the current JavaDoc-home page ('Overview' link, but with version-info)
+     */
+    @JsonIgnore
+    public String getBadgeHomeJavaDocHTML() {
+        return StringUtils.firstNonBlank(
+            getBadgeSnapshotJavaDocHTML(),
+            getBadgeLatestInternalJavaDocHTML(),
+            getBadgeLatestPublicJavaDocHTML()
+        );
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
      * @return {@code true} if the latest PUBLIC-release is available for this project, or {@code false} - otherwise
      */
     public boolean isLatestPublicAvailable() {
