@@ -1,12 +1,31 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafTool;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedSet;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileContent;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileLines;
+import static org.krmdemo.techlabs.core.utils.CoreStringUtils.multiLine;
 
 /**
  * This class represents a <b>{@code th-tool}</b>-helper to be invoked from HTML-pages,
@@ -26,6 +45,7 @@ import java.util.function.Consumer;
  *     The <code>javadoc</code> Command
  * </a>
  */
+@Slf4j
 @JsonPropertyOrder(alphabetic = true)
 public class JavaDocHelper {
 
@@ -33,6 +53,8 @@ public class JavaDocHelper {
      * The name of <b>{@code th-tool}</b>-variable for helper-object {@link JavaDocHelper}
      */
     public static final String VAR_NAME__HELPER = "jdh";
+
+    public static final Path LOCAL_PATH__SRC_MAIN_JAVA = Path.of("src", "main", "java");
 
     /**
      * @param ttCtx <b>{@code th-tool}</b>-context to wrap
@@ -43,6 +65,7 @@ public class JavaDocHelper {
         if (helper == null) {
             JavaDocHelper.register(ttCtx);
             GithubBadgeHelper.register(ttCtx);
+            GithubHelper.register(ttCtx);
             GitHelper.register(ttCtx);
             MavenHelper.register(ttCtx);
             helper = fromCtx(ttCtx);
@@ -78,14 +101,130 @@ public class JavaDocHelper {
         this.ttCtx = Objects.requireNonNull(ttCtx);
     }
 
+    // lazy-initialized correspondence between JavaDoc-report files and GitHub-project source-files
+    private Map<Path, Path> packagePathMap = null;
+
     // --------------------------------------------------------------------------------------------
+
+
 
     /**
      * @return the HTML-content of the whole right-part of top-navbar of each JavaDoc-generated HTML-page
      */
     public String getNavBarRight() {
-        // TODO: add link to concrete source file in GitHub repository of proper version in git-tree
-        return GithubBadgeHelper.fromCtx(ttCtx).getBadgeReleaseCatalogHTML();
+        logInfo("%n%n==== %s.getNavBarRight(): =====%ntth --> %s",
+            getClass().getSimpleName(), ttCtx.getThToolHelper());
+        logInfo("- packagePathSet().size() = %d;", packagePathSet().size());
+        logInfo("- githubSourceSuffix() = '%s';", githubSourceSuffix());
+
+        String navBarRightHtml =
+            GithubBadgeHelper.fromCtx(ttCtx).getBadgeReleaseCatalogHTML() +
+            System.lineSeparator() +
+            getBadgeGitHubHTML();
+        logInfo("------------ navBarRightHtml: ------------");
+        logInfo(navBarRightHtml);
+        logInfo("==========================================");
+        return navBarRightHtml;
+    }
+
+    private String getBadgeGitHubHTML() {
+        String sourceSuffix = githubSourceSuffix();
+        return String.format("""
+            <a href="%s"
+               class="github-project-source-badge-link">
+              <img alt="a badge to GitHub-project %s for version '%s'"
+                   title="go to GitHub-project %s for version '%s'"
+                   class="github-project-source-badge"
+                   src="%s" />
+            </a>""",
+            githubSourceUrl(sourceSuffix),
+            StringUtils.isBlank(sourceSuffix) ? "" : String.format("source '%s'", sourceSuffix),
+            MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion(),
+            StringUtils.isBlank(sourceSuffix) ? "" : String.format("source '%s'", sourceSuffix),
+            MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion(),
+            GithubBadgeHelper.fromCtx(ttCtx).badgeUrlGitHub());
+    }
+
+    private String githubSourceUrl(String sourceSuffix) {
+        String repoHtmlUrl = GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl();
+        String gitTreeName = MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion();
+        if (gitTreeName.endsWith("SNAPSHOT")) {
+            gitTreeName = "main";
+        }
+        return String.format("%s/tree/%s/%s", repoHtmlUrl, gitTreeName, sourceSuffix);
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    private String githubSourceSuffix() {
+        File javaDocFile = ttCtx.getThToolHelper().getInputFile();
+        logInfo("- detecting the path-suffix to GitHub source for %s;", javaDocFile);
+        if (javaDocFile == null || !javaDocFile.isFile()) {
+            logInfo("- (input file is invalid - returning empty suffix");
+            return "";
+        }
+
+        Path javaDocParentPath = javaDocFile.getParentFile().toPath();
+        if (javaDocParentPath.endsWith("class-use")) {
+            logInfo("- '.../class-use' was truncated;");
+            javaDocParentPath = javaDocParentPath.getParent();
+        }
+        logInfo("- javaDocParentPath is %s;", pathParts(javaDocParentPath));
+        if (!packagePathMap.containsKey(javaDocParentPath)) {
+            logInfo("- No! the file is not from proper JavaDoc-path");
+            return "";
+        }
+
+        logInfo("- Yeh!!! this input file belongs to proper JavaDoc-path");
+        return localPathStr(packagePathMap.get(javaDocParentPath));
+    }
+
+    /**
+     * @return loading the list of Java-packages from predefined file in JavaDoc-root directory
+     */
+    private synchronized Map<Path, Path> packagePathSet() {
+        // TODO: think about dedicated th-tool command for JavaDoc to avoid synchronization
+        if (packagePathMap != null) {
+            return packagePathMap;
+        }
+        File javaDocRoot = ttCtx.getThToolHelper().getInputDir();
+        if (javaDocRoot == null || !javaDocRoot.isDirectory()) {
+            throw new IllegalStateException(
+                "could not detect the JavaDoc-root directory, because 'inputDir' invalid - " + javaDocRoot);
+        }
+        Path packagesPath = javaDocRoot.toPath().resolve("packages");
+        logInfo("- loading the list of JavaDoc packages from '%s':", packagesPath);
+        List<String> packagesLines = loadFileLines(packagesPath);
+        logInfo(packagesLines.stream().collect(multiLine()));
+
+        this.packagePathMap = packagesLines.stream()
+            .collect(toSortedMap(
+                this::packageNameToJavaDocPath,
+                this::packageNameToSourceMainPath
+            ));
+        logInfo("- packagePathSet --> %s", dumpAsJsonTxt(this.packagePathMap));
+        return this.packagePathMap;
+    }
+
+    private Path packageNameToJavaDocPath(String packageName) {
+        File javaDocRoot = ttCtx.getThToolHelper().getInputDir();
+        return javaDocRoot.toPath().resolve(Paths.get("", packageName.split("\\.")));
+    }
+
+    private Path packageNameToSourceMainPath(String packageName) {
+        return LOCAL_PATH__SRC_MAIN_JAVA.resolve(Paths.get("", packageName.split("\\.")));
+    }
+
+    private List<String> pathParts(Path path) {
+        return StreamSupport.stream(path.spliterator(), false)
+            .map(Path::toString)
+            .toList();
+    }
+
+    private String localPathStr(Path path) {
+        return StreamSupport.stream(path.spliterator(), false)
+            .map(Path::toString)
+            .collect(Collectors.joining(File.separator));
     }
 
     // --------------------------------------------------------------------------------------------
@@ -94,4 +233,11 @@ public class JavaDocHelper {
     public String toString() {
         return DumpUtils.dumpAsYamlTxt(this);
     }
+
+    private static void logInfo(String formatString, Object... formatArgs) {
+        if (log.isInfoEnabled()) {
+            log.info(String.format(formatString, formatArgs));
+        }
+    }
+
 }

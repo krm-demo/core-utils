@@ -156,6 +156,7 @@ public class ThymeleafTool {
         if (StringUtils.isBlank(templateContent)) {
             return null;
         } else {
+            varsCtx.getThToolHelper().setInputFile(null); // <-- no input-file is available in this thread
             return templateEngine.process(templateContent, varsCtx);
         }
     }

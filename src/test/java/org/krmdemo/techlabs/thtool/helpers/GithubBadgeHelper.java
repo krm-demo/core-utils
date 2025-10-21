@@ -419,7 +419,8 @@ public class GithubBadgeHelper {
      * @return the URL to be inserted on your site
      */
     private String badgeUrlShiedsIO(String leftPart, String rightPart, String colorPart,
-                                 String logoSlugName, String colorLogo, String colorLabel) {
+                                    @SuppressWarnings("SameParameterValue") String logoSlugName,
+                                    String colorLogo, String colorLabel) {
         leftPart = escapeBadgeName(leftPart);
         rightPart = escapeBadgeName(rightPart);
         if (StringUtils.isNotBlank(leftPart) && StringUtils.isNotBlank(rightPart)) {
@@ -560,6 +561,14 @@ public class GithubBadgeHelper {
 
     private String versionStr(CommitGroupMinor commitGroupMinor) {
         return "" + commitGroupMinor.versionTag();
+    }
+
+    /**
+     * @return the URL to the version of current GitHub project (at JavaDoc-report HTML-files)
+     */
+    public String badgeUrlGitHub() {
+        return badgeUrlShiedsIO(repoName(), MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion(),
+            LABEL_COLOR__JAVADOC_NAVBAR, LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__GITHUB, LABEL_COLOR__GITHUB);
     }
 
     // --------------------------------------------------------------------------------------------

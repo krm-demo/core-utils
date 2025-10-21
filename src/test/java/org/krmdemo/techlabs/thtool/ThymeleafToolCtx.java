@@ -3,6 +3,7 @@ package org.krmdemo.techlabs.thtool;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
 import lombok.extern.slf4j.Slf4j;
+import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.thymeleaf.context.AbstractContext;
 
 import java.io.File;
@@ -47,6 +48,65 @@ public class ThymeleafToolCtx extends AbstractContext {
      * The same as {@link #DEFAULT_VARS_DIR} but of type {@link File}
      */
     public static final File DEFAULT_VARS_DIR__AS_FILE = new File(DEFAULT_VARS_DIR);
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * A built-in helper to access some variables in thread-safe way from other helpers.
+     * <hr/>
+     * It's available in th-templates by the name {@code tth}, but in most cases
+     * it could be used in other helper to realize what exactly template is processing now.
+     * In the future, it could also be used to improve and clarify handling the errors.
+     */
+    public class Helper {
+        public static final String VAR_NAME__HELPER = "tth";
+        private final ThreadLocal<File> inputDir = new ThreadLocal<>();
+        private final ThreadLocal<File> inputFile = new ThreadLocal<>();
+
+        private Helper() {
+            setVariable(VAR_NAME__HELPER, this);
+        }
+
+        public File getInputDir() {
+            return this.inputDir.get();
+        }
+
+        public void setInputDir(File dir) {
+            this.inputDir.set(dir);
+        }
+
+        public File getInputFile() {
+            return this.inputFile.get();
+        }
+
+        public void setInputFile(File file) {
+            this.inputFile.set(file);
+        }
+
+        public boolean isInputFileAvailable() {
+            return getInputFile() != null;
+        }
+
+        public String getThreadName() {
+            return Thread.currentThread().getName();
+        }
+
+        @Override
+        public String toString() {
+            return DumpUtils.dumpAsJsonTxt(this);
+        }
+    }
+
+    private final Helper thToolHelper = new Helper();
+
+    /**
+     * @return the instance of thread-safe internal helper (the same as {@code [[${ tth }]]} in th-template)
+     */
+    public Helper getThToolHelper() {
+        return thToolHelper;
+    }
+
+    // --------------------------------------------------------------------------------------------
 
     /**
      * The same as {@link #typedVar(String, Class, Object)}, but casting to {@link Map Map&lt;String,Object&gt;}

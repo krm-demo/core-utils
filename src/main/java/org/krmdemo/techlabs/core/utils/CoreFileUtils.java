@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -42,6 +43,26 @@ public class CoreFileUtils {
             return Files.readString(fileToLoad.toPath());
         } catch (IOException ignored) {
             return null;
+        }
+    }
+
+    /**
+     * Loading the content of {@code file} as list of lines,
+     * where each line is an element of returning {@link List} of {@link String}.
+     *
+     * @param filePathToLoad path of file to read the content as lines
+     * @return the content of {@code filePathToLoad} as {@link List List&lt;String&gt;}
+     */
+    public static List<String> loadFileLines(Path filePathToLoad) {
+        if (filePathToLoad == null) {
+            throw new IllegalStateException(
+                "the path to file to load lines MUST NOT be null");
+        }
+        try (Stream<String> lines = Files.lines(filePathToLoad)) {
+            return lines.toList();
+        } catch (IOException ioEx) {
+            throw new IllegalStateException(String.format(
+                "could not load the file '%s' as list of lines", filePathToLoad), ioEx);
         }
     }
 

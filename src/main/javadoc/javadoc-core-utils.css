@@ -10,6 +10,15 @@ a.release-catalog-badge-link:hover img.release-catalog-badge {
     border: 1px solid var(--navbar-text-color);
 }
 
+img.github-project-source-badge {
+    margin-left: 20px;
+    border: 1px solid var(--selected-background-color);
+    border-radius: 5px;
+}
+a.github-project-source-badge-link:hover img.github-project-source-badge {
+    border: 1px solid var(--navbar-text-color);
+}
+
 /*
 :root {
     --navbar-background-color: #42787dd9;

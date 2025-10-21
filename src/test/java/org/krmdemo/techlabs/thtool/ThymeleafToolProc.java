@@ -100,6 +100,7 @@ public class ThymeleafToolProc implements Callable<Integer> {
             logInfo("(the file does not exists or the path does not represent the file)");
             return false;
         }
+        tt.varsCtx.getThToolHelper().setInputFile(templateFile);
         String outputContent = tt.templateEngine.process(templateFile.getPath(), tt.varsCtx);
 
         if (outputLocation != null && (!outputLocation.exists() || outputLocation.isFile())) {

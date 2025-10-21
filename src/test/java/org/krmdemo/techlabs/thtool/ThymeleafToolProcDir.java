@@ -123,6 +123,7 @@ public class ThymeleafToolProcDir implements Callable<Integer> {
             throw new IllegalArgumentException(String.format(
                 "input location '%s' is not a directory", inputLocation));
         }
+        tt.varsCtx.getThToolHelper().setInputDir(inputLocation);
 
         if (outputLocation == null) {
             System.out.println("- no processing and copying because output directory is not specified;");
@@ -211,6 +212,7 @@ public class ThymeleafToolProcDir implements Callable<Integer> {
                 if (output == null) {
                     handleStatus = HandleStatus.NO_OUTPUT;
                 } else if (isProcessing()) {
+                    tt.varsCtx.getThToolHelper().setInputFile(input);
                     String outputContent = tt.templateEngine.process(input.getPath(), tt.varsCtx);
                     saveFileContent(output, outputContent);
                     handleStatus = HandleStatus.PROCESSED;
