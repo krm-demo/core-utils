@@ -17,11 +17,9 @@ import java.util.function.Consumer;
 
 import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
-import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedSet;
-import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileContent;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileLines;
-import static org.krmdemo.techlabs.core.utils.CoreFileUtils.pathPartsStr;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.pathParts;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.pathPartsStr;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.multiLine;
 
 /**
@@ -51,7 +49,12 @@ public class JavaDocHelper {
      */
     public static final String VAR_NAME__HELPER = "jdh";
 
-    public static final Path LOCAL_PATH__SRC_MAIN_JAVA = Path.of("src", "main", "java");
+    /**
+     * The root-directory of Java <b>main-source</b>
+     * (unit-tests are in separate directory, that is called <b>test-source</b>),
+     * which corresponds to <i>maven-</i> and <i>gradle-</i> default project-structure.
+     */
+    public static final Path LOCAL_PATH__SRC_MAIN_JAVA = Path.of("src/main/java");
 
     /**
      * @param ttCtx <b>{@code th-tool}</b>-context to wrap
@@ -98,8 +101,13 @@ public class JavaDocHelper {
         this.ttCtx = Objects.requireNonNull(ttCtx);
     }
 
-    // lazy-initialized correspondence between JavaDoc-report files and GitHub-project source-files
-    private Map<Path, Path> packagePathMap = null;
+    /**
+     * Lazy-initialized correspondence between JavaDoc-report files and GitHub-project source-files.
+     * The {@link Map.Entry#getKey() key} is a path to the parent directory of the JavaDoc-generated file,
+     * and the {@link Map.Entry#getValue() value} is path to corresponding directory in main-source
+     * (the root content is expected to be {@code ./src/main/java} in the <b>{@code git}</b>-repo checkout)
+     */
+    protected Map<Path, Path> packagePathMap = null;
 
     // --------------------------------------------------------------------------------------------
 
@@ -113,8 +121,8 @@ public class JavaDocHelper {
     public String getNavBarRight() {
         logInfo("%n%n==== %s.getNavBarRight(): =====%ntth --> %s",
             getClass().getSimpleName(), ttCtx.getThToolHelper());
-        logInfo("- packagePathSet().size() = %d;", packagePathSet().size());
-        logInfo("- githubSourceSuffix() = '%s';", githubSourceSuffix());
+        logInfo("- packagePathSet().size() = %d;", packagePathMap().size());
+        logInfo("- githubSourceSuffix() = '%s';", getGitHubSourcePath());
 
         String navBarRightHtml =
             GithubBadgeHelper.fromCtx(ttCtx).getBadgeReleaseCatalogHTML() +
@@ -130,7 +138,7 @@ public class JavaDocHelper {
      * @return  the HTML-badge to 'GitHub project source' (to be inserted at each HTML-page in processed JavaDoc-report)
      */
     public String getBadgeGitHubHTML() {
-        String sourceSuffix = githubSourceSuffix();
+        String sourceSuffix = getGitHubSourcePath();
         return String.format("""
             <a href="%s"
                class="github-project-source-badge-link">
@@ -147,6 +155,10 @@ public class JavaDocHelper {
             GithubBadgeHelper.fromCtx(ttCtx).badgeUrlGitHub());
     }
 
+    /**
+     * @param sourceSuffix the local path to source file from the root-directory of <b>{@code git}</b>-repo checkout
+     * @return the value of {@code href}-attribute of {@code <a>}-tag to render the remote-link to that source-file at GitHub-site
+     */
     private String githubSourceUrl(String sourceSuffix) {
         String repoHtmlUrl = GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl();
         String gitTreeName = MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion();
@@ -158,7 +170,15 @@ public class JavaDocHelper {
 
     // --------------------------------------------------------------------------------------------
 
-    private String githubSourceSuffix() {
+    /**
+     * Getting the path-part of URL to GitHub-source file, which corresponds
+     * to the JavaDoc-file that is currently processed by <b>{@code th-tool}</b>.
+     * The returning path corresponds to the local-path
+     * of the same file in the local <b>{@code git}</b>-repo checkout
+     *
+     * @return the path-part of URL to any GitHub-source file as {@link String}
+     */
+    public String getGitHubSourcePath() {
         File javaDocFile = ttCtx.getThToolHelper().getInputFile();
         logInfo("- detecting the path-suffix to GitHub source for %s;", javaDocFile);
         if (javaDocFile == null || !javaDocFile.isFile()) {
@@ -172,33 +192,45 @@ public class JavaDocHelper {
             javaDocParentPath = javaDocParentPath.getParent();
         }
         logInfo("- javaDocParentPath is %s;", pathParts(javaDocParentPath));
-        if (!packagePathMap.containsKey(javaDocParentPath)) {
+        if (!packagePathMap().containsKey(javaDocParentPath)) {
             logInfo("- No! the file is not from proper JavaDoc-path");
             return "";
         }
 
         Path javaSourceDir = packagePathMap.get(javaDocParentPath);
-        logInfo("- Yeh!!! this input file belongs to proper JavaDoc-path '%s'", javaDocParentPath);
-        logInfo("- javaSourceDir is '%s'", javaSourceDir);
-        String javaDocFileName = javaDocFile.getName();
-        int firstDot = javaDocFileName.indexOf('.');
-        String javaSourceFileName = javaDocFileName.substring(0, firstDot) + ".java";
-        File javaSourceFile = javaSourceDir.resolve(javaSourceFileName).toFile();
+        File javaSourceFile = javaSourceDir.resolve(sourceFileName(javaDocFile)).toFile();
         logInfo("- going to detect java-source file '%s' as a target link", javaSourceDir);
         if (javaSourceFile.isFile()) {
-            logInfo("- '%s' is existing java-source file!", javaSourceDir);
+            logInfo("- '%s' is existing java-source file !!!", javaSourceDir);
             return pathPartsStr(javaSourceFile.toPath());
         } else {
-            logInfo("- '%s' does not exist - returning the parent directory '%s",
+            logInfo("- '%s' does not exist - returning the parent directory '%s'.",
                 javaSourceFile, javaSourceDir);
             return pathPartsStr(javaSourceDir);
         }
     }
 
     /**
-     * @return loading the list of Java-packages from predefined file in JavaDoc-root directory
+     * @param javaDocFile a file that was generated as a part of JavaDoc-report
+     * @return the file-name that corresponds to Java-source file-name (no parent path),
+     *         which should point to standard {@code package-info.java}
+     *         if the inout file-name starts with {@code "package-"}
      */
-    private synchronized Map<Path, Path> packagePathSet() {
+    private String sourceFileName(File javaDocFile) {
+        String javaDocFileName = javaDocFile.getName();
+        int firstDot = javaDocFileName.indexOf('.');
+        String javaDocFileSlug = javaDocFileName.substring(0, firstDot);
+        if (javaDocFileSlug.startsWith("package-")) {
+            return "package-info.java";
+        } else {
+            return javaDocFileSlug + ".java";
+        }
+    }
+
+    /**
+     * @return lazy-loading the list of Java-packages from predefined file in JavaDoc-root directory
+     */
+    private synchronized Map<Path, Path> packagePathMap() {
         // TODO: think about dedicated th-tool command for JavaDoc to avoid synchronization
         if (packagePathMap != null) {
             return packagePathMap;

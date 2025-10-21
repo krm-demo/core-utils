@@ -14,6 +14,8 @@ import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_
 
 /**
  * A unit-test for <b>{@code th-tool}</b>-helper {@link JavaDocHelper}.
+ * <hr/>
+ * This unit-test is working <b>only after generating JavaDoc-report</b> - otherwise the test-cases will be skipped.
  */
 public class JavaDocHelperTest {
 
@@ -28,13 +30,13 @@ public class JavaDocHelperTest {
     }
 
     @Test
-    void testNavBarRight_JavaSource() {
+    void testNavBarRight_Contains_ReleaseCatalog() {
         assumeTrue(Files.exists(PATH_DIR__JAVADOC_REPORT),
             String.format("input directory '%s' to process the JavaDoc-report does not exist",
                 PATH_DIR__JAVADOC_REPORT));
         ttCtx.getThToolHelper().setInputDir(PATH_DIR__JAVADOC_REPORT.toFile());
         ttCtx.getThToolHelper().setInputFile(PATH_DIR__JAVADOC_REPORT.resolve(
-            Path.of("org", "krmdemo", "techlabs", "core", "datetime", "LinkedDateTimeTripletMap.html")
+            Path.of("org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.html")
         ).toFile());
         JavaDocHelper jdh = JavaDocHelper.fromCtxLazy(ttCtx);
         assertThat(jdh.getNavBarRight()).startsWith("""
@@ -42,16 +44,75 @@ public class JavaDocHelperTest {
               <img alt="a badge to 'Release Catalog'" src="https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97" class="release-catalog-badge"/>
             </a>
             <a href="https://github.com/krm-demo/core-utils/tree/""");
-//        assertThat(jdh.getNavBarRight()).isEqualTo("""
-//            <a href="https://krm-demo.github.io/core-utils/" class="release-catalog-badge-link">
-//              <img alt="a badge to 'Release Catalog'" src="https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97" class="release-catalog-badge"/>
-//            </a>
-//            <a href="https://github.com/krm-demo/core-utils/tree/main/src/main/java/org/krmdemo/techlabs/core/datetime"
-//               class="github-project-source-badge-link">
-//              <img alt="a badge to GitHub-project source 'src/main/java/org/krmdemo/techlabs/core/datetime' for version '21.18.001-SNAPSHOT'"
-//                   title="go to GitHub-project source 'src/main/java/org/krmdemo/techlabs/core/datetime' for version '21.18.001-SNAPSHOT'"
-//                   class="github-project-source-badge"
-//                   src="https://img.shields.io/badge/core--utils-21.18.001--SNAPSHOT-4D7A97?logo=github&logoColor=white&labelColor=black" />
-//            </a>""");
+    }
+
+    @Test
+    void testNavBarRight_JavaSource_RegularClass() {
+        assumeTrue(Files.exists(PATH_DIR__JAVADOC_REPORT),
+            String.format("input directory '%s' to process the JavaDoc-report does not exist",
+                PATH_DIR__JAVADOC_REPORT));
+        ttCtx.getThToolHelper().setInputDir(PATH_DIR__JAVADOC_REPORT.toFile());
+        ttCtx.getThToolHelper().setInputFile(PATH_DIR__JAVADOC_REPORT.resolve(
+            Path.of("org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.html")
+        ).toFile());
+        JavaDocHelper jdh = JavaDocHelper.fromCtxLazy(ttCtx);
+        assertThat(jdh.getGitHubSourcePath()).isEqualTo(
+            "src/main/java/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.java");
+    }
+
+    @Test
+    void testNavBarRight_JavaSource_InnerClass() {
+        assumeTrue(Files.exists(PATH_DIR__JAVADOC_REPORT),
+            String.format("input directory '%s' to process the JavaDoc-report does not exist",
+                PATH_DIR__JAVADOC_REPORT));
+        ttCtx.getThToolHelper().setInputDir(PATH_DIR__JAVADOC_REPORT.toFile());
+        ttCtx.getThToolHelper().setInputFile(PATH_DIR__JAVADOC_REPORT.resolve(
+            Path.of("org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html")
+        ).toFile());
+        JavaDocHelper jdh = JavaDocHelper.fromCtxLazy(ttCtx);
+        assertThat(jdh.getGitHubSourcePath()).isEqualTo(
+            "src/main/java/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.java");
+    }
+
+    @Test
+    void testNavBarRight_ClassInUse() {
+        assumeTrue(Files.exists(PATH_DIR__JAVADOC_REPORT),
+            String.format("input directory '%s' to process the JavaDoc-report does not exist",
+                PATH_DIR__JAVADOC_REPORT));
+        ttCtx.getThToolHelper().setInputDir(PATH_DIR__JAVADOC_REPORT.toFile());
+        ttCtx.getThToolHelper().setInputFile(PATH_DIR__JAVADOC_REPORT.resolve(
+            Path.of("org/krmdemo/techlabs/core/datetime/class-use/CoreDateTimeUtils.html")
+        ).toFile());
+        JavaDocHelper jdh = JavaDocHelper.fromCtxLazy(ttCtx);
+        assertThat(jdh.getGitHubSourcePath()).isEqualTo(
+            "src/main/java/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.java");
+    }
+
+    @Test
+    void testNavBarRight_PackageInfo_NotExisting() {
+        assumeTrue(Files.exists(PATH_DIR__JAVADOC_REPORT),
+            String.format("input directory '%s' to process the JavaDoc-report does not exist",
+                PATH_DIR__JAVADOC_REPORT));
+        ttCtx.getThToolHelper().setInputDir(PATH_DIR__JAVADOC_REPORT.toFile());
+        ttCtx.getThToolHelper().setInputFile(PATH_DIR__JAVADOC_REPORT.resolve(
+            Path.of("org/krmdemo/techlabs/core/datetime/package-summary.html")
+        ).toFile());
+        JavaDocHelper jdh = JavaDocHelper.fromCtxLazy(ttCtx);
+        assertThat(jdh.getGitHubSourcePath()).isEqualTo(
+            "src/main/java/org/krmdemo/techlabs/core/datetime");
+    }
+
+    @Test
+    void testNavBarRight_PackageInfo_Existing() {
+        assumeTrue(Files.exists(PATH_DIR__JAVADOC_REPORT),
+            String.format("input directory '%s' to process the JavaDoc-report does not exist",
+                PATH_DIR__JAVADOC_REPORT));
+        ttCtx.getThToolHelper().setInputDir(PATH_DIR__JAVADOC_REPORT.toFile());
+        ttCtx.getThToolHelper().setInputFile(PATH_DIR__JAVADOC_REPORT.resolve(
+            Path.of("org/krmdemo/techlabs/core/package-tree.html")
+        ).toFile());
+        JavaDocHelper jdh = JavaDocHelper.fromCtxLazy(ttCtx);
+        assertThat(jdh.getGitHubSourcePath()).isEqualTo(
+            "src/main/java/org/krmdemo/techlabs/core/package-info.java");
     }
 }
