@@ -1,3 +1,4 @@
+d6c8d5ff add 'GitHub Project' badge at every HTML-page of processed JavaDoc-report #3
 e835dbee << new snapshot version >> 21.18.002-SNAPSHOT
 96b8712a << internal release >> 21.18.001
 aaa1d43c add 'GitHub Project' badge at every HTML-page of processed JavaDoc-report #2
