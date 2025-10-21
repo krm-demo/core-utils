@@ -91,7 +91,7 @@ In order to refer this particular project - we must add following XML-tags into 
 - where the value of `OWNER_NAME` should be <code>krm-demo</code> (you can try another `<username>`)
 - and the value of `MY_READONLY_TOKEN` should be <code>ghp_&#8203;L1Eiw9V4CXLZVl0nu2QkqWDVpQE4zl0k&#8203;cYz6</code>
 - (should be re-masked!) the value of `MY_ADMIN_TOKEN` should be <code>ghp_&#8203;UIEgLpCQoqASXtbxGrbpgfPXNYC94T19&#8203;NqXg</code>
-- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;xfqDwKC2csgGtaSqtxTvFqtxLwLmXn1E&#8203;n7QI</code>
+- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;ZbykN8hdDCXVT2qxpUkwm5NheB27FH13&#8203;2aVC</code>
 
 > [!IMPORTANT]
 > In the list above the value of GitHub-secret `MY_READONLY_TOKEN`is displayed _un-masked_ (no asterisks as usually),
@@ -199,7 +199,7 @@ Then you can create your own jbang-scripts using following examples:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18676038625).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/18676604753).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
 
@@ -210,8 +210,10 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
 {
   "releaseCatalog": {
     "current-snapshot-group": {
-      "minor-group-info": "<< unreleased >> 3 commits",
+      "minor-group-info": "<< unreleased >> 5 commits",
       "commits-one-line": [
+        "aaa1d43 | 2025-10-21 Tue 07:38:42 |  add 'GitHub Project' badge at every HTML-page of processed JavaDoc-report #2",
+        "f47ef51 | 2025-10-21 Tue 07:20:00 |  << internal release >> 21.18.001",
         "e49498a | 2025-10-21 Tue 07:15:26 |  add 'GitHub Project' badge at every HTML-page of processed JavaDoc-report #1",
         "b729b11 | 2025-10-20 Mon 19:21:27 |  introduce JavaDocHelper",
         "ec41af5 | 2025-10-20 Mon 18:20:45 |  << new snapshot version >> 21.18.001-SNAPSHOT"
@@ -922,7 +924,6 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
   },
   "gitStatus": {
     "clean": "false",
-    "added": [],
     "changed": [
       "pom.xml"
     ],
@@ -951,6 +952,7 @@ the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
       "pom.xml",
       ".github/th-vars/var-secrets.json"
     ],
+    "added": [],
     "missing": []
   }
 }
