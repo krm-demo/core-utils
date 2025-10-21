@@ -1,8 +1,12 @@
 /**
- * This is a root package of [[${ mh.projectArtifact }]]-library.
+ * This is a root package of {@code [[${ mh.projectArtifact }]]}-library.
  * <br/>
  * <hr/>
- *
+ * [(${ gbh.badgeReleaseCatalogHTML })] - is a badge to 'Release Catalog',
+ * where all versions of {@code [[${ mh.projectArtifact }]]}-library are listed;
+ * <br/>
+ * [(${ jdh.badgeGitHubHTML })] - is a badge to either the source-file at GitHub or to the most relevant parent directory;
+ * <hr/>
  * Following th-tool's tags are available:<ul>
  *   <li>
  *     <code>[&#8203;[${ mh.projectCatalogName }]&#8203;]</code> = <code><b>[[${ mh.projectCatalogName }]]</b></code>;

@@ -1,6 +1,5 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -14,17 +13,15 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedSet;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileContent;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileLines;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.pathPartsStr;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.pathParts;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.multiLine;
 
 /**
@@ -106,10 +103,12 @@ public class JavaDocHelper {
 
     // --------------------------------------------------------------------------------------------
 
-
-
     /**
-     * @return the HTML-content of the whole right-part of top-navbar of each JavaDoc-generated HTML-page
+     * @return the HTML-content of the whole right-part of top-navbar of each JavaDoc-generated HTML-page,
+     * which includes:<ul>
+     *     <li>badge to {@link GithubBadgeHelper#getBadgeReleaseCatalogHTML() 'Release Catalog'}</li>
+     *     <li>badge to {@link #getBadgeGitHubHTML() 'GitHub  project source'}</li>
+     * </ul>
      */
     public String getNavBarRight() {
         logInfo("%n%n==== %s.getNavBarRight(): =====%ntth --> %s",
@@ -127,7 +126,10 @@ public class JavaDocHelper {
         return navBarRightHtml;
     }
 
-    private String getBadgeGitHubHTML() {
+    /**
+     * @return  the HTML-badge to 'GitHub project source' (to be inserted at each HTML-page in processed JavaDoc-report)
+     */
+    public String getBadgeGitHubHTML() {
         String sourceSuffix = githubSourceSuffix();
         return String.format("""
             <a href="%s"
@@ -175,8 +177,22 @@ public class JavaDocHelper {
             return "";
         }
 
-        logInfo("- Yeh!!! this input file belongs to proper JavaDoc-path");
-        return localPathStr(packagePathMap.get(javaDocParentPath));
+        Path javaSourceDir = packagePathMap.get(javaDocParentPath);
+        logInfo("- Yeh!!! this input file belongs to proper JavaDoc-path '%s'", javaDocParentPath);
+        logInfo("- javaSourceDir is '%s'", javaSourceDir);
+        String javaDocFileName = javaDocFile.getName();
+        int firstDot = javaDocFileName.indexOf('.');
+        String javaSourceFileName = javaDocFileName.substring(0, firstDot) + ".java";
+        File javaSourceFile = javaSourceDir.resolve(javaSourceFileName).toFile();
+        logInfo("- going to detect java-source file '%s' as a target link", javaSourceDir);
+        if (javaSourceFile.isFile()) {
+            logInfo("- '%s' is existing java-source file!", javaSourceDir);
+            return pathPartsStr(javaSourceFile.toPath());
+        } else {
+            logInfo("- '%s' does not exist - returning the parent directory '%s",
+                javaSourceFile, javaSourceDir);
+            return pathPartsStr(javaSourceDir);
+        }
     }
 
     /**
@@ -213,18 +229,6 @@ public class JavaDocHelper {
 
     private Path packageNameToSourceMainPath(String packageName) {
         return LOCAL_PATH__SRC_MAIN_JAVA.resolve(Paths.get("", packageName.split("\\.")));
-    }
-
-    private List<String> pathParts(Path path) {
-        return StreamSupport.stream(path.spliterator(), false)
-            .map(Path::toString)
-            .toList();
-    }
-
-    private String localPathStr(Path path) {
-        return StreamSupport.stream(path.spliterator(), false)
-            .map(Path::toString)
-            .collect(Collectors.joining(File.separator));
     }
 
     // --------------------------------------------------------------------------------------------

@@ -8,13 +8,54 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * Utility-class that invokes standard JDK utilities, but wraps {@link java.io.IOException}
  * into {@link IllegalStateException} and creates missing parent directories.
  */
 public class CoreFileUtils {
+
+    /**
+     * Getting the sequence of {@link Path}-components as {@link Stream Stream&lt;String&gt;}.
+     * <hr/>
+     * This operation is inversion of standard static methods {@link Path#of(String, String...)}
+     * or {@link Paths#get(String, String...)} - so following expression are identical:<pre>{@code
+     *     pathParts(Path.of("a", "b", "c"))
+     *     Stream.of("a", "b", "c")
+     * }</pre>
+     *
+     * @param path an instance of {@link Path}
+     * @return components of {@link Path} as {@link Stream Stream&lt;String&gt;}
+     */
+    public static Stream<String> pathParts(Path path) {
+        return StreamSupport.stream(path.spliterator(), false).map(Path::toString);
+    }
+
+    /**
+     * Getting the sequence of {@link Path}-components as {@link Stream List&lt;String&gt;}.
+     *
+     * @param path an instance of {@link Path}
+     * @return components of {@link Path} as {@link List List&lt;String&gt;}
+     */
+    public static List<String> pathPartsList(Path path) {
+        return pathParts(path).toList();
+    }
+
+    /**
+     * Joining the {@link #pathParts(Path) stream of path components} with {@link File#separator}
+     * - so, the assertions like following are always correct:<pre>{@code
+     *     assertThat(pathPartsStr(Path.of("a/b/c"))).isEqualTo("a/b/c")
+     * }</pre>
+     *
+     * @param path an instance of {@link Path}
+     * @return the sequence of {@link Path}-components joining with {@link File#separator}
+     */
+    public static String pathPartsStr(Path path) {
+        return pathParts(path).collect(Collectors.joining(File.separator));
+    }
 
     /**
      * The same as {@link #loadFileContent(File)}, but accept the path to that file as {@link String}
