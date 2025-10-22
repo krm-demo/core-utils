@@ -42,20 +42,20 @@ h2 {
     margin-bottom: 2em;
 }
 
-.col-1 {
+.year-and-month {
     text-align: right;
     color: var(--release-date-time-color);
     font-family: var(--body-font-family);
     font-size: 0.95em;
 }
-.col-2 {
+.day-of-month-and-week {
     text-align: left;
     color: var(--release-date-time-color);
     font-size: 0.95em;
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
 }
-.col-3 {
+.hours-and-minutes {
     text-align: left;
     color: var(--release-date-time-color);
     font-family: monospace;
@@ -145,8 +145,7 @@ h2 {
 }
 
 .major-grid-commit-row .col-6 {
-    text-align: right;
-    padding-right: 6px;
+    text-align: center;
     border-right: 2px solid var(--navbar-background-color);
 }
 
@@ -266,8 +265,7 @@ h2 {
 }
 
 .minor-grid-commit-row .col-6 {
-    text-align: right;
-    padding-right: 6px;
+    text-align: center;
     border-right: 2px solid var(--navbar-background-color);
 }
 
@@ -301,6 +299,28 @@ h2 {
 }
 .minor-grid-container summary::-webkit-details-marker {
     display: none;
+}
+
+/* ------------------------ ------------------------ ------------------------ ------------------------ */
+/* ------------------------ ------------------------ ------------------------ ------------------------ */
+/* ------------------------ ------------------------ ------------------------ ------------------------ */
+
+.major-grid-container-footer {
+    display: grid;
+    grid-template-columns: 53px 53px 35px auto 35px;
+    height: 10px;
+}
+.major-grid-container-footer .col-4-5 {
+    background-color: var(--release-title-background-color) ;
+    border-top: 1px dotted var(--navbar-background-color);
+    border-bottom: 2px solid var(--navbar-background-color);
+    border-left: 2px solid var(--navbar-background-color);
+    border-bottom-left-radius: 10px;
+}
+.major-grid-container-footer .col-6 {
+    border-bottom: 2px solid var(--navbar-background-color);
+    border-right: 2px solid var(--navbar-background-color);
+    border-bottom-right-radius: 10px;
 }
 
 /* ------------------------ ------------------------ ------------------------ ------------------------ */
