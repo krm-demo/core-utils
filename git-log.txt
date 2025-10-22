@@ -1,3 +1,4 @@
+64aa0581 add 'Open-Test-Report' to project #1
 5088cfa1 << new snapshot version >> 21.20.001-SNAPSHOT
 7254791b << public release >> 21.19
 7c1e02b8 correct the style of commit-hash at 'Release-Catalog'
