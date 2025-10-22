@@ -327,6 +327,15 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.5.1</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.opentest4j.reporting</groupId>
+            <artifactId>open-test-reporting-cli</artifactId>
+            <version>${open-test-reporting-cli.version}</version>
+            <classifier>standalone</classifier>
+            <type>jar</type>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <!-- - executing the class "...CoreUtilsMain" ::> "mvn exec:java@core-utils-main" -->
@@ -354,6 +363,61 @@
               <includePluginDependencies>false</includePluginDependencies>
               <classpathScope>test</classpathScope>
               <mainClass>${th-tool-class-name}</mainClass>
+            </configuration>
+          </execution>
+          <!--
+              This project generates HTML-reports, which are provided by "Open Test Alliance for the JVM"...
+              - the reference to their API is here: https://github.com/ota4j-team/open-test-reporting
+              - the input of this tool is JUnit5 XML-report, which is generated automatically with "maven-surefire-plugin" above
+                (see the property "junit.platform.reporting.open.xml.enabled=true" in "src/test/resources/junit-platform.properties" file)
+              - two MOJOs below allows to get help and generate HTML-report as a single "open-test-report.html" file.
+          -->
+          <execution>
+            <!--
+              - print the "help" of OpenTestReporting API    ::> `mvn exec:java@open-test-help`
+            -->
+            <id>open-test-help</id>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <includeProjectDependencies>false</includeProjectDependencies>
+              <includePluginDependencies>true</includePluginDependencies>
+              <executableDependency>
+                <groupId>org.opentest4j.reporting</groupId>
+                <artifactId>open-test-reporting-cli</artifactId>
+              </executableDependency>
+              <mainClass>org.opentest4j.reporting.cli.ReportingCli</mainClass>
+              <arguments>
+                <argument>help</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <!--
+              - generate HTML-report     ::> `mvn exec:java@open-test-html-report`
+            -->
+            <id>open-test-html-report</id>
+            <!-- it looks like IDEA becomes crazy after doing that:
+              <phase>prepare-package</phase>
+            -->
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <includeProjectDependencies>false</includeProjectDependencies>
+              <includePluginDependencies>true</includePluginDependencies>
+              <executableDependency>
+                <groupId>org.opentest4j.reporting</groupId>
+                <artifactId>open-test-reporting-cli</artifactId>
+              </executableDependency>
+              <mainClass>org.opentest4j.reporting.cli.ReportingCli</mainClass>
+              <arguments>
+                <argument>html-report</argument>
+                <argument>--output</argument>
+                <argument>${project.build.directory}/open-test-report.html</argument>
+                <argument>${project.build.directory}/open-test-report.xml</argument>
+              </arguments>
             </configuration>
           </execution>
         </executions>
@@ -538,6 +602,7 @@
     <org.junit.platform.version>1.13.4</org.junit.platform.version>
     <org.assertj.version>3.27.6</org.assertj.version>
     <org.mockito.version>5.20.0</org.mockito.version>
+    <open-test-reporting-cli.version>0.2.4</open-test-reporting-cli.version>
 
     <commons-io.version>2.20.0</commons-io.version>
     <commons-lang.version>3.19.0</commons-lang.version>

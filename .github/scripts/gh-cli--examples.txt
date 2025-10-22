@@ -1,0 +1,20 @@
+The list of gh-packages:
+...> gh api user/packages/maven/io.github.krm-demo.core-utils/versions
+
+The list of workflows:
+...> gh workflow list
+
+Latest runs of workflow 'on-main-push':
+...> gh workflow view on-main-push
+
+View the content of workflow YAML-script:
+...> gh workflow view on-main-push.yml --yaml
+
+Latest runs of workflow 'latest-info':
+...> gh workflow view latest-info
+
+Latest result of workflow run 'latest-info':
+...> gh run list --workflow="misc--latest-info.yml"
+...> gh run view 18723240572
+...> gh run view 18723240572 --log
+
