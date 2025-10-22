@@ -1,3 +1,4 @@
+5088cfa1 << new snapshot version >> 21.20.001-SNAPSHOT
 7254791b << public release >> 21.19
 7c1e02b8 correct the style of commit-hash at 'Release-Catalog'
 201b8d8b add the 'bottom-lid' to each section in 'Release Catalog'
