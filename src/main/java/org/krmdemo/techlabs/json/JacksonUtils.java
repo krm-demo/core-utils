@@ -30,6 +30,8 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 /**
  * Utility class to serialize / de-serialize JSON-Objects and JSON-Arrays
  * using <a href="https://github.com/FasterXML/jackson">Jackson Library</a>
+ * <hr/>
+ * TODO: git rid of this class or move it to proper place !!!
  *
  * @see <a href="https://github.com/FasterXML/jackson-docs">
  *     Jackson Library Documentation

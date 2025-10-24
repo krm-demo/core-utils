@@ -9,6 +9,10 @@ import picocli.CommandLine;
 import java.util.Arrays;
 import java.util.EnumSet;
 
+/**
+ * This class represents the rendering details and is used as an optional parameter to
+ * all methods in {@link org.krmdemo.techlabs.core.dump.ObjectPrinter ObjectPrinter} interface.
+ */
 public class RenderSpec {
 
     public enum Feature {

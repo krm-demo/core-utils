@@ -64,6 +64,7 @@ public class ThymeleafToolCtx extends AbstractContext {
         private final ThreadLocal<File> inputFile = new ThreadLocal<>();
 
         private Helper() {
+            //following line causes the warning "... possible 'this' escape before subclass ..."
             setVariable(VAR_NAME__HELPER, this);
         }
 

@@ -37,6 +37,28 @@ public interface ObjectPrinter {
      */
     StdOut DEFAULT_STD_OUT = new StdOut();
 
+    /**
+     * TODO: clear the debugging garbage below:
+     * <dl>
+     *     <dd><i><u>usage {@code #1}:</u></i></dd>
+     *     <dt>
+     *         description of usage <b>#1</b><br/>
+     *         ... some details ...
+     *     </dt>
+     *     <dd><i><u>usage {@code #2}:</u></i></dd>
+     *     <dt>
+     *         description of usage <b>{@code #2}</b>
+     *         <pre>some explanation inside PRE</pre>
+     *     </dt>
+     *     <dd><i><u>usage #3</u></i></dd>
+     *     <dt>{@snippet class="org.krmdemo.techlabs.core.dump.ObjectPrinterTest"}</dt>
+     *     <dd><i><u>usage {@code #4} (snippet with fragment):</u></i></dd>
+     *     <dt>{@snippet class="org.krmdemo.techlabs.core.dump.ToFileUtils" region="saveAsJsonTxt"}</dt>
+     * </dl>
+     *
+     * @param objToPrint an instance of Java-Object to print
+     * @param renderSpec rendering details and highlight-rules
+     */
     void printAsJsonTxt(Object objToPrint, RenderSpec renderSpec);
 
     void printAsJsonHtml(Object objToPrint, RenderSpec renderSpec);

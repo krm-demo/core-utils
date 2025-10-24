@@ -88,6 +88,11 @@
       <version>${com.fasterxml.jackson.version}</version>
     </dependency>
     <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-xml</artifactId>
+      <version>${com.fasterxml.jackson.version}</version> <!-- Use the latest stable version -->
+    </dependency>
+    <dependency>
       <groupId>org.snakeyaml</groupId>
       <artifactId>snakeyaml-engine</artifactId>
       <version>${snakeyaml-engine.version}</version>
@@ -116,6 +121,29 @@
       <artifactId>junit-platform-reporting</artifactId>
       <version>${org.junit.platform.version}</version>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.opentest4j.reporting</groupId>
+      <artifactId>open-test-reporting-cli</artifactId>
+      <version>${open-test-reporting-cli.version}</version>
+      <scope>test</scope>
+<!--      <classifier>standalone</classifier>-->
+<!--      <type>jar</type>-->
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-slf4j2-impl</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
@@ -327,15 +355,16 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.5.1</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.opentest4j.reporting</groupId>
-            <artifactId>open-test-reporting-cli</artifactId>
-            <version>${open-test-reporting-cli.version}</version>
-            <classifier>standalone</classifier>
-            <type>jar</type>
-          </dependency>
-        </dependencies>
+        <!-- following should be provided if "opentest4j" dependency is excluded from project scopes (1): -->
+<!--        <dependencies>-->
+<!--          <dependency>-->
+<!--            <groupId>org.opentest4j.reporting</groupId>-->
+<!--            <artifactId>open-test-reporting-cli</artifactId>-->
+<!--            <version>${open-test-reporting-cli.version}</version>-->
+<!--            <classifier>standalone</classifier>-->
+<!--            <type>jar</type>-->
+<!--          </dependency>-->
+<!--        </dependencies>-->
         <executions>
           <execution>
             <!-- - executing the class "...CoreUtilsMain" ::> "mvn exec:java@core-utils-main" -->
@@ -381,12 +410,14 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <includeProjectDependencies>false</includeProjectDependencies>
+              <!-- following should be provided if "opentest4j" dependency is excluded from project scopes (2): -->
+<!--              <executableDependency>-->
+<!--                <groupId>org.opentest4j.reporting</groupId>-->
+<!--                <artifactId>open-test-reporting-cli</artifactId>-->
+<!--              </executableDependency>-->
+              <includeProjectDependencies>true</includeProjectDependencies>
               <includePluginDependencies>true</includePluginDependencies>
-              <executableDependency>
-                <groupId>org.opentest4j.reporting</groupId>
-                <artifactId>open-test-reporting-cli</artifactId>
-              </executableDependency>
+              <classpathScope>test</classpathScope>
               <mainClass>org.opentest4j.reporting.cli.ReportingCli</mainClass>
               <arguments>
                 <argument>help</argument>
@@ -405,12 +436,14 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <includeProjectDependencies>false</includeProjectDependencies>
+              <!-- following should be provided if "opentest4j" dependency is excluded from project scopes (2): -->
+              <!--              <executableDependency>-->
+              <!--                <groupId>org.opentest4j.reporting</groupId>-->
+              <!--                <artifactId>open-test-reporting-cli</artifactId>-->
+              <!--              </executableDependency>-->
+              <includeProjectDependencies>true</includeProjectDependencies>
               <includePluginDependencies>true</includePluginDependencies>
-              <executableDependency>
-                <groupId>org.opentest4j.reporting</groupId>
-                <artifactId>open-test-reporting-cli</artifactId>
-              </executableDependency>
+              <classpathScope>test</classpathScope>
               <mainClass>org.opentest4j.reporting.cli.ReportingCli</mainClass>
               <arguments>
                 <argument>html-report</argument>
@@ -503,6 +536,7 @@
           <doctitle>JavaDoc for &lt;u&gt;${project.name}&lt;/u&gt;:${project.version}</doctitle>
 <!--          <header>&lt;u&gt;${project.name}&lt;/u&gt;:${project.version}</header>-->
           <header>[(${jdh.navBarRight})]</header>
+          <additionalOptions>--snippet-path ${project.basedir}/src/main/java:${project.basedir}/src/test/java</additionalOptions>
           <excludePackageNames>empty</excludePackageNames>
         </configuration>
         <executions>

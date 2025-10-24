@@ -15,8 +15,10 @@ public class ToFileUtils {
      * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
      */
     public static void saveAsJsonTxt(File file, Object objToSave, RenderSpec renderSpec) {
+        // @start region="saveAsJsonTxt"
         ObjectPrinter.ToFile printer = new ObjectPrinter.ToFile(file);
-        printer.printAsJsonTxt(objToSave, renderSpec);
+        printer.printAsJsonTxt(objToSave, renderSpec);  // @highlight substring="printAsJsonTxt"
+        // @end
     }
 
     /**
