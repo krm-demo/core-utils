@@ -19,6 +19,13 @@ a.github-project-source-badge-link:hover img.github-project-source-badge {
     border: 1px solid var(--navbar-text-color);
 }
 
+h1.title code {
+    font-family: monospace;
+    font-weight: 600;
+    color: var(--link-color-active);
+    /*background-color: var(--snippet-highlight-color);*/
+}
+
 /*
 :root {
     --navbar-background-color: #42787dd9;

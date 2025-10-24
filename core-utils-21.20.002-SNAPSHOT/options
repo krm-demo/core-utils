@@ -23,9 +23,9 @@
 -docfilessubdirs
 -Xdoclint:none
 -doctitle
-'JavaDoc for <u>core-utils</u>:21.20.002-SNAPSHOT'
+'[(${ jdh.overviewDocTitle })]'
 -header
-'[(${jdh.navBarRight})]'
+'[(${ jdh.navBarRight })]'
 -linksource
 -notimestamp
 --add-stylesheet
