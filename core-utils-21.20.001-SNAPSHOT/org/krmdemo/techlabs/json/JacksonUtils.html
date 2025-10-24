@@ -101,10 +101,12 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-38">JacksonUtils</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-40">JacksonUtils</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Utility class to serialize / de-serialize JSON-Objects and JSON-Arrays
-using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
+using <a href="https://github.com/FasterXML/jackson">Jackson Library</a>
+<hr/>
+TODO: git rid of this class or move it to proper place !!!</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -225,7 +227,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="errorFrom(java.lang.Exception)">
 <h3>errorFrom</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="JacksonUtils.AnyError.html" title="class in org.krmdemo.techlabs.json">JacksonUtils.AnyError</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-69">errorFrom</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&nbsp;ex)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="JacksonUtils.AnyError.html" title="class in org.krmdemo.techlabs.json">JacksonUtils.AnyError</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-71">errorFrom</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a>&nbsp;ex)</span></div>
 </div>
 </section>
 </li>
@@ -233,7 +235,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="errorFrom(com.fasterxml.jackson.core.JsonProcessingException)">
 <h3>errorFrom</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="JacksonUtils.JsonError.html" title="class in org.krmdemo.techlabs.json">JacksonUtils.JsonError</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-70">errorFrom</a></span><wbr><span class="parameters">(com.fasterxml.jackson.core.JsonProcessingException&nbsp;jsonEx)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="JacksonUtils.JsonError.html" title="class in org.krmdemo.techlabs.json">JacksonUtils.JsonError</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-72">errorFrom</a></span><wbr><span class="parameters">(com.fasterxml.jackson.core.JsonProcessingException&nbsp;jsonEx)</span></div>
 </div>
 </section>
 </li>
@@ -241,7 +243,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonTreeFromString(java.lang.String)">
 <h3>jsonTreeFromString</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonNode</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-77">jsonTreeFromString</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonNode</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-79">jsonTreeFromString</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent)</span></div>
 </div>
 </section>
 </li>
@@ -249,7 +251,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonValueFromString(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)">
 <h3>jsonValueFromString</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-86">jsonValueFromString</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-88">jsonValueFromString</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent,
  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</span></div>
 </div>
 </section>
@@ -258,7 +260,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonObjFromString(java.lang.String)">
 <h3>jsonObjFromString</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-95">jsonObjFromString</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-97">jsonObjFromString</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent)</span></div>
 </div>
 </section>
 </li>
@@ -266,7 +268,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonArrFromString(java.lang.String)">
 <h3>jsonArrFromString</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-100">jsonArrFromString</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-102">jsonArrFromString</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent)</span></div>
 </div>
 </section>
 </li>
@@ -274,7 +276,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonTreeFromResource(java.lang.String)">
 <h3>jsonTreeFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonNode</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-105">jsonTreeFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonNode</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-107">jsonTreeFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
 </div>
 </section>
 </li>
@@ -282,7 +284,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonValueFromResource(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)">
 <h3>jsonValueFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-115">jsonValueFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-117">jsonValueFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</span></div>
 </div>
 </section>
@@ -291,7 +293,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonObjFromResource(java.lang.String)">
 <h3>jsonObjFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-129">jsonObjFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-131">jsonObjFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
@@ -305,7 +307,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonArrFromResource(java.lang.String)">
 <h3>jsonArrFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-138">jsonArrFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-140">jsonArrFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
@@ -319,7 +321,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonTreeFromFile(java.io.File)">
 <h3>jsonTreeFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonNode</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-147">jsonTreeFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonNode</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-149">jsonTreeFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>jsonFile</code> - a file that contains JSON-value</dd>
@@ -333,7 +335,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonValueFromFile(java.io.File,com.fasterxml.jackson.core.type.TypeReference)">
 <h3>jsonValueFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-162">jsonValueFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-164">jsonValueFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile,
  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</span></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
@@ -351,7 +353,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonObjFromFile(java.io.File)">
 <h3>jsonObjFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-175">jsonObjFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-177">jsonObjFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>jsonFile</code> - a file that contains JSON-Object</dd>
@@ -365,7 +367,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="jsonArrFromFile(java.io.File)">
 <h3>jsonArrFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-184">jsonArrFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-186">jsonArrFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>jsonFile</code> - a file that contains JSON-Array</dd>
@@ -379,7 +381,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="dumpAsJson(java.lang.Object)">
 <h3>dumpAsJson</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-193">dumpAsJson</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-195">dumpAsJson</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>value</code> - the object to dump</dd>
@@ -393,7 +395,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="dumpAsJsonPrettyPrint(java.lang.Object)">
 <h3>dumpAsJsonPrettyPrint</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-224">dumpAsJsonPrettyPrint</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-226">dumpAsJsonPrettyPrint</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>value</code> - the object to dump in a pretty-print way</dd>
@@ -407,7 +409,7 @@ using <a href="https://github.com/FasterXML/jackson">Jackson Library</a></div>
 <section class="detail" id="prettifyJson(java.lang.String)">
 <h3>prettifyJson</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-239">prettifyJson</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonToPrettify)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/org/krmdemo/techlabs/json/JacksonUtils.html#line-241">prettifyJson</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonToPrettify)</span></div>
 <div class="block">Prettify the passed un-formatted JSON</div>
 <dl class="notes">
 <dt>Parameters:</dt>
