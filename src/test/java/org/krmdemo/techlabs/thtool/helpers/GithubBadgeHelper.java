@@ -101,6 +101,7 @@ public class GithubBadgeHelper {
     /**
      * @return the HTML-badge to 'Release Catalog' (to be inserted at each HTML-page in processed JavaDoc-report)
      */
+    @JsonIgnore
     public String getBadgeReleaseCatalogHTML() {
         return String.format("""
             <a href="https://krm-demo.github.io/core-utils/" class="release-catalog-badge-link">
