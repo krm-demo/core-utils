@@ -31,7 +31,7 @@ import static org.krmdemo.techlabs.core.utils.CoreStringUtils.multiLine;
  *     Apache Maven Javadoc Plugin
  * </a> and the most important feature that we are using here - is ability to
  * provide custom HTML-fragment for the right-part of top-navigation bar, which is performed
- * in <a href="https://github.com/krm-demo/core-utils/blob/main/pom.xml#L441">{@code 'pom.xml'}</a>
+ * in <a href="https://github.com/krm-demo/core-utils/blob/main/pom.xml#L536-L537">{@code 'pom.xml'}</a>
  *
  * @see <a href="https://docs.oracle.com/en/java/javase/21/javadoc/javadoc-tool.html">
  *     (JDK 21) JavaDoc Guide
@@ -112,6 +112,46 @@ public class JavaDocHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
+     * This HTML-fragment is inserted as a title of main JavaDoc-generated 'Overview' HTML-page
+     * via following XML-tag in {@code pom.xml}-file of this project:{@snippet : . . . . . . . . .
+     * <plugin>
+     *   <groupId>org.apache.maven.plugins</groupId>
+     *   <artifactId>maven-javadoc-plugin</artifactId>
+     *   <version>${maven.javadoc.plugin.version}</version>
+     *   <configuration>
+     *     . . . . . . . . .
+     *     <doctitle>[(${ jdh.overviewDocTitle })]</doctitle>
+     *     . . . . . . . . .
+     *   </configuration>
+     * </plugin>
+     * . . . . . . . . .}
+     *
+     * @return the content of title at JavaDoc-generated 'Overview' HTML-page
+     */
+    public String getOverviewDocTitle() {
+        return String.format("""
+            Java-API Documentation for <code>%s</code>-library of version <a href="%s">%s</a>""",
+            MavenHelper.fromCtx(ttCtx).getProjectArtifact(),
+            githubSourceUrl(""),
+            MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion()
+        );
+    }
+
+    /**
+     * This HTML-fragment is inserted to each JavaDoc-generated HTML-page
+     * via following XML-tag in {@code pom.xml}-file of this project:{@snippet : . . . . . . . . .
+     * <plugin>
+     *   <groupId>org.apache.maven.plugins</groupId>
+     *   <artifactId>maven-javadoc-plugin</artifactId>
+     *   <version>${maven.javadoc.plugin.version}</version>
+     *   <configuration>
+     *     . . . . . . . . .
+     *     <header>[(${ jdh.navBarRight })]</header>
+     *     . . . . . . . . .
+     *   </configuration>
+     * </plugin>
+     * . . . . . . . . .}
+     *
      * @return the HTML-content of the whole right-part of top-navbar of each JavaDoc-generated HTML-page,
      * which includes:<ul>
      *     <li>badge to {@link GithubBadgeHelper#getBadgeReleaseCatalogHTML() 'Release Catalog'}</li>

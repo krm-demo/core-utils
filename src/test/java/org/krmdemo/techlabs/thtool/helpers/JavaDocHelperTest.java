@@ -30,6 +30,15 @@ public class JavaDocHelperTest {
     }
 
     @Test
+    void testOverviewDocTitle() {
+        assumeTrue(Files.exists(PATH_DIR__JAVADOC_REPORT),
+            String.format("input directory '%s' to process the JavaDoc-report does not exist",
+                PATH_DIR__JAVADOC_REPORT));
+        JavaDocHelper jdh = JavaDocHelper.fromCtxLazy(ttCtx);
+        assertThat(jdh.getOverviewDocTitle()).contains("core-utils");
+    }
+
+    @Test
     void testNavBarRight_Contains_ReleaseCatalog() {
         assumeTrue(Files.exists(PATH_DIR__JAVADOC_REPORT),
             String.format("input directory '%s' to process the JavaDoc-report does not exist",

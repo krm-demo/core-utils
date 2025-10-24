@@ -533,9 +533,8 @@
           </addStylesheets>
           <docfilessubdirs>true</docfilessubdirs>
           <windowtitle>JavaDoc ${project.name}:${project.version}</windowtitle>
-          <doctitle>JavaDoc for &lt;u&gt;${project.name}&lt;/u&gt;:${project.version}</doctitle>
-<!--          <header>&lt;u&gt;${project.name}&lt;/u&gt;:${project.version}</header>-->
-          <header>[(${jdh.navBarRight})]</header>
+          <doctitle>[(${ jdh.overviewDocTitle })]</doctitle>
+          <header>[(${ jdh.navBarRight })]</header>
           <additionalOptions>--snippet-path ${project.basedir}/src/main/java:${project.basedir}/src/test/java</additionalOptions>
           <excludePackageNames>empty</excludePackageNames>
         </configuration>
