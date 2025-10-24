@@ -1,3 +1,4 @@
+ee4c00a9 << new snapshot version >> 21.20.002-SNAPSHOT
 036ba9fc << internal release >> 21.20.001
 91a17b8e start playing with snippets and '--snippet-path' javadoc-option
 64aa0581 add 'Open-Test-Report' to project #1
