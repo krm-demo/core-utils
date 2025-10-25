@@ -99,6 +99,10 @@ public class GithubBadgeHelper {
     }
 
     /**
+     * A helper-property to be inserted at <b>{@code th-tool}</b>-template
+     * in order to render the HTML-badge to 'Release Catalog':
+     * {@snippet : [(${ gbh.badgeReleaseCatalogHTML })] }
+     *
      * @return the HTML-badge to 'Release Catalog' (to be inserted at each HTML-page in processed JavaDoc-report)
      */
     @JsonIgnore
