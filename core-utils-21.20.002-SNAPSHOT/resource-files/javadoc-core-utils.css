@@ -2,6 +2,11 @@
  *    This CSS is applied to in addition to standard JavaDoc-styles for "main" code-base
  */
 
+:root {
+    --overview-background-even: #4D7A9711;
+    --overview-background-odd: #4D7A9722;
+}
+
 img.release-catalog-badge {
     border: 1px solid var(--selected-background-color);
     border-radius: 5px;
@@ -25,6 +30,20 @@ h1.title code {
     color: var(--link-color-active);
     /*background-color: var(--snippet-highlight-color);*/
 }
+
+#overview-badges-and-links a::after {
+    all: initial;
+}
+#overview-badges-and-links img.github-project-source-badge {
+    margin: 0;
+}
+#overview-badges-and-links .even-row-color {
+    background-color: var(--overview-background-even);
+}
+#overview-badges-and-links .odd-row-color {
+    background-color: var(--overview-background-odd);
+}
+
 
 /*
 :root {
