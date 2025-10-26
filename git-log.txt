@@ -1,3 +1,4 @@
+d2e89d54 introduce JaCoCo-plugin and upgrade dependencies and other plugins
 6e527329 introduce OpenTest4jHelper
 89f87e5a playing with overview CSS #1
 fc22027d add @JsonIgnore to 'GithubBadgeHelper.getBadgeReleaseCatalogHTML()'
