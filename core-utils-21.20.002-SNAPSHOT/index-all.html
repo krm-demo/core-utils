@@ -362,6 +362,18 @@ where the serializing of an object is provided with <a href="org/krmdemo/techlab
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/render/OuterTagUtils.html#embeddedSvgTag(java.lang.String)" class="member-name-link">embeddedSvgTag(String)</a> - Static method in class org.krmdemo.techlabs.core.dump.render.<a href="org/krmdemo/techlabs/core/dump/render/OuterTagUtils.html" title="class in org.krmdemo.techlabs.core.dump.render">OuterTagUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#encodeBase64(byte%5B%5D)" class="member-name-link">encodeBase64(byte[])</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
+<dd>
+<div class="block">Utility-method that provides Base64-encoding of the passed array of bytes
+that allows to use it in HTML-attributes
+(for HTTP-URL parameter - additional URL-encoding should be applied).</div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#encodeBase64(java.lang.String)" class="member-name-link">encodeBase64(String)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
+<dd>
+<div class="block">Utility-method that provides Base64-encoding of the passed content
+that allows to use it in HTML-attributes
+(for HTTP-URL parameter - additional URL-encoding should be applied).</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#entryIsValid(java.util.Map.Entry)" class="member-name-link">entryIsValid(Map.Entry)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
 <dd>
 <div class="block">In order to avoid <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link"><code>NullPointerException</code></a> in JDK's collectors
@@ -582,6 +594,12 @@ that requires an additional internal or external HTML-styles (in <code>*.css</co
 <div class="block">This merging-function ignores any subsequent attempts to overwrite the existing <code>value</code>
 for the same <code>key</code>.</div>
 </dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#imageFileData64(java.io.File)" class="member-name-link">imageFileData64(File)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
+<dd>
+<div class="block">Load the content of image-file with, encodes its content <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Base64.html#getEncoder()" title="class or interface in java.util" class="external-link"><code>Base64-encoder</code></a>
+and prepend it with corresponding mime-type prefix in order to use that final value
+either in HTML-attributes (for HTTP-URL parameter - additional URL-encoding should be applied).</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#isDayOfMonthAndWeekTheSameAsNext()" class="member-name-link">isDayOfMonthAndWeekTheSameAsNext()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">LinkedDateTimeTripletMap.LinkedTriplet</a></dt>
 <dd>
 <div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the next</b> linked value</div>
@@ -787,14 +805,19 @@ with the passed <code>mergeFunction</code>.</div>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#%3Cinit%3E(java.time.LocalDateTime)" class="member-name-link">LinkedTriplet(LocalDateTime)</a> - Constructor for class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">LinkedDateTimeTripletMap.LinkedTriplet</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#loadFileContent(java.io.File)" class="member-name-link">loadFileContent(File)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#loadFileAsBytes(java.io.File)" class="member-name-link">loadFileAsBytes(File)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
 <dd>
-<div class="block">Loading the content of <code>file</code> as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a> (it's better to use for text-files only)
-and returning <code>null</code> if the content of file could not be loaded for any reason.</div>
+<div class="block">Loading the content of <code>file</code> as <code>byte[]</code>  and throws <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a>
+if the content of file could not be loaded for any reason.</div>
 </dd>
-<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#loadFileContent(java.lang.String)" class="member-name-link">loadFileContent(String)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#loadFileAsText(java.io.File)" class="member-name-link">loadFileAsText(File)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
 <dd>
-<div class="block">The same as <a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#loadFileContent(java.io.File)"><code>CoreFileUtils.loadFileContent(File)</code></a>, but accept the path to that file as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a></div>
+<div class="block">Loading the content of <code>file</code> as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a> (it's allowed to use for text-files only)
+and throws <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a> if the content of file could not be loaded for any reason.</div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#loadFileAsText(java.lang.String)" class="member-name-link">loadFileAsText(String)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
+<dd>
+<div class="block">The same as <a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#loadFileAsText(java.io.File)"><code>CoreFileUtils.loadFileAsText(File)</code></a>, but accept the path to that file as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a></div>
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#loadFileLines(java.nio.file.Path)" class="member-name-link">loadFileLines(Path)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
 <dd>
@@ -935,7 +958,8 @@ of the method <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.b
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#pathPartsList(java.nio.file.Path)" class="member-name-link">pathPartsList(Path)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
 <dd>
-<div class="block">Getting the sequence of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link"><code>Path</code></a>-components as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link"><code>List&lt;String&gt;</code></a>.</div>
+<div class="block">Getting the sequence of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link"><code>Path</code></a>-components as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List&lt;String&gt;</code></a>
+- so, following expressions are identical:</div>
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#pathPartsStr(java.nio.file.Path)" class="member-name-link">pathPartsStr(Path)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
 <dd>

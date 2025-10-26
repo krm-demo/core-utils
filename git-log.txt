@@ -1,3 +1,4 @@
+6e527329 introduce OpenTest4jHelper
 89f87e5a playing with overview CSS #1
 fc22027d add @JsonIgnore to 'GithubBadgeHelper.getBadgeReleaseCatalogHTML()'
 11d27a68 Stop double-processing of JavaDoc-Overview and introduce 'jdh.overviewDocTitle' #1
