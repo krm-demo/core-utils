@@ -208,9 +208,9 @@
       <!--
           Getting the reports about not up-to-date versions of maven-project's dependencies and plugins:
           - getting help: "mvn versions:help" or see https://www.mojohaus.org/versions/versions-maven-plugin/index.html
-          - dependencies-updates     ::> "mvn versions:display-dependency-updates"
-          - plugin-updates info      ::> "mvn versions:display-plugin-updates"
-          - properties-updates info  ::> "mvn versions:display-property-updates"
+          - dependencies-updates     ::> `mvn versions:display-dependency-updates`
+          - plugin-updates info      ::> `mvn versions:display-plugin-updates`
+          - properties-updates info  ::> `mvn versions:display-property-updates`
       -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -309,7 +309,9 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven.surefire.plugin.version}</version>
         <configuration>
+          <!-- it's very important to prepend the list of arguments with placeholder @{argLine} for "JaCoCo" !!! -->
           <argLine>
+            @{argLine}
             -javaagent:${settings.localRepository}/org/mockito/mockito-core/${org.mockito.version}/mockito-core-${org.mockito.version}.jar
             -Xshare:off
           </argLine>
@@ -343,9 +345,48 @@
         </configuration>
       </plugin>
       <plugin>
+        <!-- old-school "surefire"-report looks useless and deprecated in favor of "Open Test Alliance for the JVM" -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
         <version>${maven.surefire.plugin.version}</version>
+      </plugin>
+
+      <!--
+          "JaCoCo"-plugin, which is used to collect and report the information about code-coverage.
+          In order to verify that "JaCoCo" is properly configured it's recommended to use "buildplan"-plugin:
+          - list of plugin executions              ::> `mvn buildplan:list`
+          - list of plugin executions by plugin    ::> `mvn buildplan:list-plugin`
+          - list of plugin executions by phase     ::> `mvn buildplan:list-phase`
+      -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${maven.jacoco.plugin.version}</version>
+        <configuration>
+          <dataFile>${maven.jacoco.target.exec-data-file}</dataFile>
+          <destFile>${maven.jacoco.target.exec-data-file}</destFile>
+          <outputDirectory>${maven.jacoco.reports.output.dir}</outputDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <!-- this is very important settings, which track the coverage during execution the JUnit-tests -->
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <!--
+                this MOJO transforms the previously collected binary-data into HTML-report:
+                - executing the "JaCoCo"-report   ::> `mvn jacoco:report`
+            -->
+            <id>report</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <!--
@@ -354,7 +395,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>${maven-exec-plugin.version}</version>
         <!-- following should be provided if "opentest4j" dependency is excluded from project scopes (1): -->
 <!--        <dependencies>-->
 <!--          <dependency>-->
@@ -429,9 +470,7 @@
               - generate HTML-report     ::> `mvn exec:java@open-test-html-report`
             -->
             <id>open-test-html-report</id>
-            <!-- it looks like IDEA becomes crazy after doing that:
-              <phase>prepare-package</phase>
-            -->
+            <phase>verify</phase>
             <goals>
               <goal>java</goal>
             </goals>
@@ -599,6 +638,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <java.version>21</java.version>
     <lombock.version>1.18.42</lombock.version>
@@ -619,7 +659,8 @@
     <maven-build-helper-plugin.version>3.6.1</maven-build-helper-plugin.version>
     <maven.dependency.plugin.version>3.8.1</maven.dependency.plugin.version>
     <maven.deploy.plugin.version>3.1.4</maven.deploy.plugin.version>
-    <maven-enforcer-plugin.version>3.6.1</maven-enforcer-plugin.version>
+    <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
+    <maven-exec-plugin.version>3.6.2</maven-exec-plugin.version>
     <maven.install.plugin.version>3.1.4</maven.install.plugin.version>
     <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven.javadoc.plugin.version>3.12.0</maven.javadoc.plugin.version>
@@ -635,16 +676,17 @@
     <org.junit.platform.version>1.13.4</org.junit.platform.version>
     <org.assertj.version>3.27.6</org.assertj.version>
     <org.mockito.version>5.20.0</org.mockito.version>
-    <open-test-reporting-cli.version>0.2.4</open-test-reporting-cli.version>
+    <open-test-reporting-cli.version>0.2.5</open-test-reporting-cli.version>
+
+    <maven.jacoco.plugin.version>0.8.14</maven.jacoco.plugin.version>
+    <maven.jacoco.target.exec-data-file>${project.build.directory}/jacoco.exec</maven.jacoco.target.exec-data-file>
+    <maven.jacoco.reports.output.dir>${project.build.directory}/jacoco-reports</maven.jacoco.reports.output.dir>
 
     <commons-io.version>2.20.0</commons-io.version>
     <commons-lang.version>3.19.0</commons-lang.version>
     <commons-text.version>1.14.0</commons-text.version>
     <com.fasterxml.jackson.version>2.20.0</com.fasterxml.jackson.version>
     <snakeyaml-engine.version>2.10</snakeyaml-engine.version>
-
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <maven-project.group>${project.groupId}</maven-project.group>
     <maven-project.artifact>${project.artifactId}</maven-project.artifact>
