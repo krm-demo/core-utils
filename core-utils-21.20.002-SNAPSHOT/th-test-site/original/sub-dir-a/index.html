@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <title>core-utils (gh-pages initial version)</title>
   <meta charset="utf-8">
@@ -69,7 +69,6 @@
           the processed site become available in the directory <code>./target/th-test-site/processed</code>.
         </p>
         <!-- start of specific page-content -->
-        <p>
         <details>
           <summary>
             JSON-properties of <a href="https://github.com/krm-demo/core-utils/blob/main/src/test/java/org/krmdemo/techlabs/opentest4j/OpenTest4jHelper.java">
@@ -79,11 +78,31 @@
           </summary>
           <pre>[(${ openTest4j })]</pre>
         </details>
-        </p>
         <p>
           Test-Results badge: <code>[(${ openTest4j.badgeHtml })]</code>
         </p>
-        <p>
+        <code>[&#8203;[${ gbh.gitHubCurrentRootUrl }]&#8203;] = [[${ gbh.gitHubCurrentRootUrl }]]</code><br/>
+        <details open>
+          <summary>
+            this is an example of <i>manually</i> constructed HTML-link:
+              <a href="#" th:href="${gbh.gitHubCurrentRootUrl + '/pom.xml'}"
+                 th:utext="|a link to <b>pom.xml</b> file|">
+                this link is not processed yet
+              </a>
+          </summary>
+          <pre>
+
+    <&#8203;a href="#" th&#8203;:href="|${gbh.gitHubCurrentRootUrl}/pom.xml|"
+       th&#8203;:utext="|a link to <&#8203;b>pom.xml<&#8203;/b> file|"&#8203;>
+      this link is not processed yet
+    <&#8203;/a&#8203;></pre>
+          <i><u>Note!</u></i><br/>
+          <small>Pay attention to the pipes (<code>'|'</code>-symbols) around the values
+            of <code>'th:utext'</code> and <code>'th:href'</code> attributes.<br/>
+            An alternate way to those pipes - is OGNL-expression with <code>'+'</code>-operation over string-operands like:
+            <code style="white-space: nowrap;">th&#8203;:href="${gbh.gitHubCurrentRootUrl + '/pom.xml'}"</code>
+          </small>
+        </details>
         <!-- end of specific page-content -->
         <div class="text-center bg-light fst-italic text-sm mb-1">Each page has its own content here.</div>
       </div>
