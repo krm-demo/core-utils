@@ -29,7 +29,7 @@ import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedSet;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 
 /**
- * This Java-record represents a <b>{@code th-tool}</b>-helper to work with local <b>{@code git}</b>-repository.
+ * This class represents a <b>{@code th-tool}</b>-helper to work with local <b>{@code git}</b>-repository.
  * The properties of this helper are available from <b>{@code th-tool}</b>-templates by name {@code git}.
  * <hr/>
  * The implementation is based on <i>porcelain-API</i> of a library <b>JGit</b>.

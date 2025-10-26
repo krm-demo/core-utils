@@ -132,9 +132,27 @@ public class JavaDocHelper {
         return String.format("""
             Java-API Documentation for <code>%s</code>-library of version <a href="%s">%s</a>""",
             MavenHelper.fromCtx(ttCtx).getProjectArtifact(),
-            githubSourceUrl(""),
+            getGitHubCurrentRootUrl(),
             MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion()
         );
+    }
+
+    /**
+     * A helper-property to be inserted at <b>{@code th-tool}</b>-template
+     * in order to render the URL to root sources of the current version of GitHub-project:
+     * {@snippet : [(${ jdh.gitHubCurrentRootUrl })] }
+     * <hr/>
+     * In some cases the usage of Thymeleaf-attribute is preferable over Thymeleaf-inline -
+     * so, this helper-property could also be inserted into <b>{@code th-tool}</b>-template in following way:
+     * {@snippet : <a th:href="${jdh.gitHubCurrentRootUrl}/path/to/file/or/dir" ...>...link-text...</a> }
+     * <hr/>
+     * <u><i>Note:</i></u> the root of Java-sources is started either at {@code src/main/java} or at {@code src/test/java} -
+     * so you should be careful when you are trying to render the HTML-link to Java-sources manually.
+     *
+     * @return the URL to root sources of the current version of GitHub-project
+     */
+    public String getGitHubCurrentRootUrl() {
+        return githubSourceUrl("");
     }
 
     /**
@@ -175,7 +193,7 @@ public class JavaDocHelper {
     }
 
     /**
-     * @return  the HTML-badge to 'GitHub project source' (to be inserted at each HTML-page in processed JavaDoc-report)
+     * @return the HTML-badge to 'GitHub project source' (to be inserted at each HTML-page in processed JavaDoc-report)
      */
     public String getBadgeGitHubHTML() {
         String sourceSuffix = getGitHubSourcePath();
