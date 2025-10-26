@@ -146,6 +146,12 @@ jobs:
           echo "... copy the 'test-site' that was generated in scope of 'mvn test -Dtest=ThymeleafToolTest#testProcessDir_TestSite': ..."
           cp -r .github/th-test-site ../gh-pages-branch/${JAR_FILE_NAME%.*}
 
+          echo "... copy the test-results from 'Open-Test-4j' (MOJO 'mvn exec:java@open-test-report') ..."
+          cp -r target/open-test-report.* ../gh-pages-branch/${JAR_FILE_NAME%.*}
+
+          echo "... copy the test-coverage-report from 'JaCoCo' (MOJO 'mvn jacoco:report') ..."
+          cp -r target/jacoco-reports ../gh-pages-branch/${JAR_FILE_NAME%.*}
+
           echo "... copy the previously generated 'Release Catalog' page ..."
           cp -r .github/th-release-catalog/* ../gh-pages-branch
 
