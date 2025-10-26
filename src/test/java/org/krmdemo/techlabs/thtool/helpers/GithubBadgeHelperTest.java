@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -7,11 +8,21 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.krmdemo.techlabs.core.utils.CoreFileUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 import org.mockito.Mockito;
 
+import java.io.File;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Stream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assumptions.assumeThat;
+import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsYamlTxt;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
 import static org.mockito.Mockito.when;
 
@@ -188,6 +199,38 @@ public class GithubBadgeHelperTest {
     // --------------------------------------------------------------------------------------------
 
     @Test
+    void testCustomLogoBadge_GIF() {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        String badgeUrlTxt = gbh.badgeUrlShiedsIO("left-part", "right-part", "blue",
+            Path.of(".github/images/jacoco/jacoco-reports.gif").toFile(),
+            "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable ad JavDoc-site
+            "4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable ad JavDoc-site
+        );
+        assertThat(badgeUrlTxt)
+            .isNotBlank()
+            .startsWith("https://img.shields.io/badge/left--part-right--part-blue?logo=data%3Aimage%2Fgif%3Bbase64%2CR0lGODlhEAA")
+            .endsWith("LWnCykoKSopvScnDEUKBgkJCMYJBwcKTM1FQQA7&logoColor=f8981d&labelColor=4D7A97")
+            .hasSize(725);
+    }
+
+    @Test
+    void testCustomLogoBadge_PNG() {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        String badgeUrlTxt = gbh.badgeUrlShiedsIO("left-part", "right-part", "gray",
+            Path.of(".github/images/opentest4j/opentest4j-logo--48.png").toFile(),
+            "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable ad JavDoc-site
+            "4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable ad JavDoc-site
+        );
+        assertThat(badgeUrlTxt)
+            .isNotBlank()
+            .startsWith("https://img.shields.io/badge/left--part-right--part-gray?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAA")
+            .endsWith("AAD%2F%2FxfuVaicHZfQAAAAAElFTkSuQmCC&logoColor=f8981d&labelColor=4D7A97")
+            .hasSize(3555);
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    @Test
     void testCommitGroup_toString() {
         System.out.println("---- ---- minorGroup(...).toString() test: ---- ----");
         System.out.println(minorGroup("12.34"));
@@ -215,8 +258,6 @@ public class GithubBadgeHelperTest {
         };
     }
 
-    // --------------------------------------------------------------------------------------------
-
     @SuppressWarnings("SameParameterValue")
     private static RevCommit mockRevCommit(String commitID) {
         return mockRevCommit(commitID,
@@ -242,4 +283,53 @@ public class GithubBadgeHelperTest {
         when(mockRevCommit.getId()).thenReturn(mockObjectId);
         return mockRevCommit;
     }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * JVM entry-point to play with different badges without garbage in JUnit-output
+     *
+     * @param args unused command-line arguments
+     */
+    public static void main(String... args) {
+        System.out.println("----- data-images and badges for JaCoCo PNG-files: -----");
+        File[] jacocoFilesArr = Stream.of(
+            "jacoco-logo.png", // <-- Note! the badge-URL is not working because the size is too large
+            "jacoco-logo--48.png", // <-- Note! the badge-URL is not working because the size is too large as well
+            "jacoco-logo--32.png",
+            "jacoco-logo--24.png",
+            "jacoco-reports.gif"
+        ).map(name -> Path.of(".github/images/jacoco", name).toFile()).toArray(File[]::new);
+        System.out.println(dumpAsYamlTxt(jacocoFilesArr));
+        dumpImageDataAndBadges(jacocoFilesArr);
+
+        System.out.println("----- data-images and badges for 'Open-Test-Alliance'-logo PNG-files: -----");
+        File[] opentest4jFilesArr = Stream.of(
+            "opentest4j-logo--200.png",
+            "opentest4j-logo--48.png",
+            "opentest4j-logo--32.png",
+            "opentest4j-logo--24.png"
+        ).map(name -> Path.of(".github/images/opentest4j", name).toFile()).toArray(File[]::new);
+        System.out.println(dumpAsYamlTxt(opentest4jFilesArr));
+        dumpImageDataAndBadges(opentest4jFilesArr);
+    }
+
+    private static void dumpImageDataAndBadges(File... pathArr) {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        for (File imageFile : pathArr) {
+            String imageData64 = CoreFileUtils.imageFileData64(imageFile);
+            System.out.println(imageFile + "(bas64) --> '" + imageData64 + "'");
+            System.out.println(imageFile + "(.url.) --> '" + URLEncoder.encode(imageData64, StandardCharsets.UTF_8) + "'");
+            String badgeUrlTxt = gbh.badgeUrlShiedsIO("left-part", "right-part",
+                "B0E0E6", // <-- this color is called "PowderBlue" at https://htmlcolorcodes.com/color-names/
+                imageFile,
+                "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable ad JavDoc-site
+                "4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable ad JavDoc-site
+            );
+            System.out.println(imageFile + "(badge) --> '" + badgeUrlTxt + "'");
+            System.out.println(imageFile + "(badge) --> badgeUrlTxt.size() = " + badgeUrlTxt.length());
+            System.out.println("----------------------");
+        }
+    }
 }
+

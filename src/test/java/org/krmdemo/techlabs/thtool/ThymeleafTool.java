@@ -2,6 +2,7 @@ package org.krmdemo.techlabs.thtool;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.krmdemo.techlabs.opentest4j.OpenTest4jHelper;
 import org.krmdemo.techlabs.thtool.helpers.GitHelper;
 import org.krmdemo.techlabs.thtool.helpers.GithubBadgeHelper;
 import org.krmdemo.techlabs.thtool.helpers.GithubHelper;
@@ -182,14 +183,20 @@ public class ThymeleafTool {
      *
      * @param args command-line arguments that will be processed by PicoCli-framework
      * @return system exit-code ({@code 0} means that everything is OK)
+     *
+     * @see <a href="https://github.com/atteo/classindex">
+     *     (GitHub) classindex
+     * </a>
      */
     static int executeMain(String... args) {
+        // TODO: the way to register th-tool-helper must be re-engineered with usage of ClassIndex-annotations and SPI
         ThymeleafTool tt = new ThymeleafTool(
             GitHelper::register,
             GithubHelper::register,
             GithubInputsHelper::register,
             GithubBadgeHelper::register,
-            JavaDocHelper::register
+            JavaDocHelper::register,
+            OpenTest4jHelper::register
         );
         return new CommandLine(tt).execute(args);
     }

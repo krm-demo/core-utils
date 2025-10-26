@@ -2,6 +2,8 @@ package org.krmdemo.techlabs.core.dump.render;
 
 import java.util.Base64;
 
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.encodeBase64;
+
 /**
  * Utility-class to wrap inner-HTML or inner-SVG with outer HTML-tags
  */
@@ -100,9 +102,6 @@ public class OuterTagUtils {
             <img alt="embedded SVG-iamge" src="data:image/svg+xml;base64,%s" />""",
             encodeBase64(outerSvgTag)
         );
-    }
-    private static String encodeBase64(String outerSvgTag) {
-        return new String(Base64.getEncoder().encode(outerSvgTag.getBytes()));
     }
 
     // --------------------------------------------------------------------------------------------

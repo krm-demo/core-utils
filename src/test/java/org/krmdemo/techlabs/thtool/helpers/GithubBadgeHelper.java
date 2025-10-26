@@ -7,8 +7,14 @@ import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafTool;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
+import java.io.File;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.function.Consumer;
+
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.imageFileData64;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileAsText;
 
 /**
  * This class represents a <b>{@code th-tool}</b>-helper to render the individual badge and the whole <i>Badge Line</i>.
@@ -115,7 +121,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the URL to the badge of 'Release Catalog'
+     * @return the URL to the badge-image for 'Release Catalog'
      */
     public String getBadgeUrlReleaseCatalog() {
         return badgeUrlShiedsIO("Release Catalog", null, LABEL_COLOR__JAVADOC_NAVBAR,
@@ -184,7 +190,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the URL to the latest PUBLIC-release JavaDoc
+     * @return the URL to the badge-image for the latest PUBLIC-release JavaDoc
      */
     public String getBadgeUrlLatestPublicJavaDoc() {
         return !isLatestPublicAvailable() ? "" :
@@ -219,7 +225,7 @@ public class GithubBadgeHelper {
     // https://krm-demo.github.io/core-utils/core-utils-21.11/
 
     /**
-     * @return the URL to the latest PUBLIC-release project
+     * @return the URL to the badge-image for the latest PUBLIC-release project
      */
     public String getBadgeUrlLatestPublicGitHub() {
         return !isLatestPublicAvailable() ? "" :
@@ -273,7 +279,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the URL to the badge to the latest INTERNAL-release JavaDoc
+     * @return the URL to the badge-image for the latest INTERNAL-release JavaDoc
      */
     public String getBadgeUrlLatestInternalJavaDoc() {
         return !isLatestInternalAvailable() ? "" :
@@ -305,7 +311,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the URL to the latest PUBLIC-release project
+     * @return the URL to the badge-image for the latest PUBLIC-release project
      */
     public String getBadgeUrlLatestInternalGitHub() {
         return !isLatestInternalAvailable() ? "" :
@@ -346,7 +352,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the URL to the badge to the latest SNAPSHOT-version
+     * @return the URL to the badge-image for the latest SNAPSHOT-version
      */
     public String getBadgeUrlSnapshotJavaDoc() {
         return !isMavenSnapshot() ? "" :
@@ -378,7 +384,7 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return the URL to the latest PUBLIC-release project
+     * @return the URL to the badge-image for the latest PUBLIC-release project
      */
     public String getBadgeUrlSnapshotGitHub() {
         return !isMavenSnapshot() ? "" :
@@ -404,52 +410,6 @@ public class GithubBadgeHelper {
 
     // --------------------------------------------------------------------------------------------
 
-    /**
-     * Returning the URL to the static-badge, which will be rendered by
-     * <a href="https://shields.io/badges/static-badge">Shields IO</a>.
-     * <hr/>
-     * This is <a href="https://img.shields.io/badge/left--part-right--part-blue?logo=github&logoColor=f8981d&labelColor=4D7A97">
-     *     an example of such URL
-     * </a>
-     *
-     * @param leftPart the left part of badge-name
-     * @param rightPart the right-part of badge-name
-     * @param colorPart the color of right-part background (or the whole badge-name background if one part is missing)
-     * @param logoSlugName the logo-slug, provided by
-     *                     <a href="https://github.com/simple-icons/simple-icons/blob/master/slugs.md">
-     *                     Simple Icons
-     *                     </a>
-     * @param colorLogo the fill-color of logo-icon
-     * @param colorLabel the background color of logo-icon
-     * @return the URL to be inserted on your site
-     */
-    private String badgeUrlShiedsIO(String leftPart, String rightPart, String colorPart,
-                                    @SuppressWarnings("SameParameterValue") String logoSlugName,
-                                    String colorLogo, String colorLabel) {
-        leftPart = escapeBadgeName(leftPart);
-        rightPart = escapeBadgeName(rightPart);
-        if (StringUtils.isNotBlank(leftPart) && StringUtils.isNotBlank(rightPart)) {
-            return String.format("https://img.shields.io/badge/%s-%s-%s?logo=%s&logoColor=%s&labelColor=%s",
-                leftPart, rightPart, colorPart, logoSlugName, colorLogo, colorLabel);
-        }
-        String singlePart = StringUtils.isNotBlank(leftPart) ? leftPart : rightPart;
-        if (StringUtils.isBlank(singlePart)) {
-            throw new IllegalArgumentException("either left and right part of badge name must be NOT blank");
-        }
-        return String.format("https://img.shields.io/badge/%s-%s?logo=%s&logoColor=%s&labelColor=%s",
-            singlePart, colorPart, logoSlugName, colorLogo, colorLabel);
-    }
-
-    private static String escapeBadgeName(String namePart) {
-        if (StringUtils.isBlank(namePart)) {
-            return namePart;
-        }
-        namePart = namePart.replace("-", "--");
-        namePart = namePart.replace("_", "__");
-        namePart = namePart.replace(" ", "_");
-        return namePart;
-    }
-
     private ReleaseCatalog releaseCatalog() {
         return GitHelper.fromCtx(ttCtx).getReleaseCatalog();
     }
@@ -465,6 +425,78 @@ public class GithubBadgeHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
+     * Returning the URL to the static-badge, which will be rendered by
+     * <a href="https://shields.io/badges/static-badge">Shields IO</a>, where the parameter {@code logoSlugName}
+     * corresponds to one of predefined values (like {@code 'github'}, {@code 'apachemaven'}, ...).
+     * <hr/>
+     * This is <a href="https://img.shields.io/badge/left--part-right--part-blue?logo=github&logoColor=f8981d&labelColor=4D7A97">
+     *     an example of such URL
+     * </a>
+     *
+     * @param leftPart the left part of badge-name
+     * @param rightPart the right-part of badge-name
+     * @param colorPart the color of right-part background (or the whole badge-name background if one part is missing)
+     * @param logoSlugName the logo-slug, provided by
+     *                     <a href="https://github.com/simple-icons/simple-icons/blob/master/slugs.md">
+     *                     Simple Icons
+     *                     </a>
+     * @param colorLogo the fill-color of logo-icon
+     * @param colorLabel the background color of logo-icon
+     * @return the URL to ready image that could be used at any HTML-page ot Markdown-page
+     */
+    public String badgeUrlShiedsIO(String leftPart, String rightPart, String colorPart,
+                                   String logoSlugName, String colorLogo, String colorLabel) {
+        leftPart = escapeBadgeName(leftPart);
+        rightPart = escapeBadgeName(rightPart);
+        if (StringUtils.isNotBlank(leftPart) && StringUtils.isNotBlank(rightPart)) {
+            return String.format("https://img.shields.io/badge/%s-%s-%s?logo=%s&logoColor=%s&labelColor=%s",
+                leftPart, rightPart, colorPart, logoSlugName, colorLogo, colorLabel);
+        }
+        String singlePart = StringUtils.isNotBlank(leftPart) ? leftPart : rightPart;
+        if (StringUtils.isBlank(singlePart)) {
+            throw new IllegalArgumentException("either left and right part of badge name must be NOT blank");
+        }
+        return String.format("https://img.shields.io/badge/%s-%s?logo=%s&logoColor=%s&labelColor=%s",
+            singlePart, colorPart, logoSlugName, colorLogo, colorLabel);
+    }
+
+    /**
+     * The same as {@link #badgeUrlShiedsIO(String, String, String, String, String, String)},
+     * but instead of {@code logoSlugName} a custom image-file could be provided.
+     *
+     * @param leftPart the left part of badge-name
+     * @param rightPart the right-part of badge-name
+     * @param colorPart the color of right-part background (or the whole badge-name background if one part is missing)
+     * @param logoFile an image-file with custom logo at local file-system
+     * @param colorLogo the fill-color of logo-icon
+     * @param colorLabel the background color of logo-icon
+     * @return the URL to ready image that could be used at any HTML-page ot Markdown-page
+     */
+    public String badgeUrlShiedsIO(String leftPart, String rightPart, String colorPart,
+                                          File logoFile, String colorLogo, String colorLabel) {
+        String imageData64 = imageFileData64(logoFile);
+        String urlUncodedImageData = URLEncoder.encode(imageData64, StandardCharsets.UTF_8);
+        return badgeUrlShiedsIO(leftPart, rightPart, colorPart,
+            urlUncodedImageData, colorLogo, colorLabel);
+    }
+
+    private static String escapeBadgeName(String namePart) {
+        if (StringUtils.isBlank(namePart)) {
+            return namePart;
+        }
+        namePart = namePart.replace("-", "--");
+        namePart = namePart.replace("_", "__");
+        namePart = namePart.replace(" ", "_");
+        return namePart;
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
+     * HTML-badge to GitHub-project of the version that corresponds to the passed {@code commitGroupMinor}:
+     * {@snippet : [(${ gbh.badgeJavaDocHTML(commitGroupMinor) })] }
+     *
      * @return HTML-badge to GitHub-project of the version that corresponds to the passed {@code commitGroupMinor}
      */
     @JsonIgnore
@@ -481,7 +513,11 @@ public class GithubBadgeHelper {
     }
 
     /**
-     * @return HTML-badge to GitHub-project of the version that corresponds to the passed {@code commitGroupMinor}
+     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
+     * HTML-badge to GitHub-project of the version that corresponds to the passed {@code commitGroupMajor}:
+     * {@snippet : [(${ gbh.badgeJavaDocHTML(commitGroupMajor) })] }
+     *
+     * @return HTML-badge to GitHub-project of the version that corresponds to the passed {@code commitGroupMajor}
      */
     @JsonIgnore
     public String badgeJavaDocHTML(CommitGroupMajor commitGroupMajor) {
@@ -578,6 +614,14 @@ public class GithubBadgeHelper {
 
     // --------------------------------------------------------------------------------------------
 
+    /**
+     * A helper-property to be inserted at <b>{@code th-tool}</b>-template
+     * in order to render the link to <b>{@code git}</b>-commit at the GitHub-site:
+     * {@snippet : [(${ gbh.badgeCommit(commitInfo) })] }
+     *
+     * @return an HTML-tag with link to <b>{@code git}</b>-commit at the GitHub-site,
+     *         where the link-text corresponds to {@link CommitInfo#getShortCommitHash()}
+     */
     public String badgeCommit(CommitInfo commitInfo) {
         return String.format("""
             <a href="%s">
@@ -594,7 +638,7 @@ public class GithubBadgeHelper {
 
     /**
      * This method is invoked from <b>{@code th-tool}</b>-template like "Release Catalog" via expression
-     * <pre>{@code <a th:href="${gbh.githubCommitUrl(commitInfo)}"></a>}</pre>
+     * <pre>{@code <a th:href="${gbh.githubCommitUrl(commitInfo)}">...link-text...</a>}</pre>
      * in order to display the link to <b>{@code git}</b>-commit at the GitHub-site.
      *
      * @param commitInfo information about <b>{@code git}</b>-commit that is fetched by {@link GitHelper}
@@ -605,6 +649,13 @@ public class GithubBadgeHelper {
         return githubCommitUrl(commitInfo.commitID);
     }
 
+    /**
+     * The same as {@link #githubCommitUrl(CommitInfo)}, but with {@link String} parameter.
+     *
+     * @param commitID 40-character SHA-1 hash of <b>{@code git}</b>-commit
+     * @return a URL reference to be rendered inside HTML-tag {@code <a href="...">...</a>}
+     * @see CommitInfo#commitID
+     */
     public String githubCommitUrl(String commitID) {
         return String.format("%s/commit/%s", repoHtmlUrl(), commitID);
     }
@@ -616,6 +667,10 @@ public class GithubBadgeHelper {
         return workflowBadgeMarkdown("on-main-push");
     }
 
+    /**
+     * @return the GitHub-Markdown'-badge to the results of GitHub-workflow with passed {@code workflowNme},
+     *         which must corresponds to the name of corresponding {@code .yml}-file
+     */
     public String workflowBadgeMarkdown(String workflowName) {
         return workflowBadgeMarkdown(workflowName, workflowName + ".yml");
     }

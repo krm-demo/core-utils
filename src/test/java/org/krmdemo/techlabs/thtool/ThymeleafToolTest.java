@@ -13,7 +13,7 @@ import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
-import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileContent;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileAsText;
 
 /**
  * A functional-test for {@link ThymeleafTool} that executes it as the command-line application from the same JVM
@@ -85,7 +85,7 @@ public class ThymeleafToolTest {
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isEmpty();
 
-        assertThat(loadFileContent(".github/th-release-catalog/index.html"))
+        assertThat(loadFileAsText(".github/th-release-catalog/index.html"))
             .contains("core-utils (Release Catalog)")
             .contains("https://github.com/krm-demo/core-utils/commit/");
     }
@@ -108,7 +108,7 @@ public class ThymeleafToolTest {
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
 
-        assertThat(loadFileContent(".github/th-test-site/processed/root-one.html"))
+        assertThat(loadFileAsText(".github/th-test-site/processed/root-one.html"))
             .contains("[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21");
     }
 

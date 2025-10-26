@@ -84,6 +84,9 @@ public class CommitInfo {
         }
     }
 
+    /**
+     * @return the short-value (of length {@link #SHORT_COMMIT_HASH_LENGTH} of {@link #commitID}
+     */
     @JsonGetter("short-commit-hash")
     public String getShortCommitHash() {
         return commitID.substring(0, SHORT_COMMIT_HASH_LENGTH);

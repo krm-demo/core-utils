@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.copyFile;
-import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileContent;
+import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileAsText;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.saveFileContent;
 
 /**
@@ -40,7 +40,7 @@ public class CoreFileUtilsTest {
 
         assertThat(fileToSave.exists()).isTrue();
         assertThat(fileToSave.isFile()).isTrue();
-        assertThat(loadFileContent(fileToSave)).isEqualTo(contentToSave);
+        assertThat(CoreFileUtils.loadFileAsText(fileToSave)).isEqualTo(contentToSave);
     }
 
     @Test
@@ -52,8 +52,8 @@ public class CoreFileUtilsTest {
 
         copyFile(fileSource, fileTarget);
 
-        assertThat(loadFileContent(fileTarget))
-            .isEqualTo(loadFileContent(fileSource));
+        assertThat(CoreFileUtils.loadFileAsText(fileTarget))
+            .isEqualTo(CoreFileUtils.loadFileAsText(fileSource));
     }
 
     private static String fileContent(TestInfo testInfo) {

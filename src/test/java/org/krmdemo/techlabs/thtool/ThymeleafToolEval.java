@@ -94,7 +94,7 @@ public class ThymeleafToolEval implements Callable<Integer> {
         } else {
             logInfo("(successfully processed and printed");
             logDebug("--- %s ---", () -> "-".repeat(100));
-            logDebug(outputContent);
+            log.debug(outputContent);
             logDebug("... %s ...", () -> "-".repeat(100));
             // The only hit to standard output !!!
             if (StringUtils.isEmpty(outputContent)) {
