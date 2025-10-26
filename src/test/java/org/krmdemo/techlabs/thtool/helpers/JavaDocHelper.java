@@ -132,27 +132,9 @@ public class JavaDocHelper {
         return String.format("""
             Java-API Documentation for <code>%s</code>-library of version <a href="%s">%s</a>""",
             MavenHelper.fromCtx(ttCtx).getProjectArtifact(),
-            getGitHubCurrentRootUrl(),
+            GithubBadgeHelper.fromCtx(ttCtx).getGitHubCurrentRootUrl(),
             MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion()
         );
-    }
-
-    /**
-     * A helper-property to be inserted at <b>{@code th-tool}</b>-template
-     * in order to render the URL to root sources of the current version of GitHub-project:
-     * {@snippet : [(${ jdh.gitHubCurrentRootUrl })] }
-     * <hr/>
-     * In some cases the usage of Thymeleaf-attribute is preferable over Thymeleaf-inline -
-     * so, this helper-property could also be inserted into <b>{@code th-tool}</b>-template in following way:
-     * {@snippet : <a th:href="${jdh.gitHubCurrentRootUrl}/path/to/file/or/dir" ...>...link-text...</a> }
-     * <hr/>
-     * <u><i>Note:</i></u> the root of Java-sources is started either at {@code src/main/java} or at {@code src/test/java} -
-     * so you should be careful when you are trying to render the HTML-link to Java-sources manually.
-     *
-     * @return the URL to root sources of the current version of GitHub-project
-     */
-    public String getGitHubCurrentRootUrl() {
-        return githubSourceUrl("");
     }
 
     /**
@@ -205,25 +187,12 @@ public class JavaDocHelper {
                    class="github-project-source-badge"
                    src="%s" />
             </a>""",
-            githubSourceUrl(sourceSuffix),
+            GithubBadgeHelper.fromCtx(ttCtx).githubSourceUrl(sourceSuffix),
             StringUtils.isBlank(sourceSuffix) ? "" : String.format("source '%s'", sourceSuffix),
             MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion(),
             StringUtils.isBlank(sourceSuffix) ? "" : String.format("source '%s'", sourceSuffix),
             MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion(),
             GithubBadgeHelper.fromCtx(ttCtx).badgeUrlGitHub());
-    }
-
-    /**
-     * @param sourceSuffix the local path to source file from the root-directory of <b>{@code git}</b>-repo checkout
-     * @return the value of {@code href}-attribute of {@code <a>}-tag to render the remote-link to that source-file at GitHub-site
-     */
-    private String githubSourceUrl(String sourceSuffix) {
-        String repoHtmlUrl = GithubHelper.fromCtx(ttCtx).getProjectRepoHtmlUrl();
-        String gitTreeName = MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion();
-        if (gitTreeName.endsWith("SNAPSHOT")) {
-            gitTreeName = "main";
-        }
-        return String.format("%s/tree/%s/%s", repoHtmlUrl, gitTreeName, sourceSuffix);
     }
 
     // --------------------------------------------------------------------------------------------
