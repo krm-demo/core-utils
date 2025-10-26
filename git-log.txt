@@ -1,3 +1,4 @@
+e4f10300 add the reports from 'Open-Test-4j' and 'JaCoCo' to the project-site #1
 d2e89d54 introduce JaCoCo-plugin and upgrade dependencies and other plugins
 6e527329 introduce OpenTest4jHelper
 89f87e5a playing with overview CSS #1

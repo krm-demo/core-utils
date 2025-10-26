@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CorePropsUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">CorePropsUtils.java</span></div><h1>CorePropsUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+/**
+ * Utility-class to work with properties of any Java-object (some extension to JDK's reflection)
+ */
+public class CorePropsUtils {
+
+    /**
+     * Comparing on equality of the same property of two objects of the same type.
+     *
+     * @param objOne the first object
+     * @param objTwo the second object
+     * @param getterFunc the reference to getter-method
+     * @return {@code true} if the properties are equal or both are eventually {@code null} (and otherwise - {@code false})
+     * @param &lt;T&gt; the type of both objects
+     * @param &lt;V&gt; the type of properties (that is inferred once the method reference is provided)
+     */
+    public static &lt;T, V&gt; boolean equalProps(T objOne, T objTwo, Function&lt;T, V&gt; getterFunc) {
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        V propOne = objOne == null ? null : getterFunc.apply(objOne);</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        V propTwo = objTwo == null ? null : getterFunc.apply(objTwo);</span>
+<span class="fc" id="L27">        return Objects.equals(propOne, propTwo);</span>
+    }
+
+    /**
+     * The same as {@link #propValue(Object, String...)}, but cast the final value to string,
+     * or transform that value using standard {@link String#valueOf(Object)}
+     * (which is the same as invoking {@link Object#toString()} on that object)
+     *
+     * @param parent the root value to start the property-chain
+     * @param propNameChain the chain of nested property-names
+     * @return the value of the last property in that property-chain as {@link String}
+     */
+    public static String propValueStr(Object parent, String... propNameChain) {
+<span class="fc" id="L40">        Object propValueObj = propValue(parent, propNameChain);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        return propValueObj == null ? null : String.valueOf(propValueObj);</span>
+    }
+
+    /**
+     * Getting the value of nested properties of &lt;b&gt;{@code th-tool}&lt;/b&gt;-variable by providing the chain of property-names,
+     * which is quite the same as Thymeleaf-Engine does when processing the expression
+     * of form {@code ${varName.propName.nestedPropName...}}. At the moment only nested objects
+     * of type {@link Map Map&amp;lt;String,Object&amp;gt;} are supported.
+     *
+     * @param parent the root value to start the property-chain
+     * @param propNameChain the chain of nested property-names
+     * @return the value of the last property in that property-chain
+     */
+    @SuppressWarnings(&quot;rawtypes&quot;)
+    public static Object propValue(Object parent, String... propNameChain) {
+<span class="fc" id="L56">        Object value = parent;</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        for (int propNameIndex = 0; propNameIndex &lt; propNameChain.length; propNameIndex++) {</span>
+<span class="fc" id="L58">            String propName = propNameChain[propNameIndex];</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            if (value instanceof Map parentMap) {</span>
+<span class="fc" id="L60">                value = parentMap.get(propName);</span>
+            } else {
+                // all values except the last one are expected to be maps
+<span class="fc" id="L63">                throw new IllegalArgumentException(String.format(</span>
+                    &quot;Could not resolve the property-chain '%s' - the tail '%s' is unresolved &quot; +
+                        &quot;(the value of '%s' is expected to be a Map, but %s).&quot;,
+<span class="fc" id="L66">                    propChainStr(propNameChain),</span>
+<span class="fc" id="L67">                    propChainTailStr(propNameIndex, propNameChain),</span>
+<span class="fc" id="L68">                    propChainHeadStr(propNameIndex, propNameChain),</span>
+<span class="fc" id="L69">                    wrongValueDescription(value)</span>
+                ));
+            }
+        }
+<span class="fc" id="L73">        return value;</span>
+    }
+
+    private static String wrongValueDescription(Object value) {
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        return value == null ? &quot;it's null&quot; : String.format(&quot;it's of type &lt;&lt;%s&gt;&gt;&quot;, value.getClass());</span>
+    }
+
+    private static String propChainStr(String... propChain) {
+<span class="fc" id="L81">        return propChainStr(0, propChain.length, propChain);</span>
+    }
+
+    private static String propChainHeadStr(int propIndex, String... propChain) {
+<span class="fc" id="L85">        return propChainStr(0, propIndex, propChain);</span>
+    }
+
+    private static String propChainTailStr(int propIndex, String... propChain) {
+<span class="fc" id="L89">        return propChainStr(propIndex, propChain.length, propChain);</span>
+    }
+
+    private static String propChainStr(int indexFrom, int indexTo, String... propChain) {
+<span class="fc" id="L93">        return Arrays.stream(propChain, indexFrom, indexTo).collect(Collectors.joining(&quot;.&quot;));</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+<span class="nc" id="L98">    private CorePropsUtils() {</span>
+        // prohibit the creation of utility-class instance
+<span class="nc" id="L100">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
