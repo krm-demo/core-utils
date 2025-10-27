@@ -17,7 +17,7 @@ core-utils,org.krmdemo.techlabs.core.dump,StringBuilderOut,15,54,0,0,3,16,1,10,1
 core-utils,org.krmdemo.techlabs.core.dump,JacksonTree.ScalarNode,0,12,0,0,0,5,0,3,0,3
 core-utils,org.krmdemo.techlabs.core.utils,RandomHelper,144,0,2,0,30,0,19,0,18,0
 core-utils,org.krmdemo.techlabs.core.utils,CoreCollectors,61,45,0,0,14,8,10,9,10,9
-core-utils,org.krmdemo.techlabs.core.utils,CorePropsUtils,12,126,1,11,2,21,2,13,1,8
+core-utils,org.krmdemo.techlabs.core.utils,CorePropsUtils,2,169,1,13,0,30,1,16,0,10
 core-utils,org.krmdemo.techlabs.core.utils,CountingUtils,49,0,0,0,6,0,8,0,8,0
 core-utils,org.krmdemo.techlabs.core.utils,MergeFunction.new MergeFunction() {...},0,23,0,0,0,3,0,3,0,3
 core-utils,org.krmdemo.techlabs.core.utils,MergeFunction,0,21,0,0,0,4,0,1,0,1

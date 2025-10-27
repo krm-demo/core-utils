@@ -71,6 +71,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#equalProps(T,T,java.util.function.Function)" tabindex="0">equalProps(T, T, Function)</a></li>
 <li><a href="#propValueStr(java.lang.Object,java.lang.String...)" tabindex="0">propValueStr(Object, String...)</a></li>
 <li><a href="#propValue(java.lang.Object,java.lang.String...)" tabindex="0">propValue(Object, String...)</a></li>
+<li><a href="#newInstance(java.lang.Class)" tabindex="0">newInstance(Class)</a></li>
 </ol>
 </li>
 </ol>
@@ -86,7 +87,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CorePropsUtils.html#line-12">CorePropsUtils</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CorePropsUtils.html#line-14">CorePropsUtils</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Utility-class to work with properties of any Java-object (some extension to JDK's reflection)</div>
 </div>
@@ -111,18 +112,24 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Comparing on equality of the same property of two objects of the same type.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#propValue(java.lang.Object,java.lang.String...)" class="member-name-link">propValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;parent,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>...&nbsp;propNameChain)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#newInstance(java.lang.Class)" class="member-name-link">newInstance</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;classToCreate)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">A helper method that allows to instantiate any class with empty-constructor
+without necessity to handle multiple checked exceptions</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#propValue(java.lang.Object,java.lang.String...)" class="member-name-link">propValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;parent,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>...&nbsp;propNameChain)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Getting the value of nested properties of <b><code>th-tool</code></b>-variable by providing the chain of property-names,
 which is quite the same as Thymeleaf-Engine does when processing the expression
 of form <code>${varName.propName.nestedPropName...}</code>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#propValueStr(java.lang.Object,java.lang.String...)" class="member-name-link">propValueStr</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;parent,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#propValueStr(java.lang.Object,java.lang.String...)" class="member-name-link">propValueStr</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;parent,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>...&nbsp;propNameChain)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">The same as <a href="#propValue(java.lang.Object,java.lang.String...)"><code>propValue(Object, String...)</code></a>, but cast the final value to string,
 or transform that value using standard <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html#valueOf(java.lang.Object)" title="class or interface in java.lang" class="external-link"><code>String.valueOf(Object)</code></a>
 (which is the same as invoking <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link"><code>Object.toString()</code></a> on that object)</div>
@@ -148,7 +155,7 @@ or transform that value using standard <a href="https://docs.oracle.com/en/java/
 <section class="detail" id="equalProps(T,T,java.util.function.Function)">
 <h3 id="equalProps(java.lang.Object,java.lang.Object,java.util.function.Function)">equalProps</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T,<wbr>V&gt;</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CorePropsUtils.html#line-24">equalProps</a></span><wbr><span class="parameters">(T&nbsp;objOne,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T,<wbr>V&gt;</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CorePropsUtils.html#line-26">equalProps</a></span><wbr><span class="parameters">(T&nbsp;objOne,
  T&nbsp;objTwo,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;T,<wbr>V&gt;&nbsp;getterFunc)</span></div>
 <div class="block">Comparing on equality of the same property of two objects of the same type.</div>
@@ -170,7 +177,7 @@ or transform that value using standard <a href="https://docs.oracle.com/en/java/
 <section class="detail" id="propValueStr(java.lang.Object,java.lang.String...)">
 <h3>propValueStr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CorePropsUtils.html#line-39">propValueStr</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;parent,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CorePropsUtils.html#line-41">propValueStr</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;parent,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>...&nbsp;propNameChain)</span></div>
 <div class="block">The same as <a href="#propValue(java.lang.Object,java.lang.String...)"><code>propValue(Object, String...)</code></a>, but cast the final value to string,
 or transform that value using standard <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html#valueOf(java.lang.Object)" title="class or interface in java.lang" class="external-link"><code>String.valueOf(Object)</code></a>
@@ -189,7 +196,7 @@ or transform that value using standard <a href="https://docs.oracle.com/en/java/
 <section class="detail" id="propValue(java.lang.Object,java.lang.String...)">
 <h3>propValue</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CorePropsUtils.html#line-54">propValue</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;parent,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CorePropsUtils.html#line-56">propValue</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;parent,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>...&nbsp;propNameChain)</span></div>
 <div class="block">Getting the value of nested properties of <b><code>th-tool</code></b>-variable by providing the chain of property-names,
 which is quite the same as Thymeleaf-Engine does when processing the expression
@@ -201,6 +208,26 @@ of type <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/ja
 <dd><code>propNameChain</code> - the chain of nested property-names</dd>
 <dt>Returns:</dt>
 <dd>the value of the last property in that property-chain</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="newInstance(java.lang.Class)">
+<h3>newInstance</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CorePropsUtils.html#line-109">newInstance</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;classToCreate)</span></div>
+<div class="block">A helper method that allows to instantiate any class with empty-constructor
+without necessity to handle multiple checked exceptions</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><span id="newInstance(java.lang.Class)-type-param-T"><code>T</code> - the type of class to create an instance of</span></dd>
+<dt>Parameters:</dt>
+<dd><code>classToCreate</code> - a class to create an instance of</dd>
+<dt>Returns:</dt>
+<dd>the instance of class <code>classToCreate</code></dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if instantiation is impossible by JDK's or JVM's reasons</dd>
 </dl>
 </div>
 </section>

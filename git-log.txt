@@ -1,3 +1,4 @@
+77ede9c9 introduce CorePropsUtils.newInstance()
 401ebdeb << new snapshot version >> 21.21.002-SNAPSHOT
 6ea373f6 << internal release >> 21.21.001
 a80f70ce make the helpers at README.md to be collapsing/expanded via HTML-details #2
