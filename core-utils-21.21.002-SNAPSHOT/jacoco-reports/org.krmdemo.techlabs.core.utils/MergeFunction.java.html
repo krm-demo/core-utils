@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MergeFunction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">MergeFunction.java</span></div><h1>MergeFunction.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import java.util.Map;
+import java.util.function.BinaryOperator;
+
+/**
+ * This enumeration is used to handle the entries with the same {@link Map.Entry#getKey() key},
+ * when the stream of {@link Map.Entry entries} are collected into linked map or sorted map.
+ */
+<span class="fc" id="L10">public enum MergeFunction {</span>
+
+    /**
+     * The default merging-function, that emulates the behaviour of consecutive invocation
+     * of the method {@link Map#put(Object, Object) put(key,value)} with the same {@code key}.
+     * So, &lt;b&gt;the last entry&lt;/b&gt; with same {@code key} overwrites the values of all previous ones.
+     */
+<span class="fc" id="L17">    OVERWRITE {</span>
+        @Override
+        &lt;U&gt; BinaryOperator&lt;U&gt; op() {
+<span class="fc" id="L20">            return (oldValue, newValue) -&gt; newValue;</span>
+        }
+    },
+
+    /**
+     * This merging-function ignores any subsequent attempts to overwrite the existing {@code value}
+     * for the same {@code key}. So, &lt;b&gt;the first entry&lt;/b&gt; with same {@code key} remains in the result map.
+     */
+<span class="fc" id="L28">    IGNORE {</span>
+        @Override
+        &lt;U&gt; BinaryOperator&lt;U&gt; op() {
+<span class="fc" id="L31">            return (oldValue, newValue) -&gt; oldValue;</span>
+        }
+    },
+
+    /**
+     * This merging-function guarantees that the source stream does not contain entries with the same keys.
+     * Otherwise, an {@link IllegalStateException} is thrown on the first attempt to violate that.
+     */
+<span class="fc" id="L39">    THROW {</span>
+        @Override
+        &lt;U&gt; BinaryOperator&lt;U&gt; op() {
+<span class="fc" id="L42">            return (oldValue, newValue) -&gt; {</span>
+<span class="fc" id="L43">                throw new IllegalStateException(String.format(</span>
+                    &quot;attempt to overwrite the value '%s' with the value '%s', which is NOT allowed&quot;,
+                    oldValue, newValue
+                ));
+            };
+        }
+    };
+
+    /**
+     * @return the merging-function as {@link BinaryOperator}
+     * @param &lt;U&gt; the type of value
+     */
+    abstract &lt;U&gt; BinaryOperator&lt;U&gt; op();
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
