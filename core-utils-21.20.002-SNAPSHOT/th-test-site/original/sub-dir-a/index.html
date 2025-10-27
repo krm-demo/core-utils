@@ -85,7 +85,7 @@
         <details open>
           <summary>
             this is an example of <i>manually</i> constructed HTML-link:
-              <a href="#" th:href="${gbh.gitHubCurrentRootUrl + '/pom.xml'}"
+              <a href="#" th:href="|${gbh.gitHubCurrentRootUrl}/pom.xml|"
                  th:utext="|a link to <b>pom.xml</b> file|">
                 this link is not processed yet
               </a>
