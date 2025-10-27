@@ -1,3 +1,4 @@
+b094e412 << new snapshot version >> 21.21.001-SNAPSHOT
 67adee12 << public release >> 21.20
 c40431f9 make the helpers at README.md to be collapsing/expanded via HTML-details
 014e9929 add the reports from 'Open-Test-4j' and 'JaCoCo' to the project-site #7

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CountingUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">CountingUtils.java</span></div><h1>CountingUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingInt;
+
+/**
+ * Utility-Class to build a counting-map from the {@link Stream} of any objects
+ * that have properly implemented {@link Object#equals(Object)} and {@link Object#hashCode()}
+ * (and {@link Comparable#compareTo(Object) for sorted counting-maps}).
+ */
+public class CountingUtils {
+
+    public static &lt;V&gt; Map&lt;V, Long&gt; countingMapLong(Stream&lt;V&gt; valuesStream) {
+<span class="nc" id="L25">        return valuesStream.collect(groupingBy(identity(), counting()));</span>
+    }
+    public static &lt;V&gt; Map&lt;V, Integer&gt; countingMap(Stream&lt;V&gt; valuesStream) {
+<span class="nc" id="L28">        return valuesStream.collect(groupingBy(identity(), summingInt(v -&gt; 1)));</span>
+    }
+    public static &lt;V&gt; NavigableMap&lt;V, Integer&gt; countingSortedMap(Stream&lt;V&gt; valuesStream) {
+<span class="nc" id="L31">        return valuesStream.collect(groupingBy(identity(), TreeMap::new, summingInt(v -&gt; 1)));</span>
+    }
+    public static &lt;V&gt; LinkedHashMap&lt;V, Integer&gt; countingLinkedMap(Stream&lt;V&gt; valuesStream) {
+<span class="nc" id="L34">        return valuesStream.collect(groupingBy(identity(), LinkedHashMap::new, summingInt(v -&gt; 1)));</span>
+    }
+
+    // ------------------------------------------------------------------------------------------------------
+
+<span class="nc" id="L39">    private CountingUtils() {</span>
+        // prohibit the creation of utility-class instance
+<span class="nc" id="L41">        throw new UnsupportedOperationException(&quot;Cannot instantiate a utility-class &quot; + getClass().getName());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
