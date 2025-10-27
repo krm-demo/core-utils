@@ -1,5 +1,7 @@
 package org.krmdemo.techlabs.core.utils;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
@@ -91,6 +93,31 @@ public class CorePropsUtils {
 
     private static String propChainStr(int indexFrom, int indexTo, String... propChain) {
         return Arrays.stream(propChain, indexFrom, indexTo).collect(Collectors.joining("."));
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * A helper method that allows to instantiate any class with empty-constructor
+     * without necessity to handle multiple checked exceptions
+     *
+     * @param classToCreate a class to create an instance of
+     * @return the instance of class {@code classToCreate}
+     * @param <T> the type of class to create an instance of
+     * @throws IllegalArgumentException if instantiation is impossible by JDK's or JVM's reasons
+     */
+    public static <T> T newInstance(Class<T> classToCreate) {
+        try {
+            Constructor<T> defaultConstructor = classToCreate.getDeclaredConstructor();
+            defaultConstructor.setAccessible(true);
+            return defaultConstructor.newInstance();
+        } catch (NoSuchMethodException | SecurityException | InvocationTargetException
+                | InstantiationException | IllegalAccessException ex) {
+            if (ex.getCause() instanceof RuntimeException runtimeCauseEx) {
+                throw runtimeCauseEx;
+            }
+            throw new IllegalArgumentException("Cannot instantiate a class " + classToCreate.getName(), ex);
+        }
     }
 
     // --------------------------------------------------------------------------------------------
