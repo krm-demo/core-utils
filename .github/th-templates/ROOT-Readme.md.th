@@ -35,18 +35,30 @@ but the latest relevant versions (with relation to the current one) are:
 
 ---
 
-the content of `GitHelper` instance (`th-tool`-expression `${git}`) is:
+<details><summary>the content of `GitHelper` instance (`th-tool`-expression `[&#8203;( ${git} )&#8203;]`)</summary>
+
 ```json
 [( ${git} )]
 ```
+</details>
 
-the content of `GithubInputsHelper` (`th-tool`-expression `${gih}`) instance is:
+<details><summary>the content of `GithubInputsHelper` instance (`th-tool`-expression `[&#8203;( ${gih} )&#8203;]`)</summary>
+
 ```json
 [( ${gih} )]
 ```
+</details>
 
-the content of `MavenHelper` (`th-tool`-expression `${mh}`) instance is:
+<details><summary>the content of `MavenHelper` instance (`th-tool`-expression `[&#8203;( ${mh} )&#8203;]`)</summary>
+
 ```json
 [( ${mh} )]
 ```
+</details>
 
+<details><summary>the content of `GithubBadgeHelper` instance (`th-tool`-expression `[&#8203;( ${gbh} )&#8203;]`)</summary>
+
+```json
+[( ${gbh} )]
+```
+</details>
