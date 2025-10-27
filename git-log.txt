@@ -1,3 +1,4 @@
+985b3600 << new snapshot version >> 21.20.003-SNAPSHOT
 0a751c6f << internal release >> 21.20.002
 f5e0fbf7 add the reports from 'Open-Test-4j' and 'JaCoCo' to the project-site #6
 0bbdca47 add the reports from 'Open-Test-4j' and 'JaCoCo' to the project-site #5
