@@ -109,7 +109,7 @@ public class ThymeleafToolProc implements Callable<Integer> {
         } else {
             logInfo("(successfully processed and printed");
             logDebug("--- %s ---", () -> "~".repeat(100));
-            logDebug(outputContent);
+            log.debug(outputContent);
             logDebug("... %s ...", () -> "~".repeat(100));
             if (outputLocation != null) {
                 logInfo("... output into location like '%s' is not supported yet :-( ...");

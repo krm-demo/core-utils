@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.thtool;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
@@ -24,6 +25,10 @@ public class ThymeleafToolTest {
     @Test
     void testEval_SimpleExpression() {
         int exitCode = ThymeleafTool.executeMain("eval", "2 + 2");
+        if (!sbErr.isEmpty()) {
+            stdErr.println(sbErr);
+        }
+        // stdErr.println(sbOut);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut.toString()).isEqualTo("4");
@@ -38,8 +43,10 @@ public class ThymeleafToolTest {
             "--input-dir",
             ".github/th-test-site/original"
         );
-//        stdOut.println(sbOut);
-//        stdErr.println(sbErr);
+        if (!sbErr.isEmpty()) {
+            stdErr.println(sbErr);
+        }
+        // stdErr.println(sbOut);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
@@ -53,8 +60,10 @@ public class ThymeleafToolTest {
             "process",
             ".github/th-templates/ROOT-Readme.md.th"
         );
-//        stdErr.println(sbErr);
-//        stdErr.println(sbOut);
+        if (!sbErr.isEmpty()) {
+            stdErr.println(sbErr);
+        }
+        // stdErr.println(sbOut);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
@@ -79,8 +88,10 @@ public class ThymeleafToolTest {
             ".github/th-release-catalog/index.html",
             ".github/th-templates/GH-PAGES--Release-Catalog.html.th"
         );
-//        stdErr.println(sbErr);
-//        stdErr.println(sbOut);
+        if (!sbErr.isEmpty()) {
+            stdErr.println(sbErr);
+        }
+        // stdErr.println(sbOut);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isEmpty();
@@ -102,8 +113,10 @@ public class ThymeleafToolTest {
             ".github/th-test-site/processed",
             "--clean-output"
         );
-//        stdOut.println(sbOut);
-//        stdErr.println(sbErr);
+        if (!sbErr.isEmpty()) {
+            stdErr.println(sbErr);
+        }
+        // stdErr.println(sbOut);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
@@ -131,8 +144,10 @@ public class ThymeleafToolTest {
             "--clean-output",
             ".html" // <-- it's very important to specify the process-pattern (otherwise - troubles with jquery-...js)
         );
-//        stdOut.println(sbOut);
-        stdErr.println(sbErr);
+        if (!sbErr.isEmpty()) {
+            stdErr.println(sbErr);
+        }
+        // stdErr.println(sbOut);
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
