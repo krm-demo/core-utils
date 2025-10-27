@@ -35,30 +35,26 @@ but the latest relevant versions (with relation to the current one) are:
 
 ---
 
-<details><summary>the content of `GitHelper` instance (`th-tool`-expression `[&#8203;( ${git} )&#8203;]`)</summary>
+<details><summary>the content of <code>GitHelper</code> instance (<code>th-tool</code>-expression <code>[&#8203;( ${git} )&#8203;]</code>)</summary>
 
 ```json
 [( ${git} )]
 ```
 </details>
 
-<details><summary>the content of `GithubInputsHelper` instance (`th-tool`-expression `[&#8203;( ${gih} )&#8203;]`)</summary>
-
-```json
-[( ${gih} )]
-```
-</details>
-
-<details><summary>the content of `MavenHelper` instance (`th-tool`-expression `[&#8203;( ${mh} )&#8203;]`)</summary>
+<details><summary>the content of <code>MavenHelper</code> instance (<code>th-tool</code>-expression <code>[&#8203;( ${mh} )&#8203;]</code>)</summary>
 
 ```json
 [( ${mh} )]
 ```
 </details>
 
-<details><summary>the content of `GithubBadgeHelper` instance (`th-tool`-expression `[&#8203;( ${gbh} )&#8203;]`)</summary>
+<details><summary>the content of <code>GithubBadgeHelper</code> instance (<code>th-tool</code>-expression <code>[&#8203;( ${gbh} )&#8203;]</code>)</summary>
 
 ```json
 [( ${gbh} )]
 ```
 </details>
+
+> [!TIP]
+> TODO: implement `dumpMarkdown()` for each `th-tool`-helper to simplify the rendering of snippets above
