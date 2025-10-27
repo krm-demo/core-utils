@@ -642,7 +642,11 @@ public class GithubBadgeHelper {
         if (gitTreeName.endsWith("SNAPSHOT")) {
             gitTreeName = "main";
         }
-        return String.format("%s/tree/%s/%s", repoHtmlUrl, gitTreeName, sourceSuffix);
+        if (StringUtils.isBlank(sourceSuffix) || sourceSuffix.trim().equals("/")) {
+            return String.format("%s/tree/%s", repoHtmlUrl, gitTreeName);
+        } else {
+            return String.format("%s/tree/%s/%s", repoHtmlUrl, gitTreeName, sourceSuffix);
+        }
     }
 
     // --------------------------------------------------------------------------------------------

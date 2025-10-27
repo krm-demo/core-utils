@@ -1,4 +1,4 @@
-<body xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
 This Java-library contains utility-classes to simplify working with core-java API (streams, collections, input-output).
 
 <div id="overview-badges-and-links">
@@ -22,9 +22,8 @@ This Java-library contains utility-classes to simplify working with core-java AP
     <div class="col-last even-row-color">
       A link to the test-results that were generated with <a href="https://github.com/ota4j-team/open-test-reporting">Open Test Reporting</a>
       command-line tool, which was executed via <a href="https://www.mojohaus.org/exec-maven-plugin/">maven-<b>exec</b>-plugin</a>'s MOJO
-<!--
-      in <a th:href="${jdh.gitHubCurrentRootUrl}">pom.xml-file</a> of the current project.
--->
+      that is declared in [(${ openTest4j.alinkToMavenExecInPom })]. That HTML-report is based in XML-report, which is created
+      when [(${ openTest4j.alinkToJUnitProps })] are enabled.
     </div>
   </div>
 </div>
