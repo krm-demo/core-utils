@@ -203,8 +203,8 @@ public class GithubBadgeHelperTest {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
         String badgeUrlTxt = gbh.badgeUrlShiedsIO("left-part", "right-part", "blue",
             Path.of(".github/images/jacoco/jacoco-reports.gif").toFile(),
-            "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable ad JavDoc-site
-            "4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable ad JavDoc-site
+            "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable at JavDoc-site
+            "4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable at JavDoc-site
         );
         assertThat(badgeUrlTxt)
             .isNotBlank()
@@ -218,8 +218,8 @@ public class GithubBadgeHelperTest {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
         String badgeUrlTxt = gbh.badgeUrlShiedsIO("left-part", "right-part", "gray",
             Path.of(".github/images/opentest4j/opentest4j-logo--48.png").toFile(),
-            "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable ad JavDoc-site
-            "4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable ad JavDoc-site
+            "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable at JavDoc-site
+            "4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable at JavDoc-site
         );
         assertThat(badgeUrlTxt)
             .isNotBlank()
@@ -323,8 +323,8 @@ public class GithubBadgeHelperTest {
             String badgeUrlTxt = gbh.badgeUrlShiedsIO("left-part", "right-part",
                 "B0E0E6", // <-- this color is called "PowderBlue" at https://htmlcolorcodes.com/color-names/
                 imageFile,
-                "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable ad JavDoc-site
-                "4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable ad JavDoc-site
+                "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable at JavDoc-site
+                "4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable at JavDoc-site
             );
             System.out.println(imageFile + "(badge) --> '" + badgeUrlTxt + "'");
             System.out.println(imageFile + "(badge) --> badgeUrlTxt.size() = " + badgeUrlTxt.length());

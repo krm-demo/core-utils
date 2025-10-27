@@ -2,6 +2,7 @@ package org.krmdemo.techlabs.thtool;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.krmdemo.techlabs.jacoco.JacocoHelper;
 import org.krmdemo.techlabs.opentest4j.OpenTest4jHelper;
 import org.krmdemo.techlabs.thtool.helpers.GitHelper;
 import org.krmdemo.techlabs.thtool.helpers.GithubBadgeHelper;
@@ -196,7 +197,8 @@ public class ThymeleafTool {
             GithubInputsHelper::register,
             GithubBadgeHelper::register,
             JavaDocHelper::register,
-            OpenTest4jHelper::register
+            OpenTest4jHelper::register,
+            JacocoHelper::register
         );
         return new CommandLine(tt).execute(args);
     }
