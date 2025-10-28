@@ -14,12 +14,12 @@ import java.util.NavigableMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJson;
-import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
+import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
+import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 
 /**
  * TODO: provide the comprehensive Java-Doc and reuse {@link ObjectPrinter} !!!
@@ -123,7 +123,7 @@ public class SysDumpUtils {
                 nameValue("isOther", fileAtrrs.isOther())
             ));
         } catch (Exception ex) {
-            return dumpAsJson(JacksonUtils.errorFrom(ex));
+            return dumpAsJsonTxt(JacksonUtils.errorFrom(ex));
         }
     }
 

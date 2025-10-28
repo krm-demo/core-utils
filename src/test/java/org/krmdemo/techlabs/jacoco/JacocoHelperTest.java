@@ -2,7 +2,11 @@ package org.krmdemo.techlabs.jacoco;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.krmdemo.techlabs.core.utils.CorePropsUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
+
+import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
@@ -21,13 +25,23 @@ public class JacocoHelperTest {
 
     @Test
     void testBadgeHtml() {
-        JacocoHelper openTest4j = JacocoHelper.fromCtxLazy(ttCtx);
-        assertThat(openTest4j.getBadgeHtml()).contains("jacoco-reports");
+        JacocoHelper jacoco = JacocoHelper.fromCtxLazy(ttCtx);
+        assertThat(jacoco.getBadgeHtml()).contains("jacoco-reports");
     }
 
     @Test
     void testBadgeMarkdown() {
-        JacocoHelper openTest4j = JacocoHelper.fromCtxLazy(ttCtx);
-        assertThat(openTest4j.getBadgeMarkdown()).contains("[JaCoCo]");
+        JacocoHelper jacoco = JacocoHelper.fromCtxLazy(ttCtx);
+        assertThat(jacoco.getBadgeMarkdown()).contains("[JaCoCo]");
+    }
+
+    @Test
+    void testDumpAsJson() {
+        JacocoHelper jacoco = JacocoHelper.fromCtxLazy(ttCtx);
+        Map<String, Object> reportMap = jacoco.getJacocoReportMap();
+        assertThat(reportMap).isNotEmpty();
+        //noinspection unchecked
+        List<Map<String, Object>> countersAll = (List<Map<String, Object>>) reportMap.get("counter");
+        System.out.println(JacocoCounter.fromItems(countersAll));
     }
 }

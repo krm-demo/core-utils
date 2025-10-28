@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.jar.JarFile;
 
-import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJson;
+import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
 
 @JsonPropertyOrder(alphabetic = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -58,6 +58,6 @@ public record ClassInfo(
 
     @Override
     public String toString() {
-        return dumpAsJson(this);
+        return dumpAsJsonTxt(this);
     }
 }

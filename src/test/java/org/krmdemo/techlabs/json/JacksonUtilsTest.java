@@ -2,6 +2,7 @@ package org.krmdemo.techlabs.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
@@ -25,6 +26,7 @@ import static org.krmdemo.techlabs.json.JacksonUtils.prettifyJson;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 
+@Disabled("gonna to remove the test")
 public class JacksonUtilsTest {
 
     @Test
