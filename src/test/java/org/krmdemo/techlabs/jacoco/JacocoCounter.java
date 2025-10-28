@@ -16,6 +16,16 @@ import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsYamlTxt;
  */
 public class JacocoCounter extends EnumMap<JacocoCounterType, JacocoCounter.Item> {
 
+    /**
+     * Empty counter (used as null-safe placeholder to display {@value NO_VALUE_STR})
+     */
+    public final static JacocoCounter EMPTY_COUNTER = new JacocoCounter();
+
+    /**
+     * A badge-value to display the absence of information about the test-coverage
+     */
+    public final static String NO_VALUE_STR = "n/a";
+
     public record Item(
         int missed,
         int covered
@@ -30,7 +40,7 @@ public class JacocoCounter extends EnumMap<JacocoCounterType, JacocoCounter.Item
         }
         @JsonGetter
         public String percentageStr() {
-            return total() == 0 ? "n/a" : String.format("%.2f", percentage());
+            return total() == 0 ? NO_VALUE_STR : String.format("%.2f", percentage());
         }
     }
 
@@ -42,6 +52,9 @@ public class JacocoCounter extends EnumMap<JacocoCounterType, JacocoCounter.Item
     }
 
     public static JacocoCounter fromItems(Collection<Map<String, Object>> itemValuesList) {
+        if (itemValuesList == null || itemValuesList.isEmpty()) {
+            return EMPTY_COUNTER;
+        }
         JacocoCounter counter = new JacocoCounter();
         for (Map<String, Object> itemValues : itemValuesList) {
             JacocoCounterType counterType = JacocoCounterType.valueOf(itemValues.get("type"));
@@ -56,8 +69,18 @@ public class JacocoCounter extends EnumMap<JacocoCounterType, JacocoCounter.Item
         return new Item(missed, covered);
     }
 
+    /**
+     * At the moment the badge-value corresponds to percentage-value of type {@link JacocoCounterType#LINE}
+     *
+     * @return a coverage percentage to be displayed on the right side of the coverage-badge
+     */
+    public String getBadgeValue() {
+        Item counterForLines = get(JacocoCounterType.LINE);
+        return counterForLines == null ? NO_VALUE_STR : counterForLines.percentageStr();
+    }
+
     @Override
     public String toString() {
-        return dumpAsYamlTxt(this);
+        return isEmpty() ? NO_VALUE_STR : dumpAsYamlTxt(this);
     }
 }

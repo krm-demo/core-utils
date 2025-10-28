@@ -15,7 +15,7 @@ import org.krmdemo.techlabs.thtool.helpers.MavenHelper;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -98,7 +98,8 @@ public class JacocoHelper {
     private final ThymeleafToolCtx ttCtx;
     @Getter private final File jacocoXmlReportFile;
 
-    private Map<String, Object> jacocoReportMap = null;
+    // lazy-loaded value
+    private JacocoCounter jacocoCounter = null;
 
     private JacocoHelper(ThymeleafToolCtx ttCtx, String jacocoXmlReportPathStr) {
         this.ttCtx = Objects.requireNonNull(ttCtx);
@@ -111,8 +112,7 @@ public class JacocoHelper {
      * @return a coverage percentage to be displayed on the right side of the coverage-badge
      */
     public String getBadgeValue() {
-        return getJacocoReportMap().isEmpty() ? "n/a" :
-            String.format("loaaded(size = %d)", getJacocoReportMap().size());
+        return getJacocoCounter().getBadgeValue();
     }
 
     /**
@@ -120,19 +120,24 @@ public class JacocoHelper {
      *
      * @return JaCoCo-XML-report as {@link Map Map&lt;String,Object&gt>}
      */
-    public Map<String, Object> getJacocoReportMap() {
-        if (jacocoReportMap != null) {
-            return jacocoReportMap;
+    public JacocoCounter getJacocoCounter() {
+        if (jacocoCounter != null) {
+            return jacocoCounter;
         }
         try {
             XmlMapper xmlMapper = new XmlMapper();
-            jacocoReportMap = xmlMapper.readValue(jacocoXmlReportFile, new TypeReference<>(){});
+            Map<String, Object> jacocoReportMap =
+                xmlMapper.readValue(jacocoXmlReportFile, new TypeReference<>(){});
+            //noinspection unchecked
+            List<Map<String, Object>> countersAll = (List<Map<String, Object>>) jacocoReportMap.get("counter");
+            jacocoCounter = JacocoCounter.fromItems(countersAll);
+
         } catch (Exception ex) {
             String errMsg = String.format("cannot load JaCoCo-XML-report from file '%s'", jacocoXmlReportFile);
             log.error(errMsg, ex);
-            jacocoReportMap =  Collections.emptyMap();
+            jacocoCounter = JacocoCounter.EMPTY_COUNTER;
         }
-        return jacocoReportMap;
+        return jacocoCounter;
     }
 
     // --------------------------------------------------------------------------------------------
@@ -179,7 +184,7 @@ public class JacocoHelper {
      */
     public String getBadgeUrl() {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtx(ttCtx);
-        return gbh.badgeUrlShiedsIO("test-coverage", "JaCoCo", "blue",
+        return gbh.badgeUrlShiedsIO("test-coverage", getBadgeValue(), "blue",
             //"b0e0e6", // <-- this color is called "PowderBlue" at https://htmlcolorcodes.com/color-names/
             Path.of(".github/images/jacoco/jacoco-reports.gif").toFile(),
             "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable ad JavDoc-site

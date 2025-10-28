@@ -36,12 +36,13 @@ public class JacocoHelperTest {
     }
 
     @Test
-    void testDumpAsJson() {
+    void testBadgeValue() {
         JacocoHelper jacoco = JacocoHelper.fromCtxLazy(ttCtx);
-        Map<String, Object> reportMap = jacoco.getJacocoReportMap();
-        assertThat(reportMap).isNotEmpty();
-        //noinspection unchecked
-        List<Map<String, Object>> countersAll = (List<Map<String, Object>>) reportMap.get("counter");
-        System.out.println(JacocoCounter.fromItems(countersAll));
+        System.out.println(jacoco);
+        if (jacoco.getJacocoCounter().isEmpty()) {
+            assertThat(jacoco.getBadgeValue()).isEqualTo(JacocoCounter.NO_VALUE_STR);
+        } else {
+            assertThat(jacoco.getBadgeValue()).matches("\\d?\\d?\\d.\\d\\d");
+        }
     }
 }
