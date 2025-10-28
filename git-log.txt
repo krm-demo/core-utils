@@ -1,3 +1,4 @@
+9dee2594 attempt to fix test-coverage badge when generated README.md for SNAPSHOT-version #1
 3aaf532d << new snapshot version >> 21.21.003-SNAPSHOT
 79867c4a << internal release >> 21.21.002
 6f3ab01f display test-coverage at the badge #2
