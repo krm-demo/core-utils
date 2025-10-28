@@ -3,4 +3,5 @@
 #   Run the test, which performs the processing of  the directory '.github/th-test-site/original' with "th-tool"
 # ----------------------------------------------------------------------------------------------------------------
 
-mvn test "-Dtest=ThymeleafToolTest#testProcessDir_TestSite"
+# Note! For maven-failsafe-plugin the system-property should be "it.test", but not just "test" !!!
+mvn -B failsafe:integration-test "-Dit.test=ThymeleafToolTest#testProcessDir_TestSite"

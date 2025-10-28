@@ -3,8 +3,11 @@ package org.krmdemo.techlabs.thtool;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.krmdemo.techlabs.core.dump.StringBuilderOut;
 
@@ -102,6 +105,7 @@ public class ThymeleafToolTest {
     }
 
     @Test
+    @Tag("integration-tests")
     void testProcessDir_TestSite() {
         int exitCode = ThymeleafTool.executeMain(
             "--var-file",
@@ -151,6 +155,15 @@ public class ThymeleafToolTest {
         assertThat(exitCode).isZero();
         assertThat(sbErr).isEmpty();
         assertThat(sbOut).isNotBlank();
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    @Test
+    @Tag("integration-tests")
+    @DisplayName("This is just a marker-test that must be executed only by 'failsafe'-plugin")
+    void testHelloIntegrationTests(TestInfo testInfo) {
+        System.out.println("Hello! " + testInfo.getDisplayName());
     }
 
     // --------------------------------------------------------------------------------------------

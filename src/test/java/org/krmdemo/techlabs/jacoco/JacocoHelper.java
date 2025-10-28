@@ -127,6 +127,7 @@ public class JacocoHelper {
      *
      * @return JaCoCo-XML-report as {@link Map Map&lt;String,Object&gt>}
      */
+    @SuppressWarnings("unchecked")
     public JacocoCounter getJacocoCounter() {
         if (jacocoCounter != null) {
             return jacocoCounter;
@@ -135,7 +136,6 @@ public class JacocoHelper {
             XmlMapper xmlMapper = new XmlMapper();
             Map<String, Object> jacocoReportMap =
                 xmlMapper.readValue(jacocoXmlReportFile, new TypeReference<>(){});
-            //noinspection unchecked
             List<Map<String, Object>> countersAll = (List<Map<String, Object>>) jacocoReportMap.get("counter");
             jacocoCounter = JacocoCounter.fromItems(countersAll);
 

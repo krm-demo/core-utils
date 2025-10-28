@@ -3,6 +3,7 @@ package org.krmdemo.techlabs.jacoco;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.Map;
@@ -15,6 +16,9 @@ import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsYamlTxt;
  * to represent <b>JaCoCo</b>-counter per each {@link JacocoCounterType tyoe}.
  */
 public class JacocoCounter extends EnumMap<JacocoCounterType, JacocoCounter.Item> {
+
+    @Serial
+    private static final long serialVersionUID = 123456789_003L;
 
     /**
      * Empty counter (used as null-safe placeholder to display {@value NO_VALUE_STR})

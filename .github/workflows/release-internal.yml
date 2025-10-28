@@ -38,9 +38,12 @@ jobs:
           echo '${{ toJson(steps) }}' > .github/th-vars/var-githubSteps.json
           echo '${{ toJson(secrets)  }}' > .github/th-vars/var-secrets.json
 
-          # build and install to the local maven repository
-          mvn -B clean install
-          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary ) ~~~~~~~~~~~~~"
+          echo "[1] ~~~~~~~~~~~~~ ( execute the default-lifecycle of the build up to 'install' phase ) ~~~~~~~~~~~~~"
+          mvn -B install
+          echo "[1] ~~~~~~~~~~~~~ ( execute integration tests, that require some results from main lifecycle ) ~~~~~~~~~~~~~"
+          mvn -B failsafe:integration-test
+          
+          echo "[1] ~~~~~~~~~~~~~ ( dump the content of './target/' into summary ) ~~~~~~~~~~~~~"
           echo "
           the result of maven-build before <b>internal release</b> (content of \`./target\` directory):
           \`\`\`bash
@@ -63,7 +66,9 @@ jobs:
 
           echo "- [1] changing the version from '$INITIAL_VERSION' to '$NEW_RELEASE_VERSION';"
           mvn -B --quiet versions:set -DnewVersion=$NEW_RELEASE_VERSION
-          mvn -B --quiet test-compile
+
+          echo "- [1] ~~~~~~~~~~~~~ ( execute the default-lifecycle of the build up to 'verify' phase ) ~~~~~~~~~~~~~"
+          mvn -B verify
 
           echo "- [1] going to commit the updated 'pom.xml' into git (THE FIRST COMMIT);"
           git add pom.xml
@@ -139,7 +144,9 @@ jobs:
 
           echo "- [2] changing the version from '$NEW_RELEASE_VERSION' to '$NEW_VERSION_NEXT';"
           mvn -B --quiet versions:set -DnewVersion=$NEW_VERSION_NEXT
-          mvn -B --quiet clean verify
+
+          echo "- [2] ~~~~~~~~~~~~~ ( execute the default-lifecycle of the build up to 'verify' phase ) ~~~~~~~~~~~~~"
+          mvn -B verify
 
           echo "- [2] going to commit the updated 'pom.xml' into git (THE SECOND COMMIT);"
           git add pom.xml

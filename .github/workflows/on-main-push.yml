@@ -63,7 +63,12 @@ jobs:
           .github/th-tool.sh process .github/th-templates/GH-PAGES--Release-Catalog.html.th --output target/GH-PAGES--Release-Catalog.html
           cat target/GH-PAGES--Release-Catalog.html
 
+          echo "~~~~~~~~~~~~~ ( execute the default-lifecycle of the build up to 'install' phase ) ~~~~~~~~~~~~~"
           mvn -B install
+
+          echo "~~~~~~~~~~~~~ ( execute integration tests, that require some results from main lifecycle ) ~~~~~~~~~~~~~"
+          mvn -B failsafe:integration-test
+          
           echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary ) ~~~~~~~~~~~~~"
           echo "
           the result of maven-build (content of \`./target/\` directory):
