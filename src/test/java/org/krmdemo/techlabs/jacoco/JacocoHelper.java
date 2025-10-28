@@ -116,6 +116,13 @@ public class JacocoHelper {
     }
 
     /**
+     * @return a tooltip, that explains the value of {@link #getBadgeValue()}
+     */
+    public String getBadgeTooltip() {
+        return getJacocoCounter().getBadgeTooltip();
+    }
+
+    /**
      * Lazy-loading of JaCoCo-XML-report - deserializing XML-file into {@link Map Map&lt;String,Object&gt>}.
      *
      * @return JaCoCo-XML-report as {@link Map Map&lt;String,Object&gt>}
@@ -154,11 +161,12 @@ public class JacocoHelper {
     @JsonIgnore
     public String getBadgeHtml() {
         return String.format("""
-            <a href="https://krm-demo.github.io/core-utils/%s-%s/jacoco-reports">
+            <a href="https://krm-demo.github.io/core-utils/%s-%s/jacoco-reports" title="%s">
               <img alt="a badge to the test-coverage report of the current project-version" src="%s" />
             </a>""",
             GithubHelper.fromCtx(ttCtx).getRepoName(),
             MavenHelper.fromCtx(ttCtx).getCurrentProjectVersion(),
+            getBadgeTooltip(),
             getBadgeUrl());
     }
 

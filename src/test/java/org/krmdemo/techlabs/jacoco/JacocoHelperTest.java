@@ -41,8 +41,10 @@ public class JacocoHelperTest {
         System.out.println(jacoco);
         if (jacoco.getJacocoCounter().isEmpty()) {
             assertThat(jacoco.getBadgeValue()).isEqualTo(JacocoCounter.NO_VALUE_STR);
+            assertThat(jacoco.getBadgeTooltip()).isEmpty();
         } else {
             assertThat(jacoco.getBadgeValue()).matches("\\d?\\d?\\d.\\d\\d");
+            assertThat(jacoco.getBadgeTooltip()).startsWith("JaCoCo LINE:");
         }
     }
 }

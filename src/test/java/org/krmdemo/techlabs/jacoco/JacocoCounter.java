@@ -79,6 +79,17 @@ public class JacocoCounter extends EnumMap<JacocoCounterType, JacocoCounter.Item
         return counterForLines == null ? NO_VALUE_STR : counterForLines.percentageStr();
     }
 
+    /**
+     * @return a tooltip, that explains the value of {@link #getBadgeValue()}
+     */
+    public String getBadgeTooltip() {
+        Item counterForLines = get(JacocoCounterType.LINE);
+        return counterForLines == null ? "" : String.format("JaCoCo %s: 100 * %d / (%d + %d) = %f",
+            JacocoCounterType.LINE, counterForLines.covered(),
+            counterForLines.covered(), counterForLines.missed(),
+            counterForLines.percentage());
+    }
+
     @Override
     public String toString() {
         return isEmpty() ? NO_VALUE_STR : dumpAsYamlTxt(this);
