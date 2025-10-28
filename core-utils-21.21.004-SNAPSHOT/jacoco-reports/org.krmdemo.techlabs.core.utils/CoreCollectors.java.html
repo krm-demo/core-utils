@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CoreCollectors.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">CoreCollectors.java</span></div><h1>CoreCollectors.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+/**
+ * A factory of {@link Collector}s that allows to collect the stream of values into linked or sorted sets
+ * and the stream of {@link Map.Entry entries} and any other types into the linked or the sorted map.
+ * An enumeration {@link MergeFunction} could be used to handle the entries with the same {@link Map.Entry#getKey() key}.
+ */
+public class CoreCollectors {
+
+    /**
+     * The same as {@link Collectors#toList()}, but tp collect the items in &lt;b&gt;reverse order&lt;/b&gt;.
+     *
+     * @return a {@code Collector} which collects all the input elements into an {@link ArrayList} in &lt;b&gt;reverse order&lt;/b&gt;.
+     * @param &lt;T&gt; the type of the elements in stream to collect
+     */
+    public static &lt;T&gt; Collector&lt;T, ?, ArrayList&lt;T&gt;&gt; toListReversed() {
+<span class="nc" id="L22">        return Collector.of(</span>
+            ArrayList::new,
+            ArrayList::addFirst,
+            (left, right) -&gt; {
+<span class="nc" id="L26">                right.addAll(0, left);</span>
+<span class="nc" id="L27">                return right;</span>
+            }
+        );
+    }
+
+    /**
+     * The same as {@link Collectors#toCollection JDK's toCollection(...)}, but produces {@link LinkedList}.
+     *
+     * @return a {@code Collector} which collects all the input elements into a {@link LinkedList}.
+     * @param &lt;T&gt; the type of the elements in stream to collect
+     */
+    public static &lt;T&gt; Collector&lt;T, ?, List&lt;T&gt;&gt; toLinkedList() {
+<span class="nc" id="L39">        return Collectors.toCollection(LinkedList::new);</span>
+    }
+
+    /**
+     * The same as {@link #toLinkedList()}, but collecting the items in &lt;b&gt;reverse order&lt;/b&gt;.
+     *
+     * @return a {@code Collector} which collects all the input elements into a {@link LinkedList} in &lt;b&gt;reverse order&lt;/b&gt;.
+     * @param &lt;T&gt; the type of the elements in stream to collect
+     */
+    public static &lt;T&gt; Collector&lt;T, ?, LinkedList&lt;T&gt;&gt; toLinkedListReversed() {
+<span class="nc" id="L49">        return Collector.of(</span>
+            LinkedList::new,
+            LinkedList::addFirst,
+            (left, right) -&gt; {
+<span class="nc" id="L53">                right.addAll(0, left);</span>
+<span class="nc" id="L54">                return right;</span>
+            }
+        );
+    }
+
+    /**
+     * The same as {@link Collectors#toCollection JDK's toCollection(...)}, but produces {@link ArrayDeque}.
+     *
+     * @return a {@code Collector} which collects all the input elements into a {@link ArrayDeque}.
+     * @param &lt;T&gt; the type of the elements in stream to collect
+     */
+    public static &lt;T&gt; Collector&lt;T, ?, Deque&lt;T&gt;&gt; toDeque() {
+<span class="nc" id="L66">        return Collectors.toCollection(ArrayDeque::new);</span>
+    }
+
+    /**
+     * The same as {@link #toDeque()}, but collecting the items in &lt;b&gt;reverse order&lt;/b&gt;.
+     *
+     * @return a {@code Collector} which collects all the input elements into a {@link ArrayDeque} in &lt;b&gt;reverse order&lt;/b&gt;.
+     * @param &lt;T&gt; the type of the elements in stream to collect
+     */
+    public static &lt;T&gt; Collector&lt;T, ?, Deque&lt;T&gt;&gt; toDequeReversed() {
+<span class="nc" id="L76">        return Collector.of(</span>
+            ArrayDeque::new,
+            Deque::addFirst,
+            (left, right) -&gt; {
+<span class="nc" id="L80">                right.addAll(left);</span>
+<span class="nc" id="L81">                return right;</span>
+            }
+        );
+    }
+
+    /**
+     * The same as {@link Collectors#toCollection JDK's toCollection(...)}, but produces {@link LinkedHashSet}.
+     *
+     * @return a {@code Collector} which collects all the input elements into a {@link LinkedHashSet}.
+     * @param &lt;T&gt; the type of the elements in stream to collect
+     */
+    public static &lt;T&gt; Collector&lt;T, ?, SequencedSet&lt;T&gt;&gt; toLinkedSet() {
+<span class="fc" id="L93">        return Collectors.toCollection(LinkedHashSet::new);</span>
+    }
+
+    /**
+     * The same as {@link Collectors#toCollection JDK's toCollection(...)}, but produces {@link TreeSet}.
+     *
+     * @return a {@link Collector}, which collects all the input elements into a {@link TreeSet}
+     * @param &lt;T&gt; the type of the elements in stream to collect (must implement {@link Comparable})
+     */
+    public static &lt;T extends Comparable&lt;T&gt;&gt; Collector&lt;T, ?, NavigableSet&lt;T&gt;&gt; toSortedSet() {
+<span class="fc" id="L103">        return Collectors.toCollection(TreeSet::new);</span>
+    }
+
+    /**
+     * The same as {@link #toSortedSet() toSortedSet()}, but with {@code comparator} as parameter
+     *
+     * @param comparator a function to compare the elements
+     * @return  a {@link Collector}, which collects all the input elements into a {@link TreeSet}
+     * @param &lt;T&gt; the type of the elements in stream to collect (not necessary to implement {@link Comparable})
+     */
+    public static &lt;T&gt; Collector&lt;T, ?, NavigableSet&lt;T&gt;&gt;
+    toSortedSet(Comparator&lt;T&gt; comparator) {
+<span class="fc" id="L115">        return Collectors.toCollection(() -&gt; new TreeSet&lt;&gt;(Objects.requireNonNull(comparator)));</span>
+    }
+
+    /**
+     * The same as {@link Collectors#toMap JDK's toMap(...)}, but the elements of collecting stream are required to be
+     * of type {@link Map.Entry}, and the produced sorted-map accepts them one by one like
+     * if the method {@link Map#putAll} would be invoked (the latest entries overwrite the existing ones).
+     *
+     * @return a {@link Collector}, which collects all the input elements into a {@link TreeMap}
+     * @param &lt;K&gt; the type of {@link Map.Entry#getKey() key} for {@link Map.Entry entries} in input stream
+     * @param &lt;U&gt; the type of {@link Map.Entry#getValue() value} for {@link Map.Entry entries} in input stream
+     */
+    public static &lt;K, U&gt;
+    Collector&lt;Map.Entry&lt;K,U&gt;, ?, NavigableMap&lt;K,U&gt;&gt;
+    toSortedMap() {
+<span class="nc" id="L130">        return toSortedMap(Map.Entry::getKey, Map.Entry::getValue);</span>
+    }
+
+    /**
+     * The same as {@link #toSortedMap() toSortedMap()}, but the parameter {@code valueMapper} allows to transform
+     * &lt;b&gt;the whole input entry&lt;/b&gt; of type {@link Map.Entry Map.Entry&amp;lt;K,V&amp;gt;}
+     * into &lt;b&gt;the value of output entry&lt;/b&gt; of type {@link Map.Entry Map.Entry&amp;lt;K,U&amp;gt;},
+     * and the {@link Map.Entry#getKey() key} of input entry remains the same in output one.
+     * &lt;hr/&gt;
+     * &lt;i&gt;the brief summary is:&lt;/i&gt;&lt;ul&gt;
+     *     &lt;li&gt;{@code valueMapper} function accepts {@link Map.Entry Map.Entry&amp;lt;K,V&amp;gt;} and returns {@code &lt;U&gt;}&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @param valueMapper the function to transform the {@link Map.Entry#getValue() value}
+     * @return a {@link Collector} that which collects all the input elements into a {@link TreeMap}
+     * @param &lt;K&gt; the type of {@link Map.Entry#getKey() key} for {@link Map.Entry entries} in input and output streams
+     * @param &lt;V&gt; the type of {@link Map.Entry#getValue() value} for {@link Map.Entry entries} in output stream
+     * @param &lt;U&gt; the type of {@link Map.Entry#getValue() value} for {@link Map.Entry entries} in input stream
+     */
+    public static &lt;K, V, U&gt;
+    Collector&lt;Map.Entry&lt;K, V&gt;, ?, NavigableMap&lt;K,U&gt;&gt;
+    toSortedMap(Function&lt;Map.Entry&lt;K, V&gt;, U&gt; valueMapper) {
+<span class="fc" id="L152">        return toSortedMap(Map.Entry::getKey, valueMapper);</span>
+    }
+
+    /**
+     * The same as {@link Collectors#toMap JDK's toMap(...)}, but produces {@link TreeMap} with overwriting the duplicates.
+     * &lt;hr/&gt;
+     * &lt;i&gt;the brief summary is:&lt;/i&gt;&lt;ul&gt;
+     *     &lt;li&gt;{@code keyMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-key {@code &lt;K&gt;}&lt;/li&gt;
+     *     &lt;li&gt;{@code valueMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-value {@code &lt;U&gt;}&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @param keyMapper a &lt;i&gt;key-mapping&lt;/i&gt; function to produce keys
+     * @param valueMapper a &lt;i&gt;value-mapping&lt;/i&gt; function to produce values
+     * @return a {@link Collector} that collects elements into a {@link NavigableMap},
+     * whose keys are the result of applying a {@code keyMapper} function to the input elements,
+     * and whose values are the result of applying a {@code valueMapper} function to all input elements
+     * equal to the key and overwriting the existing values with new ones
+     * (according to {@link MergeFunction#OVERWRITE enum-value OVERWRITE}).
+     * @param &lt;T&gt; the type of the input elements
+     * @param &lt;K&gt; the output type of the &lt;i&gt;key-mapping&lt;/i&gt; function
+     * @param &lt;U&gt; the output type of the &lt;i&gt;value-mapping&lt;/i&gt; function
+     */
+    public static &lt;T, K, U&gt;
+    Collector&lt;T, ?, NavigableMap&lt;K,U&gt;&gt;
+    toSortedMap(Function&lt;? super T, ? extends K&gt; keyMapper,
+                Function&lt;? super T, ? extends U&gt; valueMapper) {
+<span class="fc" id="L178">        return toSortedMap(keyMapper, valueMapper, MergeFunction.OVERWRITE);</span>
+    }
+
+    /**
+     * The same as {@link #toSortedMap(Function, Function) toSortedMap(keyMapper,valueMapper)},
+     * but allows to handle duplicates with {@link MergeFunction mergeFunction} parameter.
+     * &lt;hr/&gt;
+     * &lt;i&gt;the brief summary is:&lt;/i&gt;&lt;ul&gt;
+     *     &lt;li&gt;{@code keyMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-key {@code &lt;K&gt;}&lt;/li&gt;
+     *     &lt;li&gt;{@code valueMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-value {@code &lt;U&gt;}&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @param &lt;T&gt; the type of the input elements
+     * @param &lt;K&gt; the output type of the &lt;i&gt;key-mapping&lt;/i&gt; function
+     * @param &lt;U&gt; the output type of the &lt;i&gt;value-mapping&lt;/i&gt; function
+     * @param keyMapper a &lt;i&gt;key-mapping&lt;/i&gt; function to produce keys
+     * @param valueMapper a &lt;i&gt;value-mapping&lt;/i&gt; function to produce values
+     * @param mergeFunction one of values that are represented by {@link MergeFunction}-enum
+     * @return a {@link Collector}, that collects elements into a {@link TreeMap},
+     * whose keys are the result of applying a {@code keyMapper} function to the input elements,
+     * and whose values are the result of applying a {@code valueMapper} function to all input elements
+     * equal to the key and combining them using the {@code mergeFunction}.
+     */
+    public static &lt;T, K, U&gt;
+    Collector&lt;T, ?, NavigableMap&lt;K,U&gt;&gt;
+    toSortedMap(Function&lt;? super T, ? extends K&gt; keyMapper,
+                Function&lt;? super T, ? extends U&gt; valueMapper,
+                MergeFunction mergeFunction) {
+<span class="fc" id="L206">        return Collectors.toMap(keyMapper, valueMapper, mergeFunction.op(), TreeMap::new);</span>
+    }
+
+    /**
+     * The same as {@link Collectors#toMap JDK's toMap(...)}, but produces {@link LinkedHashMap} with overwriting the duplicates.
+     * &lt;hr/&gt;
+     * &lt;i&gt;the brief summary is:&lt;/i&gt;&lt;ul&gt;
+     *     &lt;li&gt;{@code keyMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-key {@code &lt;K&gt;}&lt;/li&gt;
+     *     &lt;li&gt;{@code valueMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-value {@code &lt;U&gt;}&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @param &lt;T&gt; the type of the input elements
+     * @param &lt;K&gt; the output type of the &lt;i&gt;key-mapping&lt;/i&gt;  function
+     * @param &lt;U&gt; the output type of the &lt;i&gt;value-mapping&lt;/i&gt; function
+     * @param keyMapper a &lt;i&gt;key-mapping&lt;/i&gt; function to produce keys
+     * @param valueMapper a &lt;i&gt;value-mapping&lt;/i&gt; function to produce values
+     * @return a {@link Collector} that collects elements into a {@link LinkedHashMap},
+     * whose keys are the result of applying a {@code keyMapper} function to the input elements,
+     * and whose values are the result of applying a {@code valueMapper} function to all input elements
+     * equal to the key and overwriting the existing values with new ones
+     * (according to {@link MergeFunction#OVERWRITE enum-value OVERWRITE}).
+     */
+    public static &lt;T, K, U&gt;
+    Collector&lt;T, ?, SequencedMap&lt;K,U&gt;&gt;
+    toLinkedMap(Function&lt;? super T, ? extends K&gt; keyMapper,
+                Function&lt;? super T, ? extends U&gt; valueMapper) {
+<span class="fc" id="L232">        return toLinkedMap(keyMapper, valueMapper, MergeFunction.OVERWRITE);</span>
+    }
+
+    /**
+     * The same as {@link #toLinkedMap(Function, Function) toLinkedMap(keyMapper,valueMapper)},
+     * but allows to handle duplicates with {@link MergeFunction mergeFunction} parameter.
+     * &lt;hr/&gt;
+     * &lt;i&gt;the brief summary is:&lt;/i&gt;&lt;ul&gt;
+     *     &lt;li&gt;{@code keyMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-key {@code &lt;K&gt;}&lt;/li&gt;
+     *     &lt;li&gt;{@code valueMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-value {@code &lt;U&gt;}&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @param &lt;T&gt; the type of the input elements
+     * @param &lt;K&gt; the output type of the &lt;i&gt;key-mapping&lt;/i&gt;  function
+     * @param &lt;U&gt; the output type of the &lt;i&gt;value-mapping&lt;/i&gt; function
+     * @param keyMapper a &lt;i&gt;key-mapping&lt;/i&gt; function to produce keys
+     * @param valueMapper a &lt;i&gt;value-mapping&lt;/i&gt; function to produce values
+     * @param mergeFunction one of values that are represented by {@link MergeFunction}-enum
+     * @return a {@link Collector} that collects elements into a {@link LinkedHashMap},
+     * whose keys are the result of applying a {@code keyMapper} function to the input elements,
+     * and whose values are the result of applying a {@code valueMapper} function to all input elements
+     * equal to the key and combining them using the {@code mergeFunction}.
+     */
+    public static &lt;T, K, U&gt;
+    Collector&lt;T, ?, SequencedMap&lt;K,U&gt;&gt;
+    toLinkedMap(Function&lt;? super T, ? extends K&gt; keyMapper,
+                Function&lt;? super T, ? extends U&gt; valueMapper,
+                MergeFunction mergeFunction) {
+<span class="fc" id="L260">        return Collectors.toMap(keyMapper, valueMapper, mergeFunction.op(), LinkedHashMap::new);</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+<span class="nc" id="L265">    private CoreCollectors() {</span>
+        // prohibit the creation of utility-class instance
+<span class="nc" id="L267">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
