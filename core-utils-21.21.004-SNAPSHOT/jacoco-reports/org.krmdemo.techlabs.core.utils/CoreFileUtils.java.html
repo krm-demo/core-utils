@@ -268,11 +268,11 @@ import java.util.stream.StreamSupport;
      * @return the number of removed items
      */
     public static int removeSilent(File fileOrDirToRemove) {
-<span class="pc bpc" id="L271" title="1 of 2 branches missed.">        if (fileOrDirToRemove == null) {</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">        if (fileOrDirToRemove == null) {</span>
 <span class="nc" id="L272">            return -1;</span>
         }
-<span class="pc bpc" id="L274" title="1 of 2 branches missed.">        if (!fileOrDirToRemove.exists()) {</span>
-<span class="fc" id="L275">            return 0;</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">        if (!fileOrDirToRemove.exists()) {</span>
+<span class="nc" id="L275">            return 0;</span>
         }
         try {
 <span class="nc bnc" id="L278" title="All 2 branches missed.">            if (fileOrDirToRemove.isFile()) {</span>

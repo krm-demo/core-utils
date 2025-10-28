@@ -1,3 +1,4 @@
+ce3995f1 introduce maven-failsafe-plugin #1
 0f93a075 introduce JaCoCo-badgeTooltip and put it on test-site #1
 fcd36a8a << new snapshot version >> 21.21.004-SNAPSHOT
 c0150fd7 << internal release >> 21.21.003
