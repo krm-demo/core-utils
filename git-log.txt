@@ -1,3 +1,4 @@
+3aaf532d << new snapshot version >> 21.21.003-SNAPSHOT
 79867c4a << internal release >> 21.21.002
 6f3ab01f display test-coverage at the badge #2
 551304b0 display test-coverage at the badge #1

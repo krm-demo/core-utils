@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LinkedDateTimeTripletMap.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.datetime</a> &gt; <span class="el_source">LinkedDateTimeTripletMap.java</span></div><h1>LinkedDateTimeTripletMap.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.datetime;
+
+import java.io.Serial;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Objects;
+import java.util.SequencedMap;
+import java.util.function.Function;
+
+import static org.krmdemo.techlabs.core.utils.CorePropsUtils.equalProps;
+
+/**
+ * This class is used as a parallel data-structure over the existing linked-map.
+ * To create the instance of that class - use any of factory-methods like {@link #create(SequencedMap, Function)},
+ * {@link #createByEpochSeconds(SequencedMap, Function)} or {@link #createByEpochSecondsInt(SequencedMap, Function)}
+ * &lt;hr/&gt;
+ * TODO: think about making it immutable somehow
+ *
+ * @param &lt;Key&gt; a type of original map's key
+ */
+public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, LinkedDateTimeTripletMap.LinkedTriplet&gt; {
+
+    @Serial
+    private static final long serialVersionUID = 123456789_001L;
+
+    /**
+     * Extension to {@link DateTimeTriplet} that allows to link that triplet
+     * with sequentially previous and next triplets in corresponding collection or map.
+     */
+    public static class LinkedTriplet extends DateTimeTriplet {
+        private LinkedTriplet prev;
+        private LinkedTriplet next;
+
+        void linkPrev(LinkedTriplet prev) {
+<span class="fc" id="L36">            this.prev = prev;</span>
+<span class="fc" id="L37">            prev.next = this;</span>
+<span class="fc" id="L38">        }</span>
+
+        void linkNext(LinkedTriplet next) {
+<span class="nc" id="L41">            this.next = next;</span>
+<span class="nc" id="L42">            next.prev = this;</span>
+<span class="nc" id="L43">        }</span>
+
+        public LinkedTriplet(long epochSeconds) {
+<span class="nc" id="L46">            super(epochSeconds);</span>
+<span class="nc" id="L47">        }</span>
+
+        public LinkedTriplet(long epochSeconds, int nanoOfSecond) {
+<span class="nc" id="L50">            super(epochSeconds, nanoOfSecond);</span>
+<span class="nc" id="L51">        }</span>
+
+        public LinkedTriplet(Instant instant) {
+<span class="fc" id="L54">            super(instant);</span>
+<span class="fc" id="L55">        }</span>
+
+        public LinkedTriplet(LocalDateTime localDateTimeUTC) {
+<span class="nc" id="L58">            super(localDateTimeUTC);</span>
+<span class="nc" id="L59">        }</span>
+
+        public boolean isTheSameAsPrev() {
+<span class="nc" id="L62">            return Objects.equals(this, prev);</span>
+        }
+
+        public boolean isTheSameAsNext() {
+<span class="nc" id="L66">            return Objects.equals(this, next);</span>
+        }
+
+        /**
+         * Comparing on equality on &lt;b&gt;the first part&lt;/b&gt; of triplet with &lt;b&gt;the previous&lt;/b&gt; linked value
+         *
+         * @return {@code true} if &lt;b&gt;the previous&lt;/b&gt; item exists and has the same property {@link #getYearAndMonth}
+         *          (and {@code false} - otherwise)
+         */
+        public boolean isYearAnMonthTheSameAsPrev() {
+<span class="fc" id="L76">            return equalProps(this, prev, DateTimeTriplet::getYearAndMonth);</span>
+        }
+
+        /**
+         * Comparing on equality on &lt;b&gt;the first part&lt;/b&gt; of triplet with &lt;b&gt;the next&lt;/b&gt; linked value
+         *
+         * @return {@code true} if &lt;b&gt;the next&lt;/b&gt; item exists and has the same property {@link #getYearAndMonth}
+         *          (and {@code false} - otherwise)
+         */
+        public boolean isYearAnMonthTheSameAsNext() {
+<span class="fc" id="L86">            return equalProps(this, next, DateTimeTriplet::getYearAndMonth);</span>
+        }
+
+        /**
+         * Comparing on equality on &lt;b&gt;the second part&lt;/b&gt; of triplet with &lt;b&gt;the previous&lt;/b&gt; linked value
+         *
+         * @return {@code true} if &lt;b&gt;the previous&lt;/b&gt; item exists and has the same property {@link #getDayOfMonthAndWeek}
+         *          (and {@code false} - otherwise)
+         */
+        public boolean isDayOfMonthAndWeekTheSameAsPrev() {
+<span class="fc" id="L96">            return equalProps(this, prev, DateTimeTriplet::getDayOfMonthAndWeek);</span>
+        }
+
+        /**
+         * Comparing on equality on &lt;b&gt;the second part&lt;/b&gt; of triplet with &lt;b&gt;the next&lt;/b&gt; linked value
+         *
+         * @return {@code true} if &lt;b&gt;the next&lt;/b&gt; item exists and has the same property {@link #getDayOfMonthAndWeek}
+         *          (and {@code false} - otherwise)
+         */
+        public boolean isDayOfMonthAndWeekTheSameAsNext() {
+<span class="fc" id="L106">            return equalProps(this, next, DateTimeTriplet::getDayOfMonthAndWeek);</span>
+        }
+
+        /**
+         * Comparing on equality on &lt;b&gt;the third part&lt;/b&gt; of triplet with &lt;b&gt;the previous&lt;/b&gt; linked value
+         *
+         * @return {@code true} if t&lt;b&gt;he previous&lt;/b&gt; item exists and has the same property {@link #getHoursMinutes}
+         *          (and {@code false} - otherwise)
+         */
+        public boolean isHoursMinutesTheSameAsPrev() {
+<span class="fc" id="L116">            return equalProps(this, prev, DateTimeTriplet::getHoursMinutes);</span>
+        }
+
+        /**
+         * Comparing on equality on &lt;b&gt;the third part&lt;/b&gt; of triplet with &lt;b&gt;the next&lt;/b&gt; linked value
+         *
+         * @return {@code true} if &lt;b&gt;the next&lt;/b&gt; item exists and has the same property {@link #getHoursMinutes}
+         *          (and {@code false} - otherwise)
+         */
+        public boolean isHoursMinutesTheSameAsNext() {
+<span class="fc" id="L126">            return equalProps(this, next, DateTimeTriplet::getHoursMinutes);</span>
+        }
+
+        /**
+         * @return the value of {@link #getYearAndMonth()} followed by dash{@code '-'}-symbol,
+         *      if it's not the same as in previous item in sequence (otherwise - empty string)
+         */
+        public String getLinkedYearAndMonth() {
+<span class="fc bfc" id="L134" title="All 2 branches covered.">            return isYearAnMonthTheSameAsPrev() ? &quot;&quot; : getYearAndMonth() + &quot;-&quot;;</span>
+        }
+
+        /**
+         * @return the value of {@link #getDayOfMonthAndWeek()}, if {@link #getLinkedYearAndMonth()} is not empty
+         *      and if {@link #getDayOfMonthAndWeek()} is not the same as of the previous item in sequence
+         *      (otherwise - empty string)
+         */
+        public String getLinkedDayOfMonthAndWeek() {
+<span class="fc bfc" id="L143" title="All 4 branches covered.">            return isYearAnMonthTheSameAsPrev() &amp;&amp; isDayOfMonthAndWeekTheSameAsPrev() ?  &quot;&quot; : getDayOfMonthAndWeek();</span>
+        }
+
+        /**
+         * @return the value of {@link #getDayOfMonthAndWeek()}, if {@link #getLinkedYearAndMonth()} is not empty
+         *      and if {@link #getHoursMinutes()} is not the same as of the previous item in sequence
+         *      (otherwise - dash{@code '-'}-symbol instead of digits)
+         */
+        public String getLinkedHoursMinutes() {
+<span class="fc bfc" id="L152" title="All 4 branches covered.">            return isDayOfMonthAndWeekTheSameAsPrev() &amp;&amp; isHoursMinutesTheSameAsPrev() ? &quot;--:--&quot; : getHoursMinutes();</span>
+        }
+
+        /**
+         * @return the same as inherited {@link #dump()}, but skip displaying the values of parts,
+         *          if they repeat the same of the &lt;b&gt;previous&lt;/b&gt; item in sequence
+         */
+        public String dumpLinked() {
+<span class="fc" id="L160">            return String.format(&quot;%8s%8s%6s&quot;,</span>
+<span class="fc" id="L161">                this.getLinkedYearAndMonth(),</span>
+<span class="fc" id="L162">                this.getLinkedDayOfMonthAndWeek(),</span>
+<span class="fc" id="L163">                this.getLinkedHoursMinutes());</span>
+        }
+
+        /**
+         * @return the same as inherited {@link #dump()}, but skip displaying the values of parts,
+         *          if they repeat the same of the &lt;b&gt;next&lt;/b&gt; item in sequence
+         */
+        public String dumpLinkedReversed() {
+<span class="fc" id="L171">            return String.format(&quot;%8s%8s%6s&quot;,</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">                this.isYearAnMonthTheSameAsNext() ? &quot;&quot; : this.getYearAndMonth() + &quot;-&quot;,</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">                this.isDayOfMonthAndWeekTheSameAsNext() ? &quot;&quot; : this.getDayOfMonthAndWeek(),</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">                this.isHoursMinutesTheSameAsNext() ? &quot;--:--&quot; : this.getHoursMinutes());</span>
+        }
+    }
+
+    /**
+     * Private-constructor to force using factory-methods
+     */
+    private LinkedDateTimeTripletMap() {
+    }
+
+    /**
+     * Builds a chronological sequence of {@link LinkedTriplet}s over the original sequence map,
+     * where the passed {@code instantFunc} is used to extract that date-time chronological property
+     *
+     * @param originalMap an original map over any values that has chronological property
+     * @param instantFunc a reference to getter that is used to extract that date-time chronological property
+     * @return the linked-map with the same keys and sequence, but with {@link LinkedTriplet} as value
+     * @param &lt;Key&gt; a type of original map's key
+     * @param &lt;Value&gt; a type of original map's value
+     */
+    public static &lt;Key, Value&gt;
+    LinkedDateTimeTripletMap&lt;Key&gt;
+    create(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Instant&gt; instantFunc) {
+<span class="fc" id="L197">        LinkedDateTimeTripletMap&lt;Key&gt; dttMap = new LinkedDateTimeTripletMap&lt;&gt;();</span>
+<span class="fc" id="L198">        originalMap.forEach((Key key, Value value) -&gt; {</span>
+<span class="fc" id="L199">            Instant instant = instantFunc.apply(value);</span>
+<span class="fc" id="L200">            LinkedTriplet dtt = new LinkedTriplet(instant);</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">            if (!dttMap.isEmpty()) {</span>
+<span class="fc" id="L202">                dtt.linkPrev(dttMap.lastEntry().getValue());</span>
+            }
+<span class="fc" id="L204">            dttMap.putLast(key, dtt);</span>
+<span class="fc" id="L205">        });</span>
+<span class="fc" id="L206">        return dttMap;</span>
+    }
+
+    /**
+     * The same as {@link #create(SequencedMap, Function)},
+     * but the getter-function {@code epochSecondsFunc} extracts epoch-seconds as {@link Long}
+     *
+     * @param originalMap an original map over any values that has chronological property
+     * @param epochSecondsFunc a reference to getter that is used to extract epoch-seconds as {@link Long}
+     * @return the linked-map with the same keys and sequence, but with {@link LinkedTriplet} as value
+     * @param &lt;Key&gt; a type of original map's key
+     * @param &lt;Value&gt; a type of original map's value
+     */
+    public static &lt;Key, Value&gt;
+    LinkedDateTimeTripletMap&lt;Key&gt;
+    createByEpochSeconds(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Long&gt; epochSecondsFunc) {
+<span class="fc" id="L222">        Function&lt;Value, Instant&gt; instantFunc = (Value value) -&gt; {</span>
+<span class="fc" id="L223">            Long epochSeconds = epochSecondsFunc.apply(value);</span>
+<span class="fc" id="L224">            return Instant.ofEpochSecond(epochSeconds);</span>
+        };
+<span class="fc" id="L226">        return create(originalMap, instantFunc);</span>
+    }
+
+    /**
+     * The same as {@link #createByEpochSeconds(SequencedMap, Function)},
+     * but the function that extracts epoch-seconds returns {@link Integer} (not {@link Long})
+     *
+     * @param originalMap an original map over any values that has chronological property
+     * @param epochSecondsIntFunc a reference to getter that is used to extract epoch-seconds as {@link Integer}
+     * @return the linked-map with the same keys and sequence, but with {@link LinkedTriplet} as value
+     * @param &lt;Key&gt; a type of original map's key
+     * @param &lt;Value&gt; a type of original map's value
+     */
+    public static &lt;Key, Value&gt;
+    LinkedDateTimeTripletMap&lt;Key&gt;
+    createByEpochSecondsInt(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Integer&gt; epochSecondsIntFunc) {
+<span class="fc" id="L242">        Function&lt;Value, Long&gt; epochSecondsFunc = (Value value) -&gt; epochSecondsIntFunc.apply(value).longValue();</span>
+<span class="fc" id="L243">        return createByEpochSeconds(originalMap, epochSecondsFunc);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

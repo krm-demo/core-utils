@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CoreStreamUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">CoreStreamUtils.java</span></div><h1>CoreStreamUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
+import java.util.SequencedMap;
+import java.util.SequencedSet;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedListReversed;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedSet;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toListReversed;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedSet;
+
+/**
+ * Utility-class that provides methods to transform the stream or var-args-arrays of values into linked or sorted sets
+ * and stream or var-args-arrays of {@link Map.Entry entries} into linked or sorted map.
+ * An enumeration {@link MergeFunction} could be used to handle the entries with the same {@link Map.Entry#getKey() key}.
+ */
+public class CoreStreamUtils {
+
+    // ===========================================================================================
+    //        Utility-methods to create a reverse streams from the given array or list
+    // ===========================================================================================
+
+    public static IntStream reversed(int... valuesArr) {
+<span class="nc" id="L35">        return IntStream.rangeClosed(1, valuesArr.length).map(i -&gt; valuesArr[valuesArr.length - i]);</span>
+    }
+    public static IntStream reversed(List&lt;Integer&gt; valuesList) {
+<span class="nc" id="L38">        return IntStream.rangeClosed(1, valuesList.size()).map(i -&gt; valuesList.get(valuesList.size() - i));</span>
+    }
+
+    public static int[] reversedArr(int... valuesArr) {
+<span class="nc" id="L42">        return reversed(valuesArr).toArray();</span>
+    }
+    public static int[] reversedArr(java.util.stream.IntStream values) {
+<span class="nc" id="L45">        return reversedArr(values.toArray());</span>
+    }
+
+    public static ArrayList&lt;Integer&gt; reversedList(int... valuesArr) {
+<span class="nc" id="L49">        return reversedList(Arrays.stream(valuesArr).boxed());</span>
+    }
+    public static ArrayList&lt;Integer&gt; reversedList(IntStream values) {
+<span class="nc" id="L52">        return reversedList(values.boxed());</span>
+    }
+    public static &lt;T&gt; ArrayList&lt;T&gt; reversedList(Stream&lt;T&gt; boxedStream) {
+<span class="nc" id="L55">        return boxedStream.collect(toListReversed());</span>
+    }
+    public static &lt;T&gt; ArrayList&lt;T&gt; reversedList(List&lt;T&gt; valuesList) {
+<span class="nc" id="L58">        return reversedList(valuesList.stream());</span>
+    }
+
+    public static LinkedList&lt;Integer&gt; reversedLinkedList(int... valuesArr) {
+<span class="nc" id="L62">        return reversedLinkedList(Arrays.stream(valuesArr).boxed());</span>
+    }
+    public static LinkedList&lt;Integer&gt; reversedLinkedList(IntStream values) {
+<span class="nc" id="L65">        return reversedLinkedList(values.boxed());</span>
+    }
+    public static &lt;T&gt; LinkedList&lt;T&gt; reversedLinkedList(Stream&lt;T&gt; boxedStream) {
+<span class="nc" id="L68">        return boxedStream.collect(toLinkedListReversed());</span>
+    }
+    public static &lt;T&gt; LinkedList&lt;T&gt; reversedLinkedList(List&lt;T&gt; valuesList) {
+<span class="nc" id="L71">        return reversedLinkedList(valuesList.stream());</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @param valuesArr var-args-arrays of values
+     * @return the sorted set of those values as {@link NavigableSet}
+     * @param &lt;T&gt; the type of value
+     */
+    @SafeVarargs
+    @SuppressWarnings(&quot;varargs&quot;)
+    public static &lt;T extends Comparable&lt;T&gt;&gt; NavigableSet&lt;T&gt; sortedSet(T... valuesArr) {
+<span class="fc" id="L84">        return sortedSet(Arrays.stream(valuesArr));</span>
+    }
+
+    /**
+     * @param values stream of values
+     * @return the sorted set of those values as {@link NavigableSet}
+     * @param &lt;T&gt; the type of value
+     */
+    public static &lt;T extends Comparable&lt;T&gt;&gt; NavigableSet&lt;T&gt; sortedSet(Stream&lt;T&gt; values) {
+<span class="fc" id="L93">        return values.collect(toSortedSet());</span>
+    }
+
+    /**
+     * @param valuesArr var-args-arrays of values
+     * @return the linked set of those values as {@link SequencedSet}
+     * @param &lt;T&gt; the type of value
+     */
+    @SafeVarargs
+    @SuppressWarnings(&quot;varargs&quot;)
+    public static &lt;T&gt; SequencedSet&lt;T&gt; linkedSet(T... valuesArr) {
+<span class="fc" id="L104">        return linkedSet(Arrays.stream(valuesArr));</span>
+    }
+
+    /**
+     * @param values stream of values
+     * @return the linked set of those values as {@link SequencedSet}
+     * @param &lt;T&gt; the type of value
+     */
+    public static &lt;T&gt; SequencedSet&lt;T&gt; linkedSet(Stream&lt;T&gt; values) {
+<span class="fc" id="L113">        return values.collect(toLinkedSet());</span>
+    }
+
+    /**
+     * A factory-method to produce an instance of {@link Map.Entry} from {@code key} and {@code value}.
+     *
+     * @param key a key of entry to create
+     * @param value a value of entry to create
+     * @return an instance of {@link Map.Entry} as {@link AbstractMap.SimpleEntry}
+     * @param &lt;K&gt; the type of key
+     * @param &lt;V&gt; the type of value
+     */
+    public static &lt;K, V&gt; Map.Entry&lt;K, V&gt; keyValue(K key, V value) {
+<span class="fc" id="L126">        return new AbstractMap.SimpleEntry&lt;&gt;(key, value);</span>
+    }
+
+    /**
+     * The same as {@link #keyValue(Object, Object) keyValue(K key, V value)},
+     * but when the type of {@code key} is {@link String} (we can call such {@code key} as {@code name} in this case).
+     *
+     * @param name a name of entry to create
+     * @param value a value of entry to create
+     * @return an instance of {@link Map.Entry} as {@link AbstractMap.SimpleEntry}
+     * @param &lt;V&gt; the type of value
+     */
+    public static &lt;V&gt; Map.Entry&lt;String, V&gt; nameValue(String name, V value) {
+<span class="fc" id="L139">        return keyValue(name, value);</span>
+    }
+
+    /**
+     * Transform the var-args-arrays of entries into the sorted map,
+     * where the entries with the same {@link Map.Entry#getKey() key} are merged
+     * with the default merge-function {@link MergeFunction#OVERWRITE}.
+     * &lt;hr/&gt;
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
+     *
+     * @param entriesArr var-args-arrays of entries
+     * @return the sorted map, which is collected from those entries, as {@link NavigableMap},
+     * @param &lt;K&gt; the type of key
+     * @param &lt;V&gt; the type of value
+     */
+    @SafeVarargs
+    @SuppressWarnings(&quot;varargs&quot;)
+    public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
+    sortedMap(Map.Entry&lt;K,V&gt;... entriesArr) {
+<span class="fc" id="L159">        return sortedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));</span>
+    }
+
+    /**
+     * Transform the var-args-arrays of entries into the sorted map,
+     * where the entries with the same {@link Map.Entry#getKey() key} are merged
+     * with the passed {@code mergeFunction}.
+     * &lt;hr/&gt;
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
+     *
+     * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}
+     * @param entriesArr var-args-arrays of entries
+     * @return the sorted map, which is collected from those entries, as {@link NavigableMap},
+     * @param &lt;K&gt; the type of key
+     * @param &lt;V&gt; the type of value
+     */
+    @SafeVarargs
+    @SuppressWarnings(&quot;varargs&quot;)
+    public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
+    sortedMap(MergeFunction mergeFunction, Map.Entry&lt;K,V&gt;... entriesArr) {
+<span class="nc" id="L180">        return sortedMap(mergeFunction, Arrays.stream(entriesArr));</span>
+    }
+
+    /**
+     * Transform the var-args-arrays of entries into the sorted map,
+     * where the entries with the same {@link Map.Entry#getKey() key} are merged
+     * with the default merge-function {@link MergeFunction#OVERWRITE}.
+     * &lt;hr/&gt;
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
+     *
+     * @param entries stream of entries
+     * @return the sorted map, which is collected from those entries, as {@link NavigableMap},
+     * @param &lt;K&gt; the type of key
+     * @param &lt;V&gt; the type of value
+     */
+    public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
+    sortedMap(Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
+<span class="fc" id="L198">        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
+    }
+
+    /**
+     * Transform the var-args-arrays of entries into the sorted map,
+     * where the entries with the same {@link Map.Entry#getKey() key} are merged
+     * with the passed {@code mergeFunction}.
+     * &lt;hr/&gt;
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
+     *
+     * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}
+     * @param entries stream of entries
+     * @return the sorted map, which is collected from those entries, as {@link NavigableMap},
+     * @param &lt;K&gt; the type of key
+     * @param &lt;V&gt; the type of value
+     */
+    public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
+    sortedMap(MergeFunction mergeFunction, Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
+<span class="fc" id="L217">        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
+    }
+
+    /**
+     * Transform the var-args-arrays of entries into the linked map,
+     * where the entries with the same {@link Map.Entry#getKey() key} are merged
+     * with the default merge-function {@link MergeFunction#OVERWRITE}.
+     * &lt;hr/&gt;
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
+     *
+     * @param entriesArr var-args-arrays of entries
+     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},
+     * @param &lt;K&gt; the type of key
+     * @param &lt;V&gt; the type of value
+     */
+    @SafeVarargs
+    @SuppressWarnings(&quot;varargs&quot;)
+    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
+    linkedMap(Map.Entry&lt;K,V&gt;... entriesArr) {
+<span class="fc" id="L237">        return linkedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));</span>
+    }
+
+    /**
+     * Transform the var-args-arrays of entries into the linked map,
+     * where the entries with the same {@link Map.Entry#getKey() key} are merged
+     * with the passed {@code mergeFunction}.
+     * &lt;hr/&gt;
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
+     *
+     * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}
+     * @param entriesArr var-args-arrays of entries
+     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},
+     * @param &lt;K&gt; the type of key
+     * @param &lt;V&gt; the type of value
+     */
+    @SafeVarargs
+    @SuppressWarnings(&quot;varargs&quot;)
+    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
+    linkedMap(MergeFunction mergeFunction, Map.Entry&lt;K,V&gt;... entriesArr) {
+<span class="nc" id="L258">        return linkedMap(mergeFunction, Arrays.stream(entriesArr));</span>
+    }
+
+    /**
+     * Transform the stream of entries into the linked map,
+     * where the entries with the same {@link Map.Entry#getKey() key} are merged
+     * with the default merge-function {@link MergeFunction#OVERWRITE}.
+     * &lt;hr/&gt;
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
+     *
+     * @param entries stream of entries
+     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},
+     * @param &lt;K&gt; the type of key
+     * @param &lt;V&gt; the type of value
+     */
+    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
+    linkedMap(Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
+<span class="fc" id="L276">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
+    }
+
+    /**
+     * Transform the var-args-arrays of entries into the linked map,
+     * where the entries with the same {@link Map.Entry#getKey() key} are merged
+     * with the passed {@code mergeFunction}.
+     * &lt;hr/&gt;
+     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,
+     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.
+     *
+     * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}
+     * @param entries stream of entries
+     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},
+     * @param &lt;K&gt; the type of key
+     * @param &lt;V&gt; the type of value
+     */
+    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
+    linkedMap(MergeFunction mergeFunction, Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
+<span class="fc" id="L295">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
+    }
+
+    /**
+     * In order to avoid {@link NullPointerException} in JDK's collectors
+     * all entries that are {@code null} or whose key or value is {@code null} should be filtered out.
+     *
+     * @param entry an entry to filter
+     * @return {@code true} if the entry is valid and otherwise - {@code false}
+     */
+    public static boolean entryIsValid(Map.Entry&lt;?,?&gt; entry) {
+<span class="fc bfc" id="L306" title="All 6 branches covered.">        return entry != null &amp;&amp; entry.getKey() != null &amp;&amp; entry.getValue() != null;</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+<span class="nc" id="L311">    private CoreStreamUtils() {</span>
+        // prohibit the creation of utility-class instance
+<span class="nc" id="L313">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
