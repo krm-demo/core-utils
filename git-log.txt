@@ -1,3 +1,4 @@
+6f3ab01f display test-coverage at the badge #2
 551304b0 display test-coverage at the badge #1
 484b0380 playing with JaCoCp counters #1
 77ede9c9 introduce CorePropsUtils.newInstance()
