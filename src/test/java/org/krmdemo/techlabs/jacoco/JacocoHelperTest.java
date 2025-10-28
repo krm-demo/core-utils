@@ -1,6 +1,7 @@
 package org.krmdemo.techlabs.jacoco;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.core.utils.CorePropsUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
@@ -14,6 +15,7 @@ import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_
 /**
  * A unit-test for <b>{@code th-tool}</b>-helper {@link JacocoHelper}.
  */
+@Tag("integration-test")
 public class JacocoHelperTest {
 
     private static final ThymeleafToolCtx ttCtx = new ThymeleafToolCtx();

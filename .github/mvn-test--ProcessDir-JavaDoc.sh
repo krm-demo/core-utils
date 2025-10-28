@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ----------------------------------------------------------------------------------------------------------------
-#   Run the test, which performs the processing of  the directory '.github/th-test-site/original' with "th-tool"
+#   Run the test, which performs the processing of the directory 'target/reports/apidocs' with "th-tool"
 # ----------------------------------------------------------------------------------------------------------------
 
-mvn clean package "-DskipTests" && mvn test "-Dtest=ThymeleafToolTest#testProcessDir_JavaDoc"
+# Note! For maven-failsafe-plugin the system-property should be "it.test", but not just "test" !!!
+mvn clean package "-DskipTests" && mvn failsafe:integration-test "-Dit.test=ThymeleafToolTest#testProcessDir_JavaDoc"

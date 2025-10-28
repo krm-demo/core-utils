@@ -2,6 +2,7 @@ package org.krmdemo.techlabs.thtool.helpers;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
@@ -17,6 +18,7 @@ import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_
  * <hr/>
  * This unit-test is working <b>only after generating JavaDoc-report</b> - otherwise the test-cases will be skipped.
  */
+@Tag("integration-test")
 public class JavaDocHelperTest {
 
     private static final ThymeleafToolCtx ttCtx = new ThymeleafToolCtx();

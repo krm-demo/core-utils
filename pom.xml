@@ -309,7 +309,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven.surefire.plugin.version}</version>
         <configuration>
-          <excludedGroups>integration-tests</excludedGroups>
+          <excludedGroups>integration-test</excludedGroups>
           <!-- it's very important to prepend the list of arguments with placeholder @{argLine} for "JaCoCo" !!! -->
           <argLine>
             @{argLine}
@@ -369,7 +369,7 @@
           </dependency>
         </dependencies>
         <configuration>
-          <groups>integration-tests</groups>
+          <groups>integration-test</groups>
           <argLine>
             -javaagent:${settings.localRepository}/org/mockito/mockito-core/${org.mockito.version}/mockito-core-${org.mockito.version}.jar
             -Xshare:off

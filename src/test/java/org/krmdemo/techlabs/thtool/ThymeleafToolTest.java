@@ -38,24 +38,7 @@ public class ThymeleafToolTest {
     }
 
     @Test
-    void testProcessDir_TestSite_DryRun() {
-        int exitCode = ThymeleafTool.executeMain(
-            "--var-file",
-            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
-            "process-dir",
-            "--input-dir",
-            ".github/th-test-site/original"
-        );
-        if (!sbErr.isEmpty()) {
-            stdErr.println(sbErr);
-        }
-        // stdErr.println(sbOut);
-        assertThat(exitCode).isZero();
-        assertThat(sbErr).isEmpty();
-        assertThat(sbOut).isNotBlank();
-    }
-
-    @Test
+    @Tag("integration-test")
     void testProcess_Readme() {
         int exitCode = ThymeleafTool.executeMain(
             "--var-file",
@@ -105,7 +88,26 @@ public class ThymeleafToolTest {
     }
 
     @Test
-    @Tag("integration-tests")
+    @Tag("integration-test")
+    void testProcessDir_TestSite_DryRun() {
+        int exitCode = ThymeleafTool.executeMain(
+            "--var-file",
+            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
+            "process-dir",
+            "--input-dir",
+            ".github/th-test-site/original"
+        );
+        if (!sbErr.isEmpty()) {
+            stdErr.println(sbErr);
+        }
+        // stdErr.println(sbOut);
+        assertThat(exitCode).isZero();
+        assertThat(sbErr).isEmpty();
+        assertThat(sbOut).isNotBlank();
+    }
+
+    @Test
+    @Tag("integration-test")
     void testProcessDir_TestSite() {
         int exitCode = ThymeleafTool.executeMain(
             "--var-file",
@@ -130,6 +132,7 @@ public class ThymeleafToolTest {
     }
 
     @Test
+    @Tag("integration-test")
     void testProcessDir_JavaDoc() {
         final String JAVADOC_REPORT__INPUT = "target/reports/apidocs";
         final String JAVADOC_REPORT__OUTPUT = "target/reports/apidocs-processed";
