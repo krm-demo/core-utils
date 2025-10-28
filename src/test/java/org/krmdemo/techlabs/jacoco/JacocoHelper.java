@@ -188,7 +188,8 @@ public class JacocoHelper {
             //"b0e0e6", // <-- this color is called "PowderBlue" at https://htmlcolorcodes.com/color-names/
             Path.of(".github/images/jacoco/jacoco-reports.gif").toFile(),
             "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable ad JavDoc-site
-            "4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable at JavDoc-site
+            "efe6c9" // <-- this color is present at JaCoCo-"Powered By" logo
+            //"4D7A97" // <-- this color corresponds "--navbar-background-color" CSS-variable at JavDoc-site
         );
     }
 
