@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.jar.JarFile;
 
-import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJson;
+import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
 
 @JsonPropertyOrder(alphabetic = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -58,7 +58,7 @@ public record ClassInfo(
 
     @Override
     public String toString() {
-<span class="nc" id="L61">        return dumpAsJson(this);</span>
+<span class="nc" id="L61">        return dumpAsJsonTxt(this);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

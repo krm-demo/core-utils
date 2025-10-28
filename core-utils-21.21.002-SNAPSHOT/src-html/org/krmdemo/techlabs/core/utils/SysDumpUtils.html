@@ -28,12 +28,12 @@
 <span class="source-line-no">014</span><span id="line-14">import java.util.TreeMap;</span>
 <span class="source-line-no">015</span><span id="line-15">import java.util.stream.Collectors;</span>
 <span class="source-line-no">016</span><span id="line-16"></span>
-<span class="source-line-no">017</span><span id="line-17">import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJson;</span>
-<span class="source-line-no">018</span><span id="line-18">import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;</span>
-<span class="source-line-no">019</span><span id="line-19">import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;</span>
-<span class="source-line-no">020</span><span id="line-20">import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;</span>
-<span class="source-line-no">021</span><span id="line-21">import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;</span>
-<span class="source-line-no">022</span><span id="line-22">import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;</span>
+<span class="source-line-no">017</span><span id="line-17">import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;</span>
+<span class="source-line-no">018</span><span id="line-18">import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;</span>
+<span class="source-line-no">019</span><span id="line-19">import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;</span>
+<span class="source-line-no">020</span><span id="line-20">import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;</span>
+<span class="source-line-no">021</span><span id="line-21">import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;</span>
+<span class="source-line-no">022</span><span id="line-22">import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;</span>
 <span class="source-line-no">023</span><span id="line-23"></span>
 <span class="source-line-no">024</span><span id="line-24">/**</span>
 <span class="source-line-no">025</span><span id="line-25"> * TODO: provide the comprehensive Java-Doc and reuse {@link ObjectPrinter} !!!</span>
@@ -137,7 +137,7 @@
 <span class="source-line-no">123</span><span id="line-123">                nameValue("isOther", fileAtrrs.isOther())</span>
 <span class="source-line-no">124</span><span id="line-124">            ));</span>
 <span class="source-line-no">125</span><span id="line-125">        } catch (Exception ex) {</span>
-<span class="source-line-no">126</span><span id="line-126">            return dumpAsJson(JacksonUtils.errorFrom(ex));</span>
+<span class="source-line-no">126</span><span id="line-126">            return dumpAsJsonTxt(JacksonUtils.errorFrom(ex));</span>
 <span class="source-line-no">127</span><span id="line-127">        }</span>
 <span class="source-line-no">128</span><span id="line-128">    }</span>
 <span class="source-line-no">129</span><span id="line-129"></span>

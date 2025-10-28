@@ -25,7 +25,7 @@
 <span class="source-line-no">011</span><span id="line-11">import java.util.Optional;</span>
 <span class="source-line-no">012</span><span id="line-12">import java.util.jar.JarFile;</span>
 <span class="source-line-no">013</span><span id="line-13"></span>
-<span class="source-line-no">014</span><span id="line-14">import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJson;</span>
+<span class="source-line-no">014</span><span id="line-14">import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;</span>
 <span class="source-line-no">015</span><span id="line-15"></span>
 <span class="source-line-no">016</span><span id="line-16">@JsonPropertyOrder(alphabetic = true)</span>
 <span class="source-line-no">017</span><span id="line-17">@JsonInclude(JsonInclude.Include.NON_EMPTY)</span>
@@ -72,7 +72,7 @@
 <span class="source-line-no">058</span><span id="line-58"></span>
 <span class="source-line-no">059</span><span id="line-59">    @Override</span>
 <span class="source-line-no">060</span><span id="line-60">    public String toString() {</span>
-<span class="source-line-no">061</span><span id="line-61">        return dumpAsJson(this);</span>
+<span class="source-line-no">061</span><span id="line-61">        return dumpAsJsonTxt(this);</span>
 <span class="source-line-no">062</span><span id="line-62">    }</span>
 <span class="source-line-no">063</span><span id="line-63">}</span>
 
