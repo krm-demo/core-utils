@@ -1,3 +1,4 @@
+5025e80c << new snapshot version >> 21.21.005-SNAPSHOT
 014c61b3 << internal release >> 21.21.004
 b881405c mark some tests with 'intergation-test' tag and correct some bash-scripts #1
 ce3995f1 introduce maven-failsafe-plugin #1
