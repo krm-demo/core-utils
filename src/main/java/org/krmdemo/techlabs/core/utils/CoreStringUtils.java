@@ -33,16 +33,34 @@ public class CoreStringUtils {
         return str.chars().mapToObj(ch -> (char)ch);
     }
 
+    /**
+     * Count the characters in passed string
+     *
+     * @param str a string to count the characters (as {@link CharSequence}
+     * @return a counting-map of characters in passed {@code str}
+     */
     public static Map<Character, Integer> countingCharsMap(CharSequence str) {
         return countingMap(streamChars(str));
     }
 
+    /**
+     * Split the passed sentence on alphanumeric words
+     *
+     * @param sentence a string to sp[lit
+     * @return a {@link Stream Stream&lt;String&gt;} of alphanumeric words
+     */
     public static Stream<String> splitWords(String sentence) {
         return Arrays.stream(sentence.split("\\W"))
             .map(String::trim)
             .filter(word -> !word.isEmpty());
     }
 
+    /**
+     * Split the passed sentence on alphanumeric words
+     *
+     * @param sentence a string to sp[lit
+     * @return a {@link List List&lt;String&gt;} of alphanumeric words
+     */
     public static List<String> splitWordsList(String sentence) {
         return splitWords(sentence).collect(Collectors.toList());
     }

@@ -181,7 +181,7 @@ public class CoreStreamUtils {
     }
 
     /**
-     * Transform the var-args-arrays of entries into the sorted map,
+     * Transform the stream of entries into the sorted map,
      * where the entries with the same {@link Map.Entry#getKey() key} are merged
      * with the default merge-function {@link MergeFunction#OVERWRITE}.
      * <hr/>
@@ -199,7 +199,7 @@ public class CoreStreamUtils {
     }
 
     /**
-     * Transform the var-args-arrays of entries into the sorted map,
+     * Transform the stream of entries into the sorted map,
      * where the entries with the same {@link Map.Entry#getKey() key} are merged
      * with the passed {@code mergeFunction}.
      * <hr/>
@@ -215,6 +215,16 @@ public class CoreStreamUtils {
     public static <K extends Comparable<K>, V> NavigableMap<K, V>
     sortedMap(MergeFunction mergeFunction, Stream<Map.Entry<K,V>> entries) {
         return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));
+    }
+
+    public static <K extends Comparable<K>, V> NavigableMap<K, V>
+    sortedMap(Map<K,V> mapToSort) {
+        return sortedMap(mapToSort.entrySet().stream());
+    }
+
+    public static <K extends Comparable<K>, V> NavigableMap<K, V>
+    sortedMap(MergeFunction mergeFunction, Map<K,V> mapToSort) {
+        return sortedMap(mergeFunction, mapToSort.entrySet().stream());
     }
 
     /**

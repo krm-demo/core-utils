@@ -15,15 +15,15 @@ import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
 import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapFromFile;
 import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
-import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
-import static org.krmdemo.techlabs.json.JacksonUtils.jsonArrFromFile;
-import static org.krmdemo.techlabs.json.JacksonUtils.jsonArrFromResource;
-import static org.krmdemo.techlabs.json.JacksonUtils.jsonObjFromFile;
-import static org.krmdemo.techlabs.json.JacksonUtils.jsonObjFromResource;
-import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromFile;
-import static org.krmdemo.techlabs.json.JacksonUtils.jsonTreeFromResource;
+import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonArrFromFile;
+import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonArrFromResource;
+import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonObjFromFile;
+import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonObjFromResource;
+import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonTreeFromFile;
+import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonTreeFromResource;
 
 /**
  * This class represents the context of {@link ThymeleafTool}, which holds the variables
@@ -94,7 +94,7 @@ public class ThymeleafToolCtx extends AbstractContext {
 
         @Override
         public String toString() {
-            return DumpUtils.dumpAsJsonTxt(this);
+            return dumpAsJsonTxt(this);
         }
     }
 
@@ -295,12 +295,12 @@ public class ThymeleafToolCtx extends AbstractContext {
             case JsonNodeType.OBJECT:
                 setVariable(varName, jsonObjFromFile(jsonFile));
                 logDebug("(JSON-file is loaded into variable '%s' as Map<String,?>) --> %s",
-                    () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
+                    () -> varName, () -> dumpAsJsonTxt(jsonNode));
                 return true;
             case JsonNodeType.ARRAY:
                 setVariable(varName, jsonArrFromFile(jsonFile));
                 logDebug("(JSON-file is loaded into variable '%s' as List<?>) --> %s",
-                    () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
+                    () -> varName, () -> dumpAsJsonTxt(jsonNode));
                 return true;
             default:
                 logDebug("(not recognized neither as JSON-Object nor as JSON-Array)");
@@ -316,7 +316,7 @@ public class ThymeleafToolCtx extends AbstractContext {
         } else {
             setVariable(varName, propsMap);
             logDebug("(loaded as properties-file into variable '%s') --> %s",
-                () -> varName, () -> dumpAsJsonPrettyPrint(propsMap));
+                () -> varName, () -> dumpAsJsonTxt(propsMap));
             return true;
         }
     }
@@ -327,12 +327,12 @@ public class ThymeleafToolCtx extends AbstractContext {
             case JsonNodeType.OBJECT:
                 setVariable(varName, jsonObjFromResource(jsonResPath));
                 logDebug("(loaded from JSON-resource into variable '%s' as Map<String,?>) --> %s",
-                    () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
+                    () -> varName, () -> dumpAsJsonTxt(jsonNode));
                 break;
             case JsonNodeType.ARRAY:
                 setVariable(varName, jsonArrFromResource(jsonResPath));
                 logDebug("(loaded as JSON-resource into variable '%s' as List<?>) --> %s",
-                    () -> varName, () -> dumpAsJsonPrettyPrint(jsonNode));
+                    () -> varName, () -> dumpAsJsonTxt(jsonNode));
                 break;
             default:
                 logDebug("(not recognized neither as JSON-Object nor as JSON-Array)");
@@ -346,7 +346,7 @@ public class ThymeleafToolCtx extends AbstractContext {
         } else {
             setVariable(varName, propsMap);
             logDebug("(loaded as properties-resource into variable '%s') --> %s",
-                () -> varName, () -> dumpAsJsonPrettyPrint(propsMap));
+                () -> varName, () -> dumpAsJsonTxt(propsMap));
         }
     }
 

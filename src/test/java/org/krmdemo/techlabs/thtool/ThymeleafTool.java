@@ -23,8 +23,8 @@ import java.util.Arrays;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
+import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedSet;
-import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR;
 
 /**
@@ -145,7 +145,7 @@ public class ThymeleafTool {
         varsCtx.setVariable("mh", new MavenHelper());
         varsCtx.setVariable("zh", new ZeroSpaceHelper());
         logInfo("... variables and helpers with following names are available in templates --> %s",
-            () -> dumpAsJsonPrettyPrint(sortedSet(varsCtx.getVariableNames().stream())));
+            () -> dumpAsJsonTxt(sortedSet(varsCtx.getVariableNames().stream())));
     }
 
     /**

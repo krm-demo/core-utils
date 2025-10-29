@@ -1,7 +1,6 @@
 package org.krmdemo.techlabs.core.utils;
 
 import org.krmdemo.techlabs.core.dump.ObjectPrinter;
-import org.krmdemo.techlabs.json.JacksonUtils;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -19,7 +18,6 @@ import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
-import static org.krmdemo.techlabs.json.JacksonUtils.dumpAsJsonPrettyPrint;
 
 /**
  * TODO: provide the comprehensive Java-Doc and reuse {@link ObjectPrinter} !!!
@@ -111,7 +109,7 @@ public class SysDumpUtils {
     public static String fileAttrsAsJson(Path filePath) {
         try {
             BasicFileAttributes fileAtrrs = Files.readAttributes(filePath, BasicFileAttributes.class);
-            return dumpAsJsonPrettyPrint(linkedMap(
+            return dumpAsJsonTxt(linkedMap(
                 nameValue("filePath", filePath),
                 nameValue("fileSize", fileAtrrs.size()),
                 nameValue("creationTime", fileAtrrs.creationTime()),

@@ -1,4 +1,4 @@
-package org.krmdemo.techlabs.json;
+package org.krmdemo.techlabs.core.utils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -186,65 +186,6 @@ public class JacksonUtils {
     public static List<Object> jsonArrFromFile(File jsonFile) {
         // automatic casting to "java.util.List" looks like a magic
         return jsonValueFromFile(jsonFile, new TypeReference<>(){});
-    }
-
-    /**
-     * @param value the object to dump
-     * @return serialized object in JSON-format (the default, NOT pretty-print)
-     */
-    public static String dumpAsJson(Object value) {
-        try {
-            return OBJECT_MAPPER_DUMP.writeValueAsString(value);
-        } catch (JsonProcessingException jsonEx) {
-            log.error("could not dump the value as JSON", jsonEx);
-            return dumpAsJson(errorFrom(jsonEx));
-        }
-    }
-
-    private static final PrettyPrinter PRETTY_PRINTER = prettyPrinter();
-    private static DefaultPrettyPrinter prettyPrinter() {
-        DefaultPrettyPrinter defaultPrettyPrinter = new DefaultPrettyPrinter();
-        defaultPrettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE); // <-- 2 spaces
-        return defaultPrettyPrinter;
-    }
-
-    private static final ObjectMapper OBJECT_MAPPER_PRETTY_PRINT = objectMapperPrettyPrint();
-    private static ObjectMapper objectMapperPrettyPrint() {
-        ObjectMapper objectMapper = new ObjectMapper()
-            .registerModule(new JavaTimeModule())
-            .enable(SerializationFeature.INDENT_OUTPUT)
-            .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
-        objectMapper.configOverride(Map.class).setInclude(
-            JsonInclude.Value.construct(Include.NON_EMPTY, Include.NON_EMPTY));
-        return objectMapper;
-    }
-
-    /**
-     * @param value the object to dump in a pretty-print way
-     * @return serialized object in JSON-format (pretty-print - the keys are sorted and arrays are indented)
-     */
-    public static String dumpAsJsonPrettyPrint(Object value) {
-        try {
-            return OBJECT_MAPPER_PRETTY_PRINT.writer(PRETTY_PRINTER).writeValueAsString(value);
-        } catch (JsonProcessingException jsonEx) {
-            log.error("could not dump the value as pretty-print JSON", jsonEx);
-            return dumpAsJson(errorFrom(jsonEx));
-        }
-    }
-
-    /**
-     * Prettify the passed un-formatted JSON
-     *
-     * @param jsonToPrettify JSON to prettify
-     * @return properly formatted JSON (with indentation of 2 spaces)
-     */
-    public static String prettifyJson(String jsonToPrettify) {
-        if (isBlank(jsonToPrettify)) {
-            log.warn("attempt to pretty-print the blank string - return the empty string");
-            return "";
-        }
-        JsonNode jsonTree = jsonTreeFromString(jsonToPrettify);
-        return dumpAsJsonPrettyPrint(jsonTree);
     }
 
     private JacksonUtils() {

@@ -56,13 +56,13 @@ public class GitHelperTest {
 
     @Test
     void testGitLogInfo() {
-        System.out.println("--------------  GitLogInfo: ----------------");
-        System.out.println(gitLogHelper.getGitLogInfo());
+        log.info("--------------  GitLogInfo: ----------------");
+        log.info("" + gitLogHelper.getGitLogInfo());
     }
 
     @Test
     void testReleaseCatalog() {
-        System.out.println("--------------  Release Catalog: ----------------");
-        System.out.println(gitLogHelper.getReleaseCatalog());
+        log.info("--------------  Release Catalog: ----------------");
+        log.info("" + gitLogHelper.getReleaseCatalog());
     }
 }

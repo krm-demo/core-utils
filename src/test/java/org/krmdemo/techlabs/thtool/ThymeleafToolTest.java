@@ -163,7 +163,7 @@ public class ThymeleafToolTest {
     // --------------------------------------------------------------------------------------------
 
     @Test
-    @Tag("integration-tests")
+    @Tag("integration-test")
     @DisplayName("This is just a marker-test that must be executed only by 'failsafe'-plugin")
     void testHelloIntegrationTests(TestInfo testInfo) {
         System.out.println("Hello! " + testInfo.getDisplayName());
