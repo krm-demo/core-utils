@@ -202,7 +202,7 @@ public class JacocoHelper {
         return gbh.badgeUrlShiedsIO(
             "test-coverage",
             getBadgeValue(),
-            getBadgeValueRange().hexValue,
+            getBadgeValueRange().getHexValue(),
             Path.of(".github/images/jacoco/jacoco-reports.gif").toFile(),
             "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable ad JavDoc-site
             "efe6c9" // <-- this color is present at JaCoCo-"Powered By" logo

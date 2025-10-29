@@ -1,6 +1,7 @@
 package org.krmdemo.techlabs.jacoco;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
 
 import java.nio.file.Path;
 
@@ -41,10 +42,10 @@ public enum JacocoPercentageRange {
      */
     UNKNOWN("Unknown", "unknown range", -1, "9f9f9f");
 
-    final String displayName;
-    final String description;
-    final int percentageLimit;
-    final String hexValue;
+    @Getter private final String displayName;
+    @Getter private final String description;
+    @Getter private final int percentageLimit;
+    @Getter private final String hexValue;
 
     JacocoPercentageRange(
         String displayName,
