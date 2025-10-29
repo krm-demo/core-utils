@@ -25,7 +25,7 @@ public class CountingUtils {
 <span class="nc" id="L25">        return valuesStream.collect(groupingBy(identity(), counting()));</span>
     }
     public static &lt;V&gt; Map&lt;V, Integer&gt; countingMap(Stream&lt;V&gt; valuesStream) {
-<span class="nc" id="L28">        return valuesStream.collect(groupingBy(identity(), summingInt(v -&gt; 1)));</span>
+<span class="fc" id="L28">        return valuesStream.collect(groupingBy(identity(), summingInt(v -&gt; 1)));</span>
     }
     public static &lt;V&gt; NavigableMap&lt;V, Integer&gt; countingSortedMap(Stream&lt;V&gt; valuesStream) {
 <span class="nc" id="L31">        return valuesStream.collect(groupingBy(identity(), TreeMap::new, summingInt(v -&gt; 1)));</span>

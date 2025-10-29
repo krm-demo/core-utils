@@ -30,21 +30,39 @@ import static org.krmdemo.techlabs.core.utils.CountingUtils.countingMap;
      * @return the stream of chars as {@link Stream Stream&amp;lt;Character&amp;gt;}
      */
     public static Stream&lt;Character&gt; streamChars(CharSequence str) {
-<span class="nc" id="L33">        return str.chars().mapToObj(ch -&gt; (char)ch);</span>
+<span class="fc" id="L33">        return str.chars().mapToObj(ch -&gt; (char)ch);</span>
     }
 
+    /**
+     * Count the characters in passed string
+     *
+     * @param str a string to count the characters (as {@link CharSequence}
+     * @return a counting-map of characters in passed {@code str}
+     */
     public static Map&lt;Character, Integer&gt; countingCharsMap(CharSequence str) {
-<span class="nc" id="L37">        return countingMap(streamChars(str));</span>
+<span class="fc" id="L43">        return countingMap(streamChars(str));</span>
     }
 
+    /**
+     * Split the passed sentence on alphanumeric words
+     *
+     * @param sentence a string to sp[lit
+     * @return a {@link Stream Stream&amp;lt;String&amp;gt;} of alphanumeric words
+     */
     public static Stream&lt;String&gt; splitWords(String sentence) {
-<span class="nc" id="L41">        return Arrays.stream(sentence.split(&quot;\\W&quot;))</span>
-<span class="nc" id="L42">            .map(String::trim)</span>
-<span class="nc bnc" id="L43" title="All 2 branches missed.">            .filter(word -&gt; !word.isEmpty());</span>
+<span class="fc" id="L53">        return Arrays.stream(sentence.split(&quot;\\W&quot;))</span>
+<span class="fc" id="L54">            .map(String::trim)</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">            .filter(word -&gt; !word.isEmpty());</span>
     }
 
+    /**
+     * Split the passed sentence on alphanumeric words
+     *
+     * @param sentence a string to sp[lit
+     * @return a {@link List List&amp;lt;String&amp;gt;} of alphanumeric words
+     */
     public static List&lt;String&gt; splitWordsList(String sentence) {
-<span class="nc" id="L47">        return splitWords(sentence).collect(Collectors.toList());</span>
+<span class="fc" id="L65">        return splitWords(sentence).collect(Collectors.toList());</span>
     }
 
     /**
@@ -58,7 +76,7 @@ import static org.krmdemo.techlabs.core.utils.CountingUtils.countingMap;
      * @param &lt;T&gt; the type of input elements to the reduction operation
      */
     public static &lt;T&gt; Collector&lt;T, ?, CharSequence&gt; joiningReversed() {
-<span class="nc" id="L61">        return joiningReversed(&quot;&quot;);</span>
+<span class="fc" id="L79">        return joiningReversed(&quot;&quot;);</span>
     }
 
     /**
@@ -72,7 +90,7 @@ import static org.krmdemo.techlabs.core.utils.CountingUtils.countingMap;
      * @param &lt;T&gt; the type of input elements to the reduction operation
      */
     public static &lt;T&gt; Collector&lt;T, ?, CharSequence&gt; joiningReversed(String delimiter) {
-<span class="nc" id="L75">        return joiningReversed(delimiter, &quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L93">        return joiningReversed(delimiter, &quot;&quot;, &quot;&quot;);</span>
     }
 
     /**
@@ -86,18 +104,18 @@ import static org.krmdemo.techlabs.core.utils.CountingUtils.countingMap;
      * @param &lt;T&gt; the type of input elements to the reduction operation
      */
     public static &lt;T&gt; Collector&lt;T, ?, CharSequence&gt; joiningReversed(String delimiter, String prefix, String suffix) {
-<span class="nc" id="L89">        return Collector.of(</span>
+<span class="fc" id="L107">        return Collector.of(</span>
             StringBuilder::new,
             (sb, value) -&gt; {
-<span class="nc bnc" id="L92" title="All 4 branches missed.">                if (!sb.isEmpty() &amp;&amp; !delimiter.isEmpty()) {</span>
-<span class="nc" id="L93">                    sb.insert(0, delimiter);</span>
+<span class="fc bfc" id="L110" title="All 4 branches covered.">                if (!sb.isEmpty() &amp;&amp; !delimiter.isEmpty()) {</span>
+<span class="fc" id="L111">                    sb.insert(0, delimiter);</span>
                 }
-<span class="nc" id="L95">                sb.insert(0, value);</span>
-<span class="nc" id="L96">            },</span>
+<span class="fc" id="L113">                sb.insert(0, value);</span>
+<span class="fc" id="L114">            },</span>
             (left, right) -&gt; { // the combiner is required for parallel streams
-<span class="nc" id="L98">                right.append(delimiter).append(left); return right;</span>
+<span class="fc" id="L116">                right.append(delimiter).append(left); return right;</span>
             },
-<span class="nc" id="L100">            sb -&gt; sb.insert(0, prefix).append(suffix)</span>
+<span class="fc" id="L118">            sb -&gt; sb.insert(0, prefix).append(suffix)</span>
         );
     }
 }

@@ -1,3 +1,4 @@
+91d5502a improving some coverage and minor refactoring of JacksonUtils
 c27734ff << new snapshot version >> 21.22.001-SNAPSHOT
 d31abbb5 << public release >> 21.21
 5025e80c << new snapshot version >> 21.21.005-SNAPSHOT

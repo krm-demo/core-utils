@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JacksonUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.json</a> &gt; <span class="el_source">JacksonUtils.java</span></div><h1>JacksonUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.json;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JacksonUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">JacksonUtils.java</span></div><h1>JacksonUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -188,68 +188,9 @@ public class JacksonUtils {
 <span class="fc" id="L188">        return jsonValueFromFile(jsonFile, new TypeReference&lt;&gt;(){});</span>
     }
 
-    /**
-     * @param value the object to dump
-     * @return serialized object in JSON-format (the default, NOT pretty-print)
-     */
-    public static String dumpAsJson(Object value) {
-        try {
-<span class="nc" id="L197">            return OBJECT_MAPPER_DUMP.writeValueAsString(value);</span>
-<span class="nc" id="L198">        } catch (JsonProcessingException jsonEx) {</span>
-<span class="nc" id="L199">            log.error(&quot;could not dump the value as JSON&quot;, jsonEx);</span>
-<span class="nc" id="L200">            return dumpAsJson(errorFrom(jsonEx));</span>
-        }
-    }
-
-<span class="fc" id="L204">    private static final PrettyPrinter PRETTY_PRINTER = prettyPrinter();</span>
-    private static DefaultPrettyPrinter prettyPrinter() {
-<span class="fc" id="L206">        DefaultPrettyPrinter defaultPrettyPrinter = new DefaultPrettyPrinter();</span>
-<span class="fc" id="L207">        defaultPrettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE); // &lt;-- 2 spaces</span>
-<span class="fc" id="L208">        return defaultPrettyPrinter;</span>
-    }
-
-<span class="fc" id="L211">    private static final ObjectMapper OBJECT_MAPPER_PRETTY_PRINT = objectMapperPrettyPrint();</span>
-    private static ObjectMapper objectMapperPrettyPrint() {
-<span class="fc" id="L213">        ObjectMapper objectMapper = new ObjectMapper()</span>
-<span class="fc" id="L214">            .registerModule(new JavaTimeModule())</span>
-<span class="fc" id="L215">            .enable(SerializationFeature.INDENT_OUTPUT)</span>
-<span class="fc" id="L216">            .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);</span>
-<span class="fc" id="L217">        objectMapper.configOverride(Map.class).setInclude(</span>
-<span class="fc" id="L218">            JsonInclude.Value.construct(Include.NON_EMPTY, Include.NON_EMPTY));</span>
-<span class="fc" id="L219">        return objectMapper;</span>
-    }
-
-    /**
-     * @param value the object to dump in a pretty-print way
-     * @return serialized object in JSON-format (pretty-print - the keys are sorted and arrays are indented)
-     */
-    public static String dumpAsJsonPrettyPrint(Object value) {
-        try {
-<span class="fc" id="L228">            return OBJECT_MAPPER_PRETTY_PRINT.writer(PRETTY_PRINTER).writeValueAsString(value);</span>
-<span class="nc" id="L229">        } catch (JsonProcessingException jsonEx) {</span>
-<span class="nc" id="L230">            log.error(&quot;could not dump the value as pretty-print JSON&quot;, jsonEx);</span>
-<span class="nc" id="L231">            return dumpAsJson(errorFrom(jsonEx));</span>
-        }
-    }
-
-    /**
-     * Prettify the passed un-formatted JSON
-     *
-     * @param jsonToPrettify JSON to prettify
-     * @return properly formatted JSON (with indentation of 2 spaces)
-     */
-    public static String prettifyJson(String jsonToPrettify) {
-<span class="nc bnc" id="L242" title="All 2 branches missed.">        if (isBlank(jsonToPrettify)) {</span>
-<span class="nc" id="L243">            log.warn(&quot;attempt to pretty-print the blank string - return the empty string&quot;);</span>
-<span class="nc" id="L244">            return &quot;&quot;;</span>
-        }
-<span class="nc" id="L246">        JsonNode jsonTree = jsonTreeFromString(jsonToPrettify);</span>
-<span class="nc" id="L247">        return dumpAsJsonPrettyPrint(jsonTree);</span>
-    }
-
-<span class="nc" id="L250">    private JacksonUtils() {</span>
+<span class="nc" id="L191">    private JacksonUtils() {</span>
         // prohibit the creation of utility-class instance
-<span class="nc" id="L252">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+<span class="nc" id="L193">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
