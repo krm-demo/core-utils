@@ -116,6 +116,13 @@ public class JacocoHelper {
     }
 
     /**
+     * @return a coverage percentage range (that correspond to background-color of badge-value)
+     */
+    public JacocoPercentageRange getBadgeValueRange() {
+        return getJacocoCounter().getBadgeValueRange();
+    }
+
+    /**
      * @return a tooltip, that explains the value of {@link #getBadgeValue()}
      */
     public String getBadgeTooltip() {
@@ -192,8 +199,10 @@ public class JacocoHelper {
      */
     public String getBadgeUrl() {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtx(ttCtx);
-        return gbh.badgeUrlShiedsIO("test-coverage", getBadgeValue(), "blue",
-            //"b0e0e6", // <-- this color is called "PowderBlue" at https://htmlcolorcodes.com/color-names/
+        return gbh.badgeUrlShiedsIO(
+            "test-coverage",
+            getBadgeValue(),
+            getBadgeValueRange().hexValue,
             Path.of(".github/images/jacoco/jacoco-reports.gif").toFile(),
             "f8981d", // <-- this color corresponds "--selected-background-color" CSS-variable ad JavDoc-site
             "efe6c9" // <-- this color is present at JaCoCo-"Powered By" logo

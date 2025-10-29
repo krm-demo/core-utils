@@ -94,6 +94,15 @@ public class JacocoCounter extends EnumMap<JacocoCounterType, JacocoCounter.Item
             counterForLines.percentage());
     }
 
+    /**
+     * @return a range, that correspond to background-color of badge-value
+     */
+    public JacocoPercentageRange getBadgeValueRange() {
+        Item counterForLines = get(JacocoCounterType.LINE);
+        return counterForLines == null ? JacocoPercentageRange.UNKNOWN :
+            JacocoPercentageRange.fromPercentageValue(counterForLines.percentage());
+    }
+
     @Override
     public String toString() {
         return isEmpty() ? NO_VALUE_STR : dumpAsYamlTxt(this);
