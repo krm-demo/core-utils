@@ -1,0 +1,104 @@
+/**
+ *  CSS for ".github/css-sandbox--inline-containers/inline-containers--demo.html"
+ */
+
+:root {
+    --code-font-family: monospace;
+}
+
+body {
+    min-width: 340px;
+}
+
+.nav-content h1 {
+    margin: 0;
+    padding-top: 7px;
+    color: var(--navbar-text-color);
+    font-size: 2em;
+    white-space: nowrap;
+    overflow: clip;
+    text-overflow: ellipsis;
+}
+
+.header h1 {
+    white-space: nowrap;
+    overflow: clip;
+    text-overflow: ellipsis;
+}
+
+code {
+    font-size: 0.8em;
+    color: var(--navbar-background-color) !important;
+}
+
+.item {
+    display: grid;
+    place-items: center;
+    color: var(--navbar-background-color);
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--selected-background-color);
+    background-color: var(--snippet-background-color);
+    border-radius: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 700;
+    font-family: monospace;
+}
+.rest {
+    font-family: cursive;
+}
+img {
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--selected-background-color);
+    border-radius: 3px
+}
+
+.width-85 {
+    width: 85px;
+}
+.width-100 {
+    width: 100px;
+}
+.width-120 {
+    width: 120px;
+}
+.width-150 {
+    width: 150px;
+}
+
+/* ***************** Left-Aligned Containers: ******************** */
+
+.left-aligned-container {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--navbar-background-color);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: minmax(300px, auto) min-content min-content min-content min-content;
+    gap: 5px;
+    overflow: hidden;
+    direction: rtl;
+}
+
+/* ***************** Left-Aligned Containers: ******************** */
+
+.right-aligned-container {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--navbar-background-color);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: minmax(300px, auto) min-content min-content min-content min-content;
+    gap: 5px;
+    overflow: hidden;
+    direction: ltr;
+}
+
