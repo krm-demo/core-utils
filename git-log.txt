@@ -1,3 +1,4 @@
+5fc5bd40 introduce JacocoPercentageRange #2
 e253f7f6 introduce JacocoPercentageRange #1
 91d5502a improving some coverage and minor refactoring of JacksonUtils
 c27734ff << new snapshot version >> 21.22.001-SNAPSHOT
