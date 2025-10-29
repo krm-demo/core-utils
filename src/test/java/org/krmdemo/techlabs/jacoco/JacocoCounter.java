@@ -88,11 +88,11 @@ public class JacocoCounter extends EnumMap<JacocoCounterType, JacocoCounter.Item
      */
     public String getBadgeTooltip() {
         Item counterForLines = get(JacocoCounterType.LINE);
-        return counterForLines == null ? "" : String.format("JaCoCo %s: [%s] 100 * %d / (%d + %d) = %f",
+        return counterForLines == null ? "" : String.format("JaCoCo %s: 100 * %d / (%d + %d) = %f | %s",
             JacocoCounterType.LINE,
-            getBadgeValueRange().getDisplayName(),
             counterForLines.covered(), counterForLines.covered(), counterForLines.missed(),
-            counterForLines.percentage());
+            counterForLines.percentage(),
+            getBadgeValueRange().name());
     }
 
     /**
