@@ -164,10 +164,16 @@ public class JavaDocHelper {
         logInfo("- packagePathSet().size() = %d;", packagePathMap().size());
         logInfo("- githubSourceSuffix() = '%s';", getGitHubSourcePath());
 
-        String navBarRightHtml =
-            GithubBadgeHelper.fromCtx(ttCtx).getBadgeReleaseCatalogHTML() +
-            System.lineSeparator() +
-            getBadgeGitHubHTML();
+        String navBarRightHtml = String.format("""
+            <div id="div-release-catalog-badge" class="nav-bar-right-first">
+            %s
+            </div>
+            <div id="div-github-source-badge" class="nav-bar-right-second">
+            %s
+            </div>""",
+            GithubBadgeHelper.fromCtx(ttCtx).getBadgeReleaseCatalogHTML(),
+            getBadgeGitHubHTML()
+        );
         logInfo("------------ navBarRightHtml: ------------");
         logInfo(navBarRightHtml);
         logInfo("==========================================");

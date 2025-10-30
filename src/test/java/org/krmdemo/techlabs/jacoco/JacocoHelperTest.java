@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.jacoco;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_
 /**
  * A unit-test for <b>{@code th-tool}</b>-helper {@link JacocoHelper}.
  */
+@Slf4j
 @Tag("integration-test")
 public class JacocoHelperTest {
 
@@ -40,7 +42,7 @@ public class JacocoHelperTest {
     @Test
     void testBadgeValue() {
         JacocoHelper jacoco = JacocoHelper.fromCtxLazy(ttCtx);
-        System.out.println(jacoco);
+        log.info("" + jacoco);
         if (jacoco.getJacocoCounter().isEmpty()) {
             assertThat(jacoco.getBadgeValue()).isEqualTo(JacocoCounter.NO_VALUE_STR);
             assertThat(jacoco.getBadgeTooltip()).isEmpty();
