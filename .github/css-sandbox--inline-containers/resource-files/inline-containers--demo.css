@@ -68,6 +68,7 @@ img {
     width: 150px;
 }
 
+/* *************************************************************** */
 /* ***************** Left-Aligned Containers: ******************** */
 
 .left-aligned-container {
@@ -83,23 +84,6 @@ img {
     gap: 5px;
     overflow: hidden;
     direction: rtl;
-}
-
-/* ***************** Right-Aligned Containers: ******************** */
-
-.right-aligned-container {
-    padding: 5px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border-style: solid;
-    border-width: 3px;
-    border-color: var(--navbar-background-color);
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: minmax(300px, auto) min-content min-content min-content min-content;
-    gap: 5px;
-    overflow: hidden;
-    direction: ltr;
 }
 
 /* ***************** Left-Aligned Inline Containers (ascending): ******************** */
@@ -176,6 +160,102 @@ img {
 }
 @container inline-descending (width < 400px) {
     .left-aligned-inline-container-descending :nth-child(5) {
+        display: none;
+    }
+}
+
+/* **************************************************************** */
+/* ***************** Right-Aligned Containers: ******************** */
+
+.right-aligned-container {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--navbar-background-color);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: minmax(300px, auto) min-content min-content min-content min-content;
+    gap: 5px;
+    overflow: hidden;
+    direction: ltr;
+}
+
+/* ***************** Right-Aligned Inline Containers (ascending): ******************** */
+
+.right-aligned-inline-container-ascending {
+    container-type: inline-size;
+    container-name: right-inline-ascending;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--link-color-active);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: minmax(300px, auto) min-content min-content min-content min-content;
+    gap: 5px;
+    overflow: hidden;
+    direction: ltr;
+}
+@container right-inline-ascending (width < 780px) {
+    .right-aligned-inline-container-ascending :nth-child(5) {
+        display: none;
+    }
+}
+@container right-inline-ascending (width < 675px) {
+    .right-aligned-inline-container-ascending :nth-child(4) {
+        display: none;
+    }
+}
+@container right-inline-ascending (width < 550px) {
+    .right-aligned-inline-container-ascending :nth-child(3) {
+        display: none;
+    }
+}
+@container right-inline-ascending (width < 400px) {
+    .right-aligned-inline-container-ascending :nth-child(2) {
+        display: none;
+    }
+}
+
+/* ***************** Right-Aligned Inline Containers (descending): ******************** */
+
+.right-aligned-inline-container-descending {
+    container-type: inline-size;
+    container-name: right-inline-descending;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--link-color-active);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: minmax(300px, auto) min-content min-content min-content min-content;
+    gap: 5px;
+    overflow: hidden;
+    direction: ltr;
+}
+@container right-inline-descending (width < 780px) {
+    .right-aligned-inline-container-descending :nth-child(2) {
+        display: none;
+    }
+}
+@container right-inline-descending (width < 675px) {
+    .right-aligned-inline-container-descending :nth-child(3) {
+        display: none;
+    }
+}
+@container right-inline-descending (width < 550px) {
+    .right-aligned-inline-container-descending :nth-child(4) {
+        display: none;
+    }
+}
+@container right-inline-descending (width < 400px) {
+    .right-aligned-inline-container-descending :nth-child(5) {
         display: none;
     }
 }
