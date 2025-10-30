@@ -1,21 +1,22 @@
 This particular version of the project `[[${mh.currentProjectVersion}]]` is an _INTERNAL_-release version, which consists of
-- major version `[[${mh.majorVersion}]]` (that corresponds to minimum available version of JDK);
+- major version `[[${mh.majorVersion}]]` (that corresponds to minimal supported version of JDK);
 - minor version `[[${mh.minorVersion}]]` (the ordinal number of _PUBLIC_-release);
-- incremental version  `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
+- incremental version `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
 
 > [!IMPORTANT]
-> It's highly recommended to use the latest _PUBLIC_-release version, because all others are either outdated or not stable yet
+> It's highly recommended to use the _PUBLIC_-release version [(${gbh.badgeLatestPublicGitHubMD})], 
+> because this one could be not stable enough. 
 
-## Installation and Usage of INTERNAL-release of `[[${mavenProps.get("maven-project.artifact")}]]`-library
+## Installation and Usage of INTERNAL-release of `[[${mh.projectArtifact}]]`-library
 
 > [!NOTE]
 > The _INTERNAL_-release version has 3 integer parts (_major_, _minor_ and _incremental_) parts **without** suffix `-SNAPSHOT`.
 > It's built and deployed into [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) 
-> artifatcory as a result of manual execution of GitHub workflow [`release-internal`]([[${github.event.repository.html_url}]]/actions/workflows/release-internal.yml).
+> artifactory as a result of manual execution of GitHub workflow [`release-internal`]([[${github.event.repository.html_url}]]/actions/workflows/release-internal.yml).
 
 The main purpose of _INTERNAL_-release is the final verification before _PUBLIC_-release 
 and in addition to that it's the only true-way to verify the generation of `*.md`-files
-from corresponding `th-tool` templates (they have `*.md.th` extensiom) via GitHub workflows.
+from corresponding `th-tool` templates (they have `*.md.th` extension) via [GitHub workflows](actions).
 
 Anyway it's possible to play with _INTERNAL_-release binaries, but in order to do that
 some minor changes should be done in local [`~/.m2/maven-settings`-file](https://maven.apache.org/settings.html).

@@ -1,23 +1,24 @@
 This particular version of the project `[[${mh.currentProjectVersion}]]` is a _SNAPSHOT_-version, which consists of:
-- major version `[[${mh.majorVersion}]]` (that corresponds to minimum available version of JDK);
+- major version `[[${mh.majorVersion}]]` (that corresponds to minimal supported version of JDK);
 - minor version `[[${mh.minorVersion}]]` (the ordinal number of _PUBLIC_-release);
-- incremental version  `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
+- incremental version `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
 - the qualifier `[[${mh.versionQualifier}]]` means that it's a _SNAPSHOT_-version (not released yet in any kind)
 
 > [!IMPORTANT]
-> It's highly recommended to use the latest _PUBLIC_-release version, because all others are either outdated or not stable yet
+> It's highly recommended to use the latest _PUBLIC_-release version [(${gbh.badgeLatestPublicGitHubMD})], 
+> because all others are either outdated or not stable yet.
 
-## Working with SNAPSHOT-version of `[[${mavenProps.get("maven-project.artifact")}]]`-library
+## Working with SNAPSHOT-version of `[[${mh.projectArtifact}]]`-library
 
 > [!NOTE]
 > The SNAPSHOT-version has 3 integer parts (_major_, _minor_ and _incremental_) followed by the suffix `-SNAPSHOT`.
 > It's built by GitHub workflow [`on-main-push`]([[${github.event.repository.html_url}]]/actions/workflows/on-main-push.yml) on every `git push` into `main` branch.
 
-The JavaDoc is generated and project-site at [GitHub Pages](https://docs.github.com/en/pages) is updated,
+The JavaDoc is generated and project-site at [( ${gbh.badgeSnapshotJavaDocMD} )] is updated,
 but **nothing is deployed** neither to [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
 artifactory nor to [maven central repository](https://central.sonatype.com/).
-As for content of GitHub Markdown files (like one you are reading now) - they are generated and updated
-during either INTERNAL-release or PUBLIC-release from corresponding `th-tool`-templates (quite all of them
+As for content of [GitHub Markdown](https://github.github.com/gfm/) files (like one you are reading now) - they are generated and updated
+during either _INTERNAL_-release or _PUBLIC_-release from corresponding `th-tool`-templates (quite all of them
 are located in [this folder](.github/th-templates)).
 
 The binaries of _Snapshot_-version are available only after cloning the git-repo locally and
@@ -28,7 +29,12 @@ After that, staying in the root directory of a project it's enough to type:
 ```bash
 ...> mvn clean install
 ```
-The command above installs **`[[${mavenProps.get("maven-project.artifact")}]]`**-library 
+Some integration-tests could not be executed within the [default maven-lifecycle](https://www.sonatype.com/maven-complete-reference/build-lifecycle#mavenref4-1-2).
+So, they must be executed additionally (not within the same maven-reactor!) **after** the previous command using:
+```bash
+...> mvn failsafe:integration-test
+```
+The commands above installs **`[[${mh.projectArtifact}]]`**-library 
 in the local maven-repository, and it becomes available for usage described below...
 
 ### [Maven](https://maven.apache.org/)

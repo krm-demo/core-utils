@@ -1,21 +1,22 @@
 This particular version of the project `[[${mh.currentProjectVersion}]]` is an _PUBLIC_-release version, which consists of
-- major version `[[${mh.majorVersion}]]` (that corresponds to minimum available version of JDK);
+- major version `[[${mh.majorVersion}]]` (that corresponds to minimal supported version of JDK);
 - minor version `[[${mh.minorVersion}]]` (the ordinal number of _PUBLIC_-release);
 
 > [!TIP]
 > TODO: check whether this _PUBLIC_-release is the latest one and render the warning if it's not
 
-## Usage of `[[${mavenProps.get("maven-project.artifact")}]]`-library
+## Usage of `[[${mh.projectArtifact}]]`-library
 
 > [!NOTE]
 > The _PUBLIC_-release version has only 2 integer parts (_major_ and _minor_) parts **without** _incremental_ part and suffix `-SNAPSHOT`.
 > It's built and deployed into [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
-> artifatcory as a result of manual execution of GitHub workflow [`release-public`]([[${github.event.repository.html_url}]]/actions/workflows/release-public.yml).
+> artifactory as a result of manual execution of GitHub workflow [`release-public`]([[${github.event.repository.html_url}]]/actions/workflows/release-public.yml).
 
 This version is deployed into public [maven central repository](https://central.sonatype.com/) - so, it's available for usage
-without additional downloading steps or local builds. As for Java-Doc it's either available here or will be automatically downloaded by your favorite IDE.
+without additional downloading steps or local builds. As for Java-Doc it's either available at [( ${gbh.badgeLatestPublicJavaDocMD} )]
+or will be automatically downloaded by your favorite IDE.
 
-But in order your maven/gradle project or jbang-script to use `[[${mavenProps.get("maven-project.artifact")}]]`-library
+But in order your maven/gradle project or jbang-script to use `[[${mh.projectArtifact}]]`-library
 you must declare it as dependency in the way described below.
 
 ### [Maven](https://maven.apache.org/)
