@@ -76,22 +76,32 @@ h2 {
 }
 
 .major-grid-title-row-over {
+    position: absolute;
     top: 0;
     right: 35px;
     display: grid;
     background: white;
     width: calc(100% - 35px);
     grid-template-columns: 53px 53px 35px 250px auto;
-    position: absolute;
+    white-space: nowrap;
+    overflow: hidden;
     z-index: 3;
 }
 .major-grid-title-row {
     display: grid;
     grid-template-columns: 53px 53px 35px 250px auto;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: #AAFFFF;
+    padding-right: 10px;
+    height: 32px;
+    visibility: hidden;
 }
 .major-grid-commit-row {
     display: grid;
     grid-template-columns: 53px 53px 35px 90px auto 35px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .major-grid-title-row-over .col-4 {
@@ -201,13 +211,15 @@ h2 {
     display: grid;
     background: white;
     width: calc(100% - 35px);
-    grid-template-columns: 53px 53px 35px 250px auto;
+    grid-template-columns: 53px 53px 35px 200px auto;
     position: absolute;
     z-index: 3;
 }
 .minor-grid-title-row {
     display: grid;
-    grid-template-columns: 53px 53px 35px 250px auto;
+    grid-template-columns: 53px 53px 35px 200px auto;
+    height: 32px;
+    visibility: hidden;
 }
 .minor-grid-commit-row {
     display: grid;
