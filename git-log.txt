@@ -1,3 +1,4 @@
+64247a45 correct the layout of nav-bar-right at each JavaDoc page #1
 e0da6d42 playing with 'css-sandbox--inline-containers' #3
 b0416a0b playing with 'css-sandbox--inline-containers' #2
 d927b312 playing with 'css-sandbox--inline-containers' #1
