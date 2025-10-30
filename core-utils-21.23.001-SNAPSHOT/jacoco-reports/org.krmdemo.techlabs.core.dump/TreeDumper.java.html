@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TreeDumper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.dump</a> &gt; <span class="el_source">TreeDumper.java</span></div><h1>TreeDumper.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.dump;
+
+import java.util.Map;
+import java.util.stream.Stream;
+
+/**
+ * This interface represents the ability to dump the data of JSON-like and YAML-like
+ * hierarchical structure in multicolor TEXT-base, HTML-base and SVG-base formats.
+ * &lt;hr/&gt;
+ * The main Object-Oriented Design Pattern that is used in this package is called &lt;b&gt;Visitor&lt;/b&gt;
+ * and the &lt;i&gt;visited&lt;/i&gt; hierarchy is represented by inner-class {@link Node} and its subclasses,
+ * where this outer interface {@link TreeDumper} is a &lt;i&gt;visitor&lt;/i&gt;,
+ * that accepts &lt;i&gt;visit&lt;/i&gt;-events and walks through the rest of nodes hierarchy
+ * in a &lt;a href=&quot;https://en.wikipedia.org/wiki/Depth-first_search&quot;&gt;Depth First Search&lt;/a&gt; manner.
+ * &lt;hr/&gt;
+ * Implementations of this interface are responsible for the target logical structure
+ * ({@link org.krmdemo.techlabs.core.dump.render.Highlight.Structure#JSON JSON}
+ * or {@link org.krmdemo.techlabs.core.dump.render.Highlight.Structure#YAML YAML})
+ * and the target output format (see {@link org.krmdemo.techlabs.core.dump.render.Highlight.Target Target}-enum)
+ *
+ * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/Visitor_pattern&quot;&gt;
+ *     (Wikipedia) Visitor pattern
+ * &lt;/a&gt;
+ * @see &lt;a href=&quot;https://www.baeldung.com/java-visitor-pattern&quot;&gt;
+ *     (Baeldung) Visitor Design Pattern in Java
+ * &lt;/a&gt;
+ * @see &lt;a href=&quot;https://www.geeksforgeeks.org/system-design/visitor-design-pattern/&quot;&gt;
+ *     (Geeks For Geeks) Visitor design pattern
+ * &lt;/a&gt;
+ * @see &lt;a href=&quot;https://www.digitalocean.com/community/tutorials/visitor-design-pattern-java&quot;&gt;
+ *     (Digital Ocean) Visitor Design Pattern in Java
+ * &lt;/a&gt;
+ */
+public interface TreeDumper {
+
+    interface Node {
+<span class="nc" id="L37">        default String identity() { return null; }</span>
+<span class="nc" id="L38">        default String comment() { return null; }</span>
+        void visit(TreeDumper dumper);
+    }
+
+    interface ScalarNode extends Node {
+        String text();
+    }
+
+    interface SequenceNode extends Node {
+        Stream&lt;Node&gt; sequenceItems();
+    }
+
+    interface MappingsNode extends Node {
+        Stream&lt;Map.Entry&lt;String, Node&gt;&gt; mappingsItems();
+    }
+
+<span class="fc" id="L54">    Node NULL = TreeDumper::acceptNull;</span>
+
+    void acceptNull();
+    void acceptScalar(ScalarNode scalarNode);
+    void acceptSequence(SequenceNode sequenceNode);
+    void acceptMappings(MappingsNode mappingsNode);
+
+    default void acceptRoot(Node rootNode) {
+<span class="fc" id="L62">        rootNode.visit(this);</span>
+<span class="fc" id="L63">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
