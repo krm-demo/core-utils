@@ -1,3 +1,4 @@
+80200195 minor corrections in README.md
 4bd1c851 << new snapshot version >> 21.23.001-SNAPSHOT
 0ec8a925 << public release >> 21.22
 e7170a19 << new snapshot version >> 21.22.002-SNAPSHOT
