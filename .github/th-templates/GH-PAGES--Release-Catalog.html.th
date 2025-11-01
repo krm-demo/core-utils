@@ -88,19 +88,19 @@
 
           <!-- the list of the latest commits for the SNAPSHOT-part of 'Release-Catalog' : -->
           <div class="major-grid-commit-row" th:each="commitInfo: ${git.releaseCatalog.snapshotGroup.commits}">
-            <div class="year-and-month">
+            <div class="year-and-month" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedYearAndMonth }]]
             </div>
-            <div class="day-of-month-and-week">
+            <div class="day-of-month-and-week" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedDayOfMonthAndWeek }]]
             </div>
-            <div class="hours-and-minutes">
+            <div class="hours-and-minutes" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedHoursMinutes }]]
             </div>
-            <div class="col-4">
+            <div class="col-4" th:classappend="${commitInfo.technicalCSS}">
               [(${ gbh.badgeCommit(commitInfo) })]
             </div>
-            <div class="col-5">
+            <div class="col-5" th:classappend="${commitInfo.technicalCSS}">
               [[${ commitInfo.messageShort }]]
             </div>
             <div class="col-6">...</div>
@@ -154,19 +154,19 @@
 
           <!-- the list of commits for the INTERNAL-releases in SNAPSHOT-part of 'Release-Catalog' : -->
           <div class="minor-grid-commit-row" th:each="commitInfo: ${minorGroup.commits}">
-            <div class="year-and-month">
+            <div class="year-and-month" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedYearAndMonth }]]
             </div>
-            <div class="day-of-month-and-week">
+            <div class="day-of-month-and-week" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedDayOfMonthAndWeek }]]
             </div>
-            <div class="hours-and-minutes">
+            <div class="hours-and-minutes" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedHoursMinutes }]]
             </div>
-            <div class="col-4">
+            <div class="col-4" th:classappend="${commitInfo.technicalCSS}">
               [(${ gbh.badgeCommit(commitInfo) })]
             </div>
-            <div class="col-5">
+            <div class="col-5" th:classappend="${commitInfo.technicalCSS}">
               [[${ commitInfo.messageShort }]]
             </div>
             <div class="col-6">...</div>
@@ -237,19 +237,19 @@
 
           <!-- the list of the latest commits for the PUBLIC-release-part of 'Release-Catalog' : -->
           <div class="major-grid-commit-row" th:each="commitInfo: ${majorGroup.currentMinor().commits}">
-            <div class="year-and-month">
+            <div class="year-and-month" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedYearAndMonth }]]
             </div>
-            <div class="day-of-month-and-week">
+            <div class="day-of-month-and-week" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedDayOfMonthAndWeek }]]
             </div>
-            <div class="hours-and-minutes">
+            <div class="hours-and-minutes" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedHoursMinutes }]]
             </div>
-            <div class="col-4">
+            <div class="col-4" th:classappend="${commitInfo.technicalCSS}">
               [(${ gbh.badgeCommit(commitInfo) })]
             </div>
-            <div class="col-5">
+            <div class="col-5" th:classappend="${commitInfo.technicalCSS}">
               [[${ commitInfo.messageShort }]]
             </div>
             <div class="col-6">...</div>
@@ -303,19 +303,19 @@
 
           <!-- the list of commits for the INTERNAL-releases in PUBLIC-release-part of 'Release-Catalog' : -->
           <div class="minor-grid-commit-row" th:each="commitInfo: ${minorGroup.commits}">
-            <div class="year-and-month">
+            <div class="year-and-month" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedYearAndMonth }]]
             </div>
-            <div class="day-of-month-and-week">
+            <div class="day-of-month-and-week" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedDayOfMonthAndWeek }]]
             </div>
-            <div class="hours-and-minutes">
+            <div class="hours-and-minutes" th:classappend="${commitInfo.technicalCSS}">
               [[${ git.releaseCatalog.linkedTriplet(commitInfo).linkedHoursMinutes }]]
             </div>
-            <div class="col-4">
+            <div class="col-4" th:classappend="${commitInfo.technicalCSS}">
               [(${ gbh.badgeCommit(commitInfo) })]
             </div>
-            <div class="col-5">
+            <div class="col-5" th:classappend="${commitInfo.technicalCSS}">
               [[${ commitInfo.messageShort }]]
             </div>
             <div class="col-6">...</div>

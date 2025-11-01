@@ -31,6 +31,23 @@ public class CommitInfo {
     public static final int SHORT_COMMIT_HASH_LENGTH = 7;
 
     /**
+     * The value of {@link #committerName} for technical-commit
+     * (that was performed by GitHUb-workflow - not by real person or tool manually)
+     */
+    public static final String TECH_COMMITTER_NAME = "github-actions";
+
+    /**
+     * The value of {@link #committerEmail} for technical-commit
+     * (that was performed by GitHUb-workflow - not by real person or tool manually)
+     */
+    public static final String TECH_COMMITTER_EMAIL = "github-actions@github.com";
+
+    /**
+     * The name of CSS-class that is expected to be rendered for technical commits
+     */
+    public static final String TECH_CSS_NAME = "technical-commit";
+
+    /**
      * The UTC epoch-seconds of the time when <b>{@code git}</b>-commit was made
      *
      * @see <a href="https://en.wikipedia.org/wiki/Unix_time">Unix (epoch) time</a>
@@ -104,6 +121,21 @@ public class CommitInfo {
 
     public boolean isPublicRelease() {
         return versionTag != null && versionTag.isPublicRelease();
+    }
+
+    /**
+     * @return {@code true}, if corresponding commit was made by GitHub-workflow as a result of PUBLIC-release or INTERNAL-release
+     */
+    public boolean isTechnical() {
+        return TECH_COMMITTER_NAME.equalsIgnoreCase(committerName)
+            && TECH_COMMITTER_EMAIL.equalsIgnoreCase(committerEmail);
+    }
+
+    /**
+     * @return the name of CSS-class if this commit {@link #isTechnical() is technical} or otherwise - empty string
+     */
+    public String getTechnicalCSS() {
+        return isTechnical() ? TECH_CSS_NAME : "";
     }
 
     @JsonGetter

@@ -2,7 +2,6 @@
  *  This CSS contains the styles for the root (index.html) release-catalog page
  */
 :root {
-    --major-group-border: 3px dashed green;
     --release-title-background-color: #4D7A9733;
     --release-date-time-color: #4D7A97AA;
 }
@@ -67,6 +66,26 @@ h2 {
     font-family: monospace;
     font-size: 0.7em;
     padding-top: 0.3em;
+}
+
+.year-and-month.technical-commit {
+    color: var(--body-background-color);
+}
+.day-of-month-and-week.technical-commit {
+    color: var(--body-background-color);
+}
+.hours-and-minutes.technical-commit {
+    color: var(--body-background-color);
+}
+.col-4.technical-commit {
+    color: var(--navbar-background-color);
+    font-style: italic;
+    font-size: 0.95em;
+}
+.col-5.technical-commit {
+    color: var(--navbar-background-color);
+    font-style: italic;
+    font-size: 0.9em;
 }
 
 /* ------------------------ ------------------------ Major Grid ------------------------ ------------------------ */

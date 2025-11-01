@@ -78,28 +78,40 @@ public class GitHelperTest {
         Map<String, List<CommitInfo>> commitsByCommiterName =
             sortedMap(gitLog.commitsList().stream().collect(
                 Collectors.groupingBy(CommitInfo::getCommitterName)));
-        System.out.println("--------------  GitLogInfo by 'comitterName' : ----------------");
+        System.out.println("--------------  GitLogInfo by 'committerName' : ----------------");
+        System.out.println("- total commits count: " + gitLog.commitsList().size() + "; ");
         System.out.println("- total committers count: " + commitsByCommiterName.size() + "; ");
         System.out.println("- all committers' names --> " + commitsByCommiterName.keySet() + "; ");
         for (String committerName : commitsByCommiterName.keySet()) {
-            System.out.println();
             List<CommitInfo> commits = commitsByCommiterName.get(committerName);
             CommitInfo firstCommit = commits.getLast();  // git-log has reversed chronological order (the last is the first)
             CommitInfo lastCommit = commits.getFirst();  // git-log has reversed chronological order (the first is the last)
-            System.out.printf("- commiterName = '%s', commiterEmail = '%s', commitsCount = %d;%n",
+            System.out.printf("--** commiterName = '%s', commiterEmail = '%s', commitsCount = %d;%n",
                 committerName, firstCommit.getCommitterEmail(), commits.size());
-            System.out.println("  firstCommit dtt --> " + gitLog.linkedTriplet(firstCommit));
-            System.out.printf("  firstCommit ID = '%s';%n", firstCommit.commitID);
-            System.out.printf("  firstCommit msg = '%s';%n", firstCommit.getMessageShort());
+            System.out.println("-->   firstCommit dtt --> " + gitLog.linkedTriplet(firstCommit));
+            System.out.printf( "--   firstCommit ID = '%s';%n", firstCommit.commitID);
+            System.out.printf( "--   firstCommit msg = '%s';%n", firstCommit.getMessageShort());
             if (firstCommit.hasVersionTag()) {
-                System.out.printf("  firstCommit VersionTag is '%s';%n", firstCommit.getVersionTag());
+                System.out.printf("--<  firstCommit VersionTag is '%s';%n", firstCommit.getVersionTag());
             }
-            System.out.println("  lastCommit dtt --> " + gitLog.linkedTriplet(lastCommit));
-            System.out.printf("  lastCommit ID = '%s';%n", lastCommit.commitID);
-            System.out.printf("  lastCommit msg = '%s';%n", lastCommit.getMessageShort());
+            System.out.println("-->  lastCommit dtt --> " + gitLog.linkedTriplet(lastCommit));
+            System.out.printf( "--   lastCommit ID = '%s';%n", lastCommit.commitID);
+            System.out.printf( "--   lastCommit msg = '%s';%n", lastCommit.getMessageShort());
             if (lastCommit.hasVersionTag()) {
-                System.out.printf("  lastCommit VersionTag is '%s';%n", lastCommit.getVersionTag());
+                System.out.printf("--<  lastCommit VersionTag is '%s';%n", lastCommit.getVersionTag());
             }
         }
+
+        Map<Boolean, List<CommitInfo>> commitsByTechnical =
+            gitLog.commitsList().stream().collect(
+                Collectors.partitioningBy(CommitInfo::isTechnical));
+        int countWorking = commitsByTechnical.get(Boolean.FALSE).size();
+        int countTechnical = commitsByTechnical.get(Boolean.TRUE).size();
+        assertThat(countWorking + countTechnical).isEqualTo(gitLog.commitsList().size());
+        System.out.println("countWorking = " + countWorking);
+        System.out.println("countTechnical = " + countWorking);
+
+        List<CommitInfo> technicalCommits = commitsByCommiterName.get(CommitInfo.TECH_COMMITTER_NAME);
+        assertThat(technicalCommits.size()).isEqualTo(countTechnical);
     }
 }
