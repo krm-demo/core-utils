@@ -94,7 +94,7 @@ In order to refer this particular project - we must add following XML-tags into 
 - where the value of `OWNER_NAME` should be <code>krm-demo</code> (you can try another `<username>`)
 - and the value of `MY_READONLY_TOKEN` should be <code>ghp_&#8203;L1Eiw9V4CXLZVl0nu2QkqWDVpQE4zl0k&#8203;cYz6</code>
 - (should be re-masked!) the value of `MY_ADMIN_TOKEN` should be <code>ghp_&#8203;UIEgLpCQoqASXtbxGrbpgfPXNYC94T19&#8203;NqXg</code>
-- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;aCviFqJnFrKOoNwKdpiE0gitGBMraW1T&#8203;xC5B</code>
+- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;zO4DGUoEJGXdmhOUyKiiCaFMq5Ovuj0j&#8203;TXIA</code>
 
 > [!IMPORTANT]
 > In the list above the value of GitHub-secret `MY_READONLY_TOKEN`is displayed _un-masked_ (no asterisks as usually),
@@ -202,7 +202,7 @@ Then you can create your own jbang-scripts using following examples:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/19001547237).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/19002110785).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
 
@@ -214,8 +214,11 @@ Then you can create your own jbang-scripts using following examples:
 {
   "releaseCatalog": {
     "current-snapshot-group": {
-      "minor-group-info": "<< unreleased >> 3 commits",
+      "minor-group-info": "<< unreleased >> 6 commits",
       "commits-one-line": [
+        "d477f12 | 2025-11-01 Sat 20:17:42 |  attempt to reanimate deployment to GH-Packages #3 (some minor corrections)",
+        "3c4b6fa | 2025-11-01 Sat 20:13:48 |  attempt to reanimate deployment to GH-Packages #2 (mvn jar:jar deploy:deploy)",
+        "21facf0 | 2025-11-01 Sat 19:25:31 |  << internal release >> 21.23.002",
         "c115dd5 | 2025-11-01 Sat 19:18:57 |  attempt to reanimate deployment to GH-Packages #1",
         "6b4bc92 | 2025-11-01 Sat 17:16:45 |  minor corrections in 'Release Catalog' CSS and getting rid of 'empty'-package and corresponding MOJOs in 'pop.xml'",
         "ba356b8 | 2025-11-01 Sat 04:20:11 |  << new snapshot version >> 21.23.002-SNAPSHOT"
