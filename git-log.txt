@@ -1,3 +1,4 @@
+c115dd54 attempt to reanimate deployment to GH-Packages #1
 6b4bc921 minor corrections in 'Release Catalog' CSS and getting rid of 'empty'-package and corresponding MOJOs in 'pop.xml'
 ba356b89 << new snapshot version >> 21.23.002-SNAPSHOT
 a9f30680 << internal release >> 21.23.001
