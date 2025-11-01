@@ -23,8 +23,8 @@ public class RandomHelper extends Random {
 <span class="nc" id="L23">    }</span>
 
     public RandomHelper(long seed) {
-<span class="nc" id="L26">        super(seed);</span>
-<span class="nc" id="L27">    }</span>
+<span class="fc" id="L26">        super(seed);</span>
+<span class="fc" id="L27">    }</span>
 
     public String randomLowerCase(int len) {
 <span class="nc" id="L30">        return ints(len, 'a', 'z' + 1)</span>
@@ -40,56 +40,78 @@ public class RandomHelper extends Random {
 <span class="nc" id="L40">            .collect(joining());</span>
     }
 
+    /**
+     * @param lowBound lower bound of the range (inclusive)
+     * @param highBound higher bound of the range (exclusive)
+     * @return the array of elements in range {@code [ lowBound ; highBound )} that was shuffled
+     */
     public int[] randomRangeArr(int lowBound, int highBound) {
-<span class="nc" id="L44">        return shuffle(range(lowBound, highBound));</span>
+<span class="fc" id="L49">        return shuffle(range(lowBound, highBound));</span>
     }
 
+    /**
+     * @param lowBound lower bound of the range (inclusive)
+     * @param highBound higher bound of the range (inclusive)
+     * @return the array of elements in range {@code [ lowBound ; highBound ]} that was shuffled
+     */
     public int[] randomRangeClosedArr(int lowBound, int highBound) {
-<span class="nc" id="L48">        return shuffle(rangeClosed(lowBound, highBound));</span>
+<span class="fc" id="L58">        return shuffle(rangeClosed(lowBound, highBound));</span>
     }
 
+    /**
+     * Collects the passed stream of {@code int}s into an array and shuffle it with {@link #shuffleArr(int[])}
+     *
+     * @param values stream of primitive {@code int}s
+     * @return an array of inpiut elements that are shuffled
+     */
     public int[] shuffle(IntStream values) {
-<span class="nc" id="L52">        int[] valuesArr = values.toArray();</span>
-<span class="nc" id="L53">        shuffleArr(valuesArr);</span>
-<span class="nc" id="L54">        return valuesArr;</span>
+<span class="fc" id="L68">        int[] valuesArr = values.toArray();</span>
+<span class="fc" id="L69">        shuffleArr(valuesArr);</span>
+<span class="fc" id="L70">        return valuesArr;</span>
     }
 
+    /**
+     * Swap elements of the passed array in random way.
+     * The number of swaps equals to the length of array.
+     *
+     * @param valuesArr an array to shuffle
+     */
     public void shuffleArr(int[] valuesArr) {
         // a little bit more efficient than using Collections.shuffle and subsequence copying
-<span class="nc bnc" id="L59" title="All 2 branches missed.">        for (int i = valuesArr.length; i &gt; 1; i--) {</span>
-<span class="nc" id="L60">            swap(valuesArr, i - 1, nextInt(valuesArr.length));</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        for (int i = valuesArr.length; i &gt; 1; i--) {</span>
+<span class="fc" id="L82">            swap(valuesArr, i - 1, nextInt(valuesArr.length));</span>
         }
-<span class="nc" id="L62">    }</span>
+<span class="fc" id="L84">    }</span>
 
     public int[] randomDistinctIntArr(long N, int lowBound, int highBound) {
-<span class="nc" id="L65">        return ints(5 * N, lowBound, highBound)</span>
-<span class="nc" id="L66">            .distinct().limit(N).toArray();</span>
+<span class="nc" id="L87">        return ints(5 * N, lowBound, highBound)</span>
+<span class="nc" id="L88">            .distinct().limit(N).toArray();</span>
     }
 
     public int[] randomSortedIntArr(long N, int lowBound, int highBound) {
-<span class="nc" id="L70">        return ints(N, lowBound, highBound)</span>
-<span class="nc" id="L71">            .sorted().limit(N).toArray();</span>
+<span class="nc" id="L92">        return ints(N, lowBound, highBound)</span>
+<span class="nc" id="L93">            .sorted().limit(N).toArray();</span>
     }
 
     public int[] randomSortedReversedIntArr(long N, int lowBound, int highBound) {
-<span class="nc" id="L75">        return reversedArr(randomSortedIntArr(N, lowBound, highBound));</span>
+<span class="nc" id="L97">        return reversedArr(randomSortedIntArr(N, lowBound, highBound));</span>
     }
 
     public int[] randomIncreasingIntArr(long N, int lowBound, int highBound) {
-<span class="nc" id="L79">        return ints(5 * N, lowBound, highBound)</span>
-<span class="nc" id="L80">            .distinct().limit(N).sorted().toArray();</span>
+<span class="nc" id="L101">        return ints(5 * N, lowBound, highBound)</span>
+<span class="nc" id="L102">            .distinct().limit(N).sorted().toArray();</span>
     }
 
     public int[] randomDecreasingIntArr(long N, int lowBound, int highBound) {
-<span class="nc" id="L84">        return reversedArr(randomIncreasingIntArr(N, lowBound, highBound));</span>
+<span class="nc" id="L106">        return reversedArr(randomIncreasingIntArr(N, lowBound, highBound));</span>
     }
 
     public int[] zeroIntArr(long N) {
-<span class="nc" id="L88">        return constantIntArr(N, 0);</span>
+<span class="nc" id="L110">        return constantIntArr(N, 0);</span>
     }
 
     public int[] constantIntArr(long N, int constant) {
-<span class="nc" id="L92">        return IntStream.generate(() -&gt; constant).limit(N).toArray();</span>
+<span class="nc" id="L114">        return IntStream.generate(() -&gt; constant).limit(N).toArray();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

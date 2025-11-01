@@ -1,3 +1,4 @@
+cf7494a1 add some tests and start improving the commit-info to detect the technical commits
 4237e1f1 attempt to correct the layout of minor/major groups at Release-Catalog #1
 80200195 minor corrections in README.md
 4bd1c851 << new snapshot version >> 21.23.001-SNAPSHOT

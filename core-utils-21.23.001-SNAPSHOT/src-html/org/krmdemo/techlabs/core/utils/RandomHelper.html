@@ -54,58 +54,80 @@
 <span class="source-line-no">040</span><span id="line-40">            .collect(joining());</span>
 <span class="source-line-no">041</span><span id="line-41">    }</span>
 <span class="source-line-no">042</span><span id="line-42"></span>
-<span class="source-line-no">043</span><span id="line-43">    public int[] randomRangeArr(int lowBound, int highBound) {</span>
-<span class="source-line-no">044</span><span id="line-44">        return shuffle(range(lowBound, highBound));</span>
-<span class="source-line-no">045</span><span id="line-45">    }</span>
-<span class="source-line-no">046</span><span id="line-46"></span>
-<span class="source-line-no">047</span><span id="line-47">    public int[] randomRangeClosedArr(int lowBound, int highBound) {</span>
-<span class="source-line-no">048</span><span id="line-48">        return shuffle(rangeClosed(lowBound, highBound));</span>
-<span class="source-line-no">049</span><span id="line-49">    }</span>
-<span class="source-line-no">050</span><span id="line-50"></span>
-<span class="source-line-no">051</span><span id="line-51">    public int[] shuffle(IntStream values) {</span>
-<span class="source-line-no">052</span><span id="line-52">        int[] valuesArr = values.toArray();</span>
-<span class="source-line-no">053</span><span id="line-53">        shuffleArr(valuesArr);</span>
-<span class="source-line-no">054</span><span id="line-54">        return valuesArr;</span>
-<span class="source-line-no">055</span><span id="line-55">    }</span>
-<span class="source-line-no">056</span><span id="line-56"></span>
-<span class="source-line-no">057</span><span id="line-57">    public void shuffleArr(int[] valuesArr) {</span>
-<span class="source-line-no">058</span><span id="line-58">        // a little bit more efficient than using Collections.shuffle and subsequence copying</span>
-<span class="source-line-no">059</span><span id="line-59">        for (int i = valuesArr.length; i &gt; 1; i--) {</span>
-<span class="source-line-no">060</span><span id="line-60">            swap(valuesArr, i - 1, nextInt(valuesArr.length));</span>
-<span class="source-line-no">061</span><span id="line-61">        }</span>
-<span class="source-line-no">062</span><span id="line-62">    }</span>
-<span class="source-line-no">063</span><span id="line-63"></span>
-<span class="source-line-no">064</span><span id="line-64">    public int[] randomDistinctIntArr(long N, int lowBound, int highBound) {</span>
-<span class="source-line-no">065</span><span id="line-65">        return ints(5 * N, lowBound, highBound)</span>
-<span class="source-line-no">066</span><span id="line-66">            .distinct().limit(N).toArray();</span>
-<span class="source-line-no">067</span><span id="line-67">    }</span>
-<span class="source-line-no">068</span><span id="line-68"></span>
-<span class="source-line-no">069</span><span id="line-69">    public int[] randomSortedIntArr(long N, int lowBound, int highBound) {</span>
-<span class="source-line-no">070</span><span id="line-70">        return ints(N, lowBound, highBound)</span>
-<span class="source-line-no">071</span><span id="line-71">            .sorted().limit(N).toArray();</span>
-<span class="source-line-no">072</span><span id="line-72">    }</span>
-<span class="source-line-no">073</span><span id="line-73"></span>
-<span class="source-line-no">074</span><span id="line-74">    public int[] randomSortedReversedIntArr(long N, int lowBound, int highBound) {</span>
-<span class="source-line-no">075</span><span id="line-75">        return reversedArr(randomSortedIntArr(N, lowBound, highBound));</span>
-<span class="source-line-no">076</span><span id="line-76">    }</span>
-<span class="source-line-no">077</span><span id="line-77"></span>
-<span class="source-line-no">078</span><span id="line-78">    public int[] randomIncreasingIntArr(long N, int lowBound, int highBound) {</span>
-<span class="source-line-no">079</span><span id="line-79">        return ints(5 * N, lowBound, highBound)</span>
-<span class="source-line-no">080</span><span id="line-80">            .distinct().limit(N).sorted().toArray();</span>
-<span class="source-line-no">081</span><span id="line-81">    }</span>
-<span class="source-line-no">082</span><span id="line-82"></span>
-<span class="source-line-no">083</span><span id="line-83">    public int[] randomDecreasingIntArr(long N, int lowBound, int highBound) {</span>
-<span class="source-line-no">084</span><span id="line-84">        return reversedArr(randomIncreasingIntArr(N, lowBound, highBound));</span>
-<span class="source-line-no">085</span><span id="line-85">    }</span>
-<span class="source-line-no">086</span><span id="line-86"></span>
-<span class="source-line-no">087</span><span id="line-87">    public int[] zeroIntArr(long N) {</span>
-<span class="source-line-no">088</span><span id="line-88">        return constantIntArr(N, 0);</span>
+<span class="source-line-no">043</span><span id="line-43">    /**</span>
+<span class="source-line-no">044</span><span id="line-44">     * @param lowBound lower bound of the range (inclusive)</span>
+<span class="source-line-no">045</span><span id="line-45">     * @param highBound higher bound of the range (exclusive)</span>
+<span class="source-line-no">046</span><span id="line-46">     * @return the array of elements in range {@code [ lowBound ; highBound )} that was shuffled</span>
+<span class="source-line-no">047</span><span id="line-47">     */</span>
+<span class="source-line-no">048</span><span id="line-48">    public int[] randomRangeArr(int lowBound, int highBound) {</span>
+<span class="source-line-no">049</span><span id="line-49">        return shuffle(range(lowBound, highBound));</span>
+<span class="source-line-no">050</span><span id="line-50">    }</span>
+<span class="source-line-no">051</span><span id="line-51"></span>
+<span class="source-line-no">052</span><span id="line-52">    /**</span>
+<span class="source-line-no">053</span><span id="line-53">     * @param lowBound lower bound of the range (inclusive)</span>
+<span class="source-line-no">054</span><span id="line-54">     * @param highBound higher bound of the range (inclusive)</span>
+<span class="source-line-no">055</span><span id="line-55">     * @return the array of elements in range {@code [ lowBound ; highBound ]} that was shuffled</span>
+<span class="source-line-no">056</span><span id="line-56">     */</span>
+<span class="source-line-no">057</span><span id="line-57">    public int[] randomRangeClosedArr(int lowBound, int highBound) {</span>
+<span class="source-line-no">058</span><span id="line-58">        return shuffle(rangeClosed(lowBound, highBound));</span>
+<span class="source-line-no">059</span><span id="line-59">    }</span>
+<span class="source-line-no">060</span><span id="line-60"></span>
+<span class="source-line-no">061</span><span id="line-61">    /**</span>
+<span class="source-line-no">062</span><span id="line-62">     * Collects the passed stream of {@code int}s into an array and shuffle it with {@link #shuffleArr(int[])}</span>
+<span class="source-line-no">063</span><span id="line-63">     *</span>
+<span class="source-line-no">064</span><span id="line-64">     * @param values stream of primitive {@code int}s</span>
+<span class="source-line-no">065</span><span id="line-65">     * @return an array of inpiut elements that are shuffled</span>
+<span class="source-line-no">066</span><span id="line-66">     */</span>
+<span class="source-line-no">067</span><span id="line-67">    public int[] shuffle(IntStream values) {</span>
+<span class="source-line-no">068</span><span id="line-68">        int[] valuesArr = values.toArray();</span>
+<span class="source-line-no">069</span><span id="line-69">        shuffleArr(valuesArr);</span>
+<span class="source-line-no">070</span><span id="line-70">        return valuesArr;</span>
+<span class="source-line-no">071</span><span id="line-71">    }</span>
+<span class="source-line-no">072</span><span id="line-72"></span>
+<span class="source-line-no">073</span><span id="line-73">    /**</span>
+<span class="source-line-no">074</span><span id="line-74">     * Swap elements of the passed array in random way.</span>
+<span class="source-line-no">075</span><span id="line-75">     * The number of swaps equals to the length of array.</span>
+<span class="source-line-no">076</span><span id="line-76">     *</span>
+<span class="source-line-no">077</span><span id="line-77">     * @param valuesArr an array to shuffle</span>
+<span class="source-line-no">078</span><span id="line-78">     */</span>
+<span class="source-line-no">079</span><span id="line-79">    public void shuffleArr(int[] valuesArr) {</span>
+<span class="source-line-no">080</span><span id="line-80">        // a little bit more efficient than using Collections.shuffle and subsequence copying</span>
+<span class="source-line-no">081</span><span id="line-81">        for (int i = valuesArr.length; i &gt; 1; i--) {</span>
+<span class="source-line-no">082</span><span id="line-82">            swap(valuesArr, i - 1, nextInt(valuesArr.length));</span>
+<span class="source-line-no">083</span><span id="line-83">        }</span>
+<span class="source-line-no">084</span><span id="line-84">    }</span>
+<span class="source-line-no">085</span><span id="line-85"></span>
+<span class="source-line-no">086</span><span id="line-86">    public int[] randomDistinctIntArr(long N, int lowBound, int highBound) {</span>
+<span class="source-line-no">087</span><span id="line-87">        return ints(5 * N, lowBound, highBound)</span>
+<span class="source-line-no">088</span><span id="line-88">            .distinct().limit(N).toArray();</span>
 <span class="source-line-no">089</span><span id="line-89">    }</span>
 <span class="source-line-no">090</span><span id="line-90"></span>
-<span class="source-line-no">091</span><span id="line-91">    public int[] constantIntArr(long N, int constant) {</span>
-<span class="source-line-no">092</span><span id="line-92">        return IntStream.generate(() -&gt; constant).limit(N).toArray();</span>
-<span class="source-line-no">093</span><span id="line-93">    }</span>
-<span class="source-line-no">094</span><span id="line-94">}</span>
+<span class="source-line-no">091</span><span id="line-91">    public int[] randomSortedIntArr(long N, int lowBound, int highBound) {</span>
+<span class="source-line-no">092</span><span id="line-92">        return ints(N, lowBound, highBound)</span>
+<span class="source-line-no">093</span><span id="line-93">            .sorted().limit(N).toArray();</span>
+<span class="source-line-no">094</span><span id="line-94">    }</span>
+<span class="source-line-no">095</span><span id="line-95"></span>
+<span class="source-line-no">096</span><span id="line-96">    public int[] randomSortedReversedIntArr(long N, int lowBound, int highBound) {</span>
+<span class="source-line-no">097</span><span id="line-97">        return reversedArr(randomSortedIntArr(N, lowBound, highBound));</span>
+<span class="source-line-no">098</span><span id="line-98">    }</span>
+<span class="source-line-no">099</span><span id="line-99"></span>
+<span class="source-line-no">100</span><span id="line-100">    public int[] randomIncreasingIntArr(long N, int lowBound, int highBound) {</span>
+<span class="source-line-no">101</span><span id="line-101">        return ints(5 * N, lowBound, highBound)</span>
+<span class="source-line-no">102</span><span id="line-102">            .distinct().limit(N).sorted().toArray();</span>
+<span class="source-line-no">103</span><span id="line-103">    }</span>
+<span class="source-line-no">104</span><span id="line-104"></span>
+<span class="source-line-no">105</span><span id="line-105">    public int[] randomDecreasingIntArr(long N, int lowBound, int highBound) {</span>
+<span class="source-line-no">106</span><span id="line-106">        return reversedArr(randomIncreasingIntArr(N, lowBound, highBound));</span>
+<span class="source-line-no">107</span><span id="line-107">    }</span>
+<span class="source-line-no">108</span><span id="line-108"></span>
+<span class="source-line-no">109</span><span id="line-109">    public int[] zeroIntArr(long N) {</span>
+<span class="source-line-no">110</span><span id="line-110">        return constantIntArr(N, 0);</span>
+<span class="source-line-no">111</span><span id="line-111">    }</span>
+<span class="source-line-no">112</span><span id="line-112"></span>
+<span class="source-line-no">113</span><span id="line-113">    public int[] constantIntArr(long N, int constant) {</span>
+<span class="source-line-no">114</span><span id="line-114">        return IntStream.generate(() -&gt; constant).limit(N).toArray();</span>
+<span class="source-line-no">115</span><span id="line-115">    }</span>
+<span class="source-line-no">116</span><span id="line-116">}</span>
 
 
 

@@ -209,10 +209,14 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int[]</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shuffle(java.util.stream.IntStream)" class="member-name-link">shuffle</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a>&nbsp;values)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Collects the passed stream of <code>int</code>s into an array and shuffle it with <a href="#shuffleArr(int%5B%5D)"><code>shuffleArr(int[])</code></a></div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shuffleArr(int%5B%5D)" class="member-name-link">shuffleArr</a><wbr>(int[]&nbsp;valuesArr)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Swap elements of the passed array in random way.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int[]</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#zeroIntArr(long)" class="member-name-link">zeroIntArr</a><wbr>(long&nbsp;N)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -283,8 +287,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="randomRangeArr(int,int)">
 <h3>randomRangeArr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-43">randomRangeArr</a></span><wbr><span class="parameters">(int&nbsp;lowBound,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-48">randomRangeArr</a></span><wbr><span class="parameters">(int&nbsp;lowBound,
  int&nbsp;highBound)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>lowBound</code> - lower bound of the range (inclusive)</dd>
+<dd><code>highBound</code> - higher bound of the range (exclusive)</dd>
+<dt>Returns:</dt>
+<dd>the array of elements in range <code>[ lowBound ; highBound )</code> that was shuffled</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -292,8 +303,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="randomRangeClosedArr(int,int)">
 <h3>randomRangeClosedArr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-47">randomRangeClosedArr</a></span><wbr><span class="parameters">(int&nbsp;lowBound,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-57">randomRangeClosedArr</a></span><wbr><span class="parameters">(int&nbsp;lowBound,
  int&nbsp;highBound)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>lowBound</code> - lower bound of the range (inclusive)</dd>
+<dd><code>highBound</code> - higher bound of the range (inclusive)</dd>
+<dt>Returns:</dt>
+<dd>the array of elements in range <code>[ lowBound ; highBound ]</code> that was shuffled</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -301,7 +319,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="shuffle(java.util.stream.IntStream)">
 <h3>shuffle</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-51">shuffle</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a>&nbsp;values)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-67">shuffle</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/IntStream.html" title="class or interface in java.util.stream" class="external-link">IntStream</a>&nbsp;values)</span></div>
+<div class="block">Collects the passed stream of <code>int</code>s into an array and shuffle it with <a href="#shuffleArr(int%5B%5D)"><code>shuffleArr(int[])</code></a></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>values</code> - stream of primitive <code>int</code>s</dd>
+<dt>Returns:</dt>
+<dd>an array of inpiut elements that are shuffled</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -309,7 +334,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="shuffleArr(int[])">
 <h3>shuffleArr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-57">shuffleArr</a></span><wbr><span class="parameters">(int[]&nbsp;valuesArr)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-79">shuffleArr</a></span><wbr><span class="parameters">(int[]&nbsp;valuesArr)</span></div>
+<div class="block">Swap elements of the passed array in random way.
+The number of swaps equals to the length of array.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>valuesArr</code> - an array to shuffle</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -317,7 +348,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="randomDistinctIntArr(long,int,int)">
 <h3>randomDistinctIntArr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-64">randomDistinctIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-86">randomDistinctIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
  int&nbsp;lowBound,
  int&nbsp;highBound)</span></div>
 </div>
@@ -327,7 +358,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="randomSortedIntArr(long,int,int)">
 <h3>randomSortedIntArr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-69">randomSortedIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-91">randomSortedIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
  int&nbsp;lowBound,
  int&nbsp;highBound)</span></div>
 </div>
@@ -337,7 +368,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="randomSortedReversedIntArr(long,int,int)">
 <h3>randomSortedReversedIntArr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-74">randomSortedReversedIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-96">randomSortedReversedIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
  int&nbsp;lowBound,
  int&nbsp;highBound)</span></div>
 </div>
@@ -347,7 +378,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="randomIncreasingIntArr(long,int,int)">
 <h3>randomIncreasingIntArr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-78">randomIncreasingIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-100">randomIncreasingIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
  int&nbsp;lowBound,
  int&nbsp;highBound)</span></div>
 </div>
@@ -357,7 +388,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="randomDecreasingIntArr(long,int,int)">
 <h3>randomDecreasingIntArr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-83">randomDecreasingIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-105">randomDecreasingIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
  int&nbsp;lowBound,
  int&nbsp;highBound)</span></div>
 </div>
@@ -367,7 +398,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="zeroIntArr(long)">
 <h3>zeroIntArr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-87">zeroIntArr</a></span><wbr><span class="parameters">(long&nbsp;N)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-109">zeroIntArr</a></span><wbr><span class="parameters">(long&nbsp;N)</span></div>
 </div>
 </section>
 </li>
@@ -375,7 +406,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="constantIntArr(long,int)">
 <h3>constantIntArr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-91">constantIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/RandomHelper.html#line-113">constantIntArr</a></span><wbr><span class="parameters">(long&nbsp;N,
  int&nbsp;constant)</span></div>
 </div>
 </section>

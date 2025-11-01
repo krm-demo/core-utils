@@ -602,6 +602,20 @@ for the same <code>key</code>.</div>
 and prepend it with corresponding mime-type prefix in order to use that final value
 either in HTML-attributes (for HTTP-URL parameter - additional URL-encoding should be applied).</div>
 </dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#intsList(int...)" class="member-name-link">intsList(int...)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#intsList(java.util.stream.IntStream)" class="member-name-link">intsList(IntStream)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#intsListRange(int,int)" class="member-name-link">intsListRange(int, int)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#intsListRangeClosed(int,int)" class="member-name-link">intsListRangeClosed(int, int)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#intStream(java.util.List)" class="member-name-link">intStream(List)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#intStream(java.util.stream.Stream)" class="member-name-link">intStream(Stream)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
+<dd>
+<div class="block">Un-boxing the stream of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link"><code>Integer</code></a>s</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#isDayOfMonthAndWeekTheSameAsNext()" class="member-name-link">isDayOfMonthAndWeekTheSameAsNext()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">LinkedDateTimeTripletMap.LinkedTriplet</a></dt>
 <dd>
 <div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the next</b> linked value</div>
@@ -795,6 +809,8 @@ with the passed <code>mergeFunction</code>.</div>
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
 with the passed <code>mergeFunction</code>.</div>
 </dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#linkedSet(java.lang.Iterable)" class="member-name-link">linkedSet(Iterable)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#linkedSet(java.util.stream.Stream)" class="member-name-link">linkedSet(Stream)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#linkedSet(T...)" class="member-name-link">linkedSet(T...)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
@@ -1243,9 +1259,13 @@ all methods in <a href="org/krmdemo/techlabs/core/dump/ObjectPrinter.html" title
 <dt><a href="org/krmdemo/techlabs/core/dump/render/RenderSpec.Feature.html#SHOW_NULL" class="member-name-link">SHOW_NULL</a> - Enum constant in enum class org.krmdemo.techlabs.core.dump.render.<a href="org/krmdemo/techlabs/core/dump/render/RenderSpec.Feature.html" title="enum class in org.krmdemo.techlabs.core.dump.render">RenderSpec.Feature</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#shuffle(java.util.stream.IntStream)" class="member-name-link">shuffle(IntStream)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Collects the passed stream of <code>int</code>s into an array and shuffle it with <a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#shuffleArr(int%5B%5D)"><code>RandomHelper.shuffleArr(int[])</code></a></div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#shuffleArr(int%5B%5D)" class="member-name-link">shuffleArr(int[])</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Swap elements of the passed array in random way.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#sortedMap(java.util.Map.Entry...)" class="member-name-link">sortedMap(Map.Entry...)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
 <dd>
 <div class="block">Transform the var-args-arrays of entries into the sorted map,
@@ -1253,7 +1273,9 @@ where the entries with the same <a href="https://docs.oracle.com/en/java/javase/
 with the default merge-function <a href="org/krmdemo/techlabs/core/utils/MergeFunction.html#OVERWRITE"><code>MergeFunction.OVERWRITE</code></a>.</div>
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#sortedMap(java.util.Map)" class="member-name-link">sortedMap(Map)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns to sorted copy of the passed map <code>mapToSort</code></div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#sortedMap(java.util.stream.Stream)" class="member-name-link">sortedMap(Stream)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
 <dd>
 <div class="block">Transform the stream of entries into the sorted map,
@@ -1266,14 +1288,14 @@ with the default merge-function <a href="org/krmdemo/techlabs/core/utils/MergeFu
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
 with the passed <code>mergeFunction</code>.</div>
 </dd>
-<dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#sortedMap(org.krmdemo.techlabs.core.utils.MergeFunction,java.util.Map)" class="member-name-link">sortedMap(MergeFunction, Map)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#sortedMap(org.krmdemo.techlabs.core.utils.MergeFunction,java.util.stream.Stream)" class="member-name-link">sortedMap(MergeFunction, Stream)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
 <dd>
 <div class="block">Transform the stream of entries into the sorted map,
 where the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a> are merged
 with the passed <code>mergeFunction</code>.</div>
 </dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#sortedSet(java.lang.Iterable)" class="member-name-link">sortedSet(Iterable)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#sortedSet(java.util.stream.Stream)" class="member-name-link">sortedSet(Stream)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#sortedSet(T...)" class="member-name-link">sortedSet(T...)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
