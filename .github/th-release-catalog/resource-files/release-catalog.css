@@ -113,7 +113,7 @@ h2 {
     overflow: hidden;
     background-color: #AAFFFF;
     padding-right: 10px;
-    height: 32px;
+    height: 29px;
     visibility: hidden;
 }
 .major-grid-commit-row {
@@ -129,15 +129,15 @@ h2 {
     border-top-left-radius: 10px;
     background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
     padding-left: 10px;
-    padding-top: 7px;
-    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 1px;
 }
 .major-grid-title-row-over .col-5 {
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
     text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
     border-top: 2px solid var(--navbar-background-color);
-    padding-top: 7px;
+    padding-top: 5px;
 }
 
 .major-grid-title-row .col-4 {
@@ -146,15 +146,15 @@ h2 {
     border-top-left-radius: 10px;
     background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
     padding-left: 10px;
-    padding-top: 7px;
-    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 1px;
 }
 .major-grid-title-row .col-5 {
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
     text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
     border-top: 2px solid var(--navbar-background-color);
-    padding-top: 7px;
+    padding-top: 5px;
 }
 
 .major-grid-commit-row .col-4 {
@@ -237,7 +237,7 @@ h2 {
 .minor-grid-title-row {
     display: grid;
     grid-template-columns: 53px 53px 35px 200px auto;
-    height: 32px;
+    height: 29px;
     visibility: hidden;
 }
 .minor-grid-commit-row {
@@ -251,15 +251,15 @@ h2 {
     background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
     text-align: right;
     padding-right: 15px;
-    padding-top: 7px;
-    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 1px;
 }
 .minor-grid-title-row-over .col-5 {
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
     text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
     border-top: 2px solid var(--navbar-background-color);
-    padding-top: 7px;
+    padding-top: 5px;
 }
 
 .minor-grid-title-row .col-4 {
@@ -268,15 +268,15 @@ h2 {
     background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
     text-align: right;
     padding-right: 15px;
-    padding-top: 7px;
-    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 1px;
 }
 .minor-grid-title-row .col-5 {
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
     text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
     border-top: 2px solid var(--navbar-background-color);
-    padding-top: 7px;
+    padding-top: 5px;
 }
 
 .minor-grid-commit-row .col-4 {

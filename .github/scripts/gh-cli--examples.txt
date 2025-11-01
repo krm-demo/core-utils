@@ -4,6 +4,12 @@ The list of gh-packages:
 The list of workflows:
 ...> gh workflow list
 
+Creating the INTERNAL-release (execute the workflow "release-internal"):
+...> gh workflow run release-internal
+
+Creating the PUBLIC-release (execute the workflow "release-public"):
+...> gh workflow run release-public
+
 Latest runs of workflow 'on-main-push':
 ...> gh workflow view on-main-push
 
