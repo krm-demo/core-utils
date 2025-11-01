@@ -12,6 +12,7 @@ import java.util.SequencedMap;
 import java.util.SequencedSet;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedListReversed;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
@@ -24,8 +25,66 @@ import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedSet;
  * Utility-class that provides methods to transform the stream or var-args-arrays of values into linked or sorted sets
  * and stream or var-args-arrays of {@link Map.Entry entries} into linked or sorted map.
  * An enumeration {@link MergeFunction} could be used to handle the entries with the same {@link Map.Entry#getKey() key}.
+ * <hr/>
+ * Some miscellaneous helper utility-methods to work with primitive streams are also added...
  */
 public class CoreStreamUtils {
+
+    // ===========================================================================================
+    //            Utility-methods to convert IntStreams to List<Integer>
+    // ===========================================================================================
+
+    /**
+     * @param intsArr array of primitive {@code int}s
+     * @return a {@link List} of {@link Integer}
+     */
+    public static List<Integer> intsList(int... intsArr) {
+        return intsList(IntStream.of(intsArr));
+    }
+
+    /**
+     * @param ints stream of primitive {@code int}s
+     * @return a {@link List} of {@link Integer}
+     */
+    public static List<Integer> intsList(IntStream ints) {
+        return ints.boxed().toList();
+    }
+
+    /**
+     * @param startInclusive the lower bound of the range (inclusive)
+     * @param endExclusive the higher bound of the range (exclusive)
+     * @return the {@link List} of all {@link Integer} in the range {@code [ startInclusive ; endExclusive )}
+     */
+    public static List<Integer> intsListRange(int startInclusive, int endExclusive) {
+        return intsList(IntStream.range(startInclusive, endExclusive));
+    }
+
+    /**
+     * @param startInclusive the lower bound of the range (inclusive)
+     * @param endInclusive the higher bound of the range (inclusive)
+     * @return the {@link List} of all {@link Integer} in the range {@code [ startInclusive ; endInclusive ]}
+     */
+    public static List<Integer> intsListRangeClosed(int startInclusive, int endInclusive) {
+        return intsList(IntStream.rangeClosed(startInclusive, endInclusive));
+    }
+
+    /**
+     * Un-boxing the stream of {@link Integer}s
+     *
+     * @param integers the stream of {@link Integer}s to un-box
+     * @return the stream of primitive {@code int}s
+     */
+    public static IntStream intStream(Stream<Integer> integers) {
+        return integers.mapToInt(Integer::intValue);
+    }
+
+    /**
+     * @param integersList a {@link List} of {@link Integer}
+     * @return the stream of primitive {@code int}s
+     */
+    public static IntStream intStream(List<Integer> integersList) {
+        return intStream(integersList.stream());
+    }
 
     // ===========================================================================================
     //        Utility-methods to create a reverse streams from the given array or list
@@ -76,7 +135,7 @@ public class CoreStreamUtils {
     /**
      * @param valuesArr var-args-arrays of values
      * @return the sorted set of those values as {@link NavigableSet}
-     * @param <T> the type of value
+     * @param <T> the type of value that must implement {@link Comparable}
      */
     @SafeVarargs
     @SuppressWarnings("varargs")
@@ -87,10 +146,19 @@ public class CoreStreamUtils {
     /**
      * @param values stream of values
      * @return the sorted set of those values as {@link NavigableSet}
-     * @param <T> the type of value
+     * @param <T> the type of value that must implement {@link Comparable}
      */
     public static <T extends Comparable<T>> NavigableSet<T> sortedSet(Stream<T> values) {
         return values.collect(toSortedSet());
+    }
+
+    /**
+     * @param valuesIter collection of values as {@link Iterable}
+     * @return the sorted set of those values as {@link NavigableSet}
+     * @param <T> the type of value that must implement {@link Comparable}
+     */
+    public static <T extends Comparable<T>> NavigableSet<T> sortedSet(Iterable<T> valuesIter) {
+        return sortedSet(StreamSupport.stream(valuesIter.spliterator(), false));
     }
 
     /**
@@ -111,6 +179,15 @@ public class CoreStreamUtils {
      */
     public static <T> SequencedSet<T> linkedSet(Stream<T> values) {
         return values.collect(toLinkedSet());
+    }
+
+    /**
+     * @param valuesIter collection of values as {@link Iterable}
+     * @return the linked set of those values as {@link SequencedSet}
+     * @param <T> the type of value
+     */
+    public static <T> SequencedSet<T> linkedSet(Iterable<T> valuesIter) {
+        return linkedSet(StreamSupport.stream(valuesIter.spliterator(), false));
     }
 
     /**
@@ -149,7 +226,7 @@ public class CoreStreamUtils {
      *
      * @param entriesArr var-args-arrays of entries
      * @return the sorted map, which is collected from those entries, as {@link NavigableMap},
-     * @param <K> the type of key
+     * @param <K> the type of key that must implement {@link Comparable}
      * @param <V> the type of value
      */
     @SafeVarargs
@@ -170,7 +247,7 @@ public class CoreStreamUtils {
      * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}
      * @param entriesArr var-args-arrays of entries
      * @return the sorted map, which is collected from those entries, as {@link NavigableMap},
-     * @param <K> the type of key
+     * @param <K> the type of key that must implement {@link Comparable}
      * @param <V> the type of value
      */
     @SafeVarargs
@@ -190,7 +267,7 @@ public class CoreStreamUtils {
      *
      * @param entries stream of entries
      * @return the sorted map, which is collected from those entries, as {@link NavigableMap},
-     * @param <K> the type of key
+     * @param <K> the type of key that must implement {@link Comparable}
      * @param <V> the type of value
      */
     public static <K extends Comparable<K>, V> NavigableMap<K, V>
@@ -209,7 +286,7 @@ public class CoreStreamUtils {
      * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}
      * @param entries stream of entries
      * @return the sorted map, which is collected from those entries, as {@link NavigableMap},
-     * @param <K> the type of key
+     * @param <K> the type of key that must implement {@link Comparable}
      * @param <V> the type of value
      */
     public static <K extends Comparable<K>, V> NavigableMap<K, V>
@@ -217,14 +294,17 @@ public class CoreStreamUtils {
         return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));
     }
 
+    /**
+     * Returns to sorted copy of the passed map {@code mapToSort}
+     *
+     * @param mapToSort the map whose sorted copy to return
+     * @return the sorted copy of the passed map {@code mapToSort}
+     * @param <K> the type of key that must implement {@link Comparable}
+     * @param <V> the type of value
+     */
     public static <K extends Comparable<K>, V> NavigableMap<K, V>
     sortedMap(Map<K,V> mapToSort) {
         return sortedMap(mapToSort.entrySet().stream());
-    }
-
-    public static <K extends Comparable<K>, V> NavigableMap<K, V>
-    sortedMap(MergeFunction mergeFunction, Map<K,V> mapToSort) {
-        return sortedMap(mergeFunction, mapToSort.entrySet().stream());
     }
 
     /**

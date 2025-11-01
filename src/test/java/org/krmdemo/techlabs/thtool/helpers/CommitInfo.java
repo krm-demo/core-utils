@@ -92,8 +92,8 @@ public class CommitInfo {
         return commitID.substring(0, SHORT_COMMIT_HASH_LENGTH);
     }
 
-    @JsonGetter("hasInfoTag")
-    public boolean hasInfoTag() {
+    @JsonGetter("hasTag")
+    public boolean hasTag() {
         return tagInfo != null;
     }
 
@@ -129,6 +129,8 @@ public class CommitInfo {
             messageShort
         );
     }
+
+
 
     @Override
     public final boolean equals(Object thatObj) {

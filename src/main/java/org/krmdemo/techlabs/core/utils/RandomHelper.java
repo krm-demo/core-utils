@@ -40,20 +40,42 @@ public class RandomHelper extends Random {
             .collect(joining());
     }
 
+    /**
+     * @param lowBound lower bound of the range (inclusive)
+     * @param highBound higher bound of the range (exclusive)
+     * @return the array of elements in range {@code [ lowBound ; highBound )} that was shuffled
+     */
     public int[] randomRangeArr(int lowBound, int highBound) {
         return shuffle(range(lowBound, highBound));
     }
 
+    /**
+     * @param lowBound lower bound of the range (inclusive)
+     * @param highBound higher bound of the range (inclusive)
+     * @return the array of elements in range {@code [ lowBound ; highBound ]} that was shuffled
+     */
     public int[] randomRangeClosedArr(int lowBound, int highBound) {
         return shuffle(rangeClosed(lowBound, highBound));
     }
 
+    /**
+     * Collects the passed stream of {@code int}s into an array and shuffle it with {@link #shuffleArr(int[])}
+     *
+     * @param values stream of primitive {@code int}s
+     * @return an array of inpiut elements that are shuffled
+     */
     public int[] shuffle(IntStream values) {
         int[] valuesArr = values.toArray();
         shuffleArr(valuesArr);
         return valuesArr;
     }
 
+    /**
+     * Swap elements of the passed array in random way.
+     * The number of swaps equals to the length of array.
+     *
+     * @param valuesArr an array to shuffle
+     */
     public void shuffleArr(int[] valuesArr) {
         // a little bit more efficient than using Collections.shuffle and subsequence copying
         for (int i = valuesArr.length; i > 1; i--) {
