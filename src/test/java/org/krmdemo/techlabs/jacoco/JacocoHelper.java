@@ -75,7 +75,7 @@ public class JacocoHelper {
     /**
      * Context-registering method of functional type {@link Consumer Consumer&lt;ThymeleafToolCtx&gt;}.
      * Should be used when initializing the instance of {@link ThymeleafTool},
-     * which allows to decouple the dependency from <b>{@code th-tool}</b> to helper-objects.
+     * which allows to decouple the dependencies between <b>{@code th-tool}</b> and helper-objects.
      *
      * @param ttCtx <b>{@code th-tool}</b>-context to register this helper in
      * @param jacocoXmlReportPath a path to file at local file-system to the JaCoCo-XML-report

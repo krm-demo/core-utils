@@ -84,7 +84,17 @@ jobs:
         run: |
           echo "--- deployment to GitHub Artifactory: ---"
           cd main-branch
-          mvn -B deploy
+
+          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary before deploy:deploy ) ~~~~~~~~~~~~~"
+          echo "
+          the result of maven-build (content of \`./target/\` directory before deploy:deploy):
+          \`\`\`bash
+          $(ls -laxo ./target)
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+
+          echo "~~~~~~~~~~~~~ ( executing deploy:deploy ) ~~~~~~~~~~~~~"
+          mvn -B deploy:deploy
+
           # Process the template '.github/th-templates/Usage-INTERNAL.md.th' via 'th-tool':
           .github/th-tool.sh process .github/th-templates/Usage-INTERNAL.md.th --output $GITHUB_STEP_SUMMARY
 
