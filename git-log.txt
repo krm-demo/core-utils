@@ -1,3 +1,4 @@
+bf46242a << internal release >> 21.23.002
 d477f123 attempt to reanimate deployment to GH-Packages #3 (some minor corrections)
 3c4b6fad attempt to reanimate deployment to GH-Packages #2 (mvn jar:jar deploy:deploy)
 21facf03 << internal release >> 21.23.002
