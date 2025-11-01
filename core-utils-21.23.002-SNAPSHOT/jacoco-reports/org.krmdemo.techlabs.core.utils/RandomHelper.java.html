@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RandomHelper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">RandomHelper.java</span></div><h1>RandomHelper.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import java.io.Serial;
+import java.util.Random;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.IntStream.range;
+import static java.util.stream.IntStream.rangeClosed;
+import static org.apache.commons.lang3.ArrayUtils.swap;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.reversedArr;
+
+/**
+ * Helper-wrapper over standard {@link Random} to generate random arrays and collections
+ */
+public class RandomHelper extends Random {
+
+    @Serial
+    private static final long serialVersionUID = 123456789_002L;
+
+    public RandomHelper() {
+<span class="nc" id="L22">        super(); // non-reproducible random sequences !!!</span>
+<span class="nc" id="L23">    }</span>
+
+    public RandomHelper(long seed) {
+<span class="fc" id="L26">        super(seed);</span>
+<span class="fc" id="L27">    }</span>
+
+    public String randomLowerCase(int len) {
+<span class="nc" id="L30">        return ints(len, 'a', 'z' + 1)</span>
+<span class="nc" id="L31">            .mapToObj(chInt -&gt; (char)chInt)</span>
+<span class="nc" id="L32">            .map(String::valueOf)</span>
+<span class="nc" id="L33">            .collect(joining());</span>
+    }
+
+    public String randomUpperCase(int len) {
+<span class="nc" id="L37">        return ints(len, 'A', 'Z' + 1)</span>
+<span class="nc" id="L38">            .mapToObj(chInt -&gt; (char)chInt)</span>
+<span class="nc" id="L39">            .map(String::valueOf)</span>
+<span class="nc" id="L40">            .collect(joining());</span>
+    }
+
+    /**
+     * @param lowBound lower bound of the range (inclusive)
+     * @param highBound higher bound of the range (exclusive)
+     * @return the array of elements in range {@code [ lowBound ; highBound )} that was shuffled
+     */
+    public int[] randomRangeArr(int lowBound, int highBound) {
+<span class="fc" id="L49">        return shuffle(range(lowBound, highBound));</span>
+    }
+
+    /**
+     * @param lowBound lower bound of the range (inclusive)
+     * @param highBound higher bound of the range (inclusive)
+     * @return the array of elements in range {@code [ lowBound ; highBound ]} that was shuffled
+     */
+    public int[] randomRangeClosedArr(int lowBound, int highBound) {
+<span class="fc" id="L58">        return shuffle(rangeClosed(lowBound, highBound));</span>
+    }
+
+    /**
+     * Collects the passed stream of {@code int}s into an array and shuffle it with {@link #shuffleArr(int[])}
+     *
+     * @param values stream of primitive {@code int}s
+     * @return an array of inpiut elements that are shuffled
+     */
+    public int[] shuffle(IntStream values) {
+<span class="fc" id="L68">        int[] valuesArr = values.toArray();</span>
+<span class="fc" id="L69">        shuffleArr(valuesArr);</span>
+<span class="fc" id="L70">        return valuesArr;</span>
+    }
+
+    /**
+     * Swap elements of the passed array in random way.
+     * The number of swaps equals to the length of array.
+     *
+     * @param valuesArr an array to shuffle
+     */
+    public void shuffleArr(int[] valuesArr) {
+        // a little bit more efficient than using Collections.shuffle and subsequence copying
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        for (int i = valuesArr.length; i &gt; 1; i--) {</span>
+<span class="fc" id="L82">            swap(valuesArr, i - 1, nextInt(valuesArr.length));</span>
+        }
+<span class="fc" id="L84">    }</span>
+
+    public int[] randomDistinctIntArr(long N, int lowBound, int highBound) {
+<span class="nc" id="L87">        return ints(5 * N, lowBound, highBound)</span>
+<span class="nc" id="L88">            .distinct().limit(N).toArray();</span>
+    }
+
+    public int[] randomSortedIntArr(long N, int lowBound, int highBound) {
+<span class="nc" id="L92">        return ints(N, lowBound, highBound)</span>
+<span class="nc" id="L93">            .sorted().limit(N).toArray();</span>
+    }
+
+    public int[] randomSortedReversedIntArr(long N, int lowBound, int highBound) {
+<span class="nc" id="L97">        return reversedArr(randomSortedIntArr(N, lowBound, highBound));</span>
+    }
+
+    public int[] randomIncreasingIntArr(long N, int lowBound, int highBound) {
+<span class="nc" id="L101">        return ints(5 * N, lowBound, highBound)</span>
+<span class="nc" id="L102">            .distinct().limit(N).sorted().toArray();</span>
+    }
+
+    public int[] randomDecreasingIntArr(long N, int lowBound, int highBound) {
+<span class="nc" id="L106">        return reversedArr(randomIncreasingIntArr(N, lowBound, highBound));</span>
+    }
+
+    public int[] zeroIntArr(long N) {
+<span class="nc" id="L110">        return constantIntArr(N, 0);</span>
+    }
+
+    public int[] constantIntArr(long N, int constant) {
+<span class="nc" id="L114">        return IntStream.generate(() -&gt; constant).limit(N).toArray();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

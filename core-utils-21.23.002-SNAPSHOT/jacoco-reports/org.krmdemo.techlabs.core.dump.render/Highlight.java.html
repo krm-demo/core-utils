@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Highlight.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.dump.render</a> &gt; <span class="el_source">Highlight.java</span></div><h1>Highlight.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.dump.render;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Stream;
+
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
+
+/**
+ * This class represents an immutable multidimensional {@link Map} of {@link Rule highlight rules},
+ * where the value of rule is either Ansi-Style or HTML-Style (mostly the color of text).
+ */
+public class Highlight {
+
+    /**
+     * The kind of JSON or YAML tokens to highlight
+     */
+<span class="fc" id="L19">    public enum Kind {</span>
+<span class="fc" id="L20">        SYNTAX,</span>
+<span class="fc" id="L21">        NULL,</span>
+<span class="fc" id="L22">        KEY,</span>
+<span class="fc" id="L23">        VALUE,</span>
+<span class="fc" id="L24">        BG</span>
+    }
+
+    /**
+     * The target logical structure of rendered document (&lt;b&gt;JSON&lt;/b&gt; or &lt;b&gt;YAML&lt;/b&gt;)
+     */
+<span class="fc" id="L30">    public enum Structure {</span>
+        /**
+         * &lt;a href=&quot;https://www.json.org/json-en.html&quot;&gt;JSON&lt;/a&gt;-structure of rendered document or fragment
+         * &lt;hr/&gt;
+         * (meaning of acronym is - &lt;b&gt;J&lt;/b&gt;ava-&lt;b&gt;S&lt;/b&gt;cript &lt;b&gt;O&lt;/b&gt;bject &lt;b&gt;N&lt;/b&gt;otation)
+         */
+<span class="fc" id="L36">        JSON,</span>
+
+        /**
+         * &lt;a href=&quot;https://yaml.org/spec/1.2.2/&quot;&gt;YAML&lt;/a&gt;-structure of rendered document or fragment
+         * &lt;hr/&gt;
+         * (meaning of acronym is - &lt;b&gt;Y&lt;/b&gt;AML-&lt;b&gt;A&lt;/b&gt;in't &lt;b&gt;M&lt;/b&gt;arkup &lt;b&gt;L&lt;/b&gt;anguage),&lt;br/&gt;
+         * which mostly means that YAML is a markup-language without markup-tags as XML or HTML
+         */
+<span class="fc" id="L44">        YAML</span>
+    }
+
+    /**
+     * The target format of output (HTML-document/HTML-fragment, console with ANSI-escape sequences, ...)
+     */
+<span class="fc" id="L50">    public enum Target {</span>
+
+        /**
+         * Txt-output format is mostly used to print the rendered document into terminal-console,
+         * where ANSI-escape sequences are used to highlight the different elements of documents
+         * &lt;hr/&gt;
+         * When saving intto {@code *.txt}-file - it's recommended to avoid rendering ANSI-escape sequences,
+         * which is automatically skipped by &lt;a href=&quot;https://picocli.info/&quot;&gt;picocli&lt;/a&gt;
+         * &lt;hr/&gt;
+         * In tests and other environments ANSI-escape sequences will be rendered
+         * only of the system-property &lt;b&gt;{@code picocli.ansi}&lt;/b&gt; equals to &lt;b&gt;{@code true}&lt;/b&gt;
+         */
+<span class="fc" id="L62">        TXT_ANSI,</span>
+
+        /**
+         * HTML-format, which does not require additional internal or external HTML-styles (in {@code *.css}-files)
+         */
+<span class="fc" id="L67">        HTML_STYLE,</span>
+
+        /**
+         * HTML-format, without direct HTML-styles, but only with CSS-classes for different elements,
+         * that requires an additional internal or external HTML-styles (in {@code *.css}-files)
+         */
+<span class="fc" id="L73">        HTML_CSS,</span>
+
+        /**
+         * This format could be used as a standalone SVG-image or HTML-fragment based on &lt;b&gt;{@literal &lt;svg&gt;}&lt;/b&gt;-tag,
+         * where properties of font and fill-color are specified via attributes of &lt;b&gt;{@literal &lt;tspan&gt;}&lt;/b&gt;-tag
+         */
+<span class="fc" id="L79">        SVG_ATTRS,</span>
+
+        /**
+         * This format could be used as a standalone SVG-image or HTML-fragment based on &lt;b&gt;{@literal &lt;svg&gt;}&lt;/b&gt;-tag,
+         * where SVG-attributes are encapsualted and provided via CSS-class of &lt;b&gt;{@literal &lt;tspan&gt;}&lt;/b&gt;-tag
+         */
+<span class="fc" id="L85">        SVG_CLASS</span>
+    }
+
+    /**
+     * This record represents a {@link Map.Entry#getKey() key} in multidimensional {@link Map}
+     * to store and lookup the highlight-rules.
+     *
+     * @param kind the kind of JSON or YAML tokens to highlight
+     * @param struct the target structure of rendered document (JSON or YAML)
+     * @param target the target format of output (ANSI, HTML, SVG, ...)
+     */
+<span class="fc" id="L96">    public record Place(</span>
+        Kind kind,
+        Structure struct,
+        Target target
+    ) {
+        static Place of(Kind kind, Structure struct, Target target) {
+<span class="fc" id="L102">            return new Place(kind, struct, target);</span>
+        }
+    }
+
+    /**
+     * Individual highlight-rule - the correspondence between place and style to apply.
+     *
+     * @param kind the kind of JSON or YAML tokens to highlight
+     * @param struct the target structure of rendered document (JSON or YAML)
+     * @param target the target format of output (ANSI, HTML, SVG, ...)
+     * @param valueStr the string value of ANSI-Style, HTML-Style or HTML-CSS
+     */
+<span class="fc" id="L114">    public record Rule(</span>
+        Kind kind,
+        Structure struct,
+        Target target,
+        String valueStr
+    ) {
+        Place place() {
+<span class="fc" id="L121">            return Place.of(kind, struct, target);</span>
+        }
+        static Rule of(Kind kind, Structure struct, Target target, String valueStr) {
+<span class="fc" id="L124">            return new Rule(kind, struct, target, valueStr);</span>
+        }
+    }
+
+    final private Map&lt;Place, String&gt; rulesMap;
+<span class="fc" id="L129">    private Highlight(Stream&lt;Rule&gt; rules) {</span>
+<span class="fc" id="L130">        this.rulesMap = rules.collect(toLinkedMap(Rule::place, Rule::valueStr));</span>
+<span class="fc" id="L131">    }</span>
+<span class="nc" id="L132">    private Highlight(Highlight base, Stream&lt;Rule&gt; rulesOver) {</span>
+<span class="nc" id="L133">        this.rulesMap = new LinkedHashMap&lt;&gt;(base.rulesMap);</span>
+<span class="nc" id="L134">        rulesOver.forEach(rule -&gt; this.rulesMap.put(rule.place(), rule.valueStr()));</span>
+<span class="nc" id="L135">    }</span>
+
+    /**
+     * @param place a place to look up the value for
+     * @return the string value of ANSI-Style, HTML-Style or HTML-CSS that correspond to that {@code place}
+     */
+    public String lookupValue(Place place) {
+<span class="fc" id="L142">        return rulesMap.get(place);</span>
+    }
+
+    /**
+     * A factory-method to populate the multidimensional {@link Map} of {@link Rule highlight rules}
+     *
+     * @param rulesArr var-args-arrays of {@link Rule highlight rules}
+     * @return an immutable instance of {@link Highlight} class
+     */
+    public static Highlight highlight(Rule... rulesArr) {
+<span class="fc" id="L152">        return new Highlight(Arrays.stream(rulesArr));</span>
+    }
+
+    /**
+     * A factory-method to extends/overwrite the {@code base} instance of {@link Highlight}
+     * with additional (substitutional) {@link Rule highlight rules}
+     *
+     * @param base a base instance of {@link Highlight} to extends/overwrite
+     * @param rulesArr {@link Rule highlight rules} to extends/overwrite with
+     * @return a new immutable instance of {@link Highlight} class, which is based on {@code base}
+     */
+    public static Highlight highlight(Highlight base, Rule... rulesArr) {
+<span class="nc" id="L164">        return new Highlight(base, Arrays.stream(rulesArr));</span>
+    }
+
+    /**
+     * &lt;b&gt;no-highlighting&lt;/b&gt; scheme (no {@link Rule highlight rules})
+     */
+<span class="fc" id="L170">    public static Highlight NONE = highlight();</span>
+
+    /**
+     * The default highlight-scheme is based on: &lt;ul&gt;
+     *     &lt;li&gt;&lt;b&gt;white&lt;/b&gt; syntax ( '{@code &quot;}', '&lt;code&gt;{&lt;/code&gt;', '&lt;code&gt;}&lt;/code&gt;',
+     *          '{@code [}', '{@code ]}', '{@code ,}', '{@code -}', '{@code :}' )&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;magenta&lt;/b&gt; {@code null}s&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;blue&lt;/b&gt; {@code key}s of JSON and YAML mappings&lt;/li&gt;
+     *     &lt;li&gt;&lt;b&gt;green&lt;/b&gt; {@code value}s of JSON and YAML mappings and any scalars and sequence elements&lt;/li&gt;
+     * &lt;/ul&gt;
+     * As for HTML-style correspondence - the settings of well-known Python-library
+     * &lt;a href=&quot;https://github.com/pycontribs/ansi2html/blob/main/src/ansi2html/style.py#L135-L153&quot;&gt;
+     *     ansi2html (/src/ansi2html/style.py)
+     * &lt;/a&gt;
+     * for &quot;&lt;i&gt;basic&lt;/i&gt;&quot;&lt;b&gt; {@code MacOS-Terminal}&lt;/b&gt; are used.
+     */
+<span class="fc" id="L186">    public static Highlight DEFAULT = highlight(</span>
+<span class="fc" id="L187">        Rule.of(Kind.SYNTAX, Structure.JSON, Target.TXT_ANSI, &quot;white&quot;),</span>
+<span class="fc" id="L188">        Rule.of(Kind.SYNTAX, Structure.JSON, Target.HTML_STYLE, &quot;color: #808080;&quot;),</span>
+<span class="fc" id="L189">        Rule.of(Kind.SYNTAX, Structure.JSON, Target.SVG_ATTRS, &quot;fill=\&quot;#808080\&quot;&quot;),</span>
+<span class="fc" id="L190">        Rule.of(Kind.SYNTAX, Structure.YAML, Target.TXT_ANSI, &quot;white&quot;),</span>
+<span class="fc" id="L191">        Rule.of(Kind.SYNTAX, Structure.YAML, Target.HTML_STYLE, &quot;color: #808080;&quot;),</span>
+<span class="fc" id="L192">        Rule.of(Kind.SYNTAX, Structure.YAML, Target.SVG_ATTRS, &quot;fill=\&quot;#808080\&quot;&quot;),</span>
+
+<span class="fc" id="L194">        Rule.of(Kind.NULL, Structure.JSON, Target.TXT_ANSI, &quot;magenta&quot;),</span>
+<span class="fc" id="L195">        Rule.of(Kind.NULL, Structure.JSON, Target.HTML_STYLE, &quot;color: #800080;&quot;),</span>
+<span class="fc" id="L196">        Rule.of(Kind.NULL, Structure.JSON, Target.SVG_ATTRS, &quot;fill=\&quot;#800080\&quot;&quot;),</span>
+<span class="fc" id="L197">        Rule.of(Kind.NULL, Structure.YAML, Target.TXT_ANSI, &quot;magenta&quot;),</span>
+<span class="fc" id="L198">        Rule.of(Kind.NULL, Structure.YAML, Target.HTML_STYLE, &quot;color: #800080;&quot;),</span>
+<span class="fc" id="L199">        Rule.of(Kind.NULL, Structure.YAML, Target.SVG_ATTRS, &quot;fill=\&quot;#800080\&quot;&quot;),</span>
+
+<span class="fc" id="L201">        Rule.of(Kind.KEY, Structure.JSON, Target.TXT_ANSI, &quot;blue&quot;),</span>
+<span class="fc" id="L202">        Rule.of(Kind.KEY, Structure.JSON, Target.HTML_STYLE, &quot;color: #000080;&quot;),</span>
+<span class="fc" id="L203">        Rule.of(Kind.KEY, Structure.JSON, Target.SVG_ATTRS, &quot;fill=\&quot;#000080\&quot;&quot;),</span>
+<span class="fc" id="L204">        Rule.of(Kind.KEY, Structure.YAML, Target.TXT_ANSI, &quot;blue&quot;),</span>
+<span class="fc" id="L205">        Rule.of(Kind.KEY, Structure.YAML, Target.HTML_STYLE, &quot;color: #000080;&quot;),</span>
+<span class="fc" id="L206">        Rule.of(Kind.KEY, Structure.YAML, Target.SVG_ATTRS, &quot;fill=\&quot;#000080\&quot;&quot;),</span>
+
+<span class="fc" id="L208">        Rule.of(Kind.VALUE, Structure.JSON, Target.TXT_ANSI, &quot;green&quot;),</span>
+<span class="fc" id="L209">        Rule.of(Kind.VALUE, Structure.JSON, Target.HTML_STYLE, &quot;color: #008000;&quot;),</span>
+<span class="fc" id="L210">        Rule.of(Kind.VALUE, Structure.JSON, Target.SVG_ATTRS, &quot;fill=\&quot;#008000\&quot;&quot;),</span>
+<span class="fc" id="L211">        Rule.of(Kind.VALUE, Structure.YAML, Target.TXT_ANSI, &quot;green&quot;),</span>
+<span class="fc" id="L212">        Rule.of(Kind.VALUE, Structure.YAML, Target.HTML_STYLE, &quot;color: #008000;&quot;),</span>
+<span class="fc" id="L213">        Rule.of(Kind.VALUE, Structure.YAML, Target.SVG_ATTRS, &quot;fill=\&quot;#008000\&quot;&quot;),</span>
+
+        // in some other highlight-schema it's worth to try &quot;background-color: transparent&quot; or &quot;opacity: [0.xxx;1.0]&quot;
+<span class="fc" id="L216">        Rule.of(Kind.BG, Structure.JSON, Target.HTML_STYLE, &quot;background-color: #FFFFFF;&quot;),</span>
+<span class="fc" id="L217">        Rule.of(Kind.BG, Structure.JSON, Target.SVG_ATTRS, &quot;background-color: #FFFFFF;&quot;),</span>
+<span class="fc" id="L218">        Rule.of(Kind.BG, Structure.YAML, Target.HTML_STYLE, &quot;background-color: #FFFFFF;&quot;),</span>
+<span class="fc" id="L219">        Rule.of(Kind.BG, Structure.YAML, Target.SVG_ATTRS, &quot;background-color: #FFFFFF;&quot;)</span>
+    );
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

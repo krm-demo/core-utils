@@ -1,3 +1,4 @@
+ba356b89 << new snapshot version >> 21.23.002-SNAPSHOT
 a9f30680 << internal release >> 21.23.001
 4a1255fb introduce and detect technical commits #1
 cf7494a1 add some tests and start improving the commit-info to detect the technical commits
