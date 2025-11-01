@@ -93,7 +93,8 @@ jobs:
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
           echo "~~~~~~~~~~~~~ ( executing deploy:deploy ) ~~~~~~~~~~~~~"
-          mvn -B deploy:deploy
+          # it's important to call maven-jar-plugin before (see https://stackoverflow.com/questions/6308162/maven-the-packaging-for-this-project-did-not-assign-a-file-to-the-build-artifac)
+          mvn jar:jar deploy:deploy
 
           # Process the template '.github/th-templates/Usage-INTERNAL.md.th' via 'th-tool':
           .github/th-tool.sh process .github/th-templates/Usage-INTERNAL.md.th --output $GITHUB_STEP_SUMMARY

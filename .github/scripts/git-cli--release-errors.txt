@@ -1,0 +1,14 @@
+If something is going wrong during INTERNAL-release or PUBLIC-release the state of project in git-repository becomes INVALID.
+In order to reanimate it before re-execute "release-internal" or "release-public" following steps should be done:
+
+1. First of all `git pull origin` to fetch the latest changes (first of all the result of upgrading the version in "pom.xml").
+
+2. Most probably, the version in "pom.xml" does not have "-SNAPSHOT"-qualifier - so it's necessary tp add it manually
+- for example if it's "21.23.002", then you have to change it tp "21.23.002-SNAPSHOT"
+
+3. Most probably the git-tag was already created (the command `git tag` will show that) and it must be deleted:
+- as for example above the command to run is `git tag -d 21.23.002`
+
+4. Then it's necessary to commit and push those changes into remote-repo, which not trivial:
+- together with other fixes, that was a reason of failure, following commands must be executed:
+- `git push origin --delete 21.23.002`

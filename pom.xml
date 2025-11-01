@@ -6,7 +6,7 @@
 
   <groupId>io.github.krm-demo</groupId>
   <artifactId>core-utils</artifactId>
-  <version>21.23.002</version>
+  <version>21.23.002-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
@@ -180,8 +180,22 @@
   </dependencies>
 
   <build>
-    <plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven.install.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven.deploy.plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
 
+    <plugins>
       <!-- Enforcing using the proper version of maven (see https://maven.apache.org/enforcer) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -651,6 +665,17 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <!-- this declaration is just for to be sure that proper version of "maven-install-plugin" is working -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <!-- this declaration is just for to be sure that proper version of "maven-deploy-plugin" is working -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
       </plugin>
 
     </plugins>
