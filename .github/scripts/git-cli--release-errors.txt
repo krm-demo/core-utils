@@ -12,3 +12,7 @@ In order to reanimate it before re-execute "release-internal" or "release-public
 4. Then it's necessary to commit and push those changes into remote-repo, which not trivial:
 - together with other fixes, that was a reason of failure, following commands must be executed:
 - `git push origin --delete 21.23.002`
+- other commands and fixes must be committed and pushed separately:
+-- `git add .`
+-- `git commit -m "some message about fixes details"`
+-- `git push origin`
