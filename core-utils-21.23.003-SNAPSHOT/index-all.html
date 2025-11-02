@@ -285,6 +285,10 @@ for "<i>basic</i>"<b> <code>MacOS-Terminal</code></b> are used.</div>
 <dd>
 <div class="block">Default instance of <a href="org/krmdemo/techlabs/core/dump/ObjectPrinter.StdOut.html" title="class in org.krmdemo.techlabs.core.dump"><code>ObjectPrinter.StdOut</code></a> that uses the default <a href="org/krmdemo/techlabs/core/dump/JacksonTree.html" title="class in org.krmdemo.techlabs.core.dump"><code>JacksonTree</code></a></div>
 </dd>
+<dt><a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#dtt(java.lang.String)" class="member-name-link">dtt(String)</a> - Static method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.datetime">CoreDateTimeUtils</a></dt>
+<dd>
+<div class="block">Transform the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a>-representation of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link"><code>Instant</code></a> into <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#dump()" class="member-name-link">dump()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/DumpUtils.html#dumpAsJsonHtml(java.lang.Object)" class="member-name-link">dumpAsJsonHtml(Object)</a> - Static method in class org.krmdemo.techlabs.core.dump.<a href="org/krmdemo/techlabs/core/dump/DumpUtils.html" title="class in org.krmdemo.techlabs.core.dump">DumpUtils</a></dt>
@@ -1358,7 +1362,10 @@ that allows to access important system properties via singleton instance
 TODO: complete it</div>
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#systemZoneOffset()" class="member-name-link">systemZoneOffset()</a> - Static method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.datetime">CoreDateTimeUtils</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Gets the current value of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/ZoneOffset.html" title="class or interface in java.time" class="external-link"><code>ZoneOffset</code></a>, which depends on system settings of operational system
+and on the current time (because of <a href="https://en.wikipedia.org/wiki/Daylight_saving_time">daylight saving time</a>).</div>
+</dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">

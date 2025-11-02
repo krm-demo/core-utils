@@ -6,8 +6,26 @@ import java.time.ZoneOffset;
 
 <span class="nc" id="L7">public class CoreDateTimeUtils {</span>
 
+    /**
+     * Gets the current value of {@link ZoneOffset}, which depends on system settings of operational system
+     * and on the current time (because of &lt;a href=&quot;https://en.wikipedia.org/wiki/Daylight_saving_time&quot;&gt;daylight saving time&lt;/a&gt;).
+     *
+     * @return the current value of {@link ZoneOffset}
+     */
     public static ZoneOffset systemZoneOffset() {
-<span class="fc" id="L10">        return ZoneId.systemDefault().getRules().getOffset(Instant.now());</span>
+<span class="fc" id="L16">        return ZoneId.systemDefault().getRules().getOffset(Instant.now());</span>
+    }
+
+    /**
+     * Transform the {@link String}-representation of {@link Instant} into {@link DateTimeTriplet}
+     *
+     * @param instantStr string-representation of {@link Instant} in format like {@code 2007-12-03T10:15:30.00Z}.
+     * @return the instance of {@link DateTimeTriplet}
+     *
+     * @see Instant#parse(CharSequence)
+     */
+    public static DateTimeTriplet dtt(String instantStr) {
+<span class="nc" id="L28">        return new DateTimeTriplet(Instant.parse(instantStr));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
