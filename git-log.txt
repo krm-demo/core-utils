@@ -1,3 +1,4 @@
+3a7ce507 working with th-template to show GH-Packages versions and links #1
 6ef982c5 << new snapshot version >> 21.23.003-SNAPSHOT
 bf46242a << internal release >> 21.23.002
 d477f123 attempt to reanimate deployment to GH-Packages #3 (some minor corrections)
