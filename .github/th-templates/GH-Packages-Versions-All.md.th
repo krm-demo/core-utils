@@ -1,0 +1,4 @@
+| Version-Tag | Created At |
+|------------:|:-----------|<th:block th:each=="verItem: ${ghPkgVer}">
+| [ [[${ verItem.name }]] ]( [[${ verItem.package_html_url }]]?version=[[${ verItem.name }]] ) | [[${ verItem.created_at }]] |</th:block>
+ 

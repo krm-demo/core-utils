@@ -1,0 +1,422 @@
+[
+  {
+    "created_at": "2025-11-01T20:20:33Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.002",
+    "id": 49228156,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.23.002",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-11-01T20:20:33Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/49228156"
+  },
+  {
+    "created_at": "2025-10-24T00:30:00Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.20.001",
+    "id": 48930695,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.20.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-24T00:30:01Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48930695"
+  },
+  {
+    "created_at": "2025-10-21T22:54:56Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.18.002",
+    "id": 48833201,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.18.002",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-21T22:54:57Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48833201"
+  },
+  {
+    "created_at": "2025-10-21T07:46:43Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.18.001",
+    "id": 48797153,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.18.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-21T07:46:44Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48797153"
+  },
+  {
+    "created_at": "2025-10-19T23:13:47Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.16.002",
+    "id": 48751961,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.16.002",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-19T23:13:48Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48751961"
+  },
+  {
+    "created_at": "2025-10-14T04:15:23Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.16.001",
+    "id": 48569646,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.16.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-14T04:15:24Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48569646"
+  },
+  {
+    "created_at": "2025-10-14T03:52:04Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.15.001",
+    "id": 48569425,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.15.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-14T03:52:05Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48569425"
+  },
+  {
+    "created_at": "2025-10-14T01:24:05Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.12.003",
+    "id": 48567838,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.12.003",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-14T01:24:06Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48567838"
+  },
+  {
+    "created_at": "2025-10-13T23:19:04Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.12.002",
+    "id": 48566764,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.12.002",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-13T23:19:05Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48566764"
+  },
+  {
+    "created_at": "2025-10-13T22:36:43Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.12.001",
+    "id": 48566313,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.12.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-13T22:36:44Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48566313"
+  },
+  {
+    "created_at": "2025-10-13T21:53:33Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.11.001",
+    "id": 48566005,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.11.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-13T21:53:34Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48566005"
+  },
+  {
+    "created_at": "2025-10-13T17:32:32Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.10.005",
+    "id": 48561294,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.10.005",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-13T17:32:33Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48561294"
+  },
+  {
+    "created_at": "2025-10-13T16:37:16Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.10.004",
+    "id": 48559994,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.10.004",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-13T16:37:17Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48559994"
+  },
+  {
+    "created_at": "2025-10-13T14:47:38Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.10.003",
+    "id": 48555579,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.10.003",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-13T14:47:40Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48555579"
+  },
+  {
+    "created_at": "2025-10-13T07:37:57Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.10.002",
+    "id": 48534828,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.10.002",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-13T07:37:58Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48534828"
+  },
+  {
+    "created_at": "2025-10-13T06:46:43Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.10.001",
+    "id": 48532578,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.10.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-13T06:46:44Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48532578"
+  },
+  {
+    "created_at": "2025-10-13T02:18:44Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.09.002",
+    "id": 48528922,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.09.002",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-13T02:18:45Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48528922"
+  },
+  {
+    "created_at": "2025-10-03T03:27:36Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.09.001",
+    "id": 48254496,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.09.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-03T03:27:37Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48254496"
+  },
+  {
+    "created_at": "2025-10-02T21:01:15Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.08.001",
+    "id": 48249226,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.08.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-02T21:01:16Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48249226"
+  },
+  {
+    "created_at": "2025-10-02T04:57:16Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.07.001",
+    "id": 48216514,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.07.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-02T04:57:17Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48216514"
+  },
+  {
+    "created_at": "2025-10-02T04:29:48Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.06.003",
+    "id": 48216231,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.06.003",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-02T04:29:49Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48216231"
+  },
+  {
+    "created_at": "2025-10-02T03:11:41Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.06.002",
+    "id": 48215079,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.06.002",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-02T03:11:41Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48215079"
+  },
+  {
+    "created_at": "2025-10-02T02:10:37Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.06.001",
+    "id": 48214066,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.06.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-02T02:10:38Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48214066"
+  },
+  {
+    "created_at": "2025-10-02T00:10:20Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.05.005",
+    "id": 48212478,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.05.005",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-02T00:10:22Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48212478"
+  },
+  {
+    "created_at": "2025-10-01T22:17:18Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.05.004",
+    "id": 48210987,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.05.004",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-01T22:17:19Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48210987"
+  },
+  {
+    "created_at": "2025-10-01T21:43:31Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.05.003",
+    "id": 48210341,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.05.003",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-01T21:43:32Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48210341"
+  },
+  {
+    "created_at": "2025-10-01T20:59:36Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.05.002",
+    "id": 48208914,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.05.002",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-01T20:59:37Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48208914"
+  },
+  {
+    "created_at": "2025-10-01T20:15:37Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.05.001",
+    "id": 48207480,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.05.001",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-01T20:15:38Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48207480"
+  },
+  {
+    "created_at": "2025-10-01T19:21:22Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.04.009",
+    "id": 48206009,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.04.009",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-01T19:21:23Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48206009"
+  },
+  {
+    "created_at": "2025-10-01T17:55:30Z",
+    "description": "Utility-classes to simplify working with core-java API (streams, collections, input-output)",
+    "html_url": "https://github.com/krm-demo/core-utils/packages/2631343?version=21.04.008",
+    "id": 48202980,
+    "license": "MIT",
+    "metadata": {
+      "package_type": "maven"
+    },
+    "name": "21.04.008",
+    "package_html_url": "https://github.com/krm-demo/core-utils/packages/2631343",
+    "updated_at": "2025-10-01T17:55:31Z",
+    "url": "https://api.github.com/users/krm-demo/packages/maven/io.github.krm-demo.core-utils/versions/48202980"
+  }
+]
