@@ -1,4 +1,23 @@
-| Version-Tag | Created At |
-|------------:|:-----------|<th:block th:each=="verItem: ${ghPkgVer}">
-| [ [[${ verItem.name }]] ]( [[${ verItem.package_html_url }]]?version=[[${ verItem.name }]] ) | [[${ verItem.created_at }]] |</th:block>
+This is the result of executing the bash-script `.github/scripts/gh-api--list-package-versions-all.sh`,
+which invokes `gh api ...`, saves the result of that invocation as JSON in `.github/th-vars`-directory
+and after that **`th-tool`** is processing the th-template `.github/th-templates/GH-Packages-Versions-All.md.th`
+and prints the rendered [GitHub Markdown](https://github.github.com/gfm/) into `$GITHUB_STEP_SUMMARY`.
+
+### List of all [[${ghPkgVer.size()}]] INTERNAL-releases that were performed so far
+
+<details>
+<summary>
+    the content of <code>ghPkgVer</code>-variable as JSON 
+    (<code>th-tool</code>-expression is <code>[&#8203;(${ cu.dumpAsJsonTxt(ghPkgVer) })&#8203;]</code>)
+</summary>
+
+```json
+[(${ cu.dumpAsJsonTxt(ghPkgVer) })]
+```
+</details>
+
+
+| # | Version-Tag | Created At |
+|--:|:------------:|:-----------|<th:block th:each=="verItem, verItemSt: ${ghPkgVer}">
+|  `#[[${ verItemSt.index + 1 }]]` |[ [[${ verItem.name }]] ]( [[${ verItem.package_html_url }]]?version=[[${ verItem.name }]] ) | [[${ verItem.created_at }]] |</th:block>
  

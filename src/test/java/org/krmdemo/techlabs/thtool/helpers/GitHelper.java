@@ -67,8 +67,12 @@ public class GitHelper {
         ttCtx.setVariable(VAR_NAME__HELPER, new GitHelper());
     }
 
+    /**
+     * An empty constructor implies that the current working directory is the root of local <b>{@code git}</b>-repository.
+     * In most cases such directory has a hidden direct subdirectory "{@code .git}".
+     */
     public GitHelper() {
-        // at most file-systems the dot "." means the current working-directory:
+        // in most of file-systems the dot "." means the current working-directory:
         this(".");
     }
 

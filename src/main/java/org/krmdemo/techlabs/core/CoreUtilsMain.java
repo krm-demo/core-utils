@@ -1,5 +1,9 @@
 package org.krmdemo.techlabs.core;
 
+import org.krmdemo.techlabs.core.dump.DumpUtils;
+import org.krmdemo.techlabs.core.dump.PrintUtils;
+import org.krmdemo.techlabs.core.dump.ToFileUtils;
+
 /**
  * TODO: provide the comprehensive Java-Doc !!!
  */
