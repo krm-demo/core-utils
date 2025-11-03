@@ -1,3 +1,4 @@
+cee01f85 improve information about workflow-run and display LICENSE-badge at README.md.th #1
 2487a349 << new snapshot version >> 21.23.005-SNAPSHOT
 2e3772d9 << internal release >> 21.23.004
 5e9ed32e minor corrections at USAGEs to avoid using badges inside the text #3
