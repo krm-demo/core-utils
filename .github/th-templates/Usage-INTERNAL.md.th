@@ -12,7 +12,8 @@ This particular version of the project `[[${mh.currentProjectVersion}]]` is an _
 > [!NOTE]
 > The _INTERNAL_-release version has 3 integer parts (_major_, _minor_ and _incremental_) parts **without** suffix `-SNAPSHOT`.
 > It's built and deployed into [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) 
-> artifactory as a result of manual execution of GitHub workflow [`release-internal`]([[${github.event.repository.html_url}]]/actions/workflows/release-internal.yml).
+> artifactory as a result of manual execution of GitHub workflow [`release-internal`]([[${github.event.repository.html_url}]]/actions/workflows/release-internal.yml)
+> with workflow-job [`[[${github.workflow + " #" + github.run_number}]]`]([[${github.event.repository.html_url}]]/actions/runs/[[${github.run_id}]])
 
 The main purpose of _INTERNAL_-release is the final verification before _PUBLIC_-release 
 and in addition to that it's the only true-way to verify the generation of `*.md`-files
