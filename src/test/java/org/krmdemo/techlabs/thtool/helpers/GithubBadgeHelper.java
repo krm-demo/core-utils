@@ -88,12 +88,12 @@ public class GithubBadgeHelper {
 
     // --------------------------------------------------------------------------------------------
 
-    private final static String LOGO_SLUG_NAME__GIT_HUB = "github";
-    private final static String LABEL_COLOR__VERSION = "blue";
-    private final static String LABEL_COLOR__JAVADOC_NAVBAR = "4D7A97";
-    private final static String LABEL_COLOR__GITHUB = "black";
-    private final static String LOGO_COLOR__JAVADOC_SELECTED = "f8981d";
-    private final static String LOGO_COLOR__GITHUB = "white";
+    final static String LOGO_SLUG_NAME__GIT_HUB = "github";
+    final static String LABEL_COLOR__VERSION = "blue";
+    final static String LABEL_COLOR__JAVADOC_NAVBAR = "4D7A97";
+    final static String LABEL_COLOR__GITHUB = "black";
+    final static String LOGO_COLOR__JAVADOC_SELECTED = "f8981d";
+    final static String LOGO_COLOR__GITHUB = "white";
 
     /**
      * @return the GitHub-Markdown'-badge to 'Release Catalog' (to be inserted at 'README.md')

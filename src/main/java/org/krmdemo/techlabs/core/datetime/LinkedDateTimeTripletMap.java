@@ -27,6 +27,12 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
     /**
      * Extension to {@link DateTimeTriplet} that allows to link that triplet
      * with sequentially previous and next triplets in corresponding collection or map.
+     * <hr/>
+     * The term <i>linked</i> here means that for neighbour items with the same part of {@link DateTimeTriplet}
+     * the value is not duplicated, but displayed only once (depending on linking direction).
+     * A good example of how it's working is a 'Release Catalog' of this project, where the {@link LinkedTriplet}s
+     * are displayed in the first 3 columns (per each part of triplet), which allows the page to look more friendly
+     * without the duplicated garbage.
      */
     public static class LinkedTriplet extends DateTimeTriplet {
         private LinkedTriplet prev;
@@ -42,26 +48,26 @@ public class LinkedDateTimeTripletMap<Key> extends LinkedHashMap<Key, LinkedDate
             next.prev = this;
         }
 
-        public LinkedTriplet(long epochSeconds) {
-            super(epochSeconds);
-        }
-
-        public LinkedTriplet(long epochSeconds, int nanoOfSecond) {
-            super(epochSeconds, nanoOfSecond);
-        }
-
-        public LinkedTriplet(Instant instant) {
+        LinkedTriplet(Instant instant) {
             super(instant);
         }
 
-        public LinkedTriplet(LocalDateTime localDateTimeUTC) {
-            super(localDateTimeUTC);
-        }
-
+        /**
+         * Allows to determine whether to display all three parts of linked triplet (not used now),
+         * comparing all parts of <b>the previous</b> item and this one.
+         *
+         * @return {@code true} if the parts of <b>the previous</b> item is are same as in this one
+         */
         public boolean isTheSameAsPrev() {
             return Objects.equals(this, prev);
         }
 
+        /**
+         * Allows to determine whether to display all three parts of linked triplet (not used now),
+         * comparing all parts of <b>the next</b> item and this one.
+         *
+         * @return {@code true} if the parts of <b>the next</b> item is are same as in this one
+         */
         public boolean isTheSameAsNext() {
             return Objects.equals(this, next);
         }

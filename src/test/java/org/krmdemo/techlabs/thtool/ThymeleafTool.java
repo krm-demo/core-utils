@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
 import org.krmdemo.techlabs.jacoco.JacocoHelper;
 import org.krmdemo.techlabs.opentest4j.OpenTest4jHelper;
+import org.krmdemo.techlabs.thtool.helpers.ArtifactoryHelper;
 import org.krmdemo.techlabs.thtool.helpers.CoreUtilsHelper;
 import org.krmdemo.techlabs.thtool.helpers.GitHelper;
 import org.krmdemo.techlabs.thtool.helpers.GithubBadgeHelper;
@@ -194,6 +195,7 @@ public class ThymeleafTool {
     static int executeMain(String... args) {
         // TODO: the way to register th-tool-helper must be re-engineered with usage of ClassIndex-annotations and SPI
         ThymeleafTool tt = new ThymeleafTool(
+            ArtifactoryHelper::register,
             CoreUtilsHelper::register,
             GitHelper::register,
             GithubHelper::register,
