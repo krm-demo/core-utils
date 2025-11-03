@@ -1,3 +1,4 @@
+60d876e5 minor corrections at USAGEs to avoid using badges inside the text
 a4f7b713 << new snapshot version >> 21.23.004-SNAPSHOT
 0296e366 << internal release >> 21.23.003
 ae14c044 refactor GithubBadgeHelper - introduce GH_PAGES_ROOT and 'get...Url' methods for JavaDoc and GitHub URLs #1
