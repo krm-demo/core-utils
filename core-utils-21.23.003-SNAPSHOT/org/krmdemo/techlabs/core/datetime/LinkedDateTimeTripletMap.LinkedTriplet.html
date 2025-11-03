@@ -71,16 +71,7 @@ loadScripts(document, 'script');</script>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">Description</a></li>
 <li><a href="#field-summary" tabindex="0">Field Summary</a></li>
-<li><a href="#constructor-summary" tabindex="0">Constructor Summary</a></li>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
-<li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
-<ol class="toc-list">
-<li><a href="#%3Cinit%3E(long)" tabindex="0">LinkedTriplet(long)</a></li>
-<li><a href="#%3Cinit%3E(long,int)" tabindex="0">LinkedTriplet(long, int)</a></li>
-<li><a href="#%3Cinit%3E(java.time.Instant)" tabindex="0">LinkedTriplet(Instant)</a></li>
-<li><a href="#%3Cinit%3E(java.time.LocalDateTime)" tabindex="0">LinkedTriplet(LocalDateTime)</a></li>
-</ol>
-</li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
 <li><a href="#isTheSameAsPrev()" tabindex="0">isTheSameAsPrev()</a></li>
@@ -117,10 +108,16 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public static class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.html#line-31">LinkedDateTimeTripletMap.LinkedTriplet</a></span>
+<div class="type-signature"><span class="modifiers">public static class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.html#line-37">LinkedDateTimeTripletMap.LinkedTriplet</a></span>
 <span class="extends-implements">extends <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></span></div>
 <div class="block">Extension to <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a> that allows to link that triplet
-with sequentially previous and next triplets in corresponding collection or map.</div>
+with sequentially previous and next triplets in corresponding collection or map.
+<hr/>
+The term <i>linked</i> here means that for neighbour items with the same part of <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a>
+the value is not duplicated, but displayed only once (depending on linking direction).
+A good example of how it's working is a 'Release Catalog' of this project, where the <a href="LinkedDateTimeTripletMap.LinkedTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>LinkedDateTimeTripletMap.LinkedTriplet</code></a>s
+are displayed in the first 3 columns (per each part of triplet), which allows the page to look more friendly
+without the duplicated garbage.</div>
 </div>
 </section>
 <section class="summary">
@@ -132,26 +129,6 @@ with sequentially previous and next triplets in corresponding collection or map.
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.krmdemo.techlabs.core.datetime.DateTimeTriplet">Fields inherited from class&nbsp;<a href="DateTimeTriplet.html#field-summary" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></h3>
 <code><a href="DateTimeTriplet.html#DAY_OF_WEEK__LOCALE">DAY_OF_WEEK__LOCALE</a>, <a href="DateTimeTriplet.html#DAY_OF_WEEK__TEXT_STYLE">DAY_OF_WEEK__TEXT_STYLE</a>, <a href="DateTimeTriplet.html#NOW_PROVIDER">NOW_PROVIDER</a></code></div>
-</section>
-</li>
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<li>
-<section class="constructor-summary" id="constructor-summary">
-<h2>Constructor Summary</h2>
-<div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
-<div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(long)" class="member-name-link">LinkedTriplet</a><wbr>(long&nbsp;epochSeconds)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(long,int)" class="member-name-link">LinkedTriplet</a><wbr>(long&nbsp;epochSeconds,
- int&nbsp;nanoOfSecond)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.time.Instant)" class="member-name-link">LinkedTriplet</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link">Instant</a>&nbsp;instant)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.time.LocalDateTime)" class="member-name-link">LinkedTriplet</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;localDateTimeUTC)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-</div>
 </section>
 </li>
 <!-- ========== METHOD SUMMARY =========== -->
@@ -202,10 +179,16 @@ with sequentially previous and next triplets in corresponding collection or map.
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isTheSameAsNext()" class="member-name-link">isTheSameAsNext</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Allows to determine whether to display all three parts of linked triplet (not used now),
+comparing all parts of <b>the next</b> item and this one.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isTheSameAsPrev()" class="member-name-link">isTheSameAsPrev</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Allows to determine whether to display all three parts of linked triplet (not used now),
+comparing all parts of <b>the previous</b> item and this one.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isYearAnMonthTheSameAsNext()" class="member-name-link">isYearAnMonthTheSameAsNext</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -231,47 +214,6 @@ with sequentially previous and next triplets in corresponding collection or map.
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<li>
-<section class="constructor-details" id="constructor-detail">
-<h2>Constructor Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="&lt;init&gt;(long)">
-<h3>LinkedTriplet</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-45">LinkedTriplet</a></span><wbr><span class="parameters">(long&nbsp;epochSeconds)</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(long,int)">
-<h3>LinkedTriplet</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-49">LinkedTriplet</a></span><wbr><span class="parameters">(long&nbsp;epochSeconds,
- int&nbsp;nanoOfSecond)</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(java.time.Instant)">
-<h3>LinkedTriplet</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-53">LinkedTriplet</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link">Instant</a>&nbsp;instant)</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(java.time.LocalDateTime)">
-<h3>LinkedTriplet</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-57">LinkedTriplet</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;localDateTimeUTC)</span></div>
-</div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ============ METHOD DETAIL ========== -->
 <li>
 <section class="method-details" id="method-detail">
@@ -282,6 +224,12 @@ with sequentially previous and next triplets in corresponding collection or map.
 <h3>isTheSameAsPrev</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-61">isTheSameAsPrev</a></span>()</div>
+<div class="block">Allows to determine whether to display all three parts of linked triplet (not used now),
+comparing all parts of <b>the previous</b> item and this one.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if the parts of <b>the previous</b> item is are same as in this one</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -289,7 +237,13 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="isTheSameAsNext()">
 <h3>isTheSameAsNext</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-65">isTheSameAsNext</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-71">isTheSameAsNext</a></span>()</div>
+<div class="block">Allows to determine whether to display all three parts of linked triplet (not used now),
+comparing all parts of <b>the next</b> item and this one.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if the parts of <b>the next</b> item is are same as in this one</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -297,7 +251,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="isYearAnMonthTheSameAsPrev()">
 <h3>isYearAnMonthTheSameAsPrev</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-75">isYearAnMonthTheSameAsPrev</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-81">isYearAnMonthTheSameAsPrev</a></span>()</div>
 <div class="block">Comparing on equality on <b>the first part</b> of triplet with <b>the previous</b> linked value</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -311,7 +265,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="isYearAnMonthTheSameAsNext()">
 <h3>isYearAnMonthTheSameAsNext</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-85">isYearAnMonthTheSameAsNext</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-91">isYearAnMonthTheSameAsNext</a></span>()</div>
 <div class="block">Comparing on equality on <b>the first part</b> of triplet with <b>the next</b> linked value</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -325,7 +279,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="isDayOfMonthAndWeekTheSameAsPrev()">
 <h3>isDayOfMonthAndWeekTheSameAsPrev</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-95">isDayOfMonthAndWeekTheSameAsPrev</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-101">isDayOfMonthAndWeekTheSameAsPrev</a></span>()</div>
 <div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the previous</b> linked value</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -339,7 +293,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="isDayOfMonthAndWeekTheSameAsNext()">
 <h3>isDayOfMonthAndWeekTheSameAsNext</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-105">isDayOfMonthAndWeekTheSameAsNext</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-111">isDayOfMonthAndWeekTheSameAsNext</a></span>()</div>
 <div class="block">Comparing on equality on <b>the second part</b> of triplet with <b>the next</b> linked value</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -353,7 +307,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="isHoursMinutesTheSameAsPrev()">
 <h3>isHoursMinutesTheSameAsPrev</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-115">isHoursMinutesTheSameAsPrev</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-121">isHoursMinutesTheSameAsPrev</a></span>()</div>
 <div class="block">Comparing on equality on <b>the third part</b> of triplet with <b>the previous</b> linked value</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -367,7 +321,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="isHoursMinutesTheSameAsNext()">
 <h3>isHoursMinutesTheSameAsNext</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-125">isHoursMinutesTheSameAsNext</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-131">isHoursMinutesTheSameAsNext</a></span>()</div>
 <div class="block">Comparing on equality on <b>the third part</b> of triplet with <b>the next</b> linked value</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -381,7 +335,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="getLinkedYearAndMonth()">
 <h3>getLinkedYearAndMonth</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-133">getLinkedYearAndMonth</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-139">getLinkedYearAndMonth</a></span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the value of <a href="DateTimeTriplet.html#getYearAndMonth()"><code>DateTimeTriplet.getYearAndMonth()</code></a> followed by dash<code>'-'</code>-symbol,
@@ -394,7 +348,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="getLinkedDayOfMonthAndWeek()">
 <h3>getLinkedDayOfMonthAndWeek</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-142">getLinkedDayOfMonthAndWeek</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-148">getLinkedDayOfMonthAndWeek</a></span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the value of <a href="DateTimeTriplet.html#getDayOfMonthAndWeek()"><code>DateTimeTriplet.getDayOfMonthAndWeek()</code></a>, if <a href="#getLinkedYearAndMonth()"><code>getLinkedYearAndMonth()</code></a> is not empty
@@ -408,7 +362,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="getLinkedHoursMinutes()">
 <h3>getLinkedHoursMinutes</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-151">getLinkedHoursMinutes</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-157">getLinkedHoursMinutes</a></span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the value of <a href="DateTimeTriplet.html#getDayOfMonthAndWeek()"><code>DateTimeTriplet.getDayOfMonthAndWeek()</code></a>, if <a href="#getLinkedYearAndMonth()"><code>getLinkedYearAndMonth()</code></a> is not empty
@@ -422,7 +376,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="dumpLinked()">
 <h3>dumpLinked</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-159">dumpLinked</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-165">dumpLinked</a></span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the same as inherited <a href="DateTimeTriplet.html#dump()"><code>DateTimeTriplet.dump()</code></a>, but skip displaying the values of parts,
@@ -435,7 +389,7 @@ with sequentially previous and next triplets in corresponding collection or map.
 <section class="detail" id="dumpLinkedReversed()">
 <h3>dumpLinkedReversed</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-170">dumpLinkedReversed</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#line-176">dumpLinkedReversed</a></span>()</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the same as inherited <a href="DateTimeTriplet.html#dump()"><code>DateTimeTriplet.dump()</code></a>, but skip displaying the values of parts,

@@ -58,5 +58,5 @@ core-utils,org.krmdemo.techlabs.core.dump.json,JsonTxtDumper,0,259,0,12,0,59,0,1
 core-utils,org.krmdemo.techlabs.core.datetime,CoreDateTimeUtils,9,5,0,0,2,1,2,1,2,1
 core-utils,org.krmdemo.techlabs.core.datetime,DateTimeTriplet,6,187,1,1,2,31,2,22,1,22
 core-utils,org.krmdemo.techlabs.core.datetime,LinkedDateTimeTripletMap,0,66,0,2,0,15,0,7,0,6
-core-utils,org.krmdemo.techlabs.core.datetime,LinkedDateTimeTripletMap.LinkedTriplet,30,134,0,16,11,22,6,21,6,13
+core-utils,org.krmdemo.techlabs.core.datetime,LinkedDateTimeTripletMap.LinkedTriplet,17,134,0,16,5,22,3,21,3,13
 core-utils,org.krmdemo.techlabs.core,CoreUtilsMain,3,4,0,0,1,2,1,1,1,1

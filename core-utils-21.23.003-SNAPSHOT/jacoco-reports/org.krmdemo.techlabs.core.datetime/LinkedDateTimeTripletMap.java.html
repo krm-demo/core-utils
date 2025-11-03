@@ -27,43 +27,49 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
     /**
      * Extension to {@link DateTimeTriplet} that allows to link that triplet
      * with sequentially previous and next triplets in corresponding collection or map.
+     * &lt;hr/&gt;
+     * The term &lt;i&gt;linked&lt;/i&gt; here means that for neighbour items with the same part of {@link DateTimeTriplet}
+     * the value is not duplicated, but displayed only once (depending on linking direction).
+     * A good example of how it's working is a 'Release Catalog' of this project, where the {@link LinkedTriplet}s
+     * are displayed in the first 3 columns (per each part of triplet), which allows the page to look more friendly
+     * without the duplicated garbage.
      */
     public static class LinkedTriplet extends DateTimeTriplet {
         private LinkedTriplet prev;
         private LinkedTriplet next;
 
         void linkPrev(LinkedTriplet prev) {
-<span class="fc" id="L36">            this.prev = prev;</span>
-<span class="fc" id="L37">            prev.next = this;</span>
-<span class="fc" id="L38">        }</span>
+<span class="fc" id="L42">            this.prev = prev;</span>
+<span class="fc" id="L43">            prev.next = this;</span>
+<span class="fc" id="L44">        }</span>
 
         void linkNext(LinkedTriplet next) {
-<span class="nc" id="L41">            this.next = next;</span>
-<span class="nc" id="L42">            next.prev = this;</span>
-<span class="nc" id="L43">        }</span>
+<span class="nc" id="L47">            this.next = next;</span>
+<span class="nc" id="L48">            next.prev = this;</span>
+<span class="nc" id="L49">        }</span>
 
-        public LinkedTriplet(long epochSeconds) {
-<span class="nc" id="L46">            super(epochSeconds);</span>
-<span class="nc" id="L47">        }</span>
+        LinkedTriplet(Instant instant) {
+<span class="fc" id="L52">            super(instant);</span>
+<span class="fc" id="L53">        }</span>
 
-        public LinkedTriplet(long epochSeconds, int nanoOfSecond) {
-<span class="nc" id="L50">            super(epochSeconds, nanoOfSecond);</span>
-<span class="nc" id="L51">        }</span>
-
-        public LinkedTriplet(Instant instant) {
-<span class="fc" id="L54">            super(instant);</span>
-<span class="fc" id="L55">        }</span>
-
-        public LinkedTriplet(LocalDateTime localDateTimeUTC) {
-<span class="nc" id="L58">            super(localDateTimeUTC);</span>
-<span class="nc" id="L59">        }</span>
-
+        /**
+         * Allows to determine whether to display all three parts of linked triplet (not used now),
+         * comparing all parts of &lt;b&gt;the previous&lt;/b&gt; item and this one.
+         *
+         * @return {@code true} if the parts of &lt;b&gt;the previous&lt;/b&gt; item is are same as in this one
+         */
         public boolean isTheSameAsPrev() {
 <span class="nc" id="L62">            return Objects.equals(this, prev);</span>
         }
 
+        /**
+         * Allows to determine whether to display all three parts of linked triplet (not used now),
+         * comparing all parts of &lt;b&gt;the next&lt;/b&gt; item and this one.
+         *
+         * @return {@code true} if the parts of &lt;b&gt;the next&lt;/b&gt; item is are same as in this one
+         */
         public boolean isTheSameAsNext() {
-<span class="nc" id="L66">            return Objects.equals(this, next);</span>
+<span class="nc" id="L72">            return Objects.equals(this, next);</span>
         }
 
         /**
@@ -73,7 +79,7 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *          (and {@code false} - otherwise)
          */
         public boolean isYearAnMonthTheSameAsPrev() {
-<span class="fc" id="L76">            return equalProps(this, prev, DateTimeTriplet::getYearAndMonth);</span>
+<span class="fc" id="L82">            return equalProps(this, prev, DateTimeTriplet::getYearAndMonth);</span>
         }
 
         /**
@@ -83,7 +89,7 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *          (and {@code false} - otherwise)
          */
         public boolean isYearAnMonthTheSameAsNext() {
-<span class="fc" id="L86">            return equalProps(this, next, DateTimeTriplet::getYearAndMonth);</span>
+<span class="fc" id="L92">            return equalProps(this, next, DateTimeTriplet::getYearAndMonth);</span>
         }
 
         /**
@@ -93,7 +99,7 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *          (and {@code false} - otherwise)
          */
         public boolean isDayOfMonthAndWeekTheSameAsPrev() {
-<span class="fc" id="L96">            return equalProps(this, prev, DateTimeTriplet::getDayOfMonthAndWeek);</span>
+<span class="fc" id="L102">            return equalProps(this, prev, DateTimeTriplet::getDayOfMonthAndWeek);</span>
         }
 
         /**
@@ -103,7 +109,7 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *          (and {@code false} - otherwise)
          */
         public boolean isDayOfMonthAndWeekTheSameAsNext() {
-<span class="fc" id="L106">            return equalProps(this, next, DateTimeTriplet::getDayOfMonthAndWeek);</span>
+<span class="fc" id="L112">            return equalProps(this, next, DateTimeTriplet::getDayOfMonthAndWeek);</span>
         }
 
         /**
@@ -113,7 +119,7 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *          (and {@code false} - otherwise)
          */
         public boolean isHoursMinutesTheSameAsPrev() {
-<span class="fc" id="L116">            return equalProps(this, prev, DateTimeTriplet::getHoursMinutes);</span>
+<span class="fc" id="L122">            return equalProps(this, prev, DateTimeTriplet::getHoursMinutes);</span>
         }
 
         /**
@@ -123,7 +129,7 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *          (and {@code false} - otherwise)
          */
         public boolean isHoursMinutesTheSameAsNext() {
-<span class="fc" id="L126">            return equalProps(this, next, DateTimeTriplet::getHoursMinutes);</span>
+<span class="fc" id="L132">            return equalProps(this, next, DateTimeTriplet::getHoursMinutes);</span>
         }
 
         /**
@@ -131,7 +137,7 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *      if it's not the same as in previous item in sequence (otherwise - empty string)
          */
         public String getLinkedYearAndMonth() {
-<span class="fc bfc" id="L134" title="All 2 branches covered.">            return isYearAnMonthTheSameAsPrev() ? &quot;&quot; : getYearAndMonth() + &quot;-&quot;;</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">            return isYearAnMonthTheSameAsPrev() ? &quot;&quot; : getYearAndMonth() + &quot;-&quot;;</span>
         }
 
         /**
@@ -140,7 +146,7 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *      (otherwise - empty string)
          */
         public String getLinkedDayOfMonthAndWeek() {
-<span class="fc bfc" id="L143" title="All 4 branches covered.">            return isYearAnMonthTheSameAsPrev() &amp;&amp; isDayOfMonthAndWeekTheSameAsPrev() ?  &quot;&quot; : getDayOfMonthAndWeek();</span>
+<span class="fc bfc" id="L149" title="All 4 branches covered.">            return isYearAnMonthTheSameAsPrev() &amp;&amp; isDayOfMonthAndWeekTheSameAsPrev() ?  &quot;&quot; : getDayOfMonthAndWeek();</span>
         }
 
         /**
@@ -149,7 +155,7 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *      (otherwise - dash{@code '-'}-symbol instead of digits)
          */
         public String getLinkedHoursMinutes() {
-<span class="fc bfc" id="L152" title="All 4 branches covered.">            return isDayOfMonthAndWeekTheSameAsPrev() &amp;&amp; isHoursMinutesTheSameAsPrev() ? &quot;--:--&quot; : getHoursMinutes();</span>
+<span class="fc bfc" id="L158" title="All 4 branches covered.">            return isDayOfMonthAndWeekTheSameAsPrev() &amp;&amp; isHoursMinutesTheSameAsPrev() ? &quot;--:--&quot; : getHoursMinutes();</span>
         }
 
         /**
@@ -157,10 +163,10 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *          if they repeat the same of the &lt;b&gt;previous&lt;/b&gt; item in sequence
          */
         public String dumpLinked() {
-<span class="fc" id="L160">            return String.format(&quot;%8s%8s%6s&quot;,</span>
-<span class="fc" id="L161">                this.getLinkedYearAndMonth(),</span>
-<span class="fc" id="L162">                this.getLinkedDayOfMonthAndWeek(),</span>
-<span class="fc" id="L163">                this.getLinkedHoursMinutes());</span>
+<span class="fc" id="L166">            return String.format(&quot;%8s%8s%6s&quot;,</span>
+<span class="fc" id="L167">                this.getLinkedYearAndMonth(),</span>
+<span class="fc" id="L168">                this.getLinkedDayOfMonthAndWeek(),</span>
+<span class="fc" id="L169">                this.getLinkedHoursMinutes());</span>
         }
 
         /**
@@ -168,10 +174,10 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
          *          if they repeat the same of the &lt;b&gt;next&lt;/b&gt; item in sequence
          */
         public String dumpLinkedReversed() {
-<span class="fc" id="L171">            return String.format(&quot;%8s%8s%6s&quot;,</span>
-<span class="fc bfc" id="L172" title="All 2 branches covered.">                this.isYearAnMonthTheSameAsNext() ? &quot;&quot; : this.getYearAndMonth() + &quot;-&quot;,</span>
-<span class="fc bfc" id="L173" title="All 2 branches covered.">                this.isDayOfMonthAndWeekTheSameAsNext() ? &quot;&quot; : this.getDayOfMonthAndWeek(),</span>
-<span class="fc bfc" id="L174" title="All 2 branches covered.">                this.isHoursMinutesTheSameAsNext() ? &quot;--:--&quot; : this.getHoursMinutes());</span>
+<span class="fc" id="L177">            return String.format(&quot;%8s%8s%6s&quot;,</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">                this.isYearAnMonthTheSameAsNext() ? &quot;&quot; : this.getYearAndMonth() + &quot;-&quot;,</span>
+<span class="fc bfc" id="L179" title="All 2 branches covered.">                this.isDayOfMonthAndWeekTheSameAsNext() ? &quot;&quot; : this.getDayOfMonthAndWeek(),</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">                this.isHoursMinutesTheSameAsNext() ? &quot;--:--&quot; : this.getHoursMinutes());</span>
         }
     }
 
@@ -194,16 +200,16 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
     public static &lt;Key, Value&gt;
     LinkedDateTimeTripletMap&lt;Key&gt;
     create(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Instant&gt; instantFunc) {
-<span class="fc" id="L197">        LinkedDateTimeTripletMap&lt;Key&gt; dttMap = new LinkedDateTimeTripletMap&lt;&gt;();</span>
-<span class="fc" id="L198">        originalMap.forEach((Key key, Value value) -&gt; {</span>
-<span class="fc" id="L199">            Instant instant = instantFunc.apply(value);</span>
-<span class="fc" id="L200">            LinkedTriplet dtt = new LinkedTriplet(instant);</span>
-<span class="fc bfc" id="L201" title="All 2 branches covered.">            if (!dttMap.isEmpty()) {</span>
-<span class="fc" id="L202">                dtt.linkPrev(dttMap.lastEntry().getValue());</span>
+<span class="fc" id="L203">        LinkedDateTimeTripletMap&lt;Key&gt; dttMap = new LinkedDateTimeTripletMap&lt;&gt;();</span>
+<span class="fc" id="L204">        originalMap.forEach((Key key, Value value) -&gt; {</span>
+<span class="fc" id="L205">            Instant instant = instantFunc.apply(value);</span>
+<span class="fc" id="L206">            LinkedTriplet dtt = new LinkedTriplet(instant);</span>
+<span class="fc bfc" id="L207" title="All 2 branches covered.">            if (!dttMap.isEmpty()) {</span>
+<span class="fc" id="L208">                dtt.linkPrev(dttMap.lastEntry().getValue());</span>
             }
-<span class="fc" id="L204">            dttMap.putLast(key, dtt);</span>
-<span class="fc" id="L205">        });</span>
-<span class="fc" id="L206">        return dttMap;</span>
+<span class="fc" id="L210">            dttMap.putLast(key, dtt);</span>
+<span class="fc" id="L211">        });</span>
+<span class="fc" id="L212">        return dttMap;</span>
     }
 
     /**
@@ -219,11 +225,11 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
     public static &lt;Key, Value&gt;
     LinkedDateTimeTripletMap&lt;Key&gt;
     createByEpochSeconds(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Long&gt; epochSecondsFunc) {
-<span class="fc" id="L222">        Function&lt;Value, Instant&gt; instantFunc = (Value value) -&gt; {</span>
-<span class="fc" id="L223">            Long epochSeconds = epochSecondsFunc.apply(value);</span>
-<span class="fc" id="L224">            return Instant.ofEpochSecond(epochSeconds);</span>
+<span class="fc" id="L228">        Function&lt;Value, Instant&gt; instantFunc = (Value value) -&gt; {</span>
+<span class="fc" id="L229">            Long epochSeconds = epochSecondsFunc.apply(value);</span>
+<span class="fc" id="L230">            return Instant.ofEpochSecond(epochSeconds);</span>
         };
-<span class="fc" id="L226">        return create(originalMap, instantFunc);</span>
+<span class="fc" id="L232">        return create(originalMap, instantFunc);</span>
     }
 
     /**
@@ -239,8 +245,8 @@ public class LinkedDateTimeTripletMap&lt;Key&gt; extends LinkedHashMap&lt;Key, L
     public static &lt;Key, Value&gt;
     LinkedDateTimeTripletMap&lt;Key&gt;
     createByEpochSecondsInt(SequencedMap&lt;Key,Value&gt; originalMap, Function&lt;Value, Integer&gt; epochSecondsIntFunc) {
-<span class="fc" id="L242">        Function&lt;Value, Long&gt; epochSecondsFunc = (Value value) -&gt; epochSecondsIntFunc.apply(value).longValue();</span>
-<span class="fc" id="L243">        return createByEpochSeconds(originalMap, epochSecondsFunc);</span>
+<span class="fc" id="L248">        Function&lt;Value, Long&gt; epochSecondsFunc = (Value value) -&gt; epochSecondsIntFunc.apply(value).longValue();</span>
+<span class="fc" id="L249">        return createByEpochSeconds(originalMap, epochSecondsFunc);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
