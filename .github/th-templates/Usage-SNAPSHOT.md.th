@@ -5,7 +5,7 @@ This particular version of the project `[[${mh.currentProjectVersion}]]` is a _S
 - the qualifier `[[${mh.versionQualifier}]]` means that it's a _SNAPSHOT_-version (not released yet in any kind)
 
 > [!IMPORTANT]
-> It's highly recommended to use the latest _PUBLIC_-release [`[[${gbh.latestPublicVersion}]]`]([(${gbh.latestPublicGitHubUrl})]),
+> It's highly recommended to use the latest _PUBLIC_-release [**`[[${mh.projectArtifact + ":" + gbh.latestPublicVersion}]]`**]([(${gbh.latestPublicGitHubUrl})]),
 > because all others are either outdated or not stable yet.
 
 ## Working with SNAPSHOT-version of `[[${mh.projectArtifact}]]`-library

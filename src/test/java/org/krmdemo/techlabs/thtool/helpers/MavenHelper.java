@@ -116,7 +116,7 @@ public class MavenHelper {
     }
 
     /**
-     * @return the name of project artifact ({@code "core-utils"})
+     * @return the name of the project artifact ({@code "core-utils"})
      */
     public String getProjectArtifact() {
         return mvnPropsMap.get(PROP_NAME__PROJECT_ARTIFACT);

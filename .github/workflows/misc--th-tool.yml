@@ -2,6 +2,9 @@ name: th-tool
 run-name: ${{ github.actor }} has executed 'misc--th-tool.yml' №${{ github.run_number }}
 on: workflow_dispatch
 
+# Note! The multiple execution of "th-tool" slow down the execution of this workflow considerably...
+# So, it's recommended to process a single th-template instead of multiple call to "th-tool.sh eval ..."
+
 jobs:
   th-tool:
     runs-on: ubuntu-latest
@@ -72,14 +75,16 @@ jobs:
 
       - name: "Examples of maven-versions expressions by 'th-tool' from 'mavenProps':"
         run: |
+          .github/th-tool.sh eval mavenProps.get$'\'("maven-project.artifact")\'' --output ./target/result-projectArtifact.txt
+          .github/th-tool.sh eval mavenProps.get$'\'("maven-project.version")\'' --output ./target/result-projectVersion.txt
           .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.majorVersion")\'' --output ./target/result-majorVersion.txt
           .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.minorVersion")\'' --output ./target/result-minorVersion.txt
           .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.incrementalVersion")\'' --output ./target/result-incrementalVersion.txt
           .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.qualifier")\'' --output ./target/result-qualifierVersion.txt
-          .github/th-tool.sh eval mavenProps.get$'\'("maven-project.version")\'' --output ./target/result-projectVersion.txt
           .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.nextMinorVersion")\'' --output ./target/result-nextMinorVersion.txt
           .github/th-tool.sh eval mavenProps.get$'\'("parsedVersion.nextIncrementalVersion")\'' --output ./target/result-nextIncrementalVersion.txt
 
+          PROJECT_ARTIFACT=$(cat ./target/result-projectArtifact.txt)
           CURRENT_VERSION=$(cat ./target/result-projectVersion.txt)
           INTERNAL_RELEASE_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-minorVersion.txt).$(cat ./target/result-incrementalVersion.txt)
           INTERNAL_NEXT_VERSION=$(cat ./target/result-majorVersion.txt).$(cat ./target/result-minorVersion.txt).$(cat ./target/result-nextIncrementalVersion.txt)-$(cat ./target/result-qualifierVersion.txt)
@@ -89,6 +94,7 @@ jobs:
           echo "#### Values of current, release and next versions  (by 'mavenProps' resource-var):" >> $GITHUB_STEP_SUMMARY
           echo "| Env-Var | Value | Description |" >> $GITHUB_STEP_SUMMARY
           echo "| --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`PROJECT_ARTIFACT\` | \`PROJECT_ARTIFACT\` | The name of the project artifact in \`pom.xml\` |" >> $GITHUB_STEP_SUMMARY
           echo "| \`CURRENT_VERSION\` | \`$CURRENT_VERSION\` | Current version of project in \`pom.xml\` |" >> $GITHUB_STEP_SUMMARY
           echo "| \`INTERNAL_RELEASE_VERSION\` | \`$INTERNAL_RELEASE_VERSION\` | The version of next **internal release** |" >> $GITHUB_STEP_SUMMARY
           echo "| \`INTERNAL_NEXT_VERSION\` | \`$INTERNAL_NEXT_VERSION\` | The next development version **after internal release**|" >> $GITHUB_STEP_SUMMARY
@@ -100,6 +106,7 @@ jobs:
           echo "#### Values of current, release and next versions (by 'mh'-helper):" >> $GITHUB_STEP_SUMMARY
           echo "| th-tool eval \`...\` | Value | Description |" >> $GITHUB_STEP_SUMMARY
           echo "| --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| \`mh.projectArtifact\` | \`$(.github/th-tool.sh eval mh.projectArtifact)\` | The name of the project artifact in \`pom.xml\` |" >> $GITHUB_STEP_SUMMARY
           echo "| \`mh.currentProjectVersion\` | \`$(.github/th-tool.sh eval mh.currentProjectVersion)\` | Current version of project in \`pom.xml\` |" >> $GITHUB_STEP_SUMMARY
           echo "| \`mh.calculatedProjectVersion\` | \`$(.github/th-tool.sh eval mh.calculatedProjectVersion)\` | Current version, but calculated from parts |" >> $GITHUB_STEP_SUMMARY
           echo "| \`mh.internalReleaseVersion\` | \`$(.github/th-tool.sh eval mh.internalReleaseVersion)\` | The version of next **internal release** |" >> $GITHUB_STEP_SUMMARY
