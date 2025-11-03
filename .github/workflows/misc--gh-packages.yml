@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} has executed 'misc--gh-packages.yml' №${{ github
 on: workflow_dispatch
 
 jobs:
-  th-tool:
+  gh-api--list-package-versions-all:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,5 +23,8 @@ jobs:
         run: mvn test-compile
 
       - name: "Executing the bash-script '.github/scripts/gh-api--list-package-versions-all.sh':"
+        env:
+          # it's very important to set the env-var 'GH_TOKEN' in order to use "gh"-cli utility!
+          GH_TOKEN: ${{ github.token }}
         run: .github/scripts/gh-api--list-package-versions-all.sh > $GITHUB_STEP_SUMMARY
 
