@@ -27,4 +27,4 @@ echo $GH_PACKAGE_INFO | jq
 echo $GH_PACKAGE_INFO | jq > .github/th-vars/var-ghPkgInfo.json
 
 # process the th-template to print the markdown-content in standard output:
-.github/th-tool.sh process .github/th-templates/GH-Packages-Info.md.th > $GITHUB_STEP_SUMMARY
+.github/th-tool.sh process .github/th-templates/GH-Packages-Info.md.th >> $GITHUB_STEP_SUMMARY

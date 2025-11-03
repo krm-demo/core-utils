@@ -27,4 +27,4 @@ GH_PACKAGE_VERSIONS_ALL=$(gh api \
 echo $GH_PACKAGE_VERSIONS_ALL | jq > .github/th-vars/var-ghPkgVer.json
 
 # process the th-template to print the markdown-content in standard output:
-.github/th-tool.sh process .github/th-templates/GH-Packages-Versions-All.md.th > $GITHUB_STEP_SUMMARY
+.github/th-tool.sh process .github/th-templates/GH-Packages-Versions-All.md.th >> $GITHUB_STEP_SUMMARY
