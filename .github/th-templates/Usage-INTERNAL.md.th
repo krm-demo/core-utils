@@ -1,7 +1,7 @@
 This particular version of the project `[[${mh.currentProjectVersion}]]` is an _INTERNAL_-release version, which consists of
 - major version `[[${mh.majorVersion}]]` (that corresponds to minimal supported version of JDK);
 - minor version `[[${mh.minorVersion}]]` (the ordinal number of _PUBLIC_-release);
-- incremental version `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
+- incremental version `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the previous _PUBLIC_-release);
 
 > [!IMPORTANT]
 > It's highly recommended to use the _PUBLIC_-release [**`[[${mh.projectArtifact + ":" + gbh.latestPublicVersion}]]`**]([(${gbh.latestPublicGitHubUrl})]),

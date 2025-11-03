@@ -1,7 +1,7 @@
 This particular version of the project `[[${mh.currentProjectVersion}]]` is a _SNAPSHOT_-version, which consists of:
 - major version `[[${mh.majorVersion}]]` (that corresponds to minimal supported version of JDK);
 - minor version `[[${mh.minorVersion}]]` (the ordinal number of _PUBLIC_-release);
-- incremental version `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
+- incremental version `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the previous _PUBLIC_-release);
 - the qualifier `[[${mh.versionQualifier}]]` means that it's a _SNAPSHOT_-version (not released yet in any kind)
 
 > [!IMPORTANT]

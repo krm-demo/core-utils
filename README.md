@@ -26,7 +26,7 @@ but the latest relevant versions (with relation to the current one) are:
 This particular version of the project `21.23.004-SNAPSHOT` is a _SNAPSHOT_-version, which consists of:
 - major version `21` (that corresponds to minimal supported version of JDK);
 - minor version `23` (the ordinal number of _PUBLIC_-release);
-- incremental version `4` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
+- incremental version `4` (the ordinal number of _INTERNAL_-release after the previous _PUBLIC_-release);
 - the qualifier `SNAPSHOT` means that it's a _SNAPSHOT_-version (not released yet in any kind)
 
 > [!IMPORTANT]
