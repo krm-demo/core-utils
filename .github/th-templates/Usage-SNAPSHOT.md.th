@@ -5,7 +5,7 @@ This particular version of the project `[[${mh.currentProjectVersion}]]` is a _S
 - the qualifier `[[${mh.versionQualifier}]]` means that it's a _SNAPSHOT_-version (not released yet in any kind)
 
 > [!IMPORTANT]
-> It's highly recommended to use the latest _PUBLIC_-release version [(${gbh.badgeLatestPublicGitHubMD})], 
+> It's highly recommended to use the latest _PUBLIC_-release [`[[${gbh.latestPublicVersion}]]`]([(${gbh.latestPublicGitHubUrl})]),
 > because all others are either outdated or not stable yet.
 
 ## Working with SNAPSHOT-version of `[[${mh.projectArtifact}]]`-library
@@ -14,7 +14,7 @@ This particular version of the project `[[${mh.currentProjectVersion}]]` is a _S
 > The SNAPSHOT-version has 3 integer parts (_major_, _minor_ and _incremental_) followed by the suffix `-SNAPSHOT`.
 > It's built by GitHub workflow [`on-main-push`]([[${github.event.repository.html_url}]]/actions/workflows/on-main-push.yml) on every `git push` into `main` branch.
 
-The JavaDoc is generated and project-site at [( ${gbh.badgeSnapshotJavaDocMD} )] is updated,
+The JavaDoc is generated and the [project-site]([(${gbh.snapshotJavaDocUrl})]) is updated,
 but **nothing is deployed** neither to [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
 artifactory nor to [maven central repository](https://central.sonatype.com/).
 As for content of [GitHub Markdown](https://github.github.com/gfm/) files (like one you are reading now) - they are generated and updated

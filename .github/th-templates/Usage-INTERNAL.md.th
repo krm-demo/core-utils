@@ -4,8 +4,8 @@ This particular version of the project `[[${mh.currentProjectVersion}]]` is an _
 - incremental version `[[${mh.incrementalVersion}]]` (the ordinal number of _INTERNAL_-release after the latest _PUBLIC_-release);
 
 > [!IMPORTANT]
-> It's highly recommended to use the _PUBLIC_-release version [(${gbh.badgeLatestPublicGitHubMD})], 
-> because this one could be not stable enough. 
+> It's highly recommended to use the _PUBLIC_-release [`[[${gbh.latestPublicVersion}]]`]([(${gbh.latestPublicGitHubUrl})]),
+> because the current one could be not stable enough.
 
 ## Installation and Usage of INTERNAL-release of `[[${mh.projectArtifact}]]`-library
 
