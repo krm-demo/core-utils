@@ -1,3 +1,4 @@
+5a7aff26 implementing ArtifactoryHelper #3
 c8e808dd implementing ArtifactoryHelper #2
 3d0625b5 implementing ArtifactoryHelper #1
 5f60312c imrove gh-workflow 'misc--gh-packages.yml' #6
