@@ -22,9 +22,11 @@ jobs:
       - name: "Compile 'th-tool' (no tests and no JARs and JavaDoc):"
         run: mvn test-compile
 
-      - name: "Executing the bash-script '.github/scripts/gh-api--list-package-versions-all.sh':"
+      - name: "Executing bash-scripts to fetch the information about current GH-Package and render it as a summary:"
         env:
           # it's very important to set the env-var 'GH_TOKEN' in order to use "gh"-cli utility!
           GH_TOKEN: ${{ github.token }}
-        run: .github/scripts/gh-api--list-package-versions-all.sh > $GITHUB_STEP_SUMMARY
+        run: |
+          .github/scripts/gh-api--get-package.sh > $GITHUB_STEP_SUMMARY
+          .github/scripts/gh-api--list-package-versions-all.sh > $GITHUB_STEP_SUMMARY
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ------------------------------------------------------------------------------------------------------------------
 #   List all packages for "GitHub-Packages"-Artifactory with corresponding links:
+#   - the result of "gh api ..." execution is saved in JSON-format in directory ".github/th-vars";
 #   - this bash-script is invoked from GitHub-workflow "misc--gh-packages.yml";
 #   - if executing locally the output-file with extension ".md" will be created in the directory of this script;
 # ------------------------------------------------------------------------------------------------------------------

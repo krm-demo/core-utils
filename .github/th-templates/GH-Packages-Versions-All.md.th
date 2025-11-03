@@ -1,9 +1,9 @@
-This is the result of executing the bash-script `.github/scripts/gh-api--list-package-versions-all.sh`,
-which invokes `gh api ...`, saves the result of that invocation as JSON in `.github/th-vars`-directory
-and after that **`th-tool`** is processing the th-template `.github/th-templates/GH-Packages-Versions-All.md.th`
-and prints the rendered [GitHub Markdown](https://github.github.com/gfm/) into `$GITHUB_STEP_SUMMARY`.
-
-### List of all [[${ghPkgVer.size()}]] INTERNAL-releases that were performed so far
+### List of the last [[${ghPkgVer.size()}]] INTERNAL-releases that were performed so far
+> [!NOTE]
+> This is the result of executing the bash-script `.github/scripts/gh-api--list-package-versions-all.sh`,
+> which invokes `gh api ...`, saves the result of that invocation as JSON in `.github/th-vars`-directory
+> and after that **`th-tool`** is processing the th-template `.github/th-templates/GH-Packages-Versions-All.md.th`
+> and prints the rendered [GitHub Markdown](https://github.github.com/gfm/) into `$GITHUB_STEP_SUMMARY`.
 
 The default maximum number of items to fetch is `30` (that value could be configured with `--limit N` option
 of `gh`-cli utility), but for this particular case the _last 30_ versions of _INTERNAL_-releases is enough. 

@@ -1,0 +1,25 @@
+### General information about GH-Package `[[${ghPkgInfo.name}]]`
+> [!NOTE]
+> This is the result of executing the bash-script `.github/scripts/gh-api--get-package.sh`,
+> which invokes `gh api ...`, saves the result of that invocation as JSON in `.github/th-vars`-directory
+> and after that **`th-tool`** is processing the th-template `.github/th-templates/GH-Packages-Info.md.th`
+> and prints the rendered [GitHub Markdown](https://github.github.com/gfm/) into `$GITHUB_STEP_SUMMARY`.
+
+<details>
+<summary>
+    the content of <code>ghPkgInfo</code>-variable as JSON 
+    (<code>th-tool</code>-expression is <code>[&#8203;(${ cu.dumpAsJsonTxt(ghPkgInfo) })&#8203;]</code>)
+</summary>
+
+```json
+[(${ cu.dumpAsJsonTxt(ghPkgInfo) })]
+```
+</details>
+
+|                                              Expression |                                         Value                                         | Description                             |
+|--------------------------------------------------------:|:-------------------------------------------------------------------------------------:|:----------------------------------------|
+|  `[&#8203;[${ ghPkgInfo.repository.html_url }]&#8203;]` | [ [[${ ghPkgInfo.repository.full_name }]] ]( [[${ ghPkgInfo.repository.html_url }]] ) | Root of the current GitHub-project      |
+|             `[&#8203;[${ ghPkgInfo.html_url }]&#8203;]` |              [ [[${ ghPkgInfo.name }]] ]( [[${ ghPkgInfo.html_url }]] )               | URL to _GH-Packages_                    |
+|                   `[&#8203;[${ ghPkgInfo.id }]&#8203;]` |                                `[[${ ghPkgInfo.id }]]`                                | ID of package `[[${ ghPkgInfo.name }]]` |
+|        `[&#8203;[${ ghPkgInfo.version_count }]&#8203;]` |                          `[[${ ghPkgInfo.version_count }]]`                           | Total number of _INTERNAL_-releases     |
+
