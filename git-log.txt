@@ -1,3 +1,4 @@
+0ddbf7eb minor corrections at USAGEs to avoid using badges inside the text #2
 04785cef attempt to fix GitHub-workflow 'misc--th-tool.yml' by specifying 'fetch-depth: 0' to 'actions/checkout@v4'
 60d876e5 minor corrections at USAGEs to avoid using badges inside the text
 a4f7b713 << new snapshot version >> 21.23.004-SNAPSHOT
