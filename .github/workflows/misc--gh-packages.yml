@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} has executed 'misc--gh-packages.yml' №${{ github
 on: workflow_dispatch
 
 jobs:
-  gh-api--list-package-versions-all:
+  gh-packages:
     runs-on: ubuntu-latest
 
     steps:

@@ -28,6 +28,6 @@ public class ArtifactoryHelperTest {
         assertThat(ah.getBadgeGHPkgLongMD()).isEqualTo("""
             [![GitHub-Packages long](https://img.shields.io/badge/io.github.krm--demo.core--utils-b0e0e6?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/packages/2631343)""");
         assertThat(ah.getBadgeGHPkgShortMD()).isEqualTo("""
-            [![GitHub-Packages short](https://img.shields.io/badge/GH--Packages-b0e0e6?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/packages/2631343 "information about GH-Package 'io.github.krm-demo.core-utils'")""");
+            [![GitHub-Packages short](https://img.shields.io/badge/GH--Packages-b0e0e6?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/packages/2631343 "GH-Package 'io.github.krm-demo.core-utils'")""");
     }
 }

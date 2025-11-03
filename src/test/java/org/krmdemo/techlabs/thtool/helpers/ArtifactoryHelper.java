@@ -145,7 +145,7 @@ public class ArtifactoryHelper {
      */
     public String getBadgeGHPkgShortMD() {
         return String.format(
-            "[![GitHub-Packages short](%s)](%s \"information about GH-Package '%s'\")",
+            "[![GitHub-Packages short](%s)](%s \"GH-Package '%s'\")",
             getBadgeGHPkgShortUrl(),
             GH_PACkAGE_HTML_URL,
             GH_PACkAGE_NAME);
