@@ -21,7 +21,7 @@ GH_PACKAGE_INFO=$(gh api \
   --jq '.')
 
 # display the result of "gh api" call at standard output (optional and must be commented out after debugging!)
-echo $GH_PACKAGE_INFO | jq
+#echo $GH_PACKAGE_INFO | jq
 
 # saving the list of all versions of package "io.github.krm-demo.core-utils" package into JSON-file:
 echo $GH_PACKAGE_INFO | jq > .github/th-vars/var-ghPkgInfo.json

@@ -16,10 +16,10 @@
 ```
 </details>
 
-|                                              Expression |                                         Value                                         | Description                             |
-|--------------------------------------------------------:|:-------------------------------------------------------------------------------------:|:----------------------------------------|
-|  `[&#8203;[${ ghPkgInfo.repository.html_url }]&#8203;]` | [ [[${ ghPkgInfo.repository.full_name }]] ]( [[${ ghPkgInfo.repository.html_url }]] ) | Root of the current GitHub-project      |
-|             `[&#8203;[${ ghPkgInfo.html_url }]&#8203;]` |              [ [[${ ghPkgInfo.name }]] ]( [[${ ghPkgInfo.html_url }]] )               | URL to _GH-Packages_                    |
-|                   `[&#8203;[${ ghPkgInfo.id }]&#8203;]` |                                `[[${ ghPkgInfo.id }]]`                                | ID of package `[[${ ghPkgInfo.name }]]` |
-|        `[&#8203;[${ ghPkgInfo.version_count }]&#8203;]` |                          `[[${ ghPkgInfo.version_count }]]`                           | Total number of _INTERNAL_-releases     |
+|                                                        Expression |                                         Value                                         | Description                             |
+|------------------------------------------------------------------:|:-------------------------------------------------------------------------------------:|:----------------------------------------|
+| <code>[&#8203;[${ ghPkgInfo.repository.html_url }]&#8203;]</code> | [ [[${ ghPkgInfo.repository.full_name }]] ]( [[${ ghPkgInfo.repository.html_url }]] ) | Root of the current GitHub-project      |
+|            <code>[&#8203;[${ ghPkgInfo.html_url }]&#8203;]</code> |             [ `[[${ ghPkgInfo.name }]]` ]( [[${ ghPkgInfo.html_url }]] )              | URL to _GH-Packages_                    |
+|                  <code>[&#8203;[${ ghPkgInfo.id }]&#8203;]</code> |                                `[[${ ghPkgInfo.id }]]`                                | ID of package `[[${ ghPkgInfo.name }]]` |
+|       <code>[&#8203;[${ ghPkgInfo.version_count }]&#8203;]</code> |                          `[[${ ghPkgInfo.version_count }]]`                           | Total number of _INTERNAL_-releases     |
 
