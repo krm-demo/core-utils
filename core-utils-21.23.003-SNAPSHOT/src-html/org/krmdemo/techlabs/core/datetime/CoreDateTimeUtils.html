@@ -17,31 +17,34 @@
 <span class="source-line-no">003</span><span id="line-3">import java.time.Instant;</span>
 <span class="source-line-no">004</span><span id="line-4">import java.time.ZoneId;</span>
 <span class="source-line-no">005</span><span id="line-5">import java.time.ZoneOffset;</span>
-<span class="source-line-no">006</span><span id="line-6"></span>
-<span class="source-line-no">007</span><span id="line-7">public class CoreDateTimeUtils {</span>
-<span class="source-line-no">008</span><span id="line-8"></span>
-<span class="source-line-no">009</span><span id="line-9">    /**</span>
-<span class="source-line-no">010</span><span id="line-10">     * Gets the current value of {@link ZoneOffset}, which depends on system settings of operational system</span>
-<span class="source-line-no">011</span><span id="line-11">     * and on the current time (because of &lt;a href="https://en.wikipedia.org/wiki/Daylight_saving_time"&gt;daylight saving time&lt;/a&gt;).</span>
-<span class="source-line-no">012</span><span id="line-12">     *</span>
-<span class="source-line-no">013</span><span id="line-13">     * @return the current value of {@link ZoneOffset}</span>
-<span class="source-line-no">014</span><span id="line-14">     */</span>
-<span class="source-line-no">015</span><span id="line-15">    public static ZoneOffset systemZoneOffset() {</span>
-<span class="source-line-no">016</span><span id="line-16">        return ZoneId.systemDefault().getRules().getOffset(Instant.now());</span>
-<span class="source-line-no">017</span><span id="line-17">    }</span>
-<span class="source-line-no">018</span><span id="line-18"></span>
-<span class="source-line-no">019</span><span id="line-19">    /**</span>
-<span class="source-line-no">020</span><span id="line-20">     * Transform the {@link String}-representation of {@link Instant} into {@link DateTimeTriplet}</span>
-<span class="source-line-no">021</span><span id="line-21">     *</span>
-<span class="source-line-no">022</span><span id="line-22">     * @param instantStr string-representation of {@link Instant} in format like {@code 2007-12-03T10:15:30.00Z}.</span>
-<span class="source-line-no">023</span><span id="line-23">     * @return the instance of {@link DateTimeTriplet}</span>
+<span class="source-line-no">006</span><span id="line-6">import java.time.format.DateTimeFormatter;</span>
+<span class="source-line-no">007</span><span id="line-7"></span>
+<span class="source-line-no">008</span><span id="line-8">public class CoreDateTimeUtils {</span>
+<span class="source-line-no">009</span><span id="line-9"></span>
+<span class="source-line-no">010</span><span id="line-10">    /**</span>
+<span class="source-line-no">011</span><span id="line-11">     * Gets the current value of {@link ZoneOffset}, which depends on system settings of operational system</span>
+<span class="source-line-no">012</span><span id="line-12">     * and on the current time (because of &lt;a href="https://en.wikipedia.org/wiki/Daylight_saving_time"&gt;daylight saving time&lt;/a&gt;).</span>
+<span class="source-line-no">013</span><span id="line-13">     *</span>
+<span class="source-line-no">014</span><span id="line-14">     * @return the current value of {@link ZoneOffset}</span>
+<span class="source-line-no">015</span><span id="line-15">     */</span>
+<span class="source-line-no">016</span><span id="line-16">    public static ZoneOffset systemZoneOffset() {</span>
+<span class="source-line-no">017</span><span id="line-17">        return ZoneId.systemDefault().getRules().getOffset(Instant.now());</span>
+<span class="source-line-no">018</span><span id="line-18">    }</span>
+<span class="source-line-no">019</span><span id="line-19"></span>
+<span class="source-line-no">020</span><span id="line-20">    /**</span>
+<span class="source-line-no">021</span><span id="line-21">     * Transform the string-representation of {@link Instant}</span>
+<span class="source-line-no">022</span><span id="line-22">     * in {@link DateTimeFormatter#ISO_INSTANT ISO_INSTANT}-format</span>
+<span class="source-line-no">023</span><span id="line-23">     * into {@link DateTimeTriplet}</span>
 <span class="source-line-no">024</span><span id="line-24">     *</span>
-<span class="source-line-no">025</span><span id="line-25">     * @see Instant#parse(CharSequence)</span>
-<span class="source-line-no">026</span><span id="line-26">     */</span>
-<span class="source-line-no">027</span><span id="line-27">    public static DateTimeTriplet dtt(String instantStr) {</span>
-<span class="source-line-no">028</span><span id="line-28">        return new DateTimeTriplet(Instant.parse(instantStr));</span>
-<span class="source-line-no">029</span><span id="line-29">    }</span>
-<span class="source-line-no">030</span><span id="line-30">}</span>
+<span class="source-line-no">025</span><span id="line-25">     * @param instantStr string-representation of {@link Instant} in format like {@code 2007-12-03T10:15:30.00Z}.</span>
+<span class="source-line-no">026</span><span id="line-26">     * @return the instance of {@link DateTimeTriplet}</span>
+<span class="source-line-no">027</span><span id="line-27">     *</span>
+<span class="source-line-no">028</span><span id="line-28">     * @see Instant#parse(CharSequence)</span>
+<span class="source-line-no">029</span><span id="line-29">     */</span>
+<span class="source-line-no">030</span><span id="line-30">    public static DateTimeTriplet dtt(String instantStr) {</span>
+<span class="source-line-no">031</span><span id="line-31">        return new DateTimeTriplet(Instant.parse(instantStr));</span>
+<span class="source-line-no">032</span><span id="line-32">    }</span>
+<span class="source-line-no">033</span><span id="line-33">}</span>
 
 
 

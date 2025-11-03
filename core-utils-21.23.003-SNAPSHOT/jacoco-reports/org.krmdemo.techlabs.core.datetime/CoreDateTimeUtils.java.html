@@ -3,8 +3,9 @@
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
-<span class="nc" id="L7">public class CoreDateTimeUtils {</span>
+<span class="nc" id="L8">public class CoreDateTimeUtils {</span>
 
     /**
      * Gets the current value of {@link ZoneOffset}, which depends on system settings of operational system
@@ -13,11 +14,13 @@ import java.time.ZoneOffset;
      * @return the current value of {@link ZoneOffset}
      */
     public static ZoneOffset systemZoneOffset() {
-<span class="fc" id="L16">        return ZoneId.systemDefault().getRules().getOffset(Instant.now());</span>
+<span class="fc" id="L17">        return ZoneId.systemDefault().getRules().getOffset(Instant.now());</span>
     }
 
     /**
-     * Transform the {@link String}-representation of {@link Instant} into {@link DateTimeTriplet}
+     * Transform the string-representation of {@link Instant}
+     * in {@link DateTimeFormatter#ISO_INSTANT ISO_INSTANT}-format
+     * into {@link DateTimeTriplet}
      *
      * @param instantStr string-representation of {@link Instant} in format like {@code 2007-12-03T10:15:30.00Z}.
      * @return the instance of {@link DateTimeTriplet}
@@ -25,7 +28,7 @@ import java.time.ZoneOffset;
      * @see Instant#parse(CharSequence)
      */
     public static DateTimeTriplet dtt(String instantStr) {
-<span class="nc" id="L28">        return new DateTimeTriplet(Instant.parse(instantStr));</span>
+<span class="nc" id="L31">        return new DateTimeTriplet(Instant.parse(instantStr));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
