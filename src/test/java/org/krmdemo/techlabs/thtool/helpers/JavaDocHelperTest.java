@@ -52,7 +52,7 @@ public class JavaDocHelperTest {
         JavaDocHelper jdh = JavaDocHelper.fromCtxLazy(ttCtx);
         assertThat(jdh.getNavBarRight()).startsWith("""
             <div id="div-release-catalog-badge" class="nav-bar-right-first">
-            <a href="https://krm-demo.github.io/core-utils/" class="release-catalog-badge-link">
+            <a href="https://krm-demo.github.io/core-utils" class="release-catalog-badge-link">
               <img alt="a badge to 'Release Catalog'" src="https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97" class="release-catalog-badge"/>
             </a>
             </div>

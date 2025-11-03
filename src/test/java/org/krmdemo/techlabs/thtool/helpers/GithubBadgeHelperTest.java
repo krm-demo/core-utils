@@ -52,9 +52,9 @@ public class GithubBadgeHelperTest {
         assertThat(gbh.getBadgeUrlReleaseCatalog()).isEqualTo(
             "https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97");
         assertThat(gbh.getBadgeReleaseCatalogMD()).isEqualTo("""
-            [![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/)""");
+            [![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils)""");
         assertThat(gbh.getBadgeReleaseCatalogHTML()).isEqualTo("""
-            <a href="https://krm-demo.github.io/core-utils/" class="release-catalog-badge-link">
+            <a href="https://krm-demo.github.io/core-utils" class="release-catalog-badge-link">
               <img alt="a badge to 'Release Catalog'" src="https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97" class="release-catalog-badge"/>
             </a>""");
     }
@@ -132,7 +132,7 @@ public class GithubBadgeHelperTest {
         assertThat(gbh.getBadgeUrlSnapshotGitHub()).matches(
             "https://img.shields.io/badge/core--utils-21\\.\\d\\d\\.\\d\\d\\d--SNAPSHOT-blue\\?logo=github&logoColor=white&labelColor=black");
         assertThat(gbh.getBadgeSnapshotGitHubMD()).matches("""
-            \\[!\\[Snapshot-Version]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d--SNAPSHOT-blue\\?logo=github&logoColor=white&labelColor=black\\)]\\(https://github.com/krm-demo/core-utils\\)""");
+            \\[!\\[Snapshot-Version]\\(https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d--SNAPSHOT-blue\\?logo=github&logoColor=white&labelColor=black\\)]\\(https://github.com/krm-demo/core-utils/tree/main\\)""");
         assertThat(gbh.getBadgeSnapshotGitHubHTML()).matches("""
             (?s).*https://img.shields.io/badge/core--utils-21\\.\\d\\d.\\d\\d\\d--SNAPSHOT-blue\\?logo=github&logoColor=white&labelColor=black.*""");
     }

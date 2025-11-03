@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.imageFileData64;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileAsText;
 
@@ -41,6 +42,16 @@ public class GithubBadgeHelper {
      * The name of <b>{@code th-tool}</b>-variable for helper-object {@link GithubBadgeHelper}
      */
     public static final String VAR_NAME__HELPER = "gbh";
+
+    /**
+     * URL to the root of <b>{@code gh-pages}</b>-site for the current project.
+     * At the moment the content of "Release Catalog" is available at that root-page.
+     *
+     * @see <a href="https://docs.github.com/en/pages">
+     *     GitHub Pages documentation
+     * </a>
+     */
+    public static final String GH_PAGES_ROOT = "https://krm-demo.github.io/core-utils";
 
     /**
      * @param ttCtx <b>{@code th-tool}</b>-context to wrap
@@ -100,8 +111,8 @@ public class GithubBadgeHelper {
      */
     public String getBadgeReleaseCatalogMD() {
         return String.format(
-            "[![Release-Catalog](%s)](https://krm-demo.github.io/core-utils/)",
-            getBadgeUrlReleaseCatalog());
+            "[![Release-Catalog](%s)](%s)",
+            getBadgeUrlReleaseCatalog(), GH_PAGES_ROOT);
     }
 
     /**
@@ -114,10 +125,10 @@ public class GithubBadgeHelper {
     @JsonIgnore
     public String getBadgeReleaseCatalogHTML() {
         return String.format("""
-            <a href="https://krm-demo.github.io/core-utils/" class="release-catalog-badge-link">
+            <a href="%s" class="release-catalog-badge-link">
               <img alt="a badge to 'Release Catalog'" src="%s" class="release-catalog-badge"/>
             </a>""",
-            getBadgeUrlReleaseCatalog());
+            GH_PAGES_ROOT, getBadgeUrlReleaseCatalog());
     }
 
     /**
@@ -172,8 +183,8 @@ public class GithubBadgeHelper {
     public String getBadgeLatestPublicJavaDocMD() {
         return !isLatestPublicAvailable() ? "" :
             String.format(
-                "[![Latest-Public](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
-                getBadgeUrlLatestPublicJavaDoc(), repoName(), getLatestPublicVersion());
+                "[![Latest-Public](%s)](%s)",
+                getBadgeUrlLatestPublicJavaDoc(), getLatestPublicJavaDocUrl());
     }
 
     /**
@@ -183,10 +194,10 @@ public class GithubBadgeHelper {
     public String getBadgeLatestPublicJavaDocHTML() {
         return !isLatestPublicAvailable() ? "" :
             String.format("""
-                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                <a href="%s">
                   <img alt="a badge to the latest PUBLIC-version" src="%s" />
                 </a>""",
-                repoName(), getLatestPublicVersion(), getBadgeUrlLatestPublicJavaDoc());
+                getLatestPublicJavaDocUrl(), getBadgeUrlLatestPublicJavaDoc());
     }
 
     /**
@@ -204,8 +215,8 @@ public class GithubBadgeHelper {
     public String getBadgeLatestPublicGitHubMD() {
         return !isLatestPublicAvailable() ? "" :
             String.format(
-                "[![Latest-Public](%s)](%s/tree/%s)",
-                getBadgeUrlLatestPublicGitHub(), repoHtmlUrl(), getLatestPublicVersion());
+                "[![Latest-Public](%s)](%s)",
+                getBadgeUrlLatestPublicGitHub(), getLatestPublicGitHubUrl());
     }
 
     /**
@@ -215,14 +226,11 @@ public class GithubBadgeHelper {
     public String getBadgeLatestPublicGitHubHTML() {
         return !isLatestPublicAvailable() ? "" :
             String.format("""
-                <a href="%s/tree/%s">
+                <a href="%s">
                   <img alt="a badge to the latest PUBLIC-version" src="%s" />
                 </a>""",
-                repoHtmlUrl(), getLatestPublicVersion(), getBadgeUrlLatestPublicGitHub());
+                getLatestPublicGitHubUrl(), getBadgeUrlLatestPublicGitHub());
     }
-
-    // https://github.com/krm-demo/core-utils/tree/21.11
-    // https://krm-demo.github.io/core-utils/core-utils-21.11/
 
     /**
      * @return the URL to the badge-image for the latest PUBLIC-release project
@@ -261,8 +269,8 @@ public class GithubBadgeHelper {
     public String getBadgeLatestInternalJavaDocMD() {
         return !isLatestInternalAvailable() ? "" :
             String.format(
-                "[![Latest-Internal](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
-                getBadgeUrlLatestInternalJavaDoc(), repoName(), getLatestInternalVersion());
+                "[![Latest-Internal](%s)](%s)",
+                getBadgeUrlLatestInternalJavaDoc(), getLatestInternalJavaDocUrl());
     }
 
     /**
@@ -272,10 +280,10 @@ public class GithubBadgeHelper {
     public String getBadgeLatestInternalJavaDocHTML() {
         return !isLatestInternalAvailable() ? "" :
             String.format("""
-                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                <a href="%s">
                   <img alt="a badge to the latest INTERNAL-version" src="%s" />
                 </a>""",
-                repoName(), getLatestInternalVersion(), getBadgeUrlLatestInternalJavaDoc());
+                getLatestInternalJavaDocUrl(), getBadgeUrlLatestInternalJavaDoc());
     }
 
     /**
@@ -293,8 +301,8 @@ public class GithubBadgeHelper {
     public String getBadgeLatestInternalGitHubMD() {
         return !isLatestInternalAvailable() ? "" :
             String.format(
-                "[![Latest-Internal](%s)](%s/tree/%s)",
-                getBadgeUrlLatestInternalGitHub(), repoHtmlUrl(), getLatestInternalVersion());
+                "[![Latest-Internal](%s)](%s)",
+                getBadgeUrlLatestInternalGitHub(), getLatestInternalGitHubUrl());
     }
 
     /**
@@ -304,10 +312,10 @@ public class GithubBadgeHelper {
     public String getBadgeLatestInternalGitHubHTML() {
         return !isLatestInternalAvailable() ? "" :
             String.format("""
-                <a href="%s/tree/%s">
+                <a href="%s">
                   <img alt="a badge to the latest PUBLIC-version" src="%s" />
                 </a>""",
-                repoHtmlUrl(), getLatestInternalVersion(), getBadgeUrlLatestInternalGitHub());
+                getLatestInternalGitHubUrl(), getBadgeUrlLatestInternalGitHub());
     }
 
     /**
@@ -334,8 +342,8 @@ public class GithubBadgeHelper {
     public String getBadgeSnapshotJavaDocMD() {
         return !isMavenSnapshot() ? "" :
             String.format(
-                "[![Snapshot-Version](%s)](https://krm-demo.github.io/core-utils/%s-%s)",
-                getBadgeUrlSnapshotJavaDoc(), repoName(), getSnapshotVersion());
+                "[![Snapshot-Version](%s)](%s)",
+                getBadgeUrlSnapshotJavaDoc(), getSnapshotJavaDocUrl());
     }
 
     /**
@@ -345,10 +353,10 @@ public class GithubBadgeHelper {
     public String getBadgeSnapshotJavaDocHTML() {
         return !isMavenSnapshot() ? "" :
             String.format("""
-                <a href="https://krm-demo.github.io/core-utils/%s-%s">
+                <a href="%s">
                   <img alt="a badge to the latest SNAPSHOT-version" src="%s" />
                 </a>""",
-                repoName(), getSnapshotVersion(), getBadgeUrlSnapshotJavaDoc());
+                getSnapshotJavaDocUrl(), getBadgeUrlSnapshotJavaDoc());
     }
 
     /**
@@ -367,7 +375,7 @@ public class GithubBadgeHelper {
         return !isMavenSnapshot() ? "" :
             String.format(
                 "[![Snapshot-Version](%s)](%s)",
-                getBadgeUrlSnapshotGitHub(), repoHtmlUrl());
+                getBadgeUrlSnapshotGitHub(), getSnapshotGitHubUrl());
     }
 
     /**
@@ -380,7 +388,7 @@ public class GithubBadgeHelper {
                 <a href="%s">
                   <img alt="a badge to the latest PUBLIC-version" src="%s" />
                 </a>""",
-                repoHtmlUrl(), getBadgeUrlSnapshotGitHub());
+                getSnapshotGitHubUrl(), getBadgeUrlSnapshotGitHub());
     }
 
     /**
@@ -390,6 +398,60 @@ public class GithubBadgeHelper {
         return !isMavenSnapshot() ? "" :
             badgeUrlShiedsIO(repoName(), getSnapshotVersion(), LABEL_COLOR__VERSION,
                 LOGO_SLUG_NAME__GIT_HUB, LOGO_COLOR__GITHUB, LABEL_COLOR__GITHUB);
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @return the URL to GitHub-project at the latest PUBLIC-release or empty string if it's not available
+     */
+    public String getLatestPublicJavaDocUrl() {
+        String latestPublic = getLatestPublicVersion();
+        return isBlank(latestPublic) ? "" : String.format("%s/%s-%s", GH_PAGES_ROOT, repoName(), latestPublic);
+    }
+
+    /**
+     * @return the URL to GitHub-project at the latest INTERNAL-release or empty string if it's not available
+     */
+    public String getLatestInternalJavaDocUrl() {
+        String latestInternal = getLatestInternalVersion();
+        return isBlank(latestInternal) ? "" : String.format("%s/%s-%s", GH_PAGES_ROOT, repoName(), latestInternal);
+    }
+
+    /**
+     * Quite the same as {@link GithubHelper#getProjectRepoHtmlUrl()}, but the suffix {@code /tree/main} is appended.
+     *
+     * @return the URL to GitHub-project at the current SNAPSHOT-version
+     */
+    public String getSnapshotJavaDocUrl() {
+        return !isMavenSnapshot() ? "" : String.format("%s/%s-%s", GH_PAGES_ROOT, repoName(), getSnapshotVersion());
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @return the URL to GitHub-project at the latest PUBLIC-release or empty string if it's not available
+     */
+    public String getLatestPublicGitHubUrl() {
+        String latestPublic = getLatestPublicVersion();
+        return isBlank(latestPublic) ? "" : String.format("%s/tree/%s", repoHtmlUrl(), latestPublic);
+    }
+
+    /**
+     * @return the URL to GitHub-project at the latest INTERNAL-release or empty string if it's not available
+     */
+    public String getLatestInternalGitHubUrl() {
+        String latestInternal = getLatestInternalVersion();
+        return isBlank(latestInternal) ? "" : String.format("%s/tree/%s", repoHtmlUrl(), latestInternal);
+    }
+
+    /**
+     * Quite the same as {@link GithubHelper#getProjectRepoHtmlUrl()}, but the suffix {@code /tree/main} is appended.
+     *
+     * @return the URL to GitHub-project at the current SNAPSHOT-version
+     */
+    public String getSnapshotGitHubUrl() {
+        return String.format("%s/tree/main", repoHtmlUrl());
     }
 
     // --------------------------------------------------------------------------------------------
@@ -453,7 +515,7 @@ public class GithubBadgeHelper {
                 leftPart, rightPart, colorPart, logoSlugName, colorLogo, colorLabel);
         }
         String singlePart = StringUtils.isNotBlank(leftPart) ? leftPart : rightPart;
-        if (StringUtils.isBlank(singlePart)) {
+        if (isBlank(singlePart)) {
             throw new IllegalArgumentException("either left and right part of badge name must be NOT blank");
         }
         return String.format("https://img.shields.io/badge/%s-%s?logo=%s&logoColor=%s&labelColor=%s",
@@ -481,7 +543,7 @@ public class GithubBadgeHelper {
     }
 
     private static String escapeBadgeName(String namePart) {
-        if (StringUtils.isBlank(namePart)) {
+        if (isBlank(namePart)) {
             return namePart;
         }
         namePart = namePart.replace("-", "--");
@@ -642,7 +704,7 @@ public class GithubBadgeHelper {
         if (gitTreeName.endsWith("SNAPSHOT")) {
             gitTreeName = "main";
         }
-        if (StringUtils.isBlank(sourceSuffix) || sourceSuffix.trim().equals("/")) {
+        if (isBlank(sourceSuffix) || sourceSuffix.trim().equals("/")) {
             return String.format("%s/tree/%s", repoHtmlUrl, gitTreeName);
         } else {
             return String.format("%s/tree/%s/%s", repoHtmlUrl, gitTreeName, sourceSuffix);

@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.core.utils.PropertiesUtils;
+import org.krmdemo.techlabs.thtool.ThymeleafTool;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
 import java.util.NavigableMap;
+import java.util.function.Consumer;
 
 /**
  * This class represents a <b>{@code th-tool}</b>-helper to work with maven-properties,
@@ -28,8 +30,18 @@ import java.util.NavigableMap;
 @JsonPropertyOrder(alphabetic = true)
 public class MavenHelper {
 
+    /**
+     * The name of <b>{@code th-tool}</b>-variable for helper-object {@link MavenHelper}
+     */
     public static final String VAR_NAME__HELPER = "mh";
 
+    /**
+     * A factory-method that returns an instance of {@link MavenHelper}
+     * that was previously registered with {@link #register(ThymeleafToolCtx)}.
+     *
+     * @param ttCtx <b>{@code th-tool}</b>-context to wrap
+     * @return an instance of {@link MavenHelper} for access from other helpers
+     */
     public static MavenHelper fromCtx(ThymeleafToolCtx ttCtx) {
         MavenHelper helper = ttCtx.typedVar(VAR_NAME__HELPER, MavenHelper.class);
         if (helper == null) {
@@ -39,6 +51,13 @@ public class MavenHelper {
         return helper;
     }
 
+    /**
+     * Context-registering method of functional type {@link Consumer Consumer&lt;ThymeleafToolCtx&gt;}.
+     * Should be used when initializing the instance of {@link ThymeleafTool},
+     * which allows to decouple the dependencies between <b>{@code th-tool}</b> and helper-objects.
+     *
+     * @param ttCtx <b>{@code th-tool}</b>-context to register this helper in
+     */
     public static void register(ThymeleafToolCtx ttCtx) {
         ttCtx.setVariable(VAR_NAME__HELPER, new MavenHelper());
     }

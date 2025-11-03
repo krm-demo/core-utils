@@ -2,10 +2,12 @@ package org.krmdemo.techlabs.thtool.helpers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
+import org.krmdemo.techlabs.thtool.ThymeleafTool;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import static org.krmdemo.techlabs.core.utils.CorePropsUtils.propValueStr;
 
@@ -15,7 +17,16 @@ import static org.krmdemo.techlabs.core.utils.CorePropsUtils.propValueStr;
  */
 public class GithubHelper {
 
+    /**
+     * The name of <b>{@code th-tool}</b>-variable for helper-object {@link GithubHelper}
+     */
     public static final String VAR_NAME__HELPER = "gh";
+
+    /**
+     * The name of <b>{@code th-tool}</b>-variable, which is loaded from {@code var-github.json}-file
+     * that becomes available in GitHub-workflows via following instruction in {@code run}-step:
+     * {@snippet : echo '${{ toJson(github) }}' > .github/th-vars/var-github.json }
+     */
     public static final String VAR_NAME__GITHUB = "github";
 
     public static GithubHelper fromCtxLazy() {
@@ -31,10 +42,24 @@ public class GithubHelper {
         return helper;
     }
 
+    /**
+     * A factory-method that returns an instance of {@link GithubHelper}
+     * that was previously registered with {@link #register(ThymeleafToolCtx)}.
+     *
+     * @param ttCtx <b>{@code th-tool}</b>-context to wrap
+     * @return an instance of {@link GithubHelper} for access from other helpers
+     */
     public static GithubHelper fromCtx(ThymeleafToolCtx ttCtx) {
         return ttCtx.typedVar(VAR_NAME__HELPER, GithubHelper.class);
     }
 
+    /**
+     * Context-registering method of functional type {@link Consumer Consumer&lt;ThymeleafToolCtx&gt;}.
+     * Should be used when initializing the instance of {@link ThymeleafTool},
+     * which allows to decouple the dependencies between <b>{@code th-tool}</b> and helper-objects.
+     *
+     * @param ttCtx <b>{@code th-tool}</b>-context to register this helper in
+     */
     public static void register(ThymeleafToolCtx ttCtx) {
         GithubHelper helper = new GithubHelper(ttCtx);
         ttCtx.setVariable(VAR_NAME__HELPER, helper);

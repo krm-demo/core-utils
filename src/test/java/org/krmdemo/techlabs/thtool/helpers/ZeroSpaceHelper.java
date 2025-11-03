@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
  * In order to partially violate the security rule, which prohibits displaying at console
  * or anywhere at screen the whole value of some sensitive data (like passwords, security tokens, ...),
  * corresponding string need to be obfuscated a little bit (but remains readable though).
- * It's not recommended practice, but it could very be helpful either for debug-needs
+ * It's not recommended practice, but it could be very helpful either for debug-needs
  * or when you are working on some kind of <i>Forget Password</i> functionality.
  */
 public class ZeroSpaceHelper {

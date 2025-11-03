@@ -5,6 +5,7 @@ import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
 import org.krmdemo.techlabs.core.datetime.DateTimeTriplet;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.core.dump.render.RenderSpec;
+import org.krmdemo.techlabs.thtool.ThymeleafTool;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * This class represents a <b>{@code th-tool}</b>-helper that is a delegate to utility-classes of <b>core-utils</b>-library.
@@ -35,8 +37,18 @@ import java.util.Objects;
  */
 public class CoreUtilsHelper {
 
+    /**
+     * The name of <b>{@code th-tool}</b>-variable for helper-object {@link CoreUtilsHelper}
+     */
     public static final String VAR_NAME__HELPER = "cu";
 
+    /**
+     * A factory-method that returns an instance of {@link CoreUtilsHelper}
+     * that was previously registered with {@link #register(ThymeleafToolCtx)}.
+     *
+     * @param ttCtx <b>{@code th-tool}</b>-context to wrap
+     * @return an instance of {@link CoreUtilsHelper} for access from other helpers
+     */
     public static CoreUtilsHelper fromCtx(ThymeleafToolCtx ttCtx) {
         CoreUtilsHelper helper = ttCtx.typedVar(VAR_NAME__HELPER, CoreUtilsHelper.class);
         if (helper == null) {
@@ -46,6 +58,13 @@ public class CoreUtilsHelper {
         return helper;
     }
 
+    /**
+     * Context-registering method of functional type {@link Consumer Consumer&lt;ThymeleafToolCtx&gt;}.
+     * Should be used when initializing the instance of {@link ThymeleafTool},
+     * which allows to decouple the dependencies between <b>{@code th-tool}</b> and helper-objects.
+     *
+     * @param ttCtx <b>{@code th-tool}</b>-context to register this helper in
+     */
     public static void register(ThymeleafToolCtx ttCtx) {
         ttCtx.setVariable(VAR_NAME__HELPER, new CoreUtilsHelper());
     }

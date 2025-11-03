@@ -76,7 +76,7 @@ public class ArtifactoryHelper {
      * that was previously registered with {@link #register(ThymeleafToolCtx)}.
      *
      * @param ttCtx <b>{@code th-tool}</b>-context to wrap
-     * @return an instance of {@link OpenTest4jHelper} for access from other helpers
+     * @return an instance of {@link ArtifactoryHelper} for access from other helpers
      */
     public static ArtifactoryHelper fromCtx(ThymeleafToolCtx ttCtx) {
         return ttCtx.typedVar(VAR_NAME__HELPER, ArtifactoryHelper.class);

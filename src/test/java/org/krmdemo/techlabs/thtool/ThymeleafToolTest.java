@@ -61,7 +61,7 @@ public class ThymeleafToolTest {
         assertThat(sbOut).contains("[![Latest-Public]");
         assertThat(sbOut).contains("[![Release-Catalog]" +
             "(https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)]" +
-            "(https://krm-demo.github.io/core-utils/)");
+            "(https://krm-demo.github.io/core-utils)");
     }
 
     @Test

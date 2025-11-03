@@ -74,11 +74,11 @@ public class JavaDocHelper {
     }
 
     /**
-     * A factory-method that returns an instance of {@link GithubBadgeHelper}
+     * A factory-method that returns an instance of {@link JavaDocHelper}
      * that was previously registered with {@link #register(ThymeleafToolCtx)}.
      *
      * @param ttCtx <b>{@code th-tool}</b>-context to wrap
-     * @return an instance of {@link GithubBadgeHelper} for access from other helpers
+     * @return an instance of {@link JavaDocHelper} for access from other helpers
      */
     public static JavaDocHelper fromCtx(ThymeleafToolCtx ttCtx) {
         return ttCtx.typedVar(VAR_NAME__HELPER, JavaDocHelper.class);
