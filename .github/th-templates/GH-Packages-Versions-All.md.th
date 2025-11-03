@@ -20,7 +20,7 @@ of `gh`-cli utility), but for this particular case the _last 30_ versions of _IN
 </details>
 
 
-| # | Version-Tag | Created At |
-|--:|:------------:|:-----------|<th:block th:each=="verItem, verItemSt: ${ghPkgVer}">
-|  `#[[${ verItemSt.index + 1 }]]` |[ [[${ verItem.name }]] ]( [[${ verItem.package_html_url }]]?version=[[${ verItem.name }]] ) | [[${ verItem.created_at }]] |</th:block>
+| # | Version-Tag | "Created At" as [ISO_INSTANT](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html#ISO_INSTANT) | "Created At" as [DateTimeTriplet](/src/main/java/org/krmdemo/techlabs/core/datetime/DateTimeTriplet.java) |
+|--:|:------------:|:-----------:|:---:|<th:block th:each=="verItem, verItemSt: ${ghPkgVer}">
+|  `#[[${ verItemSt.index + 1 }]]` |[ [[${ verItem.name }]] ]( [[${ verItem.package_html_url }]]?version=[[${ verItem.name }]] ) | [[${ verItem.created_at }]] | `[[${ cu.dtt(verItem.created_at) }]]` |</th:block>
  
