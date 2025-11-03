@@ -4,6 +4,7 @@
 #   - the result of "gh api ..." execution is saved in JSON-format in directory ".github/th-vars";
 #   - this bash-script is invoked from GitHub-workflow "misc--gh-packages.yml";
 #   - if executing locally the output-file with extension ".md" will be created in the directory of this script;
+#   - it's implied that the bash-script "gh-api--get-package.sh" was executed before (for th-template's processing)
 # ------------------------------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
 

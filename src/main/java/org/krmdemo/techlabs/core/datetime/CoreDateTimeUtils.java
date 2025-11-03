@@ -3,6 +3,7 @@ package org.krmdemo.techlabs.core.datetime;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 public class CoreDateTimeUtils {
 
@@ -17,7 +18,9 @@ public class CoreDateTimeUtils {
     }
 
     /**
-     * Transform the {@link String}-representation of {@link Instant} into {@link DateTimeTriplet}
+     * Transform the string-representation of {@link Instant}
+     * in {@link DateTimeFormatter#ISO_INSTANT ISO_INSTANT}-format
+     * into {@link DateTimeTriplet}
      *
      * @param instantStr string-representation of {@link Instant} in format like {@code 2007-12-03T10:15:30.00Z}.
      * @return the instance of {@link DateTimeTriplet}

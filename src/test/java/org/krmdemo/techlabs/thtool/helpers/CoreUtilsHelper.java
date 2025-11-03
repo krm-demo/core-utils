@@ -11,6 +11,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -73,7 +74,9 @@ public class CoreUtilsHelper {
     }
 
     /**
-     * Transform the {@link String}-representation of {@link Instant} into {@link DateTimeTriplet}
+     * Transform the string-representation of {@link Instant}
+     * in {@link DateTimeFormatter#ISO_INSTANT ISO_INSTANT}-format
+     * into {@link DateTimeTriplet}
      *
      * @param instantStr string-representation of {@link Instant} in format like {@code 2007-12-03T10:15:30.00Z}.
      * @return the instance of {@link DateTimeTriplet}

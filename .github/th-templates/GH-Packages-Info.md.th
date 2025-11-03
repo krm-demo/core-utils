@@ -1,8 +1,8 @@
 ### General information about GH-Package `[[${ghPkgInfo.name}]]`
 > [!NOTE]
-> This is the result of executing the bash-script `.github/scripts/gh-api--get-package.sh`,
-> which invokes `gh api ...`, saves the result of that invocation as JSON in `.github/th-vars`-directory
-> and after that **`th-tool`** is processing the th-template `.github/th-templates/GH-Packages-Info.md.th`
+> This is the result of executing the bash-script [`gh-api--get-package`]([[${ ghPkgInfo.repository.html_url }]]/tree/main/.github/scripts/gh-api--get-package.sh),
+> which invokes `gh api ...`, saves the result of that invocation as JSON in [`.github/th-vars`]([[${ ghPkgInfo.repository.html_url }]]/tree/main/.github/th-vars)-directory
+> and after that **`th-tool`** is processing the th-template [`GH-Packages-Info.md.th`]([[${ ghPkgInfo.repository.html_url }]]/tree/main/.github/th-templates/GH-Packages-Info.md.th)
 > and prints the rendered [GitHub Markdown](https://github.github.com/gfm/) into `$GITHUB_STEP_SUMMARY`.
 
 <details>
