@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: "Checkout the latest version of repo in '${{ github.ref }}'"
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: "Set up JDK 25 (Amazon Corretto)"
         uses: actions/setup-java@v4
