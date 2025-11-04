@@ -15,7 +15,7 @@ import static org.krmdemo.techlabs.core.utils.CountingUtils.countingMap;
  * Utility-class to work with strings, words and characters
  * (some extension to JDK and {@link org.apache.commons.lang3.StringUtils})
  */
-<span class="nc" id="L18">public class CoreStringUtils {</span>
+public class CoreStringUtils {
 
     /**
      * Just a short-cut of JDK-invocation: &lt;pre&gt;{@code
@@ -132,6 +132,13 @@ import static org.krmdemo.techlabs.core.utils.CountingUtils.countingMap;
      */
     public static boolean hasNoNewLineAtTheEnd(String str) {
 <span class="fc bfc" id="L134" title="All 4 branches covered.">        return StringUtils.isNotEmpty(str) &amp;&amp; !str.endsWith(System.lineSeparator());</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+<span class="fc" id="L139">    private CoreStringUtils() {</span>
+        // prohibit the creation of utility-class instance
+<span class="fc" id="L141">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

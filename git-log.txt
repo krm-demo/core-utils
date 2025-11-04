@@ -1,3 +1,4 @@
+c85f497d display GH-Packages badges in a table of INTERNAL-releases at 'Release Catalog' #1
 6809ecf9 display GH-Packages badges in a table of INTERNAL-releases at 'gh-packages' summary #1
 b8918f74 display GH-Packages badges at the Test-Site
 cee01f85 improve information about workflow-run and display LICENSE-badge at README.md.th #1

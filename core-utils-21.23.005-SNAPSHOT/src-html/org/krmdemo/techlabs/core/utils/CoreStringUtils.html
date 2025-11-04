@@ -147,7 +147,14 @@
 <span class="source-line-no">133</span><span id="line-133">    public static boolean hasNoNewLineAtTheEnd(String str) {</span>
 <span class="source-line-no">134</span><span id="line-134">        return StringUtils.isNotEmpty(str) &amp;&amp; !str.endsWith(System.lineSeparator());</span>
 <span class="source-line-no">135</span><span id="line-135">    }</span>
-<span class="source-line-no">136</span><span id="line-136">}</span>
+<span class="source-line-no">136</span><span id="line-136"></span>
+<span class="source-line-no">137</span><span id="line-137">    // --------------------------------------------------------------------------------------------</span>
+<span class="source-line-no">138</span><span id="line-138"></span>
+<span class="source-line-no">139</span><span id="line-139">    private CoreStringUtils() {</span>
+<span class="source-line-no">140</span><span id="line-140">        // prohibit the creation of utility-class instance</span>
+<span class="source-line-no">141</span><span id="line-141">        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());</span>
+<span class="source-line-no">142</span><span id="line-142">    }</span>
+<span class="source-line-no">143</span><span id="line-143">}</span>
 
 
 

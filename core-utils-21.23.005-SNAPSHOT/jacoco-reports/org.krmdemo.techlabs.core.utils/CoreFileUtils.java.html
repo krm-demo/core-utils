@@ -20,7 +20,7 @@ import java.util.stream.StreamSupport;
  * Utility-class that invokes standard JDK utilities, but wraps {@link java.io.IOException}
  * into {@link IllegalStateException} and creates missing parent directories.
  */
-<span class="nc" id="L23">public class CoreFileUtils {</span>
+public class CoreFileUtils {
 
     /**
      * Utility-method that provides Base64-encoding of the passed content
@@ -286,6 +286,13 @@ import java.util.stream.StreamSupport;
 <span class="nc" id="L286">        } catch (IOException ioEx) {</span>
 <span class="nc" id="L287">            return -2;</span>
         }
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+<span class="fc" id="L293">    private CoreFileUtils() {</span>
+        // prohibit the creation of utility-class instance
+<span class="fc" id="L295">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

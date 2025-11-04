@@ -301,7 +301,14 @@
 <span class="source-line-no">287</span><span id="line-287">            return -2;</span>
 <span class="source-line-no">288</span><span id="line-288">        }</span>
 <span class="source-line-no">289</span><span id="line-289">    }</span>
-<span class="source-line-no">290</span><span id="line-290">}</span>
+<span class="source-line-no">290</span><span id="line-290"></span>
+<span class="source-line-no">291</span><span id="line-291">    // --------------------------------------------------------------------------------------------</span>
+<span class="source-line-no">292</span><span id="line-292"></span>
+<span class="source-line-no">293</span><span id="line-293">    private CoreFileUtils() {</span>
+<span class="source-line-no">294</span><span id="line-294">        // prohibit the creation of utility-class instance</span>
+<span class="source-line-no">295</span><span id="line-295">        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());</span>
+<span class="source-line-no">296</span><span id="line-296">    }</span>
+<span class="source-line-no">297</span><span id="line-297">}</span>
 
 
 
