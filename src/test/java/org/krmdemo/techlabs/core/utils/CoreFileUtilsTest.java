@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.copyFile;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileAsText;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.saveFileContent;
@@ -66,5 +67,14 @@ public class CoreFileUtilsTest {
             testInfo.getDisplayName(),
             testInfo.getTestClass(),
             testInfo.getTestMethod());
+    }
+
+    @Test
+    void testCreationIsProhibited() {
+        UnsupportedOperationException uoEx = assertThrows(UnsupportedOperationException.class,
+            () -> CorePropsUtils.newInstance(CoreFileUtils.class)
+        );
+        assertThat(uoEx.getMessage()).isEqualTo(
+            "Cannot instantiate utility-class org.krmdemo.techlabs.core.utils.CoreFileUtils");
     }
 }

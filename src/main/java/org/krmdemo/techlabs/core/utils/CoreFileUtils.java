@@ -287,4 +287,11 @@ public class CoreFileUtils {
             return -2;
         }
     }
+
+    // --------------------------------------------------------------------------------------------
+
+    private CoreFileUtils() {
+        // prohibit the creation of utility-class instance
+        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());
+    }
 }

@@ -4,18 +4,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.keyValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.countingCharsMap;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.hasNoNewLineAtTheEnd;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.joiningReversed;
-import static org.krmdemo.techlabs.core.utils.CoreStringUtils.splitWords;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.splitWordsList;
 
 /**
@@ -90,5 +89,14 @@ public class CoreStringUtilsTest {
         assertThat(hasNoNewLineAtTheEnd("la-la-la   \r\n")).isFalse();
         assertThat(hasNoNewLineAtTheEnd("la-la-la   \r")).isTrue();
         assertThat(hasNoNewLineAtTheEnd(String.format("la-la-la   %n"))).isFalse();
+    }
+
+    @Test
+    void testCreationIsProhibited() {
+        UnsupportedOperationException uoEx = assertThrows(UnsupportedOperationException.class,
+            () -> CorePropsUtils.newInstance(CoreStringUtils.class)
+        );
+        assertThat(uoEx.getMessage()).isEqualTo(
+            "Cannot instantiate utility-class org.krmdemo.techlabs.core.utils.CoreStringUtils");
     }
 }

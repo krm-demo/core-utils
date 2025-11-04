@@ -38,6 +38,6 @@ public class CountingUtils {
 
     private CountingUtils() {
         // prohibit the creation of utility-class instance
-        throw new UnsupportedOperationException("Cannot instantiate a utility-class " + getClass().getName());
+        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());
     }
 }

@@ -9,15 +9,12 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.ParentCommand;
 
-import java.awt.*;
 import java.io.File;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.saveFileContent;
-import static org.krmdemo.techlabs.core.utils.CoreStringUtils.hasNoNewLineAtTheEnd;
 
 /**
  * Sub-command {@code evaluate} of <b>{@code th-tool}</b> that evaluates the passed expression.

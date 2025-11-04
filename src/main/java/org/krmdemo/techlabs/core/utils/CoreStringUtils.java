@@ -133,4 +133,11 @@ public class CoreStringUtils {
     public static boolean hasNoNewLineAtTheEnd(String str) {
         return StringUtils.isNotEmpty(str) && !str.endsWith(System.lineSeparator());
     }
+
+    // --------------------------------------------------------------------------------------------
+
+    private CoreStringUtils() {
+        // prohibit the creation of utility-class instance
+        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());
+    }
 }

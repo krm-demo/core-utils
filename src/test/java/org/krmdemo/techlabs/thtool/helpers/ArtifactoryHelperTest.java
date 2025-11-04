@@ -12,7 +12,10 @@ public class ArtifactoryHelperTest {
 
     private static final ThymeleafToolCtx ttCtx = new ThymeleafToolCtx();
     private static final ArtifactoryHelper ah = ArtifactoryHelper.fromCtxLazy(ttCtx);
+
     private static final String latestInternal = "21.23.004";
+    private static final CommitGroupMinor minorGroup = MockRevCommitUtils.minorGroup(latestInternal);
+    private static final CommitGroupMajor majorGroup = MockRevCommitUtils.majorGroup(latestInternal);
 
     @Test
     void testGHPkgUrl() {
@@ -38,8 +41,12 @@ public class ArtifactoryHelperTest {
 //        System.out.printf("badgeGHPkgShortUrl(%s) --> %s;%n", latestInternal, ah.badgeGHPkgShortUrl(latestInternal));
         assertThat(ah.badgeGHPkgLongUrl(latestInternal)).isEqualTo("""
             https://img.shields.io/badge/io.github.krm--demo.core--utils-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6""");
+        assertThat(ah.badgeGHPkgLongUrl(minorGroup)).isEqualTo(ah.badgeGHPkgLongUrl(latestInternal));
+        assertThat(ah.badgeGHPkgLongUrl(majorGroup)).isEqualTo(ah.badgeGHPkgLongUrl(latestInternal));
         assertThat(ah.badgeGHPkgShortUrl(latestInternal)).isEqualTo("""
             https://img.shields.io/badge/GH--Packages-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6""");
+        assertThat(ah.badgeGHPkgShortUrl(minorGroup)).isEqualTo(ah.badgeGHPkgShortUrl(latestInternal));
+        assertThat(ah.badgeGHPkgShortUrl(majorGroup)).isEqualTo(ah.badgeGHPkgShortUrl(latestInternal));
     }
 
     @Test
@@ -52,10 +59,14 @@ public class ArtifactoryHelperTest {
 
     @Test
     void testBadgeGHPkgVersionMD() {
-        assertThat(ah.badgeGHPkgLongMD(latestInternal)).startsWith("""
-            [![GitHub-Packages long](https://img.shields.io/badge/io.github.krm--demo.core--utils""");
-        assertThat(ah.badgeGHPkgShortMD(latestInternal)).startsWith("""
-            [![GitHub-Packages short](https://img.shields.io/badge/GH--Packages-""");
+        assertThat(ah.badgeGHPkgLongMD(latestInternal)).isEqualTo("""
+            [![GitHub-Packages long](https://img.shields.io/badge/io.github.krm--demo.core--utils-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004)""");
+        assertThat(ah.badgeGHPkgLongMD(minorGroup)).isEqualTo(ah.badgeGHPkgLongMD(latestInternal));
+        assertThat(ah.badgeGHPkgLongMD(majorGroup)).isEqualTo(ah.badgeGHPkgLongMD(latestInternal));
+        assertThat(ah.badgeGHPkgShortMD(latestInternal)).isEqualTo("""
+            [![GitHub-Packages short](https://img.shields.io/badge/GH--Packages-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004 "GH-Package 'io.github.krm-demo.core-utils':21.23.004")""");
+        assertThat(ah.badgeGHPkgShortMD(minorGroup)).isEqualTo(ah.badgeGHPkgShortMD(latestInternal));
+        assertThat(ah.badgeGHPkgShortMD(majorGroup)).isEqualTo(ah.badgeGHPkgShortMD(latestInternal));
     }
 
     @Test
@@ -76,9 +87,13 @@ public class ArtifactoryHelperTest {
             <a href="https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004">
               <img alt="a long badge to GH-Package" src="https://img.shields.io/badge/io.github.krm--demo.core--utils-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6" />
             </a>""");
+        assertThat(ah.badgeGHPkgLongHtml(minorGroup)).isEqualTo(ah.badgeGHPkgLongHtml(latestInternal));
+        assertThat(ah.badgeGHPkgLongHtml(majorGroup)).isEqualTo(ah.badgeGHPkgLongHtml(latestInternal));
         assertThat(ah.badgeGHPkgShortHtml(latestInternal)).isEqualTo("""
             <a href="https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004" title="GH-Package 'io.github.krm-demo.core-utils':21.23.004">
               <img alt="a short badge to GH-Package" src="https://img.shields.io/badge/GH--Packages-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6" />
             </a>""");
+        assertThat(ah.badgeGHPkgShortHtml(minorGroup)).isEqualTo(ah.badgeGHPkgShortHtml(latestInternal));
+        assertThat(ah.badgeGHPkgShortHtml(majorGroup)).isEqualTo(ah.badgeGHPkgShortHtml(latestInternal));
     }
 }

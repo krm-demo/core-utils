@@ -1,30 +1,25 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
-import org.apache.commons.text.StringEscapeUtils;
-import org.eclipse.jgit.lib.ObjectId;
-import org.eclipse.jgit.lib.PersonIdent;
-import org.eclipse.jgit.revwalk.RevCommit;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.krmdemo.techlabs.core.utils.CoreFileUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
-import org.mockito.Mockito;
 
 import java.io.File;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsYamlTxt;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
-import static org.mockito.Mockito.when;
+import static org.krmdemo.techlabs.thtool.helpers.MockRevCommitUtils.majorGroup;
+import static org.krmdemo.techlabs.thtool.helpers.MockRevCommitUtils.minorGroup;
+import static org.krmdemo.techlabs.thtool.helpers.MockRevCommitUtils.mockRevCommit;
 
 /**
  * A unit-test for <b>{@code th-tool}</b>-helper {@link GithubBadgeHelper}.
@@ -228,8 +223,6 @@ public class GithubBadgeHelperTest {
             .hasSize(3555);
     }
 
-    // --------------------------------------------------------------------------------------------
-
     @Test
     void testCommitGroup_toString() {
         System.out.println("---- ---- minorGroup(...).toString() test: ---- ----");
@@ -245,49 +238,10 @@ public class GithubBadgeHelperTest {
         System.out.println("---- ---- -------------------------------- ---- ----");
     }
 
-    private static CommitGroupMajor majorGroup(String versionStr) {
-        return new CommitGroupMajor(() -> minorGroup(versionStr));
-    }
-
-    private static CommitGroupMinor minorGroup(String versionStr) {
-        return new CommitGroupMinor() {
-            @Override
-            public VersionTag versionTag() {
-                return VersionTag.parse(versionStr);
-            }
-        };
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    private static RevCommit mockRevCommit(String commitID) {
-        return mockRevCommit(commitID,
-            String.format("some test-message for mock-commid #%s",  commitID.substring(0, 7)));
-    }
-
-    private static RevCommit mockRevCommit(String commitID, String message) {
-        ObjectId mockObjectId = Mockito.mock(ObjectId.class);
-        when(mockObjectId.getName()).thenReturn(commitID);
-
-        PersonIdent authorIdent = Mockito.mock(PersonIdent.class);
-        when(authorIdent.getName()).thenReturn("test-author");
-        when(authorIdent.getEmailAddress()).thenReturn("test.author@junit5.com");
-        PersonIdent commiterIdent = Mockito.mock(PersonIdent.class);
-        when(commiterIdent.getName()).thenReturn("test-commiter");
-        when(commiterIdent.getEmailAddress()).thenReturn("test.commiter@junit5.com");
-
-        RevCommit mockRevCommit = Mockito.mock(RevCommit.class);
-        when(mockRevCommit.getAuthorIdent()).thenReturn(authorIdent);
-        when(mockRevCommit.getCommitterIdent()).thenReturn(commiterIdent);
-        when(mockRevCommit.getShortMessage()).thenReturn(message);
-        when(mockRevCommit.getFullMessage()).thenReturn(message);
-        when(mockRevCommit.getId()).thenReturn(mockObjectId);
-        return mockRevCommit;
-    }
-
     // --------------------------------------------------------------------------------------------
 
     /**
-     * JVM entry-point to play with different badges without garbage in JUnit-output
+     * JVM entry-point to play with different badges (that have custom image-data) without garbage in JUnit-output
      *
      * @param args unused command-line arguments
      */

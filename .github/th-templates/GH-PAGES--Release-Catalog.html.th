@@ -60,6 +60,7 @@
             [(${ gbh.badgeSnapshotJavaDocHTML })]
           </div>
           <div class="col-5">
+            &nbsp;
             [(${ gbh.badgeSnapshotGitHubHTML })]
             <span>[[${ git.releaseCatalog.snapshotGroup.groupInfo }]]</span>
           </div>
@@ -80,6 +81,7 @@
                 [(${ gbh.badgeSnapshotJavaDocHTML })]
               </div>
               <div class="col-5">
+                &nbsp;
                 [(${ gbh.badgeSnapshotGitHubHTML })]
                 <span>[[${ git.releaseCatalog.snapshotGroup.groupInfo }]]</span>
               </div>
@@ -126,7 +128,10 @@
             [(${ gbh.badgeJavaDocHTML(minorGroup) })]
           </div>
           <div class="col-5">
+            &nbsp;
             [(${ gbh.badgeGitHubHTML(minorGroup) })]
+            &nbsp;&nbsp;
+            [(${ ah.badgeGHPkgShortHtml(minorGroup) })]
             <span>[[${ minorGroup.groupInfo }]]</span>
           </div>
         </div>
@@ -146,7 +151,10 @@
                 [(${ gbh.badgeJavaDocHTML(minorGroup) })]
               </div>
               <div class="col-5">
+                &nbsp;
                 [(${ gbh.badgeGitHubHTML(minorGroup) })]
+                &nbsp;&nbsp;
+                [(${ ah.badgeGHPkgShortHtml(minorGroup) })]
                 <span>[[${ minorGroup.groupInfo }]]</span>
               </div>
             </div>
@@ -209,6 +217,7 @@
             [(${ gbh.badgeJavaDocHTML(majorGroup) })]
           </div>
           <div class="col-5">
+            &nbsp;
             [(${ gbh.badgeGitHubHTML(majorGroup) })]
             <span>[[${ majorGroup.groupInfo }]]</span>
           </div>
@@ -229,6 +238,7 @@
                 [(${ gbh.badgeJavaDocHTML(majorGroup) })]
               </div>
               <div class="col-5">
+                &nbsp;
                 [(${ gbh.badgeGitHubHTML(majorGroup) })]
                 <span>[[${ majorGroup.groupInfo }]]</span>
               </div>
@@ -275,7 +285,10 @@
             [(${ gbh.badgeJavaDocHTML(minorGroup) })]
           </div>
           <div class="col-5">
+            &nbsp;
             [(${ gbh.badgeGitHubHTML(minorGroup) })]
+            &nbsp;&nbsp;
+            [(${ ah.badgeGHPkgShortHtml(minorGroup) })]
             <span>[[${ minorGroup.groupInfo }]]</span>
           </div>
         </div>
@@ -295,7 +308,10 @@
                 [(${ gbh.badgeJavaDocHTML(minorGroup) })]
               </div>
               <div class="col-5">
+                &nbsp;
                 [(${ gbh.badgeGitHubHTML(minorGroup) })]
+                &nbsp;&nbsp;
+                [(${ ah.badgeGHPkgShortHtml(minorGroup) })]
                 <span>[[${ minorGroup.groupInfo }]]</span>
               </div>
             </div>

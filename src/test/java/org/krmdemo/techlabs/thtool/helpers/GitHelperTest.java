@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsYamlTxt;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
-import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedSet;
 
 /**
  * A unit-test for <b>{@code th-tool}</b>-helper {@link GitHelper}.

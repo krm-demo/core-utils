@@ -3,7 +3,6 @@ package org.krmdemo.techlabs.thtool;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
 import lombok.extern.slf4j.Slf4j;
-import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.thymeleaf.context.AbstractContext;
 
 import java.io.File;
@@ -16,14 +15,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
-import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapFromFile;
-import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonArrFromFile;
 import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonArrFromResource;
 import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonObjFromFile;
 import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonObjFromResource;
 import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonTreeFromFile;
 import static org.krmdemo.techlabs.core.utils.JacksonUtils.jsonTreeFromResource;
+import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapFromFile;
+import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 
 /**
  * This class represents the context of {@link ThymeleafTool}, which holds the variables

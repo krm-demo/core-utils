@@ -19,6 +19,7 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.keyValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedSet;
@@ -163,5 +164,20 @@ public class CoreStreamUtilsTest {
         assertThatIllegalStateException().isThrownBy(() ->
             sortedMap(MergeFunction.THROW, numberWords.stream())
         ).withMessage("attempt to overwrite the value 'two' with the value 'couple', which is NOT allowed");
+    }
+
+    @Test
+    void testCreationIsProhibited() {
+        UnsupportedOperationException uoExCSU = assertThrows(UnsupportedOperationException.class,
+            () -> CorePropsUtils.newInstance(CoreStreamUtils.class)
+        );
+        assertThat(uoExCSU.getMessage()).isEqualTo(
+            "Cannot instantiate utility-class org.krmdemo.techlabs.core.utils.CoreStreamUtils");
+        // there's no dedicated test for collectors, because it's just a set of factory-methods
+        UnsupportedOperationException uoExCC = assertThrows(UnsupportedOperationException.class,
+            () -> CorePropsUtils.newInstance(CoreCollectors.class)
+        );
+        assertThat(uoExCC.getMessage()).isEqualTo(
+            "Cannot instantiate utility-class org.krmdemo.techlabs.core.utils.CoreCollectors");
     }
 }

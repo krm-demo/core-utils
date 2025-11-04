@@ -15,7 +15,6 @@ import java.util.function.Consumer;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.krmdemo.techlabs.core.utils.CoreFileUtils.imageFileData64;
-import static org.krmdemo.techlabs.core.utils.CoreFileUtils.loadFileAsText;
 
 /**
  * This class represents a <b>{@code th-tool}</b>-helper to render the individual badge and the whole <i>Badge Line</i>.
