@@ -13,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.keyValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.countingCharsMap;
+import static org.krmdemo.techlabs.core.utils.CoreStringUtils.hasNoNewLineAtTheEnd;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.joiningReversed;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.splitWords;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.splitWordsList;
@@ -75,5 +76,19 @@ public class CoreStringUtilsTest {
             .parallel()
             .collect(joiningReversed());
         assertThat(reverseJoined).isEqualTo(StringUtils.reverse(forwardJoined));
+    }
+
+    @Test
+    void testHasNoNewLine() {
+        assertThat(hasNoNewLineAtTheEnd(null)).isFalse();
+        assertThat(hasNoNewLineAtTheEnd("")).isFalse();
+        assertThat(hasNoNewLineAtTheEnd(" ")).isTrue();
+        assertThat(hasNoNewLineAtTheEnd(" \t  \t")).isTrue();
+        assertThat(hasNoNewLineAtTheEnd("la-la-la")).isTrue();
+        assertThat(hasNoNewLineAtTheEnd("la-la-la    ")).isTrue();
+        assertThat(hasNoNewLineAtTheEnd("la-la-la   \n")).isFalse();
+        assertThat(hasNoNewLineAtTheEnd("la-la-la   \r\n")).isFalse();
+        assertThat(hasNoNewLineAtTheEnd("la-la-la   \r")).isTrue();
+        assertThat(hasNoNewLineAtTheEnd(String.format("la-la-la   %n"))).isFalse();
     }
 }

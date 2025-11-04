@@ -1,5 +1,7 @@
 package org.krmdemo.techlabs.core.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -117,5 +119,18 @@ public class CoreStringUtils {
             },
             sb -> sb.insert(0, prefix).append(suffix)
         );
+    }
+
+    /**
+     * This method could be used to check whether the multi-line output ends with {@link System#lineSeparator() new-line}-symbol(s),
+     * because ib most cases it's quite impossible to realize that fact visually (unless using different background).
+     * <hr/>
+     * TODO: introduce a method to detect extra white-spaces before new-line like {@code git-diff} is doing
+     *
+     * @param str the string to check
+     * @return {@code true} if the passed line is not empty, and it does not end with {@link System#lineSeparator() new-line}-symbol(s)
+     */
+    public static boolean hasNoNewLineAtTheEnd(String str) {
+        return StringUtils.isNotEmpty(str) && !str.endsWith(System.lineSeparator());
     }
 }

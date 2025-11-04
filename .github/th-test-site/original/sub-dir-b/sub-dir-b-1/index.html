@@ -68,6 +68,24 @@
           After executing the tests (<code>"...&gt; mvn clean verify"</code> from command line),<br/>
           the processed site become available in the directory <code>./target/th-test-site/processed</code>.
         </p>
+        <!-- start of specific page-content -->
+        <details>
+          <summary>
+            JSON-properties of
+            <a href="#" title="(this link is working only after processing !!!) - ArtifactoryHelper.java"
+               th:href="|${gbh.gitHubCurrentRootUrl}/src/test/java/org/krmdemo/techlabs/thtool/helpers/ArtifactoryHelper.java|">
+              ArtifactoryHelper
+            </a>:
+            <code>[&#8203;(${ ah })&#8203;]</code>
+          </summary>
+          <pre>[(${ ah })]</pre>
+        </details>
+        <p>
+          Long badge to <i>GH-Packages</i> for the whole project: <code>[(${ ah.badgeGHPkgLongHtml })]</code>
+          <br/>
+          Short badge to <i>GH-Packages</i> for the whole project: <code>[(${ ah.badgeGHPkgShortHtml })]</code>
+        </p>
+        <!-- end of specific page-content -->
         <div class="text-center bg-light fst-italic text-sm mb-1">Each page has its own content here.</div>
       </div>
       <div class="row border border-secondary rounded mt-5">

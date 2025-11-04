@@ -783,6 +783,15 @@ public class GithubBadgeHelper {
         return String.format("[![%s](%s/badge.svg?event=push)](%s)", workflowName, workflowUrl, workflowUrl);
     }
 
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * For test and debug purposes the propertis of this helper could be rendered via th-template as:
+     * {@snippet : [(${ gbh })] }, or in command-line using the statement:
+     * {@snippet : ...> .github/th-tool.sh eval gbh }
+     *
+     * @return the properties of this helper in JSON-format
+     */
     @Override
     public String toString() {
         return DumpUtils.dumpAsJsonTxt(this);
