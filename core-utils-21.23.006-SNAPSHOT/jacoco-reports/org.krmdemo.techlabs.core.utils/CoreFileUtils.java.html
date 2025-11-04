@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CoreFileUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">CoreFileUtils.java</span></div><h1>CoreFileUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Base64;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
+/**
+ * Utility-class that invokes standard JDK utilities, but wraps {@link java.io.IOException}
+ * into {@link IllegalStateException} and creates missing parent directories.
+ */
+public class CoreFileUtils {
+
+    /**
+     * Utility-method that provides Base64-encoding of the passed content
+     * that allows to use it in HTML-attributes
+     * (for HTTP-URL parameter - additional URL-encoding should be applied).
+     *
+     * @param contentToEncode the text-content to encode
+     * @return Base64-encoded content
+     */
+    public static String encodeBase64(String contentToEncode) {
+<span class="fc" id="L34">        return encodeBase64(contentToEncode.getBytes());</span>
+    }
+
+    /**
+     * Utility-method that provides Base64-encoding of the passed array of bytes
+     * that allows to use it in HTML-attributes
+     * (for HTTP-URL parameter - additional URL-encoding should be applied).
+     *
+     * @param bytesArr the binary-content to encode
+     * @return Base64-encoded content
+     */
+    public static String encodeBase64(byte[] bytesArr) {
+<span class="fc" id="L46">        return new String(Base64.getEncoder().encode(bytesArr));</span>
+    }
+
+    /**
+     * Load the content of image-file with, encodes its content {@link Base64#getEncoder() Base64-encoder}
+     * and prepend it with corresponding mime-type prefix in order to use that final value
+     * either in HTML-attributes (for HTTP-URL parameter - additional URL-encoding should be applied).
+     * &lt;hr/&gt;
+     * For more advanced detection it's recommended to use &lt;a href=&quot;https://tika.apache.org/&quot;&gt;Apache Tika&lt;/a&gt;
+     *
+     * @param imageFile a file to load the text of binary content
+     * @return a data-string to use in HTML-attributes
+     */
+    public static String imageFileData64(File imageFile) {
+<span class="fc" id="L60">        byte[] imageFileContent = loadFileAsBytes(imageFile);</span>
+<span class="fc" id="L61">        String imageFileExt = FilenameUtils.getExtension(imageFile.getPath());</span>
+<span class="pc bpc" id="L62" title="2 of 4 branches missed.">        String dataPrefix = switch (imageFileExt.toLowerCase()) {</span>
+<span class="nc" id="L63">            case &quot;jpg&quot;, &quot;jpeg&quot; -&gt; &quot;data:image/jpg;base64,&quot;;</span>
+<span class="fc" id="L64">            case &quot;png&quot; -&gt; &quot;data:image/png;base64,&quot;;</span>
+<span class="fc" id="L65">            case &quot;gif&quot; -&gt; &quot;data:image/gif;base64,&quot;;</span>
+<span class="nc" id="L66">            default -&gt; throw new IllegalArgumentException(String.format(</span>
+                &quot;could not detect the mime-type of file '%s' by extension '%s&quot;,
+                imageFile, imageFileExt));
+        };
+<span class="fc" id="L70">        return dataPrefix + encodeBase64(imageFileContent);</span>
+    }
+
+    /**
+     * Getting the sequence of {@link Path}-components as {@link Stream Stream&amp;lt;String&amp;gt;}.
+     * &lt;hr/&gt;
+     * This operation is inversion of standard static methods {@link Path#of(String, String...)}
+     * or {@link Paths#get(String, String...)} - so, following expressions are identical:&lt;pre&gt;{@code
+     *     pathParts(Path.of(&quot;a/b/c&quot;))
+     *     pathParts(Path.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
+     *     Stream.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)
+     * }&lt;/pre&gt;
+     *
+     * @param path an instance of {@link Path}
+     * @return components of {@link Path} as {@link Stream Stream&amp;lt;String&amp;gt;}
+     */
+    public static Stream&lt;String&gt; pathParts(Path path) {
+<span class="nc" id="L87">        return StreamSupport.stream(path.spliterator(), false).map(Path::toString);</span>
+    }
+
+    /**
+     * Getting the sequence of {@link Path}-components as {@link List List&amp;lt;String&amp;gt;}
+     * - so, following expressions are identical:&lt;pre&gt;{@code
+     *      pathPartsList(Path.of(&quot;a/b/c&quot;))
+     *      pathPartsList(Path.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
+     *      List.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)  // &lt;-- this returns unmodifiable implementation of List
+     *      Arrays.asList(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)  // &lt;-- this returns modifiable instance of ArrayList
+     * }&lt;/pre&gt;
+     *
+     * @param path an instance of {@link Path}
+     * @return components of {@link Path} as {@link List List&amp;lt;String&amp;gt;}
+     */
+    public static List&lt;String&gt; pathPartsList(Path path) {
+<span class="nc" id="L103">        return pathParts(path).toList();</span>
+    }
+
+    /**
+     * Joining the {@link #pathParts(Path) stream of path components} with {@link File#separator}
+     * - so, the assertions like following are always correct:&lt;pre&gt;{@code
+     *     assertThat(pathPartsStr(Path.of(&quot;a/b/c&quot;))).isEqualTo(&quot;a/b/c&quot;)
+     * }&lt;/pre&gt;
+     * &lt;hr/&gt;
+     * There could be some surprises with un-normalized parts of path, which includes reference to parent directory.
+     * Such cases must be handled and tests properly, because the family of methods {@code pathPartsXXX} is
+     * just a pure representation of path-parts without additional handling them.
+     *
+     * @param path an instance of {@link Path}
+     * @return the sequence of {@link Path}-components joining with {@link File#separator}
+     */
+    public static String pathPartsStr(Path path) {
+<span class="nc" id="L120">        return pathParts(path).collect(Collectors.joining(File.separator));</span>
+    }
+
+    /**
+     * The same as {@link #loadFileAsText(File)}, but accept the path to that file as {@link String}
+     *
+     * @param pathToLoadStr the path of file to laod as {@link String}
+     * @return the content of that file as {@link String} or {@code null} if it's impossible to do
+     */
+    public static String loadFileAsText(String pathToLoadStr) {
+<span class="fc" id="L130">        return loadFileAsText(Paths.get(pathToLoadStr).toFile());</span>
+    }
+
+    /**
+     * Loading the content of {@code file} as {@link String} (it's allowed to use for text-files only)
+     * and throws {@link IllegalStateException} if the content of file could not be loaded for any reason.
+     *
+     * @param fileToLoad file to read the content
+     * @return the content of {@code file} as {@link String} or {@code null} if it's impossible to do
+     */
+    public static String loadFileAsText(File fileToLoad) {
+<span class="pc bpc" id="L141" title="2 of 4 branches missed.">        if (fileToLoad == null || !fileToLoad.isFile()) {</span>
+<span class="nc" id="L142">            throw new IllegalStateException(String.format(</span>
+                &quot;could not load the file %s as text, because it does not exist or it's not a normal file&quot;,
+<span class="nc bnc" id="L144" title="All 2 branches missed.">                fileToLoad == null ? &quot;&lt;&lt; NULL &gt;&gt;&quot; : &quot;'&quot; + fileToLoad + &quot;'&quot;));</span>
+        }
+        try {
+<span class="fc" id="L147">            return Files.readString(fileToLoad.toPath());</span>
+<span class="nc" id="L148">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L149">            throw new IllegalStateException(String.format(</span>
+                &quot;could not load the file '%s' as text, because of IOException&quot;, fileToLoad), ioEx);
+        }
+    }
+
+    /**
+     * Loading the content of {@code file} as {@code byte[]}  and throws {@link IllegalStateException}
+     * if the content of file could not be loaded for any reason.
+     *
+     * @param fileToLoad file to read the content
+     * @return the content of {@code file} as {@link String} or {@code null} if it's impossible to do
+     */
+    public static byte[] loadFileAsBytes(File fileToLoad) {
+<span class="pc bpc" id="L162" title="2 of 4 branches missed.">        if (fileToLoad == null || !fileToLoad.isFile()) {</span>
+<span class="nc" id="L163">            throw new IllegalStateException(String.format(</span>
+                &quot;could not load the file %s as bytes, because it does not exist or it's not a normal file&quot;,
+<span class="nc bnc" id="L165" title="All 2 branches missed.">                fileToLoad == null ? &quot;&lt;&lt; NULL &gt;&gt;&quot; : &quot;'&quot; + fileToLoad + &quot;'&quot;));</span>
+        }
+        try {
+<span class="fc" id="L168">            return Files.readAllBytes(fileToLoad.toPath());</span>
+<span class="nc" id="L169">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L170">            throw new IllegalStateException(String.format(</span>
+                &quot;could not load the file '%s' as bytes, because of IOException&quot;, fileToLoad), ioEx);
+        }
+    }
+
+    /**
+     * Loading the content of {@code file} as list of lines,
+     * where each line is an element of returning {@link List} of {@link String}.
+     *
+     * @param filePathToLoad path of file to read the content as lines
+     * @return the content of {@code filePathToLoad} as {@link List List&amp;lt;String&amp;gt;}
+     */
+    public static List&lt;String&gt; loadFileLines(Path filePathToLoad) {
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        if (filePathToLoad == null) {</span>
+<span class="nc" id="L184">            throw new IllegalStateException(</span>
+                &quot;the path to file to load lines MUST NOT be null&quot;);
+        }
+<span class="nc" id="L187">        try (Stream&lt;String&gt; lines = Files.lines(filePathToLoad)) {</span>
+<span class="nc" id="L188">            return lines.toList();</span>
+<span class="nc" id="L189">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L190">            throw new IllegalStateException(String.format(</span>
+                &quot;could not load the file '%s' as list of lines&quot;, filePathToLoad), ioEx);
+        }
+    }
+
+    /**
+     * Saving the content into the file {@code fileToSave} (if the file is not empty - it will be truncated).
+     * All missing parent directories will be created if necessary.
+     *
+     * @param fileToSave the file to save into
+     * @param fileContent the content to be saved
+     * @throws IllegalStateException in case of something goes wrong (which must not really happen)
+     */
+    public static void saveFileContent(File fileToSave, String fileContent) {
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">        if (fileToSave == null) {</span>
+<span class="nc" id="L205">            throw new IllegalStateException(</span>
+                &quot;could not save the file content, because fileToSave is null&quot;);
+        }
+        try {
+<span class="pc bpc" id="L209" title="1 of 2 branches missed.">            if (fileToSave.getParentFile() != null) {</span>
+<span class="fc" id="L210">                Files.createDirectories(fileToSave.getParentFile().toPath());</span>
+            }
+<span class="fc" id="L212">            Files.writeString(fileToSave.toPath(), fileContent);</span>
+<span class="nc" id="L213">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L214">            throw new IllegalStateException(&quot;could not save the content into the file &quot; + fileToSave, ioEx);</span>
+<span class="fc" id="L215">        }</span>
+<span class="fc" id="L216">    }</span>
+
+    /**
+     * Copy the file {@code sourceFile} to the file {@code targetFile}
+     * and creates all missing parent directories if necessary.
+     */
+    public static void copyFile(File sourceFile, File targetFile) {
+<span class="pc bpc" id="L223" title="2 of 4 branches missed.">        if (sourceFile == null || !sourceFile.isFile()) {</span>
+<span class="nc" id="L224">            throw new IllegalStateException(String.format(</span>
+                &quot;could not copy the file %s because it's not a normal file&quot;,
+<span class="nc bnc" id="L226" title="All 2 branches missed.">                sourceFile == null ? &quot;&lt;&lt; NULL &gt;&gt;&quot; : &quot;'&quot; + sourceFile + &quot;'&quot;));</span>
+        }
+<span class="pc bpc" id="L228" title="1 of 2 branches missed.">        if (targetFile == null) {</span>
+<span class="nc" id="L229">            throw new IllegalStateException(String.format(</span>
+                &quot;could not copy the file '%s' because target file is null&quot;, sourceFile));
+        }
+        try {
+<span class="pc bpc" id="L233" title="1 of 2 branches missed.">            if (targetFile.getParentFile() != null) {</span>
+<span class="fc" id="L234">                Files.createDirectories(targetFile.getParentFile().toPath());</span>
+            }
+<span class="fc" id="L236">            Files.copy(sourceFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);</span>
+<span class="nc" id="L237">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L238">            throw new IllegalStateException(String.format(</span>
+                &quot;could not copy the file '%s' into '%s' because of IOException&quot;,
+                sourceFile, targetFile), ioEx);
+<span class="fc" id="L241">        }</span>
+<span class="fc" id="L242">    }</span>
+
+    /**
+     * The same as {@link Files#deleteIfExists(Path)}, but ignore any kind of {@link IOException}.
+     * &lt;hr/&gt;
+     * &lt;u&gt;&lt;i&gt;Note:&lt;/i&gt;&lt;/u&gt; For non-empty directory the method {@link #removeSilent(File)} should be used,
+     * because this method will always return {@code false} for non-empty directory and remove nothing.
+     *
+     * @param pathToRemove the path to either a file or an empty directory to remove
+     * @return {@code true} if the item (file or empty directory) is removed, or {@code false} otherwise
+     */
+    public static boolean removePathSilent(Path pathToRemove) {
+<span class="nc bnc" id="L254" title="All 2 branches missed.">        if (pathToRemove == null) {</span>
+<span class="nc" id="L255">            return false;</span>
+        }
+        try {
+<span class="nc" id="L258">            return Files.deleteIfExists(pathToRemove);</span>
+<span class="nc" id="L259">        } catch (IOException ignored) {</span>
+<span class="nc" id="L260">            return false;</span>
+        }
+    }
+
+    /**
+     * Recursively removes either a single file or the whole directory and returns the number of removed items
+     *
+     * @param fileOrDirToRemove path to either a file or a directory to remove recursively
+     * @return the number of removed items
+     */
+    public static int removeSilent(File fileOrDirToRemove) {
+<span class="nc bnc" id="L271" title="All 2 branches missed.">        if (fileOrDirToRemove == null) {</span>
+<span class="nc" id="L272">            return -1;</span>
+        }
+<span class="nc bnc" id="L274" title="All 2 branches missed.">        if (!fileOrDirToRemove.exists()) {</span>
+<span class="nc" id="L275">            return 0;</span>
+        }
+        try {
+<span class="nc bnc" id="L278" title="All 2 branches missed.">            if (fileOrDirToRemove.isFile()) {</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">                return fileOrDirToRemove.delete() ? 1 : 0;</span>
+            }
+<span class="nc" id="L281">            try (Stream&lt;Path&gt; walkPathStream = Files.walk(fileOrDirToRemove.toPath())) {</span>
+<span class="nc" id="L282">                return (int) walkPathStream.sorted(Comparator.reverseOrder()) // Sort in reverse order to delete contents before directories</span>
+<span class="nc" id="L283">                    .filter(CoreFileUtils::removePathSilent)</span>
+<span class="nc" id="L284">                    .count();</span>
+            }
+<span class="nc" id="L286">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L287">            return -2;</span>
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+<span class="fc" id="L293">    private CoreFileUtils() {</span>
+        // prohibit the creation of utility-class instance
+<span class="fc" id="L295">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
