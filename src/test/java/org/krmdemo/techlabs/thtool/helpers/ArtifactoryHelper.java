@@ -113,13 +113,7 @@ public class ArtifactoryHelper {
      */
     @JsonIgnore
     public String getBadgeGHPkgLongHtml() {
-        return String.format("""
-            <a href="%s">
-              <img alt="a long badge to GH-Package '%s'" src="%s" />
-            </a>""",
-            GH_PACkAGE_HTML_URL,
-            GH_PACkAGE_NAME,
-            getBadgeGHPkgLongUrl());
+        return badgeGHPkgLongHtml(null);
     }
 
     /**
@@ -133,14 +127,7 @@ public class ArtifactoryHelper {
      */
     @JsonIgnore
     public String getBadgeGHPkgShortHtml() {
-        return String.format("""
-            <a href="%s" title="GH-Package '%s'">
-              <img alt="a short badge to GH-Package '%s'" src="%s" />
-            </a>""",
-            GH_PACkAGE_HTML_URL,
-            GH_PACkAGE_NAME,
-            GH_PACkAGE_NAME,
-            getBadgeGHPkgShortUrl());
+        return badgeGHPkgShortHtml(null);
     }
 
     /**
@@ -153,10 +140,7 @@ public class ArtifactoryHelper {
      * @return long 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME}
      */
     public String getBadgeGHPkgLongMD() {
-        return String.format(
-            "[![GitHub-Packages long](%s)](%s)",
-            getBadgeGHPkgLongUrl(),
-            GH_PACkAGE_HTML_URL);
+        return badgeGHPkgLongMD(null);
     }
 
     /**
@@ -169,15 +153,101 @@ public class ArtifactoryHelper {
      * @return short 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME}
      */
     public String getBadgeGHPkgShortMD() {
-        return String.format(
-            "[![GitHub-Packages short](%s)](%s \"GH-Package '%s'\")",
-            getBadgeGHPkgShortUrl(),
-            GH_PACkAGE_HTML_URL,
-            GH_PACkAGE_NAME);
+        return badgeGHPkgShortMD(null);
     }
 
     // --------------------------------------------------------------------------------------------
 
+    /**
+     * @return URL to GH-Packages for the whole project (a root-page)
+     */
+    public String getGHPkgUrl() {
+        return ghPkgUrl(null);
+    }
+
+    /**
+     * @return URL to GH-Packages for concrete version
+     */
+    public String ghPkgUrl(String versionStr) {
+        return GH_PACkAGE_HTML_URL + (versionStr == null ? "" : "?version=" + versionStr);
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
+     * the long HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
+     * {@snippet : [(${ ah.badgeGHPkgLongHtml(versionStr) })] }
+     * <hr/>
+     * Such badge is present at main Test-Site only (and maybe in future at 'Release Catalog')
+     *
+     * @return long HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
+     */
+    @JsonIgnore
+    public String badgeGHPkgLongHtml(String versionStr) {
+        return String.format("""
+            <a href="%s">
+              <img alt="a long badge to GH-Package" src="%s" />
+            </a>""",
+            ghPkgUrl(versionStr),
+            badgeGHPkgLongUrl(versionStr));
+    }
+
+    /**
+     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
+     * the short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
+     * {@snippet : [(${ ah.badgeGHPkgShortHtml(versionStr) })] }
+     * <hr/>
+     * Such badge is present at main Test-Site only (and maybe in future at 'Release Catalog')
+     *
+     * @return short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
+     */
+    @JsonIgnore
+    public String badgeGHPkgShortHtml(String versionStr) {
+        return String.format("""
+            <a href="%s" title="GH-Package '%s'%s">
+              <img alt="a short badge to GH-Package" src="%s" />
+            </a>""",
+            ghPkgUrl(versionStr),
+            GH_PACkAGE_NAME,
+            versionStr == null ? "" : ":" + versionStr,
+            badgeGHPkgShortUrl(versionStr));
+    }
+
+    /**
+     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
+     * the long 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME}:
+     * {@snippet : [(${ ah.badgeGHPkgLongMD(versionStr) })] }
+     * <hr/>
+     * Such badge is present at workflow-summary 'gh-packages' only (and maybe in future at 'README.md')
+     *
+     * @return long 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME}
+     */
+    public String badgeGHPkgLongMD(String versionStr) {
+        return String.format(
+            "[![GitHub-Packages long](%s)](%s)",
+            badgeGHPkgLongUrl(versionStr),
+            ghPkgUrl(versionStr));
+    }
+
+    /**
+     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
+     * the short 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME}:
+     * {@snippet : [(${ ah.badgeGHPkgShortMD(versionStr) })] }
+     * <hr/>
+     * Such badge is present at workflow-summary 'gh-packages' only (and maybe in future at 'README.md')
+     *
+     * @return short 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME}
+     */
+    public String badgeGHPkgShortMD(String versionStr) {
+        return String.format(
+            "[![GitHub-Packages short](%s)](%s \"GH-Package '%s'%s\")",
+            badgeGHPkgShortUrl(versionStr),
+            ghPkgUrl(versionStr),
+            GH_PACkAGE_NAME,
+            versionStr == null ? "" : ":" + versionStr
+        );
+    }
 
     // --------------------------------------------------------------------------------------------
 
@@ -201,8 +271,11 @@ public class ArtifactoryHelper {
     public String badgeGHPkgLongUrl(String versionStr) {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtx(ttCtx);
         return gbh.badgeUrlShiedsIO(GH_PACkAGE_NAME, versionStr,
-            "b0e0e6", // <-- this color is called "PowderBlue" at https://htmlcolorcodes.com/color-names/
-            LOGO_SLUG_NAME__GIT_HUB,"white", "black");
+            versionStr == null ? "b0e0e6" : "blue",
+            LOGO_SLUG_NAME__GIT_HUB,
+            "black",
+            "b0e0e6" // <-- this color is called "PowderBlue" at https://htmlcolorcodes.com/color-names/
+        );
     }
 
     /**
@@ -211,8 +284,11 @@ public class ArtifactoryHelper {
     public String badgeGHPkgShortUrl(String versionStr) {
         GithubBadgeHelper gbh = GithubBadgeHelper.fromCtx(ttCtx);
         return gbh.badgeUrlShiedsIO("GH-Packages", versionStr,
-            "b0e0e6", // <-- this color is called "PowderBlue" at https://htmlcolorcodes.com/color-names/
-            LOGO_SLUG_NAME__GIT_HUB,"white", "black");
+            versionStr == null ? "b0e0e6" : "blue",
+            LOGO_SLUG_NAME__GIT_HUB,
+            "black",
+            "b0e0e6" // <-- this color is called "PowderBlue" at https://htmlcolorcodes.com/color-names/
+        );
     }
 
     // --------------------------------------------------------------------------------------------
