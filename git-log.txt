@@ -1,3 +1,4 @@
+1bd30712 introduce currying interfaces BadgeProvider and BadgeVersionProvider #2 ('currentGHPkg' at README.md)
 7a23995a introduce currying interfaces BadgeProvider and BadgeVersionProvider #1
 87f15ecf << new snapshot version >> 21.23.006-SNAPSHOT
 4ddb45a4 << internal release >> 21.23.005
