@@ -174,6 +174,28 @@ public class ArtifactoryHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
+     * This conditional badge-provider performs rendering of badges to GH-Packages
+     * only when the current version of project is INTERNAL-release.
+     * In other cases an empty-stub is returned as {@link BadgeProvider#EMPTY}.
+     * <hr/>
+     * 'GitHib Markdown'-badge at {@code README.md.th}-template is inserted as: {@snippet :
+     *     [(${ ah.currentGHPkg.badgeMD })]
+     * }
+     *
+     * @return a badge-provider to the current INTERNAL-release or {@link BadgeProvider#EMPTY an empty-stub}
+     */
+    public BadgeProvider getCurrentGHPkg() {
+        MavenHelper mh = MavenHelper.fromCtx(ttCtx);
+        if (mh.versionHasQualifierPart()) {
+            return BadgeProvider.EMPTY;
+        } else if (mh.versionHasIncrementalPart()) {
+            return ghPkgShort.of(mh.getCurrentProjectVersion());
+        } else {
+            return BadgeProvider.EMPTY;
+        }
+    }
+
+    /**
      * @return URL to GH-Packages for the whole project (a root-page)
      */
     public String getGHPkgUrl() {

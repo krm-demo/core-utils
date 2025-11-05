@@ -53,6 +53,24 @@ public interface BadgeProvider {
     String getTargetUrl();
 
     /**
+     * This fake-provider is used as a placeholder for cases when the badge is unavailable
+     */
+    BadgeProvider EMPTY = new BadgeProvider() {
+        @Override
+        public String getBadgeHtml() {
+            return "";
+        }
+        @Override
+        public String getBadgeMD() {
+            return "";
+        }
+        @Override
+        public String getTargetUrl() {
+            return "!!! not target URL !!!";
+        }
+    };
+
+    /**
      * The <i>currying</i> wrapper over {@link BadgeVersionProvider},
      * where the first parameter of each method is {@code versionStr}.
      * <hr/>

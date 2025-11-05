@@ -1,9 +1,15 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
 import org.junit.jupiter.api.Test;
+import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
+import org.mockito.MockedStatic;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
 
 /**
  * A unit-test for <b>{@code th-tool}</b>-helper {@link ArtifactoryHelper}.
@@ -105,5 +111,41 @@ public class ArtifactoryHelperTest {
         assertThat(ah.getGhPkgShort().of(minorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgShort().badgeHtml(minorGroup));
         assertThat(ah.getGhPkgLong().of(majorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgLong().badgeHtml(majorGroup));
         assertThat(ah.getGhPkgShort().of(majorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgShort().badgeHtml(majorGroup));
+    }
+
+    @Test
+    void testCurrentGHPkg() {
+        // when the maven-build is running for PUBLIC-release the maven-helper expected to be following:
+        MavenHelper mhPublic = mock(MavenHelper.class);
+        when(mhPublic.versionHasQualifierPart()).thenReturn(false);
+        when(mhPublic.versionHasIncrementalPart()).thenReturn(false);
+        when(mhPublic.getCurrentProjectVersion()).thenReturn("21.xx");
+        // when the maven-build is running for INTERNAL-release the maven-helper expected to be following:
+        MavenHelper mhInternal = mock(MavenHelper.class);
+        when(mhInternal.versionHasQualifierPart()).thenReturn(false);
+        when(mhInternal.versionHasIncrementalPart()).thenReturn(true);
+        when(mhInternal.getCurrentProjectVersion()).thenReturn("21.xx.yyy");
+        // when the maven-build is running on a regular basis (SNAPSHOT-version) the maven-helper expected to be:
+        MavenHelper mhSnapshot = mock(MavenHelper.class);
+        when(mhSnapshot.versionHasQualifierPart()).thenReturn(true);
+        when(mhSnapshot.versionHasIncrementalPart()).thenReturn(true);
+        when(mhSnapshot.getCurrentProjectVersion()).thenReturn("21.xx.yyy-SNAPSHOT");
+        // now let's verify all three cases via mocking the factory-method "MavenHelper.fromCtx":
+        try (MockedStatic<MavenHelper> mavenHelperFactory = mockStatic(MavenHelper.class)) {
+            mavenHelperFactory.when(() -> MavenHelper.fromCtx(any())).thenReturn(mhPublic);
+            assertThat(ah.getCurrentGHPkg()).isSameAs(BadgeProvider.EMPTY);
+            mavenHelperFactory.when(() -> MavenHelper.fromCtx(any())).thenReturn(mhSnapshot);
+            assertThat(ah.getCurrentGHPkg()).isSameAs(BadgeProvider.EMPTY);
+            mavenHelperFactory.when(() -> MavenHelper.fromCtx(any())).thenReturn(mhInternal);
+            BadgeProvider ghPkg = ah.getCurrentGHPkg();
+            assertThat(ghPkg).isNotSameAs(BadgeProvider.EMPTY);
+            assertThat(ghPkg.getTargetUrl()).isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343?version=21.xx.yyy");
+            assertThat(ghPkg.getBadgeMD()).isEqualTo("""
+                [![GitHub-Packages short](https://img.shields.io/badge/GH--Packages-21.xx.yyy-blue?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343?version=21.xx.yyy "GH-Package 'io.github.krm-demo.core-utils':21.xx.yyy")""");
+            assertThat(ghPkg.getBadgeHtml()).isEqualTo("""
+                <a href="https://github.com/krm-demo/core-utils/packages/2631343?version=21.xx.yyy" title="GH-Package 'io.github.krm-demo.core-utils':21.xx.yyy">
+                  <img alt="GitHub-Packages short" src="https://img.shields.io/badge/GH--Packages-21.xx.yyy-blue?logo=github&logoColor=black&labelColor=b0e0e6" />
+                </a>""");
+        }
     }
 }
