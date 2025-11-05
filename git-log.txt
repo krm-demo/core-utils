@@ -1,3 +1,4 @@
+ed7a5ad0 introduce badge-providers for 'Maven-Central' and 'MVN-Repository' and include 'root', 'comments' and 'exampleXYS' properties of BadgeVersionProvider
 fe17f1df << new snapshot version >> 21.23.007-SNAPSHOT
 75ac3a65 << internal release >> 21.23.006
 1bd30712 introduce currying interfaces BadgeProvider and BadgeVersionProvider #2 ('currentGHPkg' at README.md)
