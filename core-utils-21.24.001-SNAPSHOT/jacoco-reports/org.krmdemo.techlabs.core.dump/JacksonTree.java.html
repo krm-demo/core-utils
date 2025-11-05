@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JacksonTree.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.dump</a> &gt; <span class="el_source">JacksonTree.java</span></div><h1>JacksonTree.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.dump;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
+
+/**
+ * A static-factory that provides an implementation of of {@link TreeDumper.Node}
+ * over {@link JsonNode}, which is the base data-unit that is provided by
+ * &lt;a href=&quot;https://github.com/FasterXML/jackson?tab=readme-ov-file&quot;&gt;Jackson-library&lt;/a&gt;.
+ * &lt;hr/&gt;
+ * Utility-classes {@link DumpUtils}, {@link PrintUtils} and {@link ToFileUtils}
+ * use the default static instance of this class - {@link #DEFAULT_JACKSON_TREE} via {@link ObjectPrinter.UnitOp}.
+ */
+public class JacksonTree {
+
+<span class="fc" id="L26">    public static final ObjectMapper DEFAULT_MAPPER = new ObjectMapper().registerModule(new JavaTimeModule());</span>
+
+<span class="fc" id="L28">    static final JacksonTree DEFAULT_JACKSON_TREE = new JacksonTree(DEFAULT_MAPPER);</span>
+
+    final ObjectMapper jacksonMapper;
+
+    /**
+     * An optional public constructor that allows to provide an instance of {@link ObjectMapper Jackson-ObjectMapper}
+     * that is different from the default one - {@link #DEFAULT_MAPPER}.
+     *
+     * @param jacksonMapper an instance of {@link ObjectMapper Jackson-ObjectMapper}
+     */
+<span class="fc" id="L38">    public JacksonTree(ObjectMapper jacksonMapper) {</span>
+<span class="fc" id="L39">        this.jacksonMapper = jacksonMapper;</span>
+<span class="fc" id="L40">    }</span>
+
+    /**
+     * An entry-point of this static-factory, that is used as singleton
+     * over the predefined static instance of {@link ObjectMapper} - {@link #DEFAULT_MAPPER}.
+     * &lt;hr/&gt;
+     * In order to customize the default behavior you could either
+     * register additional {@link Module Jackson-ObjectMapper-Module}s
+     * or provide your own instance of {@link ObjectMapper Jackson-ObjectMapper}
+     *
+     * @param fromValue the object to build the Jackson-Tree from as an instance of {@link JsonNode Jackson-Tree-Node}
+     * @return the instance of {@link TreeDumper.Node}, which repeats the hierarchy of {@link JsonNode Jackson-Tree-Node}
+     */
+    public TreeDumper.Node dumperNode(Object fromValue) {
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (fromValue == null) {</span>
+<span class="nc" id="L55">            return TreeDumper.NULL;</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        } else if (fromValue instanceof TreeDumper.Node dumperNode) {</span>
+<span class="nc" id="L57">            return dumperNode;</span>
+        }
+<span class="fc" id="L59">        JsonNode root = jacksonMapper.valueToTree(fromValue);</span>
+<span class="fc" id="L60">        return fromJsonNode(root);</span>
+    }
+
+    /**
+     * A factory-method that returns an implementation of {@link TreeDumper.Node}
+     * over {@link JsonNode}, which is the base data-unit that is provided by
+     * &lt;a href=&quot;https://github.com/FasterXML/jackson?tab=readme-ov-file&quot;&gt;Jackson-library&lt;/a&gt;
+     *
+     * @param jsonNode an instance of {@link JsonNode}
+     * @return a proper implementation of {@link TreeDumper.Node}
+     */
+    public static TreeDumper.Node fromJsonNode(JsonNode jsonNode) {
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (jsonNode == null) {</span>
+<span class="nc" id="L73">            return TreeDumper.NULL;</span>
+        }
+<span class="fc bfc" id="L75" title="All 4 branches covered.">        return switch (jsonNode.getNodeType()) {</span>
+<span class="fc" id="L76">            case NULL -&gt; TreeDumper.NULL;</span>
+<span class="fc" id="L77">            case ARRAY -&gt; new SequenceNode(jsonNode);</span>
+<span class="fc" id="L78">            case OBJECT, POJO -&gt; new MappingsNode(jsonNode);</span>
+<span class="fc" id="L79">            default -&gt; new ScalarNode(jsonNode);</span>
+        };
+    }
+
+
+    abstract static class JacksonNode implements TreeDumper.Node {
+        protected final JsonNode jsonNode;
+<span class="fc" id="L86">        protected JacksonNode(JsonNode jsonNode) {</span>
+<span class="fc" id="L87">            this.jsonNode = Objects.requireNonNull(jsonNode);</span>
+<span class="fc" id="L88">        }</span>
+    }
+
+    static class ScalarNode extends JacksonNode implements TreeDumper.ScalarNode {
+        protected ScalarNode (JsonNode jsonNode) {
+<span class="fc" id="L93">            super(jsonNode);</span>
+<span class="fc" id="L94">        }</span>
+        @Override
+        public String text() {
+<span class="fc" id="L97">            return jsonNode.asText();</span>
+        }
+        @Override
+        public void visit(TreeDumper dumper) {
+<span class="fc" id="L101">            dumper.acceptScalar(this);</span>
+<span class="fc" id="L102">        }</span>
+    }
+
+    static class SequenceNode extends JacksonNode implements TreeDumper.SequenceNode {
+        protected SequenceNode (JsonNode jsonNode) {
+<span class="fc" id="L107">            super(jsonNode);</span>
+<span class="fc" id="L108">        }</span>
+        @Override
+        public Stream&lt;TreeDumper.Node&gt; sequenceItems() {
+<span class="fc" id="L111">            return IntStream.range(0, jsonNode.size())</span>
+<span class="fc" id="L112">                .mapToObj(jsonNode::get)</span>
+<span class="fc" id="L113">                .map(JacksonTree::fromJsonNode);</span>
+        }
+        @Override
+        public void visit(TreeDumper dumper) {
+<span class="fc" id="L117">            dumper.acceptSequence(this);</span>
+<span class="fc" id="L118">        }</span>
+    }
+
+    static class MappingsNode extends JacksonNode implements TreeDumper.MappingsNode {
+<span class="fc" id="L122">        private final Set&lt;String&gt; fieldNames = new LinkedHashSet&lt;&gt;();</span>
+        protected MappingsNode (JsonNode jsonNode) {
+<span class="fc" id="L124">            super(jsonNode);</span>
+<span class="fc" id="L125">            jsonNode.fieldNames().forEachRemaining(fieldNames::add);</span>
+<span class="fc" id="L126">        }</span>
+        @Override
+        public Stream&lt;Map.Entry&lt;String, TreeDumper.Node&gt;&gt; mappingsItems() {
+<span class="fc" id="L129">            return fieldNames.stream().map(name -&gt; {</span>
+<span class="fc" id="L130">                JsonNode fieldNode = jsonNode.get(name);</span>
+<span class="fc" id="L131">                return nameValue(name, fromJsonNode(fieldNode));</span>
+            });
+        }
+        @Override
+        public void visit(TreeDumper dumper) {
+<span class="fc" id="L136">            dumper.acceptMappings(this);</span>
+<span class="fc" id="L137">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
