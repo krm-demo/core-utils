@@ -1,3 +1,4 @@
+0d85916b decrease the width of border between minor-groups to 1px
 2b9b4f73 << new snapshot version >> 21.23.008-SNAPSHOT
 135294f1 << internal release >> 21.23.007
 fe58d69b display 'Maven-Central' and 'MVN-Repository' badges at 'Release Catalog' and 'README.md' #1
