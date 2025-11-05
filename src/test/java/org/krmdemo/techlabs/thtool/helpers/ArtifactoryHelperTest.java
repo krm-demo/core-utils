@@ -1,15 +1,15 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
 import org.junit.jupiter.api.Test;
-import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
 import org.mockito.MockedStatic;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.krmdemo.techlabs.thtool.helpers.MockUtils.mockMavenHelperInternal;
+import static org.krmdemo.techlabs.thtool.helpers.MockUtils.mockMavenHelperPublic;
+import static org.krmdemo.techlabs.thtool.helpers.MockUtils.mockMavenHelperSnapshot;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
 
 /**
  * A unit-test for <b>{@code th-tool}</b>-helper {@link ArtifactoryHelper}.
@@ -20,8 +20,8 @@ public class ArtifactoryHelperTest {
     private static final ArtifactoryHelper ah = ArtifactoryHelper.fromCtxLazy(ttCtx);
 
     private static final String latestInternal = "21.23.004";
-    private static final CommitGroupMinor minorGroup = MockRevCommitUtils.minorGroup(latestInternal);
-    private static final CommitGroupMajor majorGroup = MockRevCommitUtils.majorGroup(latestInternal);
+    private static final CommitGroupMinor minorGroup = MockUtils.minorGroup(latestInternal);
+    private static final CommitGroupMajor majorGroup = MockUtils.majorGroup(latestInternal);
 
     @Test
     void testGHPkgUrl() {
@@ -30,9 +30,9 @@ public class ArtifactoryHelperTest {
         assertThat(ah.ghPkgUrl(latestInternal))
             .isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004");
         // ------------ using currying interfaces: -----------------
-        assertThat(ah.getGhPkgRootLong().getTargetUrl())
+        assertThat(ah.getGhPkgLong().getRoot().getTargetUrl())
             .isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343");
-        assertThat(ah.getGhPkgRootShort().getTargetUrl())
+        assertThat(ah.getGhPkgShort().getRoot().getTargetUrl())
             .isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343");
         assertThat(ah.getGhPkgLong().of(latestInternal).getTargetUrl())
             .isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004");
@@ -62,9 +62,9 @@ public class ArtifactoryHelperTest {
 
     @Test
     void testGetBadgeGHPkgMD() {
-        assertThat(ah.getGhPkgRootLong().getBadgeMD()).isEqualTo("""
+        assertThat(ah.getGhPkgLong().getRoot().getBadgeMD()).isEqualTo("""
             [![GitHub-Packages long](https://img.shields.io/badge/io.github.krm--demo.core--utils-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343 "GH-Package 'io.github.krm-demo.core-utils'")""");
-        assertThat(ah.getGhPkgRootShort().getBadgeMD()).isEqualTo("""
+        assertThat(ah.getGhPkgShort().getRoot().getBadgeMD()).isEqualTo("""
             [![GitHub-Packages short](https://img.shields.io/badge/GH--Packages-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343 "GH-Package 'io.github.krm-demo.core-utils'")""");
     }
 
@@ -80,11 +80,11 @@ public class ArtifactoryHelperTest {
 
     @Test
     void testGetBadgeGHPkgHtml() {
-        assertThat(ah.getGhPkgRootLong().getBadgeHtml()).isEqualTo("""
+        assertThat(ah.getGhPkgLong().getRoot().getBadgeHtml()).isEqualTo("""
             <a href="https://github.com/krm-demo/core-utils/packages/2631343" title="GH-Package 'io.github.krm-demo.core-utils'">
               <img alt="GitHub-Packages long" src="https://img.shields.io/badge/io.github.krm--demo.core--utils-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6" />
             </a>""");
-        assertThat(ah.getGhPkgRootShort().getBadgeHtml()).isEqualTo("""
+        assertThat(ah.getGhPkgShort().getRoot().getBadgeHtml()).isEqualTo("""
             <a href="https://github.com/krm-demo/core-utils/packages/2631343" title="GH-Package 'io.github.krm-demo.core-utils'">
               <img alt="GitHub-Packages short" src="https://img.shields.io/badge/GH--Packages-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6" />
             </a>""");
@@ -115,22 +115,11 @@ public class ArtifactoryHelperTest {
 
     @Test
     void testCurrentGHPkg() {
-        // when the maven-build is running for PUBLIC-release the maven-helper expected to be following:
-        MavenHelper mhPublic = mock(MavenHelper.class);
-        when(mhPublic.versionHasQualifierPart()).thenReturn(false);
-        when(mhPublic.versionHasIncrementalPart()).thenReturn(false);
-        when(mhPublic.getCurrentProjectVersion()).thenReturn("21.xx");
-        // when the maven-build is running for INTERNAL-release the maven-helper expected to be following:
-        MavenHelper mhInternal = mock(MavenHelper.class);
-        when(mhInternal.versionHasQualifierPart()).thenReturn(false);
-        when(mhInternal.versionHasIncrementalPart()).thenReturn(true);
-        when(mhInternal.getCurrentProjectVersion()).thenReturn("21.xx.yyy");
-        // when the maven-build is running on a regular basis (SNAPSHOT-version) the maven-helper expected to be:
-        MavenHelper mhSnapshot = mock(MavenHelper.class);
-        when(mhSnapshot.versionHasQualifierPart()).thenReturn(true);
-        when(mhSnapshot.versionHasIncrementalPart()).thenReturn(true);
-        when(mhSnapshot.getCurrentProjectVersion()).thenReturn("21.xx.yyy-SNAPSHOT");
-        // now let's verify all three cases via mocking the factory-method "MavenHelper.fromCtx":
+        // instances should be mocked before the static mocking of the class
+        MavenHelper mhPublic = mockMavenHelperPublic();
+        MavenHelper mhInternal = mockMavenHelperInternal();
+        MavenHelper mhSnapshot = mockMavenHelperSnapshot();
+        // a good example how to mock the static factory-method "MavenHelper.fromCtx":
         try (MockedStatic<MavenHelper> mavenHelperFactory = mockStatic(MavenHelper.class)) {
             mavenHelperFactory.when(() -> MavenHelper.fromCtx(any())).thenReturn(mhPublic);
             assertThat(ah.getCurrentGHPkg()).isSameAs(BadgeProvider.EMPTY);
@@ -141,9 +130,9 @@ public class ArtifactoryHelperTest {
             assertThat(ghPkg).isNotSameAs(BadgeProvider.EMPTY);
             assertThat(ghPkg.getTargetUrl()).isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343?version=21.xx.yyy");
             assertThat(ghPkg.getBadgeMD()).isEqualTo("""
-                [![GitHub-Packages short](https://img.shields.io/badge/GH--Packages-21.xx.yyy-blue?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343?version=21.xx.yyy "GH-Package 'io.github.krm-demo.core-utils':21.xx.yyy")""");
+                [![GitHub-Packages short](https://img.shields.io/badge/GH--Packages-21.xx.yyy-blue?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343?version=21.xx.yyy "GH-Package 'some.maven.project.group.mock-project-artifact':21.xx.yyy")""");
             assertThat(ghPkg.getBadgeHtml()).isEqualTo("""
-                <a href="https://github.com/krm-demo/core-utils/packages/2631343?version=21.xx.yyy" title="GH-Package 'io.github.krm-demo.core-utils':21.xx.yyy">
+                <a href="https://github.com/krm-demo/core-utils/packages/2631343?version=21.xx.yyy" title="GH-Package 'some.maven.project.group.mock-project-artifact':21.xx.yyy">
                   <img alt="GitHub-Packages short" src="https://img.shields.io/badge/GH--Packages-21.xx.yyy-blue?logo=github&logoColor=black&labelColor=b0e0e6" />
                 </a>""");
         }

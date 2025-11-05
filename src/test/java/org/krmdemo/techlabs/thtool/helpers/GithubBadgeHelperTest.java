@@ -17,9 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsYamlTxt;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
-import static org.krmdemo.techlabs.thtool.helpers.MockRevCommitUtils.majorGroup;
-import static org.krmdemo.techlabs.thtool.helpers.MockRevCommitUtils.minorGroup;
-import static org.krmdemo.techlabs.thtool.helpers.MockRevCommitUtils.mockRevCommit;
+import static org.krmdemo.techlabs.thtool.helpers.MockUtils.majorGroup;
+import static org.krmdemo.techlabs.thtool.helpers.MockUtils.minorGroup;
+import static org.krmdemo.techlabs.thtool.helpers.MockUtils.mockRevCommit;
 
 /**
  * A unit-test for <b>{@code th-tool}</b>-helper {@link GithubBadgeHelper}.

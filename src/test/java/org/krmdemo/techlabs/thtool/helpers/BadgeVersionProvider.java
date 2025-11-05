@@ -1,5 +1,10 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.util.function.Function;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -11,17 +16,16 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * <hr/>
  * For pure getters an interface {@link BadgeProvider} should be used.
  */
+@JsonPropertyOrder(alphabetic = true)
 public interface BadgeVersionProvider {
 
-//    /**
-//     * Getting the URL to badge-image according to the value of parameter {@code versionStr}.
-//     * <hr/>
-//     * It's mostly useful for tests to verify the static-badge of <a href="https://shields.io/">shields.io</a>
-//     *
-//     * @param versionStr string-representation of the project-version
-//     * @return the URL to badge-image
-//     */
-//    String badgeImageUrl(String versionStr);
+    /**
+     * @return the comments for debug/test purposes (to see that in JSON/YAML dumps and at "Test-Site")
+     */
+    @JsonProperty("#comments")
+    default String comments() {
+        return "badge-version-provider";
+    }
 
     /**
      * Getting the HTML-badge that could be inserted at <b>{@code th-tool}</b>-template,
@@ -130,6 +134,22 @@ public interface BadgeVersionProvider {
     }
 
     /**
+     * @return the instance of {@link BadgeProvider} for empty version (that is usually kind of root)
+     */
+    default BadgeProvider getRoot() {
+        return BadgeProvider.of(this, "");
+    }
+
+    /**
+     * Mostly used for test/debug purposes (to see that in JSON/YAML dumps and at "Test-Site")
+     *
+     * @return the instance of {@link BadgeProvider} for some fake-version {@code "xx.yy.zzz"}
+     */
+    default BadgeProvider getExampleXYZ() {
+        return BadgeProvider.of(this, "xx.yy.zzz");
+    }
+
+    /**
      * An implementation of interface {@link Function} with set of functions that outer-helper must provide
      *
      * @param badgeImageFunc a function that returns a URL to badge-image according to {@code versionStr} parameter
@@ -137,6 +157,12 @@ public interface BadgeVersionProvider {
      * @param altImageFunc a function that returns a value to {@code alt}-attribute to the HTML-tag {@code <img alt="..."/>}
      * @param titleImageFunc a function that returns a value to {@code title}-attribute to the HTML-tag {@code <a title="..."/>}
      */
+    @JsonIgnoreProperties({
+        "badgeImageFunc",
+        "targetUrlFunc",
+        "altImageFunc",
+        "titleImageFunc",
+    })
     record FuncRec(
         Function<String, String> badgeImageFunc,
         Function<String, String> targetUrlFunc,

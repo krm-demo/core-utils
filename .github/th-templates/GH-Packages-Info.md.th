@@ -22,6 +22,6 @@
 |            <code>[&#8203;[${ ghPkgInfo.html_url }]&#8203;]</code> |             [ `[[${ ghPkgInfo.name }]]` ]( [[${ ghPkgInfo.html_url }]] )              | URL to _GH-Packages_ of the project         |
 |                  <code>[&#8203;[${ ghPkgInfo.id }]&#8203;]</code> |                                `[[${ ghPkgInfo.id }]]`                                | ID of package `[[${ ghPkgInfo.name }]]`     |
 |       <code>[&#8203;[${ ghPkgInfo.version_count }]&#8203;]</code> |                          `[[${ ghPkgInfo.version_count }]]`                           | Total number of _INTERNAL_-releases         |
-|      <code>[&#8203;[${ ah.ghPkgRootLong.badgeMD }]&#8203;]</code> |                           [(${ ah.ghPkgRootLong.badgeMD })]                           | Long-Badge to _GH-Packages_ of the project  |
-|     <code>[&#8203;[${ ah.ghPkgRootShort.badgeMD }]&#8203;]</code> |                          [(${ ah.ghPkgRootShort.badgeMD })]                           | Short-Badge to _GH-Packages_ of the project |
+|     <code>[&#8203;[${ ah.ghPkgLong.root.badgeMD }]&#8203;]</code> |                          [(${ ah.ghPkgLong.root.badgeMD })]                           | Long-Badge to _GH-Packages_ of the project  |
+|     <code>[&#8203;[${ ah.ghPkgShort.rootbadgeMD }]&#8203;]</code> |                          [(${ ah.ghPkgShort.root.badgeMD })]                          | Short-Badge to _GH-Packages_ of the project |
 

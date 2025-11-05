@@ -5,16 +5,57 @@ import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.mockito.Mockito;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Helper/utility class to provide mock-objects that are related to <b>JGit</b> porcelain-API
+ * Helper/utility class to provide mock-objects that are reused in multiple test-cases
  *
+ * @see MavenHelper
  * @see <a href="https://git-scm.com/book/pl/v2/Appendix-B:-Embedding-Git-in-your-Applications-JGit">
  *     <b>JGit</b> - Embedding Git in your Applications
  * </a>
  */
-public class MockRevCommitUtils {
+public class MockUtils {
+
+    /**
+     * @return mock {@link MavenHelper} for <i>PUBLIC</i>-release
+     */
+    static MavenHelper mockMavenHelperPublic() {
+        MavenHelper mhPublic = mock(MavenHelper.class);
+        when(mhPublic.versionHasQualifierPart()).thenReturn(false);
+        when(mhPublic.versionHasIncrementalPart()).thenReturn(false);
+        when(mhPublic.getProjectGroup()).thenReturn("mock.maven.project.group");
+        when(mhPublic.getProjectArtifact()).thenReturn("mock-project-artifact");
+        when(mhPublic.getCurrentProjectVersion()).thenReturn("21.xx");
+        return mhPublic;
+    }
+
+    /**
+     * @return mock {@link MavenHelper} for <i>INTERNAL</i>-release
+     */
+    static MavenHelper mockMavenHelperInternal() {
+        MavenHelper mhInternal = mock(MavenHelper.class);
+        when(mhInternal.versionHasQualifierPart()).thenReturn(false);
+        when(mhInternal.versionHasIncrementalPart()).thenReturn(true);
+        when(mhInternal.getProjectGroup()).thenReturn("some.maven.project.group");
+        when(mhInternal.getProjectArtifact()).thenReturn("mock-project-artifact");
+        when(mhInternal.getCurrentProjectVersion()).thenReturn("21.xx.yyy");
+        return mhInternal;
+    }
+
+    /**
+     * @return mock {@link MavenHelper} for regular build (<i>SNAPSHOT</i>-version)
+     */
+    static MavenHelper mockMavenHelperSnapshot() {
+        MavenHelper mhSnapshot = mock(MavenHelper.class);
+        when(mhSnapshot.versionHasQualifierPart()).thenReturn(true);
+        when(mhSnapshot.versionHasIncrementalPart()).thenReturn(true);
+        when(mhSnapshot.getProjectGroup()).thenReturn("mock.maven.project.group");
+        when(mhSnapshot.getProjectArtifact()).thenReturn("mock-project-artifact");
+        when(mhSnapshot.getCurrentProjectVersion()).thenReturn("21.xx.yyy-SNAPSHOT");
+        return mhSnapshot;
+    }
 
     static CommitGroupMajor majorGroup(String versionStr) {
         return new CommitGroupMajor(() -> minorGroup(versionStr));

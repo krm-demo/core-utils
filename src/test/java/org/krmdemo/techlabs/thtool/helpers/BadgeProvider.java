@@ -1,6 +1,9 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * An interface to helper-components that provides badges and links
@@ -18,7 +21,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *     (Scala Matters) Partially Applied Functions And Currying
  * </a>
  */
+@JsonPropertyOrder(alphabetic = true)
 public interface BadgeProvider {
+
+    /**
+     * @return the comments for debug/test purposes (to see that in JSON/YAML dumps and at "Test-Site")
+     */
+    @JsonProperty("#comments")
+    default String comments() {
+        return "badge-provider";
+    }
 
     /**
      * HTML-badge that could be inserted at <b>{@code th-tool}</b>-template in a following way:
@@ -66,7 +78,12 @@ public interface BadgeProvider {
         }
         @Override
         public String getTargetUrl() {
-            return "!!! not target URL !!!";
+            return "!!! no target URL !!!";
+        }
+        @JsonValue
+        @Override
+        public String comments() {
+            return "EMPTY badge-provider";
         }
     };
 

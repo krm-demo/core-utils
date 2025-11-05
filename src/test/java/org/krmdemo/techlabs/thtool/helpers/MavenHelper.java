@@ -89,6 +89,7 @@ public class MavenHelper {
     public static final String RESOURCE_PATH__MVN_PROPS =
         "/META-INF/maven/maven-project.properties";
 
+    private final static String PROP_NAME__PROJECT_GROUP = "maven-project.group";
     private final static String PROP_NAME__PROJECT_ARTIFACT = "maven-project.artifact";
     private final static String PROP_NAME__PROJECT_VERSION = "maven-project.version";
 
@@ -113,6 +114,13 @@ public class MavenHelper {
      */
     public String getProjectCatalogName() {
         return getProjectName().replace(':', '-');
+    }
+
+    /**
+     * @return the name of the project group ({@code "io.github.krm-demo"})
+     */
+    public String getProjectGroup() {
+        return mvnPropsMap.get(PROP_NAME__PROJECT_GROUP);
     }
 
     /**
