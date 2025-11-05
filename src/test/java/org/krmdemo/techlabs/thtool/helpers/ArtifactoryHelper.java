@@ -1,6 +1,6 @@
 package org.krmdemo.techlabs.thtool.helpers;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafTool;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
@@ -18,7 +18,6 @@ import static org.krmdemo.techlabs.thtool.helpers.GithubBadgeHelper.LOGO_SLUG_NA
  * the proper links to those external resources per each version that corresponds to {@link VersionTag}.
  * <hr/>
  * The properties of this helper are available from <b>{@code th-tool}</b>-templates by name {@code ah}.
- * <br/>TODO: to be implemented !!!
  *
  * @see <a href="https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages">
  *     GitHub Packages
@@ -101,58 +100,76 @@ public class ArtifactoryHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
-     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
-     * the long HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
-     * {@snippet : [(${ ah.badgeGHPkgLongHtml })] }
+     * An instance of {@link BadgeVersionProvider} that provides the short badges to GH-Packages for concrete version.
      * <hr/>
-     * Such badge is present at main Test-Site only (and maybe in future at 'Release Catalog')
-     *
-     * @return long HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
+     * HTML-badges are inserted via following th-inlines: {@snippet :
+     *     [(${ ah.ghPkgShort.of(minorGroup).badgeHtml })]
+     *     [(${ ah.ghPkgShort.badgeHtml(minorGroup) })]
+     * }
+     * 'GitHib Markdown'-badges are inserted via following th-inlines: {@snippet :
+     *     [(${ ah.ghPkgShort.of(minorGroup).badgeMD })]
+     *     [(${ ah.ghPkgShort.badgeMD(minorGroup) })]
+     * }
      */
-    @JsonIgnore
-    public String getBadgeGHPkgLongHtml() {
-        return badgeGHPkgLongHtml("");
-    }
+    @Getter
+    private final BadgeVersionProvider ghPkgShort = new BadgeVersionProvider.FuncRec(
+        this::badgeGHPkgShortUrl,
+        this::ghPkgUrl,
+        (String _versionStr) -> "GitHub-Packages short",
+        (String versionStr) -> String.format("GH-Package '%s'%s",
+            GH_PACkAGE_NAME,
+            isBlank(versionStr) ? "" : ":" + versionStr
+        )
+    );
 
     /**
-     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
-     * the short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
-     * {@snippet : [(${ ah.badgeGHPkgShortHtml })] }
+     * An instance of {@link BadgeVersionProvider} that provides the short badges to GH-Packages for concrete version
      * <hr/>
-     * Such badge is present at main Test-Site only (and maybe in future at 'Release Catalog')
-     *
-     * @return short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
+     * HTML-badges are inserted via following th-inlines: {@snippet :
+     *     [(${ ah.ghPkgLong.of(minorGroup).badgeHtml })]
+     *     [(${ ah.ghPkgLong.badgeHtml(minorGroup) })]
+     * }
+     * 'GitHib Markdown'-badges are inserted via following th-inlines: {@snippet :
+     *     [(${ ah.ghPkgLong.of(minorGroup).badgeMD })]
+     *     [(${ ah.ghPkgLong.badgeMD(minorGroup) })]
+     * }
      */
-    @JsonIgnore
-    public String getBadgeGHPkgShortHtml() {
-        return badgeGHPkgShortHtml("");
-    }
+    @Getter
+    private final BadgeVersionProvider ghPkgLong = new BadgeVersionProvider.FuncRec(
+        this::badgeGHPkgLongUrl,
+        this::ghPkgUrl,
+        (String _versionStr) -> "GitHub-Packages long",
+        (String versionStr) -> String.format("GH-Package '%s'%s",
+            GH_PACkAGE_NAME,
+            isBlank(versionStr) ? "" : ":" + versionStr
+        )
+    );
 
     /**
-     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
-     * the long 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME}:
-     * {@snippet : [(${ ah.badgeGHPkgLongMD })] }
+     * An instance of {@link BadgeVersionProvider} that provides the long badges to the root of GH-Packages
      * <hr/>
-     * Such badge is present at workflow-summary 'gh-packages' only (and maybe in future at 'README.md')
-     *
-     * @return long 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME}
+     * HTML-badges are inserted via following th-inline: {@snippet :
+     *     [(${ ah.ghPkgRootShort.badgeHtml })]
+     * }
+     * 'GitHib Markdown'-badges are inserted via following th-inline: {@snippet :
+     *     [(${ ah.ghPkgRootShort.badgeMD })]
+     * }
      */
-    public String getBadgeGHPkgLongMD() {
-        return badgeGHPkgLongMD("");
-    }
+    @Getter
+    private final BadgeProvider ghPkgRootShort = ghPkgShort.of("");
 
     /**
-     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
-     * the short 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME}:
-     * {@snippet : [(${ ah.badgeGHPkgShortMD })] }
+     * An instance of {@link BadgeVersionProvider} that provides the long badges to the root of GH-Packages
      * <hr/>
-     * Such badge is present at workflow-summary 'gh-packages' only (and maybe in future at 'README.md')
-     *
-     * @return short 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME}
+     * HTML-badges are inserted via following th-inline: {@snippet :
+     *     [(${ ah.ghPkgRootLong.badgeHtml })]
+     * }
+     * 'GitHib Markdown'-badges are inserted via following th-inline: {@snippet :
+     *     [(${ ah.ghPkgRootLong.badgeMD })]
+     * }
      */
-    public String getBadgeGHPkgShortMD() {
-        return badgeGHPkgShortMD("");
-    }
+    @Getter
+    private final BadgeProvider ghPkgRootLong = ghPkgLong.of("");
 
     // --------------------------------------------------------------------------------------------
 
@@ -168,173 +185,6 @@ public class ArtifactoryHelper {
      */
     public String ghPkgUrl(String versionStr) {
         return GH_PACkAGE_HTML_URL + (isBlank(versionStr) ? "" : "?version=" + versionStr);
-    }
-
-    // --------------------------------------------------------------------------------------------
-
-    /**
-     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
-     * the long HTML-badge to the GH-Package {@value GH_PACkAGE_NAME} for concrete version
-     * {@snippet : [(${ ah.badgeGHPkgLongHtml(versionStr) })] }
-     * <hr/>
-     * Such badge is present at main Test-Site only (and maybe in future at 'Release Catalog')
-     *
-     * @return long HTML-badge to the GH-Package {@value GH_PACkAGE_NAME} for concrete version
-     */
-    @JsonIgnore
-    public String badgeGHPkgLongHtml(String versionStr) {
-        return String.format("""
-            <a href="%s">
-              <img alt="a long badge to GH-Package" src="%s" />
-            </a>""",
-            ghPkgUrl(versionStr),
-            badgeGHPkgLongUrl(versionStr));
-    }
-
-    /**
-     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
-     * the short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME} for concrete version
-     * {@snippet : [(${ ah.badgeGHPkgShortHtml(versionStr) })] }
-     * <hr/>
-     * Such badge is present at main Test-Site only (and maybe in future at 'Release Catalog')
-     *
-     * @return short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME} for concrete version
-     */
-    @JsonIgnore
-    public String badgeGHPkgShortHtml(String versionStr) {
-        return String.format("""
-            <a href="%s" title="GH-Package '%s'%s">
-              <img alt="a short badge to GH-Package" src="%s" />
-            </a>""",
-            ghPkgUrl(versionStr),
-            GH_PACkAGE_NAME,
-            isBlank(versionStr) ? "" : ":" + versionStr,
-            badgeGHPkgShortUrl(versionStr));
-    }
-
-    /**
-     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
-     * the long 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME} for concrete version:
-     * {@snippet : [(${ ah.badgeGHPkgLongMD(versionStr) })] }
-     * <hr/>
-     * Such badge is present at workflow-summary 'gh-packages' only (and maybe in future at 'README.md')
-     *
-     * @return long 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME} for concrete version
-     */
-    public String badgeGHPkgLongMD(String versionStr) {
-        return String.format(
-            "[![GitHub-Packages long](%s)](%s)",
-            badgeGHPkgLongUrl(versionStr),
-            ghPkgUrl(versionStr));
-    }
-
-    /**
-     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
-     * the short 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME} for concrete version:
-     * {@snippet : [(${ ah.badgeGHPkgShortMD(versionStr) })] }
-     * <hr/>
-     * Such badge is present at workflow-summary 'gh-packages' only (and maybe in future at 'README.md')
-     *
-     * @return short 'GitHub-Markdown'-badge to the GH-Package {@value GH_PACkAGE_NAME} for concrete version
-     */
-    public String badgeGHPkgShortMD(String versionStr) {
-        return String.format(
-            "[![GitHub-Packages short](%s)](%s \"GH-Package '%s'%s\")",
-            badgeGHPkgShortUrl(versionStr),
-            ghPkgUrl(versionStr),
-            GH_PACkAGE_NAME,
-            isBlank(versionStr) ? "" : ":" + versionStr
-        );
-    }
-
-    // --------------------------------------------------------------------------------------------
-
-    /**
-     * @param commitGroupMinor minor commit-group to get the GH-Package's version
-     * @return long HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMinor}
-     */
-    public String badgeGHPkgLongHtml(CommitGroupMinor commitGroupMinor) {
-        return badgeGHPkgLongHtml("" + commitGroupMinor.versionTag());
-    }
-
-    /**
-     * A helper-property to be inserted at <b>{@code th-tool}</b>-template in order to render
-     * the short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME} for concrete version
-     * {@snippet : [(${ ah.badgeGHPkgShortHtml(minorGroup) })] }
-     * <hr/>
-     * Such badge is present at 'Release Catalog'
-     *
-     * @param minorGroup minor commit-group to get the GH-Package's version
-     * @return short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code minorGroup}
-     */
-    public String badgeGHPkgShortHtml(CommitGroupMinor minorGroup) {
-        return badgeGHPkgShortHtml("" + minorGroup.versionTag());
-    }
-
-    /**
-     * TODO: must return the badge to "Maven-Central", but not to "GH-Package"
-     *
-     * @param commitGroupMajor major commit-group to get the GH-Package's version
-     * @return long HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMajor}
-     */
-    public String badgeGHPkgLongHtml(CommitGroupMajor commitGroupMajor) {
-        return badgeGHPkgLongHtml("" + commitGroupMajor.versionTag());
-    }
-
-    /**
-     * TODO: must return the badge to "Maven-Central", but not to "GH-Package"
-     *
-     * @param commitGroupMajor major commit-group to get the GH-Package's version
-     * @return short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMajor}
-     */
-    public String badgeGHPkgShortHtml(CommitGroupMajor commitGroupMajor) {
-        return badgeGHPkgShortHtml("" + commitGroupMajor.versionTag());
-    }
-
-    // --------------------------------------------------------------------------------------------
-
-    /**
-     * @param commitGroupMinor minor commit-group to get the GH-Package's version
-     * @return long HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMinor}
-     */
-    public String badgeGHPkgLongMD(CommitGroupMinor commitGroupMinor) {
-        return badgeGHPkgLongMD("" + commitGroupMinor.versionTag());
-    }
-
-    /**
-     * @param commitGroupMinor minor commit-group to get the GH-Package's version
-     * @return short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMinor}
-     */
-    public String badgeGHPkgShortMD(CommitGroupMinor commitGroupMinor) {
-        return badgeGHPkgShortMD("" + commitGroupMinor.versionTag());
-    }
-
-    /**
-     * TODO: must return the badge to "Maven-Central", but not to "GH-Package"
-     *
-     * @param commitGroupMajor major commit-group to get the GH-Package's version
-     * @return long HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMajor}
-     */
-    public String badgeGHPkgLongMD(CommitGroupMajor commitGroupMajor) {
-        return badgeGHPkgLongMD("" + commitGroupMajor.versionTag());
-    }
-
-    /**
-     * TODO: must return the badge to "Maven-Central", but not to "GH-Package"
-     *
-     * @param commitGroupMajor major commit-group to get the GH-Package's version
-     * @return short HTML-badge to the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMajor}
-     */
-    public String badgeGHPkgShortMD(CommitGroupMajor commitGroupMajor) {
-        return badgeGHPkgShortMD("" + commitGroupMajor.versionTag());
     }
 
     // --------------------------------------------------------------------------------------------
@@ -379,48 +229,6 @@ public class ArtifactoryHelper {
             "black",
             "b0e0e6" // <-- this color is called "PowderBlue" at https://htmlcolorcodes.com/color-names/
         );
-    }
-
-    // --------------------------------------------------------------------------------------------
-
-    /**
-     * @param commitGroupMinor minor commit-group to get the GH-Package's version
-     * @return the URL to the long badge-image for the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMinor}
-     */
-    public String badgeGHPkgLongUrl(CommitGroupMinor commitGroupMinor) {
-        return badgeGHPkgLongUrl("" + commitGroupMinor.versionTag());
-    }
-
-    /**
-     * @param commitGroupMinor minor commit-group to get the GH-Package's version
-     * @return the URL to the short badge-image for the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMinor}
-     */
-    public String badgeGHPkgShortUrl(CommitGroupMinor commitGroupMinor) {
-        return badgeGHPkgShortUrl("" + commitGroupMinor.versionTag());
-    }
-
-    /**
-     * TODO: must return the URL to "Maven-Central", but not to "GH-Package"
-     *
-     * @param commitGroupMajor major commit-group to get the GH-Package's version
-     * @return the URL to the long badge-image for the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMajor}
-     */
-    public String badgeGHPkgLongUrl(CommitGroupMajor commitGroupMajor) {
-        return badgeGHPkgLongUrl("" + commitGroupMajor.versionTag());
-    }
-
-    /**
-     * TODO: must return the URL to "Maven-Central", but not to "GH-Package"
-     *
-     * @param commitGroupMajor major commit-group to get the GH-Package's version
-     * @return the URL to the short badge-image for the GH-Package {@value GH_PACkAGE_NAME}
-     *         for concrete version, represented by passed {@code commitGroupMajor}
-     */
-    public String badgeGHPkgShortUrl(CommitGroupMajor commitGroupMajor) {
-        return badgeGHPkgShortUrl("" + commitGroupMajor.versionTag());
     }
 
     // --------------------------------------------------------------------------------------------

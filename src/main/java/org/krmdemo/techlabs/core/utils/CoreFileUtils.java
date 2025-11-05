@@ -63,6 +63,7 @@ public class CoreFileUtils {
             case "jpg", "jpeg" -> "data:image/jpg;base64,";
             case "png" -> "data:image/png;base64,";
             case "gif" -> "data:image/gif;base64,";
+            case "svg" -> "data:image/svg+xml;base64,";
             default -> throw new IllegalArgumentException(String.format(
                 "could not detect the mime-type of file '%s' by extension '%s",
                 imageFile, imageFileExt));

@@ -131,7 +131,7 @@
             &nbsp;
             [(${ gbh.badgeGitHubHTML(minorGroup) })]
             &nbsp;&nbsp;
-            [(${ ah.badgeGHPkgShortHtml(minorGroup) })]
+            [(${ ah.ghPkgShort.badgeHtml(minorGroup) })]
             <span>[[${ minorGroup.groupInfo }]]</span>
           </div>
         </div>
@@ -154,7 +154,7 @@
                 &nbsp;
                 [(${ gbh.badgeGitHubHTML(minorGroup) })]
                 &nbsp;&nbsp;
-                [(${ ah.badgeGHPkgShortHtml(minorGroup) })]
+                [(${ ah.ghPkgShort.badgeHtml(minorGroup) })]
                 <span>[[${ minorGroup.groupInfo }]]</span>
               </div>
             </div>
@@ -288,7 +288,7 @@
             &nbsp;
             [(${ gbh.badgeGitHubHTML(minorGroup) })]
             &nbsp;&nbsp;
-            [(${ ah.badgeGHPkgShortHtml(minorGroup) })]
+            [(${ ah.ghPkgShort.badgeHtml(minorGroup) })]
             <span>[[${ minorGroup.groupInfo }]]</span>
           </div>
         </div>
@@ -311,7 +311,7 @@
                 &nbsp;
                 [(${ gbh.badgeGitHubHTML(minorGroup) })]
                 &nbsp;&nbsp;
-                [(${ ah.badgeGHPkgShortHtml(minorGroup) })]
+                [(${ ah.ghPkgShort.badgeHtml(minorGroup) })]
                 <span>[[${ minorGroup.groupInfo }]]</span>
               </div>
             </div>

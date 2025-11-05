@@ -23,6 +23,15 @@ public class ArtifactoryHelperTest {
             .isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343");
         assertThat(ah.ghPkgUrl(latestInternal))
             .isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004");
+        // ------------ using currying interfaces: -----------------
+        assertThat(ah.getGhPkgRootLong().getTargetUrl())
+            .isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343");
+        assertThat(ah.getGhPkgRootShort().getTargetUrl())
+            .isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343");
+        assertThat(ah.getGhPkgLong().of(latestInternal).getTargetUrl())
+            .isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004");
+        assertThat(ah.getGhPkgShort().of(latestInternal).getTargetUrl())
+            .isEqualTo("https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004");
     }
 
     @Test
@@ -41,59 +50,60 @@ public class ArtifactoryHelperTest {
 //        System.out.printf("badgeGHPkgShortUrl(%s) --> %s;%n", latestInternal, ah.badgeGHPkgShortUrl(latestInternal));
         assertThat(ah.badgeGHPkgLongUrl(latestInternal)).isEqualTo("""
             https://img.shields.io/badge/io.github.krm--demo.core--utils-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6""");
-        assertThat(ah.badgeGHPkgLongUrl(minorGroup)).isEqualTo(ah.badgeGHPkgLongUrl(latestInternal));
-        assertThat(ah.badgeGHPkgLongUrl(majorGroup)).isEqualTo(ah.badgeGHPkgLongUrl(latestInternal));
         assertThat(ah.badgeGHPkgShortUrl(latestInternal)).isEqualTo("""
             https://img.shields.io/badge/GH--Packages-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6""");
-        assertThat(ah.badgeGHPkgShortUrl(minorGroup)).isEqualTo(ah.badgeGHPkgShortUrl(latestInternal));
-        assertThat(ah.badgeGHPkgShortUrl(majorGroup)).isEqualTo(ah.badgeGHPkgShortUrl(latestInternal));
     }
 
     @Test
     void testGetBadgeGHPkgMD() {
-        assertThat(ah.getBadgeGHPkgLongMD()).isEqualTo("""
-            [![GitHub-Packages long](https://img.shields.io/badge/io.github.krm--demo.core--utils-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343)""");
-        assertThat(ah.getBadgeGHPkgShortMD()).isEqualTo("""
+        assertThat(ah.getGhPkgRootLong().getBadgeMD()).isEqualTo("""
+            [![GitHub-Packages long](https://img.shields.io/badge/io.github.krm--demo.core--utils-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343 "GH-Package 'io.github.krm-demo.core-utils'")""");
+        assertThat(ah.getGhPkgRootShort().getBadgeMD()).isEqualTo("""
             [![GitHub-Packages short](https://img.shields.io/badge/GH--Packages-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343 "GH-Package 'io.github.krm-demo.core-utils'")""");
     }
 
     @Test
     void testBadgeGHPkgVersionMD() {
-        assertThat(ah.badgeGHPkgLongMD(latestInternal)).isEqualTo("""
-            [![GitHub-Packages long](https://img.shields.io/badge/io.github.krm--demo.core--utils-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004)""");
-        assertThat(ah.badgeGHPkgLongMD(minorGroup)).isEqualTo(ah.badgeGHPkgLongMD(latestInternal));
-        assertThat(ah.badgeGHPkgLongMD(majorGroup)).isEqualTo(ah.badgeGHPkgLongMD(latestInternal));
-        assertThat(ah.badgeGHPkgShortMD(latestInternal)).isEqualTo("""
+        assertThat(ah.getGhPkgLong().badgeMD(latestInternal)).isEqualTo("""
+            [![GitHub-Packages long](https://img.shields.io/badge/io.github.krm--demo.core--utils-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004 "GH-Package 'io.github.krm-demo.core-utils':21.23.004")""");
+        assertThat(ah.getGhPkgShort().badgeMD(latestInternal)).isEqualTo("""
             [![GitHub-Packages short](https://img.shields.io/badge/GH--Packages-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6)](https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004 "GH-Package 'io.github.krm-demo.core-utils':21.23.004")""");
-        assertThat(ah.badgeGHPkgShortMD(minorGroup)).isEqualTo(ah.badgeGHPkgShortMD(latestInternal));
-        assertThat(ah.badgeGHPkgShortMD(majorGroup)).isEqualTo(ah.badgeGHPkgShortMD(latestInternal));
+        assertThat(ah.getGhPkgLong().of(latestInternal).getBadgeMD()).isEqualTo(ah.getGhPkgLong().badgeMD(latestInternal));
+        assertThat(ah.getGhPkgShort().of(latestInternal).getBadgeMD()).isEqualTo(ah.getGhPkgShort().badgeMD(latestInternal));
     }
 
     @Test
     void testGetBadgeGHPkgHtml() {
-        assertThat(ah.getBadgeGHPkgLongHtml()).isEqualTo("""
-            <a href="https://github.com/krm-demo/core-utils/packages/2631343">
-              <img alt="a long badge to GH-Package" src="https://img.shields.io/badge/io.github.krm--demo.core--utils-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6" />
-            </a>""");
-        assertThat(ah.getBadgeGHPkgShortHtml()).isEqualTo("""
+        assertThat(ah.getGhPkgRootLong().getBadgeHtml()).isEqualTo("""
             <a href="https://github.com/krm-demo/core-utils/packages/2631343" title="GH-Package 'io.github.krm-demo.core-utils'">
-              <img alt="a short badge to GH-Package" src="https://img.shields.io/badge/GH--Packages-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6" />
+              <img alt="GitHub-Packages long" src="https://img.shields.io/badge/io.github.krm--demo.core--utils-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6" />
+            </a>""");
+        assertThat(ah.getGhPkgRootShort().getBadgeHtml()).isEqualTo("""
+            <a href="https://github.com/krm-demo/core-utils/packages/2631343" title="GH-Package 'io.github.krm-demo.core-utils'">
+              <img alt="GitHub-Packages short" src="https://img.shields.io/badge/GH--Packages-b0e0e6?logo=github&logoColor=black&labelColor=b0e0e6" />
             </a>""");
     }
 
     @Test
     void testGetBadgeGHPkgVersionHtml() {
-        assertThat(ah.badgeGHPkgLongHtml(latestInternal)).isEqualTo("""
-            <a href="https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004">
-              <img alt="a long badge to GH-Package" src="https://img.shields.io/badge/io.github.krm--demo.core--utils-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6" />
-            </a>""");
-        assertThat(ah.badgeGHPkgLongHtml(minorGroup)).isEqualTo(ah.badgeGHPkgLongHtml(latestInternal));
-        assertThat(ah.badgeGHPkgLongHtml(majorGroup)).isEqualTo(ah.badgeGHPkgLongHtml(latestInternal));
-        assertThat(ah.badgeGHPkgShortHtml(latestInternal)).isEqualTo("""
+        assertThat(ah.getGhPkgLong().badgeHtml(latestInternal)).isEqualTo("""
             <a href="https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004" title="GH-Package 'io.github.krm-demo.core-utils':21.23.004">
-              <img alt="a short badge to GH-Package" src="https://img.shields.io/badge/GH--Packages-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6" />
+              <img alt="GitHub-Packages long" src="https://img.shields.io/badge/io.github.krm--demo.core--utils-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6" />
             </a>""");
-        assertThat(ah.badgeGHPkgShortHtml(minorGroup)).isEqualTo(ah.badgeGHPkgShortHtml(latestInternal));
-        assertThat(ah.badgeGHPkgShortHtml(majorGroup)).isEqualTo(ah.badgeGHPkgShortHtml(latestInternal));
+        assertThat(ah.getGhPkgShort().badgeHtml(latestInternal)).isEqualTo("""
+            <a href="https://github.com/krm-demo/core-utils/packages/2631343?version=21.23.004" title="GH-Package 'io.github.krm-demo.core-utils':21.23.004">
+              <img alt="GitHub-Packages short" src="https://img.shields.io/badge/GH--Packages-21.23.004-blue?logo=github&logoColor=black&labelColor=b0e0e6" />
+            </a>""");
+        assertThat(ah.getGhPkgLong().of(latestInternal).getBadgeHtml()).isEqualTo(ah.getGhPkgLong().badgeHtml(latestInternal));
+        assertThat(ah.getGhPkgShort().of(latestInternal).getBadgeHtml()).isEqualTo(ah.getGhPkgShort().badgeHtml(latestInternal));
+        assertThat(ah.getGhPkgLong().of(minorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgLong().badgeHtml(latestInternal));
+        assertThat(ah.getGhPkgShort().of(minorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgShort().badgeHtml(latestInternal));
+        assertThat(ah.getGhPkgLong().of(majorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgLong().badgeHtml(latestInternal));
+        assertThat(ah.getGhPkgShort().of(majorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgShort().badgeHtml(latestInternal));
+        // looks like it's OK to get rid of following:
+        assertThat(ah.getGhPkgLong().of(minorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgLong().badgeHtml(minorGroup));
+        assertThat(ah.getGhPkgShort().of(minorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgShort().badgeHtml(minorGroup));
+        assertThat(ah.getGhPkgLong().of(majorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgLong().badgeHtml(majorGroup));
+        assertThat(ah.getGhPkgShort().of(majorGroup).getBadgeHtml()).isEqualTo(ah.getGhPkgShort().badgeHtml(majorGroup));
     }
 }

@@ -266,6 +266,13 @@ public class GithubBadgeHelperTest {
         ).map(name -> Path.of(".github/images/opentest4j", name).toFile()).toArray(File[]::new);
         System.out.println(dumpAsYamlTxt(opentest4jFilesArr));
         dumpImageDataAndBadges(opentest4jFilesArr);
+
+        System.out.println("----- data-images and badges for 'Maven-Central'-logo SVG-files: -----");
+        dumpMavenCentralBadge();
+
+        System.out.println("----- data-images and badges for 'MVN-Repository'-logo SVG-files: -----");
+        dumpMvnRepoBadge_3_letters();
+        dumpMvnRepoBadge_1_letter();
     }
 
     private static void dumpImageDataAndBadges(File... pathArr) {
@@ -284,6 +291,57 @@ public class GithubBadgeHelperTest {
             System.out.println(imageFile + "(badge) --> badgeUrlTxt.size() = " + badgeUrlTxt.length());
             System.out.println("----------------------");
         }
+    }
+
+    private static void dumpMavenCentralBadge() {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        File imageFile = Path.of(".github/images/maven-central-logo-short.svg").toFile();
+        String imageData64 = CoreFileUtils.imageFileData64(imageFile);
+        System.out.println(imageFile + "(bas64) --> '" + imageData64 + "'");
+        System.out.println(imageFile + "(.url.) --> '" + URLEncoder.encode(imageData64, StandardCharsets.UTF_8) + "'");
+        String badgeUrlTxt = gbh.badgeUrlShiedsIO("maven-central", "21.23",
+            "blue",
+            imageFile,
+            "2A4566", // <-- this color corresponds background of "maven-central" site
+            "2A4566" // <-- this color corresponds background of "maven-central" site
+        );
+        System.out.println(imageFile + "(badge) --> '" + badgeUrlTxt + "'");
+        System.out.println(imageFile + "(badge) --> badgeUrlTxt.size() = " + badgeUrlTxt.length());
+        System.out.println("----------------------");
+    }
+
+    private static void dumpMvnRepoBadge_3_letters() {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        File imageFile = Path.of(".github/images/mvnrepo-3-letters.svg").toFile();
+        String imageData64 = CoreFileUtils.imageFileData64(imageFile);
+        System.out.println(imageFile + "(bas64) --> '" + imageData64 + "'");
+        System.out.println(imageFile + "(.url.) --> '" + URLEncoder.encode(imageData64, StandardCharsets.UTF_8) + "'");
+        String badgeUrlTxt = gbh.badgeUrlShiedsIO("mvn-repo", "21.23",
+            "blue",
+            imageFile,
+            "white", // <-- this color corresponds background of "maven-central" site
+            "white" // <-- this color corresponds background of "maven-central" site
+        );
+        System.out.println(imageFile + "(badge) --> '" + badgeUrlTxt + "'");
+        System.out.println(imageFile + "(badge) --> badgeUrlTxt.size() = " + badgeUrlTxt.length());
+        System.out.println("----------------------");
+    }
+
+    private static void dumpMvnRepoBadge_1_letter() {
+        GithubBadgeHelper gbh = GithubBadgeHelper.fromCtxLazy(ttCtx);
+        File imageFile = Path.of(".github/images/mvnrepo-1-letter.svg").toFile();
+        String imageData64 = CoreFileUtils.imageFileData64(imageFile);
+        System.out.println(imageFile + "(bas64) --> '" + imageData64 + "'");
+        System.out.println(imageFile + "(.url.) --> '" + URLEncoder.encode(imageData64, StandardCharsets.UTF_8) + "'");
+        String badgeUrlTxt = gbh.badgeUrlShiedsIO("mvn-repo", "21.23",
+            "blue",
+            imageFile,
+            "2A4566", // <-- this color corresponds background of "maven-central" site
+            "2A4566" // <-- this color corresponds background of "maven-central" site
+        );
+        System.out.println(imageFile + "(badge) --> '" + badgeUrlTxt + "'");
+        System.out.println(imageFile + "(badge) --> badgeUrlTxt.size() = " + badgeUrlTxt.length());
+        System.out.println("----------------------");
     }
 }
 
