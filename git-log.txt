@@ -1,3 +1,4 @@
+135294f1 << internal release >> 21.23.007
 fe58d69b display 'Maven-Central' and 'MVN-Repository' badges at 'Release Catalog' and 'README.md' #1
 ed7a5ad0 introduce badge-providers for 'Maven-Central' and 'MVN-Repository' and include 'root', 'comments' and 'exampleXYS' properties of BadgeVersionProvider
 fe17f1df << new snapshot version >> 21.23.007-SNAPSHOT
