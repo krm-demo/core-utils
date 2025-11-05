@@ -59,11 +59,11 @@ public class CoreFileUtils {
     public static String imageFileData64(File imageFile) {
 <span class="fc" id="L60">        byte[] imageFileContent = loadFileAsBytes(imageFile);</span>
 <span class="fc" id="L61">        String imageFileExt = FilenameUtils.getExtension(imageFile.getPath());</span>
-<span class="pc bpc" id="L62" title="3 of 5 branches missed.">        String dataPrefix = switch (imageFileExt.toLowerCase()) {</span>
+<span class="pc bpc" id="L62" title="2 of 5 branches missed.">        String dataPrefix = switch (imageFileExt.toLowerCase()) {</span>
 <span class="nc" id="L63">            case &quot;jpg&quot;, &quot;jpeg&quot; -&gt; &quot;data:image/jpg;base64,&quot;;</span>
 <span class="fc" id="L64">            case &quot;png&quot; -&gt; &quot;data:image/png;base64,&quot;;</span>
 <span class="fc" id="L65">            case &quot;gif&quot; -&gt; &quot;data:image/gif;base64,&quot;;</span>
-<span class="nc" id="L66">            case &quot;svg&quot; -&gt; &quot;data:image/svg+xml;base64,&quot;;</span>
+<span class="fc" id="L66">            case &quot;svg&quot; -&gt; &quot;data:image/svg+xml;base64,&quot;;</span>
 <span class="nc" id="L67">            default -&gt; throw new IllegalArgumentException(String.format(</span>
                 &quot;could not detect the mime-type of file '%s' by extension '%s&quot;,
                 imageFile, imageFileExt));
