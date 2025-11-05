@@ -248,7 +248,7 @@ h2 {
 }
 
 .minor-grid-title-row-over .col-4 {
-    border-top: 2px solid var(--navbar-background-color);
+    border-top: 1px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
     background-color: var(--release-title-background-color);
     text-align: right;
@@ -257,16 +257,16 @@ h2 {
     padding-bottom: 1px;
 }
 .minor-grid-title-row-over .col-5 {
+    border-top: 1px solid var(--navbar-background-color);
     background-color: var(--release-title-background-color);
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
     text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
-    border-top: 2px solid var(--navbar-background-color);
     padding-top: 5px;
 }
 
 .minor-grid-title-row .col-4 {
-    border-top: 2px solid var(--navbar-background-color);
+    border-top: 1px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
     /*background-color: var(--release-title-background-color);*/
     text-align: right;
@@ -275,11 +275,11 @@ h2 {
     padding-bottom: 1px;
 }
 .minor-grid-title-row .col-5 {
+    border-top: 1px solid var(--navbar-background-color);
     /*background-color: var(--release-title-background-color);*/
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
     text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
-    border-top: 2px solid var(--navbar-background-color);
     padding-top: 5px;
 }
 
@@ -319,12 +319,12 @@ h2 {
     align-items: center;
     padding: 0;
     padding-right: 7px;
-    border-top: 2px solid var(--navbar-background-color);
+    border-top: 1px solid var(--navbar-background-color);
     border-right: 2px solid var(--navbar-background-color);
 }
 .minor-grid-container details[open] > summary {
     padding-right: 7px;
-    border-top: 2px solid var(--navbar-background-color);
+    border-top: 1px solid var(--navbar-background-color);
     border-right: 2px solid var(--navbar-background-color);
 }
 
