@@ -1,3 +1,4 @@
+7a23995a introduce currying interfaces BadgeProvider and BadgeVersionProvider #1
 87f15ecf << new snapshot version >> 21.23.006-SNAPSHOT
 4ddb45a4 << internal release >> 21.23.005
 c85f497d display GH-Packages badges in a table of INTERNAL-releases at 'Release Catalog' #1
