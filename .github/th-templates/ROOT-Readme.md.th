@@ -8,6 +8,8 @@
 ![GitHub recent commits](https://img.shields.io/github/commits-since/krm-demo/core-utils/21.07)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [( ${ah.currentGHPkg.badgeMD} )]
+[( ${ah.currentMavenCentral.badgeMD} )]
+[( ${ah.currentMvnRepository.badgeMD} )]
 
 # <u>[[${mavenProps.get("maven-project.artifact")}]]</u>
 

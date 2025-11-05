@@ -219,6 +219,10 @@
           <div class="col-5">
             &nbsp;
             [(${ gbh.badgeGitHubHTML(majorGroup) })]
+            &nbsp;&nbsp;
+            [(${ ah.mavenCentral.badgeHtml(majorGroup) })]
+            &nbsp;&nbsp;
+            [(${ ah.mvnRepository.badgeHtml(majorGroup) })]
             <span>[[${ majorGroup.groupInfo }]]</span>
           </div>
         </div>
@@ -240,6 +244,10 @@
               <div class="col-5">
                 &nbsp;
                 [(${ gbh.badgeGitHubHTML(majorGroup) })]
+                &nbsp;&nbsp;
+                [(${ ah.mavenCentral.badgeHtml(majorGroup) })]
+                &nbsp;&nbsp;
+                [(${ ah.mvnRepository.badgeHtml(majorGroup) })]
                 <span>[[${ majorGroup.groupInfo }]]</span>
               </div>
             </div>

@@ -127,12 +127,13 @@ h2 {
     border-top: 2px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
     border-top-left-radius: 10px;
-    background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
+    background-color: var(--release-title-background-color);
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 1px;
 }
 .major-grid-title-row-over .col-5 {
+    background-color: var(--release-title-background-color);
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
     text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
@@ -144,12 +145,13 @@ h2 {
     border-top: 2px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
     border-top-left-radius: 10px;
-    background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
+    /*background-color: var(--release-title-background-color);*/
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 1px;
 }
 .major-grid-title-row .col-5 {
+    /*background-color: var(--release-title-background-color);*/
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
     text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
@@ -248,13 +250,14 @@ h2 {
 .minor-grid-title-row-over .col-4 {
     border-top: 2px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
-    background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
+    background-color: var(--release-title-background-color);
     text-align: right;
     padding-right: 15px;
     padding-top: 5px;
     padding-bottom: 1px;
 }
 .minor-grid-title-row-over .col-5 {
+    background-color: var(--release-title-background-color);
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
     text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
@@ -265,13 +268,14 @@ h2 {
 .minor-grid-title-row .col-4 {
     border-top: 2px solid var(--navbar-background-color);
     border-left: 2px solid var(--navbar-background-color);
-    background-color: var(--release-title-background-color) ; /*#4D7A9733; /*var(--navbar-background-color);*/
+    /*background-color: var(--release-title-background-color);*/
     text-align: right;
     padding-right: 15px;
     padding-top: 5px;
     padding-bottom: 1px;
 }
 .minor-grid-title-row .col-5 {
+    /*background-color: var(--release-title-background-color);*/
     white-space: nowrap; /* Prevents text from wrapping to the next line */
     overflow: hidden; /* Hides any content that overflows the element's box */
     text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */

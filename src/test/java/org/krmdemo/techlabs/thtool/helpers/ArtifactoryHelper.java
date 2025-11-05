@@ -57,6 +57,7 @@ public class ArtifactoryHelper {
     //
     // an example for the URL above to "slf4j-api"-library at Maven-Central, but for concrete version "2.0.17":
     // "https://central.sonatype.com/artifact/org.slf4j/slf4j-api/2.0.17"
+    // our one: "https://central.sonatype.com/artifact/io.github.krm-demo/core-utils/21.23"
     // ---------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -73,12 +74,13 @@ public class ArtifactoryHelper {
     //
     // an example for the URL above to "slf4j-api"-library at MVN-Repository, but for concrete version "2.0.17":
     // "https://mvnrepository.com/artifact/org.slf4j/slf4j-api/2.0.17"
+    // our one: "https://mvnrepository.com/artifact/io.github.krm-demo/core-utils/21.23"
     // ---------------------------------------------------------------------------------------------------------------------
 
     /**
      * URL to "MVN-Repository"-site:
      */
-    public static final String MVN_REPOSITORY_HTML_URL = "https://mvnrepository.com/";
+    public static final String MVN_REPOSITORY_HTML_URL = "https://mvnrepository.com";
 
     // --------------------------------------------------------------------------------------------
 
@@ -235,15 +237,15 @@ public class ArtifactoryHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
-     * This conditional badge-provider performs rendering of badges to GH-Packages
-     * only when the current version of project is INTERNAL-release.
+     * This conditional badge-provider performs rendering the badges to GH-Packages
+     * for the current INTERNAL-release (only when the current version of project is INTERNAL-release).
      * In other cases an empty-stub is returned as {@link BadgeProvider#EMPTY}.
      * <hr/>
      * 'GitHib Markdown'-badge at {@code README.md.th}-template is inserted as: {@snippet :
      *     [(${ ah.currentGHPkg.badgeMD })]
      * }
      *
-     * @return a badge-provider to the current INTERNAL-release or {@link BadgeProvider#EMPTY an empty-stub}
+     * @return a badge-provider to the GH-Packages of the current INTERNAL-release or {@link BadgeProvider#EMPTY an empty-stub}
      */
     public BadgeProvider getCurrentGHPkg() {
         MavenHelper mh = MavenHelper.fromCtx(ttCtx);
@@ -256,34 +258,53 @@ public class ArtifactoryHelper {
         }
     }
 
-    // --------------------------------------------------------------------------------------------
+    /**
+     * This conditional badge-provider performs rendering the badges to Maven-Central
+     * for the current PUBLIC-release (only when the current version of project is PUBLIC-release).
+     * In other cases an empty-stub is returned as {@link BadgeProvider#EMPTY}.
+     * <hr/>
+     * 'GitHib Markdown'-badge at {@code README.md.th}-template is inserted as: {@snippet :
+     *     [(${ ah.currentMavenCentral.badgeMD })]
+     * }
+     *
+     * @return a badge-provider to Maven-Central of the current PUBLIC-release or {@link BadgeProvider#EMPTY an empty-stub}
+     */
+    public BadgeProvider getCurrentMavenCentral() {
+        MavenHelper mh = MavenHelper.fromCtx(ttCtx);
+        if (mh.versionHasIncrementalPart()) {
+            return BadgeProvider.EMPTY;
+        } else {
+            return mavenCentral.of(mh.getCurrentProjectVersion());
+        }
+    }
 
     /**
-     * @return URL to the root-page of GH-Packages for the current project
+     * This conditional badge-provider performs rendering the badges to MVN-Repository
+     * for the current PUBLIC-release (only when the current version of project is PUBLIC-release).
+     * In other cases an empty-stub is returned as {@link BadgeProvider#EMPTY}.
+     * <hr/>
+     * 'GitHib Markdown'-badge at {@code README.md.th}-template is inserted as: {@snippet :
+     *     [(${ ah.currentMvnRepository.badgeMD })]
+     * }
+     *
+     * @return a badge-provider to MVN-Repository of the current PUBLIC-release or {@link BadgeProvider#EMPTY an empty-stub}
      */
-    public String getGHPkgUrl() {
-        return ghPkgUrl("");
+    public BadgeProvider getCurrentMvnRepository() {
+        MavenHelper mh = MavenHelper.fromCtx(ttCtx);
+        if (mh.versionHasIncrementalPart()) {
+            return BadgeProvider.EMPTY;
+        } else {
+            return mvnRepository.of(mh.getCurrentProjectVersion());
+        }
     }
+
+    // --------------------------------------------------------------------------------------------
 
     /**
      * @return URL to GH-Packages for concrete version of the current project
      */
     public String ghPkgUrl(String versionStr) {
         return GH_PACkAGE_HTML_URL + (isBlank(versionStr) ? "" : "?version=" + versionStr);
-    }
-
-    /**
-     * @return the URL to the long badge-image for the GH-Package {@link #getGhPackageName()}
-     */
-    public String getBadgeGHPkgLongUrl() {
-        return badgeGHPkgLongUrl("");
-    }
-
-    /**
-     * @return the URL to the long badge-image for the GH-Package {@link #getGhPackageName()}
-     */
-    public String getBadgeGHPkgShortUrl() {
-        return badgeGHPkgShortUrl("");
     }
 
     /**
@@ -321,30 +342,15 @@ public class ArtifactoryHelper {
     // --------------------------------------------------------------------------------------------
 
     /**
-     * @return URL to the root of Maven-Central site
-     */
-    public String getMavenCentralUrl() {
-        return mavenCentralUrl("");
-    }
-
-    /**
      * @param versionStr maven-project version
      * @return URL to Maven-Central for concrete version of this project
      */
     public String mavenCentralUrl(String versionStr) {
-        MavenHelper mh = MavenHelper.fromCtx(ttCtx);
         if (isBlank(versionStr)) {
             return MAVEN_CENTRAL_HTML_URL;
         } else {
-            return MAVEN_CENTRAL_HTML_URL + "/" + getMavenSitePath() + "/" + mh.getCurrentProjectVersion();
+            return MAVEN_CENTRAL_HTML_URL + "/" + getMavenSitePath() + "/" + versionStr;
         }
-    }
-
-    /**
-     * @return URL to the root of Maven-Central site
-     */
-    public String getMvnRepositoryUrl() {
-        return mvnRepositoryUrl("");
     }
 
     /**
@@ -352,26 +358,11 @@ public class ArtifactoryHelper {
      * @return URL to Maven-Central for concrete version of this project
      */
     public String mvnRepositoryUrl(String versionStr) {
-        MavenHelper mh = MavenHelper.fromCtx(ttCtx);
         if (isBlank(versionStr)) {
             return MVN_REPOSITORY_HTML_URL;
         } else {
-            return MVN_REPOSITORY_HTML_URL + "/" + getMavenSitePath() + "/" + mh.getCurrentProjectVersion();
+            return MVN_REPOSITORY_HTML_URL + "/" + getMavenSitePath() + "/" + versionStr;
         }
-    }
-
-    /**
-     * @return the URL to the badge-image for "Maven-Central"-site
-     */
-    public String getBadgeMavenCentralUrl() {
-        return badgeMavenCentralUrl("");
-    }
-
-    /**
-     * @return the URL to the badge-image for "MVN-Repository"-site
-     */
-    public String getBadgeMvnRepositoryUrl() {
-        return badgeMvnRepositoryUrl("");
     }
 
     /**
@@ -427,7 +418,7 @@ public class ArtifactoryHelper {
      */
     public String getMavenSitePath() {
         MavenHelper mh = MavenHelper.fromCtx(ttCtx);
-        return mh.getProjectGroup() + "/" + mh.getProjectArtifact();
+        return "artifact/" + mh.getProjectGroup() + "/" + mh.getProjectArtifact();
     }
 
     /**
