@@ -1,3 +1,4 @@
+d5e27160 playing with local-nexus #1
 05d7f519 << new snapshot version >> 21.24.001-SNAPSHOT
 8c797550 << public release >> 21.23
 0d85916b decrease the width of border between minor-groups to 1px
