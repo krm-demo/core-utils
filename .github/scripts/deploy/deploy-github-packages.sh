@@ -22,10 +22,10 @@ jar cvf ${TARGET_DIR}/${JAR_FILE__JAVADOC} -C ${TARGET_DIR}/reports/apidocs-proc
 echo "- list of target JARs are:"
 ls -laxo ${TARGET_DIR}/*.jar
 
-echo "- the content of old JavaDoc is"
-jar tfv ${TARGET_DIR}/${JAR_FILE__JAVADOC_BACKUP}
-echo "- the content of new (processed) JavaDoc is"
-jar tfv ${TARGET_DIR}/${JAR_FILE__JAVADOC}
+#echo "- the content of old JavaDoc is"
+#jar tfv ${TARGET_DIR}/${JAR_FILE__JAVADOC_BACKUP}
+#echo "- the content of new (processed) JavaDoc is"
+#jar tfv ${TARGET_DIR}/${JAR_FILE__JAVADOC}
 
 echo "- deploying to local-nexus with 'mvn -X deploy:deploy-file ...' command:"
 mvn -X deploy:deploy-file -DgroupId="io.github.krm-demo" \
@@ -36,5 +36,5 @@ mvn -X deploy:deploy-file -DgroupId="io.github.krm-demo" \
   -Dfiles="${TARGET_DIR}/${JAR_FILE__SOURCES},${TARGET_DIR}/${JAR_FILE__JAVADOC}" \
   -Dclassifiers="sources,javadoc" \
   -Dtypes="jar,jar" \
-  -DrepositoryId="local-nexus" \
-  -Durl=http://localhost:8081/repository/maven-snapshots/
+  -DrepositoryId="github" \
+  -Durl=https://maven.pkg.github.com/krm-demo/core-utils

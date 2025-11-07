@@ -22,6 +22,19 @@ jobs:
       - name: "Compile 'th-tool' (no tests and no JARs and JavaDoc):"
         run: mvn test-compile
 
+      - name: "Display the effective maven settings"
+        run: |
+          # save the effective-settings into './target/effective-settings.xml':
+          mvn help:effective-settings -Doutput=./target/effective-settings.xml
+          # print the effective-settings in summary:
+          echo "<details><summary><code>effective-settings.xml</code></summary>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`xml" >> $GITHUB_STEP_SUMMARY
+          cat ./target/effective-settings.xml >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+
       - name: "Executing bash-scripts to fetch the information about current GH-Package and render it as a summary:"
         env:
           # it's very important to set the env-var 'GH_TOKEN' in order to use "gh"-cli utility!
