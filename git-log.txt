@@ -1,3 +1,4 @@
+4e492bbe introduce 'pom-props.source' and new approach to deploy files in GitHub-Packages #1
 17034d18 playing with local-nexus #2
 d5e27160 playing with local-nexus #1
 05d7f519 << new snapshot version >> 21.24.001-SNAPSHOT
