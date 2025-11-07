@@ -1,0 +1,46 @@
+# -------------------------------------------------------------------------------------------------
+#   This is NOT an executable bash-script, but could be included (sourced) like one of:
+# ...> . pom-props.source
+# ...> source pom-props.source
+# ...> source "$(dirname $0)/pom-props.source"
+# -------------------------------------------------------------------------------------------------
+#echo "::: start of including the source-script 'pom-props.source' :::"
+
+TARGET_DIR=${TARGET_DIR:-$(pwd)/target}
+TARGET_DIR=$(realpath $TARGET_DIR)
+#echo "TARGET_DIR is '${TARGET_DIR}'"
+
+export JAR_FILE__BIN=$(find $TARGET_DIR -name "*.jar" ! -name "*javadoc*.jar" ! -name "*sources*.jar")
+export JAR_FILE__SOURCES="${JAR_FILE__BIN%.*}-sources.jar"
+export JAR_FILE__JAVADOC="${JAR_FILE__BIN%.*}-javadoc.jar"
+export JAR_FILE__JAVADOC_BACKUP="${JAR_FILE__BIN%.*}-javadoc-backup.jar"
+
+if [ -f "$JAR_FILE__BIN" ]; then
+  echo "- going to extract the file 'pom.properties' from '$JAR_FILE__BIN' ...;"
+else
+  echo "Error: no main JAR-file with binaries at target directory '$TARGET_DIR'."
+  exit -123  # just any non-zero value
+fi
+
+POM_PROPS__TMP_DIR=$(mktemp -d)
+cd $TMP_DIR_POM_PROPS
+jar -xvf $JAR_FILE__BIN META-INF
+POM_PROPS=$(find META-INF -name "pom.properties")
+#echo "---->>>> content of '$POM_PROPS' ---->>>>"
+#cat $POM_PROPS
+#echo "<<<<---- content of '$POM_PROPS' <<<<----"
+
+if [ -f "$POM_PROPS" ]; then
+  while IFS= read -r line; do
+    #echo "|$line|"
+    #echo "POM_PROPS_$(sed 's/[^a-zA-Z0-9_]/_/g' <<< ${line%%=*} | tr '[:lower:]' '[:upper:]')|-->|${line#*=}"
+    export "POM_PROPS_$(sed 's/[^a-zA-Z0-9_]/_/g' <<< ${line%%=*} | tr '[:lower:]' '[:upper:]')=${line#*=}"
+  done < "$POM_PROPS"
+else
+  echo "Error: no 'pom.properties' found in JAR-file"
+fi
+
+cd - > /dev/null
+rm -rf $TMP_DIR_POM_PROPS
+
+#echo "::: end of including the source-script 'pom-props.source' :::"

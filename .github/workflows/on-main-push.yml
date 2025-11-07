@@ -85,16 +85,19 @@ jobs:
           echo "--- deployment to GitHub Artifactory: ---"
           cd main-branch
 
-          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary before deploy:deploy ) ~~~~~~~~~~~~~"
+          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary before deploy-github-packages.sh ) ~~~~~~~~~~~~~"
           echo "
-          the result of maven-build (content of \`./target/\` directory before deploy:deploy):
+          the content of \`./target/\` directory before executing \`.github/scripts/deploy/deploy-github-packages.sh\`:
           \`\`\`bash
           $(ls -laxo ./target)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
-          echo "~~~~~~~~~~~~~ ( executing deploy:deploy ) ~~~~~~~~~~~~~"
+          # echo "~~~~~~~~~~~~~ ( executing deploy:deploy ) ~~~~~~~~~~~~~"
           # it's important to call maven-jar-plugin before (see https://stackoverflow.com/questions/6308162/maven-the-packaging-for-this-project-did-not-assign-a-file-to-the-build-artifac)
-          mvn jar:jar deploy:deploy
+          # mvn jar:jar deploy:deploy
+          
+          echo "~~~~~~~~~~~~~ ( executing deploy-github-packages.sh ) ~~~~~~~~~~~~~"
+          .github/scripts/deploy/deploy-github-packages.sh
 
           # Process the template '.github/th-templates/Usage-INTERNAL.md.th' via 'th-tool':
           .github/th-tool.sh process .github/th-templates/Usage-INTERNAL.md.th --output $GITHUB_STEP_SUMMARY
@@ -108,7 +111,7 @@ jobs:
           echo "
           ---
 
-          Going to perform the deployment into internal Maven-Central Artifactory
+          Going to perform the deployment into Maven-Central Artifactory
 
           _... to be done (2) ..._
 

@@ -87,7 +87,7 @@ public class GitHelperTest {
             CommitInfo lastCommit = commits.getFirst();  // git-log has reversed chronological order (the first is the last)
             System.out.printf("--** commiterName = '%s', commiterEmail = '%s', commitsCount = %d;%n",
                 committerName, firstCommit.getCommitterEmail(), commits.size());
-            System.out.println("-->   firstCommit dtt --> " + gitLog.linkedTriplet(firstCommit));
+            System.out.println("-->  firstCommit dtt --> " + gitLog.linkedTriplet(firstCommit));
             System.out.printf( "--   firstCommit ID = '%s';%n", firstCommit.commitID);
             System.out.printf( "--   firstCommit msg = '%s';%n", firstCommit.getMessageShort());
             if (firstCommit.hasVersionTag()) {
@@ -108,7 +108,7 @@ public class GitHelperTest {
         int countTechnical = commitsByTechnical.get(Boolean.TRUE).size();
         assertThat(countWorking + countTechnical).isEqualTo(gitLog.commitsList().size());
         System.out.println("countWorking = " + countWorking);
-        System.out.println("countTechnical = " + countWorking);
+        System.out.println("countTechnical = " + countTechnical);
 
         List<CommitInfo> technicalCommits = commitsByCommiterName.get(CommitInfo.TECH_COMMITTER_NAME);
         assertThat(technicalCommits.size()).isEqualTo(countTechnical);
