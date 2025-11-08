@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------------------------------------
-#  Signing the file, whose path is the forst argument, with GPG and create a detached signature-file (*.asc)
-#  - this bash-script is passing the passphrase as an input from 'echo';
+#  Signing the file, whose path is the first argument, with GPG and create a detached signature-file (*.asc)
+#  - this bash-script is passing passphrase from a separate file;
 # ----------------------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
 
@@ -17,8 +17,11 @@ if [ ! -f "$1" ]; then
   exit 1
 fi
 
+# save a passphrase in a text-file:
+echo "1qaz@WSX0okm(IJN" > passphrase.txt
+
 # Perform the signing with a specified passphrase
-echo "1qaz@WSX0okm(IJN" | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 \
+gpg --batch --yes --pinentry-mode loopback --passphrase-file passphrase.txt \
   --local-user 0436EE146A372544 \
   --output $1.asc \
   --detach-sig --sign $1

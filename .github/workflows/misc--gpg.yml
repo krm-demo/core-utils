@@ -19,7 +19,7 @@ jobs:
           cache: 'maven'
           cache-dependency-path: pom.xml
 
-      - name: "Display the current status of local GPG-storage:"
+      - name: "Display the information about 'gpg'-utility version:"
         run: |
           echo "## Current status of GPG-storage" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
@@ -33,7 +33,20 @@ jobs:
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
-          
+
+      - name: "Configure GPG Key:"
+        run: |
+          # save a passphrase in a text-file:
+          echo "1qaz@WSX0okm(IJN" > passphrase.txt
+          # Import GPG-keys from GitHub-secrets:
+          echo -n "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --batch --import --passphrase-file passphrase.txt
+          # the following command will not work, because no passphrase:
+          # echo -n "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --batch --import
+        env:
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+
+      - name: "Display the current status of local GPG-storage:"
+        run: |
           echo "- getting the list of available GPG-keys (in 'long'-format):"
           gpg --list-secret-keys --keyid-format=long
           echo "<details><summary><code>gpg --list-secret-keys --keyid-format=long</code></summary>" >> $GITHUB_STEP_SUMMARY

@@ -13,8 +13,9 @@ tmp/
 # Compiled class file
 *.class
 
-# GPG-signatures
+# GPG-signatures and passphrases
 *.asc
+passphrase.txt
 
 # Log file
 *.log
