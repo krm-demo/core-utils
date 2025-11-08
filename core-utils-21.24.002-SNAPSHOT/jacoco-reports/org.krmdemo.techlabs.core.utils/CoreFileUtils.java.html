@@ -59,13 +59,13 @@ public class CoreFileUtils {
     public static String imageFileData64(File imageFile) {
 <span class="fc" id="L60">        byte[] imageFileContent = loadFileAsBytes(imageFile);</span>
 <span class="fc" id="L61">        String imageFileExt = FilenameUtils.getExtension(imageFile.getPath());</span>
-<span class="pc bpc" id="L62" title="2 of 5 branches missed.">        String dataPrefix = switch (imageFileExt.toLowerCase()) {</span>
-<span class="nc" id="L63">            case &quot;jpg&quot;, &quot;jpeg&quot; -&gt; &quot;data:image/jpg;base64,&quot;;</span>
+<span class="fc bfc" id="L62" title="All 5 branches covered.">        String dataPrefix = switch (imageFileExt.toLowerCase()) {</span>
+<span class="fc" id="L63">            case &quot;jpg&quot;, &quot;jpeg&quot; -&gt; &quot;data:image/jpg;base64,&quot;;</span>
 <span class="fc" id="L64">            case &quot;png&quot; -&gt; &quot;data:image/png;base64,&quot;;</span>
 <span class="fc" id="L65">            case &quot;gif&quot; -&gt; &quot;data:image/gif;base64,&quot;;</span>
 <span class="fc" id="L66">            case &quot;svg&quot; -&gt; &quot;data:image/svg+xml;base64,&quot;;</span>
-<span class="nc" id="L67">            default -&gt; throw new IllegalArgumentException(String.format(</span>
-                &quot;could not detect the mime-type of file '%s' by extension '%s&quot;,
+<span class="fc" id="L67">            default -&gt; throw new IllegalArgumentException(String.format(</span>
+                &quot;could not detect the mime-type of file '%s' by extension '.%s'&quot;,
                 imageFile, imageFileExt));
         };
 <span class="fc" id="L71">        return dataPrefix + encodeBase64(imageFileContent);</span>
@@ -85,7 +85,7 @@ public class CoreFileUtils {
      * @return components of {@link Path} as {@link Stream Stream&amp;lt;String&amp;gt;}
      */
     public static Stream&lt;String&gt; pathParts(Path path) {
-<span class="nc" id="L88">        return StreamSupport.stream(path.spliterator(), false).map(Path::toString);</span>
+<span class="fc" id="L88">        return StreamSupport.stream(path.spliterator(), false).map(Path::toString);</span>
     }
 
     /**
@@ -101,7 +101,7 @@ public class CoreFileUtils {
      * @return components of {@link Path} as {@link List List&amp;lt;String&amp;gt;}
      */
     public static List&lt;String&gt; pathPartsList(Path path) {
-<span class="nc" id="L104">        return pathParts(path).toList();</span>
+<span class="fc" id="L104">        return pathParts(path).toList();</span>
     }
 
     /**
@@ -118,7 +118,7 @@ public class CoreFileUtils {
      * @return the sequence of {@link Path}-components joining with {@link File#separator}
      */
     public static String pathPartsStr(Path path) {
-<span class="nc" id="L121">        return pathParts(path).collect(Collectors.joining(File.separator));</span>
+<span class="fc" id="L121">        return pathParts(path).collect(Collectors.joining(File.separator));</span>
     }
 
     /**
@@ -136,18 +136,18 @@ public class CoreFileUtils {
      * and throws {@link IllegalStateException} if the content of file could not be loaded for any reason.
      *
      * @param fileToLoad file to read the content
-     * @return the content of {@code file} as {@link String} or {@code null} if it's impossible to do
+     * @return the content of {@code fileToLoad} as {@link String}
      */
     public static String loadFileAsText(File fileToLoad) {
-<span class="pc bpc" id="L142" title="2 of 4 branches missed.">        if (fileToLoad == null || !fileToLoad.isFile()) {</span>
-<span class="nc" id="L143">            throw new IllegalStateException(String.format(</span>
+<span class="fc bfc" id="L142" title="All 4 branches covered.">        if (fileToLoad == null || !fileToLoad.isFile()) {</span>
+<span class="fc" id="L143">            throw new IllegalStateException(String.format(</span>
                 &quot;could not load the file %s as text, because it does not exist or it's not a normal file&quot;,
-<span class="nc bnc" id="L145" title="All 2 branches missed.">                fileToLoad == null ? &quot;&lt;&lt; NULL &gt;&gt;&quot; : &quot;'&quot; + fileToLoad + &quot;'&quot;));</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">                fileToLoad == null ? &quot;&lt;&lt; NULL &gt;&gt;&quot; : &quot;'&quot; + fileToLoad + &quot;'&quot;));</span>
         }
         try {
 <span class="fc" id="L148">            return Files.readString(fileToLoad.toPath());</span>
-<span class="nc" id="L149">        } catch (IOException ioEx) {</span>
-<span class="nc" id="L150">            throw new IllegalStateException(String.format(</span>
+<span class="fc" id="L149">        } catch (IOException ioEx) {</span>
+<span class="fc" id="L150">            throw new IllegalStateException(String.format(</span>
                 &quot;could not load the file '%s' as text, because of IOException&quot;, fileToLoad), ioEx);
         }
     }
@@ -160,15 +160,15 @@ public class CoreFileUtils {
      * @return the content of {@code file} as {@link String} or {@code null} if it's impossible to do
      */
     public static byte[] loadFileAsBytes(File fileToLoad) {
-<span class="pc bpc" id="L163" title="2 of 4 branches missed.">        if (fileToLoad == null || !fileToLoad.isFile()) {</span>
-<span class="nc" id="L164">            throw new IllegalStateException(String.format(</span>
+<span class="fc bfc" id="L163" title="All 4 branches covered.">        if (fileToLoad == null || !fileToLoad.isFile()) {</span>
+<span class="fc" id="L164">            throw new IllegalStateException(String.format(</span>
                 &quot;could not load the file %s as bytes, because it does not exist or it's not a normal file&quot;,
-<span class="nc bnc" id="L166" title="All 2 branches missed.">                fileToLoad == null ? &quot;&lt;&lt; NULL &gt;&gt;&quot; : &quot;'&quot; + fileToLoad + &quot;'&quot;));</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">                fileToLoad == null ? &quot;&lt;&lt; NULL &gt;&gt;&quot; : &quot;'&quot; + fileToLoad + &quot;'&quot;));</span>
         }
         try {
 <span class="fc" id="L169">            return Files.readAllBytes(fileToLoad.toPath());</span>
-<span class="nc" id="L170">        } catch (IOException ioEx) {</span>
-<span class="nc" id="L171">            throw new IllegalStateException(String.format(</span>
+<span class="fc" id="L170">        } catch (IOException ioEx) {</span>
+<span class="fc" id="L171">            throw new IllegalStateException(String.format(</span>
                 &quot;could not load the file '%s' as bytes, because of IOException&quot;, fileToLoad), ioEx);
         }
     }
@@ -181,15 +181,15 @@ public class CoreFileUtils {
      * @return the content of {@code filePathToLoad} as {@link List List&amp;lt;String&amp;gt;}
      */
     public static List&lt;String&gt; loadFileLines(Path filePathToLoad) {
-<span class="nc bnc" id="L184" title="All 2 branches missed.">        if (filePathToLoad == null) {</span>
-<span class="nc" id="L185">            throw new IllegalStateException(</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">        if (filePathToLoad == null) {</span>
+<span class="fc" id="L185">            throw new IllegalStateException(</span>
                 &quot;the path to file to load lines MUST NOT be null&quot;);
         }
-<span class="nc" id="L188">        try (Stream&lt;String&gt; lines = Files.lines(filePathToLoad)) {</span>
-<span class="nc" id="L189">            return lines.toList();</span>
-<span class="nc" id="L190">        } catch (IOException ioEx) {</span>
-<span class="nc" id="L191">            throw new IllegalStateException(String.format(</span>
-                &quot;could not load the file '%s' as list of lines&quot;, filePathToLoad), ioEx);
+<span class="fc" id="L188">        try (Stream&lt;String&gt; lines = Files.lines(filePathToLoad)) {</span>
+<span class="fc" id="L189">            return lines.toList();</span>
+<span class="fc" id="L190">        } catch (Exception ex) {</span>
+<span class="fc" id="L191">            throw new IllegalStateException(String.format(</span>
+                &quot;could not load the file '%s' as list of lines&quot;, filePathToLoad), ex);
         }
     }
 

@@ -79,7 +79,7 @@
 <span class="source-line-no">065</span><span id="line-65">            case "gif" -&gt; "data:image/gif;base64,";</span>
 <span class="source-line-no">066</span><span id="line-66">            case "svg" -&gt; "data:image/svg+xml;base64,";</span>
 <span class="source-line-no">067</span><span id="line-67">            default -&gt; throw new IllegalArgumentException(String.format(</span>
-<span class="source-line-no">068</span><span id="line-68">                "could not detect the mime-type of file '%s' by extension '%s",</span>
+<span class="source-line-no">068</span><span id="line-68">                "could not detect the mime-type of file '%s' by extension '.%s'",</span>
 <span class="source-line-no">069</span><span id="line-69">                imageFile, imageFileExt));</span>
 <span class="source-line-no">070</span><span id="line-70">        };</span>
 <span class="source-line-no">071</span><span id="line-71">        return dataPrefix + encodeBase64(imageFileContent);</span>
@@ -150,7 +150,7 @@
 <span class="source-line-no">136</span><span id="line-136">     * and throws {@link IllegalStateException} if the content of file could not be loaded for any reason.</span>
 <span class="source-line-no">137</span><span id="line-137">     *</span>
 <span class="source-line-no">138</span><span id="line-138">     * @param fileToLoad file to read the content</span>
-<span class="source-line-no">139</span><span id="line-139">     * @return the content of {@code file} as {@link String} or {@code null} if it's impossible to do</span>
+<span class="source-line-no">139</span><span id="line-139">     * @return the content of {@code fileToLoad} as {@link String}</span>
 <span class="source-line-no">140</span><span id="line-140">     */</span>
 <span class="source-line-no">141</span><span id="line-141">    public static String loadFileAsText(File fileToLoad) {</span>
 <span class="source-line-no">142</span><span id="line-142">        if (fileToLoad == null || !fileToLoad.isFile()) {</span>
@@ -201,9 +201,9 @@
 <span class="source-line-no">187</span><span id="line-187">        }</span>
 <span class="source-line-no">188</span><span id="line-188">        try (Stream&lt;String&gt; lines = Files.lines(filePathToLoad)) {</span>
 <span class="source-line-no">189</span><span id="line-189">            return lines.toList();</span>
-<span class="source-line-no">190</span><span id="line-190">        } catch (IOException ioEx) {</span>
+<span class="source-line-no">190</span><span id="line-190">        } catch (Exception ex) {</span>
 <span class="source-line-no">191</span><span id="line-191">            throw new IllegalStateException(String.format(</span>
-<span class="source-line-no">192</span><span id="line-192">                "could not load the file '%s' as list of lines", filePathToLoad), ioEx);</span>
+<span class="source-line-no">192</span><span id="line-192">                "could not load the file '%s' as list of lines", filePathToLoad), ex);</span>
 <span class="source-line-no">193</span><span id="line-193">        }</span>
 <span class="source-line-no">194</span><span id="line-194">    }</span>
 <span class="source-line-no">195</span><span id="line-195"></span>
