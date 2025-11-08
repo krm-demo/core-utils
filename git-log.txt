@@ -1,3 +1,4 @@
+00bdfcb8 playing with GPG #1
 a19aa6d1 improve code-coverage in CoreFileUtils
 6421df8a add some unit-tests for core utilities
 38ad112e << new snapshot version >> 21.24.002-SNAPSHOT
