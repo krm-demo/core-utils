@@ -42,7 +42,7 @@ This particular version of the project `21.24.001` is an _INTERNAL_-release vers
 > The _INTERNAL_-release version has 3 integer parts (_major_, _minor_ and _incremental_) parts **without** suffix `-SNAPSHOT`.
 > It's built and deployed into [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) 
 > artifactory as a result of manual execution of GitHub workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/workflows/release-internal.yml)
-> with workflow-job [`release-internal #91`](https://github.com/krm-demo/core-utils/actions/runs/19185376717)
+> with workflow-job [`release-internal #93`](https://github.com/krm-demo/core-utils/actions/runs/19186453148)
 
 The main purpose of _INTERNAL_-release is the final verification before _PUBLIC_-release 
 and in addition to that it's the only true-way to verify the generation of `*.md`-files
@@ -99,7 +99,7 @@ In order to refer this particular project - we must add following XML-tags into 
 - where the value of `OWNER_NAME` should be <code>krm-demo</code> (you can try another `<username>`)
 - and the value of `MY_READONLY_TOKEN` should be <code>ghp_&#8203;L1Eiw9V4CXLZVl0nu2QkqWDVpQE4zl0k&#8203;cYz6</code>
 - (should be re-masked!) the value of `MY_ADMIN_TOKEN` should be <code>ghp_&#8203;UIEgLpCQoqASXtbxGrbpgfPXNYC94T19&#8203;NqXg</code>
-- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;xiYPHwh3daRljB2InIeB0z3jv5akZp46&#8203;zH7E</code>
+- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;VvSK6qnF5KgkKAXP8AgL8Nkhp2dCZe1p&#8203;SYX7</code>
 
 > [!IMPORTANT]
 > In the list above the value of GitHub-secret `MY_READONLY_TOKEN`is displayed _un-masked_ (no asterisks as usually),
@@ -207,7 +207,7 @@ Then you can create your own jbang-scripts using following examples:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/19185376717).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/19186453148).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
 
@@ -219,8 +219,11 @@ Then you can create your own jbang-scripts using following examples:
 {
   "releaseCatalog": {
     "current-snapshot-group": {
-      "minor-group-info": "<< unreleased >> 6 commits",
+      "minor-group-info": "<< unreleased >> 9 commits",
       "commits-one-line": [
+        "a85a02d | 2025-11-08 Sat 02:14:27 |  introduce 'pom-props.source' and new approach to deploy files in GitHub-Packages #4",
+        "d5e5b2d | 2025-11-08 Sat 01:51:53 |  introduce 'pom-props.source' and new approach to deploy files in GitHub-Packages #3",
+        "86ea433 | 2025-11-08 Sat 00:57:18 |  << internal release >> 21.24.001",
         "7490a5c | 2025-11-08 Sat 00:49:04 |  introduce 'pom-props.source' and new approach to deploy files in GitHub-Packages #2",
         "63a19c8 | 2025-11-08 Sat 00:05:20 |  << internal release >> 21.24.001",
         "4e492bb | 2025-11-07 Fri 23:52:36 |  introduce 'pom-props.source' and new approach to deploy files in GitHub-Packages #1",
@@ -1194,6 +1197,12 @@ Then you can create your own jbang-scripts using following examples:
   },
   "gitStatus": {
     "clean": "false",
+    "uncommittedChanges": [
+      ".github/th-vars/var-github.json",
+      ".github/th-vars/var-githubInputs.json",
+      "pom.xml",
+      ".github/th-vars/var-secrets.json"
+    ],
     "added": [],
     "changed": [
       "pom.xml"
@@ -1216,12 +1225,6 @@ Then you can create your own jbang-scripts using following examples:
       ".github/th-release-catalog/index.html",
       ".github/th-test-site/processed",
       "target"
-    ],
-    "uncommittedChanges": [
-      ".github/th-vars/var-github.json",
-      ".github/th-vars/var-githubInputs.json",
-      "pom.xml",
-      ".github/th-vars/var-secrets.json"
     ],
     "missing": []
   }
