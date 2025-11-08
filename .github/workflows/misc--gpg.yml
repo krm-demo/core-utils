@@ -21,11 +21,35 @@ jobs:
 
       - name: "Display the current status of local GPG-storage:"
         run: |
+          echo "## Current status of GPG-storage" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+
           echo "- getting the version of 'gpg'-utility:"
           gpg --version
+          echo "<details><summary><code>gpg --version</code></summary>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`xml" >> $GITHUB_STEP_SUMMARY
+          gpg --version >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
           
           echo "- getting the list of available GPG-keys (in 'long'-format):"
           gpg --list-secret-keys --keyid-format=long
+          echo "<details><summary><code>gpg --list-secret-keys --keyid-format=long</code></summary>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          gpg --list-secret-keys --keyid-format=long >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
           
           echo "- getting the list of available GPG-signatures (in '0xshort'-format):"
           gpg --list-signatures --keyid-format 0xshort
+          echo "<details><summary><code>gpg --list-signatures --keyid-format 0xshort</code></summary>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          gpg --list-signatures --keyid-format 0xshort >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
