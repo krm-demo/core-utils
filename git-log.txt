@@ -1,3 +1,5 @@
+d5e5b2d6 introduce 'pom-props.source' and new approach to deploy files in GitHub-Packages #3
+86ea4334 << internal release >> 21.24.001
 7490a5cb introduce 'pom-props.source' and new approach to deploy files in GitHub-Packages #2
 63a19c8f << internal release >> 21.24.001
 4e492bbe introduce 'pom-props.source' and new approach to deploy files in GitHub-Packages #1
