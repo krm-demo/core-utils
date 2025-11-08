@@ -1,0 +1,29 @@
+name: gpg-demo
+run-name: ${{ github.actor }} has executed 'misc--gpg.yml' №${{ github.run_number }}
+on: workflow_dispatch
+
+jobs:
+  gpg-demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout the latest version of repo in '${{ github.ref }}'"
+        uses: actions/checkout@v4
+
+      - name: "Set up JDK 25 (Amazon Corretto)"
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'corretto'
+          check-latest: true
+          cache: 'maven'
+          cache-dependency-path: pom.xml
+
+      - name: "Display the effective maven settings"
+        run: |
+          # getting the version of 'gpg'-utility:
+          gpg --version
+          # getting the list of available GPG-keys (in 'long'-format):
+          gpg --list-secret-keys --keyid-format=long
+          # getting the list of available GPG-signatures (in '0xshort'-format):
+          gpg --list-signatures --keyid-format 0xshort

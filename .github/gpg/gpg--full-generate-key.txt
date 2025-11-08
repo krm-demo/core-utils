@@ -1,0 +1,113 @@
+The steps below are described in details at following resources:
+- https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key
+- https://central.sonatype.org/publish/requirements/gpg/
+
+
+...> gpg --full-generate-key
+gpg (GnuPG) 2.4.8; Copyright (C) 2025 g10 Code GmbH
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Please select what kind of key you want:
+   (1) RSA and RSA
+   (2) DSA and Elgamal
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+   (9) ECC (sign and encrypt) *default*
+  (10) ECC (sign only)
+  (14) Existing key from card
+Your selection?
+Please select which elliptic curve you want:
+   (1) Curve 25519 *default*
+   (4) NIST P-384
+   (6) Brainpool P-256
+Your selection?
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0) 15y
+Key expires at Sun Nov  4 14:55:50 2040 EST
+Is this correct? (y/N) y
+
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: krm-demo
+Email address: aleksey.kurmanov@gmail.com
+Comment: io.github.krm-demo
+You selected this USER-ID:
+    "krm-demo (io.github.krm-demo) <aleksey.kurmanov@gmail.com>"
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+gpg: directory '/Users/alekseykurmanov/.gnupg/openpgp-revocs.d' created
+gpg: revocation certificate stored as '/Users/alekseykurmanov/.gnupg/openpgp-revocs.d/10D61A25CC41F8A2532A4E290436EE146A372544.rev'
+public and secret key created and signed.
+
+pub   ed25519 2025-11-08 [SC] [expires: 2040-11-04]
+      10D61A25CC41F8A2532A4E290436EE146A372544
+uid                      krm-demo (io.github.krm-demo) <aleksey.kurmanov@gmail.com>
+sub   cv25519 2025-11-08 [E] [expires: 2040-11-04]
+
+:::> passphrase is: "1qaz@WSX0okm(IJN"
+
+
+...> $gpg --list-secret-keys --keyid-format=long
+gpg: checking the trustdb
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+gpg: next trustdb check due at 2040-11-04
+[keyboxd]
+---------
+sec   ed25519/0436EE146A372544 2025-11-08 [SC] [expires: 2040-11-04]
+      10D61A25CC41F8A2532A4E290436EE146A372544
+uid                 [ultimate] krm-demo (io.github.krm-demo) <aleksey.kurmanov@gmail.com>
+ssb   cv25519/9F2E68DFD94B34E2 2025-11-08 [E] [expires: 2040-11-04]
+
+
+...> gpg --list-signatures --keyid-format 0xshort
+[keyboxd]
+---------
+pub   ed25519/0x6A372544 2025-11-08 [SC] [expires: 2040-11-04]
+      10D61A25CC41F8A2532A4E290436EE146A372544
+uid           [ultimate] krm-demo (io.github.krm-demo) <aleksey.kurmanov@gmail.com>
+sig 3        0x6A372544 2025-11-08  [self-signature]
+sub   cv25519/0xD94B34E2 2025-11-08 [E] [expires: 2040-11-04]
+sig          0x6A372544 2025-11-08  [self-signature]
+
+pub   rsa4096/0x2D51784F 2018-03-23 [SC]
+      F34C3DDAE72926B079BEAEC6BCE9D9A42D51784F
+uid           [ unknown] Amazon ECS <ecs-security@amazon.com>
+sig 3        0x2D51784F 2018-03-23  [self-signature]
+sub   rsa4096/0x710E61AF 2018-04-30 [S]
+sig          0x2D51784F 2018-04-30  [self-signature]
+sub   rsa4096/0xADAF8B8E 2018-03-23 [S]
+sig          0x2D51784F 2018-03-23  [self-signature]
+sub   rsa4096/0x53C6C98D 2018-03-23 [E]
+sig          0x2D51784F 2018-03-23  [self-signature]
+
+
+...> gpg --armor --export 0436EE146A372544
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mDMEaQ+gcxYJKwYBBAHaRw8BAQdA8PRWi5oUI0xfsal7q1mPPjwvzXocel88VAQQ
+/qbbL5m0OmtybS1kZW1vIChpby5naXRodWIua3JtLWRlbW8pIDxhbGVrc2V5Lmt1
+cm1hbm92QGdtYWlsLmNvbT6ImQQTFgoAQRYhBBDWGiXMQfiiUypOKQQ27hRqNyVE
+BQJpD6BzAhsDBQkcMgSABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEAQ2
+7hRqNyVEnaUA/A6vOWVjP8LWuQ/0S1/M38wlwriwAw6tAU8voiD1ao/mAQDaQn+M
+eZNGOFNH6Q3s8TgGnOhVAyGVEYGlq19GHYm8Drg4BGkPoHMSCisGAQQBl1UBBQEB
+B0DY+ITT3ZJjt3sDW0d95Pszts8oSUiD553YeI8OAh8PdAMBCAeIfgQYFgoAJhYh
+BBDWGiXMQfiiUypOKQQ27hRqNyVEBQJpD6BzAhsMBQkcMgSAAAoJEAQ27hRqNyVE
+ab0A/is1/1pTF9sA6MM5e9sBK6bSCD33yCwEQXzW47aHHsHoAPwJtPUja/EUC7Yg
+aHPxy7ZBrgv/QJi2qI8TnFmZikZpDw==
+=Cumj
+-----END PGP PUBLIC KEY BLOCK-----
