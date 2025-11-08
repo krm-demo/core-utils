@@ -19,11 +19,13 @@ jobs:
           cache: 'maven'
           cache-dependency-path: pom.xml
 
-      - name: "Display the effective maven settings"
+      - name: "Display the current status of local GPG-storage:"
         run: |
-          # getting the version of 'gpg'-utility:
+          echo "- getting the version of 'gpg'-utility:"
           gpg --version
-          # getting the list of available GPG-keys (in 'long'-format):
+          
+          echo "- getting the list of available GPG-keys (in 'long'-format):"
           gpg --list-secret-keys --keyid-format=long
-          # getting the list of available GPG-signatures (in '0xshort'-format):
+          
+          echo "- getting the list of available GPG-signatures (in '0xshort'-format):"
           gpg --list-signatures --keyid-format 0xshort
