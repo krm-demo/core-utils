@@ -155,7 +155,7 @@ public class CoreStreamUtils {
     /**
      * @param valuesIter collection of values as {@link Iterable}
      * @return the sorted set of those values as {@link NavigableSet}
-     * @param &lt;T&gt; the type of value that must implement {@link Comparable}
+     * @param &lt;T&gt; the type of elements that must implement {@link Comparable}
      */
     public static &lt;T extends Comparable&lt;T&gt;&gt; NavigableSet&lt;T&gt; sortedSet(Iterable&lt;T&gt; valuesIter) {
 <span class="nc" id="L161">        return sortedSet(StreamSupport.stream(valuesIter.spliterator(), false));</span>
@@ -164,7 +164,7 @@ public class CoreStreamUtils {
     /**
      * @param valuesArr var-args-arrays of values
      * @return the linked set of those values as {@link SequencedSet}
-     * @param &lt;T&gt; the type of value
+     * @param &lt;T&gt; the type of elements
      */
     @SafeVarargs
     @SuppressWarnings(&quot;varargs&quot;)
@@ -175,7 +175,7 @@ public class CoreStreamUtils {
     /**
      * @param values stream of values
      * @return the linked set of those values as {@link SequencedSet}
-     * @param &lt;T&gt; the type of value
+     * @param &lt;T&gt; the type of elements
      */
     public static &lt;T&gt; SequencedSet&lt;T&gt; linkedSet(Stream&lt;T&gt; values) {
 <span class="fc" id="L181">        return values.collect(toLinkedSet());</span>
@@ -184,7 +184,7 @@ public class CoreStreamUtils {
     /**
      * @param valuesIter collection of values as {@link Iterable}
      * @return the linked set of those values as {@link SequencedSet}
-     * @param &lt;T&gt; the type of value
+     * @param &lt;T&gt; the type of elements
      */
     public static &lt;T&gt; SequencedSet&lt;T&gt; linkedSet(Iterable&lt;T&gt; valuesIter) {
 <span class="nc" id="L190">        return linkedSet(StreamSupport.stream(valuesIter.spliterator(), false));</span>

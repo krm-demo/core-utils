@@ -159,8 +159,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/TreeDumper.Node.html#comment()" class="member-name-link">comment()</a> - Method in interface org.krmdemo.techlabs.core.dump.<a href="org/krmdemo/techlabs/core/dump/TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.Node</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#constantIntArr(long,int)" class="member-name-link">constantIntArr(long, int)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#constantIntArr(long,int)" class="member-name-link">constantIntArr(long, int)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
+<dd>
+<div class="block">Getting an array of size <code>N</code> with all elements equal to <code>constant</code></div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#copyFile(java.io.File,java.io.File)" class="member-name-link">copyFile(File, File)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
 <dd>
 <div class="block">Copy the file <code>sourceFile</code> to the file <code>targetFile</code>
@@ -205,7 +207,9 @@ and stream or var-args-arrays of <a href="https://docs.oracle.com/en/java/javase
 <div class="block">Count the characters in passed string</div>
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CountingUtils.html#countingLinkedMap(java.util.stream.Stream)" class="member-name-link">countingLinkedMap(Stream)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CountingUtils.html" title="class in org.krmdemo.techlabs.core.utils">CountingUtils</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the counting-map, where the order of elements corresponds to the first occurrence of value.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CountingUtils.html#countingMap(java.util.stream.Stream)" class="member-name-link">countingMap(Stream)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CountingUtils.html" title="class in org.krmdemo.techlabs.core.utils">CountingUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CountingUtils.html#countingMapLong(java.util.stream.Stream)" class="member-name-link">countingMapLong(Stream)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CountingUtils.html" title="class in org.krmdemo.techlabs.core.utils">CountingUtils</a></dt>
@@ -1150,31 +1154,53 @@ or transform that value using standard <a href="https://docs.oracle.com/en/java/
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#randomDecreasingIntArr(long,int,int)" class="member-name-link">randomDecreasingIntArr(long, int, int)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting an array of eventually <code>N</code> <b>distinct</b> integers in the range <code>[ lowBound, int highBound )</code>,
+which are <b>sorted</b> in <b>descending</b> order.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#randomDistinctIntArr(long,int,int)" class="member-name-link">randomDistinctIntArr(long, int, int)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting an array of eventually <code>N</code> <b>distinct</b> integers in the range <code>[ lowBound, int highBound )</code>.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a> - Class in <a href="org/krmdemo/techlabs/core/utils/package-summary.html">org.krmdemo.techlabs.core.utils</a></dt>
 <dd>
-<div class="block">Helper-wrapper over standard <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Random.html" title="class or interface in java.util" class="external-link"><code>Random</code></a> to generate random arrays and collections</div>
+<div class="block">Helper-wrapper over standard <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Random.html" title="class or interface in java.util" class="external-link"><code>Random</code></a> to generate random arrays and strings</div>
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#%3Cinit%3E()" class="member-name-link">RandomHelper()</a> - Constructor for class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs an <b>un-reproducible</b> instance of <a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils"><code>RandomHelper</code></a></div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#%3Cinit%3E(long)" class="member-name-link">RandomHelper(long)</a> - Constructor for class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs a <b>reproducible</b> instance of <a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils"><code>RandomHelper</code></a></div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#randomIncreasingIntArr(long,int,int)" class="member-name-link">randomIncreasingIntArr(long, int, int)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting an array of eventually <code>N</code> <b>distinct</b> integers in the range <code>[ lowBound, int highBound )</code>,
+which are <b>sorted</b> in <b>ascending</b> order.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#randomLowerCase(int)" class="member-name-link">randomLowerCase(int)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting a random lowercased string</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#randomRangeArr(int,int)" class="member-name-link">randomRangeArr(int, int)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#randomRangeClosedArr(int,int)" class="member-name-link">randomRangeClosedArr(int, int)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#randomSortedIntArr(long,int,int)" class="member-name-link">randomSortedIntArr(long, int, int)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting an array of eventually <code>N</code> integers in the range <code>[ lowBound, int highBound )</code>,
+which are <b>sorted</b> in <b>ascending</b> order, but <b>not distinct</b>.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#randomSortedReversedIntArr(long,int,int)" class="member-name-link">randomSortedReversedIntArr(long, int, int)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting an array of eventually <code>N</code> integers in the range <code>[ lowBound, int highBound )</code>,
+which are <b>sorted</b> in <b>descending</b> order, but <b>not distinct</b>.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#randomUpperCase(int)" class="member-name-link">randomUpperCase(int)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting a random uppercased string</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#removePathSilent(java.nio.file.Path)" class="member-name-link">removePathSilent(Path)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
 <dd>
 <div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Files.html#deleteIfExists(java.nio.file.Path)" title="class or interface in java.nio.file" class="external-link"><code>Files.deleteIfExists(Path)</code></a>, but ignore any kind of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>.</div>
@@ -1617,8 +1643,10 @@ in <a href="org/krmdemo/techlabs/core/dump/render/Highlight.Target.html#TXT_ANSI
 </dl>
 <h2 class="title" id="I:Z">Z</h2>
 <dl class="index">
-<dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#zeroIntArr(long)" class="member-name-link">zeroIntArr(long)</a> - Method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/RandomHelper.html#zeroIntArr(long)" class="member-name-link">zeroIntArr(long)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></dt>
+<dd>
+<div class="block">Getting an array of size <code>N</code> with zero(<code>0</code>)-elements</div>
+</dd>
 </dl>
 <a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:J">J</a>&nbsp;<a href="#I:K">K</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:Y">Y</a>&nbsp;<a href="#I:Z">Z</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a>
 <footer role="contentinfo">
