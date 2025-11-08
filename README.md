@@ -42,7 +42,7 @@ This particular version of the project `21.24.001` is an _INTERNAL_-release vers
 > The _INTERNAL_-release version has 3 integer parts (_major_, _minor_ and _incremental_) parts **without** suffix `-SNAPSHOT`.
 > It's built and deployed into [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) 
 > artifactory as a result of manual execution of GitHub workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/workflows/release-internal.yml)
-> with workflow-job [`release-internal #90`](https://github.com/krm-demo/core-utils/actions/runs/19184569570)
+> with workflow-job [`release-internal #91`](https://github.com/krm-demo/core-utils/actions/runs/19185376717)
 
 The main purpose of _INTERNAL_-release is the final verification before _PUBLIC_-release 
 and in addition to that it's the only true-way to verify the generation of `*.md`-files
@@ -99,7 +99,7 @@ In order to refer this particular project - we must add following XML-tags into 
 - where the value of `OWNER_NAME` should be <code>krm-demo</code> (you can try another `<username>`)
 - and the value of `MY_READONLY_TOKEN` should be <code>ghp_&#8203;L1Eiw9V4CXLZVl0nu2QkqWDVpQE4zl0k&#8203;cYz6</code>
 - (should be re-masked!) the value of `MY_ADMIN_TOKEN` should be <code>ghp_&#8203;UIEgLpCQoqASXtbxGrbpgfPXNYC94T19&#8203;NqXg</code>
-- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;E1LcSUuwtnzhqJR2Xk3WifloihEXtf16&#8203;hp4a</code>
+- (should be re-masked!) the value of `github_token` should be <code>ghs_&#8203;xiYPHwh3daRljB2InIeB0z3jv5akZp46&#8203;zH7E</code>
 
 > [!IMPORTANT]
 > In the list above the value of GitHub-secret `MY_READONLY_TOKEN`is displayed _un-masked_ (no asterisks as usually),
@@ -207,7 +207,7 @@ Then you can create your own jbang-scripts using following examples:
 
 > [!NOTE]
 > <small>This GitHub-Markdown page is generated with use of **`th-tool`** 
-> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/19184569570).
+> during GitHub Workflow [`release-internal`](https://github.com/krm-demo/core-utils/actions/runs/19185376717).
 > In order to make changes in this page - edit the `th-tool`-template 
 > [ROOT-Readme.md.th](https://github.com/krm-demo/core-utils/blob/main/.github/th-templates/ROOT-Readme.md.th)</small>
 
@@ -219,8 +219,10 @@ Then you can create your own jbang-scripts using following examples:
 {
   "releaseCatalog": {
     "current-snapshot-group": {
-      "minor-group-info": "<< unreleased >> 4 commits",
+      "minor-group-info": "<< unreleased >> 6 commits",
       "commits-one-line": [
+        "7490a5c | 2025-11-08 Sat 00:49:04 |  introduce 'pom-props.source' and new approach to deploy files in GitHub-Packages #2",
+        "63a19c8 | 2025-11-08 Sat 00:05:20 |  << internal release >> 21.24.001",
         "4e492bb | 2025-11-07 Fri 23:52:36 |  introduce 'pom-props.source' and new approach to deploy files in GitHub-Packages #1",
         "17034d1 | 2025-11-07 Fri 06:39:34 |  playing with local-nexus #2",
         "d5e2716 | 2025-11-06 Thu 21:56:02 |  playing with local-nexus #1",
