@@ -3,7 +3,7 @@ In order to reanimate it before re-execute "release-internal" or "release-public
 
 1. First of all `git pull origin` to fetch the latest changes (first of all the result of upgrading the version in "pom.xml").
 
-2. Most probably, the version in "pom.xml" does not have "-SNAPSHOT"-qualifier - so it's necessary tp add it manually
+2. Most probably, the version in "pom.xml" does not have "-SNAPSHOT"-qualifier - so it's necessary to add it manually:
 - for example if it's "21.23.002", then you have to change it tp "21.23.002-SNAPSHOT"
 
 3. Most probably the git-tag was already created (the command `git tag` will show that) and it must be deleted:
