@@ -4,13 +4,14 @@ In order to reanimate it before re-execute "release-internal" or "release-public
 1. First of all `git pull origin` to fetch the latest changes (first of all the result of upgrading the version in "pom.xml").
 
 2. Most probably, the version in "pom.xml" does not have "-SNAPSHOT"-qualifier - so it's necessary to add it manually:
+-- `head pom.xml` will display you the first 10 rows of "pom.xml", which is enough to see the project-version;
 - for example if it's "21.23.002", then you have to change it tp "21.23.002-SNAPSHOT"
 
 3. Most probably the git-tag was already created (the command `git tag` will show that) and it must be deleted:
-- as for example above the command to run is `git tag -d 21.23.002`
+- as for example above, the command to run is `git tag -d 21.23.002`
 - if the new version at 'GitHub Packages' was created it's necessary to delete the last one:
-...> .github/scripts/gh-api--del-package-version-last.sh
-- by the way, it looks like 'gh api' performs deleting the git-tag, but I'm not sure;
+-- `.github/scripts/gh-api--del-package-version-last.sh`
+- those two commands DON'T imply each other and should be executed if extra objects were created;
 
 4. Then it's necessary to commit and push those changes into remote-repo, which not trivial:
 - together with other fixes, that was a reason of failure, following commands must be executed:
