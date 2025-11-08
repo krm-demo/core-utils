@@ -8,6 +8,9 @@ In order to reanimate it before re-execute "release-internal" or "release-public
 
 3. Most probably the git-tag was already created (the command `git tag` will show that) and it must be deleted:
 - as for example above the command to run is `git tag -d 21.23.002`
+- if the new version at 'GitHub Packages' was created it's necessary to delete the last one:
+...> .github/scripts/gh-api--del-package-version-last.sh
+- by the way, it looks like 'gh api' performs deleting the git-tag, but I'm not sure;
 
 4. Then it's necessary to commit and push those changes into remote-repo, which not trivial:
 - together with other fixes, that was a reason of failure, following commands must be executed:
