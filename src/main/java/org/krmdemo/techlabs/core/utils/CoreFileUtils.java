@@ -65,7 +65,7 @@ public class CoreFileUtils {
             case "gif" -> "data:image/gif;base64,";
             case "svg" -> "data:image/svg+xml;base64,";
             default -> throw new IllegalArgumentException(String.format(
-                "could not detect the mime-type of file '%s' by extension '%s",
+                "could not detect the mime-type of file '%s' by extension '.%s'",
                 imageFile, imageFileExt));
         };
         return dataPrefix + encodeBase64(imageFileContent);
@@ -136,7 +136,7 @@ public class CoreFileUtils {
      * and throws {@link IllegalStateException} if the content of file could not be loaded for any reason.
      *
      * @param fileToLoad file to read the content
-     * @return the content of {@code file} as {@link String} or {@code null} if it's impossible to do
+     * @return the content of {@code fileToLoad} as {@link String}
      */
     public static String loadFileAsText(File fileToLoad) {
         if (fileToLoad == null || !fileToLoad.isFile()) {
@@ -187,9 +187,9 @@ public class CoreFileUtils {
         }
         try (Stream<String> lines = Files.lines(filePathToLoad)) {
             return lines.toList();
-        } catch (IOException ioEx) {
+        } catch (Exception ex) {
             throw new IllegalStateException(String.format(
-                "could not load the file '%s' as list of lines", filePathToLoad), ioEx);
+                "could not load the file '%s' as list of lines", filePathToLoad), ex);
         }
     }
 
