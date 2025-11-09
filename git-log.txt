@@ -1,3 +1,4 @@
+e7b62fd7 introduce new GitHub secrets and vars and bash-script '.github/gpg/gpg-import.sh' #2
 663d1905 introduce new GitHub secrets and vars and bash-script '.github/gpg/gpg-import.sh' #1
 3a372bd3 playing with GPG #20
 5053fe42 playing with GPG #19
