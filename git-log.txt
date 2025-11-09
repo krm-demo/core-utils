@@ -1,3 +1,5 @@
+75e1b176 correct the version of 'commons-io:commons-io' (fix the compilation errors)
+d04ffa6a upgrade the versions of dependencies in 'pom.xml'
 dc75d4fa introduce new GitHub secrets and vars and bash-script '.github/gpg/gpg-import.sh' #5
 cc28fd25 introduce new GitHub secrets and vars and bash-script '.github/gpg/gpg-import.sh' #4
 dd9c963f introduce new GitHub secrets and vars and bash-script '.github/gpg/gpg-import.sh' #3
