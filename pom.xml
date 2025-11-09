@@ -740,7 +740,7 @@
     <maven.jacoco.target.exec-data-file>${project.build.directory}/jacoco.exec</maven.jacoco.target.exec-data-file>
     <maven.jacoco.reports.output.dir>${project.build.directory}/jacoco-reports</maven.jacoco.reports.output.dir>
 
-    <commons-io.version>20030203.000550</commons-io.version>
+    <commons-io.version>2.20.0</commons-io.version>
     <commons-lang.version>3.19.0</commons-lang.version>
     <commons-text.version>1.14.0</commons-text.version>
     <com.fasterxml.jackson.version>2.20.1</com.fasterxml.jackson.version>
