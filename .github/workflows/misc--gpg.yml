@@ -75,7 +75,7 @@ jobs:
 
       - name: "Signing the file 'pom.xml':"
         run: |
-          echo "## Signing the file \'pom.xml\`" >> $GITHUB_STEP_SUMMARY
+          echo "## Signing the file \`pom.xml\`" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
 
           # invoke 'gpg ... --sign ...':
@@ -125,7 +125,7 @@ jobs:
 
       - name: "Signing the file 'LICENSE':"
         run: |
-          echo "## Signing the file \'LICENSE\`" >> $GITHUB_STEP_SUMMARY
+          echo "## Signing the file \`LICENSE\`" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
 
           # invoke 'gpg ... --sign ...':
