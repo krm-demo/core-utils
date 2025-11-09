@@ -93,6 +93,7 @@ jobs:
           echo "------------ gpg --verify ... ---------------"
           gpg --verify pom.xml.asc
           echo "---------------------------------------------"
+          # Note! that 'gpg'-utility print the results to both standard system-streams - so, we have to redirect them properly !
           
           echo "<details><summary><code>gpg --verify pom.xml.asc</code></summary>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
@@ -109,3 +110,23 @@ jobs:
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
+
+          echo -e "---" >> $GITHUB_STEP_SUMMARY
+          echo -e "Following \`gpg\`-commands has the second argument of a signed file:
+
+          echo "<details><summary><code>gpg --verify pom.xml.asc pom.xml</code></summary>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          gpg --verify pom.xml.asc pom.xml &>> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+
+          echo "<details><summary><code>gpg --status-fd 1 --verify pom.xml.asc pom.xml</code></summary>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          gpg --status-fd 1 --verify pom.xml.asc pom.xml >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+
