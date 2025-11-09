@@ -40,11 +40,11 @@ jobs:
           echo "1qaz@WSX0okm(IJN" > passphrase.txt
           # Import GPG-keys from GitHub-secrets:
           echo -n "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --batch --import --passphrase-file passphrase.txt
-          echo "---------------------------------------------"
-          gpg --check-trustdb
-          echo "---------------------------------------------"
+          echo "-----------  gpg --edit-key ...  ---------------"
           # invoke 'gpg ... --edit-key ... trust':
           echo -e "5\ny\nquit" | gpg --batch --yes --pinentry-mode loopback --command-fd 0 --expert --edit-key 0436EE146A372544 trust
+          echo "-----------  gpg --check-trustdb ...  ---------------"
+          gpg --update-trustdb
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
 
@@ -87,7 +87,7 @@ jobs:
           echo "<details><summary><code>gpg --verify pom.xml.asc</code></summary>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --verify pom.xml.asc >> $GITHUB_STEP_SUMMARY
+          gpg --status-fd 1 --verify pom.xml.asc >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
