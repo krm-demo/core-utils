@@ -44,18 +44,11 @@ jobs:
           echo "</details>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
 
-      - name: "Configure GPG Key:"
-        run: |
-          # save a passphrase in a text-file:
-          echo "1qaz@WSX0okm(IJN" > passphrase.txt
-          # Import GPG-keys from GitHub-secrets:
-          echo -n "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --batch --import --passphrase-file passphrase.txt
-          echo "-----------  gpg --edit-key ...  ---------------"
-          # invoke 'gpg ... --edit-key ... trust':
-          echo -e "5\ny\nquit" | gpg --batch --yes --pinentry-mode loopback --command-fd 0 --expert --edit-key 0436EE146A372544 trust
-          echo "-----------  gpg --check-trustdb ...  ---------------"
-          gpg --update-trustdb
+      - name: "Configure GPG Key (import and trust):"
+        run: .github/gpg/gpg-import.sh
         env:
+          GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
 
       - name: "Display the current status of local GPG-storage:"
