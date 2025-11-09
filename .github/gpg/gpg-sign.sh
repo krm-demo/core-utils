@@ -22,3 +22,5 @@ echo "1qaz@WSX0okm(IJN" | gpg --batch --yes --pinentry-mode loopback --passphras
   --local-user 0436EE146A372544 \
   --output $1.asc \
   --detach-sig --sign $1
+
+echo ".... finish the script $0 in '$(pwd)' ...."

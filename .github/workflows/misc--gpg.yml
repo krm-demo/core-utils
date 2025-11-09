@@ -70,10 +70,17 @@ jobs:
           echo "### Signing the file `pom.xml`" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
           .github/gpg/gpg-sign.sh pom.xml
+          
+          ls -laxo
+          git status
+          echo "------------ gpg --verify ... ---------------"
+          gpg --batch --passphrase-file passphrase.txt --verify pom.xml.asc
+          echo "---------------------------------------------"
+          
           echo "<details><summary><code>gpg --verify pom.xml.asc</code></summary>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --verify pom.xml.asc >> $GITHUB_STEP_SUMMARY
+          gpg --batch --passphrase-file passphrase.txt --verify pom.xml.asc >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
