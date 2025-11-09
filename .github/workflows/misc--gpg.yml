@@ -69,6 +69,11 @@ jobs:
         run: |
           echo "### Signing the file `pom.xml`" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
+          
+          # invoke 'gpg ... --edit-key ... trust':
+          echo -e "5\ny\nquit" | gpg --command-fd 0 --expert --edit-key 0436EE146A372544 trust
+          
+          # invoke 'gpg ... --sign ...':
           .github/gpg/gpg-sign.sh pom.xml
           
           ls -laxo
@@ -80,7 +85,7 @@ jobs:
           echo "<details><summary><code>gpg --verify pom.xml.asc</code></summary>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --batch --passphrase-file passphrase.txt --verify pom.xml.asc >> $GITHUB_STEP_SUMMARY
+          gpg --verify pom.xml.asc >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY

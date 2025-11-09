@@ -115,3 +115,6 @@ aHPxy7ZBrgv/QJi2qI8TnFmZikZpDw==
 
 # The results of command below (the content of that '.b64'-file is saved as GitHub-secret):
 ...> gpg --export-secret-keys 0436EE146A372544 | base64 > gpg.private.key.b64
+
+# The command below allows to avoid the warning like: "WARNING: This key is not certified with a trusted signature!"
+...> echo -e "5\ny\nquit" | gpg --command-fd 0 --expert --edit-key 0436EE146A372544 trust
