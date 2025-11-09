@@ -192,6 +192,11 @@
           <artifactId>maven-deploy-plugin</artifactId>
           <version>${maven.deploy.plugin.version}</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${maven.gpg.plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -677,6 +682,11 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
       </plugin>
+      <plugin>
+        <!-- this declaration is just for to be sure that proper version of "maven-deploy-plugin" is working -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+      </plugin>
 
     </plugins>
   </build>
@@ -702,17 +712,18 @@
     <picocli.version>4.7.7</picocli.version>
 
     <maven-build-helper-plugin.version>3.6.1</maven-build-helper-plugin.version>
-    <maven.dependency.plugin.version>3.8.1</maven.dependency.plugin.version>
+    <maven.dependency.plugin.version>3.9.0</maven.dependency.plugin.version>
     <maven.deploy.plugin.version>3.1.4</maven.deploy.plugin.version>
     <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
     <maven-exec-plugin.version>3.6.2</maven-exec-plugin.version>
     <maven.failsafe.plugin.version>3.5.4</maven.failsafe.plugin.version>
+    <maven.gpg.plugin.version>3.2.8</maven.gpg.plugin.version>
     <maven.install.plugin.version>3.1.4</maven.install.plugin.version>
     <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven.javadoc.plugin.version>3.12.0</maven.javadoc.plugin.version>
     <maven.javadoc.plugin.release>${java.version}</maven.javadoc.plugin.release>
     <maven-properties-plugin.version>1.2.1</maven-properties-plugin.version>
-    <maven.release.plugin.version>3.1.1</maven.release.plugin.version>
+    <maven.release.plugin.version>3.2.0</maven.release.plugin.version>
     <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
     <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
     <maven.surefire.plugin.version>3.5.4</maven.surefire.plugin.version>
@@ -729,10 +740,10 @@
     <maven.jacoco.target.exec-data-file>${project.build.directory}/jacoco.exec</maven.jacoco.target.exec-data-file>
     <maven.jacoco.reports.output.dir>${project.build.directory}/jacoco-reports</maven.jacoco.reports.output.dir>
 
-    <commons-io.version>2.20.0</commons-io.version>
+    <commons-io.version>20030203.000550</commons-io.version>
     <commons-lang.version>3.19.0</commons-lang.version>
     <commons-text.version>1.14.0</commons-text.version>
-    <com.fasterxml.jackson.version>2.20.0</com.fasterxml.jackson.version>
+    <com.fasterxml.jackson.version>2.20.1</com.fasterxml.jackson.version>
     <snakeyaml-engine.version>2.10</snakeyaml-engine.version>
 
     <maven-project.group>${project.groupId}</maven-project.group>
