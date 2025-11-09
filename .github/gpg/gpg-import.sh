@@ -14,7 +14,7 @@ echo "- saving GPG-passphrase to './passphrase.txt' ..."
 echo $GPG_PASSPHRASE > passphrase.txt
 
 echo "-------  gpg --import ...  -----------------"
-echo $GPG_SIGNING_KEY | base64 --decode | gpg --batch --import --passphrase-file passphrase.txt
+echo -n "$GPG_SIGNING_KEY" | base64 --decode | gpg --batch --import --passphrase-file passphrase.txt
 
 echo "-------  gpg --edit-key ...  ---------------"
 echo -e "5\ny\nquit" | gpg --batch --yes --pinentry-mode loopback --command-fd 0 --expert --edit-key 0436EE146A372544 trust

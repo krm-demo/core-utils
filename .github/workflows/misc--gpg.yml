@@ -58,7 +58,7 @@ jobs:
           echo "<details><summary><code>gpg --list-secret-keys --keyid-format=long</code></summary>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --list-secret-keys --keyid-format=long >> $GITHUB_STEP_SUMMARY
+          gpg --list-secret-keys --keyid-format=long &>> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
@@ -68,7 +68,7 @@ jobs:
           echo "<details><summary><code>gpg --list-signatures --keyid-format 0xshort</code></summary>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --list-signatures --keyid-format 0xshort >> $GITHUB_STEP_SUMMARY
+          gpg --list-signatures --keyid-format 0xshort &>> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
