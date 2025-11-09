@@ -2,7 +2,7 @@
 # -------------------------------------------------------------------------------------------------------
 #   List all packages for "GitHub-Packages"-Artifactory
 # -------------------------------------------------------------------------------------------------------
-echo "... starting the script $0 in '$(pwd)' ..."
+#echo "... starting the script $0 in '$(pwd)' ..."
 
 gh api \
   -H "Accept: application/vnd.github+json" \
