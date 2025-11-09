@@ -112,7 +112,7 @@ jobs:
           echo -e "" >> $GITHUB_STEP_SUMMARY
 
           echo -e "---" >> $GITHUB_STEP_SUMMARY
-          echo -e "Following \`gpg\`-commands has the second argument of a signed file:
+          echo -e "Following \`gpg\`-commands has the second argument of a signed file:"
 
           echo "<details><summary><code>gpg --verify pom.xml.asc pom.xml</code></summary>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
