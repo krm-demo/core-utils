@@ -4,6 +4,9 @@
 #  - this bash-script is passing the passphrase as an input from 'echo';
 # ----------------------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
+echo "- RUNNER_TEMP = '$RUNNER_TEMP';"
+echo "- GPG_KEY_ID = '$GPG_KEY_ID';"
+echo "- content of 'passphrase.txt' --> '$(cat passphrase.txt 2>/dev/null || echo "<< does not exists >>")';"
 
 # Check if the first argument is provided
 if [ -z "$1" ]; then
@@ -18,8 +21,8 @@ if [ ! -f "$1" ]; then
 fi
 
 # Perform the signing with a specified passphrase
-echo "1qaz@WSX0okm(IJN" | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 \
-  --local-user 0436EE146A372544 \
+echo $GPG_PASSPHRASE | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 \
+  --local-user $GPG_KEY_ID \
   --output $1.asc \
   --detach-sig --sign $1
 

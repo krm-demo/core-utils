@@ -74,6 +74,9 @@ jobs:
           echo -e "" >> $GITHUB_STEP_SUMMARY
 
       - name: "Signing the file 'pom.xml':"
+        env:
+          GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           echo "## Signing the file \`pom.xml\`" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
@@ -124,6 +127,9 @@ jobs:
           echo -e "" >> $GITHUB_STEP_SUMMARY
 
       - name: "Signing the file 'LICENSE':"
+        env:
+          GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           echo "## Signing the file \`LICENSE\`" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY

@@ -8,7 +8,9 @@
 #   where '0436EE146A372544' is the value of env-var '$GPG_KEY_ID' (a GitHUb-repo-var '${{ vars.GPG_KEY_ID }}');
 # --------------------------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
-echo "- GPG_KEY_ID = '$GPG_KEY_ID'"
+echo "- RUNNER_TEMP = '$RUNNER_TEMP';"
+echo "- GPG_KEY_ID = '$GPG_KEY_ID';"
+echo "- content of 'passphrase.txt' --> '$(cat passphrase.txt 2>/dev/null || echo "<< does not exists >>")';"
 
 echo "- saving GPG-passphrase to './passphrase.txt' ..."
 echo $GPG_PASSPHRASE > passphrase.txt
