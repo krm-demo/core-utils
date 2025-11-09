@@ -40,6 +40,9 @@ jobs:
           echo "1qaz@WSX0okm(IJN" > passphrase.txt
           # Import GPG-keys from GitHub-secrets:
           echo -n "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --batch --import --passphrase-file passphrase.txt
+          echo "---------------------------------------------"
+          # invoke 'gpg ... --edit-key ... trust':
+          echo -e "5\ny\nquit" | gpg --command-fd 0 --expert --edit-key 0436EE146A372544 trust
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
 
@@ -67,11 +70,8 @@ jobs:
 
       - name: "Signing the file 'pom.xml':"
         run: |
-          echo "### Signing the file `pom.xml`" >> $GITHUB_STEP_SUMMARY
+          echo "### Signing the file \'pom.xml\`" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
-          
-          # invoke 'gpg ... --edit-key ... trust':
-          echo -e "5\ny\nquit" | gpg --command-fd 0 --expert --edit-key 0436EE146A372544 trust
           
           # invoke 'gpg ... --sign ...':
           .github/gpg/gpg-sign.sh pom.xml
