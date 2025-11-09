@@ -42,7 +42,7 @@ jobs:
           echo -n "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode | gpg --batch --import --passphrase-file passphrase.txt
           echo "---------------------------------------------"
           # invoke 'gpg ... --edit-key ... trust':
-          echo -e "5\ny\nquit" | gpg --command-fd 0 --expert --edit-key 0436EE146A372544 trust
+          echo -e "5\ny\nquit" | gpg --pinentry-mode loopback --command-fd 0 --expert --edit-key 0436EE146A372544 trust
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
 
