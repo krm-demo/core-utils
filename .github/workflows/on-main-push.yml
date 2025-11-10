@@ -85,6 +85,7 @@ jobs:
           GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           echo "--- deployment to GitHub Artifactory: ---"
           cd main-branch

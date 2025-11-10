@@ -8,7 +8,14 @@
 echo "... starting the script $0 in '$(pwd)' ..."
 echo "- GPG_KEY_ID = '$GPG_KEY_ID';"
 echo "- GPG_PASSPHRASE = '$GPG_PASSPHRASE';"
+echo "- MAVEN_GPG_PASSPHRASE = '$MAVEN_GPG_PASSPHRASE';"
 echo "- content of 'passphrase.txt' --> '$(cat passphrase.txt 2>/dev/null || echo "<< does not exists >>")';"
+
+if [[ "$GPG_PASSPHRASE" == "$MAVEN_GPG_PASSPHRASE" ]]; then
+  echo "- variables GPG_PASSPHRASE equals to MAVEN_GPG_PASSPHRASE"
+else
+  echo "- variables GPG_PASSPHRASE does NOT equal to MAVEN_GPG_PASSPHRASE "'!!!'
+fi
 
 source "$(dirname $0)/pom-props.source"
 
@@ -33,8 +40,11 @@ ls -laxo target/*.jar
 #echo "- the content of new (processed) JavaDoc is"
 #jar tfv ${JAR_FILE__JAVADOC}
 
+# - env-var with predefined name 'MAVEN_GPG_PASSPHRASE' is used to provide the parameter "-Dgpg.passphrase";
+# - as for parameter "-Dgpg.keyname" - it looks like env-var MAVEN_GPG_KEY is not working in our case;
+
 echo "- deploying to 'GitHub Packages' with 'mvn -X gpg:sign-and-deploy-file ...' command:"
-mvn -X gpg:sign-and-deploy-file \
+mvn gpg:sign-and-deploy-file \
   -DgroupId="${POM_PROPS_GROUPID}" \
   -DartifactId="${POM_PROPS_ARTIFACTID}" \
   -Dversion="${POM_PROPS_VERSION}" \
@@ -44,12 +54,11 @@ mvn -X gpg:sign-and-deploy-file \
   -Dclassifiers="sources,javadoc" \
   -Dtypes="jar,jar" \
   -Dgpg.keyname="$GPG_KEY_ID" \
-  -Dgpg.passphrase="$GPG_PASSPHRASE" \
   -DrepositoryId="github" \
   -Durl=https://maven.pkg.github.com/krm-demo/core-utils
 
 # TODO: the command above could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@local-nexus"
 
-.github/gpg/gpg-verify.sh $JAR_FILE__BIN
-.github/gpg/gpg-verify.sh $JAR_FILE__SOURCES
-.github/gpg/gpg-verify.sh $JAR_FILE__JAVADOC
+.github/gpg/gpg-verify.sh ${JAR_FILE__BIN}.asc
+.github/gpg/gpg-verify.sh ${JAR_FILE__SOURCES}.asc
+.github/gpg/gpg-verify.sh ${JAR_FILE__JAVADOC}.asc

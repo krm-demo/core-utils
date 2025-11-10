@@ -49,3 +49,7 @@ mvn -X gpg:sign-and-deploy-file \
   -Durl=http://localhost:8081/repository/maven-snapshots/
 
 # TODO: the command above could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@local-nexus"
+
+.github/gpg/gpg-verify.sh ${JAR_FILE__BIN}.asc
+.github/gpg/gpg-verify.sh ${JAR_FILE__SOURCES}.asc
+.github/gpg/gpg-verify.sh ${JAR_FILE__JAVADOC}.asc
