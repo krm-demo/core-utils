@@ -1,3 +1,4 @@
+de56d18c add some info to prepare PUBLIC-deployment #1
 e16ea306 attempt to fix losing the output at 52258GITHUB_STEP_SUMMARY
 3abd8dc9 << new snapshot version >> 21.24.006-SNAPSHOT
 0844ee22 << internal release >> 21.24.005
