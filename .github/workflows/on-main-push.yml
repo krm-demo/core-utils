@@ -82,6 +82,9 @@ jobs:
         if: ${{ inputs && inputs.release_type == 'INTERNAL' && inputs.release_phase == 'call-main'}}
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
         run: |
           echo "--- deployment to GitHub Artifactory: ---"
           cd main-branch
@@ -95,6 +98,9 @@ jobs:
 
           #echo "~~~~~~~~~~~~~ ( executing 'deploy-github-packages.sh' ) ~~~~~~~~~~~~~"
           #.github/scripts/deploy/deploy-github-packages.sh
+
+          #echo "~~~~~~~~~~~~~ ( executing 'gpg-import.sh' ) ~~~~~~~~~~~~~"
+          .github/gpg/gpg-import.sh
 
           #echo "~~~~~~~~~~~~~ ( executing 'sign-and-deploy-github-packages.sh' ) ~~~~~~~~~~~~~"
           .github/scripts/deploy/sign-and-deploy-github-packages.sh
