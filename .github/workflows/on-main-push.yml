@@ -22,6 +22,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      MAVEN__CENTRAL_USERNAME: ${{ secrets.MAVEN__CENTRAL_USERNAME }}
+      MAVEN__CENTRAL_PASSWORD: ${{ secrets.MAVEN__CENTRAL_PASSWORD }}
 
     steps:
       - name: "Checkout the 'main'-branch of repo '${{ github.ref }}' into './main-branch'"
@@ -31,14 +34,54 @@ jobs:
           path: main-branch
           fetch-depth: 0
 
-      - name: "Set up JDK 25 (Amazon Corretto)"
+      - name: "Set up JDK 25 (Amazon Corretto) - default maven-settings"
         uses: actions/setup-java@v4
+        if: ${{ !inputs || inputs.release_type != 'PUBLIC' || inputs.release_phase != 'call-main' }}
         with:
           java-version: '25'
           distribution: 'corretto'
           check-latest: true
           cache: 'maven'
           cache-dependency-path: main-branch/pom.xml
+
+      - name: "Set up JDK 25 (Amazon Corretto) - for PUBLIC-release (using Maven-Central as target)"
+        uses: actions/setup-java@v4
+        if: ${{ inputs && inputs.release_type == 'PUBLIC' && inputs.release_phase == 'call-main' }}
+        with:
+          java-version: '25'
+          distribution: 'corretto'
+          check-latest: true
+          cache: 'maven'
+          cache-dependency-path: main-branch/pom.xml
+          server-id: maven-central
+          server-username: MAVEN__CENTRAL_USERNAME
+          server-password: MAVEN__CENTRAL_PASSWORD
+
+      - name: "Dump effective maven-settings (show passwords)"
+        run: |
+          # save the effective-settings into './target/effective-settings--show-psw.xml':
+          mvn help:effective-settings -DshowPasswords=true -Doutput=./target/effective-settings--show-psw.xml
+          # print the effective-settings (with show passwords) in summary:
+          echo "<details><summary><code>effective-settings--show-psw.xml</code></summary>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`xml" >> $GITHUB_STEP_SUMMARY
+          cat ./target/effective-settings--show-psw.xml >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+
+      - name: "Dump effective maven-settings (hide passwords)"
+        run: |
+          # save the effective-settings into './target/effective-settings.xml':
+          mvn help:effective-settings -Doutput=./target/effective-settings.xml
+          # print the effective-settings (with hide passwords) in summary:
+          echo "<details><summary><code>effective-settings.xml</code></summary>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`xml" >> $GITHUB_STEP_SUMMARY
+          cat ./target/effective-settings.xml >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+          echo -e "" >> $GITHUB_STEP_SUMMARY
 
       - name: "Dump Git-Hub context-variables into '.github/th-vars'-dir"
         run: |
