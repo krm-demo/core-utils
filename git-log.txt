@@ -1,3 +1,4 @@
+7f98ff48 add some info to prepare PUBLIC-deployment #5
 48b8de29 add some info to prepare PUBLIC-deployment #4
 d7e4a92c add some info to prepare PUBLIC-deployment #3
 7e8e5010 << new snapshot version >> 21.24.007-SNAPSHOT
