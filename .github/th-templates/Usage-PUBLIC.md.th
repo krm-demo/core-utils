@@ -17,6 +17,10 @@ This version is deployed into public [maven central repository](https://central.
 without additional downloading steps or local builds. As for Java-Doc it's either available at [( ${gbh.badgeLatestPublicJavaDocMD} )]
 or will be automatically downloaded by your favorite IDE.
 
+Following is temporary and must be removed !!!
+- `MAVEN__CENTRAL_USERNAME` is <code>[(${zh.mask4(secrets.get("MAVEN__CENTRAL_USERNAME"))})]</code>
+- `MAVEN__CENTRAL_PASSWORD` is <code>[(${zh.mask4(secrets.get("MAVEN__CENTRAL_PASSWORD"))})]</code>
+
 But in order your maven/gradle project or jbang-script to use `[[${mh.projectArtifact}]]`-library
 you must declare it as dependency in the way described below.
 

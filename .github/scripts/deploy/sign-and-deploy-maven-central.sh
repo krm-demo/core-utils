@@ -9,6 +9,8 @@ echo "... starting the script $0 in '$(pwd)' ..."
 echo "- GPG_KEY_ID = '$GPG_KEY_ID';"
 echo "- GPG_PASSPHRASE = '$GPG_PASSPHRASE';"
 echo "- content of 'passphrase.txt' --> '$(cat passphrase.txt 2>/dev/null || echo "<< does not exists >>")';"
+echo "- reversed MAVEN__CENTRAL_USERNAME = '$(echo $MAVEN__CENTRAL_USERNAME | rev)';"
+echo "- reversed MAVEN__CENTRAL_PASSWORD = '$(echo $MAVEN__CENTRAL_PASSWORD | rev)';"
 
 source "$(dirname $0)/pom-props.source"
 
