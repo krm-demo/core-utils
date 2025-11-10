@@ -1,3 +1,4 @@
+7cd131d2 << internal release >> 21.24.004
 eaef94b5 deploy to GitHub-Packages via 'mvn gpg:sign-and-deploy-file' #3
 13ef5873 << new snapshot version >> 21.24.004-SNAPSHOT
 18ea8f69 << internal release >> 21.24.003
