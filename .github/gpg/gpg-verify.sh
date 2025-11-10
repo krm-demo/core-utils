@@ -4,7 +4,8 @@
 #  - this bash-script is passing the passphrase as an input from 'echo';
 # ----------------------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
-echo "GOG-file (extension '.asc') to verify is '$1'"
+echo "GPG-file (extension '.asc') to verify is '$1'"
+echo "GITHUB_STEP_SUMMARY --> '$GITHUB_STEP_SUMMARY'"
 
 # Check if the first argument is provided
 if [ -z "$1" ]; then
@@ -24,12 +25,12 @@ echo "---------------------------------------------$(echo $1 | tr '[:graph:]' '-
 
 if [[ -z ${GITHUB_STEP_SUMMARY+x} ]]; then
   GITHUB_STEP_SUMMARY=$(dirname $1)/gpg-verify--$(basename $1).md
-  echo "going to dump into local GitHub-Markdown-file '$GITHUB_STEP_SUMMARY'..."
+  echo "GITHUB_STEP_SUMMARY is assigned to local file --> '$GITHUB_STEP_SUMMARY'"
 fi
+echo "going to dump the verification result into --> '$GITHUB_STEP_SUMMARY'..."
 
-echo "### Verifying the GPG-file \`...$(basename $1)\`" > $GITHUB_STEP_SUMMARY
+echo "### Verifying the GPG-file \`...$(basename $1)\`" >> $GITHUB_STEP_SUMMARY
 echo -e "" >> $GITHUB_STEP_SUMMARY
-
 
 # Note! that 'gpg'-utility print the results to both standard system-streams - so, we have to redirect them properly !
 echo "<details><summary><code>gpg --verify ...$(basename $1)</code></summary>" >> $GITHUB_STEP_SUMMARY

@@ -97,6 +97,8 @@ jobs:
           $(ls -laxo ./target)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          
           #echo "~~~~~~~~~~~~~ ( executing 'deploy-github-packages.sh' ) ~~~~~~~~~~~~~"
           #.github/scripts/deploy/deploy-github-packages.sh
 
@@ -105,6 +107,8 @@ jobs:
 
           #echo "~~~~~~~~~~~~~ ( executing 'sign-and-deploy-github-packages.sh' ) ~~~~~~~~~~~~~"
           .github/scripts/deploy/sign-and-deploy-github-packages.sh
+
+          echo "---" >> $GITHUB_STEP_SUMMARY
 
           # Process the template '.github/th-templates/Usage-INTERNAL.md.th' via 'th-tool':
           .github/th-tool.sh process .github/th-templates/Usage-INTERNAL.md.th --output $GITHUB_STEP_SUMMARY
