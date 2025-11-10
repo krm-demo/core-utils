@@ -1,3 +1,4 @@
+e34e8160 << new snapshot version >> 21.24.008-SNAPSHOT
 200c2276 << internal release >> 21.24.007
 7f98ff48 add some info to prepare PUBLIC-deployment #5
 48b8de29 add some info to prepare PUBLIC-deployment #4
