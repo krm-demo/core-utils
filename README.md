@@ -1,15 +1,15 @@
-[![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg?event=push)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)  [![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils)  [![Open-Test-4j](https://img.shields.io/badge/test--results-Open--Test--4j-blue?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAJPElEQVR4nOxZbXCU1fW%2Fz31ed599NuwGDAkJkBDz92%2FQqERNdvOGEXyJQaGNOmV0UCxqrdWZfmjLtB07Y%2B1HO%2BLIiHXqqKDtVITWgLzk%2FUVIRIaW0IQyQAmbTTZps9ns7vN%2Bb%2BfZGzfJZjdJ6TrlQ39f8sy559793XPPueecGwZjDK4nMKkGEMKqrhmmiVA6GUOKYhiaZ1kI4WIJ6YYRkRVF09LIYy54lhVtAseyCXIq4cjCUTksy2n%2FeVWPBiavqHpEYMVlzpU8Yydyu8A7RTEloYlwWFbTbJjRycGjZ39zPtCLMSISSDHFORX33rzNJS4HAHAs63ZKSQhFZHkymk7bYIxPXvzj0b53TayLoijYeAhpZJqKooTDEQayD976fOnqBxPsNEXIMM2x4AQR6bre3taKkLUhGtJVNTUIobbWloTfc0rOu8vLAQBjY2Onvzq1du0t2Tk5MxWa%2F%2Fp%2B68A%2BwSZkZd3AMLOcVdf1wEhAUdT6khfvzK8DALidEvGnKUKhcCSqqmRbP3z5pY%2F27o1PfnLbUz%2FaubO46MYEQreWlBxpagYAvPHr13%2F16qsvvvzyzp%2F%2BLD7qD17Y3foiz3MrcnMoikpqP9%2FVIVNH36%2Fd4xazeZZ1xQ5uilDgn%2BMo9qEoSn7uisLCwm1PbwcAvPvOHp%2FPd3bg%2FEd7P4SQbm463tLU9OS2p4qKijKXLX1k8xaM8UP33%2FfVqVO33X774WPH47%2F3%2B97X%2BoY6Vq7KS7DNTGiaNnjl6i25NQ2lPwYA3OBaAiG0tDVdR7NjbUVu7vYdOwAAhxo%2F8%2Fl8As%2FveO55AEAwON7S1HT%2FAw%2Bsr60lmsN%2B%2F%2BnTp91u95%2FPnPH7%2FdnZ2daJmFq%2F%2F4QkSfOwsdyZ4%2Byivc%2FXsankJZ61qbpu43kYcyA0z7T50dnRgRH67rPPIYSOHz1ChGOTgwbSBIFfcLog8AibY%2BGrAAAzRsMihMG138Ud7W0Mw2x98glnRsbnhw4RoaJHrKVpesHpdExHNaJxiUWIAkmcbjEwTbO1pUWSpD27d4t2sbOjIxgMWvvmHLHkYy5iBcsqwtf35BQhZhFbSYqB%2Fv7RQGB8fPzNN97w%2B4c0TTvxRTcAYJmUx0BWUdQFV1AVBVL0UikvZi04RYhjmYTIDIfD5%2Fr6zvX1RSKReZZrb2uzAmr%2Fp909vX84cMCStFoSBrI3Zt0Vngyb5nxG0nU9GpVvyi7nGIFkt%2BnkauO5aGxDLMt6vN7urq7a6ioyVHPPPXSKYGk%2Bfiw3L6%2BispKiqNX5%2BUVFRS3NTRhjiqLW37R1YPjEsH8kO2d50sSOEAqMBFhauK%2F4GcKGqNGvvPIKOTVCCEJYV19vs9nKPB6P11tdXfOLV3%2FJcVx8obyVKz1er8vlwhgHAiN19fX%2Ff%2FPNliNS1Irc3MzMzDvWrWNZ1iG4KAr%2BbfiUIsuiKCZw0nXdPzSsqtqmkpfyl5UAADIcInHw6VyW9jyPMe44%2F7vm%2Fg8BhRwOked5mqZN01RUNTwZpgDcWLzdU7gldj58hmN2LiMIRSLRRXjiv4VA6O%2BtA%2FvOD5%2FUTIVIeMZenFNZUdSw1JFLDsuVNNsTpD3nE5jIHAsPKnrYxkqZjhU0nHLKBeohAk03IrKs6nraac0EyzAOm8DP8M6UhAgQQqqux0rqdNbUFGUFEMew5NZJonC9dR3Jaf4X8T9CCyF1Oafr34BTW1mFgTTHsjyX2JERJHHqqKJGZNlE1161LQaQokSbINpsCxAKTobjPSsKBY3LF%2FBkiOIFOncVzEperv8n4BhmidMJqWSEMADjoUktdh8aly8oh%2FYbA2fBDLpwaRZ%2F38PcXRXppcXQtNspxbPvNKGpthVj%2BdAn6pGDEEKb3c7FqgKEsaHriqLous7831r7tu9BUUpYNxQKBUZGbsjKCgaDmqrmFxSQ7D3k80Wj0dX5%2BZcvXXK73e7MTKIfCARCExMFa9ZACDmWcTudU9smf3TDIE202tWsHjnIsqw7M1MURZbjaIZhWdZmty9xueyiaAycjfz2zbmed7ixsbK87HBj4893%2FqSyvGxgYIAk%2FIYtmxs2P6IqSmV52Q9eeIEoI4Qe3bK5srxMi7mHphtxP5kiFJGtVGyO%2F0M%2B%2BDHDsktcrrlVFUVRDofDbreb589pJ9tTHYGnohIA8GVPj9XYj45evnSpzOMhq7W1tgwODgIAent6Bvr7Z84iBKYJEYLq4U%2BBqjidznm8RHQ4GIZRj%2F4pVc6prqkBAJDiurOjHSFUVV1DhgzDePuttwAAH7z3XsIs3TCMWL0LY28lesy8SDvTy7Ds%2FN0dRVGCIKCxETTsS6pwY1HR8uzsL3t6McbdnV2Wzbze%2BOjH%2B%2FYO%2B%2F2NjZ%2FNnUjiCZJuxjrXiQkgR9k5L0hzwcR0zKGrSUchhLX33js4eMU%2FNPRFd1duXt7KVavIkOR0RiKR55%2Fdociyy%2BVKmEie6mKNIrG9rhEDLEiI6GAtZW35QN1DAIAD%2B%2FdfvHixqro6vuaDdXVOp%2FNEd%2FeawkJvzNWS7Ce2J2sCZReJ%2Fy9ICMd0KEdi5Mfh8XoFQXhnz9sAY4%2B3Ii6XJKnhsccBAA2PPZbqjXG6UYSiAy5brmvaghWSFasUZFavMQxD%2FhrajDdJm822rvTOYb%2Bfoqgyj2fm3Kef2c5x3LcaGuYuS2gwpJqkITQR4qo2KJ98oCqKMCfFxGGapizLTPFtUMrobGv7zqMN8W6Q47j8ggLyXb1%2BfVdnR3Hx2pzZr1gFawovDl6l5%2FTKFAA8z01ne4HnIrLCV9yjdRyfHB1OFWsY44lgEAMg3L8ZAFBVXf36rl3HPp969Hh869a77r6bfG%2FYuPEvZ87UbthAHIim6fpNDxevvSX%2BwLCutBRjHD84nuOIo02lDoTQaHACY2wMXg7veo1SFcnp5Hl%2Bpo8bhhGamDAMQ6h%2FVNhQn8qE14alSzKYhEZRUbVgOGwdiu9K5P3dyG8ZluU4CCFGyDAMXdcpu8P27Se4Uk962Uh2u2gTyPes8iOqKKFINBZHptbdprYfjd9%2BlORk7ygTNm6CUkZ62YiCIInTzzGJ9ZCiahORyHRNoshYkQHNUA4p7cUQBYAk2u2CMEs4N8gRQlFFlVX1mysardqG4%2ByCMLc7m68vM0wz9s%2BXdNKCFGW5Zup0ed01iv8KAAD%2F%2FxfuVaicHZfQAAAAAElFTkSuQmCC&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.26/open-test-report.html) [![JaCoCo](https://img.shields.io/badge/test--coverage-76.06-dfb317?logo=data%3Aimage%2Fgif%3Bbase64%2CR0lGODlhEAAQAKU5AJsAAKwAALoAAEBAQF5eXhGuAXtvPnxvPntwPnxwPn9wPYFxPIJxPIVzPBK6AIh2O453OZJ7OJd9N5x%2FNRTSAJ%2BCNaCCNaSDNKWENKmFM6iGM6yHMq%2BIMbKKMIaavoyfwpOmxpqsy9SyaNSyadWyadq9fODIj97o997o%2BN%2Fo99%2Fo%2BOHp%2BOPr%2BObu%2BOnv%2Bezy%2BvDz%2B%2FP1%2B%2FL2%2B%2FP2%2B%2FX3%2B%2FX4%2B%2Fb4%2B%2Ff5%2FPn6%2FP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FyH5BAEKAD8ALAAAAAAQABAAAAaIwJ9wSCwKO8gk0ijk4J7QUYe5wYVAn2eJNC1qbmCoqSTKFC%2B068dTq9lqmGJlNpPF7veZpTiBEf6AgX9CEi8EFIiIAwKMAgNCES6HDpQOAwGYjkIQLQQOBaAFAwCkAY8%2FDyyTlZeZpw0rBAOztLWnCykoKSopvScnDEUKBgkJCMYJBwcKTM1FQQA7&logoColor=f8981d&labelColor=efe6c9)](https://krm-demo.github.io/core-utils/core-utils-21.26/jacoco-reports)
+[![on-main-push](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml/badge.svg?event=push)](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml)  [![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils)  [![Open-Test-4j](https://img.shields.io/badge/test--results-Open--Test--4j-blue?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAJPElEQVR4nOxZbXCU1fW%2Fz31ed599NuwGDAkJkBDz92%2FQqERNdvOGEXyJQaGNOmV0UCxqrdWZfmjLtB07Y%2B1HO%2BLIiHXqqKDtVITWgLzk%2FUVIRIaW0IQyQAmbTTZps9ns7vN%2Bb%2BfZGzfJZjdJ6TrlQ39f8sy559793XPPueecGwZjDK4nMKkGEMKqrhmmiVA6GUOKYhiaZ1kI4WIJ6YYRkRVF09LIYy54lhVtAseyCXIq4cjCUTksy2n%2FeVWPBiavqHpEYMVlzpU8Yydyu8A7RTEloYlwWFbTbJjRycGjZ39zPtCLMSISSDHFORX33rzNJS4HAHAs63ZKSQhFZHkymk7bYIxPXvzj0b53TayLoijYeAhpZJqKooTDEQayD976fOnqBxPsNEXIMM2x4AQR6bre3taKkLUhGtJVNTUIobbWloTfc0rOu8vLAQBjY2Onvzq1du0t2Tk5MxWa%2F%2Fp%2B68A%2BwSZkZd3AMLOcVdf1wEhAUdT6khfvzK8DALidEvGnKUKhcCSqqmRbP3z5pY%2F27o1PfnLbUz%2FaubO46MYEQreWlBxpagYAvPHr13%2F16qsvvvzyzp%2F%2BLD7qD17Y3foiz3MrcnMoikpqP9%2FVIVNH36%2Fd4xazeZZ1xQ5uilDgn%2BMo9qEoSn7uisLCwm1PbwcAvPvOHp%2FPd3bg%2FEd7P4SQbm463tLU9OS2p4qKijKXLX1k8xaM8UP33%2FfVqVO33X774WPH47%2F3%2B97X%2BoY6Vq7KS7DNTGiaNnjl6i25NQ2lPwYA3OBaAiG0tDVdR7NjbUVu7vYdOwAAhxo%2F8%2Fl8As%2FveO55AEAwON7S1HT%2FAw%2Bsr60lmsN%2B%2F%2BnTp91u95%2FPnPH7%2FdnZ2daJmFq%2F%2F4QkSfOwsdyZ4%2Byivc%2FXsankJZ61qbpu43kYcyA0z7T50dnRgRH67rPPIYSOHz1ChGOTgwbSBIFfcLog8AibY%2BGrAAAzRsMihMG138Ud7W0Mw2x98glnRsbnhw4RoaJHrKVpesHpdExHNaJxiUWIAkmcbjEwTbO1pUWSpD27d4t2sbOjIxgMWvvmHLHkYy5iBcsqwtf35BQhZhFbSYqB%2Fv7RQGB8fPzNN97w%2B4c0TTvxRTcAYJmUx0BWUdQFV1AVBVL0UikvZi04RYhjmYTIDIfD5%2Fr6zvX1RSKReZZrb2uzAmr%2Fp909vX84cMCStFoSBrI3Zt0Vngyb5nxG0nU9GpVvyi7nGIFkt%2BnkauO5aGxDLMt6vN7urq7a6ioyVHPPPXSKYGk%2Bfiw3L6%2BispKiqNX5%2BUVFRS3NTRhjiqLW37R1YPjEsH8kO2d50sSOEAqMBFhauK%2F4GcKGqNGvvPIKOTVCCEJYV19vs9nKPB6P11tdXfOLV3%2FJcVx8obyVKz1er8vlwhgHAiN19fX%2Ff%2FPNliNS1Irc3MzMzDvWrWNZ1iG4KAr%2BbfiUIsuiKCZw0nXdPzSsqtqmkpfyl5UAADIcInHw6VyW9jyPMe44%2F7vm%2Fg8BhRwOked5mqZN01RUNTwZpgDcWLzdU7gldj58hmN2LiMIRSLRRXjiv4VA6O%2BtA%2FvOD5%2FUTIVIeMZenFNZUdSw1JFLDsuVNNsTpD3nE5jIHAsPKnrYxkqZjhU0nHLKBeohAk03IrKs6nraac0EyzAOm8DP8M6UhAgQQqqux0rqdNbUFGUFEMew5NZJonC9dR3Jaf4X8T9CCyF1Oafr34BTW1mFgTTHsjyX2JERJHHqqKJGZNlE1161LQaQokSbINpsCxAKTobjPSsKBY3LF%2FBkiOIFOncVzEperv8n4BhmidMJqWSEMADjoUktdh8aly8oh%2FYbA2fBDLpwaRZ%2F38PcXRXppcXQtNspxbPvNKGpthVj%2BdAn6pGDEEKb3c7FqgKEsaHriqLous7831r7tu9BUUpYNxQKBUZGbsjKCgaDmqrmFxSQ7D3k80Wj0dX5%2BZcvXXK73e7MTKIfCARCExMFa9ZACDmWcTudU9smf3TDIE202tWsHjnIsqw7M1MURZbjaIZhWdZmty9xueyiaAycjfz2zbmed7ixsbK87HBj4893%2FqSyvGxgYIAk%2FIYtmxs2P6IqSmV52Q9eeIEoI4Qe3bK5srxMi7mHphtxP5kiFJGtVGyO%2F0M%2B%2BDHDsktcrrlVFUVRDofDbreb589pJ9tTHYGnohIA8GVPj9XYj45evnSpzOMhq7W1tgwODgIAent6Bvr7Z84iBKYJEYLq4U%2BBqjidznm8RHQ4GIZRj%2F4pVc6prqkBAJDiurOjHSFUVV1DhgzDePuttwAAH7z3XsIs3TCMWL0LY28lesy8SDvTy7Ds%2FN0dRVGCIKCxETTsS6pwY1HR8uzsL3t6McbdnV2Wzbze%2BOjH%2B%2FYO%2B%2F2NjZ%2FNnUjiCZJuxjrXiQkgR9k5L0hzwcR0zKGrSUchhLX33js4eMU%2FNPRFd1duXt7KVavIkOR0RiKR55%2Fdociyy%2BVKmEie6mKNIrG9rhEDLEiI6GAtZW35QN1DAIAD%2B%2FdfvHixqro6vuaDdXVOp%2FNEd%2FeawkJvzNWS7Ce2J2sCZReJ%2Fy9ICMd0KEdi5Mfh8XoFQXhnz9sAY4%2B3Ii6XJKnhsccBAA2PPZbqjXG6UYSiAy5brmvaghWSFasUZFavMQxD%2FhrajDdJm822rvTOYb%2Bfoqgyj2fm3Kef2c5x3LcaGuYuS2gwpJqkITQR4qo2KJ98oCqKMCfFxGGapizLTPFtUMrobGv7zqMN8W6Q47j8ggLyXb1%2BfVdnR3Hx2pzZr1gFawovDl6l5%2FTKFAA8z01ne4HnIrLCV9yjdRyfHB1OFWsY44lgEAMg3L8ZAFBVXf36rl3HPp969Hh869a77r6bfG%2FYuPEvZ87UbthAHIim6fpNDxevvSX%2BwLCutBRjHD84nuOIo02lDoTQaHACY2wMXg7veo1SFcnp5Hl%2Bpo8bhhGamDAMQ6h%2FVNhQn8qE14alSzKYhEZRUbVgOGwdiu9K5P3dyG8ZluU4CCFGyDAMXdcpu8P27Se4Uk962Uh2u2gTyPes8iOqKKFINBZHptbdprYfjd9%2BlORk7ygTNm6CUkZ62YiCIInTzzGJ9ZCiahORyHRNoshYkQHNUA4p7cUQBYAk2u2CMEs4N8gRQlFFlVX1mysardqG4%2ByCMLc7m68vM0wz9s%2BXdNKCFGW5Zup0ed01iv8KAAD%2F%2FxfuVaicHZfQAAAAAElFTkSuQmCC&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.27.001-SNAPSHOT/open-test-report.html) [![JaCoCo](https://img.shields.io/badge/test--coverage-76.06-dfb317?logo=data%3Aimage%2Fgif%3Bbase64%2CR0lGODlhEAAQAKU5AJsAAKwAALoAAEBAQF5eXhGuAXtvPnxvPntwPnxwPn9wPYFxPIJxPIVzPBK6AIh2O453OZJ7OJd9N5x%2FNRTSAJ%2BCNaCCNaSDNKWENKmFM6iGM6yHMq%2BIMbKKMIaavoyfwpOmxpqsy9SyaNSyadWyadq9fODIj97o997o%2BN%2Fo99%2Fo%2BOHp%2BOPr%2BObu%2BOnv%2Bezy%2BvDz%2B%2FP1%2B%2FL2%2B%2FP2%2B%2FX3%2B%2FX4%2B%2Fb4%2B%2Ff5%2FPn6%2FP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FyH5BAEKAD8ALAAAAAAQABAAAAaIwJ9wSCwKO8gk0ijk4J7QUYe5wYVAn2eJNC1qbmCoqSTKFC%2B068dTq9lqmGJlNpPF7veZpTiBEf6AgX9CEi8EFIiIAwKMAgNCES6HDpQOAwGYjkIQLQQOBaAFAwCkAY8%2FDyyTlZeZpw0rBAOztLWnCykoKSopvScnDEUKBgkJCMYJBwcKTM1FQQA7&logoColor=f8981d&labelColor=efe6c9)](https://krm-demo.github.io/core-utils/core-utils-21.27.001-SNAPSHOT/jacoco-reports)
 
-[![Latest-Public](https://img.shields.io/badge/core--utils-21.26-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.26)  
+[![Latest-Public](https://img.shields.io/badge/core--utils-21.26-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.26)  [![Snapshot-Version](https://img.shields.io/badge/core--utils-21.27.001--SNAPSHOT-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/main)
 
-[![Latest-Public](https://img.shields.io/badge/core--utils-21.26-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.26)    
+[![Latest-Public](https://img.shields.io/badge/core--utils-21.26-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.26)  [![Snapshot-Version](https://img.shields.io/badge/core--utils-21.27.001--SNAPSHOT-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.27.001-SNAPSHOT)  
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/krm-demo/core-utils)
 ![GitHub recent commits](https://img.shields.io/github/commits-since/krm-demo/core-utils/21.07)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[![Maven-Central site](https://img.shields.io/badge/maven--central-21.26-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDQwIDQ0Ij4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjZjE4OTAwOwogICAgICB9CiAgICAgIC5jbHMtMSwgLmNscy0yLCAuY2xzLTMgewogICAgICAgIHN0cm9rZS13aWR0aDogMTA7CiAgICAgIH0KICAgICAgLmNscy0yIHsKICAgICAgICBmaWxsOiAjZWY4NzAwOwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMTkuMiA0My45IC4yIDMzIDAgMTEuMSAxOC45IDAgMzggMTAuOCAzOCAxMi41IDM2LjIgMTIuNSAzNiAxMi44IDM1LjUgMTIuNSAzNS4zIDEyLjUgMzUuMyAxMi40IDE4LjkgMy4xIDIuNyAxMi42IDIuOCAzMS41IDE5LjIgNDAuOCAzNS41IDMxLjIgMzUuNSAzMS4xIDM1LjcgMzEuMSAzNi4xIDMwLjggMzYuMyAzMS4xIDM4LjEgMzEuMSAzOC4xIDMyLjggMTkuMiA0My45Ii8%2BCiAgPGcgY2xhc3M9ImNscy0xIiA%2BCiAgICA8cGF0aCBkPSJNMjAuOCwxNS4xIGMyLjgsMCw0LjQsMS4yLDUuMywyLjRsLTIuMywyLjFjLS42LS45LTEuNi0xLjQtMi44LTEuNC0yLjEsMC0zLjYsMS42LTMuNiwzLjlzMS41LDMuOSwzLjYsMy45LDIuMi0uNiwyLjgtMS40bDIuMywyLjFjLS45LDEuMi0yLjYsMi40LTUuMywyLjQtNC4xLDAtNy4xLTIuOS03LjEtNy4xczMtNyw3LjEtN1oiLz4KICA8L2c%2BCjwvc3ZnPg%3D%3D&logoColor=415d7c&labelColor=415d7c)](https://central.sonatype.com/artifact/io.github.krm-demo/core-utils/21.26 "Maven-Central site for 'io.github.krm-demo:core-utils:21.26'")
-[![MVN-Repository site](https://img.shields.io/badge/mvn--repo-21.26-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMzVweCIgaGVpZ2h0PSIzNXB4IiB2aWV3Qm94PSIwIDUgMzAgMjUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BCiAgPGcgc3R5bGU9ImRpc3BsYXk6aW5saW5lIj4KICAgIDxwYXRoIHN0eWxlPSJkaXNwbGF5OmlubGluZTtmaWxsOiMyNzZiYzA7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlLXdpZHRoOi4xOTM4MjQiIGQ9Ik0wIDBoNjN2MzVIMHoiIC8%2BCiAgICA8ZwogICAgICBzdHlsZT0iZm9udC13ZWlnaHQ6NzAwO2ZvbnQtc2l6ZToyNC42MDY5cHg7Zm9udC1mYW1pbHk6J0dpbGwgU2Fucyc7LWlua3NjYXBlLWZvbnQtc3BlY2lmaWNhdGlvbjonR2lsbCBTYW5zLCBCb2xkJztmaWxsOiMwNGE7c3Ryb2tlLXdpZHRoOi4zMTgxOTMiPgogICAgICA8cGF0aAogICAgICAgIGQ9Ik0yNy44MjMgMjMuMDU1SDIyLjh2LTkuNjQ4bC00LjUzIDUuNTg3aC0uMzk2bC00LjU0MS01LjU4N3Y5LjY0OEg4LjQ1NFY2LjQwMmg0LjU1NGw1LjExOSA2LjI0OCA1LjE0Mi02LjI0OGg0LjU1NHoiCiAgICAgICAgc3R5bGU9ImZpbGw6I2ZmZiIgdHJhbnNmb3JtPSJzY2FsZSguODMxNTIgMS4yMDI2MikiIC8%2BCiAgICA8L2c%2BCiAgPC9nPgo8L3N2Zz4%3D&logoColor=eee&labelColor=eee)](https://mvnrepository.com/artifact/io.github.krm-demo/core-utils/21.26 "MVN-Repository site for 'io.github.krm-demo:core-utils:21.26'")
+
+
 
 # <u>core-utils</u>
 
@@ -18,7 +18,7 @@ It was initially created as a core and reusable part of **`th-tool`** (which is 
 Some features and approaches could be very useful and helpful independently as a separate Java-library
 that could be easily integrated into any Java-project as a maven/gradle artifact or as a dependency to jbang-script.
 
-Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.26).
+Full documentation (including JavDoc) and examples fort this particular version are available [here](https://krm-demo.github.io/core-utils/core-utils-21.27.001-SNAPSHOT).
 Other versions of ths project are listed in the [release catalog](https://krm-demo.github.io/core-utils/),
 but the latest relevant versions (with relation to the current one) are:
 
@@ -27,27 +27,44 @@ but the latest relevant versions (with relation to the current one) are:
 
 ---
 
-This particular version of the project `21.26` is an _PUBLIC_-release version, which consists of
+This particular version of the project `21.27.001-SNAPSHOT` is a _SNAPSHOT_-version, which consists of:
 - major version `21` (that corresponds to minimal supported version of JDK);
-- minor version `26` (the ordinal number of _PUBLIC_-release);
+- minor version `27` (the ordinal number of _PUBLIC_-release);
+- incremental version `1` (the ordinal number of _INTERNAL_-release after the previous _PUBLIC_-release);
+- the qualifier `SNAPSHOT` means that it's a _SNAPSHOT_-version (not released yet in any kind)
 
-> [!TIP]
-> TODO: check whether this _PUBLIC_-release is the latest one and render the warning if it's not
+> [!IMPORTANT]
+> It's highly recommended to use the latest _PUBLIC_-release [**`core-utils:21.26`**](https://github.com/krm-demo/core-utils/tree/21.26),
+> because all others are either outdated or not stable yet.
 
-## Usage of `core-utils`-library
+## Working with SNAPSHOT-version of `core-utils`-library
 
 > [!NOTE]
-> The _PUBLIC_-release version has only 2 integer parts (_major_ and _minor_) parts **without** _incremental_ part and suffix `-SNAPSHOT`.
-> It's built and deployed into [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
-> artifactory as a result of manual execution of GitHub workflow [`release-public`](https://github.com/krm-demo/core-utils/actions/workflows/release-public.yml)
-> with workflow-job [`release-public #27`](https://github.com/krm-demo/core-utils/actions/runs/19221810565)
+> The SNAPSHOT-version has 3 integer parts (_major_, _minor_ and _incremental_) followed by the suffix `-SNAPSHOT`.
+> It's built by GitHub workflow [`on-main-push`](https://github.com/krm-demo/core-utils/actions/workflows/on-main-push.yml) on every `git push` into `main` branch.
 
-This version is deployed into public [maven central repository](https://central.sonatype.com/) - so, it's available for usage
-without additional downloading steps or local builds. As for Java-Doc it's either available at [![Latest-Public](https://img.shields.io/badge/core--utils-21.26-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.26)
-or will be automatically downloaded by your favorite IDE.
+The JavaDoc is generated and the [project-site](https://krm-demo.github.io/core-utils/core-utils-21.27.001-SNAPSHOT) is updated,
+but **nothing is deployed** neither to [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
+artifactory nor to [maven central repository](https://central.sonatype.com/).
+As for content of [GitHub Markdown](https://github.github.com/gfm/) files (like one you are reading now) - they are generated and updated
+during either _INTERNAL_-release or _PUBLIC_-release from corresponding `th-tool`-templates (quite all of them
+are located in [this folder](.github/th-templates)).
 
-But in order your maven/gradle project or jbang-script to use `core-utils`-library
-you must declare it as dependency in the way described below.
+The binaries of _Snapshot_-version are available only after cloning the git-repo locally and
+checking out the proper branch (the most recent snapshot is in `main`-branch).
+In order to build the project it's recommended to use [sdkman](https://sdkman.io/) to install the latest version
+of [java](https://sdkman.io/jdks/) and the latest version of [maven](https://sdkman.io/sdks/maven/). 
+After that, staying in the root directory of a project it's enough to type:
+```bash
+...> mvn clean install
+```
+Some integration-tests could not be executed within the [default maven-lifecycle](https://www.sonatype.com/maven-complete-reference/build-lifecycle#mavenref4-1-2).
+So, they must be executed additionally (not within the same maven-reactor!) **after** the previous command using:
+```bash
+...> mvn failsafe:integration-test
+```
+The commands above installs **`core-utils`**-library 
+in the local maven-repository, and it becomes available for usage described below...
 
 ### [Maven](https://maven.apache.org/)
 Dependencies for projects that are using [Apache Maven](https://maven.apache.org/) as a build-tool 
@@ -57,7 +74,7 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.26</artifactId>
+            <version>21.27.001-SNAPSHOT</artifactId>
         </dependency>
     ```
 - for test-source dependencies:
@@ -65,31 +82,31 @@ could be declared in `pom.xml` file in following way:
         <dependency>
             <groupId>io.github.krm-demo</groupId>
             <artifactId>core-utils</artifactId>
-            <version>21.26</artifactId>
+            <version>21.27.001-SNAPSHOT</artifactId>
             <scope>test</scope>
         </dependency>
     ```
-
 ### [Gradle](https://gradle.org/)
 Projects that use [**Gradle** Build Tool](https://gradle.org/) should declare the dependencies 
 in either `build.gradle` or `build.gradle.kts` like following: 
 ```Gradle
     // for main-source implementation dependencies:
-    implementation("io.github.krm-demo:core-utils:21.26")
+    implementation("io.github.krm-demo:core-utils:21.27.001-SNAPSHOT")
     . . . . . . . . . . . . . .
     // for test-source implementation dependencies:
-    testImplementation("io.github.krm-demo:core-utils:21.26")
+    testImplementation("io.github.krm-demo:core-utils:21.27.001-SNAPSHOT")
 ```
 
 ### [JBang](https://www.jbang.dev/)
+
 If you don't have [JBang](https://www.jbang.dev/) installed - it's very easy to do
-either following by [instructions at their site](https://www.jbang.dev/download/)
+either following by [instructions at their site](https://www.jbang.dev/download/) 
 or using [sdkman](https://sdkman.io/sdks/jbang/). The easiest way to verify that
-both [JBang](https://www.jbang.dev/) and **`core-utils`**-library
+both [JBang](https://www.jbang.dev/) and **`core-utils`**-library 
 are properly installed is to execute following command:
 
 ```bash
-...> jbang io.github.krm-demo:core-utils:21.26
+...> jbang io.github.krm-demo:core-utils:21.27.001-SNAPSHOT
 This is a Main-class of 'core-utils' library (just a test message here)
 ```
 You must see quite the same output as above. The versions and other detailed information could also be verified in such way.
@@ -99,11 +116,11 @@ Then you can create your own jbang-scripts using following examples:
 - JBang-script to see Java system-properties
 - JBang-script to see the detailed information of CLASSPATH at runtime
 - ... some other very useful and helpful scripts ...
--
+- 
 
 ---
 > [!TIP]
-> TODO: examples to be provided... (maybe specific for _PUBLIC_-releases)
+> TODO: examples to be provided... (maybe specific for _SNAPSHOT_-versions)
 ---
 
 
@@ -123,14 +140,18 @@ Then you can create your own jbang-scripts using following examples:
 ```json
 {
   "releaseCatalog": {
-    "current-snapshot-group": {
-      "minor-group-info": "<< unreleased >> 2 commits",
-      "commits-one-line": [
-        "fc75a4c | 2025-11-10 Mon 05:28:03 |  perform the deplopyment to Maven-Central #2 (correct the deployment URL)",
-        "e75d2fb | 2025-11-10 Mon 04:59:19 |  << new snapshot version >> 21.26.001-SNAPSHOT"
-      ]
-    },
     "major-groups": [
+      {
+        "major-group-info": "21.26 (finalized major group with 0 finalized minor groups)",
+        "final-minor-group": {
+          "minor-group-info": "<< PUBLIC 21.26 >> 2 working commits",
+          "commits-one-line": [
+            "dd68904 | 2025-11-10 Mon 05:38:06 |  << public release >> 21.26",
+            "fc75a4c | 2025-11-10 Mon 05:28:03 |  perform the deplopyment to Maven-Central #2 (correct the deployment URL)",
+            "e75d2fb | 2025-11-10 Mon 04:59:19 |  << new snapshot version >> 21.26.001-SNAPSHOT"
+          ]
+        }
+      },
       {
         "major-group-info": "21.25 (finalized major group with 0 finalized minor groups)",
         "final-minor-group": {
@@ -1252,27 +1273,27 @@ Then you can create your own jbang-scripts using following examples:
 
 ```json
 {
-  "calculatedProjectVersion": "21.26.000-SNAPSHOT",
-  "currentProjectVersion": "21.26",
-  "incrementalAsInt": "0",
-  "incrementalVersion": "0",
-  "internalNextVersion": "21.26.001-SNAPSHOT",
-  "internalReleaseVersion": "21.26.000",
+  "calculatedProjectVersion": "21.27.001-SNAPSHOT",
+  "currentProjectVersion": "21.27.001-SNAPSHOT",
+  "incrementalAsInt": "1",
+  "incrementalVersion": "1",
+  "internalNextVersion": "21.27.002-SNAPSHOT",
+  "internalReleaseVersion": "21.27.001",
   "majorVersion": "21",
   "majorVersionAsInt": "21",
-  "minorVersion": "26",
-  "minorVersionAsInt": "26",
+  "minorVersion": "27",
+  "minorVersionAsInt": "27",
   "projectArtifact": "core-utils",
-  "projectCatalogName": "core-utils-21.26",
+  "projectCatalogName": "core-utils-21.27.001-SNAPSHOT",
   "projectGroup": "io.github.krm-demo",
-  "projectName": "core-utils:21.26",
-  "publicNextVersion": "21.27.001-SNAPSHOT",
-  "publicReleaseVersion": "21.26",
+  "projectName": "core-utils:21.27.001-SNAPSHOT",
+  "publicNextVersion": "21.28.001-SNAPSHOT",
+  "publicReleaseVersion": "21.27",
   "resourcePath": "/META-INF/maven/maven-project.properties",
-  "usageFragmentPath": ".github/th-templates/Usage-PUBLIC.md.th",
-  "usageFragmentSuffix": "PUBLIC",
-  "versionHasIncrementalPart": "false",
-  "versionHasQualifierPart": "false",
+  "usageFragmentPath": ".github/th-templates/Usage-SNAPSHOT.md.th",
+  "usageFragmentSuffix": "SNAPSHOT",
+  "versionHasIncrementalPart": "true",
+  "versionHasQualifierPart": "true",
   "versionQualifier": "SNAPSHOT"
 }
 ```
@@ -1288,16 +1309,16 @@ Then you can create your own jbang-scripts using following examples:
   "badgeLatestPublicGitHubMD": "[![Latest-Public](https://img.shields.io/badge/core--utils-21.26-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/21.26)",
   "badgeLatestPublicJavaDocMD": "[![Latest-Public](https://img.shields.io/badge/core--utils-21.26-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.26)",
   "badgeReleaseCatalogMD": "[![Release-Catalog](https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils)",
-  "badgeSnapshotGitHubMD": "",
-  "badgeSnapshotJavaDocMD": "",
+  "badgeSnapshotGitHubMD": "[![Snapshot-Version](https://img.shields.io/badge/core--utils-21.27.001--SNAPSHOT-blue?logo=github&logoColor=white&labelColor=black)](https://github.com/krm-demo/core-utils/tree/main)",
+  "badgeSnapshotJavaDocMD": "[![Snapshot-Version](https://img.shields.io/badge/core--utils-21.27.001--SNAPSHOT-blue?logo=github&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.27.001-SNAPSHOT)",
   "badgeUrlLatestInternalGitHub": "",
   "badgeUrlLatestInternalJavaDoc": "",
   "badgeUrlLatestPublicGitHub": "https://img.shields.io/badge/core--utils-21.26-blue?logo=github&logoColor=white&labelColor=black",
   "badgeUrlLatestPublicJavaDoc": "https://img.shields.io/badge/core--utils-21.26-blue?logo=github&logoColor=f8981d&labelColor=4D7A97",
   "badgeUrlReleaseCatalog": "https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97",
-  "badgeUrlSnapshotGitHub": "",
-  "badgeUrlSnapshotJavaDoc": "",
-  "gitHubCurrentRootUrl": "https://github.com/krm-demo/core-utils/tree/21.26",
+  "badgeUrlSnapshotGitHub": "https://img.shields.io/badge/core--utils-21.27.001--SNAPSHOT-blue?logo=github&logoColor=white&labelColor=black",
+  "badgeUrlSnapshotJavaDoc": "https://img.shields.io/badge/core--utils-21.27.001--SNAPSHOT-blue?logo=github&logoColor=f8981d&labelColor=4D7A97",
+  "gitHubCurrentRootUrl": "https://github.com/krm-demo/core-utils/tree/main",
   "latestInternalAvailable": "false",
   "latestInternalGitHubUrl": "",
   "latestInternalJavaDocUrl": "",
@@ -1306,11 +1327,11 @@ Then you can create your own jbang-scripts using following examples:
   "latestPublicGitHubUrl": "https://github.com/krm-demo/core-utils/tree/21.26",
   "latestPublicJavaDocUrl": "https://krm-demo.github.io/core-utils/core-utils-21.26",
   "latestPublicVersion": "21.26",
-  "mavenInternal": "false",
-  "mavenSnapshot": "false",
+  "mavenInternal": "true",
+  "mavenSnapshot": "true",
   "snapshotGitHubUrl": "https://github.com/krm-demo/core-utils/tree/main",
-  "snapshotJavaDocUrl": "",
-  "snapshotVersion": "21.26"
+  "snapshotJavaDocUrl": "https://krm-demo.github.io/core-utils/core-utils-21.27.001-SNAPSHOT",
+  "snapshotVersion": "21.27.001-SNAPSHOT"
 }
 ```
 </details>
