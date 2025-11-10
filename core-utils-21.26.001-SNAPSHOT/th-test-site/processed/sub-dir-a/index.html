@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>core-utils (gh-pages initial version)</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<span class="bg-primary text-white" style="position: absolute; top: 4px; left: 7px; text-align: left;">
+  <a href="https://krm-demo.github.io/core-utils" class="release-catalog-badge-link">
+  <img alt="a badge to 'Release Catalog'" src="https://img.shields.io/badge/Release_Catalog-4D7A97?logo=github&logoColor=f8981d&labelColor=4D7A97" class="release-catalog-badge"/>
+</a>
+  <hr style="height: 1px; margin-top: 3px; margin-bottom: 2px; padding: 0;"/>
+  <a href="https://krm-demo.github.io/core-utils/core-utils-21.26.001-SNAPSHOT">
+  <img alt="a badge to the latest SNAPSHOT-version" src="https://img.shields.io/badge/core--utils-21.26.001--SNAPSHOT-blue?logo=github&logoColor=f8981d&labelColor=4D7A97" />
+</a>
+</span>
+<div class="container-fluid p-1 bg-primary text-white text-center">
+  <h1>
+    <span style="font-family: monospace; font-weight: 600">core-utils</span>
+    (<small>test site</small>)
+    <a href="https://github.com/krm-demo/core-utils/tree/main/.github/th-test-site/original" style="float: right; margin-right: 10px;">
+      <img alt="an imagege to return back to the project-site"
+           src="../images/git-hub-logo--white-inv.svg"
+           width="32px" height="32px" />
+    </a>
+  </h1>
+</div>
+
+<!-- Body (Content) -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-3">
+
+      <div style="text-align: center">
+        <!-- following two DIV-s are mutually exclusively displayed via "th:style" attribute: -->
+        <div style="display: none">
+          <a href="#" class="btn btn-primary disabled">original</a>
+          <a href="../../processed/sub-dir-a/index.html" class="btn btn-link">processed</a>
+          <hr/>
+        </div>
+        <div style="display: block">
+          <a href="../../original/sub-dir-a/index.html" class="btn btn-link">original</a>
+          <a href="#" class="btn btn-primary disabled">processed</a>
+          <hr/>
+        </div>
+      </div>
+
+      <h3>Navigation Links</h3>
+      <a href="../index.html">home</a>
+      <ul>
+        <li><a href="../root-one.html">root-one</a></li>
+        <li><a href="../root-two.html">root-two</a></li>
+        <li><b>sub-dir-a</b></li>
+        <li><a href="../sub-dir-b/index.html">sub-dir-b</a></li>
+        <ul>
+          <li><a href="../sub-dir-b/sub-dir-b-1/index.html">sub-dir-b-1</a></li>
+        </ul>
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      <div class="row border border-secondary rounded">
+        <h3>Some Page-Specific Information</h3>
+        <p>
+          This is the index-page of <code>/sub-dir-a</code>.
+        </p>
+        <p>
+          After executing the tests (<code>"...&gt; mvn clean verify"</code> from command line),<br/>
+          the processed site become available in the directory <code>./target/th-test-site/processed</code>.
+        </p>
+        <!-- start of specific page-content -->
+        <details>
+          <summary>
+            JSON-properties of
+            <a href="https://github.com/krm-demo/core-utils/tree/main/src/test/java/org/krmdemo/techlabs/opentest4j/OpenTest4jHelper.java" title="(this link is working only after processing !!!) - OpenTest4jHelper.java">
+              OpenTest4jHelper
+            </a>:
+            <code>[&#8203;(${ openTest4j })&#8203;]</code>
+          </summary>
+          <pre>{
+  "alinkToJUnitProps": "<a href="https://github.com/krm-demo/core-utils/tree/main/src/test/resources/junit-platform.properties#L1-L2"><code>JUnit-Platform</code>-properties</a>",
+  "alinkToMavenExecInPom": "<a href="https://github.com/krm-demo/core-utils/tree/main/pom.xml#L519-L544"><code>pom.xml</code>-file</a>",
+  "badgeMarkdown": "[![Open-Test-4j](https://img.shields.io/badge/test--results-Open--Test--4j-blue?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAJPElEQVR4nOxZbXCU1fW%2Fz31ed599NuwGDAkJkBDz92%2FQqERNdvOGEXyJQaGNOmV0UCxqrdWZfmjLtB07Y%2B1HO%2BLIiHXqqKDtVITWgLzk%2FUVIRIaW0IQyQAmbTTZps9ns7vN%2Bb%2BfZGzfJZjdJ6TrlQ39f8sy559793XPPueecGwZjDK4nMKkGEMKqrhmmiVA6GUOKYhiaZ1kI4WIJ6YYRkRVF09LIYy54lhVtAseyCXIq4cjCUTksy2n%2FeVWPBiavqHpEYMVlzpU8Yydyu8A7RTEloYlwWFbTbJjRycGjZ39zPtCLMSISSDHFORX33rzNJS4HAHAs63ZKSQhFZHkymk7bYIxPXvzj0b53TayLoijYeAhpZJqKooTDEQayD976fOnqBxPsNEXIMM2x4AQR6bre3taKkLUhGtJVNTUIobbWloTfc0rOu8vLAQBjY2Onvzq1du0t2Tk5MxWa%2F%2Fp%2B68A%2BwSZkZd3AMLOcVdf1wEhAUdT6khfvzK8DALidEvGnKUKhcCSqqmRbP3z5pY%2F27o1PfnLbUz%2FaubO46MYEQreWlBxpagYAvPHr13%2F16qsvvvzyzp%2F%2BLD7qD17Y3foiz3MrcnMoikpqP9%2FVIVNH36%2Fd4xazeZZ1xQ5uilDgn%2BMo9qEoSn7uisLCwm1PbwcAvPvOHp%2FPd3bg%2FEd7P4SQbm463tLU9OS2p4qKijKXLX1k8xaM8UP33%2FfVqVO33X774WPH47%2F3%2B97X%2BoY6Vq7KS7DNTGiaNnjl6i25NQ2lPwYA3OBaAiG0tDVdR7NjbUVu7vYdOwAAhxo%2F8%2Fl8As%2FveO55AEAwON7S1HT%2FAw%2Bsr60lmsN%2B%2F%2BnTp91u95%2FPnPH7%2FdnZ2daJmFq%2F%2F4QkSfOwsdyZ4%2Byivc%2FXsankJZ61qbpu43kYcyA0z7T50dnRgRH67rPPIYSOHz1ChGOTgwbSBIFfcLog8AibY%2BGrAAAzRsMihMG138Ud7W0Mw2x98glnRsbnhw4RoaJHrKVpesHpdExHNaJxiUWIAkmcbjEwTbO1pUWSpD27d4t2sbOjIxgMWvvmHLHkYy5iBcsqwtf35BQhZhFbSYqB%2Fv7RQGB8fPzNN97w%2B4c0TTvxRTcAYJmUx0BWUdQFV1AVBVL0UikvZi04RYhjmYTIDIfD5%2Fr6zvX1RSKReZZrb2uzAmr%2Fp909vX84cMCStFoSBrI3Zt0Vngyb5nxG0nU9GpVvyi7nGIFkt%2BnkauO5aGxDLMt6vN7urq7a6ioyVHPPPXSKYGk%2Bfiw3L6%2BispKiqNX5%2BUVFRS3NTRhjiqLW37R1YPjEsH8kO2d50sSOEAqMBFhauK%2F4GcKGqNGvvPIKOTVCCEJYV19vs9nKPB6P11tdXfOLV3%2FJcVx8obyVKz1er8vlwhgHAiN19fX%2Ff%2FPNliNS1Irc3MzMzDvWrWNZ1iG4KAr%2BbfiUIsuiKCZw0nXdPzSsqtqmkpfyl5UAADIcInHw6VyW9jyPMe44%2F7vm%2Fg8BhRwOked5mqZN01RUNTwZpgDcWLzdU7gldj58hmN2LiMIRSLRRXjiv4VA6O%2BtA%2FvOD5%2FUTIVIeMZenFNZUdSw1JFLDsuVNNsTpD3nE5jIHAsPKnrYxkqZjhU0nHLKBeohAk03IrKs6nraac0EyzAOm8DP8M6UhAgQQqqux0rqdNbUFGUFEMew5NZJonC9dR3Jaf4X8T9CCyF1Oafr34BTW1mFgTTHsjyX2JERJHHqqKJGZNlE1161LQaQokSbINpsCxAKTobjPSsKBY3LF%2FBkiOIFOncVzEperv8n4BhmidMJqWSEMADjoUktdh8aly8oh%2FYbA2fBDLpwaRZ%2F38PcXRXppcXQtNspxbPvNKGpthVj%2BdAn6pGDEEKb3c7FqgKEsaHriqLous7831r7tu9BUUpYNxQKBUZGbsjKCgaDmqrmFxSQ7D3k80Wj0dX5%2BZcvXXK73e7MTKIfCARCExMFa9ZACDmWcTudU9smf3TDIE202tWsHjnIsqw7M1MURZbjaIZhWdZmty9xueyiaAycjfz2zbmed7ixsbK87HBj4893%2FqSyvGxgYIAk%2FIYtmxs2P6IqSmV52Q9eeIEoI4Qe3bK5srxMi7mHphtxP5kiFJGtVGyO%2F0M%2B%2BDHDsktcrrlVFUVRDofDbreb589pJ9tTHYGnohIA8GVPj9XYj45evnSpzOMhq7W1tgwODgIAent6Bvr7Z84iBKYJEYLq4U%2BBqjidznm8RHQ4GIZRj%2F4pVc6prqkBAJDiurOjHSFUVV1DhgzDePuttwAAH7z3XsIs3TCMWL0LY28lesy8SDvTy7Ds%2FN0dRVGCIKCxETTsS6pwY1HR8uzsL3t6McbdnV2Wzbze%2BOjH%2B%2FYO%2B%2F2NjZ%2FNnUjiCZJuxjrXiQkgR9k5L0hzwcR0zKGrSUchhLX33js4eMU%2FNPRFd1duXt7KVavIkOR0RiKR55%2Fdociyy%2BVKmEie6mKNIrG9rhEDLEiI6GAtZW35QN1DAIAD%2B%2FdfvHixqro6vuaDdXVOp%2FNEd%2FeawkJvzNWS7Ce2J2sCZReJ%2Fy9ICMd0KEdi5Mfh8XoFQXhnz9sAY4%2B3Ii6XJKnhsccBAA2PPZbqjXG6UYSiAy5brmvaghWSFasUZFavMQxD%2FhrajDdJm822rvTOYb%2Bfoqgyj2fm3Kef2c5x3LcaGuYuS2gwpJqkITQR4qo2KJ98oCqKMCfFxGGapizLTPFtUMrobGv7zqMN8W6Q47j8ggLyXb1%2BfVdnR3Hx2pzZr1gFawovDl6l5%2FTKFAA8z01ne4HnIrLCV9yjdRyfHB1OFWsY44lgEAMg3L8ZAFBVXf36rl3HPp969Hh869a77r6bfG%2FYuPEvZ87UbthAHIim6fpNDxevvSX%2BwLCutBRjHD84nuOIo02lDoTQaHACY2wMXg7veo1SFcnp5Hl%2Bpo8bhhGamDAMQ6h%2FVNhQn8qE14alSzKYhEZRUbVgOGwdiu9K5P3dyG8ZluU4CCFGyDAMXdcpu8P27Se4Uk962Uh2u2gTyPes8iOqKKFINBZHptbdprYfjd9%2BlORk7ygTNm6CUkZ62YiCIInTzzGJ9ZCiahORyHRNoshYkQHNUA4p7cUQBYAk2u2CMEs4N8gRQlFFlVX1mysardqG4%2ByCMLc7m68vM0wz9s%2BXdNKCFGW5Zup0ed01iv8KAAD%2F%2FxfuVaicHZfQAAAAAElFTkSuQmCC&logoColor=f8981d&labelColor=4D7A97)](https://krm-demo.github.io/core-utils/core-utils-21.26.001-SNAPSHOT/open-test-report.html)",
+  "badgeUrl": "https://img.shields.io/badge/test--results-Open--Test--4j-blue?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAJPElEQVR4nOxZbXCU1fW%2Fz31ed599NuwGDAkJkBDz92%2FQqERNdvOGEXyJQaGNOmV0UCxqrdWZfmjLtB07Y%2B1HO%2BLIiHXqqKDtVITWgLzk%2FUVIRIaW0IQyQAmbTTZps9ns7vN%2Bb%2BfZGzfJZjdJ6TrlQ39f8sy559793XPPueecGwZjDK4nMKkGEMKqrhmmiVA6GUOKYhiaZ1kI4WIJ6YYRkRVF09LIYy54lhVtAseyCXIq4cjCUTksy2n%2FeVWPBiavqHpEYMVlzpU8Yydyu8A7RTEloYlwWFbTbJjRycGjZ39zPtCLMSISSDHFORX33rzNJS4HAHAs63ZKSQhFZHkymk7bYIxPXvzj0b53TayLoijYeAhpZJqKooTDEQayD976fOnqBxPsNEXIMM2x4AQR6bre3taKkLUhGtJVNTUIobbWloTfc0rOu8vLAQBjY2Onvzq1du0t2Tk5MxWa%2F%2Fp%2B68A%2BwSZkZd3AMLOcVdf1wEhAUdT6khfvzK8DALidEvGnKUKhcCSqqmRbP3z5pY%2F27o1PfnLbUz%2FaubO46MYEQreWlBxpagYAvPHr13%2F16qsvvvzyzp%2F%2BLD7qD17Y3foiz3MrcnMoikpqP9%2FVIVNH36%2Fd4xazeZZ1xQ5uilDgn%2BMo9qEoSn7uisLCwm1PbwcAvPvOHp%2FPd3bg%2FEd7P4SQbm463tLU9OS2p4qKijKXLX1k8xaM8UP33%2FfVqVO33X774WPH47%2F3%2B97X%2BoY6Vq7KS7DNTGiaNnjl6i25NQ2lPwYA3OBaAiG0tDVdR7NjbUVu7vYdOwAAhxo%2F8%2Fl8As%2FveO55AEAwON7S1HT%2FAw%2Bsr60lmsN%2B%2F%2BnTp91u95%2FPnPH7%2FdnZ2daJmFq%2F%2F4QkSfOwsdyZ4%2Byivc%2FXsankJZ61qbpu43kYcyA0z7T50dnRgRH67rPPIYSOHz1ChGOTgwbSBIFfcLog8AibY%2BGrAAAzRsMihMG138Ud7W0Mw2x98glnRsbnhw4RoaJHrKVpesHpdExHNaJxiUWIAkmcbjEwTbO1pUWSpD27d4t2sbOjIxgMWvvmHLHkYy5iBcsqwtf35BQhZhFbSYqB%2Fv7RQGB8fPzNN97w%2B4c0TTvxRTcAYJmUx0BWUdQFV1AVBVL0UikvZi04RYhjmYTIDIfD5%2Fr6zvX1RSKReZZrb2uzAmr%2Fp909vX84cMCStFoSBrI3Zt0Vngyb5nxG0nU9GpVvyi7nGIFkt%2BnkauO5aGxDLMt6vN7urq7a6ioyVHPPPXSKYGk%2Bfiw3L6%2BispKiqNX5%2BUVFRS3NTRhjiqLW37R1YPjEsH8kO2d50sSOEAqMBFhauK%2F4GcKGqNGvvPIKOTVCCEJYV19vs9nKPB6P11tdXfOLV3%2FJcVx8obyVKz1er8vlwhgHAiN19fX%2Ff%2FPNliNS1Irc3MzMzDvWrWNZ1iG4KAr%2BbfiUIsuiKCZw0nXdPzSsqtqmkpfyl5UAADIcInHw6VyW9jyPMe44%2F7vm%2Fg8BhRwOked5mqZN01RUNTwZpgDcWLzdU7gldj58hmN2LiMIRSLRRXjiv4VA6O%2BtA%2FvOD5%2FUTIVIeMZenFNZUdSw1JFLDsuVNNsTpD3nE5jIHAsPKnrYxkqZjhU0nHLKBeohAk03IrKs6nraac0EyzAOm8DP8M6UhAgQQqqux0rqdNbUFGUFEMew5NZJonC9dR3Jaf4X8T9CCyF1Oafr34BTW1mFgTTHsjyX2JERJHHqqKJGZNlE1161LQaQokSbINpsCxAKTobjPSsKBY3LF%2FBkiOIFOncVzEperv8n4BhmidMJqWSEMADjoUktdh8aly8oh%2FYbA2fBDLpwaRZ%2F38PcXRXppcXQtNspxbPvNKGpthVj%2BdAn6pGDEEKb3c7FqgKEsaHriqLous7831r7tu9BUUpYNxQKBUZGbsjKCgaDmqrmFxSQ7D3k80Wj0dX5%2BZcvXXK73e7MTKIfCARCExMFa9ZACDmWcTudU9smf3TDIE202tWsHjnIsqw7M1MURZbjaIZhWdZmty9xueyiaAycjfz2zbmed7ixsbK87HBj4893%2FqSyvGxgYIAk%2FIYtmxs2P6IqSmV52Q9eeIEoI4Qe3bK5srxMi7mHphtxP5kiFJGtVGyO%2F0M%2B%2BDHDsktcrrlVFUVRDofDbreb589pJ9tTHYGnohIA8GVPj9XYj45evnSpzOMhq7W1tgwODgIAent6Bvr7Z84iBKYJEYLq4U%2BBqjidznm8RHQ4GIZRj%2F4pVc6prqkBAJDiurOjHSFUVV1DhgzDePuttwAAH7z3XsIs3TCMWL0LY28lesy8SDvTy7Ds%2FN0dRVGCIKCxETTsS6pwY1HR8uzsL3t6McbdnV2Wzbze%2BOjH%2B%2FYO%2B%2F2NjZ%2FNnUjiCZJuxjrXiQkgR9k5L0hzwcR0zKGrSUchhLX33js4eMU%2FNPRFd1duXt7KVavIkOR0RiKR55%2Fdociyy%2BVKmEie6mKNIrG9rhEDLEiI6GAtZW35QN1DAIAD%2B%2FdfvHixqro6vuaDdXVOp%2FNEd%2FeawkJvzNWS7Ce2J2sCZReJ%2Fy9ICMd0KEdi5Mfh8XoFQXhnz9sAY4%2B3Ii6XJKnhsccBAA2PPZbqjXG6UYSiAy5brmvaghWSFasUZFavMQxD%2FhrajDdJm822rvTOYb%2Bfoqgyj2fm3Kef2c5x3LcaGuYuS2gwpJqkITQR4qo2KJ98oCqKMCfFxGGapizLTPFtUMrobGv7zqMN8W6Q47j8ggLyXb1%2BfVdnR3Hx2pzZr1gFawovDl6l5%2FTKFAA8z01ne4HnIrLCV9yjdRyfHB1OFWsY44lgEAMg3L8ZAFBVXf36rl3HPp969Hh869a77r6bfG%2FYuPEvZ87UbthAHIim6fpNDxevvSX%2BwLCutBRjHD84nuOIo02lDoTQaHACY2wMXg7veo1SFcnp5Hl%2Bpo8bhhGamDAMQ6h%2FVNhQn8qE14alSzKYhEZRUbVgOGwdiu9K5P3dyG8ZluU4CCFGyDAMXdcpu8P27Se4Uk962Uh2u2gTyPes8iOqKKFINBZHptbdprYfjd9%2BlORk7ygTNm6CUkZ62YiCIInTzzGJ9ZCiahORyHRNoshYkQHNUA4p7cUQBYAk2u2CMEs4N8gRQlFFlVX1mysardqG4%2ByCMLc7m68vM0wz9s%2BXdNKCFGW5Zup0ed01iv8KAAD%2F%2FxfuVaicHZfQAAAAAElFTkSuQmCC&logoColor=f8981d&labelColor=4D7A97"
+}</pre>
+        </details>
+        <p>
+          Test-Results badge: <code><a href="https://krm-demo.github.io/core-utils/core-utils-21.26.001-SNAPSHOT/open-test-report.html">
+  <img alt="a badge to the test-report of the current project-version" src="https://img.shields.io/badge/test--results-Open--Test--4j-blue?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAJPElEQVR4nOxZbXCU1fW%2Fz31ed599NuwGDAkJkBDz92%2FQqERNdvOGEXyJQaGNOmV0UCxqrdWZfmjLtB07Y%2B1HO%2BLIiHXqqKDtVITWgLzk%2FUVIRIaW0IQyQAmbTTZps9ns7vN%2Bb%2BfZGzfJZjdJ6TrlQ39f8sy559793XPPueecGwZjDK4nMKkGEMKqrhmmiVA6GUOKYhiaZ1kI4WIJ6YYRkRVF09LIYy54lhVtAseyCXIq4cjCUTksy2n%2FeVWPBiavqHpEYMVlzpU8Yydyu8A7RTEloYlwWFbTbJjRycGjZ39zPtCLMSISSDHFORX33rzNJS4HAHAs63ZKSQhFZHkymk7bYIxPXvzj0b53TayLoijYeAhpZJqKooTDEQayD976fOnqBxPsNEXIMM2x4AQR6bre3taKkLUhGtJVNTUIobbWloTfc0rOu8vLAQBjY2Onvzq1du0t2Tk5MxWa%2F%2Fp%2B68A%2BwSZkZd3AMLOcVdf1wEhAUdT6khfvzK8DALidEvGnKUKhcCSqqmRbP3z5pY%2F27o1PfnLbUz%2FaubO46MYEQreWlBxpagYAvPHr13%2F16qsvvvzyzp%2F%2BLD7qD17Y3foiz3MrcnMoikpqP9%2FVIVNH36%2Fd4xazeZZ1xQ5uilDgn%2BMo9qEoSn7uisLCwm1PbwcAvPvOHp%2FPd3bg%2FEd7P4SQbm463tLU9OS2p4qKijKXLX1k8xaM8UP33%2FfVqVO33X774WPH47%2F3%2B97X%2BoY6Vq7KS7DNTGiaNnjl6i25NQ2lPwYA3OBaAiG0tDVdR7NjbUVu7vYdOwAAhxo%2F8%2Fl8As%2FveO55AEAwON7S1HT%2FAw%2Bsr60lmsN%2B%2F%2BnTp91u95%2FPnPH7%2FdnZ2daJmFq%2F%2F4QkSfOwsdyZ4%2Byivc%2FXsankJZ61qbpu43kYcyA0z7T50dnRgRH67rPPIYSOHz1ChGOTgwbSBIFfcLog8AibY%2BGrAAAzRsMihMG138Ud7W0Mw2x98glnRsbnhw4RoaJHrKVpesHpdExHNaJxiUWIAkmcbjEwTbO1pUWSpD27d4t2sbOjIxgMWvvmHLHkYy5iBcsqwtf35BQhZhFbSYqB%2Fv7RQGB8fPzNN97w%2B4c0TTvxRTcAYJmUx0BWUdQFV1AVBVL0UikvZi04RYhjmYTIDIfD5%2Fr6zvX1RSKReZZrb2uzAmr%2Fp909vX84cMCStFoSBrI3Zt0Vngyb5nxG0nU9GpVvyi7nGIFkt%2BnkauO5aGxDLMt6vN7urq7a6ioyVHPPPXSKYGk%2Bfiw3L6%2BispKiqNX5%2BUVFRS3NTRhjiqLW37R1YPjEsH8kO2d50sSOEAqMBFhauK%2F4GcKGqNGvvPIKOTVCCEJYV19vs9nKPB6P11tdXfOLV3%2FJcVx8obyVKz1er8vlwhgHAiN19fX%2Ff%2FPNliNS1Irc3MzMzDvWrWNZ1iG4KAr%2BbfiUIsuiKCZw0nXdPzSsqtqmkpfyl5UAADIcInHw6VyW9jyPMe44%2F7vm%2Fg8BhRwOked5mqZN01RUNTwZpgDcWLzdU7gldj58hmN2LiMIRSLRRXjiv4VA6O%2BtA%2FvOD5%2FUTIVIeMZenFNZUdSw1JFLDsuVNNsTpD3nE5jIHAsPKnrYxkqZjhU0nHLKBeohAk03IrKs6nraac0EyzAOm8DP8M6UhAgQQqqux0rqdNbUFGUFEMew5NZJonC9dR3Jaf4X8T9CCyF1Oafr34BTW1mFgTTHsjyX2JERJHHqqKJGZNlE1161LQaQokSbINpsCxAKTobjPSsKBY3LF%2FBkiOIFOncVzEperv8n4BhmidMJqWSEMADjoUktdh8aly8oh%2FYbA2fBDLpwaRZ%2F38PcXRXppcXQtNspxbPvNKGpthVj%2BdAn6pGDEEKb3c7FqgKEsaHriqLous7831r7tu9BUUpYNxQKBUZGbsjKCgaDmqrmFxSQ7D3k80Wj0dX5%2BZcvXXK73e7MTKIfCARCExMFa9ZACDmWcTudU9smf3TDIE202tWsHjnIsqw7M1MURZbjaIZhWdZmty9xueyiaAycjfz2zbmed7ixsbK87HBj4893%2FqSyvGxgYIAk%2FIYtmxs2P6IqSmV52Q9eeIEoI4Qe3bK5srxMi7mHphtxP5kiFJGtVGyO%2F0M%2B%2BDHDsktcrrlVFUVRDofDbreb589pJ9tTHYGnohIA8GVPj9XYj45evnSpzOMhq7W1tgwODgIAent6Bvr7Z84iBKYJEYLq4U%2BBqjidznm8RHQ4GIZRj%2F4pVc6prqkBAJDiurOjHSFUVV1DhgzDePuttwAAH7z3XsIs3TCMWL0LY28lesy8SDvTy7Ds%2FN0dRVGCIKCxETTsS6pwY1HR8uzsL3t6McbdnV2Wzbze%2BOjH%2B%2FYO%2B%2F2NjZ%2FNnUjiCZJuxjrXiQkgR9k5L0hzwcR0zKGrSUchhLX33js4eMU%2FNPRFd1duXt7KVavIkOR0RiKR55%2Fdociyy%2BVKmEie6mKNIrG9rhEDLEiI6GAtZW35QN1DAIAD%2B%2FdfvHixqro6vuaDdXVOp%2FNEd%2FeawkJvzNWS7Ce2J2sCZReJ%2Fy9ICMd0KEdi5Mfh8XoFQXhnz9sAY4%2B3Ii6XJKnhsccBAA2PPZbqjXG6UYSiAy5brmvaghWSFasUZFavMQxD%2FhrajDdJm822rvTOYb%2Bfoqgyj2fm3Kef2c5x3LcaGuYuS2gwpJqkITQR4qo2KJ98oCqKMCfFxGGapizLTPFtUMrobGv7zqMN8W6Q47j8ggLyXb1%2BfVdnR3Hx2pzZr1gFawovDl6l5%2FTKFAA8z01ne4HnIrLCV9yjdRyfHB1OFWsY44lgEAMg3L8ZAFBVXf36rl3HPp969Hh869a77r6bfG%2FYuPEvZ87UbthAHIim6fpNDxevvSX%2BwLCutBRjHD84nuOIo02lDoTQaHACY2wMXg7veo1SFcnp5Hl%2Bpo8bhhGamDAMQ6h%2FVNhQn8qE14alSzKYhEZRUbVgOGwdiu9K5P3dyG8ZluU4CCFGyDAMXdcpu8P27Se4Uk962Uh2u2gTyPes8iOqKKFINBZHptbdprYfjd9%2BlORk7ygTNm6CUkZ62YiCIInTzzGJ9ZCiahORyHRNoshYkQHNUA4p7cUQBYAk2u2CMEs4N8gRQlFFlVX1mysardqG4%2ByCMLc7m68vM0wz9s%2BXdNKCFGW5Zup0ed01iv8KAAD%2F%2FxfuVaicHZfQAAAAAElFTkSuQmCC&logoColor=f8981d&labelColor=4D7A97" />
+</a></code>
+        </p>
+        <code>[&#8203;[${ gbh.gitHubCurrentRootUrl }]&#8203;] = https://github.com/krm-demo/core-utils/tree/main</code><br/>
+        <details open>
+          <summary>
+            this is an example of <i>manually</i> constructed HTML-link:
+              <a href="https://github.com/krm-demo/core-utils/tree/main/pom.xml">a link to <b>pom.xml</b> file</a>
+          </summary>
+          <pre>
+
+    <&#8203;a href="#" th&#8203;:href="|${gbh.gitHubCurrentRootUrl}/pom.xml|"
+       th&#8203;:utext="|a link to <&#8203;b>pom.xml<&#8203;/b> file|"&#8203;>
+      this link is not processed yet
+    <&#8203;/a&#8203;></pre>
+          <i><u>Note!</u></i><br/>
+          <small>Pay attention to the pipes (<code>'|'</code>-symbols) around the values
+            of <code>'th:utext'</code> and <code>'th:href'</code> attributes.<br/>
+            An alternate way to those pipes - is OGNL-expression with <code>'+'</code>-operation over string-operands like:
+            <code style="white-space: nowrap;">th&#8203;:href="${gbh.gitHubCurrentRootUrl + '/pom.xml'}"</code>
+          </small>
+        </details>
+        <!-- end of specific page-content -->
+        <div class="text-center bg-light fst-italic text-sm mb-1">Each page has its own content here.</div>
+      </div>
+      <div class="row border border-secondary rounded mt-5">
+        <h3>Some Technical Information</h3>
+        <p>
+          The content of this section has <b><var>th-tool</var></b>-tags,
+          which performs the access to the basic <b><var>th-tool</var></b>-helpers:
+        </p>
+        <code>[&#8203;[${ mh.projectCatalogName }]&#8203;] = core-utils-21.26.001-SNAPSHOT</code><br/>
+        <code>[&#8203;[${ mh.projectArtifact }]&#8203;] = core-utils</code><br/>
+        <code>[&#8203;[${ mh.currentProjectVersion }]&#8203;] = 21.26.001-SNAPSHOT</code><br/>
+        <div class="text-center bg-light fst-italic text-sm mb-1">
+          Each page has the same calculated content here.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="p-1 text-center fixed-bottom ">
+  <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.1)">
+    some transparent footer, which is also exactly the same for all pages;
+    (the name of th-template is '<code>.github/th-test-site/original/sub-dir-a/index.html</code>')
+  </div>
+</footer>
+
+</body>
+</html>
