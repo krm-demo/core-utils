@@ -1,3 +1,4 @@
+b70f1ac5 << public release >> 21.25
 b5322c3d perform the deplopyment to Maven-Central #1
 11795202 << new snapshot version >> 21.25.001-SNAPSHOT
 7ae5600f << public release >> 21.24
