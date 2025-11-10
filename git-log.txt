@@ -1,3 +1,4 @@
+f9152c9f << internal release >> 21.24.002
 477fa522 deploy to GitHub-Packages via 'mvn gpg:sign-and-deploy-file' #1
 5317f722 introduce '.github/gpg/gpg-verify.sh' #1
 75e1b176 correct the version of 'commons-io:commons-io' (fix the compilation errors)
