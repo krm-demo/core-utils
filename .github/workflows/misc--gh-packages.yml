@@ -26,6 +26,9 @@ jobs:
         run: mvn test-compile
 
       - name: "Display the effective maven settings"
+        env:
+          MAVEN__CENTRAL_USERNAME: ${{ secrets.MAVEN__CENTRAL_USERNAME }}
+          MAVEN__CENTRAL_PASSWORD: ${{ secrets.MAVEN__CENTRAL_PASSWORD }}
         run: |
           # save the effective-settings into './target/effective-settings.xml':
           mvn help:effective-settings -DshowPasswords=true -Doutput=./target/effective-settings.xml
