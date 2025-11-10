@@ -1,3 +1,4 @@
+e1f22a90 << new snapshot version >> 21.24.003-SNAPSHOT
 f9152c9f << internal release >> 21.24.002
 477fa522 deploy to GitHub-Packages via 'mvn gpg:sign-and-deploy-file' #1
 5317f722 introduce '.github/gpg/gpg-verify.sh' #1
