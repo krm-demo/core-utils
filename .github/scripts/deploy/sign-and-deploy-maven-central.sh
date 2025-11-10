@@ -45,7 +45,7 @@ mvn -X gpg:sign-and-deploy-file \
   -Dtypes="jar,jar" \
   -Dgpg.keyname="$GPG_KEY_ID" \
   -Dgpg.passphrase="$GPG_PASSPHRASE" \
-  -DrepositoryId="krm-demo-maven-central" \
+  -DrepositoryId="maven-central" \
   -Durl=https://oss.sonatype.org/content/repositories/releases/
 
 # TODO: the command above could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@local-nexus"

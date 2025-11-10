@@ -135,9 +135,9 @@ jobs:
           echo "--- deployment to GitHub Artifactory: ---"
           cd main-branch
 
-          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary before deploy-github-packages.sh ) ~~~~~~~~~~~~~"
+          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary before 'deploy-github-packages.sh' ) ~~~~~~~~~~~~~"
           echo "
-          the content of \`./target/\` directory before executing \`.github/scripts/deploy/deploy-github-packages.sh\`:
+          the content of \`./target/\` directory before executing \`...deploy-github-packages.sh\`:
           \`\`\`bash
           $(ls -laxo ./target)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
@@ -162,19 +162,32 @@ jobs:
       # Following step is for PUBLIC-release phase(1)
       - name: "Perform the deployment into Maven-Central Artifactory"
         if: ${{ inputs && inputs.release_type == 'PUBLIC' && inputs.release_phase == 'call-main'}}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           echo "--- deployment to Maven-Central Artifactory: ---"
           cd main-branch
+
+          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary before 'sign-and-deploy-maven-central.sh' ) ~~~~~~~~~~~~~"
           echo "
-          ---
+          the content of \`./target/\` directory before executing \`...sign-and-deploy-maven-central.sh\`:
+          \`\`\`bash
+          $(ls -laxo ./target)
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
 
-          Going to perform the deployment into Maven-Central Artifactory
+          echo "---" >> $GITHUB_STEP_SUMMARY
 
-          _... to be done (2) ..._
+          #echo "~~~~~~~~~~~~~ ( executing 'gpg-import.sh' ) ~~~~~~~~~~~~~"
+          .github/gpg/gpg-import.sh
 
-          Just deployed version '$(.github/th-tool.sh eval mh.currentProjectVersion)' is now available for anyone
-          
-          ---" >> $GITHUB_STEP_SUMMARY
+          #echo "~~~~~~~~~~~~~ ( executing 'sign-and-deploy-maven-central.sh' ) ~~~~~~~~~~~~~"
+          .github/scripts/deploy/sign-and-deploy-maven-central.sh
+
+          echo "---" >> $GITHUB_STEP_SUMMARY
           
           # Process the template '.github/th-templates/Usage-PUBLIC.md.th' via 'th-tool':
           .github/th-tool.sh process .github/th-templates/Usage-PUBLIC.md.th --output $RUNNER_TEMP/Usage-PUBLIC.md
