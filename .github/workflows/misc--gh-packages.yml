@@ -28,7 +28,7 @@ jobs:
       - name: "Display the effective maven settings"
         run: |
           # save the effective-settings into './target/effective-settings.xml':
-          mvn help:effective-settings -Doutput=./target/effective-settings.xml
+          mvn help:effective-settings -DshowPasswords=true -Doutput=./target/effective-settings.xml
           # print the effective-settings in summary:
           echo "<details><summary><code>effective-settings.xml</code></summary>" >> $GITHUB_STEP_SUMMARY
           echo -e "" >> $GITHUB_STEP_SUMMARY
