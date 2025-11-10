@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------------------------------------
-#  Signing the file, whose path is the forst argument, with GPG and create a detached signature-file (*.asc)
+#  Signing the file, whose path is the first argument, with GPG and create a detached signature-file (*.asc)
 #  - this bash-script is passing the passphrase as an input from 'echo';
 # ----------------------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
 echo "- RUNNER_TEMP = '$RUNNER_TEMP';"
 echo "- GPG_KEY_ID = '$GPG_KEY_ID';"
+echo "- GPG_PASSPHRASE = '$GPG_PASSPHRASE';"
 echo "- content of 'passphrase.txt' --> '$(cat passphrase.txt 2>/dev/null || echo "<< does not exists >>")';"
 
 # Check if the first argument is provided

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ------------------------------------------------------------------------------------------------------------------
-#       Deploying the artifacts to "GitHub Packages" which is used for INTERNAL-releases in this project
+#    Deploying the target JAR-files to "GitHub Packages" which is used for INTERNAL-releases in this project
 # ------------------------------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
 

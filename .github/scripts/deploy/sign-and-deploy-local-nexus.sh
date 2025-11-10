@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-# ------------------------------------------------------------------------------------------------------------------
-#   Deploying the artifacts to local nexus-repository (which is the same as remote one, but hosted locally)
-# ------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
+#   Signing with GPG and deploying the target JAR-files to local nexus-repository
+#         (which is the same as remote one, but hosted locally)
+# - this script is the same as "deploy-local-nexus.sh", but uses different maven-plugin;
+# - when executing at GitHub it's very import to import GPG-keys with "gpg-import.sh" before;
+# ---------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
+echo "- GPG_KEY_ID = '$GPG_KEY_ID';"
+echo "- GPG_PASSPHRASE = '$GPG_PASSPHRASE';"
+echo "- content of 'passphrase.txt' --> '$(cat passphrase.txt 2>/dev/null || echo "<< does not exists >>")';"
 
 source "$(dirname $0)/pom-props.source"
 
@@ -22,13 +28,13 @@ jar cvf ${JAR_FILE__JAVADOC} -C target/reports/apidocs-processed .
 echo "- list of target JARs are:"
 ls -laxo target/*.jar
 
-echo "- the content of old JavaDoc is"
-jar tfv ${JAR_FILE__JAVADOC_BACKUP}
-echo "- the content of new (processed) JavaDoc is"
-jar tfv ${JAR_FILE__JAVADOC}
+#echo "- the content of old JavaDoc is"
+#jar tfv ${JAR_FILE__JAVADOC_BACKUP}
+#echo "- the content of new (processed) JavaDoc is"
+#jar tfv ${JAR_FILE__JAVADOC}
 
-echo "- deploying to local-nexus with 'mvn -X deploy:deploy-file ...' command:"
-mvn -X deploy:deploy-file \
+echo "- deploying to 'GitHub Packages' with 'mvn -X gpg:sign-and-deploy-file ...' command:"
+mvn -X gpg:sign-and-deploy-file \
   -DgroupId="${POM_PROPS_GROUPID}" \
   -DartifactId="${POM_PROPS_ARTIFACTID}" \
   -Dversion="${POM_PROPS_VERSION}" \
@@ -37,7 +43,9 @@ mvn -X deploy:deploy-file \
   -Dfiles="${JAR_FILE__SOURCES},${JAR_FILE__JAVADOC}" \
   -Dclassifiers="sources,javadoc" \
   -Dtypes="jar,jar" \
+  -Dgpg.keyname="$GPG_KEY_ID" \
+  -Dgpg.passphrase="$GPG_PASSPHRASE" \
   -DrepositoryId="local-nexus" \
   -Durl=http://localhost:8081/repository/maven-snapshots/
 
-# TODO: the command above could be simplified using maven MOJO like "...> mvn deploy:deploy-file@local-nexus"
+# TODO: the command above could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@local-nexus"

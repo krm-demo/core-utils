@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ------------------------------------------------------------------------------------------------------------------
-#   Deploying the artifacts to local nexus-repository (which is the same as remote one, but hosted locally)
+#   Deploying the target JAR-files to local nexus-repository (which is the same as remote one, but hosted locally)
 # ------------------------------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
 

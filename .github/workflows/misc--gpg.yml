@@ -84,47 +84,8 @@ jobs:
           # invoke 'gpg ... --sign ...':
           .github/gpg/gpg-sign.sh pom.xml
 
-          ls -laxo
-          git status
-          echo "------------ gpg --verify ... ---------------"
-          gpg --verify pom.xml.asc
-          echo "---------------------------------------------"
-          # Note! that 'gpg'-utility print the results to both standard system-streams - so, we have to redirect them properly !
-
-          echo "<details><summary><code>gpg --verify pom.xml.asc</code></summary>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --verify pom.xml.asc &>> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "</details>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-
-          echo "<details><summary><code>gpg --status-fd 1 --verify pom.xml.asc</code></summary>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --status-fd 1 --verify pom.xml.asc >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "</details>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-
-          echo -e "---" >> $GITHUB_STEP_SUMMARY
-          echo -e "Following \`gpg\`-commands has the second argument \`pom.xml\`of a signed file:"
-
-          echo "<details><summary><code>gpg --verify pom.xml.asc pom.xml</code></summary>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --verify pom.xml.asc pom.xml &>> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "</details>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-
-          echo "<details><summary><code>gpg --status-fd 1 --verify pom.xml.asc pom.xml</code></summary>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --status-fd 1 --verify pom.xml.asc pom.xml >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "</details>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
+          # invoke 'gpg ... --verify ...':
+          .github/gpg/gpg-verify.sh pom.xml.asc
 
       - name: "Signing the file 'LICENSE':"
         env:
@@ -137,44 +98,5 @@ jobs:
           # invoke 'gpg ... --sign ...':
           .github/gpg/gpg-sign.sh LICENSE
 
-          ls -laxo
-          git status
-          echo "------------ gpg --verify ... ---------------"
-          gpg --verify LICENSE.asc
-          echo "---------------------------------------------"
-          # Note! that 'gpg'-utility print the results to both standard system-streams - so, we have to redirect them properly !
-
-          echo "<details><summary><code>gpg --verify LICENSE.asc</code></summary>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --verify LICENSE.asc &>> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "</details>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-
-          echo "<details><summary><code>gpg --status-fd 1 --verify LICENSE.asc</code></summary>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --status-fd 1 --verify LICENSE.asc >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "</details>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-
-          echo -e "---" >> $GITHUB_STEP_SUMMARY
-          echo -e "Following \`gpg\`-commands has the second argument \`LICENSE\` of a signed file:"
-
-          echo "<details><summary><code>gpg --verify LICENSE.asc LICENSE</code></summary>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --verify LICENSE.asc LICENSE &>> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "</details>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-
-          echo "<details><summary><code>gpg --status-fd 1 --verify LICENSE.asc LICENSE</code></summary>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          gpg --status-fd 1 --verify LICENSE.asc LICENSE >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "</details>" >> $GITHUB_STEP_SUMMARY
-          echo -e "" >> $GITHUB_STEP_SUMMARY
+          # invoke 'gpg ... --verify ...':
+          .github/gpg/gpg-verify.sh LICENSE.asc
