@@ -111,7 +111,8 @@ jobs:
           echo "---" >> $GITHUB_STEP_SUMMARY
 
           # Process the template '.github/th-templates/Usage-INTERNAL.md.th' via 'th-tool':
-          .github/th-tool.sh process .github/th-templates/Usage-INTERNAL.md.th --output $GITHUB_STEP_SUMMARY
+          .github/th-tool.sh process .github/th-templates/Usage-INTERNAL.md.th --output $RUNNER_TEMP/Usage-INTERNAL.md
+          cat $RUNNER_TEMP/Usage-INTERNAL.md >> $GITHUB_STEP_SUMMARY
 
       # Following step is for PUBLIC-release phase(1)
       - name: "Perform the deployment into Maven-Central Artifactory"
@@ -129,8 +130,10 @@ jobs:
           Just deployed version '$(.github/th-tool.sh eval mh.currentProjectVersion)' is now available for anyone
           
           ---" >> $GITHUB_STEP_SUMMARY
+          
           # Process the template '.github/th-templates/Usage-PUBLIC.md.th' via 'th-tool':
-          .github/th-tool.sh process .github/th-templates/Usage-PUBLIC.md.th --output $GITHUB_STEP_SUMMARY
+          .github/th-tool.sh process .github/th-templates/Usage-PUBLIC.md.th --output $RUNNER_TEMP/Usage-PUBLIC.md
+          cat $RUNNER_TEMP/Usage-PUBLIC.md >> $GITHUB_STEP_SUMMARY
 
       # Following step is for phase(2) of both INTERNAL-release and PUBLIC-release
       - name: "Inform the developers that new SNAPSHOT-version is available"
