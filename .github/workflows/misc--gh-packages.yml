@@ -18,6 +18,9 @@ jobs:
           check-latest: true
           cache: 'maven'
           cache-dependency-path: pom.xml
+          server-id: maven-central
+          server-username: MAVEN__CENTRAL_USERNAME
+          server-password: MAVEN__CENTRAL_PASSWORD
 
       - name: "Compile 'th-tool' (no tests and no JARs and JavaDoc):"
         run: mvn test-compile

@@ -18,6 +18,28 @@
     <url>https://github.com/krm-demo/core-utils</url>
   </organization>
 
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Aleksey Kurmanov</name>
+      <email>aleksey.kurmanov@gmail.com</email>
+      <organization>krm-demo</organization>
+      <organizationUrl>https://github.com/krm-demo</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/krm-demo/core-utils.git</connection>
+    <developerConnection>scm:git:git://github.com/krm-demo/core-utils.git</developerConnection>
+    <url>https://github.com/krm-demo/core-utils.git</url>
+  </scm>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
