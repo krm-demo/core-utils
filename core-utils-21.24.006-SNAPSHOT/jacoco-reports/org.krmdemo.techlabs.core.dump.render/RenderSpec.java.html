@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RenderSpec.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.dump.render</a> &gt; <span class="el_source">RenderSpec.java</span></div><h1>RenderSpec.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.dump.render;
+
+import org.krmdemo.techlabs.core.dump.render.Highlight.Kind;
+import org.krmdemo.techlabs.core.dump.render.Highlight.Place;
+import org.krmdemo.techlabs.core.dump.render.Highlight.Structure;
+import org.krmdemo.techlabs.core.dump.render.Highlight.Target;
+import picocli.CommandLine;
+
+import java.util.Arrays;
+import java.util.EnumSet;
+
+/**
+ * This class represents the rendering details and is used as an optional parameter to
+ * all methods in {@link org.krmdemo.techlabs.core.dump.ObjectPrinter ObjectPrinter} interface.
+ */
+public class RenderSpec {
+
+<span class="fc" id="L18">    public enum Feature {</span>
+<span class="fc" id="L19">        SHOW_NULL,</span>
+<span class="fc" id="L20">        SHOW_EMPTY,</span>
+<span class="fc" id="L21">        RENDER_HTML_DOC,</span>
+<span class="fc" id="L22">        EMBEDDED_SVG_IMG,</span>
+<span class="fc" id="L23">        USE_HTML_CSS,</span>
+<span class="fc" id="L24">        NESTED_SECTIONS</span>
+    }
+
+    private final Highlight highlight;
+<span class="fc" id="L28">    private final EnumSet&lt;Feature&gt; featuresSet = EnumSet.noneOf(Feature.class);</span>
+
+<span class="fc" id="L30">    public RenderSpec(Highlight highlight, Feature... featuresArr) {</span>
+<span class="fc" id="L31">        this.highlight = highlight;</span>
+<span class="fc" id="L32">        this.featuresSet.addAll(Arrays.asList(featuresArr));</span>
+<span class="fc" id="L33">    }</span>
+
+    public boolean hasFeature(Feature feature) {
+<span class="fc" id="L36">        return featuresSet.contains(feature);</span>
+    }
+
+    public String dumpOuterHtml(String innerHTML, Structure struct) {
+        // TODO: move it to HTML-dumpers
+<span class="fc" id="L41">        String outerStyle = highlight.lookupValue(Place.of(Kind.BG, struct, Target.HTML_STYLE));</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (hasFeature(Feature.RENDER_HTML_DOC)) {</span>
+<span class="fc" id="L43">            return OuterTagUtils.outerHtmlDivStyle(innerHTML, outerStyle,</span>
+<span class="fc" id="L44">                String.format(&quot;%s as HTML (rendered by Core-Utils)&quot;, struct));</span>
+        } else {
+<span class="fc" id="L46">            return OuterTagUtils.outerDivStyle(innerHTML, outerStyle);</span>
+        }
+    }
+
+    public String dumpOuterSvg(String innerSVG, Structure struct, int fontSizePX, int maxRowLen, int rowsCount) {
+        // TODO: move it to SVG-dumpers
+<span class="fc" id="L52">        String outerStyle = highlight.lookupValue(Place.of(Kind.BG, struct, Target.SVG_ATTRS));</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (hasFeature(Feature.RENDER_HTML_DOC)) {</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">            if (hasFeature(Feature.EMBEDDED_SVG_IMG)) {</span>
+<span class="fc" id="L55">                return OuterTagUtils.outerHtmlImgSvgAttrs(</span>
+                    innerSVG, fontSizePX, maxRowLen, rowsCount, outerStyle,
+<span class="fc" id="L57">                    String.format(&quot;%s as SVG (rendered by Core-Utils)&quot;, struct));</span>
+            } else {
+<span class="nc" id="L59">                return OuterTagUtils.outerHtmlSvgAttrs(</span>
+                    innerSVG, fontSizePX, maxRowLen, rowsCount, outerStyle,
+<span class="nc" id="L61">                    String.format(&quot;%s as SVG (rendered by Core-Utils)&quot;, struct));</span>
+            }
+        } else {
+<span class="fc" id="L64">            return OuterTagUtils.outerSvgAttrs(innerSVG, fontSizePX, maxRowLen, rowsCount, outerStyle);</span>
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    String highlightAnsi(Kind kind, Structure struct, String str) {
+<span class="fc" id="L71">        String ansiStyle = highlight.lookupValue(Place.of(kind, struct, Target.TXT_ANSI));</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        if (ansiStyle == null) {</span>
+<span class="fc" id="L73">            return str;</span>
+        }
+<span class="fc" id="L75">        String ansiRenderStr = String.format(&quot;@|%s %s|@&quot;, ansiStyle, str);</span>
+<span class="fc" id="L76">        return CommandLine.Help.Ansi.AUTO.string(ansiRenderStr);</span>
+    }
+
+    String highlightHtmlStyle(Kind kind, Structure struct, String str) {
+<span class="fc" id="L80">        String styleValue = highlight.lookupValue(Place.of(kind, struct, Target.HTML_STYLE));</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (styleValue == null) {</span>
+<span class="nc" id="L82">            return str;</span>
+        }
+<span class="fc" id="L84">        return String.format(&quot;&quot;&quot;</span>
+            &lt;span style=&quot;%s&quot;&gt;%s&lt;/span&gt;&quot;&quot;&quot;,
+            styleValue, str);
+    }
+
+    String highlightHtmlCss(Kind kind, Structure struct, String str) {
+<span class="nc" id="L90">        String cssClassName = highlight.lookupValue(Place.of(kind, struct, Target.HTML_CSS));</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (cssClassName == null) {</span>
+<span class="nc" id="L92">            return str;</span>
+        }
+<span class="nc" id="L94">        return String.format(&quot;&quot;&quot;</span>
+            &lt;span class=&quot;%s&quot;&gt;%s&lt;/span&gt;&quot;&quot;&quot;,
+            cssClassName, str);
+    }
+
+    String highlightSvgAttrs(Kind kind, Structure struct, String str) {
+<span class="fc" id="L100">        String svgAttrs = highlight.lookupValue(Place.of(kind, struct, Target.SVG_ATTRS));</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (svgAttrs == null) {</span>
+<span class="nc" id="L102">            return str;</span>
+        }
+<span class="fc" id="L104">        return String.format(&quot;&quot;&quot;</span>
+            &lt;tspan %s&gt;%s&lt;/tspan&gt;&quot;&quot;&quot;,
+            svgAttrs, str);
+    }
+
+    String highlightSvgClass(Kind kind, Structure struct, String str) {
+<span class="nc" id="L110">        String svgClassName = highlight.lookupValue(Place.of(kind, struct, Target.SVG_CLASS));</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (svgClassName == null) {</span>
+<span class="nc" id="L112">            return str;</span>
+        }
+<span class="nc" id="L114">        return String.format(&quot;&quot;&quot;</span>
+            &lt;tspan class=&quot;%s&quot;&gt;%s&lt;/tspan&gt;&quot;&quot;&quot;,
+            svgClassName, str);
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    public String highlightSyntaxAnsi(Structure struct, char syntaxSymbolChar) {
+<span class="fc" id="L122">        return highlightSyntaxAnsi(struct, String.valueOf(syntaxSymbolChar));</span>
+    }
+
+    public String highlightSyntaxHtmlStyle(Structure struct, char syntaxSymbolChar) {
+<span class="fc" id="L126">        return highlightSyntaxHtmlStyle(struct, String.valueOf(syntaxSymbolChar));</span>
+    }
+
+    public String highlightSyntaxHtmlCss(Structure struct, char syntaxSymbolChar) {
+<span class="nc" id="L130">        return highlightSyntaxHtmlCss(struct, String.valueOf(syntaxSymbolChar));</span>
+    }
+
+    public String highlightSyntaxSvgAttrs(Structure struct, char syntaxSymbolChar) {
+<span class="fc" id="L134">        return highlightSyntaxSvgAttrs(struct, String.valueOf(syntaxSymbolChar));</span>
+    }
+
+    public String highlightSyntaxSvgClass(Structure struct, char syntaxSymbolChar) {
+<span class="nc" id="L138">        return highlightSyntaxSvgClass(struct, String.valueOf(syntaxSymbolChar));</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    public String highlightSyntaxAnsi(Structure struct, String syntaxSymbol) {
+<span class="fc" id="L144">        return highlightAnsi(Kind.SYNTAX, struct, syntaxSymbol);</span>
+    }
+
+    public String highlightSyntaxHtmlStyle(Structure struct, String syntaxSymbol) {
+<span class="fc" id="L148">        return highlightHtmlStyle(Kind.SYNTAX, struct, syntaxSymbol);</span>
+    }
+
+    public String highlightSyntaxHtmlCss(Structure struct, String syntaxSymbol) {
+<span class="nc" id="L152">        return highlightHtmlCss(Kind.SYNTAX, struct, syntaxSymbol);</span>
+    }
+
+    public String highlightSyntaxSvgAttrs(Structure struct, String syntaxSymbol) {
+<span class="fc" id="L156">        return highlightSvgAttrs(Kind.SYNTAX, struct, syntaxSymbol);</span>
+    }
+
+    public String highlightSyntaxSvgClass(Structure struct, String syntaxSymbol) {
+<span class="nc" id="L160">        return highlightSvgClass(Kind.SYNTAX, struct, syntaxSymbol);</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    public String highlightNullAnsi(Structure struct) {
+<span class="fc" id="L166">        return highlightAnsi(Kind.NULL, struct, &quot;null&quot;);</span>
+    }
+
+    public String highlightNullHtmlStyle(Structure struct) {
+<span class="fc" id="L170">        return highlightHtmlStyle(Kind.NULL, struct, &quot;null&quot;);</span>
+    }
+
+    public String highlightNullHtmlCss(Structure struct) {
+<span class="nc" id="L174">        return highlightHtmlCss(Kind.NULL, struct, &quot;null&quot;);</span>
+    }
+
+    public String highlightNullSvgAttrs(Structure struct) {
+<span class="fc" id="L178">        return highlightSvgAttrs(Kind.NULL, struct, &quot;null&quot;);</span>
+    }
+
+    public String highlightNullSvgClass(Structure struct) {
+<span class="nc" id="L182">        return highlightSvgClass(Kind.NULL, struct, &quot;null&quot;);</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    public String highlightKeyAnsi(Structure struct, String keyStr) {
+<span class="fc" id="L188">        return highlightAnsi(Kind.KEY, struct, keyStr);</span>
+    }
+
+    public String highlightKeyHtmlStyle(Structure struct, String keyStr) {
+<span class="fc" id="L192">        return highlightHtmlStyle(Kind.KEY, struct, keyStr);</span>
+    }
+
+    public String highlightKeyHtmlCss(Structure struct, String keyStr) {
+<span class="nc" id="L196">        return highlightHtmlCss(Kind.KEY, struct, keyStr);</span>
+    }
+
+    public String highlightKeySvgAttrs(Structure struct, String keyStr) {
+<span class="fc" id="L200">        return highlightSvgAttrs(Kind.KEY, struct, keyStr);</span>
+    }
+
+    public String highlightKeySvgClass(Structure struct, String keyStr) {
+<span class="nc" id="L204">        return highlightSvgClass(Kind.KEY, struct, keyStr);</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    public String highlightValueAnsi(Structure struct, String valueStr) {
+<span class="fc" id="L210">        return highlightAnsi(Kind.VALUE, struct, valueStr);</span>
+    }
+
+    public String highlightValueHtmlStyle(Structure struct, String valueStr) {
+<span class="fc" id="L214">        return highlightHtmlStyle(Kind.VALUE, struct, valueStr);</span>
+    }
+
+    public String highlightValueHtmlCss(Structure struct, String valueStr) {
+<span class="nc" id="L218">        return highlightHtmlCss(Kind.VALUE, struct, valueStr);</span>
+    }
+
+    public String highlightValueSvgAttrs(Structure struct, String valueStr) {
+<span class="fc" id="L222">        return highlightSvgAttrs(Kind.VALUE, struct, valueStr);</span>
+    }
+
+    public String highlightValueSvgClass(Structure struct, String valueStr) {
+<span class="nc" id="L226">        return highlightSvgClass(Kind.VALUE, struct, valueStr);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

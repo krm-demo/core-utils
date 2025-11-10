@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>YamlTxtDumper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.dump.yaml</a> &gt; <span class="el_source">YamlTxtDumper.java</span></div><h1>YamlTxtDumper.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.dump.yaml;
+
+import org.krmdemo.techlabs.core.dump.TreeDumper;
+import org.krmdemo.techlabs.core.dump.render.Highlight;
+import org.krmdemo.techlabs.core.dump.render.RenderSpec;
+
+import java.io.PrintStream;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Objects;
+
+/**
+ * Implementation of {@link TreeDumper} that dumps into the passed {@link PrintStream}
+ * the tree of a {@link Highlight.Structure#YAML YAML} logical structure
+ * in {@link Highlight.Target#TXT_ANSI ANSI-Txt} target format.
+ */
+public class YamlTxtDumper implements TreeDumper {
+
+    final PrintStream out;
+    final RenderSpec renderSpec;
+<span class="fc" id="L23">    final Deque&lt;String&gt; currentPath = new ArrayDeque&lt;&gt;();</span>
+
+<span class="fc" id="L25">    public YamlTxtDumper(PrintStream out, RenderSpec renderSpec) {</span>
+<span class="fc" id="L26">        this.out = Objects.requireNonNull(out);</span>
+<span class="fc" id="L27">        this.renderSpec = Objects.requireNonNull(renderSpec);</span>
+<span class="fc" id="L28">    }</span>
+
+    @Override
+    public void acceptNull() {
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (parentIsMapping()) {</span>
+<span class="fc" id="L33">            out.print(' ');</span>
+        }
+<span class="fc" id="L35">        out.print(renderSpec.highlightNullAnsi(Highlight.Structure.YAML));</span>
+<span class="fc" id="L36">    }</span>
+
+    @Override
+    public void acceptScalar(ScalarNode scalarNode) {
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (parentIsMapping()) {</span>
+<span class="fc" id="L41">            out.print(' ');</span>
+        }
+<span class="fc" id="L43">        out.print(renderSpec.highlightValueAnsi(Highlight.Structure.YAML, scalarNode.text()));</span>
+<span class="fc" id="L44">    }</span>
+
+    @Override
+    public void acceptSequence(SequenceNode sequenceNode) {
+<span class="fc" id="L48">        int count = 0;</span>
+<span class="fc" id="L49">        Iterator&lt;Node&gt; itNode = sequenceNode.sequenceItems().iterator();</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        while (itNode.hasNext()) {</span>
+<span class="fc bfc" id="L51" title="All 4 branches covered.">            if (count &gt; 0 || parentIsMapping()) {</span>
+<span class="fc" id="L52">                out.println();</span>
+<span class="fc" id="L53">                out.print(indent());</span>
+            }
+<span class="fc" id="L55">            out.print(dashSpace());</span>
+<span class="fc" id="L56">            count++;</span>
+<span class="fc" id="L57">            currentPath.addLast(String.format(&quot;[%d]&quot;, count));</span>
+<span class="fc" id="L58">            itNode.next().visit(this);</span>
+<span class="fc" id="L59">            currentPath.removeLast();</span>
+        }
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (count == 0) {</span>
+<span class="fc" id="L62">            out.print(emptySequence());</span>
+        }
+<span class="fc" id="L64">    }</span>
+
+    @Override
+    public void acceptMappings(MappingsNode mappingsNode) {
+<span class="fc" id="L68">        int count = 0;</span>
+<span class="fc" id="L69">        Iterator&lt;Map.Entry&lt;String, Node&gt;&gt; itEntry = mappingsNode.mappingsItems().iterator();</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        while (itEntry.hasNext()) {</span>
+<span class="fc bfc" id="L71" title="All 4 branches covered.">            if (count &gt; 0 || parentIsMapping()) {</span>
+<span class="fc" id="L72">                out.println();</span>
+<span class="fc" id="L73">                out.print(indent());</span>
+            }
+<span class="fc" id="L75">            count++;</span>
+<span class="fc" id="L76">            Map.Entry&lt;String, Node&gt; entry = itEntry.next();</span>
+<span class="fc" id="L77">            currentPath.addLast(String.format(&quot;(%s)&quot;, entry.getKey()));</span>
+<span class="fc" id="L78">            out.print(renderSpec.highlightKeyAnsi(Highlight.Structure.JSON, entry.getKey()));</span>
+<span class="fc" id="L79">            out.print(colon());</span>
+<span class="fc" id="L80">            entry.getValue().visit(this);</span>
+<span class="fc" id="L81">            currentPath.removeLast();</span>
+<span class="fc" id="L82">        }</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (count == 0) {</span>
+<span class="nc" id="L84">            out.print(emptyMappings());</span>
+        }
+<span class="fc" id="L86">    }</span>
+
+    private boolean parentIsMapping() {
+<span class="fc bfc" id="L89" title="All 4 branches covered.">        return !currentPath.isEmpty() &amp;&amp; currentPath.getLast().endsWith(&quot;)&quot;);</span>
+    }
+
+    private String indent() {
+<span class="fc" id="L93">        return &quot;  &quot;.repeat(currentPath.size());</span>
+    }
+
+    private String dashSpace() {
+<span class="fc" id="L97">        return renderSpec.highlightSyntaxAnsi(Highlight.Structure.YAML, &quot;- &quot;);</span>
+    }
+
+    private String colon() {
+<span class="fc" id="L101">        return renderSpec.highlightSyntaxAnsi(Highlight.Structure.YAML, ':');</span>
+    }
+
+    private String emptySequence() {
+<span class="fc" id="L105">        return renderSpec.highlightSyntaxAnsi(Highlight.Structure.YAML, &quot; []&quot;);</span>
+    }
+
+    private String emptyMappings() {
+<span class="nc" id="L109">        return renderSpec.highlightSyntaxAnsi(Highlight.Structure.YAML, &quot; {}&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
