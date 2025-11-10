@@ -34,7 +34,8 @@ ls -laxo target/*.jar
 #jar tfv ${JAR_FILE__JAVADOC}
 
 echo "- deploying to 'GitHub Packages' with 'mvn -X gpg:sign-and-deploy-file ...' command:"
-mvn -X gpg:sign-and-deploy-file \
+# TODO: the command below could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@maven-central"
+mvn -B gpg:sign-and-deploy-file \
   -DgroupId="${POM_PROPS_GROUPID}" \
   -DartifactId="${POM_PROPS_ARTIFACTID}" \
   -Dversion="${POM_PROPS_VERSION}" \
@@ -46,9 +47,19 @@ mvn -X gpg:sign-and-deploy-file \
   -Dgpg.keyname="$GPG_KEY_ID" \
   -Dgpg.passphrase="$GPG_PASSPHRASE" \
   -DrepositoryId="maven-central" \
-  -Durl=https://oss.sonatype.org/content/repositories/releases/
+  -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/
 
-# TODO: the command above could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@local-nexus"
+EXIT_CODE__SIGN_AND_DEPLOY=$?
+if [ EXIT_CODE__SIGN_AND_DEPLOY -eq 0 ]; then
+    echo "> [!NOTE]" >> $GITHUB_STEP_SUMMARY
+    echo "> It looks like deployment to [**Maven-Central**](https://central.sonatype.com/publishing/deployments) was successful"'!!!' >> $GITHUB_STEP_SUMMARY
+    echo -e "" >> $GITHUB_STEP_SUMMARY
+else
+    echo "> [!CAUTION]" >> $GITHUB_STEP_SUMMARY
+    echo "> EXIT_CODE of \`mvn gpg:sign-and-deploy-file ...\` is $EXIT_CODE__SIGN_AND_DEPLOY" >> $GITHUB_STEP_SUMMARY
+    echo "> There was an error during deployment to **Maven-Central** - check the logs for details" >> $GITHUB_STEP_SUMMARY
+    echo -e "" >> $GITHUB_STEP_SUMMARY
+fi
 
 .github/gpg/gpg-verify.sh ${JAR_FILE__BIN}.asc
 .github/gpg/gpg-verify.sh ${JAR_FILE__SOURCES}.asc

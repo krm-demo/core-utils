@@ -34,6 +34,7 @@ ls -laxo target/*.jar
 #jar tfv ${JAR_FILE__JAVADOC}
 
 echo "- deploying to 'GitHub Packages' with 'mvn -X gpg:sign-and-deploy-file ...' command:"
+# TODO: the command above could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@local-nexus"
 mvn -X gpg:sign-and-deploy-file \
   -DgroupId="${POM_PROPS_GROUPID}" \
   -DartifactId="${POM_PROPS_ARTIFACTID}" \
@@ -47,8 +48,6 @@ mvn -X gpg:sign-and-deploy-file \
   -Dgpg.passphrase="$GPG_PASSPHRASE" \
   -DrepositoryId="local-nexus" \
   -Durl=http://localhost:8081/repository/maven-snapshots/
-
-# TODO: the command above could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@local-nexus"
 
 .github/gpg/gpg-verify.sh ${JAR_FILE__BIN}.asc
 .github/gpg/gpg-verify.sh ${JAR_FILE__SOURCES}.asc

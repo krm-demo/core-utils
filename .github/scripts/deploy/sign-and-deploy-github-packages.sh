@@ -44,6 +44,7 @@ ls -laxo target/*.jar
 # - as for parameter "-Dgpg.keyname" - it looks like env-var MAVEN_GPG_KEY is not working in our case;
 
 echo "- deploying to 'GitHub Packages' with 'mvn -X gpg:sign-and-deploy-file ...' command:"
+# TODO: the command above could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@github"
 mvn gpg:sign-and-deploy-file \
   -DgroupId="${POM_PROPS_GROUPID}" \
   -DartifactId="${POM_PROPS_ARTIFACTID}" \
@@ -57,7 +58,17 @@ mvn gpg:sign-and-deploy-file \
   -DrepositoryId="github" \
   -Durl=https://maven.pkg.github.com/krm-demo/core-utils
 
-# TODO: the command above could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@local-nexus"
+EXIT_CODE__SIGN_AND_DEPLOY=$?
+if [ $? -eq 0 ]; then
+    echo "> [!NOTE]" >> $GITHUB_STEP_SUMMARY
+    echo "> It looks like deployment to **GitHub-Packages** was successful"'!!!' >> $GITHUB_STEP_SUMMARY
+    echo -e "" >> $GITHUB_STEP_SUMMARY
+else
+    echo "> [!CAUTION]" >> $GITHUB_STEP_SUMMARY
+    echo "> EXIT_CODE of \`mvn gpg:sign-and-deploy-file ...\` is $EXIT_CODE__SIGN_AND_DEPLOY" >> $GITHUB_STEP_SUMMARY
+    echo "> There was an **error** during deployment to **GitHub-Packages** - check the logs for details" >> $GITHUB_STEP_SUMMARY
+    echo -e "" >> $GITHUB_STEP_SUMMARY
+fi
 
 .github/gpg/gpg-verify.sh ${JAR_FILE__BIN}.asc
 .github/gpg/gpg-verify.sh ${JAR_FILE__SOURCES}.asc
