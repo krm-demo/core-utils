@@ -15,6 +15,9 @@ tmp/
 
 # GPG-signatures and passphrases
 *.asc
+*.sig
+*.asc.md
+*.sig.md
 passphrase.txt
 
 # Log file

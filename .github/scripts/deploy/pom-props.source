@@ -10,7 +10,7 @@ TARGET_DIR=${TARGET_DIR:-$(pwd)/target}
 TARGET_DIR=$(realpath $TARGET_DIR)
 #echo "TARGET_DIR is '${TARGET_DIR}'"
 
-export JAR_FILE__BIN=$(find $TARGET_DIR -name "*.jar" ! -name "*javadoc*.jar" ! -name "*sources*.jar")
+export JAR_FILE__BIN=$(find $TARGET_DIR -mindepth 1 -maxdepth 1 -name "*.jar" ! -name "*javadoc*.jar" ! -name "*sources*.jar")
 export JAR_FILE__SOURCES="${JAR_FILE__BIN%.*}-sources.jar"
 export JAR_FILE__JAVADOC="${JAR_FILE__BIN%.*}-javadoc.jar"
 export JAR_FILE__JAVADOC_BACKUP="${JAR_FILE__BIN%.*}-javadoc-backup.jar"

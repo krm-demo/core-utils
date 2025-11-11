@@ -23,6 +23,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      GITHUB_TOKEN: ${{ github.token }}
+      GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+      MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       MAVEN__CENTRAL_USERNAME: ${{ secrets.MAVEN__CENTRAL_USERNAME }}
       MAVEN__CENTRAL_PASSWORD: ${{ secrets.MAVEN__CENTRAL_PASSWORD }}
 
@@ -104,10 +109,10 @@ jobs:
           cd main-branch
           echo "Current directory is $(pwd)"
 
-          echo "~~~~~~~~~~~~~ ( generate 'Release Catalog' root ) ~~~~~~~~~~~~~"
-          mvn -B --quiet test-compile
-          .github/th-tool.sh process .github/th-templates/GH-PAGES--Release-Catalog.html.th --output target/GH-PAGES--Release-Catalog.html
-          cat target/GH-PAGES--Release-Catalog.html
+          # echo "~~~~~~~~~~~~~ ( generate 'Release Catalog' root ) ~~~~~~~~~~~~~"
+          # mvn -B --quiet test-compile
+          # .github/th-tool.sh process .github/th-templates/GH-PAGES--Release-Catalog.html.th --output target/GH-PAGES--Release-Catalog.html
+          # cat target/GH-PAGES--Release-Catalog.html
 
           echo "~~~~~~~~~~~~~ ( execute the default-lifecycle of the build up to 'install' phase ) ~~~~~~~~~~~~~"
           mvn -B install
@@ -121,16 +126,20 @@ jobs:
           \`\`\`bash
           $(ls -laxo ./target)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
+          
+          echo "~~~~~~~~~~~~~ ( execute the 'sign-and-deploy-to-dir.sh' ) ~~~~~~~~~~~~~"
+          .github/scripts/deploy/sign-and-deploy-to-dir.sh
+
+          echo "~~~~~~~~~~~~~ ( dump the hierarchy of deploying bundle ) ~~~~~~~~~~~~~"
+          echo "
+          the result of \`sign-and-deploy-to-dir.sh\` (hierarchy of \`./target/deploy-dir--maven-central\` directory):
+          \`\`\`bash
+          $(tree ./target/deploy-dir--maven-central)
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
 
       # Following step is for INTERNAL-release phase(1)
       - name: "Perform the deployment into Git-Hub Artifactory"
         if: ${{ inputs && inputs.release_type == 'INTERNAL' && inputs.release_phase == 'call-main'}}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           echo "--- deployment to GitHub Artifactory: ---"
           cd main-branch
@@ -162,12 +171,6 @@ jobs:
       # Following step is for PUBLIC-release phase(1)
       - name: "Perform the deployment into Maven-Central Artifactory"
         if: ${{ inputs && inputs.release_type == 'PUBLIC' && inputs.release_phase == 'call-main'}}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           echo "--- deployment to Maven-Central Artifactory: ---"
           cd main-branch
@@ -226,7 +229,7 @@ jobs:
 
           # going to extract the file-slug (basename without extension) of a target JAR-file
           # and use it as a name of the destination directory to copy the generated Java-Doc
-          JAR_FILE_NAME=$(find "./target/" -name "*.jar" ! -name "*-javadoc*.jar" ! -name "*-sources*.jar" -exec basename {} \;)
+          JAR_FILE_NAME=$(find "./target/" -mindepth 1 -maxdepth 1 -name "*.jar" ! -name "*-javadoc*.jar" ! -name "*-sources*.jar" -exec basename {} \;)
           echo "... going to re-write the content of folder '$(realpath ../gh-pages-branch/${JAR_FILE_NAME%.*})': ..."
           rm -rf ../gh-pages-branch/*-SNAPSHOT
           echo "JAR_FILE_NAME=$JAR_FILE_NAME"
@@ -260,6 +263,3 @@ jobs:
           git commit -m "add the test text-file a.txt as a result of GitHub-Workflow '$GITHUB_WORKFLOW' #$GITHUB_RUN_NUMBER with '${{ inputs.release_type }}/${{ inputs.release_phase }}'"
           git push
           echo "That's it "'!!!'
-
-
-

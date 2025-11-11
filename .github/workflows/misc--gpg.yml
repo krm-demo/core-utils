@@ -82,7 +82,7 @@ jobs:
           echo -e "" >> $GITHUB_STEP_SUMMARY
 
           # invoke 'gpg ... --sign ...':
-          .github/gpg/gpg-sign.sh pom.xml
+          .github/gpg/gpg-sign--asc.sh pom.xml
 
           # invoke 'gpg ... --verify ...':
           .github/gpg/gpg-verify.sh pom.xml.asc
@@ -96,7 +96,7 @@ jobs:
           echo -e "" >> $GITHUB_STEP_SUMMARY
 
           # invoke 'gpg ... --sign ...':
-          .github/gpg/gpg-sign.sh LICENSE
+          .github/gpg/gpg-sign--asc.sh LICENSE
 
           # invoke 'gpg ... --verify ...':
           .github/gpg/gpg-verify.sh LICENSE.asc

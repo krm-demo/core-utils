@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------------------------------------
-#  Signing the file, whose path is the first argument, with GPG and create a detached signature-file (*.asc)
-#  - this bash-script is passing the passphrase as an input from 'echo';
+#  Signing the file, whose path is the first argument, with with text (ASCII-armored) GPG-signature
+#  and create a detached signature-file (*.asc) as a sibling the the file to sign.
+#  - this bash-script is passing the passphrase as an input from 'echo' (file-descriptor '0');
 # ----------------------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
 echo "- RUNNER_TEMP = '$RUNNER_TEMP';"
@@ -24,7 +25,8 @@ fi
 # Perform the signing with a specified passphrase
 echo $GPG_PASSPHRASE | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 \
   --local-user $GPG_KEY_ID \
+  --armor --detach-sign --status-fd 1 \
   --output $1.asc \
-  --detach-sig --sign $1
+  --sign $1
 
 echo ".... finish the script $0 in '$(pwd)' ...."

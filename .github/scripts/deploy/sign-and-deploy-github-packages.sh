@@ -45,7 +45,7 @@ ls -laxo target/*.jar
 
 echo "- deploying to 'GitHub Packages' with 'mvn -X gpg:sign-and-deploy-file ...' command:"
 # TODO: the command above could be simplified using maven MOJO like "...> mvn gpg:sign-and-deploy-file@github"
-mvn gpg:sign-and-deploy-file \
+mvn -B gpg:sign-and-deploy-file \
   -DgroupId="${POM_PROPS_GROUPID}" \
   -DartifactId="${POM_PROPS_ARTIFACTID}" \
   -Dversion="${POM_PROPS_VERSION}" \
