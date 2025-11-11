@@ -1,3 +1,4 @@
+0f619810 ZIP the bundle to deploy #1
 70213fd3 some improvement in GPG-scripts #2
 9f4fdbe9 some improvement in GPG-scripts #1
 0e762bef << new snapshot version >> 21.28.001-SNAPSHOT
