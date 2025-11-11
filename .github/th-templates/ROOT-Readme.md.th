@@ -25,6 +25,11 @@ but the latest relevant versions (with relation to the current one) are:
 > [!TIP]
 > TODO: to be inserted the header section of [Release-Catalog](https://krm-demo.github.io/core-utils/)
 
+Following is temporary and must be removed !!!
+- `GPG_KEY_ID` is <code>[(${zh.mask4(secrets.get("GPG_KEY_ID"))})]</code>
+- `GPG_PASSPHRASE` is <code>[(${zh.mask4(secrets.get("GPG_PASSPHRASE"))})]</code>
+- `GPG_SIGNING_KEY` is <code>[(${zh.mask4(secrets.get("GPG_SIGNING_KEY"))})]</code>
+
 ---
 
 <th:block th:replace="~{${mh.usageFragmentPath}}"> Error replacing the 'Usage'-fragment !!! </th:block>

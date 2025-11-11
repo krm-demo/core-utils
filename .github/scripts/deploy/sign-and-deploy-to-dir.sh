@@ -46,5 +46,10 @@ mvn -B gpg:sign-and-deploy-file \
   -DrepositoryId="local-nexus" \
   -Durl=file:///$(pwd)/target/deploy-dir--maven-central
 
-echo "- hierarchy of deploying bundle:"
-tree -s ./target/deploy-dir--maven-central
+#echo "- hierarchy of deploying bundle:"
+#tree -s ./target/deploy-dir--maven-central
+
+(cd target/deploy-dir--maven-central/ && zip -q -r ${JAR_FILE__BIN%.*}.zip .)
+
+echo "- hierarchy of bundle-ZIP to deploy:"
+unzip -l ${JAR_FILE__BIN%.*}.zip

@@ -133,11 +133,11 @@ jobs:
           echo "~~~~~~~~~~~~~ ( execute the 'sign-and-deploy-to-dir.sh' ) ~~~~~~~~~~~~~"
           .github/scripts/deploy/sign-and-deploy-to-dir.sh
 
-          echo "~~~~~~~~~~~~~ ( dump the hierarchy of deploying bundle ) ~~~~~~~~~~~~~"
+          echo "~~~~~~~~~~~~~ ( dump the content of deploying bundle ) ~~~~~~~~~~~~~"
           echo "
-          the result of \`sign-and-deploy-to-dir.sh\` (hierarchy of \`./target/deploy-dir--maven-central\` directory):
+          the result of \`sign-and-deploy-to-dir.sh\` (content of ZIP-file to deploy to Maven-Central):
           \`\`\`bash
-          $(tree ./target/deploy-dir--maven-central)
+          $(unzip -l ${JAR_FILE__BIN%.*}.zip)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
       # Following step is for INTERNAL-release phase(1)
