@@ -127,6 +127,9 @@ jobs:
           $(ls -laxo ./target)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
           
+          echo "~~~~~~~~~~~~~ ( executing 'gpg-import.sh' ) ~~~~~~~~~~~~~"
+          .github/gpg/gpg-import.sh
+
           echo "~~~~~~~~~~~~~ ( execute the 'sign-and-deploy-to-dir.sh' ) ~~~~~~~~~~~~~"
           .github/scripts/deploy/sign-and-deploy-to-dir.sh
 
@@ -156,10 +159,11 @@ jobs:
           #echo "~~~~~~~~~~~~~ ( executing 'deploy-github-packages.sh' ) ~~~~~~~~~~~~~"
           #.github/scripts/deploy/deploy-github-packages.sh
 
-          #echo "~~~~~~~~~~~~~ ( executing 'gpg-import.sh' ) ~~~~~~~~~~~~~"
+          echo "~~~~~~~~~~~~~ ( executing 'gpg-import.sh' ) ~~~~~~~~~~~~~"
+          # TODO: maybe it's not necessary (see the step above) !!!
           .github/gpg/gpg-import.sh
 
-          #echo "~~~~~~~~~~~~~ ( executing 'sign-and-deploy-github-packages.sh' ) ~~~~~~~~~~~~~"
+          echo "~~~~~~~~~~~~~ ( executing 'sign-and-deploy-github-packages.sh' ) ~~~~~~~~~~~~~"
           .github/scripts/deploy/sign-and-deploy-github-packages.sh
 
           echo "---" >> $GITHUB_STEP_SUMMARY
