@@ -137,7 +137,7 @@ jobs:
           echo "
           the result of \`sign-and-deploy-to-dir.sh\` (content of ZIP-file to deploy to Maven-Central):
           \`\`\`bash
-          $(unzip -l ${JAR_FILE__BIN%.*}.zip)
+          $(unzip -l *.zip)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
       # Following step is for INTERNAL-release phase(1)
