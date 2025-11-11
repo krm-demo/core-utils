@@ -1,3 +1,4 @@
+5fdf941c ZIP the bundle to deploy #3
 0bc3374a ZIP the bundle to deploy #2
 0f619810 ZIP the bundle to deploy #1
 70213fd3 some improvement in GPG-scripts #2
