@@ -1,3 +1,4 @@
+dab48557 << public release >> 21.28
 e2346be6 automate the deployment to Maven-Central #1
 0e5dedd0 add info about share the GPG-key at 'keys.openpgp.org' in order for Maven-Central to be able to verify artifacts against it
 cfb093a2 << new snapshot version >> 21.28.002-SNAPSHOT
