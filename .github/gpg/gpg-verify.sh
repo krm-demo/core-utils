@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
-# -----------------------------------------------------------------------------------------------------------
-#  Signing the file, whose path is the forst argument, with GPG and create a detached signature-file (*.asc)
-#  - this bash-script is passing the passphrase as an input from 'echo';
-# ----------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------
+#  Verifying the GPG-signature file, whose path is passed as the first command-line argument.
+#  The passed file is expected to be of detached GPG-signature with extension '.asc' or '.sig'
+#  and the source-file (the target of signature) is expected to be a sibling in the same directory.
+# - if the variable $GITHUB_STEP_SUMMARY exists - the file with that name is appended with GitHub-Markdown results;
+# - if it variable $GITHUB_STEP_SUMMARY does not exists - it's assigned with the name of target-file followed by '.md'
+# ---------------------------------------------------------------------------------------------------------------------
 echo "... starting the script $0 in '$(pwd)' ..."
-echo "- GPG-file (expected extension '.asc' or '.sig) to verify is '$1';"
+echo "- GPG-file (expected extension '.asc' or '.sig') to verify is '$1';"
 echo "- GITHUB_STEP_SUMMARY --> '$GITHUB_STEP_SUMMARY';"
 
 FILE_EXTENSION=$(echo ${1##*.} | tr '[:upper:]' '[:lower:]')
