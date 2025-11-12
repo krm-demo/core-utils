@@ -1,3 +1,5 @@
+142c7a88 ZIP the bundle to deploy #7 (verify GPG in directory #3)
+fa61aa73 ZIP the bundle to deploy #6 (verify GPG in directory #2)
 6388b2af ZIP the bundle to deploy #5 (verify GPG in directory)
 2bd51fd0 ZIP the bundle to deploy #4 (add real 'pom.xml' #2)
 5fdf941c ZIP the bundle to deploy #3
