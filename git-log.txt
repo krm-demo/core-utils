@@ -1,3 +1,4 @@
+cfb093a2 << new snapshot version >> 21.28.002-SNAPSHOT
 da2a328a << internal release >> 21.28.001
 142c7a88 ZIP the bundle to deploy #7 (verify GPG in directory #3)
 fa61aa73 ZIP the bundle to deploy #6 (verify GPG in directory #2)
