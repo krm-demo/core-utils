@@ -127,35 +127,12 @@ jobs:
           $(ls -laxo ./target)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
           
-          echo "~~~~~~~~~~~~~ ( executing 'gpg-import.sh' ) ~~~~~~~~~~~~~"
-          .github/gpg/gpg-import.sh
-
-          echo "~~~~~~~~~~~~~ ( execute the 'sign-and-deploy-to-dir.sh' ) ~~~~~~~~~~~~~"
-          .github/scripts/deploy/sign-and-deploy-to-dir.sh
-
-          echo "~~~~~~~~~~~~~ ( dump the content of deploying bundle ) ~~~~~~~~~~~~~"
-          echo "
-          the result of \`sign-and-deploy-to-dir.sh\` (content of ZIP-file to deploy to Maven-Central):
-          \`\`\`bash
-          $(unzip -l target/*.zip)
-          \`\`\`" >> $GITHUB_STEP_SUMMARY
-
-          echo "~~~~~~~~~~~~~ ( verifying GPG-signatures in a ZIP-bundle to deploy ) ~~~~~~~~~~~~~"
-          .github/gpg/gpg-verify-dir.sh target/deploy-dir--maven-central/
-
       # Following step is for INTERNAL-release phase(1)
       - name: "Perform the deployment into Git-Hub Artifactory"
         if: ${{ inputs && inputs.release_type == 'INTERNAL' && inputs.release_phase == 'call-main'}}
         run: |
           echo "--- deployment to GitHub Artifactory: ---"
           cd main-branch
-
-          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary before 'deploy-github-packages.sh' ) ~~~~~~~~~~~~~"
-          echo "
-          the content of \`./target/\` directory before executing \`...deploy-github-packages.sh\`:
-          \`\`\`bash
-          $(ls -laxo ./target)
-          \`\`\`" >> $GITHUB_STEP_SUMMARY
 
           echo "---" >> $GITHUB_STEP_SUMMARY
           
@@ -182,20 +159,26 @@ jobs:
           echo "--- deployment to Maven-Central Artifactory: ---"
           cd main-branch
 
-          echo "~~~~~~~~~~~~~ ( dump the content of './target/' into summary before 'sign-and-deploy-maven-central.sh' ) ~~~~~~~~~~~~~"
-          echo "
-          the content of \`./target/\` directory before executing \`...sign-and-deploy-maven-central.sh\`:
-          \`\`\`bash
-          $(ls -laxo ./target)
-          \`\`\`" >> $GITHUB_STEP_SUMMARY
-
           echo "---" >> $GITHUB_STEP_SUMMARY
 
-          #echo "~~~~~~~~~~~~~ ( executing 'gpg-import.sh' ) ~~~~~~~~~~~~~"
+          echo "~~~~~~~~~~~~~ ( executing 'gpg-import.sh' ) ~~~~~~~~~~~~~"
           .github/gpg/gpg-import.sh
 
-          #echo "~~~~~~~~~~~~~ ( executing 'sign-and-deploy-maven-central.sh' ) ~~~~~~~~~~~~~"
-          .github/scripts/deploy/sign-and-deploy-maven-central.sh
+          echo "~~~~~~~~~~~~~ ( execute the 'sign-and-deploy-to-dir.sh' ) ~~~~~~~~~~~~~"
+          .github/scripts/deploy/sign-and-deploy-to-dir.sh
+
+          echo "~~~~~~~~~~~~~ ( dump the content of deploying bundle ) ~~~~~~~~~~~~~"
+          echo "
+          the result of \`sign-and-deploy-to-dir.sh\` (content of ZIP-file to deploy to Maven-Central):
+          \`\`\`bash
+          $(unzip -l target/*.zip)
+          \`\`\`" >> $GITHUB_STEP_SUMMARY
+
+          echo "~~~~~~~~~~~~~ ( verifying GPG-signatures in a ZIP-bundle to deploy ) ~~~~~~~~~~~~~"
+          .github/gpg/gpg-verify-dir.sh target/deploy-dir--maven-central/
+
+          echo "~~~~~~~~~~~~~ ( uploading the ZIP-bundle to Maven-Central ) ~~~~~~~~~~~~~"
+          .github/scripts/curl--mc-upload.sh
 
           echo "---" >> $GITHUB_STEP_SUMMARY
           
