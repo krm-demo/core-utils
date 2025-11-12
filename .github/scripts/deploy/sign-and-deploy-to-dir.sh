@@ -41,6 +41,7 @@ mvn -B gpg:sign-and-deploy-file \
   -Dfiles="${JAR_FILE__SOURCES},${JAR_FILE__JAVADOC}" \
   -Dclassifiers="sources,javadoc" \
   -Dtypes="jar,jar" \
+  -DpomFile="pom.xml" \
   -Dgpg.keyname="$GPG_KEY_ID" \
   -Dgpg.passphrase="$GPG_PASSPHRASE" \
   -DrepositoryId="local-nexus" \
