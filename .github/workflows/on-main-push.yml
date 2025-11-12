@@ -141,7 +141,7 @@ jobs:
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
           echo "~~~~~~~~~~~~~ ( verifying GPG-signatures in a ZIP-bundle to deploy ) ~~~~~~~~~~~~~"
-          .github/gpg/gpg-verify.sh target/deploy-dir--maven-central/
+          .github/gpg/gpg-verify-dir.sh target/deploy-dir--maven-central/
 
       # Following step is for INTERNAL-release phase(1)
       - name: "Perform the deployment into Git-Hub Artifactory"
