@@ -118,3 +118,6 @@ aHPxy7ZBrgv/QJi2qI8TnFmZikZpDw==
 
 # The command below allows to avoid the warning like: "WARNING: This key is not certified with a trusted signature!"
 ...> echo -e "5\ny\nquit" | gpg --command-fd 0 --expert --edit-key 0436EE146A372544 trust
+
+# !!! A very important thing is to make the generated GPG-key to be verifyable externally from Maven-Central site !!!
+gpg --keyserver keys.openpgp.org --send-keys 0436EE146A372544
