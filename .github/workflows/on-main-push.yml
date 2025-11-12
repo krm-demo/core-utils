@@ -140,6 +140,9 @@ jobs:
           $(unzip -l target/*.zip)
           \`\`\`" >> $GITHUB_STEP_SUMMARY
 
+          echo "~~~~~~~~~~~~~ ( verifying GPG-signatures in a ZIP-bundle to deploy ) ~~~~~~~~~~~~~"
+          .github/gpg/gpg-verify.sh target/deploy-dir--maven-central/
+
       # Following step is for INTERNAL-release phase(1)
       - name: "Perform the deployment into Git-Hub Artifactory"
         if: ${{ inputs && inputs.release_type == 'INTERNAL' && inputs.release_phase == 'call-main'}}
@@ -165,9 +168,6 @@ jobs:
 
           echo "~~~~~~~~~~~~~ ( executing 'sign-and-deploy-github-packages.sh' ) ~~~~~~~~~~~~~"
           .github/scripts/deploy/sign-and-deploy-github-packages.sh
-
-          echo "~~~~~~~~~~~~~ ( verifying GPG-signatures in a ZIP-bundle to deploy ) ~~~~~~~~~~~~~"
-          .github/gpg/gpg-verify.sh target/deploy-dir--maven-central/
 
           echo "---" >> $GITHUB_STEP_SUMMARY
 
