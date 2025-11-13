@@ -59,4 +59,7 @@ core-utils,org.krmdemo.techlabs.core.datetime,CoreDateTimeUtils,9,5,0,0,2,1,2,1,
 core-utils,org.krmdemo.techlabs.core.datetime,DateTimeTriplet,6,187,1,1,2,31,2,22,1,22
 core-utils,org.krmdemo.techlabs.core.datetime,LinkedDateTimeTripletMap,0,66,0,2,0,15,0,7,0,6
 core-utils,org.krmdemo.techlabs.core.datetime,LinkedDateTimeTripletMap.LinkedTriplet,17,134,0,16,5,22,3,21,3,13
-core-utils,org.krmdemo.techlabs.core,CoreUtilsMain,3,4,0,0,1,2,1,1,1,1
+core-utils,org.krmdemo.techlabs.core,CoreUtilsMain,3,9,0,0,1,4,1,1,1,1
+core-utils,org.krmdemo.techlabs.core.buildinfo,MavenBuildInfo,44,194,4,10,6,38,4,16,0,13
+core-utils,org.krmdemo.techlabs.core.buildinfo,BuildInfo,5,14,1,1,1,2,2,2,1,2
+core-utils,org.krmdemo.techlabs.core.buildinfo,CoreUtilsBuildInfo,0,10,0,0,0,3,0,2,0,2

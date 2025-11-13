@@ -6,3 +6,4 @@ org.krmdemo.techlabs.core.datetime
 org.krmdemo.techlabs.core.utils
 org.krmdemo.techlabs.core.classinfo
 org.krmdemo.techlabs.core
+org.krmdemo.techlabs.core.buildinfo

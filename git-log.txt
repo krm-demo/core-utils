@@ -1,3 +1,4 @@
+b1b99f5e introduce core interface BuildInfo and huge refactoring of MavenHelper #1
 223536f0 << new snapshot version >> 21.29.001-SNAPSHOT
 dab48557 << public release >> 21.28
 e2346be6 automate the deployment to Maven-Central #1
