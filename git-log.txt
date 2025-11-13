@@ -1,3 +1,4 @@
+2969da98 << new snapshot version >> 21.29.002-SNAPSHOT
 c7cea4de << internal release >> 21.29.001
 b1b99f5e introduce core interface BuildInfo and huge refactoring of MavenHelper #1
 223536f0 << new snapshot version >> 21.29.001-SNAPSHOT
