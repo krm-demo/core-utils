@@ -10,20 +10,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MavenHelperTest {
 
     private final MavenHelper mavenHelper = new MavenHelper(
-        "/org/krmdemo/techlabs/core/thtool/test-01--maven-project.properties");
+        "test-project-group", "test-project-artifact01");
     private final MavenHelper mavenHelperInternal = new MavenHelper(
-        "/org/krmdemo/techlabs/core/thtool/test-02--maven-project.properties");
+        "test-project-group", "test-project-artifact02");
     private final MavenHelper mavenHelperPublic = new MavenHelper(
-        "/org/krmdemo/techlabs/core/thtool/test-03--maven-project.properties");
+        "test-project-group", "test-project-artifact03");
 
     @Test
     void testResourcePath() {
-        assertThat(mavenHelper.getResourcePath())
-            .endsWith("test-01--maven-project.properties");
-        assertThat(mavenHelperInternal.getResourcePath())
-            .endsWith("test-02--maven-project.properties");
-        assertThat(mavenHelperPublic.getResourcePath())
-            .endsWith("test-03--maven-project.properties");
+        assertThat(mavenHelper.getResourcePath()).isEqualTo(
+            "/META-INF/maven/test-project-group/test-project-artifact01/maven-project.properties");
+        assertThat(mavenHelperInternal.getResourcePath()).isEqualTo(
+            "/META-INF/maven/test-project-group/test-project-artifact02/maven-project.properties");
+        assertThat(mavenHelperPublic.getResourcePath()).isEqualTo(
+            "/META-INF/maven/test-project-group/test-project-artifact03/maven-project.properties");
     }
 
     @Test
@@ -39,11 +39,11 @@ public class MavenHelperTest {
     @Test
     void testCatalogName() {
         assertThat(mavenHelper.getProjectCatalogName())
-            .isEqualTo("core-utils-21.0.2-SNAPSHOT");
+            .isEqualTo("test-project-artifact01-21.0.2-SNAPSHOT");
         assertThat(mavenHelperInternal.getProjectCatalogName())
-            .isEqualTo("core-utils-21.0.25");
+            .isEqualTo("test-project-artifact02-21.0.25");
         assertThat(mavenHelperPublic.getProjectCatalogName())
-            .isEqualTo("core-utils-la-la-la-21.0");
+            .isEqualTo("test-project-artifact03-21.0");
     }
 
     @Test

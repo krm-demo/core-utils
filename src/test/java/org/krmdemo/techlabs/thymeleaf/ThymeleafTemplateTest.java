@@ -20,7 +20,7 @@ import static org.krmdemo.techlabs.core.utils.PropertiesUtils.propsMapResource;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class ThymeleafTemplateTest {
 
-    public static final String RESOURCE__MAVEN_PROPS = "/META-INF/maven/maven-project.properties";
+    public static final String RESOURCE__MAVEN_PROPS = "/META-INF/maven/test-project-group/test-project-artifact01/maven-project.properties";
 
     @SuppressWarnings("unused")  // <-- used inside template !!!
     public boolean isIterable(Object someObject) {
@@ -201,10 +201,10 @@ public class ThymeleafTemplateTest {
             """, ctx);
         //System.out.printf("mvnProps:%n---- ---- ---- ----%n%s---- ---- ---- ----%n", mvnProps);
         assertThat(mvnProps).isEqualTo("""
-            mh.resourcePath = "/META-INF/maven/maven-project.properties";  // <-- escaped
-            mh.resourcePath = "/META-INF/maven/maven-project.properties";  // <-- un-escaped
-            zh.mask4(mh.resourcePath) = "/MET&amp;#8203;A-INF/maven/maven-project.proper&amp;#8203;ties";  // <-- escaped
-            zh.mask4(mh.resourcePath) = "/MET&#8203;A-INF/maven/maven-project.proper&#8203;ties";  // <-- un-escaped
+            mh.resourcePath = "/META-INF/maven/io.github.krm-demo/core-utils/maven-project.properties";  // <-- escaped
+            mh.resourcePath = "/META-INF/maven/io.github.krm-demo/core-utils/maven-project.properties";  // <-- un-escaped
+            zh.mask4(mh.resourcePath) = "/MET&amp;#8203;A-INF/maven/io.github.krm-demo/core-utils/maven-project.proper&amp;#8203;ties";  // <-- escaped
+            zh.mask4(mh.resourcePath) = "/MET&#8203;A-INF/maven/io.github.krm-demo/core-utils/maven-project.proper&#8203;ties";  // <-- un-escaped
             """);
     }
 }

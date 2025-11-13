@@ -82,13 +82,13 @@ In order to refer this particular project - we must add following XML-tags into 
 > [!CAUTION] 
 > **AS FOR `github_token` AND `MY_ADMIN_TOKEN` - THEY MUST BE RE-MASKED AND UN-OBFUSCATED** 
 
-After that you can use the latest internal release of **`[[${mavenProps.get("maven-project.artifact")}]]`**
+After that you can use the latest internal release of **`[[${mh.projectArtifact}]]`**
 in any maven/gradle project (from command-line and with IDE).
 As for using via JBang - there could be some troubles resolving
 that additional remote maven-repository and one of single-time workaround
 is to download the corresponding manually with command `mvn dependency:get`:
 ```bash
-...> mvn dependency:get -Dartifact=[[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]
+...> mvn dependency:get -Dartifact=[[${mh.projectGroup}]]:[[${mh.projectArtifact}]]:[[${mh.currentProjectVersion}]]
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ------------------< org.apache.maven:standalone-pom >-------------------
@@ -122,17 +122,17 @@ could be declared in `pom.xml` file in following way:
 - for main-source dependencies:
     ```XML
         <dependency>
-            <groupId>[[${mavenProps.get("maven-project.group")}]]</groupId>
-            <artifactId>[[${mavenProps.get("maven-project.artifact")}]]</artifactId>
-            <version>[[${mavenProps.get("maven-project.version")}]]</artifactId>
+            <groupId>[[${mh.projectGroup}]]</groupId>
+            <artifactId>[[${mh.projectArtifact}]]</artifactId>
+            <version>[[${mh.currentProjectVersion}]]</artifactId>
         </dependency>
     ```
 - for test-source dependencies:
     ```XML
         <dependency>
-            <groupId>[[${mavenProps.get("maven-project.group")}]]</groupId>
-            <artifactId>[[${mavenProps.get("maven-project.artifact")}]]</artifactId>
-            <version>[[${mavenProps.get("maven-project.version")}]]</artifactId>
+            <groupId>[[${mh.projectGroup}]]</groupId>
+            <artifactId>[[${mh.projectArtifact}]]</artifactId>
+            <version>[[${mh.currentProjectVersion}]]</artifactId>
             <scope>test</scope>
         </dependency>
     ```
@@ -141,21 +141,21 @@ Projects that use [**Gradle** Build Tool](https://gradle.org/) should declare th
 in either `build.gradle` or `build.gradle.kts` like following: 
 ```Gradle
     // for main-source implementation dependencies:
-    implementation("[[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]")
+    implementation("[[${mh.projectGroup}]]:[[${mh.projectArtifact}]]:[[${mh.currentProjectVersion}]]")
     . . . . . . . . . . . . . .
     // for test-source implementation dependencies:
-    testImplementation("[[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]")
+    testImplementation("[[${mh.projectGroup}]]:[[${mh.projectArtifact}]]:[[${mh.currentProjectVersion}]]")
 ```
 
 ### [JBang](https://www.jbang.dev/)
 If you don't have [JBang](https://www.jbang.dev/) installed - it's very easy to do
 either following by [instructions at their site](https://www.jbang.dev/download/)
 or using [sdkman](https://sdkman.io/sdks/jbang/). The easiest way to verify that
-both [JBang](https://www.jbang.dev/) and **`[[${mavenProps.get("maven-project.artifact")}]]`**-library
+both [JBang](https://www.jbang.dev/) and **`[[${mh.projectArtifact}]]`**-library
 are properly installed is to execute following command:
 
 ```bash
-...> jbang [[${mavenProps.get("maven-project.group")}]]:[[${mavenProps.get("maven-project.artifact")}]]:[[${mavenProps.get("maven-project.version")}]]
+...> jbang [[${mh.projectGroup}]]:[[${mh.projectArtifact}]]:[[${mh.currentProjectVersion}]]
 This is a Main-class of 'core-utils' library (just a test message here)
 ```
 You must see quite the same output as above. The versions and other detailed information could also be verified in such way.

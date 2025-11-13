@@ -11,7 +11,7 @@
 [( ${ah.currentMavenCentral.badgeMD} )]
 [( ${ah.currentMvnRepository.badgeMD} )]
 
-# <u>[[${mavenProps.get("maven-project.artifact")}]]</u>
+# <u>[[${mh.projectArtifact}]]</u>
 
 This Java-library contains utility-classes to simplify working with core-java API (streams, collections, io, ...).
 It was initially created as a core and reusable part of **`th-tool`** (which is not published yet).

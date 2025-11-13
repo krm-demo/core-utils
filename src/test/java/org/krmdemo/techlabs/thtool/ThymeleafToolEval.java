@@ -48,11 +48,12 @@ public class ThymeleafToolEval implements Callable<Integer> {
         - @|italic th-tool eval|@ @|cyan $'\\' "Hello, " + "World \\\\u0021\\\\u0021\\\\u0021" \\''|@ - the result is @|green Hello, World !!!|@;
         - @|italic th-tool eval|@ @|cyan $'\\' "\\\\\\\\inside back-slashes\\\\\\\\" \\''|@ - the result is @|green \\inside back-slashes\\|@;
         - @|italic th-tool eval|@ @|cyan $'\\' 1+2 * 3+4 * 5 \\''|@ - the result is @|green 27|@;
-        - @|italic th-tool eval|@ @|cyan $'\\' mavenProps["maven-project.artifact"] \\''|@ - the result is @|green core-utils|@;
+        - @|italic th-tool eval|@ @|cyan $'\\' mh.props["maven-project.artifact"] \\''|@ - the result is @|green core-utils|@;
         but in most casess and when using the same expression in templates such escaping is not necessary:
         - @|italic th-tool eval|@ @|cyan 20 - 30|@ - the result is @|green -10|@;
         - @|italic th-tool eval|@ @|cyan 20 + 30|@ - the result is @|green 50|@;
-        - @|italic th-tool eval|@ @|cyan mh.resourcePath |@ - the result is @|green /META-INF/maven/maven-project.properties|@;
+        - @|italic th-tool eval|@ @|cyan mh.resourcePath |@ - the result is:
+          @|green /META-INF/maven/io.github.krm-demo/core-utils/maven-project.properties|@;
         """
     )
     List<String> expressionsArgs;;

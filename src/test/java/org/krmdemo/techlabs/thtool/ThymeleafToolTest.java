@@ -39,10 +39,7 @@ public class ThymeleafToolTest {
     @Test
     @Tag("integration-test")
     void testProcess_Readme() {
-        int exitCode = ThymeleafTool.executeMain(
-            "--var-file",
-            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
-            "process",
+        int exitCode = ThymeleafTool.executeMain("process",
             ".github/th-templates/ROOT-Readme.md.th"
         );
         if (!sbErr.isEmpty()) {
@@ -65,10 +62,7 @@ public class ThymeleafToolTest {
 
     @Test
     void testProcess_ReleaseCatalog() {
-        int exitCode = ThymeleafTool.executeMain(
-            "--var-file",
-            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
-            "process",
+        int exitCode = ThymeleafTool.executeMain("process",
             "--output",
             ".github/th-release-catalog/index.html",
             ".github/th-templates/GH-PAGES--Release-Catalog.html.th"
@@ -89,10 +83,7 @@ public class ThymeleafToolTest {
     @Test
     @Tag("integration-test")
     void testProcessDir_TestSite_DryRun() {
-        int exitCode = ThymeleafTool.executeMain(
-            "--var-file",
-            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
-            "process-dir",
+        int exitCode = ThymeleafTool.executeMain("process-dir",
             "--input-dir",
             ".github/th-test-site/original"
         );
@@ -108,10 +99,7 @@ public class ThymeleafToolTest {
     @Test
     @Tag("integration-test")
     void testProcessDir_TestSite() {
-        int exitCode = ThymeleafTool.executeMain(
-            "--var-file",
-            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
-            "process-dir",
+        int exitCode = ThymeleafTool.executeMain("process-dir",
             "--input-dir",
             ".github/th-test-site/original",
             "--output-dir",
@@ -139,10 +127,7 @@ public class ThymeleafToolTest {
             String.format("input directory '%s' to process the JavaDoc-report does not exist",
                 JAVADOC_REPORT__INPUT));
 
-        int exitCode = ThymeleafTool.executeMain(
-            "--var-file",
-            "mavenProps=./target/classes/META-INF/maven/maven-project.properties",
-            "process-dir",
+        int exitCode = ThymeleafTool.executeMain("process-dir",
             "--input-dir",
             JAVADOC_REPORT__INPUT,
             "--output-dir",

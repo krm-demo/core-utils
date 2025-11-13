@@ -3,4 +3,4 @@
 #   Execute (not build!) 'th-tool' and delegate all command-line of this bash-script's arguments to it.
 # -------------------------------------------------------------------------------------------------------
 
-mvn --quiet exec:java@th-tool "-Dexec.args=--var-file mavenProps=./target/classes/META-INF/maven/maven-project.properties $*"
+mvn --quiet exec:java@th-tool "-Dexec.args=$*"

@@ -228,7 +228,7 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-compat</artifactId>
-      <version>${maven-comat.version}</version>
+      <version>${maven-compat.version}</version>
       <scope>test</scope>
     </dependency>
   -->
@@ -367,7 +367,7 @@
             </goals>
             <configuration>
               <outputFile>
-                ${project.build.outputDirectory}/META-INF/maven/maven-project.properties
+                ${project.build.outputDirectory}/META-INF/maven/${project.groupId}/${project.artifactId}/maven-project.properties
               </outputFile>
             </configuration>
           </execution>
@@ -654,30 +654,28 @@
               <Project-Group>${project.groupId}</Project-Group>
               <Project-Org-Url>${project.organization.url}</Project-Org-Url>
               <Project-Url>${project.url}</Project-Url>
-              <Env-Path>${env.PATH}</Env-Path>
-              <Env-Pwd>${env.PWD}</Env-Pwd>
-              <Project-Build-Url>${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}</Project-Build-Url>
-              <Project-Commit-Url>${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/commit/${env.GITHUB_SHA}</Project-Commit-Url>
+              <Project-Build-Url>${cicd.server.url}/${cicd.repository}/actions/runs/${cicd.build.run.id}</Project-Build-Url>
+              <Project-Commit-Url>${cicd.server.url}/${cicd.repository}/commit/${cicd.git.commit}</Project-Commit-Url>
             </manifestEntries>
             <manifestSections>
               <manifestSection>
                 <name>git-hub</name>
                 <manifestEntries>
-                  <Github-Server-Url>${env.GITHUB_SERVER_URL}</Github-Server-Url>
-                  <Github-Server-Repository>${env.GITHUB_REPOSITORY}</Github-Server-Repository>
-                  <Github-Sha>${env.GITHUB_SHA}</Github-Sha>
-                  <Github-Ref>${env.GITHUB_REF}</Github-Ref>
-                  <Github-Ref-Name>${env.GITHUB_REF_NAME}</Github-Ref-Name>
-                  <Github-Ref-Type>${env.GITHUB_REF_TYPE}</Github-Ref-Type>
-                  <Github-Head-Ref>${env.GITHUB_HEAD_REF}</Github-Head-Ref>
-                  <Github-Run-Id>${env.GITHUB_RUN_ID}</Github-Run-Id>
-                  <Github-Run-Attempt>${env.GITHUB_RUN_ATTEMPT}</Github-Run-Attempt>
-                  <Github-Run-Number>${env.GITHUB_RUN_NUMBER}</Github-Run-Number>
-                  <Github-Workflow>${env.GITHUB_WORKFLOW}</Github-Workflow>
-                  <Github-Workflow-Event>${env.GITHUB_EVENT_NAME}</Github-Workflow-Event>
-                  <Github-Workflow-Job>${env.GITHUB_JOB}</Github-Workflow-Job>
-                  <Github-Workflow-Ref>${env.GITHUB_WORKFLOW_REF}</Github-Workflow-Ref>
-                  <Github-Workflow-Sha>${env.GITHUB_WORKFLOW_SHA}</Github-Workflow-Sha>
+                  <Github-Server-Url>${cicd.server.url}</Github-Server-Url>
+                  <Github-Server-Repository>${cicd.repository}</Github-Server-Repository>
+                  <Github-Sha>${cicd.git.commit}</Github-Sha>
+                  <Github-Ref>${cicd.git.ref}</Github-Ref>
+                  <Github-Ref-Name>${cicd.git.ref.name}</Github-Ref-Name>
+                  <Github-Ref-Type>${cicd.git.ref.type}</Github-Ref-Type>
+                  <Github-Head-Ref>${cicd.git.ref.head}</Github-Head-Ref>
+                  <Github-Run-Id>${cicd.build.run.id}</Github-Run-Id>
+                  <Github-Run-Attempt>${cicd.build.run.attempt}</Github-Run-Attempt>
+                  <Github-Run-Number>${cicd.build.run.number}</Github-Run-Number>
+                  <Github-Workflow>${cicd.build.run.workflow}</Github-Workflow>
+                  <Github-Workflow-Event>${cicd.build.run.event}</Github-Workflow-Event>
+                  <Github-Workflow-Job>${cicd.build.run.job}</Github-Workflow-Job>
+                  <Github-Workflow-Ref>${cicd.build.run.workflow.ref}</Github-Workflow-Ref>
+                  <Github-Workflow-Sha>${cicd.build.run.workflow.commit}</Github-Workflow-Sha>
                 </manifestEntries>
               </manifestSection>
             </manifestSections>
@@ -785,9 +783,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <java.version>21</java.version>
+    <minimal.java.version>21</minimal.java.version>
     <lombock.version>1.18.42</lombock.version>
-    <maven.compiler.release>${java.version}</maven.compiler.release>
+    <maven.compiler.release>${minimal.java.version}</maven.compiler.release>
     <maven-compiler-plugin.debug>true</maven-compiler-plugin.debug>
     <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
 
@@ -811,7 +809,7 @@
     <maven.install.plugin.version>3.1.4</maven.install.plugin.version>
     <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven.javadoc.plugin.version>3.12.0</maven.javadoc.plugin.version>
-    <maven.javadoc.plugin.release>${java.version}</maven.javadoc.plugin.release>
+    <maven.javadoc.plugin.release>${minimal.java.version}</maven.javadoc.plugin.release>
     <maven-properties-plugin.version>1.2.1</maven-properties-plugin.version>
     <maven.release.plugin.version>3.2.0</maven.release.plugin.version>
     <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
@@ -821,7 +819,7 @@
 
     <maven.version>3.9.11</maven.version>
     <maven-core.version>${maven.version}</maven-core.version>
-    <maven-comat.version>${maven.version}</maven-comat.version>
+    <maven-compat.version>${maven.version}</maven-compat.version>
     <maven-plugin-api.version>${maven.version}</maven-plugin-api.version>
     <maven-plugin-annotations.version>3.15.1</maven-plugin-annotations.version>
     <maven-version-to-enforce>[${maven.version},)</maven-version-to-enforce>
@@ -846,9 +844,27 @@
     <maven-project.group>${project.groupId}</maven-project.group>
     <maven-project.artifact>${project.artifactId}</maven-project.artifact>
     <maven-project.version>${project.version}</maven-project.version>
+    <maven-project.description>${project.description}</maven-project.description>
 
     <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSS'Z'</maven.build.timestamp.format>
     <maven-project.build-date-time>${maven.build.timestamp}</maven-project.build-date-time>
+
+    <!-- TODO: move the following declarations to special maven-profile over the env-var GITHUB_ACTIONS='true' -->
+    <cicd.server.url>${env.GITHUB_SERVER_URL}</cicd.server.url>
+    <cicd.repository>${env.GITHUB_REPOSITORY}</cicd.repository>
+    <cicd.git.commit>${env.GITHUB_SHA}</cicd.git.commit>
+    <cicd.git.ref>${env.GITHUB_REF}</cicd.git.ref>
+    <cicd.git.ref.head>${env.GITHUB_HEAD_REF}</cicd.git.ref.head>
+    <cicd.git.ref.name>${env.GITHUB_REF_NAME}</cicd.git.ref.name>
+    <cicd.git.ref.type>${env.GITHUB_REF_TYPE}</cicd.git.ref.type>
+    <cicd.build.run.id>${env.GITHUB_RUN_ID}</cicd.build.run.id>
+    <cicd.build.run.attempt>${env.GITHUB_RUN_ATTEMPT}</cicd.build.run.attempt>
+    <cicd.build.run.number>${env.GITHUB_RUN_NUMBER}</cicd.build.run.number>
+    <cicd.build.run.event>${env.GITHUB_EVENT_NAME}</cicd.build.run.event>
+    <cicd.build.run.job>${env.GITHUB_JOB}</cicd.build.run.job>
+    <cicd.build.run.workflow>${env.GITHUB_WORKFLOW}</cicd.build.run.workflow>
+    <cicd.build.run.workflow.commit>${env.GITHUB_WORKFLOW_SHA}</cicd.build.run.workflow.commit>
+    <cicd.build.run.workflow.ref>${env.GITHUB_WORKFLOW_REF}</cicd.build.run.workflow.ref>
   </properties>
 
   <distributionManagement>
