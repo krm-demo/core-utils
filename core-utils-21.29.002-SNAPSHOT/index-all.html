@@ -141,7 +141,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="org/krmdemo/techlabs/core/dump/render/Highlight.Kind.html#BG" class="member-name-link">BG</a> - Enum constant in enum class org.krmdemo.techlabs.core.dump.render.<a href="org/krmdemo/techlabs/core/dump/render/Highlight.Kind.html" title="enum class in org.krmdemo.techlabs.core.dump.render">Highlight.Kind</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" class="type-name-link" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a> - Interface in <a href="org/krmdemo/techlabs/core/buildinfo/package-summary.html">org.krmdemo.techlabs.core.buildinfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">This interface represents the build-information that is usually collected by build-tool
+into some dedicated text-resource, which are available in classpath at runtime.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
@@ -441,11 +444,16 @@ over <code>JsonNode</code>, which is the base data-unit that is provided by
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getBuildDateTime()" class="member-name-link">getBuildDateTime()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the date-time when the project was built as <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a>.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#getBuildDateTime()" class="member-name-link">getBuildDateTime()</a> - Method in class org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getBuildDateTimeStr()" class="member-name-link">getBuildDateTimeStr()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the build date-time without information about day of week,
+because in some cases the information about the day of week is not desired.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/classinfo/ClassInfo.html#getClassLoaderName()" class="member-name-link">getClassLoaderName()</a> - Method in record class org.krmdemo.techlabs.core.classinfo.<a href="org/krmdemo/techlabs/core/classinfo/ClassInfo.html" title="class in org.krmdemo.techlabs.core.classinfo">ClassInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/classinfo/ClassInfo.html#getClassLocation()" class="member-name-link">getClassLocation()</a> - Method in record class org.krmdemo.techlabs.core.classinfo.<a href="org/krmdemo/techlabs/core/classinfo/ClassInfo.html" title="class in org.krmdemo.techlabs.core.classinfo">ClassInfo</a></dt>
@@ -471,15 +479,23 @@ over <code>JsonNode</code>, which is the base data-unit that is provided by
 <dt><a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#getLinkedYearAndMonth()" class="member-name-link">getLinkedYearAndMonth()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">LinkedDateTimeTripletMap.LinkedTriplet</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getLoadingErrors()" class="member-name-link">getLoadingErrors()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the list of loading-errors that was happened on constructing the instance of this object.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#getLoadingErrors()" class="member-name-link">getLoadingErrors()</a> - Method in class org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getLocalDateTime()" class="member-name-link">getLocalDateTime()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getMavenCoordinates()" class="member-name-link">getMavenCoordinates()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the maven-coordinates - the colon(<code>':'</code>)-separated <a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getProjectGroup()"><code>project-group</code></a>,
+<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getProjectArtifact()"><code>project-artifact</code></a> and <a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getProjectVersion()"><code>project-version</code></a>,
+<a href="https://gradle.org/">Gradle</a>-style identifier of any project and library.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getMinimalJavaVersion()" class="member-name-link">getMinimalJavaVersion()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the minimal supported version of JDK, where this library could be used</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#getMinimalJavaVersion()" class="member-name-link">getMinimalJavaVersion()</a> - Method in class org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getMinutes()" class="member-name-link">getMinutes()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
@@ -489,23 +505,36 @@ over <code>JsonNode</code>, which is the base data-unit that is provided by
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getMonth()" class="member-name-link">getMonth()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getProjectArtifact()" class="member-name-link">getProjectArtifact()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the value of maven-project artifact (<code>&lt;artifactId&gt;</code>-tag in <code>pom.xml</code>),
+which must also be a part of <a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getResourcePath()"><code>resource-path</code></a>.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#getProjectArtifact()" class="member-name-link">getProjectArtifact()</a> - Method in class org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getProjectGroup()" class="member-name-link">getProjectGroup()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the value of maven-project group (<code>&lt;groupId&gt;</code>-tag in <code>pom.xml</code>),
+which must also be a part of <a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getResourcePath()"><code>resource-path</code></a>.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#getProjectGroup()" class="member-name-link">getProjectGroup()</a> - Method in class org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getProjectProps()" class="member-name-link">getProjectProps()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting a sorted map of build-information properties (not dumped by default).</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#getProjectProps()" class="member-name-link">getProjectProps()</a> - Method in class org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getProjectVersion()" class="member-name-link">getProjectVersion()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the value of maven-project version (<code>&lt;version&gt;</code>-tag in <code>pom.xml</code>),
+which must also be a value of corresponding <b><code>git</code></b>-tag in <code>git</code>-repository.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#getProjectVersion()" class="member-name-link">getProjectVersion()</a> - Method in class org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getResourcePath()" class="member-name-link">getResourcePath()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The path to resource that is used to represent the build-information</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#getResourcePath()" class="member-name-link">getResourcePath()</a> - Method in class org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/classinfo/ClassInfo.html#getSimpleName()" class="member-name-link">getSimpleName()</a> - Method in record class org.krmdemo.techlabs.core.classinfo.<a href="org/krmdemo/techlabs/core/classinfo/ClassInfo.html" title="class in org.krmdemo.techlabs.core.classinfo">ClassInfo</a></dt>
@@ -917,7 +946,7 @@ where each line is an element of returning <a href="https://docs.oracle.com/en/j
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a> - Class in <a href="org/krmdemo/techlabs/core/buildinfo/package-summary.html">org.krmdemo.techlabs.core.buildinfo</a></dt>
 <dd>
-<div class="block">Implementation of <a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo"><code>BuildInfo</code></a> with information that is loaded from properties-file,
+<div class="block">Implementation of <a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo"><code>BuildInfo</code></a> with build-information that is loaded from properties-file,
 that is expected to be at classpath as a resource with path:</div>
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">MavenBuildInfo(String, String)</a> - Constructor for class org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a></dt>
