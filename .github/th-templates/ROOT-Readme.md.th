@@ -1,4 +1,4 @@
-[[ ${gbh.badgeBuildPassing} ]]  [( ${gbh.badgeReleaseCatalogMD} )]  [(${ openTest4j.bp.root.badgeMD })] [(${ jacoco.badgeMarkdown })]
+[[ ${gbh.badgeBuildPassing} ]]  [( ${gbh.badgeReleaseCatalogMD} )]  [(${ openTest4j.bp.root.badgeMD })] [(${ jacoco.bp.root.badgeMD })]
 
 [( ${gbh.badgeLatestPublicGitHubMD} )] [( ${gbh.badgeLatestInternalGitHubMD} )] [( ${gbh.badgeSnapshotGitHubMD} )]
 

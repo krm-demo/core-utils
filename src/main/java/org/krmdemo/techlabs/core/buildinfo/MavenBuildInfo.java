@@ -14,7 +14,7 @@ import java.util.NavigableMap;
 import java.util.SequencedMap;
 
 /**
- * Implementation of {@link BuildInfo} with information that is loaded from properties-file,
+ * Implementation of {@link BuildInfo} with build-information that is loaded from properties-file,
  * that is expected to be at classpath as a resource with path: <pre>{@code
  * /META-INF/maven/'project-group'/'project-artifact'/maven-project.properties
  * }</pre>

@@ -440,7 +440,7 @@ public class ArtifactoryHelper {
      * This is used mostly for link-tooltips, but not for real reference as gradle-dependencies
      *
      * @param versionStr maven-project version
-     * @return Gradle-style coordinates of maven-project
+     * @return <a href="https://gradle.org/">Gradle</a>-style identifier of any project and library.
      */
     public String mavenCoordinates(String versionStr) {
         MavenHelper mh = MavenHelper.fromCtx(ttCtx);

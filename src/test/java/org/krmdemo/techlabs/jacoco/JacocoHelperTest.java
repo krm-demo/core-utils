@@ -4,11 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.krmdemo.techlabs.core.utils.CorePropsUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
-
-import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.krmdemo.techlabs.thtool.ThymeleafToolCtx.DEFAULT_VARS_DIR__AS_FILE;
@@ -30,13 +26,13 @@ public class JacocoHelperTest {
     @Test
     void testBadgeHtml() {
         JacocoHelper jacoco = JacocoHelper.fromCtxLazy(ttCtx);
-        assertThat(jacoco.getBadgeHtml()).contains("jacoco-reports");
+        assertThat(jacoco.getBp().getRoot().getBadgeHtml()).contains("jacoco-reports");
     }
 
     @Test
     void testBadgeMarkdown() {
         JacocoHelper jacoco = JacocoHelper.fromCtxLazy(ttCtx);
-        assertThat(jacoco.getBadgeMarkdown()).contains("[JaCoCo]");
+        assertThat(jacoco.getBp().getRoot().getBadgeMD()).contains("[JaCoCo report]");
     }
 
     @Test
