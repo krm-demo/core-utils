@@ -1,3 +1,4 @@
+aa3e6f65 << new snapshot version >> 21.29.003-SNAPSHOT
 c8a924f3 << internal release >> 21.29.002
 07437d18 minor corrections in JavaSoc and README
 50df5ad7 some improvements in badges (jacoco)
