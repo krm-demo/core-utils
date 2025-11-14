@@ -5,6 +5,8 @@ import lombok.Getter;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.krmdemo.techlabs.thtool.ThymeleafTool;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
+import org.krmdemo.techlabs.thtool.badges.BadgeProvider;
+import org.krmdemo.techlabs.thtool.badges.BadgeVersionProvider;
 
 import java.nio.file.Path;
 import java.util.Objects;

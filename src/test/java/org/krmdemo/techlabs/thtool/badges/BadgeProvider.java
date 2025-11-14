@@ -1,9 +1,11 @@
-package org.krmdemo.techlabs.thtool.helpers;
+package org.krmdemo.techlabs.thtool.badges;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
+import org.krmdemo.techlabs.thtool.helpers.CommitGroupMajor;
+import org.krmdemo.techlabs.thtool.helpers.CommitGroupMinor;
 
 /**
  * An interface to helper-components that provides badges and links

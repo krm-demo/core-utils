@@ -2,6 +2,7 @@ package org.krmdemo.techlabs.thtool.helpers;
 
 import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.thtool.ThymeleafToolCtx;
+import org.krmdemo.techlabs.thtool.badges.BadgeProvider;
 import org.mockito.MockedStatic;
 
 import static org.assertj.core.api.Assertions.assertThat;

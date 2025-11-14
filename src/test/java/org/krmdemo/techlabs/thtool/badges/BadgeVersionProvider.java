@@ -1,9 +1,10 @@
-package org.krmdemo.techlabs.thtool.helpers;
+package org.krmdemo.techlabs.thtool.badges;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.krmdemo.techlabs.thtool.helpers.CommitGroupMajor;
+import org.krmdemo.techlabs.thtool.helpers.CommitGroupMinor;
 
 import java.util.function.Function;
 
