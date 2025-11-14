@@ -87,7 +87,7 @@ public class JacksonUtils {
 
     public static &lt;T&gt; T jsonValueFromString(String jsonContent, TypeReference&lt;T&gt; typeRef) {
         try {
-<span class="nc" id="L90">            return OBJECT_MAPPER_DUMP.readValue(jsonContent, typeRef);</span>
+<span class="fc" id="L90">            return OBJECT_MAPPER_DUMP.readValue(jsonContent, typeRef);</span>
 <span class="nc" id="L91">        } catch (JsonProcessingException jsonEx) {</span>
 <span class="nc" id="L92">            throw new IllegalArgumentException(</span>
 <span class="nc" id="L93">                String.format(&quot;could not read &lt;%s&gt;:%n---%n'%s'%n---%n&quot;, typeRef, jsonContent), jsonEx);</span>
@@ -101,7 +101,7 @@ public class JacksonUtils {
 
     public static List&lt;Object&gt; jsonArrFromString(String jsonContent) {
         // automatic casting to &quot;java.util.List&quot; looks like a magic
-<span class="nc" id="L104">        return jsonValueFromString(jsonContent, new TypeReference&lt;&gt;(){});</span>
+<span class="fc" id="L104">        return jsonValueFromString(jsonContent, new TypeReference&lt;&gt;(){});</span>
     }
 
     public static JsonNode jsonTreeFromResource(String resourcePath) {

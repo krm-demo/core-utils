@@ -31,12 +31,12 @@ core-utils,org.krmdemo.techlabs.core.utils,CoreFileUtils,110,255,18,25,25,48,14,
 core-utils,org.krmdemo.techlabs.core.utils,SysDumpUtils,98,260,5,12,17,45,6,22,1,18
 core-utils,org.krmdemo.techlabs.core.utils,CoreStreamUtils,97,124,0,6,18,20,19,23,19,20
 core-utils,org.krmdemo.techlabs.core.utils,JacksonUtils.new TypeReference() {...},3,0,0,0,1,0,1,0,1,0
-core-utils,org.krmdemo.techlabs.core.utils,JacksonUtils,175,56,0,0,33,11,10,6,10,6
+core-utils,org.krmdemo.techlabs.core.utils,JacksonUtils,163,68,0,0,31,13,8,8,8,8
 core-utils,org.krmdemo.techlabs.core.utils,JacksonUtils.new TypeReference() {...},0,3,0,0,0,1,0,1,0,1
 core-utils,org.krmdemo.techlabs.core.utils,JacksonUtils.new TypeReference() {...},0,3,0,0,0,1,0,1,0,1
 core-utils,org.krmdemo.techlabs.core.utils,JacksonUtils.new TypeReference() {...},3,0,0,0,1,0,1,0,1,0
 core-utils,org.krmdemo.techlabs.core.utils,JacksonUtils.new TypeReference() {...},3,0,0,0,1,0,1,0,1,0
-core-utils,org.krmdemo.techlabs.core.utils,JacksonUtils.new TypeReference() {...},3,0,0,0,1,0,1,0,1,0
+core-utils,org.krmdemo.techlabs.core.utils,JacksonUtils.new TypeReference() {...},0,3,0,0,0,1,0,1,0,1
 core-utils,org.krmdemo.techlabs.core.classinfo,ClassInfo,3,73,0,2,1,15,1,10,1,9
 core-utils,org.krmdemo.techlabs.core.classinfo,SystemInfo,37,0,2,0,11,0,3,0,2,0
 core-utils,org.krmdemo.techlabs.core.classinfo,JarFileInfo,9,45,0,0,3,13,1,6,1,6
