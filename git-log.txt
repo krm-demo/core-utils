@@ -1,3 +1,4 @@
+f9afcdd8 some improvements in badges (openTest4j)
 2969da98 << new snapshot version >> 21.29.002-SNAPSHOT
 c7cea4de << internal release >> 21.29.001
 b1b99f5e introduce core interface BuildInfo and huge refactoring of MavenHelper #1
