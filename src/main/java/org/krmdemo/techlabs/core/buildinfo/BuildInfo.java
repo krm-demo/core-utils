@@ -73,7 +73,7 @@ public interface BuildInfo {
     /**
      * Getting the maven-coordinates - the colon({@code ':'})-separated {@link #getProjectGroup() project-group},
      * {@link #getProjectArtifact() project-artifact} and {@link #getProjectVersion() project-version},
-     * <a href="https://gradle.org/">Gradle</a>-style identifier of any project and library.
+     * which is also a <a href="https://gradle.org/">Gradle</a>-style identifier of any project and library.
      *
      * @return colon({@code ':'})-separated {@link #getProjectGroup() project-group},
      *         {@link #getProjectArtifact() project-artifact} and {@link #getProjectVersion() project-version}
@@ -113,7 +113,7 @@ public interface BuildInfo {
     /**
      * Getting the list of loading-errors that was happened on constructing the instance of this object.
      * In normal scenario such list <u>must be empty!</u>
-     * 
+     *
      * @return if not empty - the list of errors that were discovered when loading the resource-content
      */
     @JsonGetter("loading-errors")
