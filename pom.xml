@@ -233,6 +233,12 @@
     </dependency>
   -->
 
+    <dependency>
+      <groupId>io.github.openfeign</groupId>
+      <artifactId>feign-jackson</artifactId>
+      <version>${openfeign.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -840,6 +846,7 @@
     <commons-text.version>1.14.0</commons-text.version>
     <com.fasterxml.jackson.version>2.20.1</com.fasterxml.jackson.version>
     <snakeyaml-engine.version>2.10</snakeyaml-engine.version>
+    <openfeign.version>13.6</openfeign.version>
 
     <maven-project.group>${project.groupId}</maven-project.group>
     <maven-project.artifact>${project.artifactId}</maven-project.artifact>

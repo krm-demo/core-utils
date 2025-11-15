@@ -1,4 +1,4 @@
-package org.krmdemo.techlabs.github;
+package org.krmdemo.techlabs.ghapi;
 
 import org.junit.jupiter.api.Test;
 
