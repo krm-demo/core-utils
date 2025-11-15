@@ -1,3 +1,4 @@
+11b4a00d playing with Open-Feign #1
 7454a8bf introduce Open-Feign
 9d7b8aac introduce GithubApiTest #1
 aa3e6f65 << new snapshot version >> 21.29.003-SNAPSHOT
