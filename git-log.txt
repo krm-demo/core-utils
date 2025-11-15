@@ -1,3 +1,4 @@
+d95ca23e playing with Open-Feign #2
 11b4a00d playing with Open-Feign #1
 7454a8bf introduce Open-Feign
 9d7b8aac introduce GithubApiTest #1
