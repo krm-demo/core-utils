@@ -2,6 +2,8 @@ package org.krmdemo.techlabs.ghapi;
 
 import feign.Feign;
 import feign.HeaderMap;
+import feign.Headers;
+import feign.Param;
 import feign.QueryMap;
 import feign.Request;
 import feign.RequestLine;
@@ -57,8 +59,67 @@ public class GithubApiTest {
     final static Duration HTTP_TIMEOUT = Duration.ofMillis(HTTP_TIMEOUT_MS);
 
     @Test
+    @DisplayName("1. Old-School approach with HttpURLConnection")
+    void testListPackages_OldSchool(TestInfo testInfo) {
+        System.out.printf("------ %s: ------%n", testInfo.getDisplayName());
+        Map<String, String> paramsMap = mavenTypeParamsMap();
+        URI uri = URI.create(URL_LIST_PACKAGES + urlParams(paramsMap));
+        try {
+            HttpURLConnection httpConn = (HttpURLConnection)uri.toURL().openConnection();
+            httpConn.setRequestMethod("GET");
+            headersMapStr().forEach(httpConn::setRequestProperty);  // <-- very nice way to provide headers !!!
+            httpConn.setConnectTimeout(HTTP_TIMEOUT_MS);
+            httpConn.setReadTimeout(HTTP_TIMEOUT_MS);
+            // remote invocation is performed after following statement:
+            int httpStatus = httpConn.getResponseCode();
+            assertThat(httpStatus).isEqualTo(200);
+            Map<String, List<String>> responseHeadersMap = httpConn.getHeaderFields();
+            System.out.println("responseHeadersMap.size() --> " + responseHeadersMap.size());
+            printHeader(responseHeadersMap, "content-type");
+            printHeader(responseHeadersMap, "content-length");
+            printHeader(responseHeadersMap, "date");
+            String responseBody = IOUtils.toString(httpConn.getInputStream(), Charset.defaultCharset());
+            verifyResponseBody(responseBody);
+            httpConn.disconnect();
+        } catch (IOException ioEx) {
+            throw new IllegalStateException("cannot connect to URI via HttpURLConnection - " + uri, ioEx);
+        }
+    }
+
+    @Test
+    @DisplayName("2. Java-11 approach with HttpClient")
+    void testListPackages_HttpClient(TestInfo testInfo) {
+        System.out.printf("------ %s: ------%n", testInfo.getDisplayName());
+        Map<String, String> paramsMap = mavenTypeParamsMap();
+        URI uri = URI.create(URL_LIST_PACKAGES + urlParams(paramsMap));
+        try (HttpClient client = HttpClient.newBuilder().build()) {
+            HttpRequest.Builder requestBuilder =
+                HttpRequest.newBuilder()
+                    .timeout(HTTP_TIMEOUT)
+                    .uri(uri).GET();
+            headersMapStr().forEach(requestBuilder::header);    // <-- very nice way to provide headers !!!
+            HttpRequest request = requestBuilder.build();
+            // remote invocation is performed after following statement:
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            assertThat(response.statusCode()).isEqualTo(200);
+            Map<String, List<String>> responseHeadersMap = response.headers().map();
+            System.out.println("responseHeadersMap.size() --> " + responseHeadersMap.size());
+            printHeader(responseHeadersMap, "content-type");
+            printHeader(responseHeadersMap, "content-length");
+            printHeader(responseHeadersMap, "date");
+//            System.out.println("==========================================================");
+//            PrintUtils.printAsJsonTxt(responseHeadersMap);
+//            System.out.println();
+//            System.out.println("==========================================================");
+            verifyResponseBody(response.body());
+        } catch (InterruptedException | IOException ex) {
+            throw new IllegalStateException("cannot connect to URI via HttpClient - " + uri, ex);
+        }
+    }
+
+    @Test
     @DisplayName("3. Open-Feign approach (using @HeaderMap and @QueryMap)")
-    void testListPackages_OpenFeign(TestInfo testInfo) {
+    void testListPackages_OpenFeign_HeaderMaps(TestInfo testInfo) {
         System.out.printf("------ %s: ------%n", testInfo.getDisplayName());
 
         interface PackagesApi {
@@ -75,52 +136,38 @@ public class GithubApiTest {
     }
 
     @Test
-    @DisplayName("2. Java-11 approach with HttpClient")
-    void testListPackages_HttpClient(TestInfo testInfo) {
+    @DisplayName("4. Open-Feign approach (using @Headers on interface)")
+    void testListPackages_OpenFeign_HeadersAnnotation(TestInfo testInfo) {
         System.out.printf("------ %s: ------%n", testInfo.getDisplayName());
-        Map<String, String> paramsMap = mavenTypeParamsMap();
-        URI uri = URI.create(URL_LIST_PACKAGES + urlParams(paramsMap));
-        try (HttpClient client = HttpClient.newBuilder().build()) {
-            HttpRequest.Builder requestBuilder =
-                HttpRequest.newBuilder()
-                    .timeout(HTTP_TIMEOUT)
-                    .uri(uri).GET();
-            headersMapStr().forEach(requestBuilder::header);
-            HttpRequest request = requestBuilder.build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            assertThat(response.statusCode()).isEqualTo(200);
-            Map<String, List<String>> responseHeadersMap = response.headers().map();
-            System.out.println("responseHeadersMap.size() --> " + responseHeadersMap.size());
-//            System.out.println("==========================================================");
-//            PrintUtils.printAsJsonTxt(responseHeadersMap);
-//            System.out.println();
-//            System.out.println("==========================================================");
-            verifyResponseBody(response.body());
-        } catch (InterruptedException | IOException ex) {
-            throw new IllegalStateException("cannot connect to URI via HttpClient - " + uri, ex);
+
+        @Headers({
+            "Authorization: token {github-token}",
+            "Accept: application/vnd.github+json",
+            "X-GitHub-Api-Version: 2022-11-28",
+        })
+        interface PackagesApi {
+            @RequestLine("GET /users/krm-demo/packages")
+            List<Object> listAll(@Param("github-token") String githubToken, @QueryMap Map<String, Object> queryMap);
         }
+
+        PackagesApi githubPackages = Feign.builder()
+            .options(new Request.Options(HTTP_TIMEOUT, HTTP_TIMEOUT, true))
+            .decoder(new JacksonDecoder())
+            .target(PackagesApi.class, URL_GITHUB_API);
+        List<Object> responseList = githubPackages.listAll(GITHUB_AUTH_TOKEN, mavenTypeQueryMap());
+        verifyResponseList(responseList);
     }
 
-    @Test
-    @DisplayName("1. Old-School approach with HttpURLConnection")
-    void testListPackages_OldSchool(TestInfo testInfo) {
-        System.out.printf("------ %s: ------%n", testInfo.getDisplayName());
-        Map<String, String> paramsMap = mavenTypeParamsMap();
-        URI uri = URI.create(URL_LIST_PACKAGES + urlParams(paramsMap));
-        try {
-            HttpURLConnection httpConn = (HttpURLConnection)uri.toURL().openConnection();
-            httpConn.setRequestMethod("GET");
-            headersMapStr().forEach(httpConn::setRequestProperty);
-            httpConn.setConnectTimeout(HTTP_TIMEOUT_MS);
-            httpConn.setReadTimeout(HTTP_TIMEOUT_MS);
-            int httpStatus = httpConn.getResponseCode();
-            assertThat(httpStatus).isEqualTo(200);
-            String responseBody = IOUtils.toString(httpConn.getInputStream(), Charset.defaultCharset());
-            verifyResponseBody(responseBody);
-            httpConn.disconnect();
-        } catch (IOException ioEx) {
-            throw new IllegalStateException("cannot connect to URI via HttpURLConnection - " + uri, ioEx);
-        }
+    // ------------------------------------------------------------------------------------
+
+    static void printHeader(Map<String, List<String>> responseHeadersMap, String headerName) {
+        System.out.printf("responseHeaders['%s'] = '%s';%n",
+            headerName, firstHeader(responseHeadersMap, headerName));
+    }
+
+    static String firstHeader(Map<String, List<String>> responseHeadersMap, String headerName) {
+        List<String> valuesList = responseHeadersMap.getOrDefault(headerName, Collections.emptyList());
+        return valuesList.isEmpty() ? null : valuesList.getFirst();
     }
 
     static Map<String, Object> headersMap() {
