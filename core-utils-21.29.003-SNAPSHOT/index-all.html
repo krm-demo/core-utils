@@ -295,11 +295,13 @@ for "<i>basic</i>"<b> <code>MacOS-Terminal</code></b> are used.</div>
 <dd>
 <div class="block">Default instance of <a href="org/krmdemo/techlabs/core/dump/ObjectPrinter.StdOut.html" title="class in org.krmdemo.techlabs.core.dump"><code>ObjectPrinter.StdOut</code></a> that uses the default <a href="org/krmdemo/techlabs/core/dump/JacksonTree.html" title="class in org.krmdemo.techlabs.core.dump"><code>JacksonTree</code></a></div>
 </dd>
-<dt><a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#dtt(java.lang.String)" class="member-name-link">dtt(String)</a> - Static method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.datetime">CoreDateTimeUtils</a></dt>
+<dt><a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#DTT_DESERIALIZER" class="member-name-link">DTT_DESERIALIZER</a> - Static variable in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.datetime">CoreDateTimeUtils</a></dt>
 <dd>
-<div class="block">Transform the string-representation of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link"><code>Instant</code></a>
-in <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html#ISO_INSTANT" title="class or interface in java.time.format" class="external-link"><code>ISO_INSTANT</code></a>-format
-into <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+<div class="block">Jackson-Serializer for <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#DTT_SERIALIZER" class="member-name-link">DTT_SERIALIZER</a> - Static variable in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.datetime">CoreDateTimeUtils</a></dt>
+<dd>
+<div class="block">Jackson-Deserializer for <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#dump()" class="member-name-link">dump()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
 <dd>&nbsp;</dd>
@@ -348,6 +350,8 @@ over the predefined static instance of <code>ObjectMapper</code> - <a href="org/
 <dd>
 <div class="block">Returns the value of the <a href="./org/krmdemo/techlabs/core/dump/ObjectPrinter.UnitOp.html#param-dumperNodeFunc"><code>dumperNodeFunc</code></a> record component.</div>
 </dd>
+<dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#dumpIsoInstant()" class="member-name-link">dumpIsoInstant()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#dumpLinked()" class="member-name-link">dumpLinked()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">LinkedDateTimeTripletMap.LinkedTriplet</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html#dumpLinkedReversed()" class="member-name-link">dumpLinkedReversed()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/LinkedDateTimeTripletMap.LinkedTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">LinkedDateTimeTripletMap.LinkedTriplet</a></dt>
@@ -466,6 +470,11 @@ because in some cases the information about the day of week is not desired.</div
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getDayOfWeek()" class="member-name-link">getDayOfWeek()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getEpochSeconds()" class="member-name-link">getEpochSeconds()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
+<dd>
+<div class="block">Getting the number of seconds from the epoch of <code>1970-01-01T00:00:00Z</code>
+according to underlying value of <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getLocalDateTime()"><code>DateTimeTriplet.getLocalDateTime()</code></a>.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getHours()" class="member-name-link">getHours()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getHoursMinutes()" class="member-name-link">getHoursMinutes()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
@@ -485,7 +494,9 @@ because in some cases the information about the day of week is not desired.</div
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#getLoadingErrors()" class="member-name-link">getLoadingErrors()</a> - Method in class org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html" title="class in org.krmdemo.techlabs.core.buildinfo">MavenBuildInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getLocalDateTime()" class="member-name-link">getLocalDateTime()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the underlying value of standard <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link"><code>LocalDateTime</code></a> from JDK</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getMavenCoordinates()" class="member-name-link">getMavenCoordinates()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
 <dd>
 <div class="block">Getting the maven-coordinates - the colon(<code>':'</code>)-separated <a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getProjectGroup()"><code>project-group</code></a>,
@@ -503,7 +514,9 @@ which is also a <a href="https://gradle.org/">Gradle</a>-style identifier of any
 <dt><a href="org/krmdemo/techlabs/core/classinfo/ClassInfo.html#getModuleName()" class="member-name-link">getModuleName()</a> - Method in record class org.krmdemo.techlabs.core.classinfo.<a href="org/krmdemo/techlabs/core/classinfo/ClassInfo.html" title="class in org.krmdemo.techlabs.core.classinfo">ClassInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getMonth()" class="member-name-link">getMonth()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the value of month as enumeration <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Month.html" title="class or interface in java.time" class="external-link"><code>Month</code></a></div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html#getProjectArtifact()" class="member-name-link">getProjectArtifact()</a> - Method in interface org.krmdemo.techlabs.core.buildinfo.<a href="org/krmdemo/techlabs/core/buildinfo/BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></dt>
 <dd>
 <div class="block">Getting the value of maven-project artifact (<code>&lt;artifactId&gt;</code>-tag in <code>pom.xml</code>),
@@ -540,7 +553,9 @@ which must also be a value of corresponding <b><code>git</code></b>-tag in <code
 <dt><a href="org/krmdemo/techlabs/core/classinfo/ClassInfo.html#getSimpleName()" class="member-name-link">getSimpleName()</a> - Method in record class org.krmdemo.techlabs.core.classinfo.<a href="org/krmdemo/techlabs/core/classinfo/ClassInfo.html" title="class in org.krmdemo.techlabs.core.classinfo">ClassInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getYear()" class="member-name-link">getYear()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Getting the value of year</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#getYearAndMonth()" class="member-name-link">getYearAndMonth()</a> - Method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -736,6 +751,11 @@ comparing all parts of <b>the previous</b> item and this one.</div>
 </dl>
 <h2 class="title" id="I:J">J</h2>
 <dl class="index">
+<dt><a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#jacksonModuleDTT()" class="member-name-link">jacksonModuleDTT()</a> - Static method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.datetime">CoreDateTimeUtils</a></dt>
+<dd>
+<div class="block">Custom Jackson-Module that provides serialization and deserialization for <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a>,
+which is useful to apply into <code>ObjectMapper</code></div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/JacksonTree.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.dump">JacksonTree</a> - Class in <a href="org/krmdemo/techlabs/core/dump/package-summary.html">org.krmdemo.techlabs.core.dump</a></dt>
 <dd>
 <div class="block">A static-factory that provides an implementation of of <a href="org/krmdemo/techlabs/core/dump/TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump"><code>TreeDumper.Node</code></a>
@@ -1074,6 +1094,30 @@ of the method <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.b
 </dl>
 <h2 class="title" id="I:P">P</h2>
 <dl class="index">
+<dt><a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#parseAny(java.lang.String)" class="member-name-link">parseAny(String)</a> - Static method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.datetime">CoreDateTimeUtils</a></dt>
+<dd>
+<div class="block">Performs the subsequent attempts to parse the passed string <code>dttStr</code> with:
+    <a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#parseIsoInstant(java.lang.String)"><code>CoreDateTimeUtils.parseIsoInstant(String)</code></a>
+    <a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#parseEpochSeconds(java.lang.String)"><code>CoreDateTimeUtils.parseEpochSeconds(String)</code></a>
+    <a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#parseNatural(java.lang.String)"><code>CoreDateTimeUtils.parseNatural(String)</code></a>
+
+... and returns either an instance of <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a> or <code>null</code> if the input string is blank.</div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#parseEpochSeconds(java.lang.String)" class="member-name-link">parseEpochSeconds(String)</a> - Static method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.datetime">CoreDateTimeUtils</a></dt>
+<dd>
+<div class="block">Transform the string-representation of epoch-seconds into <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#parseIsoInstant(java.lang.String)" class="member-name-link">parseIsoInstant(String)</a> - Static method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.datetime">CoreDateTimeUtils</a></dt>
+<dd>
+<div class="block">Transform the string-representation of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link"><code>Instant</code></a>
+in <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html#ISO_INSTANT" title="class or interface in java.time.format" class="external-link"><code>ISO_INSTANT</code></a>-format
+into <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#parseNatural(java.lang.String)" class="member-name-link">parseNatural(String)</a> - Static method in class org.krmdemo.techlabs.core.datetime.<a href="org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html" title="class in org.krmdemo.techlabs.core.datetime">CoreDateTimeUtils</a></dt>
+<dd>
+<div class="block">Parse the result of <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#dump()"><code>DateTimeTriplet.dump()</code></a> or <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html#dumpNoWeek()"><code>DateTimeTriplet.dumpNoWeek()</code></a>
+back to original instance of <a href="org/krmdemo/techlabs/core/datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a>.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html#pathParts(java.nio.file.Path)" class="member-name-link">pathParts(Path)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></dt>
 <dd>
 <div class="block">Getting the sequence of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link"><code>Path</code></a>-components as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link"><code>Stream&lt;String&gt;</code></a>.</div>

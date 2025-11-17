@@ -114,21 +114,58 @@ loadScripts(document, 'script');</script>
 with sequentially previous and next triplets in corresponding collection or map.</div>
 </div>
 </div>
+<div class="caption"><span>Fields in <a href="../package-summary.html">org.krmdemo.techlabs.core.datetime</a> with type parameters of type <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Field</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static final com.fasterxml.jackson.databind.JsonDeserializer<wbr>&lt;<a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a>&gt;</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">CoreDateTimeUtils.</span><code><a href="../CoreDateTimeUtils.html#DTT_DESERIALIZER" class="member-name-link">DTT_DESERIALIZER</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Jackson-Serializer for <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</div>
+<div class="col-first odd-row-color"><code>static final com.fasterxml.jackson.databind.JsonSerializer<wbr>&lt;<a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a>&gt;</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">CoreDateTimeUtils.</span><code><a href="../CoreDateTimeUtils.html#DTT_SERIALIZER" class="member-name-link">DTT_SERIALIZER</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Jackson-Deserializer for <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</div>
+</div>
 <div class="caption"><span>Methods in <a href="../package-summary.html">org.krmdemo.techlabs.core.datetime</a> that return <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></span></div>
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
-<div class="col-second even-row-color"><span class="type-name-label">CoreDateTimeUtils.</span><code><a href="../CoreDateTimeUtils.html#dtt(java.lang.String)" class="member-name-link">dtt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;instantStr)</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">DateTimeTriplet.</span><code><a href="../DateTimeTriplet.html#now()" class="member-name-link">now</a>()</code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>static <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">CoreDateTimeUtils.</span><code><a href="../CoreDateTimeUtils.html#parseAny(java.lang.String)" class="member-name-link">parseAny</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dttStr)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Performs the subsequent attempts to parse the passed string <code>dttStr</code> with:
+    <a href="../CoreDateTimeUtils.html#parseIsoInstant(java.lang.String)"><code>CoreDateTimeUtils.parseIsoInstant(String)</code></a>
+    <a href="../CoreDateTimeUtils.html#parseEpochSeconds(java.lang.String)"><code>CoreDateTimeUtils.parseEpochSeconds(String)</code></a>
+    <a href="../CoreDateTimeUtils.html#parseNatural(java.lang.String)"><code>CoreDateTimeUtils.parseNatural(String)</code></a>
+
+... and returns either an instance of <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a> or <code>null</code> if the input string is blank.</div>
+</div>
+<div class="col-first even-row-color"><code>static <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">CoreDateTimeUtils.</span><code><a href="../CoreDateTimeUtils.html#parseEpochSeconds(java.lang.String)" class="member-name-link">parseEpochSeconds</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;epochSecondsStr)</code></div>
 <div class="col-last even-row-color">
+<div class="block">Transform the string-representation of epoch-seconds into <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</div>
+<div class="col-first odd-row-color"><code>static <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">CoreDateTimeUtils.</span><code><a href="../CoreDateTimeUtils.html#parseIsoInstant(java.lang.String)" class="member-name-link">parseIsoInstant</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;instantStr)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Transform the string-representation of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link"><code>Instant</code></a>
 in <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html#ISO_INSTANT" title="class or interface in java.time.format" class="external-link"><code>ISO_INSTANT</code></a>-format
 into <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
 </div>
-<div class="col-first odd-row-color"><code>static <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">DateTimeTriplet.</span><code><a href="../DateTimeTriplet.html#now()" class="member-name-link">now</a>()</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>static <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">CoreDateTimeUtils.</span><code><a href="../CoreDateTimeUtils.html#parseNatural(java.lang.String)" class="member-name-link">parseNatural</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dttStr)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Parse the result of <a href="../DateTimeTriplet.html#dump()"><code>DateTimeTriplet.dump()</code></a> or <a href="../DateTimeTriplet.html#dumpNoWeek()"><code>DateTimeTriplet.dumpNoWeek()</code></a>
+back to original instance of <a href="../DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a>.</div>
+</div>
 </div>
 </section>
 </li>

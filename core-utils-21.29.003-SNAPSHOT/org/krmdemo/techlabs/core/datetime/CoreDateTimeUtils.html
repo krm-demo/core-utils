@@ -69,8 +69,15 @@ loadScripts(document, 'script');</script>
 <div class="toc-header">Contents&nbsp;<input type="text" class="filter-input" disabled placeholder="Filter contents (type .)" aria-label="Filter table of contents" autocomplete="off" spellcheck="false"><input type="reset" class="reset-filter" disabled tabindex="-1" value="Reset"></div>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">Description</a></li>
+<li><a href="#field-summary" tabindex="0">Field Summary</a></li>
 <li><a href="#constructor-summary" tabindex="0">Constructor Summary</a></li>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
+<li><a href="#field-detail" tabindex="0">Field Details</a>
+<ol class="toc-list">
+<li><a href="#DTT_DESERIALIZER" tabindex="0">DTT_DESERIALIZER</a></li>
+<li><a href="#DTT_SERIALIZER" tabindex="0">DTT_SERIALIZER</a></li>
+</ol>
+</li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
 <ol class="toc-list">
 <li><a href="#%3Cinit%3E()" tabindex="0">CoreDateTimeUtils()</a></li>
@@ -79,7 +86,11 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
 <li><a href="#systemZoneOffset()" tabindex="0">systemZoneOffset()</a></li>
-<li><a href="#dtt(java.lang.String)" tabindex="0">dtt(String)</a></li>
+<li><a href="#parseIsoInstant(java.lang.String)" tabindex="0">parseIsoInstant(String)</a></li>
+<li><a href="#parseEpochSeconds(java.lang.String)" tabindex="0">parseEpochSeconds(String)</a></li>
+<li><a href="#parseNatural(java.lang.String)" tabindex="0">parseNatural(String)</a></li>
+<li><a href="#parseAny(java.lang.String)" tabindex="0">parseAny(String)</a></li>
+<li><a href="#jacksonModuleDTT()" tabindex="0">jacksonModuleDTT()</a></li>
 </ol>
 </li>
 </ol>
@@ -95,12 +106,34 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-8">CoreDateTimeUtils</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-25">CoreDateTimeUtils</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 </div>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>Field Summary</h2>
+<div class="caption"><span>Fields</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Field</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static final com.fasterxml.jackson.databind.JsonDeserializer<wbr>&lt;<a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a>&gt;</code></div>
+<div class="col-second even-row-color"><code><a href="#DTT_DESERIALIZER" class="member-name-link">DTT_DESERIALIZER</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Jackson-Serializer for <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</div>
+<div class="col-first odd-row-color"><code>static final com.fasterxml.jackson.databind.JsonSerializer<wbr>&lt;<a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a>&gt;</code></div>
+<div class="col-second odd-row-color"><code><a href="#DTT_SERIALIZER" class="member-name-link">DTT_SERIALIZER</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Jackson-Deserializer for <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</div>
+</div>
+</section>
+</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -125,12 +158,39 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#dtt(java.lang.String)" class="member-name-link">dtt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;instantStr)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static com.fasterxml.jackson.databind.module.SimpleModule</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#jacksonModuleDTT()" class="member-name-link">jacksonModuleDTT</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Custom Jackson-Module that provides serialization and deserialization for <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a>,
+which is useful to apply into <code>ObjectMapper</code></div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseAny(java.lang.String)" class="member-name-link">parseAny</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dttStr)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Performs the subsequent attempts to parse the passed string <code>dttStr</code> with:
+    <a href="#parseIsoInstant(java.lang.String)"><code>parseIsoInstant(String)</code></a>
+    <a href="#parseEpochSeconds(java.lang.String)"><code>parseEpochSeconds(String)</code></a>
+    <a href="#parseNatural(java.lang.String)"><code>parseNatural(String)</code></a>
+
+... and returns either an instance of <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a> or <code>null</code> if the input string is blank.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseEpochSeconds(java.lang.String)" class="member-name-link">parseEpochSeconds</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;epochSecondsStr)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Transform the string-representation of epoch-seconds into <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseIsoInstant(java.lang.String)" class="member-name-link">parseIsoInstant</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;instantStr)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Transform the string-representation of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link"><code>Instant</code></a>
 in <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html#ISO_INSTANT" title="class or interface in java.time.format" class="external-link"><code>ISO_INSTANT</code></a>-format
 into <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseNatural(java.lang.String)" class="member-name-link">parseNatural</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dttStr)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Parse the result of <a href="DateTimeTriplet.html#dump()"><code>DateTimeTriplet.dump()</code></a> or <a href="DateTimeTriplet.html#dumpNoWeek()"><code>DateTimeTriplet.dumpNoWeek()</code></a>
+back to original instance of <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/ZoneOffset.html" title="class or interface in java.time" class="external-link">ZoneOffset</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#systemZoneOffset()" class="member-name-link">systemZoneOffset</a>()</code></div>
@@ -150,6 +210,32 @@ and on the current time (because of <a href="https://en.wikipedia.org/wiki/Dayli
 </section>
 <section class="details">
 <ul class="details-list">
+<!-- ============ FIELD DETAIL =========== -->
+<li>
+<section class="field-details" id="field-detail">
+<h2>Field Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="DTT_DESERIALIZER">
+<h3>DTT_DESERIALIZER</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonDeserializer&lt;<a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-126">DTT_DESERIALIZER</a></span></div>
+<div class="block">Jackson-Serializer for <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="DTT_SERIALIZER">
+<h3>DTT_SERIALIZER</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonSerializer&lt;<a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-136">DTT_SERIALIZER</a></span></div>
+<div class="block">Jackson-Deserializer for <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+</div>
+</section>
+</li>
+</ul>
+</section>
+</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -159,7 +245,7 @@ and on the current time (because of <a href="https://en.wikipedia.org/wiki/Dayli
 <section class="detail" id="&lt;init&gt;()">
 <h3>CoreDateTimeUtils</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-8">CoreDateTimeUtils</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-25">CoreDateTimeUtils</a></span>()</div>
 </div>
 </section>
 </li>
@@ -175,7 +261,7 @@ and on the current time (because of <a href="https://en.wikipedia.org/wiki/Dayli
 <section class="detail" id="systemZoneOffset()">
 <h3>systemZoneOffset</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/ZoneOffset.html" title="class or interface in java.time" class="external-link">ZoneOffset</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-16">systemZoneOffset</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/ZoneOffset.html" title="class or interface in java.time" class="external-link">ZoneOffset</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-33">systemZoneOffset</a></span>()</div>
 <div class="block">Gets the current value of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/ZoneOffset.html" title="class or interface in java.time" class="external-link"><code>ZoneOffset</code></a>, which depends on system settings of operational system
 and on the current time (because of <a href="https://en.wikipedia.org/wiki/Daylight_saving_time">daylight saving time</a>).</div>
 <dl class="notes">
@@ -186,10 +272,10 @@ and on the current time (because of <a href="https://en.wikipedia.org/wiki/Dayli
 </section>
 </li>
 <li>
-<section class="detail" id="dtt(java.lang.String)">
-<h3>dtt</h3>
+<section class="detail" id="parseIsoInstant(java.lang.String)">
+<h3>parseIsoInstant</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-30">dtt</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;instantStr)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-48">parseIsoInstant</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;instantStr)</span></div>
 <div class="block">Transform the string-representation of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link"><code>Instant</code></a>
 in <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html#ISO_INSTANT" title="class or interface in java.time.format" class="external-link"><code>ISO_INSTANT</code></a>-format
 into <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
@@ -198,12 +284,85 @@ into <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.da
 <dd><code>instantStr</code> - string-representation of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="class or interface in java.time" class="external-link"><code>Instant</code></a> in format like <code>2007-12-03T10:15:30.00Z</code>.</dd>
 <dt>Returns:</dt>
 <dd>the instance of <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - in case of <code>null</code>, blank or any invalid string</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
 <li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html#parse(java.lang.CharSequence)" title="class or interface in java.time" class="external-link"><code>Instant.parse(CharSequence)</code></a></li>
 </ul>
 </dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="parseEpochSeconds(java.lang.String)">
+<h3>parseEpochSeconds</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-59">parseEpochSeconds</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;epochSecondsStr)</span></div>
+<div class="block">Transform the string-representation of epoch-seconds into <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>epochSecondsStr</code> - string-representation of epoch-seconds (that is a standard <code>long</code>)</dd>
+<dt>Returns:</dt>
+<dd>the instance of <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - in case of <code>null</code>, blank or any invalid string</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="parseNatural(java.lang.String)">
+<h3>parseNatural</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-72">parseNatural</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dttStr)</span></div>
+<div class="block">Parse the result of <a href="DateTimeTriplet.html#dump()"><code>DateTimeTriplet.dump()</code></a> or <a href="DateTimeTriplet.html#dumpNoWeek()"><code>DateTimeTriplet.dumpNoWeek()</code></a>
+back to original instance of <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>dttStr</code> - the string with data-time in format "yyyy-MM-dd [\'(\'EEE\') \']HH:mm"</dd>
+<dt>Returns:</dt>
+<dd>the instance of <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - in case of <code>null</code>, blank or any invalid string</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="parseAny(java.lang.String)">
+<h3>parseAny</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-92">parseAny</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dttStr)</span></div>
+<div class="block">Performs the subsequent attempts to parse the passed string <code>dttStr</code> with:<ul>
+    <li><a href="#parseIsoInstant(java.lang.String)"><code>parseIsoInstant(String)</code></a></li>
+    <li><a href="#parseEpochSeconds(java.lang.String)"><code>parseEpochSeconds(String)</code></a></li>
+    <li><a href="#parseNatural(java.lang.String)"><code>parseNatural(String)</code></a></li>
+</ul>
+... and returns either an instance of <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a> or <code>null</code> if the input string is blank.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>dttStr</code> - the string in any supported formats (ISO_INSTANT, epoch-seconds, natural)</dd>
+<dt>Returns:</dt>
+<dd>the instance of <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - in case of the passed string is not blank and could not be parsed</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="jacksonModuleDTT()">
+<h3>jacksonModuleDTT</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.module.SimpleModule</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/datetime/CoreDateTimeUtils.html#line-149">jacksonModuleDTT</a></span>()</div>
+<div class="block">Custom Jackson-Module that provides serialization and deserialization for <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a>,
+which is useful to apply into <code>ObjectMapper</code></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>an instance of <code>SimpleModule</code> that provides serialization and deserialization for <a href="DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a></dd>
 </dl>
 </div>
 </section>

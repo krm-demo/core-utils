@@ -286,137 +286,139 @@
 <span class="source-line-no">272</span><span id="line-272">     */</span>
 <span class="source-line-no">273</span><span id="line-273">    public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;</span>
 <span class="source-line-no">274</span><span id="line-274">    sortedMap(Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {</span>
-<span class="source-line-no">275</span><span id="line-275">        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
-<span class="source-line-no">276</span><span id="line-276">    }</span>
-<span class="source-line-no">277</span><span id="line-277"></span>
-<span class="source-line-no">278</span><span id="line-278">    /**</span>
-<span class="source-line-no">279</span><span id="line-279">     * Transform the stream of entries into the sorted map,</span>
-<span class="source-line-no">280</span><span id="line-280">     * where the entries with the same {@link Map.Entry#getKey() key} are merged</span>
-<span class="source-line-no">281</span><span id="line-281">     * with the passed {@code mergeFunction}.</span>
-<span class="source-line-no">282</span><span id="line-282">     * &lt;hr/&gt;</span>
-<span class="source-line-no">283</span><span id="line-283">     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,</span>
-<span class="source-line-no">284</span><span id="line-284">     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.</span>
-<span class="source-line-no">285</span><span id="line-285">     *</span>
-<span class="source-line-no">286</span><span id="line-286">     * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}</span>
-<span class="source-line-no">287</span><span id="line-287">     * @param entries stream of entries</span>
-<span class="source-line-no">288</span><span id="line-288">     * @return the sorted map, which is collected from those entries, as {@link NavigableMap},</span>
-<span class="source-line-no">289</span><span id="line-289">     * @param &lt;K&gt; the type of key that must implement {@link Comparable}</span>
-<span class="source-line-no">290</span><span id="line-290">     * @param &lt;V&gt; the type of value</span>
-<span class="source-line-no">291</span><span id="line-291">     */</span>
-<span class="source-line-no">292</span><span id="line-292">    public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;</span>
-<span class="source-line-no">293</span><span id="line-293">    sortedMap(MergeFunction mergeFunction, Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {</span>
-<span class="source-line-no">294</span><span id="line-294">        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
-<span class="source-line-no">295</span><span id="line-295">    }</span>
-<span class="source-line-no">296</span><span id="line-296"></span>
-<span class="source-line-no">297</span><span id="line-297">    /**</span>
-<span class="source-line-no">298</span><span id="line-298">     * Returns to sorted copy of the passed map {@code mapToSort}</span>
-<span class="source-line-no">299</span><span id="line-299">     *</span>
-<span class="source-line-no">300</span><span id="line-300">     * @param mapToSort the map whose sorted copy to return</span>
-<span class="source-line-no">301</span><span id="line-301">     * @return the sorted copy of the passed map {@code mapToSort}</span>
-<span class="source-line-no">302</span><span id="line-302">     * @param &lt;K&gt; the type of key that must implement {@link Comparable}</span>
-<span class="source-line-no">303</span><span id="line-303">     * @param &lt;V&gt; the type of value</span>
-<span class="source-line-no">304</span><span id="line-304">     */</span>
-<span class="source-line-no">305</span><span id="line-305">    public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;</span>
-<span class="source-line-no">306</span><span id="line-306">    sortedMap(Map&lt;K,V&gt; mapToSort) {</span>
-<span class="source-line-no">307</span><span id="line-307">        return sortedMap(mapToSort.entrySet().stream());</span>
-<span class="source-line-no">308</span><span id="line-308">    }</span>
-<span class="source-line-no">309</span><span id="line-309"></span>
-<span class="source-line-no">310</span><span id="line-310">    /**</span>
-<span class="source-line-no">311</span><span id="line-311">     * Transform the var-args-arrays of entries into the linked map,</span>
-<span class="source-line-no">312</span><span id="line-312">     * where the entries with the same {@link Map.Entry#getKey() key} are merged</span>
-<span class="source-line-no">313</span><span id="line-313">     * with the default merge-function {@link MergeFunction#OVERWRITE}.</span>
-<span class="source-line-no">314</span><span id="line-314">     * &lt;hr/&gt;</span>
-<span class="source-line-no">315</span><span id="line-315">     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,</span>
-<span class="source-line-no">316</span><span id="line-316">     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.</span>
-<span class="source-line-no">317</span><span id="line-317">     *</span>
-<span class="source-line-no">318</span><span id="line-318">     * @param entriesArr var-args-arrays of entries</span>
-<span class="source-line-no">319</span><span id="line-319">     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},</span>
-<span class="source-line-no">320</span><span id="line-320">     * @param &lt;K&gt; the type of key</span>
-<span class="source-line-no">321</span><span id="line-321">     * @param &lt;V&gt; the type of value</span>
-<span class="source-line-no">322</span><span id="line-322">     */</span>
-<span class="source-line-no">323</span><span id="line-323">    @SafeVarargs</span>
-<span class="source-line-no">324</span><span id="line-324">    @SuppressWarnings("varargs")</span>
-<span class="source-line-no">325</span><span id="line-325">    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;</span>
-<span class="source-line-no">326</span><span id="line-326">    linkedMap(Map.Entry&lt;K,V&gt;... entriesArr) {</span>
-<span class="source-line-no">327</span><span id="line-327">        return linkedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));</span>
-<span class="source-line-no">328</span><span id="line-328">    }</span>
-<span class="source-line-no">329</span><span id="line-329"></span>
-<span class="source-line-no">330</span><span id="line-330">    /**</span>
-<span class="source-line-no">331</span><span id="line-331">     * Transform the var-args-arrays of entries into the linked map,</span>
-<span class="source-line-no">332</span><span id="line-332">     * where the entries with the same {@link Map.Entry#getKey() key} are merged</span>
-<span class="source-line-no">333</span><span id="line-333">     * with the passed {@code mergeFunction}.</span>
-<span class="source-line-no">334</span><span id="line-334">     * &lt;hr/&gt;</span>
-<span class="source-line-no">335</span><span id="line-335">     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,</span>
-<span class="source-line-no">336</span><span id="line-336">     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.</span>
-<span class="source-line-no">337</span><span id="line-337">     *</span>
-<span class="source-line-no">338</span><span id="line-338">     * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}</span>
-<span class="source-line-no">339</span><span id="line-339">     * @param entriesArr var-args-arrays of entries</span>
-<span class="source-line-no">340</span><span id="line-340">     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},</span>
-<span class="source-line-no">341</span><span id="line-341">     * @param &lt;K&gt; the type of key</span>
-<span class="source-line-no">342</span><span id="line-342">     * @param &lt;V&gt; the type of value</span>
-<span class="source-line-no">343</span><span id="line-343">     */</span>
-<span class="source-line-no">344</span><span id="line-344">    @SafeVarargs</span>
-<span class="source-line-no">345</span><span id="line-345">    @SuppressWarnings("varargs")</span>
-<span class="source-line-no">346</span><span id="line-346">    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;</span>
-<span class="source-line-no">347</span><span id="line-347">    linkedMap(MergeFunction mergeFunction, Map.Entry&lt;K,V&gt;... entriesArr) {</span>
-<span class="source-line-no">348</span><span id="line-348">        return linkedMap(mergeFunction, Arrays.stream(entriesArr));</span>
-<span class="source-line-no">349</span><span id="line-349">    }</span>
-<span class="source-line-no">350</span><span id="line-350"></span>
-<span class="source-line-no">351</span><span id="line-351">    /**</span>
-<span class="source-line-no">352</span><span id="line-352">     * Transform the stream of entries into the linked map,</span>
-<span class="source-line-no">353</span><span id="line-353">     * where the entries with the same {@link Map.Entry#getKey() key} are merged</span>
-<span class="source-line-no">354</span><span id="line-354">     * with the default merge-function {@link MergeFunction#OVERWRITE}.</span>
-<span class="source-line-no">355</span><span id="line-355">     * &lt;hr/&gt;</span>
-<span class="source-line-no">356</span><span id="line-356">     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,</span>
-<span class="source-line-no">357</span><span id="line-357">     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.</span>
-<span class="source-line-no">358</span><span id="line-358">     *</span>
-<span class="source-line-no">359</span><span id="line-359">     * @param entries stream of entries</span>
-<span class="source-line-no">360</span><span id="line-360">     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},</span>
-<span class="source-line-no">361</span><span id="line-361">     * @param &lt;K&gt; the type of key</span>
-<span class="source-line-no">362</span><span id="line-362">     * @param &lt;V&gt; the type of value</span>
-<span class="source-line-no">363</span><span id="line-363">     */</span>
-<span class="source-line-no">364</span><span id="line-364">    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;</span>
-<span class="source-line-no">365</span><span id="line-365">    linkedMap(Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {</span>
-<span class="source-line-no">366</span><span id="line-366">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
-<span class="source-line-no">367</span><span id="line-367">    }</span>
-<span class="source-line-no">368</span><span id="line-368"></span>
-<span class="source-line-no">369</span><span id="line-369">    /**</span>
-<span class="source-line-no">370</span><span id="line-370">     * Transform the var-args-arrays of entries into the linked map,</span>
-<span class="source-line-no">371</span><span id="line-371">     * where the entries with the same {@link Map.Entry#getKey() key} are merged</span>
-<span class="source-line-no">372</span><span id="line-372">     * with the passed {@code mergeFunction}.</span>
-<span class="source-line-no">373</span><span id="line-373">     * &lt;hr/&gt;</span>
-<span class="source-line-no">374</span><span id="line-374">     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,</span>
-<span class="source-line-no">375</span><span id="line-375">     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.</span>
-<span class="source-line-no">376</span><span id="line-376">     *</span>
-<span class="source-line-no">377</span><span id="line-377">     * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}</span>
-<span class="source-line-no">378</span><span id="line-378">     * @param entries stream of entries</span>
-<span class="source-line-no">379</span><span id="line-379">     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},</span>
-<span class="source-line-no">380</span><span id="line-380">     * @param &lt;K&gt; the type of key</span>
-<span class="source-line-no">381</span><span id="line-381">     * @param &lt;V&gt; the type of value</span>
-<span class="source-line-no">382</span><span id="line-382">     */</span>
-<span class="source-line-no">383</span><span id="line-383">    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;</span>
-<span class="source-line-no">384</span><span id="line-384">    linkedMap(MergeFunction mergeFunction, Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {</span>
-<span class="source-line-no">385</span><span id="line-385">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
-<span class="source-line-no">386</span><span id="line-386">    }</span>
-<span class="source-line-no">387</span><span id="line-387"></span>
-<span class="source-line-no">388</span><span id="line-388">    /**</span>
-<span class="source-line-no">389</span><span id="line-389">     * In order to avoid {@link NullPointerException} in JDK's collectors</span>
-<span class="source-line-no">390</span><span id="line-390">     * all entries that are {@code null} or whose key or value is {@code null} should be filtered out.</span>
-<span class="source-line-no">391</span><span id="line-391">     *</span>
-<span class="source-line-no">392</span><span id="line-392">     * @param entry an entry to filter</span>
-<span class="source-line-no">393</span><span id="line-393">     * @return {@code true} if the entry is valid and otherwise - {@code false}</span>
-<span class="source-line-no">394</span><span id="line-394">     */</span>
-<span class="source-line-no">395</span><span id="line-395">    public static boolean entryIsValid(Map.Entry&lt;?,?&gt; entry) {</span>
-<span class="source-line-no">396</span><span id="line-396">        return entry != null &amp;&amp; entry.getKey() != null &amp;&amp; entry.getValue() != null;</span>
-<span class="source-line-no">397</span><span id="line-397">    }</span>
-<span class="source-line-no">398</span><span id="line-398"></span>
-<span class="source-line-no">399</span><span id="line-399">    // --------------------------------------------------------------------------------------------</span>
+<span class="source-line-no">275</span><span id="line-275">        return entries</span>
+<span class="source-line-no">276</span><span id="line-276">            .filter(e -&gt; e != null &amp;&amp; e.getKey() != null &amp;&amp; e.getValue() != null)</span>
+<span class="source-line-no">277</span><span id="line-277">            .collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
+<span class="source-line-no">278</span><span id="line-278">    }</span>
+<span class="source-line-no">279</span><span id="line-279"></span>
+<span class="source-line-no">280</span><span id="line-280">    /**</span>
+<span class="source-line-no">281</span><span id="line-281">     * Transform the stream of entries into the sorted map,</span>
+<span class="source-line-no">282</span><span id="line-282">     * where the entries with the same {@link Map.Entry#getKey() key} are merged</span>
+<span class="source-line-no">283</span><span id="line-283">     * with the passed {@code mergeFunction}.</span>
+<span class="source-line-no">284</span><span id="line-284">     * &lt;hr/&gt;</span>
+<span class="source-line-no">285</span><span id="line-285">     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,</span>
+<span class="source-line-no">286</span><span id="line-286">     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.</span>
+<span class="source-line-no">287</span><span id="line-287">     *</span>
+<span class="source-line-no">288</span><span id="line-288">     * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}</span>
+<span class="source-line-no">289</span><span id="line-289">     * @param entries stream of entries</span>
+<span class="source-line-no">290</span><span id="line-290">     * @return the sorted map, which is collected from those entries, as {@link NavigableMap},</span>
+<span class="source-line-no">291</span><span id="line-291">     * @param &lt;K&gt; the type of key that must implement {@link Comparable}</span>
+<span class="source-line-no">292</span><span id="line-292">     * @param &lt;V&gt; the type of value</span>
+<span class="source-line-no">293</span><span id="line-293">     */</span>
+<span class="source-line-no">294</span><span id="line-294">    public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;</span>
+<span class="source-line-no">295</span><span id="line-295">    sortedMap(MergeFunction mergeFunction, Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {</span>
+<span class="source-line-no">296</span><span id="line-296">        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
+<span class="source-line-no">297</span><span id="line-297">    }</span>
+<span class="source-line-no">298</span><span id="line-298"></span>
+<span class="source-line-no">299</span><span id="line-299">    /**</span>
+<span class="source-line-no">300</span><span id="line-300">     * Returns to sorted copy of the passed map {@code mapToSort}</span>
+<span class="source-line-no">301</span><span id="line-301">     *</span>
+<span class="source-line-no">302</span><span id="line-302">     * @param mapToSort the map whose sorted copy to return</span>
+<span class="source-line-no">303</span><span id="line-303">     * @return the sorted copy of the passed map {@code mapToSort}</span>
+<span class="source-line-no">304</span><span id="line-304">     * @param &lt;K&gt; the type of key that must implement {@link Comparable}</span>
+<span class="source-line-no">305</span><span id="line-305">     * @param &lt;V&gt; the type of value</span>
+<span class="source-line-no">306</span><span id="line-306">     */</span>
+<span class="source-line-no">307</span><span id="line-307">    public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;</span>
+<span class="source-line-no">308</span><span id="line-308">    sortedMap(Map&lt;K,V&gt; mapToSort) {</span>
+<span class="source-line-no">309</span><span id="line-309">        return sortedMap(mapToSort.entrySet().stream());</span>
+<span class="source-line-no">310</span><span id="line-310">    }</span>
+<span class="source-line-no">311</span><span id="line-311"></span>
+<span class="source-line-no">312</span><span id="line-312">    /**</span>
+<span class="source-line-no">313</span><span id="line-313">     * Transform the var-args-arrays of entries into the linked map,</span>
+<span class="source-line-no">314</span><span id="line-314">     * where the entries with the same {@link Map.Entry#getKey() key} are merged</span>
+<span class="source-line-no">315</span><span id="line-315">     * with the default merge-function {@link MergeFunction#OVERWRITE}.</span>
+<span class="source-line-no">316</span><span id="line-316">     * &lt;hr/&gt;</span>
+<span class="source-line-no">317</span><span id="line-317">     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,</span>
+<span class="source-line-no">318</span><span id="line-318">     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.</span>
+<span class="source-line-no">319</span><span id="line-319">     *</span>
+<span class="source-line-no">320</span><span id="line-320">     * @param entriesArr var-args-arrays of entries</span>
+<span class="source-line-no">321</span><span id="line-321">     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},</span>
+<span class="source-line-no">322</span><span id="line-322">     * @param &lt;K&gt; the type of key</span>
+<span class="source-line-no">323</span><span id="line-323">     * @param &lt;V&gt; the type of value</span>
+<span class="source-line-no">324</span><span id="line-324">     */</span>
+<span class="source-line-no">325</span><span id="line-325">    @SafeVarargs</span>
+<span class="source-line-no">326</span><span id="line-326">    @SuppressWarnings("varargs")</span>
+<span class="source-line-no">327</span><span id="line-327">    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;</span>
+<span class="source-line-no">328</span><span id="line-328">    linkedMap(Map.Entry&lt;K,V&gt;... entriesArr) {</span>
+<span class="source-line-no">329</span><span id="line-329">        return linkedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));</span>
+<span class="source-line-no">330</span><span id="line-330">    }</span>
+<span class="source-line-no">331</span><span id="line-331"></span>
+<span class="source-line-no">332</span><span id="line-332">    /**</span>
+<span class="source-line-no">333</span><span id="line-333">     * Transform the var-args-arrays of entries into the linked map,</span>
+<span class="source-line-no">334</span><span id="line-334">     * where the entries with the same {@link Map.Entry#getKey() key} are merged</span>
+<span class="source-line-no">335</span><span id="line-335">     * with the passed {@code mergeFunction}.</span>
+<span class="source-line-no">336</span><span id="line-336">     * &lt;hr/&gt;</span>
+<span class="source-line-no">337</span><span id="line-337">     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,</span>
+<span class="source-line-no">338</span><span id="line-338">     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.</span>
+<span class="source-line-no">339</span><span id="line-339">     *</span>
+<span class="source-line-no">340</span><span id="line-340">     * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}</span>
+<span class="source-line-no">341</span><span id="line-341">     * @param entriesArr var-args-arrays of entries</span>
+<span class="source-line-no">342</span><span id="line-342">     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},</span>
+<span class="source-line-no">343</span><span id="line-343">     * @param &lt;K&gt; the type of key</span>
+<span class="source-line-no">344</span><span id="line-344">     * @param &lt;V&gt; the type of value</span>
+<span class="source-line-no">345</span><span id="line-345">     */</span>
+<span class="source-line-no">346</span><span id="line-346">    @SafeVarargs</span>
+<span class="source-line-no">347</span><span id="line-347">    @SuppressWarnings("varargs")</span>
+<span class="source-line-no">348</span><span id="line-348">    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;</span>
+<span class="source-line-no">349</span><span id="line-349">    linkedMap(MergeFunction mergeFunction, Map.Entry&lt;K,V&gt;... entriesArr) {</span>
+<span class="source-line-no">350</span><span id="line-350">        return linkedMap(mergeFunction, Arrays.stream(entriesArr));</span>
+<span class="source-line-no">351</span><span id="line-351">    }</span>
+<span class="source-line-no">352</span><span id="line-352"></span>
+<span class="source-line-no">353</span><span id="line-353">    /**</span>
+<span class="source-line-no">354</span><span id="line-354">     * Transform the stream of entries into the linked map,</span>
+<span class="source-line-no">355</span><span id="line-355">     * where the entries with the same {@link Map.Entry#getKey() key} are merged</span>
+<span class="source-line-no">356</span><span id="line-356">     * with the default merge-function {@link MergeFunction#OVERWRITE}.</span>
+<span class="source-line-no">357</span><span id="line-357">     * &lt;hr/&gt;</span>
+<span class="source-line-no">358</span><span id="line-358">     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,</span>
+<span class="source-line-no">359</span><span id="line-359">     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.</span>
+<span class="source-line-no">360</span><span id="line-360">     *</span>
+<span class="source-line-no">361</span><span id="line-361">     * @param entries stream of entries</span>
+<span class="source-line-no">362</span><span id="line-362">     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},</span>
+<span class="source-line-no">363</span><span id="line-363">     * @param &lt;K&gt; the type of key</span>
+<span class="source-line-no">364</span><span id="line-364">     * @param &lt;V&gt; the type of value</span>
+<span class="source-line-no">365</span><span id="line-365">     */</span>
+<span class="source-line-no">366</span><span id="line-366">    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;</span>
+<span class="source-line-no">367</span><span id="line-367">    linkedMap(Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {</span>
+<span class="source-line-no">368</span><span id="line-368">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
+<span class="source-line-no">369</span><span id="line-369">    }</span>
+<span class="source-line-no">370</span><span id="line-370"></span>
+<span class="source-line-no">371</span><span id="line-371">    /**</span>
+<span class="source-line-no">372</span><span id="line-372">     * Transform the var-args-arrays of entries into the linked map,</span>
+<span class="source-line-no">373</span><span id="line-373">     * where the entries with the same {@link Map.Entry#getKey() key} are merged</span>
+<span class="source-line-no">374</span><span id="line-374">     * with the passed {@code mergeFunction}.</span>
+<span class="source-line-no">375</span><span id="line-375">     * &lt;hr/&gt;</span>
+<span class="source-line-no">376</span><span id="line-376">     * In order to avoid {@link NullPointerException} all invalid entries are filtered out,</span>
+<span class="source-line-no">377</span><span id="line-377">     * where the filter is based on using {@link #entryIsValid(Map.Entry)} function.</span>
+<span class="source-line-no">378</span><span id="line-378">     *</span>
+<span class="source-line-no">379</span><span id="line-379">     * @param mergeFunction the merge-function to handle the entries with the same {@link Map.Entry#getKey() key}</span>
+<span class="source-line-no">380</span><span id="line-380">     * @param entries stream of entries</span>
+<span class="source-line-no">381</span><span id="line-381">     * @return the linked map, which is collected from {@code entries}, as {@link SequencedMap},</span>
+<span class="source-line-no">382</span><span id="line-382">     * @param &lt;K&gt; the type of key</span>
+<span class="source-line-no">383</span><span id="line-383">     * @param &lt;V&gt; the type of value</span>
+<span class="source-line-no">384</span><span id="line-384">     */</span>
+<span class="source-line-no">385</span><span id="line-385">    public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;</span>
+<span class="source-line-no">386</span><span id="line-386">    linkedMap(MergeFunction mergeFunction, Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {</span>
+<span class="source-line-no">387</span><span id="line-387">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
+<span class="source-line-no">388</span><span id="line-388">    }</span>
+<span class="source-line-no">389</span><span id="line-389"></span>
+<span class="source-line-no">390</span><span id="line-390">    /**</span>
+<span class="source-line-no">391</span><span id="line-391">     * In order to avoid {@link NullPointerException} in JDK's collectors</span>
+<span class="source-line-no">392</span><span id="line-392">     * all entries that are {@code null} or whose key or value is {@code null} should be filtered out.</span>
+<span class="source-line-no">393</span><span id="line-393">     *</span>
+<span class="source-line-no">394</span><span id="line-394">     * @param entry an entry to filter</span>
+<span class="source-line-no">395</span><span id="line-395">     * @return {@code true} if the entry is valid and otherwise - {@code false}</span>
+<span class="source-line-no">396</span><span id="line-396">     */</span>
+<span class="source-line-no">397</span><span id="line-397">    public static boolean entryIsValid(Map.Entry&lt;?,?&gt; entry) {</span>
+<span class="source-line-no">398</span><span id="line-398">        return entry != null &amp;&amp; entry.getKey() != null &amp;&amp; entry.getValue() != null;</span>
+<span class="source-line-no">399</span><span id="line-399">    }</span>
 <span class="source-line-no">400</span><span id="line-400"></span>
-<span class="source-line-no">401</span><span id="line-401">    private CoreStreamUtils() {</span>
-<span class="source-line-no">402</span><span id="line-402">        // prohibit the creation of utility-class instance</span>
-<span class="source-line-no">403</span><span id="line-403">        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());</span>
-<span class="source-line-no">404</span><span id="line-404">    }</span>
-<span class="source-line-no">405</span><span id="line-405">}</span>
+<span class="source-line-no">401</span><span id="line-401">    // --------------------------------------------------------------------------------------------</span>
+<span class="source-line-no">402</span><span id="line-402"></span>
+<span class="source-line-no">403</span><span id="line-403">    private CoreStreamUtils() {</span>
+<span class="source-line-no">404</span><span id="line-404">        // prohibit the creation of utility-class instance</span>
+<span class="source-line-no">405</span><span id="line-405">        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());</span>
+<span class="source-line-no">406</span><span id="line-406">    }</span>
+<span class="source-line-no">407</span><span id="line-407">}</span>
 
 
 

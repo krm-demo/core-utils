@@ -110,7 +110,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-26">MavenBuildInfo</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-24">MavenBuildInfo</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo">BuildInfo</a></span></div>
 <div class="block">Implementation of <a href="BuildInfo.html" title="interface in org.krmdemo.techlabs.core.buildinfo"><code>BuildInfo</code></a> with build-information that is loaded from properties-file,
@@ -222,7 +222,7 @@ which must also be a value of corresponding <b><code>git</code></b>-tag in <code
 <section class="detail" id="&lt;init&gt;(java.lang.String,java.lang.String)">
 <h3>MavenBuildInfo</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-72">MavenBuildInfo</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;mavenProjectGroup,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-70">MavenBuildInfo</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;mavenProjectGroup,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;mavenProjectArtifact)</span></div>
 <div class="block">Loading the build-information from properties-file, whose resource-path
 depends on passed <code>mavenProjectGroup</code> and <code>mavenProjectArtifact</code></div>
@@ -246,7 +246,7 @@ depends on passed <code>mavenProjectGroup</code> and <code>mavenProjectArtifact<
 <section class="detail" id="getProjectGroup()">
 <h3>getProjectGroup</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-140">getProjectGroup</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-138">getProjectGroup</a></span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="BuildInfo.html#getProjectGroup()">BuildInfo</a></code></span></div>
 <div class="block">Getting the value of maven-project group (<code>&lt;groupId&gt;</code>-tag in <code>pom.xml</code>),
 which must also be a part of <a href="BuildInfo.html#getResourcePath()"><code>resource-path</code></a>.</div>
@@ -263,7 +263,7 @@ which must also be a part of <a href="BuildInfo.html#getResourcePath()"><code>re
 <section class="detail" id="getProjectArtifact()">
 <h3>getProjectArtifact</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-145">getProjectArtifact</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-143">getProjectArtifact</a></span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="BuildInfo.html#getProjectArtifact()">BuildInfo</a></code></span></div>
 <div class="block">Getting the value of maven-project artifact (<code>&lt;artifactId&gt;</code>-tag in <code>pom.xml</code>),
 which must also be a part of <a href="BuildInfo.html#getResourcePath()"><code>resource-path</code></a>.</div>
@@ -280,7 +280,7 @@ which must also be a part of <a href="BuildInfo.html#getResourcePath()"><code>re
 <section class="detail" id="getProjectProps()">
 <h3>getProjectProps</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-150">getProjectProps</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableMap.html" title="class or interface in java.util" class="external-link">NavigableMap</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-148">getProjectProps</a></span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="BuildInfo.html#getProjectProps()">BuildInfo</a></code></span></div>
 <div class="block">Getting a sorted map of build-information properties (not dumped by default).</div>
 <dl class="notes">
@@ -296,7 +296,7 @@ which must also be a part of <a href="BuildInfo.html#getResourcePath()"><code>re
 <section class="detail" id="getResourcePath()">
 <h3>getResourcePath</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-155">getResourcePath</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-153">getResourcePath</a></span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="BuildInfo.html#getResourcePath()">BuildInfo</a></code></span></div>
 <div class="block">The path to resource that is used to represent the build-information</div>
 <dl class="notes">
@@ -312,7 +312,7 @@ which must also be a part of <a href="BuildInfo.html#getResourcePath()"><code>re
 <section class="detail" id="getProjectVersion()">
 <h3>getProjectVersion</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-160">getProjectVersion</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-158">getProjectVersion</a></span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="BuildInfo.html#getProjectVersion()">BuildInfo</a></code></span></div>
 <div class="block">Getting the value of maven-project version (<code>&lt;version&gt;</code>-tag in <code>pom.xml</code>),
 which must also be a value of corresponding <b><code>git</code></b>-tag in <code>git</code>-repository.</div>
@@ -329,7 +329,7 @@ which must also be a value of corresponding <b><code>git</code></b>-tag in <code
 <section class="detail" id="getBuildDateTime()">
 <h3>getBuildDateTime</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-165">getBuildDateTime</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime">DateTimeTriplet</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-163">getBuildDateTime</a></span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="BuildInfo.html#getBuildDateTime()">BuildInfo</a></code></span></div>
 <div class="block">Getting the date-time when the project was built as <a href="../datetime/DateTimeTriplet.html" title="class in org.krmdemo.techlabs.core.datetime"><code>DateTimeTriplet</code></a>.</div>
 <dl class="notes">
@@ -345,7 +345,7 @@ which must also be a value of corresponding <b><code>git</code></b>-tag in <code
 <section class="detail" id="getMinimalJavaVersion()">
 <h3>getMinimalJavaVersion</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-170">getMinimalJavaVersion</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-168">getMinimalJavaVersion</a></span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="BuildInfo.html#getMinimalJavaVersion()">BuildInfo</a></code></span></div>
 <div class="block">Getting the minimal supported version of JDK, where this library could be used</div>
 <dl class="notes">
@@ -361,7 +361,7 @@ which must also be a value of corresponding <b><code>git</code></b>-tag in <code
 <section class="detail" id="getLoadingErrors()">
 <h3>getLoadingErrors</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-175">getLoadingErrors</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-173">getLoadingErrors</a></span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="BuildInfo.html#getLoadingErrors()">BuildInfo</a></code></span></div>
 <div class="block">Getting the list of loading-errors that was happened on constructing the instance of this object.
 In normal scenario such list <u>must be empty!</u></div>
@@ -378,7 +378,7 @@ In normal scenario such list <u>must be empty!</u></div>
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-180">toString</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/buildinfo/MavenBuildInfo.html#line-178">toString</a></span>()</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>

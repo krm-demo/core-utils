@@ -14,37 +14,159 @@
 <div class="source-container">
 <pre><span class="source-line-no">001</span><span id="line-1">package org.krmdemo.techlabs.core.datetime;</span>
 <span class="source-line-no">002</span><span id="line-2"></span>
-<span class="source-line-no">003</span><span id="line-3">import java.time.Instant;</span>
-<span class="source-line-no">004</span><span id="line-4">import java.time.ZoneId;</span>
-<span class="source-line-no">005</span><span id="line-5">import java.time.ZoneOffset;</span>
-<span class="source-line-no">006</span><span id="line-6">import java.time.format.DateTimeFormatter;</span>
-<span class="source-line-no">007</span><span id="line-7"></span>
-<span class="source-line-no">008</span><span id="line-8">public class CoreDateTimeUtils {</span>
-<span class="source-line-no">009</span><span id="line-9"></span>
-<span class="source-line-no">010</span><span id="line-10">    /**</span>
-<span class="source-line-no">011</span><span id="line-11">     * Gets the current value of {@link ZoneOffset}, which depends on system settings of operational system</span>
-<span class="source-line-no">012</span><span id="line-12">     * and on the current time (because of &lt;a href="https://en.wikipedia.org/wiki/Daylight_saving_time"&gt;daylight saving time&lt;/a&gt;).</span>
-<span class="source-line-no">013</span><span id="line-13">     *</span>
-<span class="source-line-no">014</span><span id="line-14">     * @return the current value of {@link ZoneOffset}</span>
-<span class="source-line-no">015</span><span id="line-15">     */</span>
-<span class="source-line-no">016</span><span id="line-16">    public static ZoneOffset systemZoneOffset() {</span>
-<span class="source-line-no">017</span><span id="line-17">        return ZoneId.systemDefault().getRules().getOffset(Instant.now());</span>
-<span class="source-line-no">018</span><span id="line-18">    }</span>
-<span class="source-line-no">019</span><span id="line-19"></span>
-<span class="source-line-no">020</span><span id="line-20">    /**</span>
-<span class="source-line-no">021</span><span id="line-21">     * Transform the string-representation of {@link Instant}</span>
-<span class="source-line-no">022</span><span id="line-22">     * in {@link DateTimeFormatter#ISO_INSTANT ISO_INSTANT}-format</span>
-<span class="source-line-no">023</span><span id="line-23">     * into {@link DateTimeTriplet}</span>
-<span class="source-line-no">024</span><span id="line-24">     *</span>
-<span class="source-line-no">025</span><span id="line-25">     * @param instantStr string-representation of {@link Instant} in format like {@code 2007-12-03T10:15:30.00Z}.</span>
-<span class="source-line-no">026</span><span id="line-26">     * @return the instance of {@link DateTimeTriplet}</span>
-<span class="source-line-no">027</span><span id="line-27">     *</span>
-<span class="source-line-no">028</span><span id="line-28">     * @see Instant#parse(CharSequence)</span>
-<span class="source-line-no">029</span><span id="line-29">     */</span>
-<span class="source-line-no">030</span><span id="line-30">    public static DateTimeTriplet dtt(String instantStr) {</span>
-<span class="source-line-no">031</span><span id="line-31">        return new DateTimeTriplet(Instant.parse(instantStr));</span>
-<span class="source-line-no">032</span><span id="line-32">    }</span>
-<span class="source-line-no">033</span><span id="line-33">}</span>
+<span class="source-line-no">003</span><span id="line-3">import com.fasterxml.jackson.core.JsonGenerator;</span>
+<span class="source-line-no">004</span><span id="line-4">import com.fasterxml.jackson.core.JsonParser;</span>
+<span class="source-line-no">005</span><span id="line-5">import com.fasterxml.jackson.databind.DeserializationContext;</span>
+<span class="source-line-no">006</span><span id="line-6">import com.fasterxml.jackson.databind.JsonDeserializer;</span>
+<span class="source-line-no">007</span><span id="line-7">import com.fasterxml.jackson.databind.JsonSerializer;</span>
+<span class="source-line-no">008</span><span id="line-8">import com.fasterxml.jackson.databind.SerializerProvider;</span>
+<span class="source-line-no">009</span><span id="line-9">import com.fasterxml.jackson.databind.deser.std.StdDeserializer;</span>
+<span class="source-line-no">010</span><span id="line-10">import com.fasterxml.jackson.databind.module.SimpleModule;</span>
+<span class="source-line-no">011</span><span id="line-11">import com.fasterxml.jackson.databind.ser.std.StdSerializer;</span>
+<span class="source-line-no">012</span><span id="line-12">import org.apache.commons.lang3.StringUtils;</span>
+<span class="source-line-no">013</span><span id="line-13"></span>
+<span class="source-line-no">014</span><span id="line-14">import java.io.IOException;</span>
+<span class="source-line-no">015</span><span id="line-15">import java.time.Instant;</span>
+<span class="source-line-no">016</span><span id="line-16">import java.time.LocalDateTime;</span>
+<span class="source-line-no">017</span><span id="line-17">import java.time.ZoneId;</span>
+<span class="source-line-no">018</span><span id="line-18">import java.time.ZoneOffset;</span>
+<span class="source-line-no">019</span><span id="line-19">import java.time.format.DateTimeFormatter;</span>
+<span class="source-line-no">020</span><span id="line-20">import java.time.format.DateTimeFormatterBuilder;</span>
+<span class="source-line-no">021</span><span id="line-21">import java.util.List;</span>
+<span class="source-line-no">022</span><span id="line-22">import java.util.Optional;</span>
+<span class="source-line-no">023</span><span id="line-23">import java.util.function.Function;</span>
+<span class="source-line-no">024</span><span id="line-24"></span>
+<span class="source-line-no">025</span><span id="line-25">public class CoreDateTimeUtils {</span>
+<span class="source-line-no">026</span><span id="line-26"></span>
+<span class="source-line-no">027</span><span id="line-27">    /**</span>
+<span class="source-line-no">028</span><span id="line-28">     * Gets the current value of {@link ZoneOffset}, which depends on system settings of operational system</span>
+<span class="source-line-no">029</span><span id="line-29">     * and on the current time (because of &lt;a href="https://en.wikipedia.org/wiki/Daylight_saving_time"&gt;daylight saving time&lt;/a&gt;).</span>
+<span class="source-line-no">030</span><span id="line-30">     *</span>
+<span class="source-line-no">031</span><span id="line-31">     * @return the current value of {@link ZoneOffset}</span>
+<span class="source-line-no">032</span><span id="line-32">     */</span>
+<span class="source-line-no">033</span><span id="line-33">    public static ZoneOffset systemZoneOffset() {</span>
+<span class="source-line-no">034</span><span id="line-34">        return ZoneId.systemDefault().getRules().getOffset(Instant.now());</span>
+<span class="source-line-no">035</span><span id="line-35">    }</span>
+<span class="source-line-no">036</span><span id="line-36"></span>
+<span class="source-line-no">037</span><span id="line-37">    /**</span>
+<span class="source-line-no">038</span><span id="line-38">     * Transform the string-representation of {@link Instant}</span>
+<span class="source-line-no">039</span><span id="line-39">     * in {@link DateTimeFormatter#ISO_INSTANT ISO_INSTANT}-format</span>
+<span class="source-line-no">040</span><span id="line-40">     * into {@link DateTimeTriplet}</span>
+<span class="source-line-no">041</span><span id="line-41">     *</span>
+<span class="source-line-no">042</span><span id="line-42">     * @param instantStr string-representation of {@link Instant} in format like {@code 2007-12-03T10:15:30.00Z}.</span>
+<span class="source-line-no">043</span><span id="line-43">     * @return the instance of {@link DateTimeTriplet}</span>
+<span class="source-line-no">044</span><span id="line-44">     * @throws IllegalArgumentException in case of {@code null}, blank or any invalid string</span>
+<span class="source-line-no">045</span><span id="line-45">     *</span>
+<span class="source-line-no">046</span><span id="line-46">     * @see Instant#parse(CharSequence)</span>
+<span class="source-line-no">047</span><span id="line-47">     */</span>
+<span class="source-line-no">048</span><span id="line-48">    public static DateTimeTriplet parseIsoInstant(String instantStr) {</span>
+<span class="source-line-no">049</span><span id="line-49">        return new DateTimeTriplet(Instant.parse(instantStr));</span>
+<span class="source-line-no">050</span><span id="line-50">    }</span>
+<span class="source-line-no">051</span><span id="line-51"></span>
+<span class="source-line-no">052</span><span id="line-52">    /**</span>
+<span class="source-line-no">053</span><span id="line-53">     * Transform the string-representation of epoch-seconds into {@link DateTimeTriplet}</span>
+<span class="source-line-no">054</span><span id="line-54">     *</span>
+<span class="source-line-no">055</span><span id="line-55">     * @param epochSecondsStr string-representation of epoch-seconds (that is a standard {@code long})</span>
+<span class="source-line-no">056</span><span id="line-56">     * @return the instance of {@link DateTimeTriplet}</span>
+<span class="source-line-no">057</span><span id="line-57">     * @throws IllegalArgumentException in case of {@code null}, blank or any invalid string</span>
+<span class="source-line-no">058</span><span id="line-58">     */</span>
+<span class="source-line-no">059</span><span id="line-59">    public static DateTimeTriplet parseEpochSeconds(String epochSecondsStr) {</span>
+<span class="source-line-no">060</span><span id="line-60">        long epochSeconds = Long.parseLong(epochSecondsStr);</span>
+<span class="source-line-no">061</span><span id="line-61">        return new DateTimeTriplet(epochSeconds);</span>
+<span class="source-line-no">062</span><span id="line-62">    }</span>
+<span class="source-line-no">063</span><span id="line-63"></span>
+<span class="source-line-no">064</span><span id="line-64">    /**</span>
+<span class="source-line-no">065</span><span id="line-65">     * Parse the result of {@link DateTimeTriplet#dump()} or {@link DateTimeTriplet#dumpNoWeek()}</span>
+<span class="source-line-no">066</span><span id="line-66">     * back to original instance of {@link DateTimeTriplet}.</span>
+<span class="source-line-no">067</span><span id="line-67">     *</span>
+<span class="source-line-no">068</span><span id="line-68">     * @param dttStr the string with data-time in format {@value #dttNaturalFmtPattern}</span>
+<span class="source-line-no">069</span><span id="line-69">     * @return the instance of {@link DateTimeTriplet}</span>
+<span class="source-line-no">070</span><span id="line-70">     * @throws IllegalArgumentException in case of {@code null}, blank or any invalid string</span>
+<span class="source-line-no">071</span><span id="line-71">     */</span>
+<span class="source-line-no">072</span><span id="line-72">    public static DateTimeTriplet parseNatural(String dttStr) {</span>
+<span class="source-line-no">073</span><span id="line-73">        LocalDateTime localDateTimeUTC = LocalDateTime.parse(dttStr, dttNaturalFormatter);</span>
+<span class="source-line-no">074</span><span id="line-74">        return new DateTimeTriplet(localDateTimeUTC);</span>
+<span class="source-line-no">075</span><span id="line-75">    }</span>
+<span class="source-line-no">076</span><span id="line-76"></span>
+<span class="source-line-no">077</span><span id="line-77">    private static final String dttNaturalFmtPattern = "yyyy-MM-dd ['('EEE') ']HH:mm";</span>
+<span class="source-line-no">078</span><span id="line-78">    private static final DateTimeFormatter dttNaturalFormatter = DateTimeFormatter.ofPattern(dttNaturalFmtPattern);</span>
+<span class="source-line-no">079</span><span id="line-79"></span>
+<span class="source-line-no">080</span><span id="line-80">    /**</span>
+<span class="source-line-no">081</span><span id="line-81">     * Performs the subsequent attempts to parse the passed string {@code dttStr} with:&lt;ul&gt;</span>
+<span class="source-line-no">082</span><span id="line-82">     *     &lt;li&gt;{@link #parseIsoInstant(String)}&lt;/li&gt;</span>
+<span class="source-line-no">083</span><span id="line-83">     *     &lt;li&gt;{@link #parseEpochSeconds(String)}&lt;/li&gt;</span>
+<span class="source-line-no">084</span><span id="line-84">     *     &lt;li&gt;{@link #parseNatural(String)}&lt;/li&gt;</span>
+<span class="source-line-no">085</span><span id="line-85">     * &lt;/ul&gt;</span>
+<span class="source-line-no">086</span><span id="line-86">     * ... and returns either an instance of {@link DateTimeTriplet} or {@code null} if the input string is blank.</span>
+<span class="source-line-no">087</span><span id="line-87">     *</span>
+<span class="source-line-no">088</span><span id="line-88">     * @param dttStr the string in any supported formats (ISO_INSTANT, epoch-seconds, natural)</span>
+<span class="source-line-no">089</span><span id="line-89">     * @return the instance of {@link DateTimeTriplet}</span>
+<span class="source-line-no">090</span><span id="line-90">     * @throws IllegalArgumentException in case of the passed string is not blank and could not be parsed</span>
+<span class="source-line-no">091</span><span id="line-91">     */</span>
+<span class="source-line-no">092</span><span id="line-92">    public static DateTimeTriplet parseAny(String dttStr) {</span>
+<span class="source-line-no">093</span><span id="line-93">        if (StringUtils.isBlank(dttStr)) {</span>
+<span class="source-line-no">094</span><span id="line-94">            return null;</span>
+<span class="source-line-no">095</span><span id="line-95">        }</span>
+<span class="source-line-no">096</span><span id="line-96">        return parseFuncChain.stream()</span>
+<span class="source-line-no">097</span><span id="line-97">            .map(optFunc -&gt; optFunc.apply(dttStr))</span>
+<span class="source-line-no">098</span><span id="line-98">            .flatMap(Optional::stream)</span>
+<span class="source-line-no">099</span><span id="line-99">            .findFirst().orElseThrow(() -&gt;</span>
+<span class="source-line-no">100</span><span id="line-100">                new IllegalArgumentException(String.format(</span>
+<span class="source-line-no">101</span><span id="line-101">                    "could not parse the string '%s' as DateTimeTriplet with any of supported ways", dttStr)</span>
+<span class="source-line-no">102</span><span id="line-102">            ));</span>
+<span class="source-line-no">103</span><span id="line-103">    }</span>
+<span class="source-line-no">104</span><span id="line-104"></span>
+<span class="source-line-no">105</span><span id="line-105">    private static final List&lt;Function&lt;String, Optional&lt;DateTimeTriplet&gt;&gt;&gt; parseFuncChain = List.of(</span>
+<span class="source-line-no">106</span><span id="line-106">        parseOptional(CoreDateTimeUtils::parseIsoInstant),</span>
+<span class="source-line-no">107</span><span id="line-107">        parseOptional(CoreDateTimeUtils::parseEpochSeconds),</span>
+<span class="source-line-no">108</span><span id="line-108">        parseOptional(CoreDateTimeUtils::parseNatural)</span>
+<span class="source-line-no">109</span><span id="line-109">    );</span>
+<span class="source-line-no">110</span><span id="line-110"></span>
+<span class="source-line-no">111</span><span id="line-111">    private static</span>
+<span class="source-line-no">112</span><span id="line-112">    Function&lt;String, Optional&lt;DateTimeTriplet&gt;&gt;</span>
+<span class="source-line-no">113</span><span id="line-113">    parseOptional(Function&lt;String, DateTimeTriplet&gt; parseFunc) {</span>
+<span class="source-line-no">114</span><span id="line-114">        return str -&gt; {</span>
+<span class="source-line-no">115</span><span id="line-115">            try {</span>
+<span class="source-line-no">116</span><span id="line-116">                return Optional.of(parseFunc.apply(str));</span>
+<span class="source-line-no">117</span><span id="line-117">            } catch (Exception _ignored) {</span>
+<span class="source-line-no">118</span><span id="line-118">                return Optional.empty();</span>
+<span class="source-line-no">119</span><span id="line-119">            }</span>
+<span class="source-line-no">120</span><span id="line-120">        };</span>
+<span class="source-line-no">121</span><span id="line-121">    }</span>
+<span class="source-line-no">122</span><span id="line-122"></span>
+<span class="source-line-no">123</span><span id="line-123">    /**</span>
+<span class="source-line-no">124</span><span id="line-124">     * Jackson-Serializer for {@link DateTimeTriplet}</span>
+<span class="source-line-no">125</span><span id="line-125">     */</span>
+<span class="source-line-no">126</span><span id="line-126">    public static final JsonDeserializer&lt;DateTimeTriplet&gt; DTT_DESERIALIZER = new StdDeserializer&lt;&gt;(DateTimeTriplet.class) {</span>
+<span class="source-line-no">127</span><span id="line-127">        @Override</span>
+<span class="source-line-no">128</span><span id="line-128">        public DateTimeTriplet deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException {</span>
+<span class="source-line-no">129</span><span id="line-129">            return parseAny(parser.getText());</span>
+<span class="source-line-no">130</span><span id="line-130">        }</span>
+<span class="source-line-no">131</span><span id="line-131">    };</span>
+<span class="source-line-no">132</span><span id="line-132"></span>
+<span class="source-line-no">133</span><span id="line-133">    /**</span>
+<span class="source-line-no">134</span><span id="line-134">     * Jackson-Deserializer for {@link DateTimeTriplet}</span>
+<span class="source-line-no">135</span><span id="line-135">     */</span>
+<span class="source-line-no">136</span><span id="line-136">    public static final JsonSerializer&lt;DateTimeTriplet&gt; DTT_SERIALIZER = new StdSerializer&lt;&gt;(DateTimeTriplet.class) {</span>
+<span class="source-line-no">137</span><span id="line-137">        @Override</span>
+<span class="source-line-no">138</span><span id="line-138">        public void serialize(DateTimeTriplet dtt, JsonGenerator gen, SerializerProvider serializers) throws IOException {</span>
+<span class="source-line-no">139</span><span id="line-139">            gen.writeString(dtt.dump());</span>
+<span class="source-line-no">140</span><span id="line-140">        }</span>
+<span class="source-line-no">141</span><span id="line-141">    };</span>
+<span class="source-line-no">142</span><span id="line-142"></span>
+<span class="source-line-no">143</span><span id="line-143">    /**</span>
+<span class="source-line-no">144</span><span id="line-144">     * Custom Jackson-Module that provides serialization and deserialization for {@link DateTimeTriplet},</span>
+<span class="source-line-no">145</span><span id="line-145">     * which is useful to apply into {@link com.fasterxml.jackson.databind.ObjectMapper}</span>
+<span class="source-line-no">146</span><span id="line-146">     *</span>
+<span class="source-line-no">147</span><span id="line-147">     * @return an instance of {@link SimpleModule} that provides serialization and deserialization for {@link DateTimeTriplet}</span>
+<span class="source-line-no">148</span><span id="line-148">     */</span>
+<span class="source-line-no">149</span><span id="line-149">    public static SimpleModule jacksonModuleDTT() {</span>
+<span class="source-line-no">150</span><span id="line-150">        SimpleModule jacksonModule = new SimpleModule();</span>
+<span class="source-line-no">151</span><span id="line-151">        jacksonModule.addDeserializer(DateTimeTriplet.class, DTT_DESERIALIZER);</span>
+<span class="source-line-no">152</span><span id="line-152">        jacksonModule.addSerializer(DTT_SERIALIZER);</span>
+<span class="source-line-no">153</span><span id="line-153">        return jacksonModule;</span>
+<span class="source-line-no">154</span><span id="line-154">    }</span>
+<span class="source-line-no">155</span><span id="line-155">}</span>
 
 
 

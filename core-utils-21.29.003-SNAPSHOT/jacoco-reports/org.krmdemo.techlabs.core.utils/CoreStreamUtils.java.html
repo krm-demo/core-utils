@@ -272,7 +272,9 @@ public class CoreStreamUtils {
      */
     public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
     sortedMap(Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
-<span class="fc" id="L275">        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
+<span class="fc" id="L275">        return entries</span>
+<span class="pc bpc" id="L276" title="2 of 6 branches missed.">            .filter(e -&gt; e != null &amp;&amp; e.getKey() != null &amp;&amp; e.getValue() != null)</span>
+<span class="fc" id="L277">            .collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
     }
 
     /**
@@ -291,7 +293,7 @@ public class CoreStreamUtils {
      */
     public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
     sortedMap(MergeFunction mergeFunction, Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
-<span class="fc" id="L294">        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
+<span class="fc" id="L296">        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
     }
 
     /**
@@ -304,7 +306,7 @@ public class CoreStreamUtils {
      */
     public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
     sortedMap(Map&lt;K,V&gt; mapToSort) {
-<span class="fc" id="L307">        return sortedMap(mapToSort.entrySet().stream());</span>
+<span class="fc" id="L309">        return sortedMap(mapToSort.entrySet().stream());</span>
     }
 
     /**
@@ -324,7 +326,7 @@ public class CoreStreamUtils {
     @SuppressWarnings(&quot;varargs&quot;)
     public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
     linkedMap(Map.Entry&lt;K,V&gt;... entriesArr) {
-<span class="fc" id="L327">        return linkedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));</span>
+<span class="fc" id="L329">        return linkedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));</span>
     }
 
     /**
@@ -345,7 +347,7 @@ public class CoreStreamUtils {
     @SuppressWarnings(&quot;varargs&quot;)
     public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
     linkedMap(MergeFunction mergeFunction, Map.Entry&lt;K,V&gt;... entriesArr) {
-<span class="nc" id="L348">        return linkedMap(mergeFunction, Arrays.stream(entriesArr));</span>
+<span class="nc" id="L350">        return linkedMap(mergeFunction, Arrays.stream(entriesArr));</span>
     }
 
     /**
@@ -363,7 +365,7 @@ public class CoreStreamUtils {
      */
     public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
     linkedMap(Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
-<span class="fc" id="L366">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
+<span class="fc" id="L368">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
     }
 
     /**
@@ -382,7 +384,7 @@ public class CoreStreamUtils {
      */
     public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
     linkedMap(MergeFunction mergeFunction, Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
-<span class="fc" id="L385">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
+<span class="fc" id="L387">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
     }
 
     /**
@@ -393,14 +395,14 @@ public class CoreStreamUtils {
      * @return {@code true} if the entry is valid and otherwise - {@code false}
      */
     public static boolean entryIsValid(Map.Entry&lt;?,?&gt; entry) {
-<span class="fc bfc" id="L396" title="All 6 branches covered.">        return entry != null &amp;&amp; entry.getKey() != null &amp;&amp; entry.getValue() != null;</span>
+<span class="fc bfc" id="L398" title="All 6 branches covered.">        return entry != null &amp;&amp; entry.getKey() != null &amp;&amp; entry.getValue() != null;</span>
     }
 
     // --------------------------------------------------------------------------------------------
 
-<span class="fc" id="L401">    private CoreStreamUtils() {</span>
+<span class="fc" id="L403">    private CoreStreamUtils() {</span>
         // prohibit the creation of utility-class instance
-<span class="fc" id="L403">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+<span class="fc" id="L405">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
