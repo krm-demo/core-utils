@@ -98,6 +98,6 @@ public class CoreUtilsHelper {
      * @see Instant#parse(CharSequence)
      */
     public DateTimeTriplet dtt(String instantStr) {
-        return CoreDateTimeUtils.dtt(instantStr);
+        return CoreDateTimeUtils.parseIsoInstant(instantStr);
     }
 }

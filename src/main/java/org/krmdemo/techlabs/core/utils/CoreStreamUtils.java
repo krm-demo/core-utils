@@ -272,7 +272,9 @@ public class CoreStreamUtils {
      */
     public static <K extends Comparable<K>, V> NavigableMap<K, V>
     sortedMap(Stream<Map.Entry<K,V>> entries) {
-        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));
+        return entries
+            .filter(e -> e != null && e.getKey() != null && e.getValue() != null)
+            .collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     /**

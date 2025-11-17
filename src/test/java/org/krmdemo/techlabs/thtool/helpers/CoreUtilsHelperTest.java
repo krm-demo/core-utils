@@ -52,7 +52,7 @@ public class CoreUtilsHelperTest {
         DateTimeTriplet dttNow = DateTimeTriplet.now(); // <-- there could be any predefined value to assert
         try (MockedStatic<CoreDateTimeUtils> mockedDumpUtils = mockStatic(CoreDateTimeUtils.class)) {
             // register mocking expectations:
-            mockedDumpUtils.when(() -> CoreDateTimeUtils.dtt(anyString())).thenReturn(dttNow);
+            mockedDumpUtils.when(() -> CoreDateTimeUtils.parseIsoInstant(anyString())).thenReturn(dttNow);
             // perform the invocation of our helper and assert the expected delegations:
             assertThat(cu.dtt("2007-12-03T10:15:30.00Z")).isEqualTo(dttNow);
         }

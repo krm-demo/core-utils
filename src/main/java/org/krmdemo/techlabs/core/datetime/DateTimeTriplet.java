@@ -1,10 +1,14 @@
 package org.krmdemo.techlabs.core.datetime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.Objects;
@@ -32,6 +36,9 @@ import java.util.function.Supplier;
  * all it's parts for UTC time-zone and day of week corresponds to {@link Locale#US}
  * ({@code Mon}, {@code Tue}, {@code Wed}, {@code Thu}, {@code Fri}, {@code Sat}, {@code Sun}) by default .
  */
+@JsonPropertyOrder({
+    "year", "month", "dayOfMoth", "dayOfWeek", "hours", "minutes", "epochSeconds"
+})
 public class DateTimeTriplet {
 
     private final LocalDateTime localDateTimeUTC;
@@ -62,7 +69,9 @@ public class DateTimeTriplet {
      * @param localDateTimeUTC a date-time in {@link ZoneOffset#UTC} time-zone as {@link LocalDateTime}
      */
     public DateTimeTriplet(LocalDateTime localDateTimeUTC) {
-        this.localDateTimeUTC = Objects.requireNonNull(localDateTimeUTC);
+        this.localDateTimeUTC = Objects.requireNonNull(localDateTimeUTC)
+            .withSecond(0)
+            .withNano(0);
     }
 
     /**
@@ -89,13 +98,28 @@ public class DateTimeTriplet {
     }
 
     /**
+     * Getting the number of seconds from the epoch of {@code 1970-01-01T00:00:00Z}
+     * according to underlying value of {@link #getLocalDateTime()}.
+     *
+     * @return the number of seconds from the epoch of {@code 1970-01-01T00:00:00Z}.
+     */
+    public long getEpochSeconds() {
+        return localDateTimeUTC.toEpochSecond(ZoneOffset.UTC);
+    }
+
+    /**
+     * Getting the underlying value of standard {@link LocalDateTime} from JDK
+     *
      * @return underlying value of standard {@link LocalDateTime} from JDK
      */
+    @JsonIgnore
     public LocalDateTime getLocalDateTime() {
         return localDateTimeUTC;
     }
 
     /**
+     * Getting the value of year
+     *
      * @return integer value of year
      */
     public int getYear() {
@@ -103,6 +127,8 @@ public class DateTimeTriplet {
     }
 
     /**
+     * Getting the value of month as enumeration {@link Month}
+     *
      * @return a value of month as enumeration {@link Month}
      */
     public Month getMonth() {
@@ -113,6 +139,7 @@ public class DateTimeTriplet {
      * @return <b>the first part</b> of date-time triplet that contains dash-separated
      *          {@link #getYear() year} and {@link #getMonth() month}
      */
+    @JsonIgnore
     public String getYearAndMonth() {
         return String.format("%04d-%02d", this.getYear(), this.getMonth().getValue());
     }
@@ -136,6 +163,7 @@ public class DateTimeTriplet {
      *          and {@link #getDayOfWeek() the day of week as 3-letters acronym}
      *          in a format described in the declaration of {@link DateTimeTriplet}
      */
+    @JsonIgnore
     public String getDayOfMonthAndWeek() {
         String dayOfWeekStr = this.getDayOfWeek().getDisplayName(
             DAY_OF_WEEK__TEXT_STYLE.get(),
@@ -162,6 +190,7 @@ public class DateTimeTriplet {
      * @return <b>the third part</b> of date-time triplet that contains colon{@code ':'}-separated
      *          {@link #getHours() hours} and {@link #getMinutes() minutes}
      */
+    @JsonIgnore
     public String getHoursMinutes() {
         return String.format("%02d:%02d", this.getHours(), this.getMinutes());
     }
@@ -182,6 +211,14 @@ public class DateTimeTriplet {
      */
     public String dumpNoWeek() {
         return String.format("%s-%02d %s", getYearAndMonth(), getDayOfMoth(), getHoursMinutes());
+    }
+
+    /**
+     * @return string-representation of corresponding {@link Instant} in format like {@code 2007-12-03T10:15:30.00Z}.
+     * @see DateTimeFormatter#ISO_INSTANT ISO_INSTANT
+     */
+    public String dumpIsoInstant() {
+        return "" + Instant.ofEpochSecond(this.getEpochSeconds());
     }
 
     @Override

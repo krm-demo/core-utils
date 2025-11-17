@@ -1,8 +1,11 @@
 package org.krmdemo.techlabs.ghapi;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import feign.RequestLine;
+import org.krmdemo.techlabs.core.datetime.DateTimeTriplet;
 
 import java.time.Duration;
+import java.util.Map;
 
 public interface GithubApi {
 
@@ -12,12 +15,17 @@ public interface GithubApi {
 
     record User(
         String id,
-        String login
+        String login,
+        @JsonProperty("created_at") DateTimeTriplet createdAt,
+        @JsonProperty("updated_at") DateTimeTriplet updatedAt
     ) {}
 
     interface UserClient {
         @RequestLine("GET /user")
-        User get();
+        User getUser();
+
+        @RequestLine("GET /user")
+        Map<String, Object> getUserProps();
     }
 
     UserClient userClient();

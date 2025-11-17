@@ -8,10 +8,8 @@ import org.krmdemo.techlabs.core.utils.PropertiesUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.NavigableMap;
-import java.util.SequencedMap;
 
 /**
  * Implementation of {@link BuildInfo} with build-information that is loaded from properties-file,
@@ -95,7 +93,7 @@ public class MavenBuildInfo implements BuildInfo {
             return null;
         }
         try {
-            return CoreDateTimeUtils.dtt(mvnPropsMap.get(PROP_NAME__PROJECT_BUILD_DATE_TIME));
+            return CoreDateTimeUtils.parseIsoInstant(mvnPropsMap.get(PROP_NAME__PROJECT_BUILD_DATE_TIME));
         } catch (Exception ex) {
             errorMsg(String.format("could not parse the property '%s' to get the build date-time value - %s",
                 PROP_NAME__PROJECT_BUILD_DATE_TIME, ex.getMessage()));
