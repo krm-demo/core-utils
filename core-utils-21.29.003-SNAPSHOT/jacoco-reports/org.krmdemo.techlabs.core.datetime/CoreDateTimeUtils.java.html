@@ -136,13 +136,13 @@ import java.util.function.Function;
 <span class="fc" id="L136">    public static final JsonSerializer&lt;DateTimeTriplet&gt; DTT_SERIALIZER = new StdSerializer&lt;&gt;(DateTimeTriplet.class) {</span>
         @Override
         public void serialize(DateTimeTriplet dtt, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-<span class="nc" id="L139">            gen.writeString(dtt.dump());</span>
-<span class="nc" id="L140">        }</span>
+<span class="fc" id="L139">            gen.writeString(dtt.dump());</span>
+<span class="fc" id="L140">        }</span>
     };
 
     /**
      * Custom Jackson-Module that provides serialization and deserialization for {@link DateTimeTriplet},
-     * which is useful to apply into {@link com.fasterxml.jackson.databind.ObjectMapper}
+     * which is useful to register in {@link com.fasterxml.jackson.databind.ObjectMapper ObjectMapper}
      *
      * @return an instance of {@link SimpleModule} that provides serialization and deserialization for {@link DateTimeTriplet}
      */

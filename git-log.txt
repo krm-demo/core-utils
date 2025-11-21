@@ -1,3 +1,4 @@
+ccc121c6 latest changes in GithubApi and some improvement in DTT serialization
 330d945e put 'libs.zip' under the version control
 87a83c21 comments and next steps in GitHubApi
 977e44c3 working on GithubApi #2

@@ -3,6 +3,7 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
 
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -23,9 +24,12 @@ import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
  */
 public class JacksonTree {
 
-<span class="fc" id="L26">    public static final ObjectMapper DEFAULT_MAPPER = new ObjectMapper().registerModule(new JavaTimeModule());</span>
+<span class="fc" id="L27">    public static final ObjectMapper DEFAULT_MAPPER =</span>
+        new ObjectMapper()
+<span class="fc" id="L29">            .registerModule(new JavaTimeModule())</span>
+<span class="fc" id="L30">            .registerModule(CoreDateTimeUtils.jacksonModuleDTT());</span>
 
-<span class="fc" id="L28">    static final JacksonTree DEFAULT_JACKSON_TREE = new JacksonTree(DEFAULT_MAPPER);</span>
+<span class="fc" id="L32">    static final JacksonTree DEFAULT_JACKSON_TREE = new JacksonTree(DEFAULT_MAPPER);</span>
 
     final ObjectMapper jacksonMapper;
 
@@ -35,9 +39,9 @@ public class JacksonTree {
      *
      * @param jacksonMapper an instance of {@link ObjectMapper Jackson-ObjectMapper}
      */
-<span class="fc" id="L38">    public JacksonTree(ObjectMapper jacksonMapper) {</span>
-<span class="fc" id="L39">        this.jacksonMapper = jacksonMapper;</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L42">    public JacksonTree(ObjectMapper jacksonMapper) {</span>
+<span class="fc" id="L43">        this.jacksonMapper = jacksonMapper;</span>
+<span class="fc" id="L44">    }</span>
 
     /**
      * An entry-point of this static-factory, that is used as singleton
@@ -51,13 +55,13 @@ public class JacksonTree {
      * @return the instance of {@link TreeDumper.Node}, which repeats the hierarchy of {@link JsonNode Jackson-Tree-Node}
      */
     public TreeDumper.Node dumperNode(Object fromValue) {
-<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (fromValue == null) {</span>
-<span class="nc" id="L55">            return TreeDumper.NULL;</span>
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        } else if (fromValue instanceof TreeDumper.Node dumperNode) {</span>
-<span class="nc" id="L57">            return dumperNode;</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (fromValue == null) {</span>
+<span class="nc" id="L59">            return TreeDumper.NULL;</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        } else if (fromValue instanceof TreeDumper.Node dumperNode) {</span>
+<span class="nc" id="L61">            return dumperNode;</span>
         }
-<span class="fc" id="L59">        JsonNode root = jacksonMapper.valueToTree(fromValue);</span>
-<span class="fc" id="L60">        return fromJsonNode(root);</span>
+<span class="fc" id="L63">        JsonNode root = jacksonMapper.valueToTree(fromValue);</span>
+<span class="fc" id="L64">        return fromJsonNode(root);</span>
     }
 
     /**
@@ -69,72 +73,72 @@ public class JacksonTree {
      * @return a proper implementation of {@link TreeDumper.Node}
      */
     public static TreeDumper.Node fromJsonNode(JsonNode jsonNode) {
-<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (jsonNode == null) {</span>
-<span class="nc" id="L73">            return TreeDumper.NULL;</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (jsonNode == null) {</span>
+<span class="nc" id="L77">            return TreeDumper.NULL;</span>
         }
-<span class="fc bfc" id="L75" title="All 4 branches covered.">        return switch (jsonNode.getNodeType()) {</span>
-<span class="fc" id="L76">            case NULL -&gt; TreeDumper.NULL;</span>
-<span class="fc" id="L77">            case ARRAY -&gt; new SequenceNode(jsonNode);</span>
-<span class="fc" id="L78">            case OBJECT, POJO -&gt; new MappingsNode(jsonNode);</span>
-<span class="fc" id="L79">            default -&gt; new ScalarNode(jsonNode);</span>
+<span class="fc bfc" id="L79" title="All 4 branches covered.">        return switch (jsonNode.getNodeType()) {</span>
+<span class="fc" id="L80">            case NULL -&gt; TreeDumper.NULL;</span>
+<span class="fc" id="L81">            case ARRAY -&gt; new SequenceNode(jsonNode);</span>
+<span class="fc" id="L82">            case OBJECT, POJO -&gt; new MappingsNode(jsonNode);</span>
+<span class="fc" id="L83">            default -&gt; new ScalarNode(jsonNode);</span>
         };
     }
 
 
     abstract static class JacksonNode implements TreeDumper.Node {
         protected final JsonNode jsonNode;
-<span class="fc" id="L86">        protected JacksonNode(JsonNode jsonNode) {</span>
-<span class="fc" id="L87">            this.jsonNode = Objects.requireNonNull(jsonNode);</span>
-<span class="fc" id="L88">        }</span>
+<span class="fc" id="L90">        protected JacksonNode(JsonNode jsonNode) {</span>
+<span class="fc" id="L91">            this.jsonNode = Objects.requireNonNull(jsonNode);</span>
+<span class="fc" id="L92">        }</span>
     }
 
     static class ScalarNode extends JacksonNode implements TreeDumper.ScalarNode {
         protected ScalarNode (JsonNode jsonNode) {
-<span class="fc" id="L93">            super(jsonNode);</span>
-<span class="fc" id="L94">        }</span>
+<span class="fc" id="L97">            super(jsonNode);</span>
+<span class="fc" id="L98">        }</span>
         @Override
         public String text() {
-<span class="fc" id="L97">            return jsonNode.asText();</span>
+<span class="fc" id="L101">            return jsonNode.asText();</span>
         }
         @Override
         public void visit(TreeDumper dumper) {
-<span class="fc" id="L101">            dumper.acceptScalar(this);</span>
-<span class="fc" id="L102">        }</span>
+<span class="fc" id="L105">            dumper.acceptScalar(this);</span>
+<span class="fc" id="L106">        }</span>
     }
 
     static class SequenceNode extends JacksonNode implements TreeDumper.SequenceNode {
         protected SequenceNode (JsonNode jsonNode) {
-<span class="fc" id="L107">            super(jsonNode);</span>
-<span class="fc" id="L108">        }</span>
+<span class="fc" id="L111">            super(jsonNode);</span>
+<span class="fc" id="L112">        }</span>
         @Override
         public Stream&lt;TreeDumper.Node&gt; sequenceItems() {
-<span class="fc" id="L111">            return IntStream.range(0, jsonNode.size())</span>
-<span class="fc" id="L112">                .mapToObj(jsonNode::get)</span>
-<span class="fc" id="L113">                .map(JacksonTree::fromJsonNode);</span>
+<span class="fc" id="L115">            return IntStream.range(0, jsonNode.size())</span>
+<span class="fc" id="L116">                .mapToObj(jsonNode::get)</span>
+<span class="fc" id="L117">                .map(JacksonTree::fromJsonNode);</span>
         }
         @Override
         public void visit(TreeDumper dumper) {
-<span class="fc" id="L117">            dumper.acceptSequence(this);</span>
-<span class="fc" id="L118">        }</span>
+<span class="fc" id="L121">            dumper.acceptSequence(this);</span>
+<span class="fc" id="L122">        }</span>
     }
 
     static class MappingsNode extends JacksonNode implements TreeDumper.MappingsNode {
-<span class="fc" id="L122">        private final Set&lt;String&gt; fieldNames = new LinkedHashSet&lt;&gt;();</span>
+<span class="fc" id="L126">        private final Set&lt;String&gt; fieldNames = new LinkedHashSet&lt;&gt;();</span>
         protected MappingsNode (JsonNode jsonNode) {
-<span class="fc" id="L124">            super(jsonNode);</span>
-<span class="fc" id="L125">            jsonNode.fieldNames().forEachRemaining(fieldNames::add);</span>
-<span class="fc" id="L126">        }</span>
+<span class="fc" id="L128">            super(jsonNode);</span>
+<span class="fc" id="L129">            jsonNode.fieldNames().forEachRemaining(fieldNames::add);</span>
+<span class="fc" id="L130">        }</span>
         @Override
         public Stream&lt;Map.Entry&lt;String, TreeDumper.Node&gt;&gt; mappingsItems() {
-<span class="fc" id="L129">            return fieldNames.stream().map(name -&gt; {</span>
-<span class="fc" id="L130">                JsonNode fieldNode = jsonNode.get(name);</span>
-<span class="fc" id="L131">                return nameValue(name, fromJsonNode(fieldNode));</span>
+<span class="fc" id="L133">            return fieldNames.stream().map(name -&gt; {</span>
+<span class="fc" id="L134">                JsonNode fieldNode = jsonNode.get(name);</span>
+<span class="fc" id="L135">                return nameValue(name, fromJsonNode(fieldNode));</span>
             });
         }
         @Override
         public void visit(TreeDumper dumper) {
-<span class="fc" id="L136">            dumper.acceptMappings(this);</span>
-<span class="fc" id="L137">        }</span>
+<span class="fc" id="L140">            dumper.acceptMappings(this);</span>
+<span class="fc" id="L141">        }</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

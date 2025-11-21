@@ -101,7 +101,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/dump/JacksonTree.html#line-24">JacksonTree</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/dump/JacksonTree.html#line-25">JacksonTree</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">A static-factory that provides an implementation of of <a href="TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump"><code>TreeDumper.Node</code></a>
 over <code>JsonNode</code>, which is the base data-unit that is provided by
@@ -189,7 +189,7 @@ over <code>JsonNode</code>, which is the base data-unit that is provided by
 <section class="detail" id="DEFAULT_MAPPER">
 <h3>DEFAULT_MAPPER</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.ObjectMapper</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/dump/JacksonTree.html#line-26">DEFAULT_MAPPER</a></span></div>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.ObjectMapper</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/dump/JacksonTree.html#line-27">DEFAULT_MAPPER</a></span></div>
 </div>
 </section>
 </li>
@@ -205,7 +205,7 @@ over <code>JsonNode</code>, which is the base data-unit that is provided by
 <section class="detail" id="&lt;init&gt;(com.fasterxml.jackson.databind.ObjectMapper)">
 <h3>JacksonTree</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/dump/JacksonTree.html#line-38">JacksonTree</a></span><wbr><span class="parameters">(com.fasterxml.jackson.databind.ObjectMapper&nbsp;jacksonMapper)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/dump/JacksonTree.html#line-42">JacksonTree</a></span><wbr><span class="parameters">(com.fasterxml.jackson.databind.ObjectMapper&nbsp;jacksonMapper)</span></div>
 <div class="block">An optional public constructor that allows to provide an instance of <code>Jackson-ObjectMapper</code>
 that is different from the default one - <a href="#DEFAULT_MAPPER"><code>DEFAULT_MAPPER</code></a>.</div>
 <dl class="notes">
@@ -227,7 +227,7 @@ that is different from the default one - <a href="#DEFAULT_MAPPER"><code>DEFAULT
 <section class="detail" id="dumperNode(java.lang.Object)">
 <h3>dumperNode</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.Node</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/dump/JacksonTree.html#line-53">dumperNode</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;fromValue)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.Node</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/dump/JacksonTree.html#line-57">dumperNode</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;fromValue)</span></div>
 <div class="block">An entry-point of this static-factory, that is used as singleton
 over the predefined static instance of <code>ObjectMapper</code> - <a href="#DEFAULT_MAPPER"><code>DEFAULT_MAPPER</code></a>.
 <hr/>
@@ -247,7 +247,7 @@ or provide your own instance of <code>Jackson-ObjectMapper</code></div>
 <section class="detail" id="fromJsonNode(com.fasterxml.jackson.databind.JsonNode)">
 <h3>fromJsonNode</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.Node</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/dump/JacksonTree.html#line-71">fromJsonNode</a></span><wbr><span class="parameters">(com.fasterxml.jackson.databind.JsonNode&nbsp;jsonNode)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump">TreeDumper.Node</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/dump/JacksonTree.html#line-75">fromJsonNode</a></span><wbr><span class="parameters">(com.fasterxml.jackson.databind.JsonNode&nbsp;jsonNode)</span></div>
 <div class="block">A factory-method that returns an implementation of <a href="TreeDumper.Node.html" title="interface in org.krmdemo.techlabs.core.dump"><code>TreeDumper.Node</code></a>
 over <code>JsonNode</code>, which is the base data-unit that is provided by
 <a href="https://github.com/FasterXML/jackson?tab=readme-ov-file">Jackson-library</a></div>
