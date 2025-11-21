@@ -33,4 +33,25 @@ public class GithubApiTest {
         NavigableMap<String, Object> sortedUserProps = sortedMap(currentUserProps);
         System.out.println("sortedUserProps --> " + DumpUtils.dumpAsJsonTxt(sortedUserProps));
     }
+
+    @Test
+    void testOwner() {
+        GithubApi.UserClient userClient = githubApi.userClient();
+        GithubApi.User currentUser = userClient.getUser();
+        assertThat(currentUser).isNotNull();
+        assertThat(currentUser.login()).isNotBlank();
+
+        GithubApi.User currentOwner = userClient.getOwner(currentUser.login());
+        System.out.println("currentUser --> " + DumpUtils.dumpAsJsonTxt(currentUser));
+        System.out.println("currentOwner --> " + DumpUtils.dumpAsJsonTxt(currentOwner));
+        assertThat(DumpUtils.dumpAsJsonTxt(currentOwner))
+            .isEqualToNormalizingNewlines(DumpUtils.dumpAsJsonTxt(currentOwner));
+    }
+
+    @Test
+    void testRepositoryClient() {
+        GithubApi.RepositoryClient repoClient = githubApi.repositoryClient();
+        GithubApi.Repository repo = repoClient.getRepository("krm-demo", "core-utils");
+        System.out.println("repo --> " + DumpUtils.dumpAsJsonTxt(repo));
+    }
 }

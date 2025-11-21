@@ -142,7 +142,7 @@ public class CoreDateTimeUtils {
 
     /**
      * Custom Jackson-Module that provides serialization and deserialization for {@link DateTimeTriplet},
-     * which is useful to apply into {@link com.fasterxml.jackson.databind.ObjectMapper}
+     * which is useful to register in {@link com.fasterxml.jackson.databind.ObjectMapper ObjectMapper}
      *
      * @return an instance of {@link SimpleModule} that provides serialization and deserialization for {@link DateTimeTriplet}
      */

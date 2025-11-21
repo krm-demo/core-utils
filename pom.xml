@@ -471,6 +471,15 @@
         <version>${maven.failsafe.plugin.version}</version>
         <dependencies>
           <dependency>
+            <!--
+                Following dependency allows to see the brief and fancy (tree-like) information of executed test-cases,
+                but it's not included into standard maven-extension, but should be exported additionally.
+
+              To view or to clone the source-repository for corresponding project at GitHub using "gh"-utility:
+              :::> gh api /repos/fabriciorby/maven-surefire-junit5-tree-reporter
+              :::> gh repo view fabriciorby/maven-surefire-junit5-tree-reporter
+              :::> gh repo clone fabriciorby/maven-surefire-junit5-tree-reporter
+            -->
             <groupId>me.fabriciorby</groupId>
             <artifactId>maven-surefire-junit5-tree-reporter</artifactId>
             <version>${me-fabriciorby-junit5-tree-reporter.version}</version>
@@ -585,6 +594,11 @@
               - the input of this tool is JUnit5 XML-report, which is generated automatically with "maven-surefire-plugin" above
                 (see the property "junit.platform.reporting.open.xml.enabled=true" in "src/test/resources/junit-platform.properties" file)
               - two MOJOs below allows to get help and generate HTML-report as a single "open-test-report.html" file.
+
+              To view or to clone the source-repository for corresponding project at GitHub using "gh"-utility:
+              :::> gh api /repos/ota4j-team/open-test-reporting
+              :::> gh repo view ota4j-team/open-test-reporting
+              :::> gh repo clone ota4j-team/open-test-reporting
           -->
           <execution>
             <!--

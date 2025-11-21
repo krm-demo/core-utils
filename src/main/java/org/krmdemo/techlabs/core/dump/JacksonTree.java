@@ -3,6 +3,7 @@ package org.krmdemo.techlabs.core.dump;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
 
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -23,7 +24,10 @@ import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
  */
 public class JacksonTree {
 
-    public static final ObjectMapper DEFAULT_MAPPER = new ObjectMapper().registerModule(new JavaTimeModule());
+    public static final ObjectMapper DEFAULT_MAPPER =
+        new ObjectMapper()
+            .registerModule(new JavaTimeModule())
+            .registerModule(CoreDateTimeUtils.jacksonModuleDTT());
 
     static final JacksonTree DEFAULT_JACKSON_TREE = new JacksonTree(DEFAULT_MAPPER);
 

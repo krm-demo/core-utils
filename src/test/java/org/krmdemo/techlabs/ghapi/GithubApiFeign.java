@@ -49,12 +49,21 @@ class GithubApiFeign implements GithubApi {
 
     @Override
     public UserClient userClient() {
-        return feignBuilder().target(UserClient.class, URL_GITHUB_API);
+        return targetClient(UserClient.class);
     }
 
     @Override
     public User currentUser() {
         return userClient().getUser();
+    }
+
+    @Override
+    public RepositoryClient repositoryClient() {
+        return targetClient(RepositoryClient.class);
+    }
+
+    private <T> T targetClient(Class<T> clientClass) {
+        return feignBuilder().target(clientClass, URL_GITHUB_API);
     }
 
     static class FactoryImpl extends GithubApi.Factory {

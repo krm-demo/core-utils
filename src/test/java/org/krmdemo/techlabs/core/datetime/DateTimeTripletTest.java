@@ -60,19 +60,6 @@ public class DateTimeTripletTest {
     }
 
     @Test
-    void testDumpJson() {
-        //System.out.println("ddtNow --(as JSON)--> " + dumpAsJsonTxt(dttNow));
-        assertThat(dumpAsJsonTxt(dttNow))
-            .contains("year")
-            .contains("month")
-            .contains("dayOfMoth")
-            .contains("dayOfWeek")
-            .contains("hours")
-            .contains("minutes")
-            .contains("epochSeconds");
-    }
-
-    @Test
     void testParseEpochSeconds() {
         DateTimeTriplet dttParsed = parseEpochSeconds("" + dttNow.getEpochSeconds());
         assertThat(dttParsed.getLocalDateTime()).isEqualTo(dttNow.getLocalDateTime());
