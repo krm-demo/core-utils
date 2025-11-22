@@ -1,3 +1,4 @@
+5c8695ce Fixes in GithubApi and improving its test coverage
 420f5b53 add some useful methods into GithubApi.RepositoryClient #1
 82b32edd add getRepoProps to GithubApi
 affb81da a bash-script to curl for list of bb-repos and upload
