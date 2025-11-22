@@ -1,3 +1,4 @@
+82b32edd add getRepoProps to GithubApi
 affb81da a bash-script to curl for list of bb-repos and upload
 25ac324f a bash-script to curl for bb-repo
 ccc121c6 latest changes in GithubApi and some improvement in DTT serialization
