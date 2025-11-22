@@ -1,19 +1,29 @@
 package org.krmdemo.techlabs.ghapi;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.Feign;
 import feign.Request;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
+import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
+import java.util.function.Function;
 
-import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 
+/**
+ * Implementation of {@link GithubApi} that is based on using <a href="https://github.com/OpenFeign/feign">Open-Feign</a>
+ *
+ * @see <a href="https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/">
+ *     (Spring-IO Docs) Spring Cloud OpenFeign
+ * </a>
+ * @see <a href="https://www.baeldung.com/spring-cloud-openfeign">
+ *     (Baeldung) Introduction to Spring Cloud <code>OpenFeign</code>
+ * </a>
+ */
 class GithubApiFeign implements GithubApi {
 
     public static final String ENV_VAR__GITHUB_TOKEN = "GITHUB_TOKEN";
@@ -66,26 +76,44 @@ class GithubApiFeign implements GithubApi {
 
     @Override
     public NavigableMap<String, Repository> currentUserReposMap() {
-        // TODO: to be implemented
-        return null;
+        return repositoryClient().getUserRepos().stream()
+            .collect(toSortedMap(
+                Repository::name,
+                Function.identity()
+            ));
     }
 
     @Override
-    public Map<String, Repository> ownerReposMap(String ownerName) {
-        // TODO: to be implemented
-        return Map.of();
+    public NavigableMap<String, Repository> ownerReposMap(String ownerName) {
+        return repositoryClient().getOwnerRepos(ownerName).stream()
+            .collect(toSortedMap(
+                Repository::name,
+                Function.identity()
+            ));
     }
 
     @Override
     public Repository currentRepo() {
-        // TODO: to be implemented
-        return null;
+        if (StringUtils.isBlank(this.repoName)) {
+            throw new IllegalStateException(
+                "could not get the current repository, because there's no information " +
+                    "about current repository-name in this instance of " + getClass().getSimpleName());
+        }
+        String currentOwnerName = StringUtils.isNotBlank(this.ownerName) ?
+            this.ownerName : this.currentUser().login();
+        return repositoryClient().getRepository(currentOwnerName, this.repoName);
     }
 
     @Override
     public Map<String, Object> currentRepoProps() {
-        // TODO: to be implemented
-        return Map.of();
+        if (StringUtils.isBlank(this.repoName)) {
+            throw new IllegalStateException(
+                "could not get the properties of current repository, because there's no information " +
+                    "about current repository-name in this instance of " + getClass().getSimpleName());
+        }
+        String currentOwnerName = StringUtils.isNotBlank(this.ownerName) ?
+            this.ownerName : this.currentUser().login();
+        return repositoryClient().getRepoProps(currentOwnerName, this.repoName);
     }
 
     private <T> T targetClient(Class<T> clientClass) {

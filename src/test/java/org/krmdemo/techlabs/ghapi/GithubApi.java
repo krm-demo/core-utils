@@ -161,7 +161,7 @@ public interface GithubApi {
          *
          * @return the collection of GitHub-{@code repositories} of {@link #currentUser() current user}
          */
-        @RequestLine("GET /users/USERNAME/repos")
+        @RequestLine("GET /user/repos")
         Collection<Repository> getUserRepos();
 
         /**
@@ -170,7 +170,7 @@ public interface GithubApi {
          *
          * @return the collection of GitHub-{@code repositories} of the owner with the passed @code ownerName}
          */
-        @RequestLine("GET /users/USERNAME/repos")
+        @RequestLine("GET /users/{ownerName}/repos")
         Collection<Repository> getOwnerRepos(@Param("ownerName") String ownerName);
     }
 
@@ -198,7 +198,7 @@ public interface GithubApi {
      *         with the passed {@code ownerName}, where the {@link Map.Entry#getKey() key} is repository's {@link Repository#name() name}
      *         and the {@link Map.Entry#getValue() value} is a basic repository properties as {@link Repository}
      */
-    Map<String, Repository> ownerReposMap(String ownerName);
+    NavigableMap<String, Repository> ownerReposMap(String ownerName);
 
     /**
      * Loading the basic properties of the current GitHub-{@code repository} as {@link Repository},
@@ -248,7 +248,7 @@ public interface GithubApi {
         }
 
         public Factory repoName(String repoName) {
-            this.repoName = ownerName;
+            this.repoName = repoName;
             return this;
         }
     }

@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.NavigableMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.krmdemo.techlabs.core.utils.CorePropsUtils.propValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
 
 /**
@@ -57,5 +59,33 @@ public class GithubApiTest {
         System.out.println("repo --> " + DumpUtils.dumpAsJsonTxt(repo));
         Map<String, Object> repoProps = repoClient.getRepoProps(ownerName, repoName);
         System.out.println("repoProps --> " + DumpUtils.dumpAsJsonTxt(repoProps));
+
+        final String orgNameSlf4j = "qos-ch";
+        Map<String, GithubApi.Repository> reposMap = githubApi.ownerReposMap(orgNameSlf4j);
+        System.out.printf("list of repos of organization %s --> %s%n",
+            orgNameSlf4j, DumpUtils.dumpAsJsonTxt(reposMap.keySet()));
+        assertThat(reposMap).containsKeys("slf4j", "logback");
+
+        Map<String, GithubApi.Repository> currentReposMap = githubApi.currentUserReposMap();
+        assertThat(currentReposMap).containsKeys("core-utils");
+    }
+
+    @Test
+    void testCurrentRepo_NoOwner() {
+        GithubApi githubApi_NoOwner = GithubApi.feignFactory()
+            .githubToken(GithubHttpTest.GITHUB_AUTH_TOKEN)
+            .create();
+        assertThatIllegalStateException().isThrownBy(githubApi_NoOwner::currentRepo)
+            .withMessage("could not get the current repository, because there's no information about current repository-name in this instance of GithubApiFeign");
+        assertThatIllegalStateException().isThrownBy(githubApi_NoOwner::currentRepoProps)
+            .withMessage("could not get the properties of current repository, because there's no information about current repository-name in this instance of GithubApiFeign");
+    }
+
+    @Test
+    void testCurrentRepo() {
+        assertThat(githubApi.currentRepo().name()).isEqualTo("core-utils");
+        Map<String, Object> currRepoProps = githubApi.currentRepoProps();
+        System.out.println("currRepoProps --> " + DumpUtils.dumpAsJsonTxt(currRepoProps));
+        assertThat(propValue(currRepoProps, "owner", "login")).isEqualTo("krm-demo");
     }
 }
