@@ -128,7 +128,7 @@ public interface GithubApi {
 
         /**
          * Loading the basic properties of GitHub-{@code repository} by the first and the second parts
-         * of full name (slash{@code '/'}-separated {@code ownerName} and {@code repoName})
+         * of the full name (slash{@code '/'}-separated {@code ownerName} and {@code repoName})
          *
          * @param ownerName the first part of {@link Repository#fullName()}, which corresponds to {@link User#login()}
          * @param repoName the second part of {@link Repository#fullName()}, which is just a name of GitHib-{@code repository}
@@ -136,6 +136,18 @@ public interface GithubApi {
          */
         @RequestLine("GET /repos/{ownerName}/{repoName}")
         Repository getRepository(
+            @Param("ownerName") String ownerName,
+            @Param("repoName") String repoName
+        );
+
+        /**
+         * Loading all properties of GitHub-{@code repository} by the first and the second parts
+         * of the full name (slash{@code '/'}-separated {@code ownerName} and {@code repoName})
+         *
+         * @return all properties of GitHub-{@code repository} as JSON-object, which is represented by {@link Map Map&lt;String,Object&gt;}
+         */
+        @RequestLine("GET /repos/{ownerName}/{repoName}")
+        Map<String, Object> getRepoProps(
             @Param("ownerName") String ownerName,
             @Param("repoName") String repoName
         );

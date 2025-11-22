@@ -50,8 +50,12 @@ public class GithubApiTest {
 
     @Test
     void testRepositoryClient() {
+        final String ownerName = "atteo";
+        final String repoName = "classindex";
         GithubApi.RepositoryClient repoClient = githubApi.repositoryClient();
-        GithubApi.Repository repo = repoClient.getRepository("krm-demo", "core-utils");
+        GithubApi.Repository repo = repoClient.getRepository(ownerName, repoName);
         System.out.println("repo --> " + DumpUtils.dumpAsJsonTxt(repo));
+        Map<String, Object> repoProps = repoClient.getRepoProps(ownerName, repoName);
+        System.out.println("repoProps --> " + DumpUtils.dumpAsJsonTxt(repoProps));
     }
 }
