@@ -6,7 +6,9 @@ import feign.RequestLine;
 import org.krmdemo.techlabs.core.datetime.DateTimeTriplet;
 
 import java.time.Duration;
+import java.util.Collection;
 import java.util.Map;
+import java.util.NavigableMap;
 
 /**
  * This interface represents a facade to GitHub-API, which should be instantiated via {@link Factory}
@@ -67,7 +69,6 @@ public interface GithubApi {
         @RequestLine("GET /user")
         Map<String, Object> getUserProps();
 
-
         /**
          * Loading the basic properties of GitHub-{@code owner} with passed {@code ownerName}.
          *
@@ -90,7 +91,7 @@ public interface GithubApi {
     UserClient userClient();
 
     /**
-     * A shortcut to {@code userClient().getUser()}
+     * A shortcut to {@link #userClient() userClient()}{@link UserClient#getUser() .getUser()}
      *
      * @return the basic properties of GitHub-{@code user} as {@link User}
      */
@@ -144,6 +145,8 @@ public interface GithubApi {
          * Loading all properties of GitHub-{@code repository} by the first and the second parts
          * of the full name (slash{@code '/'}-separated {@code ownerName} and {@code repoName})
          *
+         * @param ownerName the first part of {@link Repository#fullName()}, which corresponds to {@link User#login()}
+         * @param repoName the second part of {@link Repository#fullName()}, which is just a name of GitHib-{@code repository}
          * @return all properties of GitHub-{@code repository} as JSON-object, which is represented by {@link Map Map&lt;String,Object&gt;}
          */
         @RequestLine("GET /repos/{ownerName}/{repoName}")
@@ -151,6 +154,24 @@ public interface GithubApi {
             @Param("ownerName") String ownerName,
             @Param("repoName") String repoName
         );
+
+        /**
+         * Loading the collection of GitHub-{@code repositories} that belong to the current user,
+         * which corresponds to GitHub-{@code token} in HTTP-header.
+         *
+         * @return the collection of GitHub-{@code repositories} of {@link #currentUser() current user}
+         */
+        @RequestLine("GET /users/USERNAME/repos")
+        Collection<Repository> getUserRepos();
+
+        /**
+         * Loading the collection of GitHub-{@code repositories} that belong to the GitHub-{@code user}
+         * or GitHub-{@code organization} with the pased {@code ownerName}.
+         *
+         * @return the collection of GitHub-{@code repositories} of the owner with the passed @code ownerName}
+         */
+        @RequestLine("GET /users/USERNAME/repos")
+        Collection<Repository> getOwnerRepos(@Param("ownerName") String ownerName);
     }
 
     /**
@@ -161,7 +182,47 @@ public interface GithubApi {
      */
     RepositoryClient repositoryClient();
 
+    /**
+     * Getting the sorted map over the result of {@link RepositoryClient#getUserRepos()}
+     *
+     * @return a sorted map over the collection of GitHub-{@code repositories} of the {@link #currentUser() current user},
+     *         where the {@link Map.Entry#getKey() key} is repository's {@link Repository#name() name}
+     *         and the {@link Map.Entry#getValue() value} is a basic repository properties as {@link Repository}
+     */
+    NavigableMap<String, Repository> currentUserReposMap();
 
+    /**
+     * Getting the sorted map over the result of {@link RepositoryClient#getOwnerRepos(String)}
+     *
+     * @return a sorted map over the collection of GitHub-{@code repositories} of the GitHub-{@code owner}
+     *         with the passed {@code ownerName}, where the {@link Map.Entry#getKey() key} is repository's {@link Repository#name() name}
+     *         and the {@link Map.Entry#getValue() value} is a basic repository properties as {@link Repository}
+     */
+    Map<String, Repository> ownerReposMap(String ownerName);
+
+    /**
+     * Loading the basic properties of the current GitHub-{@code repository} as {@link Repository},
+     * whose {@link Repository#fullName()} corresponds to values that was passed to {@link Factory#ownerName(String)}
+     * and to {@link Factory#repoName(String)} accordingly.
+     * <hr/>
+     * The most important method of the whole GitHub-API that allows to get the ID of the current repository
+     *
+     * @return the basic properties of the current repository as {@link Repository}
+     */
+    Repository currentRepo();
+
+    /**
+     * Loading all the properties of the current GitHub-{@code repository}
+     * as JSON-object, which is represented by {@link Map Map&lt;String,Object&gt;},
+     * whose {@link Repository#fullName()} corresponds to values that was passed to {@link Factory#ownerName(String)}
+     * and to {@link Factory#repoName(String)} accordingly.
+     * <hr/>
+     * The most important method of the whole GitHub-API that allows to get the ID of the current repository
+     *
+     * @return all the properties of the current GitHub-{@code repository}
+     *         as JSON-object, which is represented by {@link Map Map&lt;String,Object&gt;}
+     */
+    Map<String, Object> currentRepoProps();
 
     // ---------------------------------------------------------------------------------------------
 

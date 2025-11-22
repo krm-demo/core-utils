@@ -9,6 +9,8 @@ import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
 
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 
@@ -60,6 +62,30 @@ class GithubApiFeign implements GithubApi {
     @Override
     public RepositoryClient repositoryClient() {
         return targetClient(RepositoryClient.class);
+    }
+
+    @Override
+    public NavigableMap<String, Repository> currentUserReposMap() {
+        // TODO: to be implemented
+        return null;
+    }
+
+    @Override
+    public Map<String, Repository> ownerReposMap(String ownerName) {
+        // TODO: to be implemented
+        return Map.of();
+    }
+
+    @Override
+    public Repository currentRepo() {
+        // TODO: to be implemented
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> currentRepoProps() {
+        // TODO: to be implemented
+        return Map.of();
     }
 
     private <T> T targetClient(Class<T> clientClass) {
