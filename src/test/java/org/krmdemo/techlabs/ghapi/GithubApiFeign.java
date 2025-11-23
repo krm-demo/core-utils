@@ -5,6 +5,9 @@ import feign.Request;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.concurrent.AtomicSafeInitializer;
+import org.apache.commons.lang3.concurrent.ConcurrentException;
+import org.apache.commons.lang3.concurrent.LazyInitializer;
 import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
 
 import java.util.List;
@@ -16,6 +19,17 @@ import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 
 /**
  * Implementation of {@link GithubApi} that is based on using <a href="https://github.com/OpenFeign/feign">Open-Feign</a>
+ * and the results of some remote calls are cached and lazy-initialized via {@link AtomicSafeInitializer}
+ * that allows to avoid multiple invocations for:<dl>
+ *     <dt>{@link #getCurrentUser()}:</dt>
+ *     <dd>thread-safe property of type {@link User}, which is lazy-initialized over the invocation of
+ *          {@link #userClient()}{@link UserClient#getUser() .getUser()}
+ *     </dd>
+ *     <dt>{@link #getCurrentRepo()}:</dt>
+ *     <dd>thread-safe property of type {@link Repository}, which is lazy-initialized over the invocation of
+ *          {@link #repositoryClient()}{@link RepositoryClient#getRepository(String, String) .getRepository()}
+ *     </dd>
+ * </dl>
  *
  * @see <a href="https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/">
  *     (Spring-IO Docs) Spring Cloud OpenFeign
@@ -30,6 +44,15 @@ class GithubApiFeign implements GithubApi {
 
     public static final String SYS_PROP__GITHUB_TOKEN = "github-token";
 
+    private final AtomicSafeInitializer<User> currentUserHolder =
+        AtomicSafeInitializer.<User>builder()
+            .setInitializer(this::loadCurrentUser)
+            .get();
+
+    private final AtomicSafeInitializer<Repository> currentRepoHolder =
+        AtomicSafeInitializer.<Repository>builder()
+            .setInitializer(this::loadCurrentRepo)
+            .get();
 
     private final String githubToken;
     private final String ownerName;
@@ -64,9 +87,19 @@ class GithubApiFeign implements GithubApi {
         return targetClient(UserClient.class);
     }
 
-    @Override
-    public User currentUser() {
+    // the reference to this method is used as atomic-safe-initializer
+    private User loadCurrentUser() {
         return userClient().getUser();
+    }
+
+    @Override
+    public User getCurrentUser() {
+        try {
+            return currentUserHolder.get();
+        } catch (ConcurrentException concEx) {
+            throw new IllegalStateException(
+                "current user is not available because of errors during initialization", concEx);
+        }
     }
 
     @Override
@@ -92,16 +125,25 @@ class GithubApiFeign implements GithubApi {
             ));
     }
 
-    @Override
-    public Repository currentRepo() {
+    private Repository loadCurrentRepo() {
         if (StringUtils.isBlank(this.repoName)) {
             throw new IllegalStateException(
                 "could not get the current repository, because there's no information " +
                     "about current repository-name in this instance of " + getClass().getSimpleName());
         }
         String currentOwnerName = StringUtils.isNotBlank(this.ownerName) ?
-            this.ownerName : this.currentUser().login();
+            this.ownerName : this.getCurrentUser().login();
         return repositoryClient().getRepository(currentOwnerName, this.repoName);
+    }
+
+    @Override
+    public Repository getCurrentRepo() {
+        try {
+            return currentRepoHolder.get();
+        } catch (ConcurrentException concEx) {
+            throw new IllegalStateException(
+                "current repo is not available because of errors during initialization", concEx);
+        }
     }
 
     @Override
@@ -112,7 +154,7 @@ class GithubApiFeign implements GithubApi {
                     "about current repository-name in this instance of " + getClass().getSimpleName());
         }
         String currentOwnerName = StringUtils.isNotBlank(this.ownerName) ?
-            this.ownerName : this.currentUser().login();
+            this.ownerName : this.getCurrentUser().login();
         return repositoryClient().getRepoProps(currentOwnerName, this.repoName);
     }
 

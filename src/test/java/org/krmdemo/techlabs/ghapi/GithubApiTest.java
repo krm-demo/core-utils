@@ -25,7 +25,7 @@ public class GithubApiTest {
 
     @Test
     void testCurrentUser() {
-        GithubApi.User currentUser = githubApi.currentUser();
+        GithubApi.User currentUser = githubApi.getCurrentUser();
         assertThat(currentUser).isNotNull();
         System.out.println("currentUser --> " + currentUser);
         assertThat(currentUser.login()).isEqualTo("krm-demo");
@@ -75,7 +75,7 @@ public class GithubApiTest {
         GithubApi githubApi_NoOwner = GithubApi.feignFactory()
             .githubToken(GithubHttpTest.GITHUB_AUTH_TOKEN)
             .create();
-        assertThatIllegalStateException().isThrownBy(githubApi_NoOwner::currentRepo)
+        assertThatIllegalStateException().isThrownBy(githubApi_NoOwner::getCurrentRepo)
             .withMessage("could not get the current repository, because there's no information about current repository-name in this instance of GithubApiFeign");
         assertThatIllegalStateException().isThrownBy(githubApi_NoOwner::currentRepoProps)
             .withMessage("could not get the properties of current repository, because there's no information about current repository-name in this instance of GithubApiFeign");
@@ -83,7 +83,7 @@ public class GithubApiTest {
 
     @Test
     void testCurrentRepo() {
-        assertThat(githubApi.currentRepo().name()).isEqualTo("core-utils");
+        assertThat(githubApi.getCurrentRepo().name()).isEqualTo("core-utils");
         Map<String, Object> currRepoProps = githubApi.currentRepoProps();
         System.out.println("currRepoProps --> " + DumpUtils.dumpAsJsonTxt(currRepoProps));
         assertThat(propValue(currRepoProps, "owner", "login")).isEqualTo("krm-demo");

@@ -95,7 +95,7 @@ public interface GithubApi {
      *
      * @return the basic properties of GitHub-{@code user} as {@link User}
      */
-    User currentUser();
+    User getCurrentUser();
 
     // ---------------------------------------------------------------------------------------------
 
@@ -159,7 +159,7 @@ public interface GithubApi {
          * Loading the collection of GitHub-{@code repositories} that belong to the current user,
          * which corresponds to GitHub-{@code token} in HTTP-header.
          *
-         * @return the collection of GitHub-{@code repositories} of {@link #currentUser() current user}
+         * @return the collection of GitHub-{@code repositories} of {@link #getCurrentUser() current user}
          */
         @RequestLine("GET /user/repos")
         Collection<Repository> getUserRepos();
@@ -209,7 +209,7 @@ public interface GithubApi {
      *
      * @return the basic properties of the current repository as {@link Repository}
      */
-    Repository currentRepo();
+    Repository getCurrentRepo();
 
     /**
      * Loading all the properties of the current GitHub-{@code repository}
