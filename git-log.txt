@@ -1,3 +1,4 @@
+0dace2a4 introduce GithubApi.PackageClient #2
 92a7c7f3 introduce AtomicSafeInitializer over loadCurrentUser and loadCurrentRepo
 5c8695ce Fixes in GithubApi and improving its test coverage
 420f5b53 add some useful methods into GithubApi.RepositoryClient #1
