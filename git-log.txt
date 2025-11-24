@@ -1,3 +1,4 @@
+4e362bfa attempt to commit the MD-file about BB-token #1
 0dace2a4 introduce GithubApi.PackageClient #2
 92a7c7f3 introduce AtomicSafeInitializer over loadCurrentUser and loadCurrentRepo
 5c8695ce Fixes in GithubApi and improving its test coverage
