@@ -3,6 +3,7 @@ package org.krmdemo.techlabs.ghapi;
 import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.NavigableMap;
 
@@ -17,9 +18,12 @@ import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
  */
 public class GithubApiTest {
 
+    static final String CURRENT_OWNER_NAME = "krm-demo";
+    static final String CURRENT_REPO_NAME = "core-utils";
+
     static GithubApi githubApi = GithubApi.feignFactory()
-        .ownerName("krm-demo")
-        .repoName("core-utils")
+        .ownerName(CURRENT_OWNER_NAME)
+        .repoName(CURRENT_REPO_NAME)
         .githubToken(GithubHttpTest.GITHUB_AUTH_TOKEN)
         .create();
 
@@ -28,7 +32,7 @@ public class GithubApiTest {
         GithubApi.User currentUser = githubApi.getCurrentUser();
         assertThat(currentUser).isNotNull();
         System.out.println("currentUser --> " + currentUser);
-        assertThat(currentUser.login()).isEqualTo("krm-demo");
+        assertThat(currentUser.login()).isEqualTo(CURRENT_OWNER_NAME);
 
         Map<String, Object> currentUserProps = githubApi.userClient().getUserProps();
         System.out.println("currentUserProps --> " + DumpUtils.dumpAsJsonTxt(currentUserProps));
@@ -67,7 +71,7 @@ public class GithubApiTest {
         assertThat(reposMap).containsKeys("slf4j", "logback");
 
         Map<String, GithubApi.Repository> currentReposMap = githubApi.currentUserReposMap();
-        assertThat(currentReposMap).containsKeys("core-utils");
+        assertThat(currentReposMap).containsKeys(CURRENT_REPO_NAME);
     }
 
     @Test
@@ -83,9 +87,19 @@ public class GithubApiTest {
 
     @Test
     void testCurrentRepo() {
-        assertThat(githubApi.getCurrentRepo().name()).isEqualTo("core-utils");
+        assertThat(githubApi.getCurrentRepo().name()).isEqualTo(CURRENT_REPO_NAME);
         Map<String, Object> currRepoProps = githubApi.currentRepoProps();
         System.out.println("currRepoProps --> " + DumpUtils.dumpAsJsonTxt(currRepoProps));
-        assertThat(propValue(currRepoProps, "owner", "login")).isEqualTo("krm-demo");
+        assertThat(propValue(currRepoProps, "owner", "login")).isEqualTo(CURRENT_OWNER_NAME);
+    }
+
+    @Test
+    void testPackageClient() {
+        GithubApi.PackageClient packageClient = githubApi.packageClient();
+        Collection<GithubApi.Package> userMavenPackages = packageClient.getUserMavenPackages();
+        System.out.println("userMavenPackages --> " + DumpUtils.dumpAsJsonTxt(userMavenPackages));
+        Collection<GithubApi.Package> ownerMavenPackages = packageClient.getOwnerMavenPackages(CURRENT_OWNER_NAME);
+        System.out.println("ownerMavenPackages --> " + DumpUtils.dumpAsJsonTxt(ownerMavenPackages));
+        assertThat(userMavenPackages).containsExactlyInAnyOrderElementsOf(ownerMavenPackages);
     }
 }

@@ -1,5 +1,6 @@
 package org.krmdemo.techlabs.ghapi;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import feign.Param;
 import feign.RequestLine;
@@ -40,6 +41,7 @@ public interface GithubApi {
      * @param createdAt the date-time when GitHub-{@code user} was created
      * @param updatedAt the last date-time when GitHub-{@code user} was updated
      */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     record User(
         String id,
         String login,
@@ -49,7 +51,7 @@ public interface GithubApi {
     ) {}
 
     /**
-     * Feign-Interface to access GitHub-API to
+     * Feign-Interface to access GitHub-API for GitHub-entities of type {@link User}
      */
     interface UserClient {
 
@@ -91,7 +93,8 @@ public interface GithubApi {
     UserClient userClient();
 
     /**
-     * A shortcut to {@link #userClient() userClient()}{@link UserClient#getUser() .getUser()}
+     * A shortcut to {@link #userClient() userClient()}{@link UserClient#getUser() .getUser()},
+     * but the result is expected to be cached by implementation to avoid redundant REST-invocations.
      *
      * @return the basic properties of GitHub-{@code user} as {@link User}
      */
@@ -110,6 +113,7 @@ public interface GithubApi {
      * @param createdAt the date-time when GitHub-{@code repository} was created
      * @param updatedAt the last date-time when GitHub-{@code repository} was updated
      */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     record Repository(
         String id,
         String name,
@@ -123,7 +127,7 @@ public interface GithubApi {
     ) {}
 
     /**
-     * Feign-Interface to access GitHub-API to
+     * Feign-Interface to access GitHub-API for GitHub-entities of type {@link Repository}
      */
     interface RepositoryClient {
 
@@ -159,33 +163,33 @@ public interface GithubApi {
          * Loading the collection of GitHub-{@code repositories} that belong to the current user,
          * which corresponds to GitHub-{@code token} in HTTP-header.
          *
-         * @return the collection of GitHub-{@code repositories} of {@link #getCurrentUser() current user}
+         * @return the collection of GitHub-{@code repositories} for the {@link #getCurrentUser() current user}
          */
         @RequestLine("GET /user/repos")
         Collection<Repository> getUserRepos();
 
         /**
          * Loading the collection of GitHub-{@code repositories} that belong to the GitHub-{@code user}
-         * or GitHub-{@code organization} with the pased {@code ownerName}.
+         * or GitHub-{@code organization} with the passed {@code ownerName}.
          *
-         * @return the collection of GitHub-{@code repositories} of the owner with the passed @code ownerName}
+         * @return the collection of GitHub-{@code repositories} for the owner with the passed {@code ownerName}
          */
         @RequestLine("GET /users/{ownerName}/repos")
         Collection<Repository> getOwnerRepos(@Param("ownerName") String ownerName);
     }
 
     /**
-     * Getting the implementation of {@link UserClient} that corresponds to GitHub-{@code token},
+     * Getting the implementation of {@link RepositoryClient} that corresponds to GitHub-{@code token},
      * which is provided via {@link Factory#githubToken(String)}
      *
-     * @return the implementation of {@link UserClient}
+     * @return the implementation of {@link RepositoryClient}
      */
     RepositoryClient repositoryClient();
 
     /**
      * Getting the sorted map over the result of {@link RepositoryClient#getUserRepos()}
      *
-     * @return a sorted map over the collection of GitHub-{@code repositories} of the {@link #currentUser() current user},
+     * @return a sorted map over the collection of GitHub-{@code repositories} of the {@link #getCurrentUser() current user},
      *         where the {@link Map.Entry#getKey() key} is repository's {@link Repository#name() name}
      *         and the {@link Map.Entry#getValue() value} is a basic repository properties as {@link Repository}
      */
@@ -205,7 +209,8 @@ public interface GithubApi {
      * whose {@link Repository#fullName()} corresponds to values that was passed to {@link Factory#ownerName(String)}
      * and to {@link Factory#repoName(String)} accordingly.
      * <hr/>
-     * The most important method of the whole GitHub-API that allows to get the ID of the current repository
+     * The result is expected to be cached by implementation to avoid redundant REST-invocations.
+     * This method is the most important of the whole GitHub-API that allows to get the ID of the current repository.
      *
      * @return the basic properties of the current repository as {@link Repository}
      */
@@ -226,10 +231,79 @@ public interface GithubApi {
 
     // ---------------------------------------------------------------------------------------------
 
+    /**
+     * This Java-record represents basic properties of GitHub-API entity {@code package}.
+     *
+     * @param id a unique ID that is generated by GitHub and identifies any GitHub-{@code package} uniquely
+     * @param name a name of GitHub-{@code package}, which is dot{@code '.'}-separated maven-group and maven-artifact
+     * @param createdAt the date-time when GitHub-{@code package} was created
+     * @param updatedAt the last date-time when GitHub-{@code package} was updated
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    record Package(
+        String id,
+        String name,
+        Repository repository,
+        @JsonProperty("package_type") String packageType,
+        @JsonProperty("html_url") String htmlUrl,
+        @JsonProperty("created_at") DateTimeTriplet createdAt,
+        @JsonProperty("updated_at") DateTimeTriplet updatedAt
+    ) {}
+
+    /**
+     * Feign-Interface to access GitHub-API for GitHub-entities of type {@link Package}
+     */
+    interface PackageClient {
+
+        /**
+         * Loading the collection of GitHub-{@code packages} of type {@code "maven"} that belong to the current user,
+         * which corresponds to GitHub-{@code token} in HTTP-header.
+         *
+         * @return the collection of GitHub-{@code packages} of type {@code "maven"} for the {@link #getCurrentUser() current user}
+         */
+        @RequestLine("GET /user/packages")
+        Collection<Package> getUserMavenPackages();
+
+        /**
+         * Loading the collection of GitHub-{@code packages} that belong to the GitHub-{@code user}
+         * or GitHub-{@code organization} with the passed {@code ownerName}.
+         *
+         * @return the collection of GitHub-{@code packages} of type {@code "maven"} for the owner with the passed {@code ownerName}
+         */
+        @RequestLine("GET /users/{ownerName}/packages")
+        Collection<Package> getOwnerMavenPackages(@Param("ownerName") String ownerName);
+    }
+
+    /**
+     * Getting the implementation of {@link PackageClient} that corresponds to GitHub-{@code token},
+     * which is provided via {@link Factory#githubToken(String)}
+     *
+     * @return the implementation of {@link PackageClient}
+     */
+    PackageClient packageClient();
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Getting the instance of {@link Factory} that produces the instances of {@link GithubApi},
+     * which is based on using <a href="https://github.com/OpenFeign/feign">Open-Feign</a>.
+     *
+     * @return feign-based {@link Factory} to produce the instances of {@link GithubApi}
+     */
     static Factory feignFactory() {
         return new GithubApiFeign.FactoryImpl();
     }
 
+    /**
+     * This class represents a factory to produce the instances of {@link GithubApi}
+     *
+     * @see <a href="https://www.digitalocean.com/community/tutorials/builder-design-pattern-in-java">
+     *     Builder Design Pattern in Java
+     * </a>
+     * @see <a href="https://www.baeldung.com/java-builder-pattern">
+     *     Implement the Builder Pattern in <code>Java</code>
+     * </a>
+     */
     abstract class Factory {
         String githubToken;
         String ownerName;

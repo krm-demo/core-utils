@@ -73,6 +73,7 @@ class GithubApiFeign implements GithubApi {
                 requestTemplate.header("Authorization", "token " + githubToken);
                 requestTemplate.header("Accept", "application/vnd.github+json");
                 requestTemplate.header("X-GitHub-Api-Version", "2022-11-28");
+                requestTemplate.query("package_type", "maven");
             });
     }
 
@@ -81,6 +82,12 @@ class GithubApiFeign implements GithubApi {
 
     private static final JacksonEncoder jacksonEncoder =
         new JacksonEncoder(List.of(CoreDateTimeUtils.jacksonModuleDTT()));
+
+    private <T> T targetClient(Class<T> clientClass) {
+        return feignBuilder().target(clientClass, URL_GITHUB_API);
+    }
+
+    // ---------------------------------------------------------------------------------------------
 
     @Override
     public UserClient userClient() {
@@ -101,6 +108,8 @@ class GithubApiFeign implements GithubApi {
                 "current user is not available because of errors during initialization", concEx);
         }
     }
+
+    // ---------------------------------------------------------------------------------------------
 
     @Override
     public RepositoryClient repositoryClient() {
@@ -158,9 +167,14 @@ class GithubApiFeign implements GithubApi {
         return repositoryClient().getRepoProps(currentOwnerName, this.repoName);
     }
 
-    private <T> T targetClient(Class<T> clientClass) {
-        return feignBuilder().target(clientClass, URL_GITHUB_API);
+    // ---------------------------------------------------------------------------------------------
+
+    @Override
+    public PackageClient packageClient() {
+        return targetClient(PackageClient.class);
     }
+
+    // ---------------------------------------------------------------------------------------------
 
     static class FactoryImpl extends GithubApi.Factory {
         @Override
