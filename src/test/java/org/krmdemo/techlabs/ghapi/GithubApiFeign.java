@@ -13,7 +13,10 @@ import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
+import java.util.TreeMap;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 
@@ -58,10 +61,16 @@ class GithubApiFeign implements GithubApi {
     private final String ownerName;
     private final String repoName;
 
-    private GithubApiFeign(String githubToken, String ownerName, String repoName) {
-        this.githubToken = githubToken;
-        this.ownerName = ownerName;
-        this.repoName = repoName;
+    /**
+     * Constructor over the instance of {@link Factory}, which appears to be
+     * a holder of all necessary properties to communicate with target REST-endpoint.
+     *
+     * @param factory real (non-abstract) instance of {@link Factory} with all mandatory properties
+     */
+    protected GithubApiFeign(Factory factory) {
+        this.githubToken = factory.githubToken;
+        this.ownerName = factory.ownerName;
+        this.repoName = factory.repoName;
     }
 
     private Feign.Builder feignBuilder() {
@@ -174,13 +183,57 @@ class GithubApiFeign implements GithubApi {
         return targetClient(PackageClient.class);
     }
 
-    // ---------------------------------------------------------------------------------------------
+    @Override
+    public NavigableMap<String, Package> userMavenPackagesMap() {
+        return packageClient().getUserMavenPackages().stream()
+            .collect(toSortedMap(
+                Package::name,
+                Function.identity()
+            ));
+    }
+
+    @Override
+    public NavigableMap<String, Package> ownerMavenPackagesMap(String ownerName) {
+        return packageClient().getUserMavenPackages().stream()
+            .collect(toSortedMap(
+                Package::name,
+                Function.identity()
+            ));
+    }
+
+    @Override
+    public NavigableMap<String, NavigableMap<String, Package>> userRepoToMavenPackages() {
+        return userMavenPackagesMap().entrySet().stream()
+            .collect(Collectors.groupingBy(
+                entry -> entry.getValue().repository().name(),
+                TreeMap::new,
+                toSortedMap()
+            ));
+    }
+
+    @Override
+    public NavigableMap<String, NavigableMap<String, Package>> ownerRepoToMavenPackages(String ownerName) {
+        return userMavenPackagesMap().entrySet().stream()
+            .collect(Collectors.groupingBy(
+                entry -> entry.getValue().repository().name(),
+                TreeMap::new,
+                toSortedMap()
+            ));
+    }
+
+    @Override
+    public Package getCurrentRepoMavenPkg() {
+        // TODO: cover the methods above and implement this one
+        return null;
+    }
+
+// ---------------------------------------------------------------------------------------------
 
     static class FactoryImpl extends GithubApi.Factory {
         @Override
         public GithubApi create() {
             // ??? TODO: maybe it's a good idea to take the value of token from sys-props and env-vars here
-            return new GithubApiFeign(githubToken, ownerName, repoName);
+            return new GithubApiFeign(this);
         }
     }
 }

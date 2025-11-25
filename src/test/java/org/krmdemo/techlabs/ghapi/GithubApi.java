@@ -245,6 +245,7 @@ public interface GithubApi {
         String name,
         Repository repository,
         @JsonProperty("package_type") String packageType,
+        @JsonProperty("version_count") Integer versionCount,
         @JsonProperty("html_url") String htmlUrl,
         @JsonProperty("created_at") DateTimeTriplet createdAt,
         @JsonProperty("updated_at") DateTimeTriplet updatedAt
@@ -282,6 +283,20 @@ public interface GithubApi {
      */
     PackageClient packageClient();
 
+    NavigableMap<String, Package> userMavenPackagesMap();
+
+    NavigableMap<String, Package> ownerMavenPackagesMap(String ownerName);
+
+    NavigableMap<String, NavigableMap<String, Package>> userRepoToMavenPackages();
+
+    NavigableMap<String, NavigableMap<String, Package>> ownerRepoToMavenPackages(String ownerName);
+
+    /**
+     *
+     * @return
+     */
+    Package getCurrentRepoMavenPkg();
+
     // ---------------------------------------------------------------------------------------------
 
     /**
@@ -305,9 +320,9 @@ public interface GithubApi {
      * </a>
      */
     abstract class Factory {
-        String githubToken;
-        String ownerName;
-        String repoName;
+        protected String githubToken;
+        protected String ownerName;
+        protected String repoName;
 
         public abstract GithubApi create();
 

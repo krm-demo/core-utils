@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 
@@ -20,6 +21,14 @@ public class GithubApiTest {
 
     static final String CURRENT_OWNER_NAME = "krm-demo";
     static final String CURRENT_REPO_NAME = "core-utils";
+
+    static final String CURRENT_MAVEN_PROJECT_GROUP = "io.github." + CURRENT_OWNER_NAME;
+    static final String CURRENT_MAVEN_PROJECT_ARTIFACT = CURRENT_REPO_NAME;
+
+    // by convention - the name of GitHub-package's name is dot'.'-concatenated maven-group and maven-artifact:
+    static final String CURRENT_GITHUB_PACKAGE_NAME = String.format("%s.%s",
+        CURRENT_MAVEN_PROJECT_GROUP, CURRENT_MAVEN_PROJECT_ARTIFACT);
+
 
     static GithubApi githubApi = GithubApi.feignFactory()
         .ownerName(CURRENT_OWNER_NAME)
@@ -101,5 +110,14 @@ public class GithubApiTest {
         Collection<GithubApi.Package> ownerMavenPackages = packageClient.getOwnerMavenPackages(CURRENT_OWNER_NAME);
         System.out.println("ownerMavenPackages --> " + DumpUtils.dumpAsJsonTxt(ownerMavenPackages));
         assertThat(userMavenPackages).containsExactlyInAnyOrderElementsOf(ownerMavenPackages);
+    }
+
+    @Test
+    void testMavenPackagesMap() {
+        final String currentUserLogin = githubApi.getCurrentUser().login();
+        Map<String, GithubApi.Package> usrPkgMap = githubApi.userMavenPackagesMap();
+        Map<String, GithubApi.Package> ownPkgMap = githubApi.ownerMavenPackagesMap(currentUserLogin);
+        assertThat(usrPkgMap).isEqualTo(ownPkgMap);
+        assertThat(usrPkgMap).containsKey(CURRENT_GITHUB_PACKAGE_NAME);
     }
 }
