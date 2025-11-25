@@ -133,6 +133,34 @@ public class CoreStreamUtils {
     // --------------------------------------------------------------------------------------------
 
     /**
+     * Getting the {@link Stream} of elements in passed {@link Iterable}.
+     * <hr/>
+     * <u><i>Note:</i></u> the returned stream could be used only once, but the construction is very chip
+     * from performance and memory foot-print point of view - so, there's no problem to invoke this method multiple times.
+     *
+     * @param elems elements to get the {@link Stream} of
+     * @return a sequential {@link Stream} of elements in {@code elems}
+     * @param <T> a type of elements in {@code elems}
+     */
+    public static <T> Stream<T> streamOf(Iterable<T> elems) {
+        return StreamSupport.stream(elems.spliterator(), false);
+    }
+
+    /**
+     * This method returns the {@link List}, which appears to be two whole copy of {@code elems}.
+     * The order of elements in the first and the second copy remains exactly the same as in original {@link Iterable}.
+     *
+     * @param elems elements to <i>multiply twice</i>
+     * @return the {@link List}, which appears to be two whole copy of {@code elems}
+     * @param <T> a type of elements in {@code elems}
+     */
+    public static <T> List<T> listTwiceOf(Iterable<T> elems) {
+        return Stream.concat(streamOf(elems), streamOf(elems)).toList();
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
      * @param valuesArr var-args-arrays of values
      * @return the sorted set of those values as {@link NavigableSet}
      * @param <T> the type of value that must implement {@link Comparable}

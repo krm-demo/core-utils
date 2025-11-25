@@ -2,16 +2,21 @@ package org.krmdemo.techlabs.ghapi;
 
 import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
+import org.mockito.Mockito;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.krmdemo.techlabs.core.utils.CorePropsUtils.propValue;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.listTwiceOf;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.streamOf;
 
 /**
  * This unit-test checks the results of GitHub-workflow actions to be cleaned up
@@ -119,5 +124,23 @@ public class GithubApiTest {
         Map<String, GithubApi.Package> ownPkgMap = githubApi.ownerMavenPackagesMap(currentUserLogin);
         assertThat(usrPkgMap).isEqualTo(ownPkgMap);
         assertThat(usrPkgMap).containsKey(CURRENT_GITHUB_PACKAGE_NAME);
+
+        Collection<GithubApi.Package> usrPkgList = githubApi.packageClient().getUserMavenPackages();
+        assertThat(usrPkgMap.values()).containsExactlyInAnyOrderElementsOf(usrPkgList);
+
+        GithubApi spyGithubApi = Mockito.spy(githubApi);
+        Mockito.doReturn(new GithubApi.PackageClient() {
+            @Override
+            public Collection<GithubApi.Package> getUserMavenPackages() {
+                return usrPkgList;
+            }
+            @Override
+            public Collection<GithubApi.Package> getOwnerMavenPackages(String ownerName) {
+                // duplicated elements are expected to be ignored when the result map is collected
+                return listTwiceOf(usrPkgList);
+            }
+        }).when(spyGithubApi).packageClient();
+        assertThat(spyGithubApi.packageClient().getOwnerMavenPackages(currentUserLogin)).hasSize(2 * usrPkgMap.size());
+        assertThat(spyGithubApi.ownerMavenPackagesMap(currentUserLogin)).hasSize(usrPkgMap.size());
     }
 }
