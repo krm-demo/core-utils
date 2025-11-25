@@ -133,6 +133,34 @@ public class CoreStreamUtils {
     // --------------------------------------------------------------------------------------------
 
     /**
+     * Getting the {@link Stream} of elements in passed {@link Iterable}.
+     * &lt;hr/&gt;
+     * &lt;u&gt;&lt;i&gt;Note:&lt;/i&gt;&lt;/u&gt; the returned stream could be used only once, but the construction is very chip
+     * from performance and memory foot-print point of view - so, there's no problem to invoke this method multiple times.
+     *
+     * @param elems elements to get the {@link Stream} of
+     * @return a sequential {@link Stream} of elements in {@code elems}
+     * @param &lt;T&gt; a type of elements in {@code elems}
+     */
+    public static &lt;T&gt; Stream&lt;T&gt; streamOf(Iterable&lt;T&gt; elems) {
+<span class="fc" id="L146">        return StreamSupport.stream(elems.spliterator(), false);</span>
+    }
+
+    /**
+     * This method returns the {@link List}, which appears to be two whole copy of {@code elems}.
+     * The order of elements in the first and the second copy remains exactly the same as in original {@link Iterable}.
+     *
+     * @param elems elements to &lt;i&gt;multiply twice&lt;/i&gt;
+     * @return the {@link List}, which appears to be two whole copy of {@code elems}
+     * @param &lt;T&gt; a type of elements in {@code elems}
+     */
+    public static &lt;T&gt; List&lt;T&gt; listTwiceOf(Iterable&lt;T&gt; elems) {
+<span class="fc" id="L158">        return Stream.concat(streamOf(elems), streamOf(elems)).toList();</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
      * @param valuesArr var-args-arrays of values
      * @return the sorted set of those values as {@link NavigableSet}
      * @param &lt;T&gt; the type of value that must implement {@link Comparable}
@@ -140,7 +168,7 @@ public class CoreStreamUtils {
     @SafeVarargs
     @SuppressWarnings(&quot;varargs&quot;)
     public static &lt;T extends Comparable&lt;T&gt;&gt; NavigableSet&lt;T&gt; sortedSet(T... valuesArr) {
-<span class="fc" id="L143">        return sortedSet(Arrays.stream(valuesArr));</span>
+<span class="fc" id="L171">        return sortedSet(Arrays.stream(valuesArr));</span>
     }
 
     /**
@@ -149,7 +177,7 @@ public class CoreStreamUtils {
      * @param &lt;T&gt; the type of value that must implement {@link Comparable}
      */
     public static &lt;T extends Comparable&lt;T&gt;&gt; NavigableSet&lt;T&gt; sortedSet(Stream&lt;T&gt; values) {
-<span class="fc" id="L152">        return values.collect(toSortedSet());</span>
+<span class="fc" id="L180">        return values.collect(toSortedSet());</span>
     }
 
     /**
@@ -158,7 +186,7 @@ public class CoreStreamUtils {
      * @param &lt;T&gt; the type of elements that must implement {@link Comparable}
      */
     public static &lt;T extends Comparable&lt;T&gt;&gt; NavigableSet&lt;T&gt; sortedSet(Iterable&lt;T&gt; valuesIter) {
-<span class="nc" id="L161">        return sortedSet(StreamSupport.stream(valuesIter.spliterator(), false));</span>
+<span class="nc" id="L189">        return sortedSet(StreamSupport.stream(valuesIter.spliterator(), false));</span>
     }
 
     /**
@@ -169,7 +197,7 @@ public class CoreStreamUtils {
     @SafeVarargs
     @SuppressWarnings(&quot;varargs&quot;)
     public static &lt;T&gt; SequencedSet&lt;T&gt; linkedSet(T... valuesArr) {
-<span class="fc" id="L172">        return linkedSet(Arrays.stream(valuesArr));</span>
+<span class="fc" id="L200">        return linkedSet(Arrays.stream(valuesArr));</span>
     }
 
     /**
@@ -178,7 +206,7 @@ public class CoreStreamUtils {
      * @param &lt;T&gt; the type of elements
      */
     public static &lt;T&gt; SequencedSet&lt;T&gt; linkedSet(Stream&lt;T&gt; values) {
-<span class="fc" id="L181">        return values.collect(toLinkedSet());</span>
+<span class="fc" id="L209">        return values.collect(toLinkedSet());</span>
     }
 
     /**
@@ -187,7 +215,7 @@ public class CoreStreamUtils {
      * @param &lt;T&gt; the type of elements
      */
     public static &lt;T&gt; SequencedSet&lt;T&gt; linkedSet(Iterable&lt;T&gt; valuesIter) {
-<span class="nc" id="L190">        return linkedSet(StreamSupport.stream(valuesIter.spliterator(), false));</span>
+<span class="nc" id="L218">        return linkedSet(StreamSupport.stream(valuesIter.spliterator(), false));</span>
     }
 
     /**
@@ -200,7 +228,7 @@ public class CoreStreamUtils {
      * @param &lt;V&gt; the type of value
      */
     public static &lt;K, V&gt; Map.Entry&lt;K, V&gt; keyValue(K key, V value) {
-<span class="fc" id="L203">        return new AbstractMap.SimpleEntry&lt;&gt;(key, value);</span>
+<span class="fc" id="L231">        return new AbstractMap.SimpleEntry&lt;&gt;(key, value);</span>
     }
 
     /**
@@ -213,7 +241,7 @@ public class CoreStreamUtils {
      * @param &lt;V&gt; the type of value
      */
     public static &lt;V&gt; Map.Entry&lt;String, V&gt; nameValue(String name, V value) {
-<span class="fc" id="L216">        return keyValue(name, value);</span>
+<span class="fc" id="L244">        return keyValue(name, value);</span>
     }
 
     /**
@@ -233,7 +261,7 @@ public class CoreStreamUtils {
     @SuppressWarnings(&quot;varargs&quot;)
     public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
     sortedMap(Map.Entry&lt;K,V&gt;... entriesArr) {
-<span class="fc" id="L236">        return sortedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));</span>
+<span class="fc" id="L264">        return sortedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));</span>
     }
 
     /**
@@ -254,7 +282,7 @@ public class CoreStreamUtils {
     @SuppressWarnings(&quot;varargs&quot;)
     public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
     sortedMap(MergeFunction mergeFunction, Map.Entry&lt;K,V&gt;... entriesArr) {
-<span class="nc" id="L257">        return sortedMap(mergeFunction, Arrays.stream(entriesArr));</span>
+<span class="nc" id="L285">        return sortedMap(mergeFunction, Arrays.stream(entriesArr));</span>
     }
 
     /**
@@ -272,9 +300,9 @@ public class CoreStreamUtils {
      */
     public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
     sortedMap(Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
-<span class="fc" id="L275">        return entries</span>
-<span class="pc bpc" id="L276" title="2 of 6 branches missed.">            .filter(e -&gt; e != null &amp;&amp; e.getKey() != null &amp;&amp; e.getValue() != null)</span>
-<span class="fc" id="L277">            .collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
+<span class="fc" id="L303">        return entries</span>
+<span class="pc bpc" id="L304" title="2 of 6 branches missed.">            .filter(e -&gt; e != null &amp;&amp; e.getKey() != null &amp;&amp; e.getValue() != null)</span>
+<span class="fc" id="L305">            .collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
     }
 
     /**
@@ -293,7 +321,7 @@ public class CoreStreamUtils {
      */
     public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
     sortedMap(MergeFunction mergeFunction, Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
-<span class="fc" id="L296">        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
+<span class="fc" id="L324">        return entries.collect(toSortedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
     }
 
     /**
@@ -306,7 +334,7 @@ public class CoreStreamUtils {
      */
     public static &lt;K extends Comparable&lt;K&gt;, V&gt; NavigableMap&lt;K, V&gt;
     sortedMap(Map&lt;K,V&gt; mapToSort) {
-<span class="fc" id="L309">        return sortedMap(mapToSort.entrySet().stream());</span>
+<span class="fc" id="L337">        return sortedMap(mapToSort.entrySet().stream());</span>
     }
 
     /**
@@ -326,7 +354,7 @@ public class CoreStreamUtils {
     @SuppressWarnings(&quot;varargs&quot;)
     public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
     linkedMap(Map.Entry&lt;K,V&gt;... entriesArr) {
-<span class="fc" id="L329">        return linkedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));</span>
+<span class="fc" id="L357">        return linkedMap(Arrays.stream(entriesArr).filter(CoreStreamUtils::entryIsValid));</span>
     }
 
     /**
@@ -347,7 +375,7 @@ public class CoreStreamUtils {
     @SuppressWarnings(&quot;varargs&quot;)
     public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
     linkedMap(MergeFunction mergeFunction, Map.Entry&lt;K,V&gt;... entriesArr) {
-<span class="nc" id="L350">        return linkedMap(mergeFunction, Arrays.stream(entriesArr));</span>
+<span class="nc" id="L378">        return linkedMap(mergeFunction, Arrays.stream(entriesArr));</span>
     }
 
     /**
@@ -365,7 +393,7 @@ public class CoreStreamUtils {
      */
     public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
     linkedMap(Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
-<span class="fc" id="L368">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
+<span class="fc" id="L396">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue));</span>
     }
 
     /**
@@ -384,7 +412,7 @@ public class CoreStreamUtils {
      */
     public static &lt;K, V&gt; SequencedMap&lt;K, V&gt;
     linkedMap(MergeFunction mergeFunction, Stream&lt;Map.Entry&lt;K,V&gt;&gt; entries) {
-<span class="fc" id="L387">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
+<span class="fc" id="L415">        return entries.collect(toLinkedMap(Map.Entry::getKey, Map.Entry::getValue, mergeFunction));</span>
     }
 
     /**
@@ -395,14 +423,14 @@ public class CoreStreamUtils {
      * @return {@code true} if the entry is valid and otherwise - {@code false}
      */
     public static boolean entryIsValid(Map.Entry&lt;?,?&gt; entry) {
-<span class="fc bfc" id="L398" title="All 6 branches covered.">        return entry != null &amp;&amp; entry.getKey() != null &amp;&amp; entry.getValue() != null;</span>
+<span class="fc bfc" id="L426" title="All 6 branches covered.">        return entry != null &amp;&amp; entry.getKey() != null &amp;&amp; entry.getValue() != null;</span>
     }
 
     // --------------------------------------------------------------------------------------------
 
-<span class="fc" id="L403">    private CoreStreamUtils() {</span>
+<span class="fc" id="L431">    private CoreStreamUtils() {</span>
         // prohibit the creation of utility-class instance
-<span class="fc" id="L405">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+<span class="fc" id="L433">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
