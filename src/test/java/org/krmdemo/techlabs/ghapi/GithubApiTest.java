@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.krmdemo.techlabs.core.utils.CorePropsUtils.propValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.listTwiceOf;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
+import static org.krmdemo.techlabs.ghapi.GithubApi.Factory.mavenPackageName;
 
 /**
  * This unit-test checks the results of GitHub-workflow actions to be cleaned up
@@ -36,13 +37,14 @@ public class GithubApiTest {
     static final String CURRENT_MAVEN_PROJECT_ARTIFACT = CURRENT_REPO_NAME;
 
     // by convention - the name of GitHub-package's name is dot'.'-concatenated maven-group and maven-artifact:
-    static final String CURRENT_GITHUB_PACKAGE_NAME = String.format("%s.%s",
+    static final String CURRENT_GITHUB_PACKAGE_NAME = mavenPackageName(
         CURRENT_MAVEN_PROJECT_GROUP, CURRENT_MAVEN_PROJECT_ARTIFACT);
-
 
     static GithubApi githubApi = GithubApi.feignFactory()
         .ownerName(CURRENT_OWNER_NAME)
         .repoName(CURRENT_REPO_NAME)
+        .mavenProjectGroup(CURRENT_MAVEN_PROJECT_GROUP)
+        .mavenProjectArtifact(CURRENT_MAVEN_PROJECT_ARTIFACT)
         .githubToken(GithubHttpTest.GITHUB_AUTH_TOKEN)
         .create();
 
@@ -199,6 +201,17 @@ public class GithubApiTest {
         assertThat(DumpUtils.dumpAsJsonTxt(mockOwnRepoToMvnPkg))
             .isEqualToNormalizingNewlines(
                 resourceAsString("mock-repo-to-mvn-pkg--with-duplicates.json"));
+    }
+
+    @Test
+    void testCurrentRepoMavenPkg() {
+        assertThat(githubApi.isCurrentRepoMavenPkgPresent()).isTrue();
+        GithubApi.Package currentPkg = githubApi.getCurrentRepoMavenPkg();
+        assertThat(currentPkg).isNotNull();
+        assertThat(currentPkg.name()).isEqualTo(CURRENT_GITHUB_PACKAGE_NAME);
+        // subsequent access to current package must return the reference to the same object
+        assertThat(githubApi.getCurrentRepoMavenPkg()).isSameAs(currentPkg);
+        assertThat(githubApi.getCurrentRepoMavenPkg()).isSameAs(currentPkg);
     }
 
     // ---------------------------------------------------------------------------------------------

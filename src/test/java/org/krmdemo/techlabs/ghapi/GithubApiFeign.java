@@ -13,12 +13,14 @@ import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
+import java.util.Optional;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
+import static org.krmdemo.techlabs.ghapi.GithubApi.Factory.mavenPackageName;
 
 /**
  * Implementation of {@link GithubApi} that is based on using <a href="https://github.com/OpenFeign/feign">Open-Feign</a>
@@ -57,9 +59,15 @@ class GithubApiFeign implements GithubApi {
             .setInitializer(this::loadCurrentRepo)
             .get();
 
+    private final AtomicSafeInitializer<Optional<Package>> currentMvnPkgHolder =
+        AtomicSafeInitializer.<Optional<Package>>builder()
+            .setInitializer(this::loadCurrentRepoMavenPkgOpt)
+            .get();
+
     private final String githubToken;
     private final String ownerName;
     private final String repoName;
+    private final String pkgName;
 
     /**
      * Constructor over the instance of {@link Factory}, which appears to be
@@ -71,6 +79,11 @@ class GithubApiFeign implements GithubApi {
         this.githubToken = factory.githubToken;
         this.ownerName = factory.ownerName;
         this.repoName = factory.repoName;
+        if (StringUtils.isBlank(factory.mavenPackageName)) {
+            this.pkgName = mavenPackageName(factory.mavenProjectGroup, factory.mavenProjectArtifact);
+        } else {
+            this.pkgName = factory.mavenPackageName;
+        }
     }
 
     private Feign.Builder feignBuilder() {
@@ -221,10 +234,28 @@ class GithubApiFeign implements GithubApi {
             ));
     }
 
+    private Optional<Package> loadCurrentRepoMavenPkgOpt() {
+        if (StringUtils.isBlank(this.repoName)) {
+            throw new IllegalStateException(
+                "could not get the current maven-package, because there's no information " +
+                    "about current repository-name in this instance of " + getClass().getSimpleName());
+        }
+        NavigableMap<String, NavigableMap<String, Package>> repoToMvnPkg = userRepoToMavenPackages();
+        if (!repoToMvnPkg.containsKey(this.repoName)) {
+            return Optional.empty();
+        }
+        NavigableMap<String, Package> mvnPkgMap = repoToMvnPkg.get(this.repoName);
+        return Optional.ofNullable(mvnPkgMap.get(this.pkgName));
+    }
+
     @Override
-    public Package getCurrentRepoMavenPkg() {
-        // TODO: cover the methods above and implement this one
-        return null;
+    public Optional<Package> getCurrentRepoMavenPkgOpt() {
+        try {
+            return currentMvnPkgHolder.get();
+        } catch (ConcurrentException concEx) {
+            throw new IllegalStateException(
+                "current maven-package is not available because of errors during initialization", concEx);
+        }
     }
 
 // ---------------------------------------------------------------------------------------------
@@ -232,6 +263,20 @@ class GithubApiFeign implements GithubApi {
     static class FactoryImpl extends GithubApi.Factory {
         @Override
         public GithubApi create() {
+            if (StringUtils.isNotBlank(mavenPackageName)) {
+                if (StringUtils.isNotBlank(mavenProjectGroup)) {
+                    throw new IllegalArgumentException(String.format(
+                        "if 'mavenPackageName' is not blank ('%s') the mavenProjectGroup should be blank, " +
+                            "but it equals to '%s'",
+                        mavenPackageName, mavenProjectGroup));
+                }
+                if (StringUtils.isNotBlank(mavenProjectArtifact)) {
+                    throw new IllegalArgumentException(String.format(
+                        "if 'mavenPackageName' is not blank ('%s') the mavenProjectArtifact should be blank, " +
+                            "but it equals to '%s'",
+                        mavenPackageName, mavenProjectArtifact));
+                }
+            }
             // ??? TODO: maybe it's a good idea to take the value of token from sys-props and env-vars here
             return new GithubApiFeign(this);
         }

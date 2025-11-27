@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import feign.Param;
 import feign.RequestLine;
+import org.apache.commons.lang3.concurrent.ConcurrentException;
 import org.krmdemo.techlabs.core.datetime.DateTimeTriplet;
 
 import java.time.Duration;
 import java.util.Collection;
 import java.util.Map;
 import java.util.NavigableMap;
+import java.util.Optional;
 
 /**
  * This interface represents a facade to GitHub-API, which should be instantiated via {@link Factory}
@@ -291,11 +293,15 @@ public interface GithubApi {
 
     NavigableMap<String, NavigableMap<String, Package>> ownerRepoToMavenPackages(String ownerName);
 
-    /**
-     *
-     * @return
-     */
-    Package getCurrentRepoMavenPkg();
+    Optional<Package> getCurrentRepoMavenPkgOpt();
+
+    default boolean isCurrentRepoMavenPkgPresent() {
+        return getCurrentRepoMavenPkgOpt().isPresent();
+    }
+
+    default Package getCurrentRepoMavenPkg() {
+        return getCurrentRepoMavenPkgOpt().orElse(null);
+    }
 
     // ---------------------------------------------------------------------------------------------
 
@@ -323,6 +329,21 @@ public interface GithubApi {
         protected String githubToken;
         protected String ownerName;
         protected String repoName;
+        protected String mavenProjectGroup;
+        protected String mavenProjectArtifact;
+        protected String mavenPackageName;
+
+        /**
+         * By convention, the name of GitHub-package must be the dot{@code '.'}-concatenating values
+         * of maven-project group and maven-project artifact - so, this method calculates that.
+         *
+         * @param mavenProjectGroup maven-project group
+         * @param mavenProjectArtifact maven-project artifact
+         * @return dot{@code '.'}-concatenating values pf {@code mavenProjectGroup} and {@code mavenProjectArtifact}
+         */
+        static String mavenPackageName(String mavenProjectGroup, String mavenProjectArtifact) {
+            return String.format("%s.%s", mavenProjectGroup, mavenProjectArtifact);
+        }
 
         public abstract GithubApi create();
 
@@ -338,6 +359,21 @@ public interface GithubApi {
 
         public Factory repoName(String repoName) {
             this.repoName = repoName;
+            return this;
+        }
+
+        public Factory mavenProjectGroup(String mavenProjectGroup) {
+            this.mavenProjectGroup = mavenProjectGroup;
+            return this;
+        }
+
+        public Factory mavenProjectArtifact(String mavenProjectArtifact) {
+            this.mavenProjectArtifact = mavenProjectArtifact;
+            return this;
+        }
+
+        public Factory mavenPackageName(String mavenPackageName) {
+            this.mavenPackageName = mavenPackageName;
             return this;
         }
     }
