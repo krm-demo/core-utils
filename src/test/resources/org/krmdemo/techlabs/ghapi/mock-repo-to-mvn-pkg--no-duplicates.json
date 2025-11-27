@@ -1,0 +1,108 @@
+{
+  "test-repo-name-one": {
+    "test-group-A.test-artifact-01": {
+      "id": "test-pkg-one-01-ID",
+      "name": "test-group-A.test-artifact-01",
+      "repository": {
+        "id": "test-repo-id-one",
+        "name": "test-repo-name-one",
+        "description": "some description of repo 'one'",
+        "full_name": "full-test-repo-name-one",
+        "html_url": "<< no HTML URL for GitHub-repo >>",
+        "clone_url": "<< no GIT URL for GitHub-repo >>",
+        "created_at": "2025-11-06 (Thu) 12:34",
+        "updated_at": "2025-11-16 (Sun) 12:34",
+        "pushed_at": "2025-11-21 (Fri) 12:34"
+      },
+      "package_type": "maven",
+      "version_count": "123",
+      "html_url": "<< no HTML URL for GitHub-package >>",
+      "created_at": "2025-10-22 (Wed) 12:34",
+      "updated_at": "2025-11-01 (Sat) 12:34"
+    },
+    "test-group-A.test-artifact-02": {
+      "id": "test-pkg-one-02-ID",
+      "name": "test-group-A.test-artifact-02",
+      "repository": {
+        "id": "test-repo-id-one",
+        "name": "test-repo-name-one",
+        "description": "some description of repo 'one'",
+        "full_name": "full-test-repo-name-one",
+        "html_url": "<< no HTML URL for GitHub-repo >>",
+        "clone_url": "<< no GIT URL for GitHub-repo >>",
+        "created_at": "2025-11-06 (Thu) 12:34",
+        "updated_at": "2025-11-16 (Sun) 12:34",
+        "pushed_at": "2025-11-21 (Fri) 12:34"
+      },
+      "package_type": "maven",
+      "version_count": "123",
+      "html_url": "<< no HTML URL for GitHub-package >>",
+      "created_at": "2025-10-22 (Wed) 12:34",
+      "updated_at": "2025-11-01 (Sat) 12:34"
+    }
+  },
+  "test-repo-name-three": {
+    "test-group-C.test-artifact-05": {
+      "id": "test-pkg-three-05-ID",
+      "name": "test-group-C.test-artifact-05",
+      "repository": {
+        "id": "test-repo-id-three",
+        "name": "test-repo-name-three",
+        "description": "some description of repo 'three'",
+        "full_name": "full-test-repo-name-three",
+        "html_url": "<< no HTML URL for GitHub-repo >>",
+        "clone_url": "<< no GIT URL for GitHub-repo >>",
+        "created_at": "2025-11-06 (Thu) 12:34",
+        "updated_at": "2025-11-16 (Sun) 12:34",
+        "pushed_at": "2025-11-21 (Fri) 12:34"
+      },
+      "package_type": "maven",
+      "version_count": "123",
+      "html_url": "<< no HTML URL for GitHub-package >>",
+      "created_at": "2025-10-22 (Wed) 12:34",
+      "updated_at": "2025-11-01 (Sat) 12:34"
+    },
+    "test-group-C.test-artifact-06": {
+      "id": "test-pkg-three-06-ID",
+      "name": "test-group-C.test-artifact-06",
+      "repository": {
+        "id": "test-repo-id-three",
+        "name": "test-repo-name-three",
+        "description": "some description of repo 'three'",
+        "full_name": "full-test-repo-name-three",
+        "html_url": "<< no HTML URL for GitHub-repo >>",
+        "clone_url": "<< no GIT URL for GitHub-repo >>",
+        "created_at": "2025-11-06 (Thu) 12:34",
+        "updated_at": "2025-11-16 (Sun) 12:34",
+        "pushed_at": "2025-11-21 (Fri) 12:34"
+      },
+      "package_type": "maven",
+      "version_count": "123",
+      "html_url": "<< no HTML URL for GitHub-package >>",
+      "created_at": "2025-10-22 (Wed) 12:34",
+      "updated_at": "2025-11-01 (Sat) 12:34"
+    }
+  },
+  "test-repo-name-two": {
+    "test-group-B.test-artifact-04": {
+      "id": "test-pkg-two-04-ID",
+      "name": "test-group-B.test-artifact-04",
+      "repository": {
+        "id": "test-repo-id-two",
+        "name": "test-repo-name-two",
+        "description": "some description of repo 'two'",
+        "full_name": "full-test-repo-name-two",
+        "html_url": "<< no HTML URL for GitHub-repo >>",
+        "clone_url": "<< no GIT URL for GitHub-repo >>",
+        "created_at": "2025-11-06 (Thu) 12:34",
+        "updated_at": "2025-11-16 (Sun) 12:34",
+        "pushed_at": "2025-11-21 (Fri) 12:34"
+      },
+      "package_type": "maven",
+      "version_count": "123",
+      "html_url": "<< no HTML URL for GitHub-package >>",
+      "created_at": "2025-10-22 (Wed) 12:34",
+      "updated_at": "2025-11-01 (Sat) 12:34"
+    }
+  }
+}

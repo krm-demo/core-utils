@@ -194,7 +194,7 @@ class GithubApiFeign implements GithubApi {
 
     @Override
     public NavigableMap<String, Package> ownerMavenPackagesMap(String ownerName) {
-        return packageClient().getUserMavenPackages().stream()
+        return packageClient().getOwnerMavenPackages(ownerName).stream()
             .collect(toSortedMap(
                 Package::name,
                 Function.identity()
@@ -213,7 +213,7 @@ class GithubApiFeign implements GithubApi {
 
     @Override
     public NavigableMap<String, NavigableMap<String, Package>> ownerRepoToMavenPackages(String ownerName) {
-        return userMavenPackagesMap().entrySet().stream()
+        return ownerMavenPackagesMap(ownerName).entrySet().stream()
             .collect(Collectors.groupingBy(
                 entry -> entry.getValue().repository().name(),
                 TreeMap::new,

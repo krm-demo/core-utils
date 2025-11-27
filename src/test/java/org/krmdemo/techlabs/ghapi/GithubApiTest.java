@@ -1,22 +1,27 @@
 package org.krmdemo.techlabs.ghapi;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
+import org.krmdemo.techlabs.core.datetime.DateTimeTriplet;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 import org.mockito.Mockito;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.krmdemo.techlabs.core.utils.CorePropsUtils.propValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.listTwiceOf;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
-import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.streamOf;
 
 /**
  * This unit-test checks the results of GitHub-workflow actions to be cleaned up
@@ -142,5 +147,131 @@ public class GithubApiTest {
         }).when(spyGithubApi).packageClient();
         assertThat(spyGithubApi.packageClient().getOwnerMavenPackages(currentUserLogin)).hasSize(2 * usrPkgMap.size());
         assertThat(spyGithubApi.ownerMavenPackagesMap(currentUserLogin)).hasSize(usrPkgMap.size());
+    }
+
+    @Test
+    void testUserRepoToMavenPackages() {
+        NavigableMap<String, NavigableMap<String, GithubApi.Package>> usrRepoToMvnPkg =
+            githubApi.userRepoToMavenPackages();
+        assertThat(usrRepoToMvnPkg).containsKey(CURRENT_REPO_NAME);
+        assertThat(usrRepoToMvnPkg.get(CURRENT_REPO_NAME)).containsKey(CURRENT_GITHUB_PACKAGE_NAME);
+
+        GithubApi spyGithubApi = Mockito.spy(githubApi);
+        Mockito.doReturn(new GithubApi.PackageClient() {
+            @Override
+            public Collection<GithubApi.Package> getUserMavenPackages() {
+                return mockPackages_noDups();
+            }
+            @Override
+            public Collection<GithubApi.Package> getOwnerMavenPackages(String ownerName) {
+                return fail("must not be invoked !!!");
+            }
+        }).when(spyGithubApi).packageClient();
+
+        NavigableMap<String, NavigableMap<String, GithubApi.Package>> mockUsrRepoToMvnPkg =
+            spyGithubApi.userRepoToMavenPackages();
+        assertThat(DumpUtils.dumpAsJsonTxt(mockUsrRepoToMvnPkg))
+            .isEqualToNormalizingNewlines(
+                resourceAsString("mock-repo-to-mvn-pkg--no-duplicates.json"));
+    }
+
+    @Test
+    void testOwnerRepoToMavenPackages() {
+        NavigableMap<String, NavigableMap<String, GithubApi.Package>> ownRepoToMvnPkg =
+            githubApi.ownerRepoToMavenPackages(CURRENT_OWNER_NAME);
+        assertThat(ownRepoToMvnPkg).containsKey(CURRENT_REPO_NAME);
+        assertThat(ownRepoToMvnPkg.get(CURRENT_REPO_NAME)).containsKey(CURRENT_GITHUB_PACKAGE_NAME);
+
+        GithubApi spyGithubApi = Mockito.spy(githubApi);
+        Mockito.doReturn(new GithubApi.PackageClient() {
+            @Override
+            public Collection<GithubApi.Package> getUserMavenPackages() {
+                return fail("must not be invoked !!!");
+            }
+            @Override
+            public Collection<GithubApi.Package> getOwnerMavenPackages(String ownerName) {
+                return mockPackages_withDups();
+            }
+        }).when(spyGithubApi).packageClient();
+
+        NavigableMap<String, NavigableMap<String, GithubApi.Package>> mockOwnRepoToMvnPkg =
+            spyGithubApi.ownerRepoToMavenPackages("ignored-oner-name");
+        assertThat(DumpUtils.dumpAsJsonTxt(mockOwnRepoToMvnPkg))
+            .isEqualToNormalizingNewlines(
+                resourceAsString("mock-repo-to-mvn-pkg--with-duplicates.json"));
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    private static List<GithubApi.Package> mockPackages_noDups() {
+        return List.of(
+            mockPkg("one", "A", "01"),
+            mockPkg("one", "A", "02"),
+            mockPkg("two", "B", "04"),
+            mockPkg("three", "C", "05"),
+            mockPkg("three", "C", "06")
+        );
+    }
+
+    private static List<GithubApi.Package> mockPackages_withDups() {
+        return List.of(
+            mockPkg("one", "A", "01"),
+            mockPkg("one", "A", "02"),
+            mockPkg("one", "B", "03"),  // <-- duplicated package name
+            mockPkg("two", "B", "03"),  // <-- duplicated package name
+            mockPkg("two", "B", "04"),
+            mockPkg("three", "C", "05")
+        );
+    }
+
+    private static GithubApi.Package mockPkg(String repoSuffix, String groupSuffix, String projectSuffix) {
+        return new GithubApi.Package(
+            "test-pkg-" + repoSuffix + "-" + projectSuffix + "-ID",
+            "test-group-" + groupSuffix + ".test-artifact-" + projectSuffix,
+            mockRepo(repoSuffix),
+            "maven",
+            123,
+            "<< no HTML URL for GitHub-package >>",
+            givenDaysAgo(35),
+            givenDaysAgo(25)
+        );
+    }
+
+    private static GithubApi.Repository mockRepo(String repoSuffix) {
+        return new GithubApi.Repository(
+            "test-repo-id-" + repoSuffix,
+            "test-repo-name-" + repoSuffix,
+            "some description of repo '" + repoSuffix + "'",
+            "full-test-repo-name-" + repoSuffix,
+            "<< no HTML URL for GitHub-repo >>",
+            "<< no GIT URL for GitHub-repo >>",
+            givenDaysAgo(20),
+            givenDaysAgo(10),
+            givenDaysAgo(5)
+        );
+    }
+
+    private static LocalDateTime ldtBaseDateTime() {
+        return LocalDateTime.of(2025, Month.NOVEMBER, 26, 12, 34);
+    }
+
+    private static DateTimeTriplet givenDaysAgo(int daysAgo) {
+        return new DateTimeTriplet(ldtBaseDateTime().minusDays(daysAgo));
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    @SuppressWarnings("SameParameterValue")
+    private String resourceAsString(String resourceRelativePath) {
+        try (InputStream resourceStream = getClass().getResourceAsStream(resourceRelativePath)) {
+            if (resourceStream == null) {
+                throw new IllegalArgumentException(String.format(
+                    "no resource by relative resource-path '%s'", resourceRelativePath));
+            }
+            return IOUtils.toString(resourceStream, Charset.defaultCharset());
+        } catch (IOException ioEx) {
+            throw new IllegalStateException(String.format(
+                "could not load the resource by relative resource-path '%s'", resourceRelativePath), ioEx);
+        }
     }
 }
