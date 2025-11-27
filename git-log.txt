@@ -1,3 +1,4 @@
+81ee4514 further improvements in GithubApi #3
 527b3a54 further improvements in GithubApi #2 (introduce using Mockito.spy)
 7ac6246c further improvements in GithubApi #1
 4e362bfa attempt to commit the MD-file about BB-token #1

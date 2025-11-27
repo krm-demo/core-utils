@@ -127,7 +127,7 @@ public class CoreCollectors {
     public static &lt;K, U&gt;
     Collector&lt;Map.Entry&lt;K,U&gt;, ?, NavigableMap&lt;K,U&gt;&gt;
     toSortedMap() {
-<span class="nc" id="L130">        return toSortedMap(Map.Entry::getKey, Map.Entry::getValue);</span>
+<span class="fc" id="L130">        return toSortedMap(Map.Entry::getKey, Map.Entry::getValue);</span>
     }
 
     /**
