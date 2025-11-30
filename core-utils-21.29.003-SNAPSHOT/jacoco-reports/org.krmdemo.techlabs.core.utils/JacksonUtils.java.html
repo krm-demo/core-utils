@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.PrettyPrinter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -37,7 +38,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  *     Jackson Library Documentation
  * &lt;/a&gt;
  */
-<span class="fc" id="L40">@Slf4j</span>
+<span class="fc" id="L41">@Slf4j</span>
 public class JacksonUtils {
 
     @Getter
@@ -48,11 +49,11 @@ public class JacksonUtils {
         private final String exceptionClass;
         private final String message;
         private final List&lt;String&gt; stackTrace;
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        public AnyError(@NonNull Exception ex) {</span>
-<span class="fc" id="L52">            this.exceptionClass = ex.getClass().getName();</span>
-<span class="fc" id="L53">            this.message = ex.getMessage();</span>
-<span class="fc" id="L54">            this.stackTrace = ExceptionUtils.getRootCauseStackTraceList(ex);</span>
-<span class="fc" id="L55">        }</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        public AnyError(@NonNull Exception ex) {</span>
+<span class="fc" id="L53">            this.exceptionClass = ex.getClass().getName();</span>
+<span class="fc" id="L54">            this.message = ex.getMessage();</span>
+<span class="fc" id="L55">            this.stackTrace = ExceptionUtils.getRootCauseStackTraceList(ex);</span>
+<span class="fc" id="L56">        }</span>
     }
 
     @Getter @ToString
@@ -62,65 +63,74 @@ public class JacksonUtils {
         private final String originalMessage;
         private final String location;
         public JsonError(JsonProcessingException jsonEx) {
-<span class="nc" id="L65">            super(jsonEx);</span>
-<span class="nc" id="L66">            this.originalMessage = jsonEx.getOriginalMessage();</span>
-<span class="nc bnc" id="L67" title="All 2 branches missed.">            this.location = jsonEx.getLocation() == null ? &quot;&quot; : jsonEx.getLocation().toString();</span>
-<span class="nc" id="L68">        }</span>
+<span class="nc" id="L66">            super(jsonEx);</span>
+<span class="nc" id="L67">            this.originalMessage = jsonEx.getOriginalMessage();</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">            this.location = jsonEx.getLocation() == null ? &quot;&quot; : jsonEx.getLocation().toString();</span>
+<span class="nc" id="L69">        }</span>
     }
 
-<span class="fc" id="L71">    public static AnyError errorFrom(Exception ex) { return new AnyError(ex); }</span>
-<span class="nc" id="L72">    public static JsonError errorFrom(JsonProcessingException jsonEx) { return new JsonError(jsonEx); }</span>
+<span class="fc" id="L72">    public static AnyError errorFrom(Exception ex) { return new AnyError(ex); }</span>
+<span class="nc" id="L73">    public static JsonError errorFrom(JsonProcessingException jsonEx) { return new JsonError(jsonEx); }</span>
 
-<span class="fc" id="L74">    private static final ObjectMapper OBJECT_MAPPER_DUMP =</span>
+<span class="fc" id="L75">    private static final ObjectMapper OBJECT_MAPPER_DUMP =</span>
         new ObjectMapper()
-<span class="fc" id="L76">            .registerModule(new JavaTimeModule())</span>
-<span class="fc" id="L77">            .enable(SerializationFeature.INDENT_OUTPUT);</span>
+<span class="fc" id="L77">            .registerModule(new JavaTimeModule())</span>
+<span class="fc" id="L78">            .enable(SerializationFeature.INDENT_OUTPUT);</span>
 
     public static JsonNode jsonTreeFromString(String jsonContent) {
         try {
-<span class="nc" id="L81">            return OBJECT_MAPPER_DUMP.readTree(jsonContent);</span>
-<span class="nc" id="L82">        } catch (JsonProcessingException jsonEx) {</span>
-<span class="nc" id="L83">            throw new IllegalArgumentException(</span>
-<span class="nc" id="L84">                String.format(&quot;could not read the JSON-Tree:%n---%n'%s'%n---%n&quot;, jsonContent), jsonEx);</span>
+<span class="nc" id="L82">            return OBJECT_MAPPER_DUMP.readTree(jsonContent);</span>
+<span class="nc" id="L83">        } catch (JsonProcessingException jsonEx) {</span>
+<span class="nc" id="L84">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L85">                String.format(&quot;could not read the JSON-Tree:%n---%n'%s'%n---%n&quot;, jsonContent), jsonEx);</span>
         }
     }
 
     public static &lt;T&gt; T jsonValueFromString(String jsonContent, TypeReference&lt;T&gt; typeRef) {
         try {
-<span class="fc" id="L90">            return OBJECT_MAPPER_DUMP.readValue(jsonContent, typeRef);</span>
-<span class="nc" id="L91">        } catch (JsonProcessingException jsonEx) {</span>
-<span class="nc" id="L92">            throw new IllegalArgumentException(</span>
-<span class="nc" id="L93">                String.format(&quot;could not read &lt;%s&gt;:%n---%n'%s'%n---%n&quot;, typeRef, jsonContent), jsonEx);</span>
+<span class="fc" id="L91">            return OBJECT_MAPPER_DUMP.readValue(jsonContent, typeRef);</span>
+<span class="nc" id="L92">        } catch (JsonProcessingException jsonEx) {</span>
+<span class="nc" id="L93">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L94">                String.format(&quot;could not read by type-ref &lt;%s&gt;:%n---%n'%s'%n---%n&quot;, typeRef, jsonContent), jsonEx);</span>
+        }
+    }
+
+    public static &lt;T&gt; T jsonValueFromString(String jsonContent, JavaType javaType) {
+        try {
+<span class="fc" id="L100">            return OBJECT_MAPPER_DUMP.readValue(jsonContent, javaType);</span>
+<span class="nc" id="L101">        } catch (JsonProcessingException jsonEx) {</span>
+<span class="nc" id="L102">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L103">                String.format(&quot;could not read by java-type &lt;%s&gt;:%n---%n'%s'%n---%n&quot;, javaType, jsonContent), jsonEx);</span>
         }
     }
 
     public static Map&lt;String, Object&gt; jsonObjFromString(String jsonContent) {
         // automatic casting to &quot;java.util.Map&quot; looks like a magic
-<span class="nc" id="L99">        return jsonValueFromString(jsonContent, new TypeReference&lt;&gt;(){});</span>
+<span class="nc" id="L109">        return jsonValueFromString(jsonContent, new TypeReference&lt;&gt;(){});</span>
     }
 
     public static List&lt;Object&gt; jsonArrFromString(String jsonContent) {
         // automatic casting to &quot;java.util.List&quot; looks like a magic
-<span class="fc" id="L104">        return jsonValueFromString(jsonContent, new TypeReference&lt;&gt;(){});</span>
+<span class="fc" id="L114">        return jsonValueFromString(jsonContent, new TypeReference&lt;&gt;(){});</span>
     }
 
     public static JsonNode jsonTreeFromResource(String resourcePath) {
-<span class="nc" id="L108">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
-<span class="nc" id="L109">        try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {</span>
-<span class="nc" id="L110">            return OBJECT_MAPPER_DUMP.readTree(resourceStream);</span>
-<span class="nc" id="L111">        } catch (IOException ioEx) {</span>
-<span class="nc" id="L112">            throw new IllegalArgumentException(</span>
-<span class="nc" id="L113">                String.format(&quot;could not load the JSON-Tree from JSON-resource by path '%s'&quot;, resourcePath), ioEx);</span>
+<span class="nc" id="L118">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
+<span class="nc" id="L119">        try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {</span>
+<span class="nc" id="L120">            return OBJECT_MAPPER_DUMP.readTree(resourceStream);</span>
+<span class="nc" id="L121">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L122">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L123">                String.format(&quot;could not load the JSON-Tree from JSON-resource by path '%s'&quot;, resourcePath), ioEx);</span>
         }
     }
 
     public static &lt;T&gt; T jsonValueFromResource(String resourcePath, TypeReference&lt;T&gt; typeRef) {
-<span class="nc" id="L118">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
-<span class="nc" id="L119">        try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {</span>
-<span class="nc" id="L120">            return OBJECT_MAPPER_DUMP.readValue(resourceStream, typeRef);</span>
-<span class="nc" id="L121">        } catch (IOException ioEx) {</span>
-<span class="nc" id="L122">            throw new IllegalArgumentException(</span>
-<span class="nc" id="L123">                String.format(&quot;could not load &lt;%s&gt; from resource by path '%s'&quot;, typeRef, resourcePath), ioEx);</span>
+<span class="nc" id="L128">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
+<span class="nc" id="L129">        try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {</span>
+<span class="nc" id="L130">            return OBJECT_MAPPER_DUMP.readValue(resourceStream, typeRef);</span>
+<span class="nc" id="L131">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L132">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L133">                String.format(&quot;could not load &lt;%s&gt; from resource by path '%s'&quot;, typeRef, resourcePath), ioEx);</span>
         }
     }
 
@@ -130,7 +140,7 @@ public class JacksonUtils {
      */
     public static Map&lt;String, Object&gt; jsonObjFromResource(String resourcePath) {
         // automatic casting to &quot;java.util.Map&quot; looks like a magic
-<span class="nc" id="L133">        return jsonValueFromResource(resourcePath, new TypeReference&lt;&gt;(){});</span>
+<span class="nc" id="L143">        return jsonValueFromResource(resourcePath, new TypeReference&lt;&gt;(){});</span>
     }
 
     /**
@@ -139,7 +149,7 @@ public class JacksonUtils {
      */
     public static List&lt;Object&gt; jsonArrFromResource(String resourcePath) {
         // automatic casting to &quot;java.util.List&quot; looks like a magic
-<span class="nc" id="L142">        return jsonValueFromResource(resourcePath, new TypeReference&lt;&gt;(){});</span>
+<span class="nc" id="L152">        return jsonValueFromResource(resourcePath, new TypeReference&lt;&gt;(){});</span>
     }
 
     /**
@@ -147,11 +157,11 @@ public class JacksonUtils {
      * @return the root node of de-serialized JSON-Tree
      */
     public static JsonNode jsonTreeFromFile(File jsonFile) {
-<span class="fc" id="L150">        try (FileInputStream resourceStream = new FileInputStream(jsonFile)) {</span>
-<span class="fc" id="L151">            return OBJECT_MAPPER_DUMP.readTree(resourceStream);</span>
-<span class="nc" id="L152">        } catch (IOException ioEx) {</span>
-<span class="nc" id="L153">            throw new IllegalArgumentException(</span>
-<span class="nc" id="L154">                String.format(&quot;could not load the JSON-Tree from JSON-file '%s'&quot;, jsonFile), ioEx);</span>
+<span class="fc" id="L160">        try (FileInputStream resourceStream = new FileInputStream(jsonFile)) {</span>
+<span class="fc" id="L161">            return OBJECT_MAPPER_DUMP.readTree(resourceStream);</span>
+<span class="nc" id="L162">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L163">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L164">                String.format(&quot;could not load the JSON-Tree from JSON-file '%s'&quot;, jsonFile), ioEx);</span>
         }
     }
 
@@ -162,11 +172,11 @@ public class JacksonUtils {
      * @param &lt;T&gt; the type to de-serialize the JSON-value to
      */
     public static &lt;T&gt; T jsonValueFromFile(File jsonFile, TypeReference&lt;T&gt; typeRef) {
-<span class="fc" id="L165">        try (FileInputStream resourceStream = new FileInputStream(jsonFile)) {</span>
-<span class="fc" id="L166">            return OBJECT_MAPPER_DUMP.readValue(resourceStream, typeRef);</span>
-<span class="nc" id="L167">        } catch (IOException ioEx) {</span>
-<span class="nc" id="L168">            throw new IllegalArgumentException(</span>
-<span class="nc" id="L169">                String.format(&quot;could not load &lt;%s&gt; from JSON-file '%s'&quot;, typeRef, jsonFile), ioEx);</span>
+<span class="fc" id="L175">        try (FileInputStream resourceStream = new FileInputStream(jsonFile)) {</span>
+<span class="fc" id="L176">            return OBJECT_MAPPER_DUMP.readValue(resourceStream, typeRef);</span>
+<span class="nc" id="L177">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L178">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L179">                String.format(&quot;could not load &lt;%s&gt; from JSON-file '%s'&quot;, typeRef, jsonFile), ioEx);</span>
         }
     }
 
@@ -176,7 +186,7 @@ public class JacksonUtils {
      */
     public static Map&lt;String, Object&gt; jsonObjFromFile(File jsonFile) {
         // automatic casting to &quot;java.util.Map&quot; looks like a magic
-<span class="fc" id="L179">        return jsonValueFromFile(jsonFile, new TypeReference&lt;&gt;(){});</span>
+<span class="fc" id="L189">        return jsonValueFromFile(jsonFile, new TypeReference&lt;&gt;(){});</span>
     }
 
     /**
@@ -185,12 +195,12 @@ public class JacksonUtils {
      */
     public static List&lt;Object&gt; jsonArrFromFile(File jsonFile) {
         // automatic casting to &quot;java.util.List&quot; looks like a magic
-<span class="fc" id="L188">        return jsonValueFromFile(jsonFile, new TypeReference&lt;&gt;(){});</span>
+<span class="fc" id="L198">        return jsonValueFromFile(jsonFile, new TypeReference&lt;&gt;(){});</span>
     }
 
-<span class="nc" id="L191">    private JacksonUtils() {</span>
+<span class="nc" id="L201">    private JacksonUtils() {</span>
         // prohibit the creation of utility-class instance
-<span class="nc" id="L193">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+<span class="nc" id="L203">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

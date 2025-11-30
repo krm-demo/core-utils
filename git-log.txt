@@ -1,3 +1,4 @@
+2422547c further improvements in GithubApi #5 (introduce FeignCoders)
 048e2ade further improvements in GithubApi #4 (implement current maven-package)
 81ee4514 further improvements in GithubApi #3
 527b3a54 further improvements in GithubApi #2 (introduce using Mockito.spy)
