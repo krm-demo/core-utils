@@ -2,24 +2,20 @@ package org.krmdemo.techlabs.ghapi;
 
 import feign.Feign;
 import feign.Request;
-import feign.jackson.JacksonDecoder;
-import feign.jackson.JacksonEncoder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.concurrent.AtomicSafeInitializer;
 import org.apache.commons.lang3.concurrent.ConcurrentException;
-import org.apache.commons.lang3.concurrent.LazyInitializer;
-import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
 
-import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
+import static org.krmdemo.techlabs.ghapi.FeignCoders.feignDecoder;
+import static org.krmdemo.techlabs.ghapi.FeignCoders.feignEncoder;
 import static org.krmdemo.techlabs.ghapi.GithubApi.Factory.mavenPackageName;
 
 /**
@@ -89,8 +85,8 @@ class GithubApiFeign implements GithubApi {
     private Feign.Builder feignBuilder() {
         return Feign.builder()
             .options(new Request.Options(HTTP_TIMEOUT, HTTP_TIMEOUT, true))
-            .decoder(jacksonDecoder)
-            .encoder(jacksonEncoder)
+            .encoder(feignEncoder())
+            .decoder(feignDecoder())
             .requestInterceptor(requestTemplate -> {
                 requestTemplate.header("Authorization", "token " + githubToken);
                 requestTemplate.header("Accept", "application/vnd.github+json");
@@ -98,12 +94,6 @@ class GithubApiFeign implements GithubApi {
                 requestTemplate.query("package_type", "maven");
             });
     }
-
-    private static final JacksonDecoder jacksonDecoder =
-        new JacksonDecoder(List.of(CoreDateTimeUtils.jacksonModuleDTT()));
-
-    private static final JacksonEncoder jacksonEncoder =
-        new JacksonEncoder(List.of(CoreDateTimeUtils.jacksonModuleDTT()));
 
     private <T> T targetClient(Class<T> clientClass) {
         return feignBuilder().target(clientClass, URL_GITHUB_API);
@@ -258,7 +248,14 @@ class GithubApiFeign implements GithubApi {
         }
     }
 
-// ---------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
+
+    @Override
+    public PkgVerClient pkgVerClient() {
+        return targetClient(PkgVerClient.class);
+    }
+
+    // ---------------------------------------------------------------------------------------------
 
     static class FactoryImpl extends GithubApi.Factory {
         @Override

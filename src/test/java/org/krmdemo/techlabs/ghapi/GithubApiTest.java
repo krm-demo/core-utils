@@ -20,7 +20,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.krmdemo.techlabs.core.utils.CorePropsUtils.propValue;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.listTwiceOf;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
 import static org.krmdemo.techlabs.ghapi.GithubApi.Factory.mavenPackageName;
 
@@ -75,6 +77,8 @@ public class GithubApiTest {
             .isEqualToNormalizingNewlines(DumpUtils.dumpAsJsonTxt(currentOwner));
     }
 
+    // ---------------------------------------------------------------------------------------------
+
     @Test
     void testRepositoryClient() {
         final String ownerName = "atteo";
@@ -113,6 +117,8 @@ public class GithubApiTest {
         System.out.println("currRepoProps --> " + DumpUtils.dumpAsJsonTxt(currRepoProps));
         assertThat(propValue(currRepoProps, "owner", "login")).isEqualTo(CURRENT_OWNER_NAME);
     }
+
+    // ---------------------------------------------------------------------------------------------
 
     @Test
     void testPackageClient() {
@@ -212,6 +218,31 @@ public class GithubApiTest {
         // subsequent access to current package must return the reference to the same object
         assertThat(githubApi.getCurrentRepoMavenPkg()).isSameAs(currentPkg);
         assertThat(githubApi.getCurrentRepoMavenPkg()).isSameAs(currentPkg);
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    @Test
+    void testPkgVerClient() {
+        Collection<GithubApi.PkgVer> usrPkgVerColl =
+            githubApi.pkgVerClient().getUserMavenPackageVersions(CURRENT_GITHUB_PACKAGE_NAME);
+        //System.out.println("usrPkgVerColl --> " + DumpUtils.dumpAsJsonTxt(usrPkgVerColl));
+        Collection<GithubApi.PkgVer> ownPkgVerColl =
+            githubApi.pkgVerClient().getOwnerMavenPackageVersions(CURRENT_OWNER_NAME, CURRENT_GITHUB_PACKAGE_NAME);
+        //System.out.println("ownPkgVerColl --> " + DumpUtils.dumpAsJsonTxt(usrPkgVerColl));
+        System.out.println("==============================================");
+        System.out.println("usrPkgVerColl.size() = " + usrPkgVerColl.size());
+        System.out.println("ownPkgVerColl.size() = " + ownPkgVerColl.size());
+        System.out.println("==============================================");
+        Map<String, Object> queryMap = linkedMap(
+            nameValue("page", "1"),
+            nameValue("per_page", "40")
+        );
+        PagingResult<GithubApi.PkgVer> usrPkgVerResult =
+            githubApi.pkgVerClient().userMavenPackageVersions(
+                CURRENT_GITHUB_PACKAGE_NAME, queryMap);
+        System.out.println("usrPkgVerResult --> " + usrPkgVerResult);
+        assertThat(usrPkgVerResult.itemsList()).hasSize(40);
     }
 
     // ---------------------------------------------------------------------------------------------

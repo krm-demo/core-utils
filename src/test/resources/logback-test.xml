@@ -17,6 +17,15 @@
     <append>true</append>
   </appender>
 
+  <!-- file-appender for the rest of Open-Feign Encoders and Decoders -->
+  <appender name="GITHUB_API_LOG" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_DIR}/ghapi.log</file>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+    <append>true</append>
+  </appender>
+
   <!-- file-appender for the rest of 'core-utils' library -->
   <appender name="DEFAULT_LOG" class="ch.qos.logback.core.FileAppender">
     <file>${LOG_DIR}/core-utils-default.log</file>
@@ -29,6 +38,11 @@
   <!-- 'th-tool' logger -->
   <logger name="org.krmdemo.techlabs.thtool" level="DEBUG" additivity="false">
     <appender-ref ref="TH_TOOL_LOG"/>
+  </logger>
+
+  <!-- 'ghapi' logger -->
+  <logger name="org.krmdemo.techlabs.ghapi" level="DEBUG" additivity="false">
+    <appender-ref ref="GITHUB_API_LOG"/>
   </logger>
 
   <!-- the default logger of 'core-utils' library (not commit DEBUG because a lot of garbage from ThymeLeaf !!!) -->

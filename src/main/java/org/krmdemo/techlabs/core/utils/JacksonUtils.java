@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.PrettyPrinter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -90,7 +91,16 @@ public class JacksonUtils {
             return OBJECT_MAPPER_DUMP.readValue(jsonContent, typeRef);
         } catch (JsonProcessingException jsonEx) {
             throw new IllegalArgumentException(
-                String.format("could not read <%s>:%n---%n'%s'%n---%n", typeRef, jsonContent), jsonEx);
+                String.format("could not read by type-ref <%s>:%n---%n'%s'%n---%n", typeRef, jsonContent), jsonEx);
+        }
+    }
+
+    public static <T> T jsonValueFromString(String jsonContent, JavaType javaType) {
+        try {
+            return OBJECT_MAPPER_DUMP.readValue(jsonContent, javaType);
+        } catch (JsonProcessingException jsonEx) {
+            throw new IllegalArgumentException(
+                String.format("could not read by java-type <%s>:%n---%n'%s'%n---%n", javaType, jsonContent), jsonEx);
         }
     }
 
