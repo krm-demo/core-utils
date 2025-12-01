@@ -13,29 +13,24 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
-import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
+import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__PAGE_NUM;
+import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__PER_PAGE;
+import static org.krmdemo.techlabs.ghapi.GithubHeaders.extractInteger;
+import static org.krmdemo.techlabs.ghapi.GithubHeaders.relToLinkUri;
 
 /**
  * This class represents the paging-result of some endpoints of GitHub-API,
- * where the total number of items could be huge enough and we have to fetch them page by page.
+ * where the total number of items could be huge enough, and we have to fetch them page by page.
  *
  * @param <T> the type of item in the paging result
  *
@@ -49,20 +44,11 @@ import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 @JsonPropertyOrder({
     "request-url", "page-num", "per-page",
     "http-status", "http-reason", "next-page", "last-page",
+    "rate-limit-per-hour", "rate-limit-remaining", "rate-limit-used",
     "items-list"
 })
 @Slf4j
 public class PagingResult<T> {
-
-    /**
-     * HTTP-Query parameter that corresponds to the {@code '1'}-based sequence number of the page to fetch
-     */
-    public final static String PARAM_NAME__PAGE_NUM = "page";
-
-    /**
-     * HTTP-Query parameter that corresponds to the number of items in each page
-     */
-    public final static String PARAM_NAME__PER_PAGE = "per_page";
 
     @JsonProperty("items-list")private final List<T> itemsList;
 
@@ -75,6 +61,10 @@ public class PagingResult<T> {
     @JsonProperty("next-page") private final Integer nextPage;
     @JsonProperty("last-page") private final Integer lastPage;
 
+    @JsonProperty("rate-limit-per-hour") private final Integer rateLimitPerHour;
+    @JsonProperty("rate-limit-remaining") private final Integer rateLimitRemaining;
+    @JsonProperty("rate-limit-used") private final Integer rateLimitUsed;
+
     private PagingResult(Builder<T> builder) {
         this.itemsList = builder.itemsList;
         this.requestUrl = builder.requestUrl;
@@ -84,6 +74,9 @@ public class PagingResult<T> {
         this.httpReason = builder.httpReason;
         this.nextPage = builder.nextPage;
         this.lastPage = builder.lastPage;
+        this.rateLimitPerHour = builder.rateLimitPerHour;
+        this.rateLimitRemaining = builder.rateLimitRemaining;
+        this.rateLimitUsed = builder.rateLimitUsed;
     }
 
     @Override
@@ -91,6 +84,16 @@ public class PagingResult<T> {
         return DumpUtils.dumpAsJsonTxt(this);
     }
 
+    /**
+     * This class represents a factory to produce the instances of {@link GithubApi}
+     *
+     * @see <a href="https://www.digitalocean.com/community/tutorials/builder-design-pattern-in-java">
+     *     Builder Design Pattern in Java
+     * </a>
+     * @see <a href="https://www.baeldung.com/java-builder-pattern">
+     *     Implement the Builder Pattern in <code>Java</code>
+     * </a>
+     */
     @Setter
     @Accessors(fluent = true, chain = true)
     public static class Builder<T> {
@@ -104,6 +107,10 @@ public class PagingResult<T> {
         private String httpReason;
         private Integer nextPage;
         private Integer lastPage;
+
+        private Integer rateLimitPerHour;
+        private Integer rateLimitRemaining;
+        private Integer rateLimitUsed;
 
         private Builder() {
         }
@@ -119,103 +126,50 @@ public class PagingResult<T> {
         }
     }
 
+    /**
+     * The only way to get the instance of {@link Builder}, because its constructor is private.
+     *
+     * @return the instance of {@link Builder} that produces the instances of {@link PagingResult}
+     */
     public static <T> Builder<T> builder() {
         return new Builder<>();
     }
 
+    /**
+     * Creating the instance of {@link Builder} and populate the values from Open-Feign {@link Response}
+     *
+     * @param feighResponse feign-response as {@link Response}
+     * @return the instance of {@link Builder} which later could be used to instantiate the {@link PagingResult}
+     * @param <T> a type of item in paging result
+     */
     public static <T> Builder<T> fromFeignResponse(Response feighResponse) {
         Builder<T> builder = PagingResult.<T>builder()
             .httpStatus(feighResponse.status())
             .httpReason(feighResponse.reason())
             .requestUrl(feighResponse.request().requestTemplate().url());
+
         Map<String, Collection<String>> requestParams = feighResponse.request().requestTemplate().queries();
         builder.pageNum(extractInteger(requestParams, PARAM_NAME__PAGE_NUM));
         builder.perPage(extractInteger(requestParams, PARAM_NAME__PER_PAGE));
-        String headerLink = extractString(feighResponse.headers(), "link");
-        Map<String, LinkUri> linkUriMap = relToLinkUri(headerLink);
-        LinkUri nextLink = linkUriMap.get("next");
-        LinkUri lastLink = linkUriMap.get("last");
+
+        Map<String, GithubHeaders.LinkUri> linkUriMap = relToLinkUri(feighResponse);
+        GithubHeaders.LinkUri nextLink = linkUriMap.get("next");
+        GithubHeaders.LinkUri lastLink = linkUriMap.get("last");
         builder.nextPage(nextLink == null ? null : nextLink.getPageNum());
         builder.lastPage(lastLink == null ? null : lastLink.getPageNum());
-        // TODO: parse rate-limits
-        return builder;
+
+        return builder
+            .rateLimitPerHour(GithubHeaders.extractRateLimitPerHour(feighResponse))
+            .rateLimitRemaining(GithubHeaders.extractRateLimitRemaining(feighResponse))
+            .rateLimitUsed(GithubHeaders.extractRateLimitUsed(feighResponse));
     }
 
-    private static String extractString(Map<String, Collection<String>> nameToColl, String name) {
-        Collection<String> coll = nameToColl.get(name);
-        if (coll == null || coll.isEmpty()) {
-            return null;
-        } else {
-            return coll.iterator().next();
-        }
-    }
-
-    private static Integer extractInteger(Map<String, Collection<String>> nameToColl, String name) {
-        return parseInteger(extractString(nameToColl, name));
-    }
-
-    private static Integer parseInteger(String intStr) {
-        try {
-            return StringUtils.isBlank(intStr) ? null : Integer.valueOf(intStr.trim());
-        } catch (NumberFormatException ignore) {
-            return null;
-        }
-    }
-
-    static Pattern HEADER_LINK_PATTERN = Pattern.compile("<(?<url>[^><;,]*)>[; ]*rel=\"(?<rel>[a-zA-Z0-9_:-]+)\"[, ]*");
-
-    static Map<String, LinkUri> relToLinkUri(String headerLink) {
-        Matcher matcher = HEADER_LINK_PATTERN.matcher(headerLink);
-        return matcher.results().collect(toLinkedMap(
-            mr -> mr.group("rel"),
-            mr -> new LinkUri(mr.group("url"))
-        ));
-    }
-
-    @Getter
-    @JsonPropertyOrder(alphabetic = true)
-    static class LinkUri {
-        private final URI uri;
-        private final Map<String, String> queryParams;
-        LinkUri(String uriStr) {
-            this(parseURI(uriStr));
-        }
-        LinkUri(URI uri) {
-            this.uri = uri;
-            if (uri == null || StringUtils.isBlank(uri.getQuery())) {
-                this.queryParams = Collections.emptyMap();
-                return;
-            }
-            this.queryParams = Arrays.stream(uri.getQuery().split("&"))
-                .map(this::paramPairEntry)
-                .collect(toLinkedMap());
-        }
-        Map.Entry<String, String> paramPairEntry(String paramPair) {
-            if (StringUtils.isBlank(paramPair)) {
-                return null;
-            }
-            String[] pairArr = paramPair.split("=");
-            return nameValue(pairArr[0], pairArr[1]);
-        }
-        static URI parseURI(String urlStr) {
-            try {
-                return new URI(urlStr);
-            } catch (URISyntaxException uriSyntaxEx) {
-                log.error(String.format("cannot parse the link-URI '%s'", urlStr), uriSyntaxEx);
-                return null;
-            }
-        }
-
-        public Integer getPageNum() {
-            return parseInteger(queryParams.get(PARAM_NAME__PAGE_NUM));
-        }
-
-        public Integer getPerPage() {
-            return parseInteger(queryParams.get(PARAM_NAME__PER_PAGE));
-        }
-    }
-
-
+    /**
+     * Getting the instance of Open-Feign decoder that make an attempt to treat the input as {@link PagingResult}
+     *
+     * @param delegate an Open-Feign decoder to delegate the job
+     * @return the instance of Open-Feign decoder for response of type {@link PagingResult}
+     */
     public static Decoder feignDecoder(Decoder delegate) {
         return new PagingResultDecoder(delegate);
     }
@@ -258,7 +212,7 @@ public class PagingResult<T> {
                     javaTypeItemsList,
                     DumpUtils.dumpAsJsonTxt(itemsListObj));
                 return fromFeignResponse(response)
-                    .itemsListObj(itemsListObj)
+                    .itemsListObj(itemsListObj)  // <-- it looks like it's the simplest way to assign items of unknown class
                     .build();
             }
             log.info("delegating the whole decoding to " + delegate.getClass().getSimpleName());

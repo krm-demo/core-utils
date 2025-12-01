@@ -1,15 +1,16 @@
 package org.krmdemo.techlabs.ghapi;
 
-import javassist.tools.Dump;
 import org.junit.jupiter.api.Test;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedSet;
 
-public class PagingResultTest {
+/**
+ * A unit-test to verify the utility-class {@link GithubHeaders}
+ */
+public class GithubHeadersTest {
 
     final String headerLink_01 = """
         <https://api.github.com/user/packages/maven/io.github.krm-demo.core-utils/versions?page=2&per_page=40&package_type=maven>; rel="next", \
@@ -22,7 +23,7 @@ public class PagingResultTest {
 
     @Test
     void testRelToUri_01() {
-        Map<String, PagingResult.LinkUri> relToLinkUri = PagingResult.relToLinkUri(headerLink_01);
+        Map<String, GithubHeaders.LinkUri> relToLinkUri = GithubHeaders.relToLinkUri(headerLink_01);
         assertThat(DumpUtils.dumpAsJsonTxt(relToLinkUri)).isEqualTo("""
             {
               "next": {
@@ -38,7 +39,7 @@ public class PagingResultTest {
 
     @Test
     void testRelToUri_02() {
-        Map<String, PagingResult.LinkUri> relToLinkUri = PagingResult.relToLinkUri(headerLink_02);
+        Map<String, GithubHeaders.LinkUri> relToLinkUri = GithubHeaders.relToLinkUri(headerLink_02);
         assertThat(DumpUtils.dumpAsJsonTxt(relToLinkUri)).isEqualTo("""
             {
               "next": {
