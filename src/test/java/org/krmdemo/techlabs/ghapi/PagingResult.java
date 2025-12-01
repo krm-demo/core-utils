@@ -17,15 +17,32 @@ import org.apache.commons.lang3.StringUtils;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.SequencedSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
+
+/**
+ * This class represents the paging-result of some endpoints of GitHub-API,
+ * where the total number of items could be huge enough and we have to fetch them page by page.
+ *
+ * @param <T> the type of item in the paging result
+ *
+ * @see <a href="https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api?apiVersion=2022-11-28">
+ *     (GitHub docs) Using pagination in the REST API
+ * </a>
+ */
 @Getter
 @Accessors(fluent = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -34,7 +51,18 @@ import java.util.SequencedSet;
     "http-status", "http-reason", "next-page", "last-page",
     "items-list"
 })
+@Slf4j
 public class PagingResult<T> {
+
+    /**
+     * HTTP-Query parameter that corresponds to the {@code '1'}-based sequence number of the page to fetch
+     */
+    public final static String PARAM_NAME__PAGE_NUM = "page";
+
+    /**
+     * HTTP-Query parameter that corresponds to the number of items in each page
+     */
+    public final static String PARAM_NAME__PER_PAGE = "per_page";
 
     @JsonProperty("items-list")private final List<T> itemsList;
 
@@ -101,9 +129,15 @@ public class PagingResult<T> {
             .httpReason(feighResponse.reason())
             .requestUrl(feighResponse.request().requestTemplate().url());
         Map<String, Collection<String>> requestParams = feighResponse.request().requestTemplate().queries();
-        builder.pageNum(extractInteger(requestParams, "page"));
-        builder.perPage(extractInteger(requestParams, "per_page"));
-        // TODO: parse links and rate-limits
+        builder.pageNum(extractInteger(requestParams, PARAM_NAME__PAGE_NUM));
+        builder.perPage(extractInteger(requestParams, PARAM_NAME__PER_PAGE));
+        String headerLink = extractString(feighResponse.headers(), "link");
+        Map<String, LinkUri> linkUriMap = relToLinkUri(headerLink);
+        LinkUri nextLink = linkUriMap.get("next");
+        LinkUri lastLink = linkUriMap.get("last");
+        builder.nextPage(nextLink == null ? null : nextLink.getPageNum());
+        builder.lastPage(lastLink == null ? null : lastLink.getPageNum());
+        // TODO: parse rate-limits
         return builder;
     }
 
@@ -117,19 +151,75 @@ public class PagingResult<T> {
     }
 
     private static Integer extractInteger(Map<String, Collection<String>> nameToColl, String name) {
-        String valueStr = extractString(nameToColl, name);
+        return parseInteger(extractString(nameToColl, name));
+    }
+
+    private static Integer parseInteger(String intStr) {
         try {
-            return StringUtils.isBlank(valueStr) ? null : Integer.valueOf(valueStr.trim());
+            return StringUtils.isBlank(intStr) ? null : Integer.valueOf(intStr.trim());
         } catch (NumberFormatException ignore) {
             return null;
         }
     }
 
+    static Pattern HEADER_LINK_PATTERN = Pattern.compile("<(?<url>[^><;,]*)>[; ]*rel=\"(?<rel>[a-zA-Z0-9_:-]+)\"[, ]*");
+
+    static Map<String, LinkUri> relToLinkUri(String headerLink) {
+        Matcher matcher = HEADER_LINK_PATTERN.matcher(headerLink);
+        return matcher.results().collect(toLinkedMap(
+            mr -> mr.group("rel"),
+            mr -> new LinkUri(mr.group("url"))
+        ));
+    }
+
+    @Getter
+    @JsonPropertyOrder(alphabetic = true)
+    static class LinkUri {
+        private final URI uri;
+        private final Map<String, String> queryParams;
+        LinkUri(String uriStr) {
+            this(parseURI(uriStr));
+        }
+        LinkUri(URI uri) {
+            this.uri = uri;
+            if (uri == null || StringUtils.isBlank(uri.getQuery())) {
+                this.queryParams = Collections.emptyMap();
+                return;
+            }
+            this.queryParams = Arrays.stream(uri.getQuery().split("&"))
+                .map(this::paramPairEntry)
+                .collect(toLinkedMap());
+        }
+        Map.Entry<String, String> paramPairEntry(String paramPair) {
+            if (StringUtils.isBlank(paramPair)) {
+                return null;
+            }
+            String[] pairArr = paramPair.split("=");
+            return nameValue(pairArr[0], pairArr[1]);
+        }
+        static URI parseURI(String urlStr) {
+            try {
+                return new URI(urlStr);
+            } catch (URISyntaxException uriSyntaxEx) {
+                log.error(String.format("cannot parse the link-URI '%s'", urlStr), uriSyntaxEx);
+                return null;
+            }
+        }
+
+        public Integer getPageNum() {
+            return parseInteger(queryParams.get(PARAM_NAME__PAGE_NUM));
+        }
+
+        public Integer getPerPage() {
+            return parseInteger(queryParams.get(PARAM_NAME__PER_PAGE));
+        }
+    }
+
+
     public static Decoder feignDecoder(Decoder delegate) {
         return new PagingResultDecoder(delegate);
     }
 
-    @Slf4j
     static class PagingResultDecoder implements Decoder {
         private final static TypeFactory TYPE_FACTORY = TypeFactory.defaultInstance();
         private final Decoder delegate;

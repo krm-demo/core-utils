@@ -207,6 +207,21 @@ public class CoreCollectors {
     }
 
     /**
+     * The same as {@link Collectors#toMap JDK's toMap(...)}, but the elements of collecting stream are required to be
+     * of type {@link Map.Entry}, and the produced linked-map accepts them one by one like
+     * if the method {@link Map#putAll} would be invoked (the latest entries overwrite the existing ones).
+     *
+     * @return a {@link Collector}, which collects all the input elements into a {@link LinkedHashMap}
+     * @param <K> the type of {@link Map.Entry#getKey() key} for {@link Map.Entry entries} in input stream
+     * @param <U> the type of {@link Map.Entry#getValue() value} for {@link Map.Entry entries} in input stream
+     */
+    public static <K, U>
+    Collector<Map.Entry<K,U>, ?, SequencedMap<K,U>>
+    toLinkedMap() {
+        return toLinkedMap(Map.Entry::getKey, Map.Entry::getValue);
+    }
+
+    /**
      * The same as {@link Collectors#toMap JDK's toMap(...)}, but produces {@link LinkedHashMap} with overwriting the duplicates.
      * <hr/>
      * <i>the brief summary is:</i><ul>

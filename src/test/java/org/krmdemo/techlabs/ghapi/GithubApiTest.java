@@ -243,6 +243,23 @@ public class GithubApiTest {
                 CURRENT_GITHUB_PACKAGE_NAME, queryMap);
         System.out.println("usrPkgVerResult --> " + usrPkgVerResult);
         assertThat(usrPkgVerResult.itemsList()).hasSize(40);
+        assertThat(usrPkgVerResult.nextPage()).isEqualTo(2);
+        assertThat(usrPkgVerResult.lastPage()).isEqualTo(2);
+    }
+
+    @Test
+    void testPkgVerClient_size() {
+        Map<String, Object> queryMap = linkedMap(
+            nameValue("page", "1"),
+            nameValue("per_page", "1")
+        );
+        PagingResult<GithubApi.PkgVer> usrPkgVerResult =
+            githubApi.pkgVerClient().userMavenPackageVersions(
+                CURRENT_GITHUB_PACKAGE_NAME, queryMap);
+        System.out.println("usrPkgVerResult --> " + usrPkgVerResult);
+        assertThat(usrPkgVerResult.itemsList()).hasSize(1);
+        assertThat(usrPkgVerResult.nextPage()).isEqualTo(2);
+        assertThat(usrPkgVerResult.lastPage()).isEqualTo(58);
     }
 
     // ---------------------------------------------------------------------------------------------
