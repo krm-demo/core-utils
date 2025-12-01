@@ -221,66 +221,81 @@
 <span class="source-line-no">207</span><span id="line-207">    }</span>
 <span class="source-line-no">208</span><span id="line-208"></span>
 <span class="source-line-no">209</span><span id="line-209">    /**</span>
-<span class="source-line-no">210</span><span id="line-210">     * The same as {@link Collectors#toMap JDK's toMap(...)}, but produces {@link LinkedHashMap} with overwriting the duplicates.</span>
-<span class="source-line-no">211</span><span id="line-211">     * &lt;hr/&gt;</span>
-<span class="source-line-no">212</span><span id="line-212">     * &lt;i&gt;the brief summary is:&lt;/i&gt;&lt;ul&gt;</span>
-<span class="source-line-no">213</span><span id="line-213">     *     &lt;li&gt;{@code keyMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-key {@code &lt;K&gt;}&lt;/li&gt;</span>
-<span class="source-line-no">214</span><span id="line-214">     *     &lt;li&gt;{@code valueMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-value {@code &lt;U&gt;}&lt;/li&gt;</span>
-<span class="source-line-no">215</span><span id="line-215">     * &lt;/ul&gt;</span>
-<span class="source-line-no">216</span><span id="line-216">     *</span>
-<span class="source-line-no">217</span><span id="line-217">     * @param &lt;T&gt; the type of the input elements</span>
-<span class="source-line-no">218</span><span id="line-218">     * @param &lt;K&gt; the output type of the &lt;i&gt;key-mapping&lt;/i&gt;  function</span>
-<span class="source-line-no">219</span><span id="line-219">     * @param &lt;U&gt; the output type of the &lt;i&gt;value-mapping&lt;/i&gt; function</span>
-<span class="source-line-no">220</span><span id="line-220">     * @param keyMapper a &lt;i&gt;key-mapping&lt;/i&gt; function to produce keys</span>
-<span class="source-line-no">221</span><span id="line-221">     * @param valueMapper a &lt;i&gt;value-mapping&lt;/i&gt; function to produce values</span>
-<span class="source-line-no">222</span><span id="line-222">     * @return a {@link Collector} that collects elements into a {@link LinkedHashMap},</span>
-<span class="source-line-no">223</span><span id="line-223">     * whose keys are the result of applying a {@code keyMapper} function to the input elements,</span>
-<span class="source-line-no">224</span><span id="line-224">     * and whose values are the result of applying a {@code valueMapper} function to all input elements</span>
-<span class="source-line-no">225</span><span id="line-225">     * equal to the key and overwriting the existing values with new ones</span>
-<span class="source-line-no">226</span><span id="line-226">     * (according to {@link MergeFunction#OVERWRITE enum-value OVERWRITE}).</span>
-<span class="source-line-no">227</span><span id="line-227">     */</span>
-<span class="source-line-no">228</span><span id="line-228">    public static &lt;T, K, U&gt;</span>
-<span class="source-line-no">229</span><span id="line-229">    Collector&lt;T, ?, SequencedMap&lt;K,U&gt;&gt;</span>
-<span class="source-line-no">230</span><span id="line-230">    toLinkedMap(Function&lt;? super T, ? extends K&gt; keyMapper,</span>
-<span class="source-line-no">231</span><span id="line-231">                Function&lt;? super T, ? extends U&gt; valueMapper) {</span>
-<span class="source-line-no">232</span><span id="line-232">        return toLinkedMap(keyMapper, valueMapper, MergeFunction.OVERWRITE);</span>
-<span class="source-line-no">233</span><span id="line-233">    }</span>
-<span class="source-line-no">234</span><span id="line-234"></span>
-<span class="source-line-no">235</span><span id="line-235">    /**</span>
-<span class="source-line-no">236</span><span id="line-236">     * The same as {@link #toLinkedMap(Function, Function) toLinkedMap(keyMapper,valueMapper)},</span>
-<span class="source-line-no">237</span><span id="line-237">     * but allows to handle duplicates with {@link MergeFunction mergeFunction} parameter.</span>
-<span class="source-line-no">238</span><span id="line-238">     * &lt;hr/&gt;</span>
-<span class="source-line-no">239</span><span id="line-239">     * &lt;i&gt;the brief summary is:&lt;/i&gt;&lt;ul&gt;</span>
-<span class="source-line-no">240</span><span id="line-240">     *     &lt;li&gt;{@code keyMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-key {@code &lt;K&gt;}&lt;/li&gt;</span>
-<span class="source-line-no">241</span><span id="line-241">     *     &lt;li&gt;{@code valueMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-value {@code &lt;U&gt;}&lt;/li&gt;</span>
-<span class="source-line-no">242</span><span id="line-242">     * &lt;/ul&gt;</span>
-<span class="source-line-no">243</span><span id="line-243">     *</span>
-<span class="source-line-no">244</span><span id="line-244">     * @param &lt;T&gt; the type of the input elements</span>
-<span class="source-line-no">245</span><span id="line-245">     * @param &lt;K&gt; the output type of the &lt;i&gt;key-mapping&lt;/i&gt;  function</span>
-<span class="source-line-no">246</span><span id="line-246">     * @param &lt;U&gt; the output type of the &lt;i&gt;value-mapping&lt;/i&gt; function</span>
-<span class="source-line-no">247</span><span id="line-247">     * @param keyMapper a &lt;i&gt;key-mapping&lt;/i&gt; function to produce keys</span>
-<span class="source-line-no">248</span><span id="line-248">     * @param valueMapper a &lt;i&gt;value-mapping&lt;/i&gt; function to produce values</span>
-<span class="source-line-no">249</span><span id="line-249">     * @param mergeFunction one of values that are represented by {@link MergeFunction}-enum</span>
-<span class="source-line-no">250</span><span id="line-250">     * @return a {@link Collector} that collects elements into a {@link LinkedHashMap},</span>
-<span class="source-line-no">251</span><span id="line-251">     * whose keys are the result of applying a {@code keyMapper} function to the input elements,</span>
-<span class="source-line-no">252</span><span id="line-252">     * and whose values are the result of applying a {@code valueMapper} function to all input elements</span>
-<span class="source-line-no">253</span><span id="line-253">     * equal to the key and combining them using the {@code mergeFunction}.</span>
-<span class="source-line-no">254</span><span id="line-254">     */</span>
-<span class="source-line-no">255</span><span id="line-255">    public static &lt;T, K, U&gt;</span>
-<span class="source-line-no">256</span><span id="line-256">    Collector&lt;T, ?, SequencedMap&lt;K,U&gt;&gt;</span>
-<span class="source-line-no">257</span><span id="line-257">    toLinkedMap(Function&lt;? super T, ? extends K&gt; keyMapper,</span>
-<span class="source-line-no">258</span><span id="line-258">                Function&lt;? super T, ? extends U&gt; valueMapper,</span>
-<span class="source-line-no">259</span><span id="line-259">                MergeFunction mergeFunction) {</span>
-<span class="source-line-no">260</span><span id="line-260">        return Collectors.toMap(keyMapper, valueMapper, mergeFunction.op(), LinkedHashMap::new);</span>
-<span class="source-line-no">261</span><span id="line-261">    }</span>
-<span class="source-line-no">262</span><span id="line-262"></span>
-<span class="source-line-no">263</span><span id="line-263">    // --------------------------------------------------------------------------------------------</span>
-<span class="source-line-no">264</span><span id="line-264"></span>
-<span class="source-line-no">265</span><span id="line-265">    private CoreCollectors() {</span>
-<span class="source-line-no">266</span><span id="line-266">        // prohibit the creation of utility-class instance</span>
-<span class="source-line-no">267</span><span id="line-267">        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());</span>
-<span class="source-line-no">268</span><span id="line-268">    }</span>
-<span class="source-line-no">269</span><span id="line-269">}</span>
+<span class="source-line-no">210</span><span id="line-210">     * The same as {@link Collectors#toMap JDK's toMap(...)}, but the elements of collecting stream are required to be</span>
+<span class="source-line-no">211</span><span id="line-211">     * of type {@link Map.Entry}, and the produced linked-map accepts them one by one like</span>
+<span class="source-line-no">212</span><span id="line-212">     * if the method {@link Map#putAll} would be invoked (the latest entries overwrite the existing ones).</span>
+<span class="source-line-no">213</span><span id="line-213">     *</span>
+<span class="source-line-no">214</span><span id="line-214">     * @return a {@link Collector}, which collects all the input elements into a {@link LinkedHashMap}</span>
+<span class="source-line-no">215</span><span id="line-215">     * @param &lt;K&gt; the type of {@link Map.Entry#getKey() key} for {@link Map.Entry entries} in input stream</span>
+<span class="source-line-no">216</span><span id="line-216">     * @param &lt;U&gt; the type of {@link Map.Entry#getValue() value} for {@link Map.Entry entries} in input stream</span>
+<span class="source-line-no">217</span><span id="line-217">     */</span>
+<span class="source-line-no">218</span><span id="line-218">    public static &lt;K, U&gt;</span>
+<span class="source-line-no">219</span><span id="line-219">    Collector&lt;Map.Entry&lt;K,U&gt;, ?, SequencedMap&lt;K,U&gt;&gt;</span>
+<span class="source-line-no">220</span><span id="line-220">    toLinkedMap() {</span>
+<span class="source-line-no">221</span><span id="line-221">        return toLinkedMap(Map.Entry::getKey, Map.Entry::getValue);</span>
+<span class="source-line-no">222</span><span id="line-222">    }</span>
+<span class="source-line-no">223</span><span id="line-223"></span>
+<span class="source-line-no">224</span><span id="line-224">    /**</span>
+<span class="source-line-no">225</span><span id="line-225">     * The same as {@link Collectors#toMap JDK's toMap(...)}, but produces {@link LinkedHashMap} with overwriting the duplicates.</span>
+<span class="source-line-no">226</span><span id="line-226">     * &lt;hr/&gt;</span>
+<span class="source-line-no">227</span><span id="line-227">     * &lt;i&gt;the brief summary is:&lt;/i&gt;&lt;ul&gt;</span>
+<span class="source-line-no">228</span><span id="line-228">     *     &lt;li&gt;{@code keyMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-key {@code &lt;K&gt;}&lt;/li&gt;</span>
+<span class="source-line-no">229</span><span id="line-229">     *     &lt;li&gt;{@code valueMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-value {@code &lt;U&gt;}&lt;/li&gt;</span>
+<span class="source-line-no">230</span><span id="line-230">     * &lt;/ul&gt;</span>
+<span class="source-line-no">231</span><span id="line-231">     *</span>
+<span class="source-line-no">232</span><span id="line-232">     * @param &lt;T&gt; the type of the input elements</span>
+<span class="source-line-no">233</span><span id="line-233">     * @param &lt;K&gt; the output type of the &lt;i&gt;key-mapping&lt;/i&gt;  function</span>
+<span class="source-line-no">234</span><span id="line-234">     * @param &lt;U&gt; the output type of the &lt;i&gt;value-mapping&lt;/i&gt; function</span>
+<span class="source-line-no">235</span><span id="line-235">     * @param keyMapper a &lt;i&gt;key-mapping&lt;/i&gt; function to produce keys</span>
+<span class="source-line-no">236</span><span id="line-236">     * @param valueMapper a &lt;i&gt;value-mapping&lt;/i&gt; function to produce values</span>
+<span class="source-line-no">237</span><span id="line-237">     * @return a {@link Collector} that collects elements into a {@link LinkedHashMap},</span>
+<span class="source-line-no">238</span><span id="line-238">     * whose keys are the result of applying a {@code keyMapper} function to the input elements,</span>
+<span class="source-line-no">239</span><span id="line-239">     * and whose values are the result of applying a {@code valueMapper} function to all input elements</span>
+<span class="source-line-no">240</span><span id="line-240">     * equal to the key and overwriting the existing values with new ones</span>
+<span class="source-line-no">241</span><span id="line-241">     * (according to {@link MergeFunction#OVERWRITE enum-value OVERWRITE}).</span>
+<span class="source-line-no">242</span><span id="line-242">     */</span>
+<span class="source-line-no">243</span><span id="line-243">    public static &lt;T, K, U&gt;</span>
+<span class="source-line-no">244</span><span id="line-244">    Collector&lt;T, ?, SequencedMap&lt;K,U&gt;&gt;</span>
+<span class="source-line-no">245</span><span id="line-245">    toLinkedMap(Function&lt;? super T, ? extends K&gt; keyMapper,</span>
+<span class="source-line-no">246</span><span id="line-246">                Function&lt;? super T, ? extends U&gt; valueMapper) {</span>
+<span class="source-line-no">247</span><span id="line-247">        return toLinkedMap(keyMapper, valueMapper, MergeFunction.OVERWRITE);</span>
+<span class="source-line-no">248</span><span id="line-248">    }</span>
+<span class="source-line-no">249</span><span id="line-249"></span>
+<span class="source-line-no">250</span><span id="line-250">    /**</span>
+<span class="source-line-no">251</span><span id="line-251">     * The same as {@link #toLinkedMap(Function, Function) toLinkedMap(keyMapper,valueMapper)},</span>
+<span class="source-line-no">252</span><span id="line-252">     * but allows to handle duplicates with {@link MergeFunction mergeFunction} parameter.</span>
+<span class="source-line-no">253</span><span id="line-253">     * &lt;hr/&gt;</span>
+<span class="source-line-no">254</span><span id="line-254">     * &lt;i&gt;the brief summary is:&lt;/i&gt;&lt;ul&gt;</span>
+<span class="source-line-no">255</span><span id="line-255">     *     &lt;li&gt;{@code keyMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-key {@code &lt;K&gt;}&lt;/li&gt;</span>
+<span class="source-line-no">256</span><span id="line-256">     *     &lt;li&gt;{@code valueMapper} function accepts {@code &lt;T&gt;} and returns the type of entry-value {@code &lt;U&gt;}&lt;/li&gt;</span>
+<span class="source-line-no">257</span><span id="line-257">     * &lt;/ul&gt;</span>
+<span class="source-line-no">258</span><span id="line-258">     *</span>
+<span class="source-line-no">259</span><span id="line-259">     * @param &lt;T&gt; the type of the input elements</span>
+<span class="source-line-no">260</span><span id="line-260">     * @param &lt;K&gt; the output type of the &lt;i&gt;key-mapping&lt;/i&gt;  function</span>
+<span class="source-line-no">261</span><span id="line-261">     * @param &lt;U&gt; the output type of the &lt;i&gt;value-mapping&lt;/i&gt; function</span>
+<span class="source-line-no">262</span><span id="line-262">     * @param keyMapper a &lt;i&gt;key-mapping&lt;/i&gt; function to produce keys</span>
+<span class="source-line-no">263</span><span id="line-263">     * @param valueMapper a &lt;i&gt;value-mapping&lt;/i&gt; function to produce values</span>
+<span class="source-line-no">264</span><span id="line-264">     * @param mergeFunction one of values that are represented by {@link MergeFunction}-enum</span>
+<span class="source-line-no">265</span><span id="line-265">     * @return a {@link Collector} that collects elements into a {@link LinkedHashMap},</span>
+<span class="source-line-no">266</span><span id="line-266">     * whose keys are the result of applying a {@code keyMapper} function to the input elements,</span>
+<span class="source-line-no">267</span><span id="line-267">     * and whose values are the result of applying a {@code valueMapper} function to all input elements</span>
+<span class="source-line-no">268</span><span id="line-268">     * equal to the key and combining them using the {@code mergeFunction}.</span>
+<span class="source-line-no">269</span><span id="line-269">     */</span>
+<span class="source-line-no">270</span><span id="line-270">    public static &lt;T, K, U&gt;</span>
+<span class="source-line-no">271</span><span id="line-271">    Collector&lt;T, ?, SequencedMap&lt;K,U&gt;&gt;</span>
+<span class="source-line-no">272</span><span id="line-272">    toLinkedMap(Function&lt;? super T, ? extends K&gt; keyMapper,</span>
+<span class="source-line-no">273</span><span id="line-273">                Function&lt;? super T, ? extends U&gt; valueMapper,</span>
+<span class="source-line-no">274</span><span id="line-274">                MergeFunction mergeFunction) {</span>
+<span class="source-line-no">275</span><span id="line-275">        return Collectors.toMap(keyMapper, valueMapper, mergeFunction.op(), LinkedHashMap::new);</span>
+<span class="source-line-no">276</span><span id="line-276">    }</span>
+<span class="source-line-no">277</span><span id="line-277"></span>
+<span class="source-line-no">278</span><span id="line-278">    // --------------------------------------------------------------------------------------------</span>
+<span class="source-line-no">279</span><span id="line-279"></span>
+<span class="source-line-no">280</span><span id="line-280">    private CoreCollectors() {</span>
+<span class="source-line-no">281</span><span id="line-281">        // prohibit the creation of utility-class instance</span>
+<span class="source-line-no">282</span><span id="line-282">        throw new UnsupportedOperationException("Cannot instantiate utility-class " + getClass().getName());</span>
+<span class="source-line-no">283</span><span id="line-283">    }</span>
+<span class="source-line-no">284</span><span id="line-284">}</span>
 
 
 

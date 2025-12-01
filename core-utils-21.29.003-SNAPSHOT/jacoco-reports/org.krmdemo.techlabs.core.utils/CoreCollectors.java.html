@@ -207,6 +207,21 @@ public class CoreCollectors {
     }
 
     /**
+     * The same as {@link Collectors#toMap JDK's toMap(...)}, but the elements of collecting stream are required to be
+     * of type {@link Map.Entry}, and the produced linked-map accepts them one by one like
+     * if the method {@link Map#putAll} would be invoked (the latest entries overwrite the existing ones).
+     *
+     * @return a {@link Collector}, which collects all the input elements into a {@link LinkedHashMap}
+     * @param &lt;K&gt; the type of {@link Map.Entry#getKey() key} for {@link Map.Entry entries} in input stream
+     * @param &lt;U&gt; the type of {@link Map.Entry#getValue() value} for {@link Map.Entry entries} in input stream
+     */
+    public static &lt;K, U&gt;
+    Collector&lt;Map.Entry&lt;K,U&gt;, ?, SequencedMap&lt;K,U&gt;&gt;
+    toLinkedMap() {
+<span class="fc" id="L221">        return toLinkedMap(Map.Entry::getKey, Map.Entry::getValue);</span>
+    }
+
+    /**
      * The same as {@link Collectors#toMap JDK's toMap(...)}, but produces {@link LinkedHashMap} with overwriting the duplicates.
      * &lt;hr/&gt;
      * &lt;i&gt;the brief summary is:&lt;/i&gt;&lt;ul&gt;
@@ -229,7 +244,7 @@ public class CoreCollectors {
     Collector&lt;T, ?, SequencedMap&lt;K,U&gt;&gt;
     toLinkedMap(Function&lt;? super T, ? extends K&gt; keyMapper,
                 Function&lt;? super T, ? extends U&gt; valueMapper) {
-<span class="fc" id="L232">        return toLinkedMap(keyMapper, valueMapper, MergeFunction.OVERWRITE);</span>
+<span class="fc" id="L247">        return toLinkedMap(keyMapper, valueMapper, MergeFunction.OVERWRITE);</span>
     }
 
     /**
@@ -257,14 +272,14 @@ public class CoreCollectors {
     toLinkedMap(Function&lt;? super T, ? extends K&gt; keyMapper,
                 Function&lt;? super T, ? extends U&gt; valueMapper,
                 MergeFunction mergeFunction) {
-<span class="fc" id="L260">        return Collectors.toMap(keyMapper, valueMapper, mergeFunction.op(), LinkedHashMap::new);</span>
+<span class="fc" id="L275">        return Collectors.toMap(keyMapper, valueMapper, mergeFunction.op(), LinkedHashMap::new);</span>
     }
 
     // --------------------------------------------------------------------------------------------
 
-<span class="fc" id="L265">    private CoreCollectors() {</span>
+<span class="fc" id="L280">    private CoreCollectors() {</span>
         // prohibit the creation of utility-class instance
-<span class="fc" id="L267">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+<span class="fc" id="L282">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

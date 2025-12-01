@@ -1582,6 +1582,12 @@ and on the current time (because of <a href="https://en.wikipedia.org/wiki/Dayli
 <dd>
 <div class="block">The same as <a href="org/krmdemo/techlabs/core/utils/CoreCollectors.html#toLinkedList()"><code>CoreCollectors.toLinkedList()</code></a>, but collecting the items in <b>reverse order</b>.</div>
 </dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreCollectors.html#toLinkedMap()" class="member-name-link">toLinkedMap()</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreCollectors.html" title="class in org.krmdemo.techlabs.core.utils">CoreCollectors</a></dt>
+<dd>
+<div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toMap(...)</code></a>, but the elements of collecting stream are required to be
+of type <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry</code></a>, and the produced linked-map accepts them one by one like
+if the method <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#putAll(java.util.Map)" title="class or interface in java.util" class="external-link"><code>Map.putAll(Map)</code></a> would be invoked (the latest entries overwrite the existing ones).</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreCollectors.html#toLinkedMap(java.util.function.Function,java.util.function.Function)" class="member-name-link">toLinkedMap(Function, Function)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreCollectors.html" title="class in org.krmdemo.techlabs.core.utils">CoreCollectors</a></dt>
 <dd>
 <div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)" title="class or interface in java.util.stream" class="external-link"><code>JDK's toMap(...)</code></a>, but produces <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashMap.html" title="class or interface in java.util" class="external-link"><code>LinkedHashMap</code></a> with overwriting the duplicates.</div>
