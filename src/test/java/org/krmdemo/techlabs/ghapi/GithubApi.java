@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import feign.Param;
 import feign.QueryMap;
 import feign.RequestLine;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.concurrent.ConcurrentException;
 import org.krmdemo.techlabs.core.datetime.DateTimeTriplet;
 
@@ -377,6 +379,8 @@ public interface GithubApi {
      *     Implement the Builder Pattern in <code>Java</code>
      * </a>
      */
+    @Setter
+    @Accessors(fluent = true, chain = true)
     abstract class Factory {
         protected String githubToken;
         protected String ownerName;
@@ -384,6 +388,21 @@ public interface GithubApi {
         protected String mavenProjectGroup;
         protected String mavenProjectArtifact;
         protected String mavenPackageName;
+
+        /**
+         * Creating the instance of {@link GithubApi} according to concrete implementation of this {@link Factory}.
+         * Possible approaches could be based on:<ul>
+         *     <li>using the direct HTTP-client (either from JDK or third-party like <a href="https://square.github.io/okhttp/">OkHttp</a>);</li>
+         *     <li>using HTTP-ORM library like <a href="https://github.com/OpenFeign/feign">Open-Feign</a>;</li>
+         *     <li>executing command-line tool <a href="https://github.com/cli/cli">{@code gh}</a></li>
+         * </ul>
+         * <hr/>
+         * At the moment only {@link GithubApiFeign.FactoryImpl} factory is ready
+         * and the static method {@link #feignFactory()} is recommended to use.
+         *
+         * @return the instance of {@link GithubApi}
+         */
+        public abstract GithubApi create();
 
         /**
          * By convention, the name of GitHub-package must be the dot{@code '.'}-concatenating values
@@ -395,38 +414,6 @@ public interface GithubApi {
          */
         static String mavenPackageName(String mavenProjectGroup, String mavenProjectArtifact) {
             return String.format("%s.%s", mavenProjectGroup, mavenProjectArtifact);
-        }
-
-        public abstract GithubApi create();
-
-        public Factory githubToken(String githubToken) {
-            this.githubToken = githubToken;
-            return this;
-        }
-
-        public Factory ownerName(String ownerName) {
-            this.ownerName = ownerName;
-            return this;
-        }
-
-        public Factory repoName(String repoName) {
-            this.repoName = repoName;
-            return this;
-        }
-
-        public Factory mavenProjectGroup(String mavenProjectGroup) {
-            this.mavenProjectGroup = mavenProjectGroup;
-            return this;
-        }
-
-        public Factory mavenProjectArtifact(String mavenProjectArtifact) {
-            this.mavenProjectArtifact = mavenProjectArtifact;
-            return this;
-        }
-
-        public Factory mavenPackageName(String mavenPackageName) {
-            this.mavenPackageName = mavenPackageName;
-            return this;
         }
     }
 }
