@@ -1,3 +1,4 @@
+7467b2ea further improvements in GithubApi #9
 2789a917 further improvements in GithubApi #8
 7c4fae9a further improvements in GithubApi #7 (rate-limits)
 2db47a6f further improvements in GithubApi #6
