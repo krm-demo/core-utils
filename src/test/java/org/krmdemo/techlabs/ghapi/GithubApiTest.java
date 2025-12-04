@@ -25,6 +25,8 @@ import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.listTwiceOf;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
 import static org.krmdemo.techlabs.ghapi.GithubApi.Factory.mavenPackageName;
+import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__PAGE_NUM;
+import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__PER_PAGE;
 
 /**
  * This unit-test checks the results of GitHub-workflow actions to be cleaned up
@@ -235,8 +237,8 @@ public class GithubApiTest {
         System.out.println("ownPkgVerColl.size() = " + ownPkgVerColl.size());
         System.out.println("==============================================");
         Map<String, Object> queryMap = linkedMap(
-            nameValue("page", "1"),
-            nameValue("per_page", "40")
+            nameValue(PARAM_NAME__PAGE_NUM, "1"),
+            nameValue(PARAM_NAME__PER_PAGE, "40")
         );
         PagingResult<GithubApi.PkgVer> usrPkgVerResult =
             githubApi.pkgVerClient().userMavenPackageVersions(
@@ -249,17 +251,11 @@ public class GithubApiTest {
 
     @Test
     void testPkgVerClient_size() {
-        Map<String, Object> queryMap = linkedMap(
-            nameValue("page", "1"),
-            nameValue("per_page", "1")
-        );
-        PagingResult<GithubApi.PkgVer> usrPkgVerResult =
-            githubApi.pkgVerClient().userMavenPackageVersions(
-                CURRENT_GITHUB_PACKAGE_NAME, queryMap);
-        System.out.println("usrPkgVerResult --> " + usrPkgVerResult);
-        assertThat(usrPkgVerResult.itemsList()).hasSize(1);
-        assertThat(usrPkgVerResult.nextPage()).isEqualTo(2);
-        assertThat(usrPkgVerResult.lastPage()).isEqualTo(58);
+        int currPkgVerCount = githubApi.getCurrentRepoMavenPkg().versionCount();
+        int currPkgVerCount_paging = githubApi.userMavenPackageVersionsCount(CURRENT_GITHUB_PACKAGE_NAME);
+        System.out.println("currentRepoMavenPkg.versionCount = " + currPkgVerCount + ";");
+        System.out.println("userMavenPackageVersionsCount    = " + currPkgVerCount_paging + ";");
+        assertThat(currPkgVerCount_paging).isEqualTo(currPkgVerCount);
     }
 
     // ---------------------------------------------------------------------------------------------

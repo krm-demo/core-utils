@@ -14,9 +14,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 import static org.krmdemo.techlabs.ghapi.FeignCoders.feignDecoder;
 import static org.krmdemo.techlabs.ghapi.FeignCoders.feignEncoder;
 import static org.krmdemo.techlabs.ghapi.GithubApi.Factory.mavenPackageName;
+import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__PAGE_NUM;
+import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__PER_PAGE;
 
 /**
  * Implementation of {@link GithubApi} that is based on using <a href="https://github.com/OpenFeign/feign">Open-Feign</a>
@@ -253,6 +257,18 @@ class GithubApiFeign implements GithubApi {
     @Override
     public PkgVerClient pkgVerClient() {
         return targetClient(PkgVerClient.class);
+    }
+
+    @Override
+    public int userMavenPackageVersionsCount(String packageName) {
+        Map<String, Object> queryMap = linkedMap(
+            nameValue(PARAM_NAME__PAGE_NUM, "1"),
+            nameValue(PARAM_NAME__PER_PAGE, "1")
+        );
+        PagingResult<GithubApi.PkgVer> usrPkgVerResult =
+            pkgVerClient().userMavenPackageVersions(
+                packageName, queryMap);
+        return usrPkgVerResult.lastPage();
     }
 
     // ---------------------------------------------------------------------------------------------
