@@ -16,7 +16,7 @@ import java.util.function.BinaryOperator;
      */
 <span class="fc" id="L17">    OVERWRITE {</span>
         @Override
-        &lt;U&gt; BinaryOperator&lt;U&gt; op() {
+        public &lt;U&gt; BinaryOperator&lt;U&gt; op() {
 <span class="fc" id="L20">            return (oldValue, newValue) -&gt; newValue;</span>
         }
     },
@@ -27,7 +27,7 @@ import java.util.function.BinaryOperator;
      */
 <span class="fc" id="L28">    IGNORE {</span>
         @Override
-        &lt;U&gt; BinaryOperator&lt;U&gt; op() {
+        public  &lt;U&gt; BinaryOperator&lt;U&gt; op() {
 <span class="fc" id="L31">            return (oldValue, newValue) -&gt; oldValue;</span>
         }
     },
@@ -38,7 +38,7 @@ import java.util.function.BinaryOperator;
      */
 <span class="fc" id="L39">    THROW {</span>
         @Override
-        &lt;U&gt; BinaryOperator&lt;U&gt; op() {
+        public &lt;U&gt; BinaryOperator&lt;U&gt; op() {
 <span class="fc" id="L42">            return (oldValue, newValue) -&gt; {</span>
 <span class="fc" id="L43">                throw new IllegalStateException(String.format(</span>
                     &quot;attempt to overwrite the value '%s' with the value '%s', which is NOT allowed&quot;,
@@ -52,6 +52,6 @@ import java.util.function.BinaryOperator;
      * @return the merging-function as {@link BinaryOperator}
      * @param &lt;U&gt; the type of value
      */
-    abstract &lt;U&gt; BinaryOperator&lt;U&gt; op();
+    public abstract &lt;U&gt; BinaryOperator&lt;U&gt; op();
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

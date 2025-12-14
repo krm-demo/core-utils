@@ -30,7 +30,7 @@
 <span class="source-line-no">016</span><span id="line-16">     */</span>
 <span class="source-line-no">017</span><span id="line-17">    OVERWRITE {</span>
 <span class="source-line-no">018</span><span id="line-18">        @Override</span>
-<span class="source-line-no">019</span><span id="line-19">        &lt;U&gt; BinaryOperator&lt;U&gt; op() {</span>
+<span class="source-line-no">019</span><span id="line-19">        public &lt;U&gt; BinaryOperator&lt;U&gt; op() {</span>
 <span class="source-line-no">020</span><span id="line-20">            return (oldValue, newValue) -&gt; newValue;</span>
 <span class="source-line-no">021</span><span id="line-21">        }</span>
 <span class="source-line-no">022</span><span id="line-22">    },</span>
@@ -41,7 +41,7 @@
 <span class="source-line-no">027</span><span id="line-27">     */</span>
 <span class="source-line-no">028</span><span id="line-28">    IGNORE {</span>
 <span class="source-line-no">029</span><span id="line-29">        @Override</span>
-<span class="source-line-no">030</span><span id="line-30">        &lt;U&gt; BinaryOperator&lt;U&gt; op() {</span>
+<span class="source-line-no">030</span><span id="line-30">        public  &lt;U&gt; BinaryOperator&lt;U&gt; op() {</span>
 <span class="source-line-no">031</span><span id="line-31">            return (oldValue, newValue) -&gt; oldValue;</span>
 <span class="source-line-no">032</span><span id="line-32">        }</span>
 <span class="source-line-no">033</span><span id="line-33">    },</span>
@@ -52,7 +52,7 @@
 <span class="source-line-no">038</span><span id="line-38">     */</span>
 <span class="source-line-no">039</span><span id="line-39">    THROW {</span>
 <span class="source-line-no">040</span><span id="line-40">        @Override</span>
-<span class="source-line-no">041</span><span id="line-41">        &lt;U&gt; BinaryOperator&lt;U&gt; op() {</span>
+<span class="source-line-no">041</span><span id="line-41">        public &lt;U&gt; BinaryOperator&lt;U&gt; op() {</span>
 <span class="source-line-no">042</span><span id="line-42">            return (oldValue, newValue) -&gt; {</span>
 <span class="source-line-no">043</span><span id="line-43">                throw new IllegalStateException(String.format(</span>
 <span class="source-line-no">044</span><span id="line-44">                    "attempt to overwrite the value '%s' with the value '%s', which is NOT allowed",</span>
@@ -66,7 +66,7 @@
 <span class="source-line-no">052</span><span id="line-52">     * @return the merging-function as {@link BinaryOperator}</span>
 <span class="source-line-no">053</span><span id="line-53">     * @param &lt;U&gt; the type of value</span>
 <span class="source-line-no">054</span><span id="line-54">     */</span>
-<span class="source-line-no">055</span><span id="line-55">    abstract &lt;U&gt; BinaryOperator&lt;U&gt; op();</span>
+<span class="source-line-no">055</span><span id="line-55">    public abstract &lt;U&gt; BinaryOperator&lt;U&gt; op();</span>
 <span class="source-line-no">056</span><span id="line-56">}</span>
 
 

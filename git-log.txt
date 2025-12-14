@@ -1,3 +1,4 @@
+3f919593 Introduce parallel and sequential aggregation of paging-results for package-versions #1
 7467b2ea further improvements in GithubApi #9
 2789a917 further improvements in GithubApi #8
 7c4fae9a further improvements in GithubApi #7 (rate-limits)
