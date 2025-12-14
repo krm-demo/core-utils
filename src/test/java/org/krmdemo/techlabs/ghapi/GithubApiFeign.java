@@ -5,20 +5,29 @@ import feign.Request;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.concurrent.AtomicSafeInitializer;
 import org.apache.commons.lang3.concurrent.ConcurrentException;
+import org.krmdemo.techlabs.core.utils.MergeFunction;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Optional;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toMap;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
 import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
 import static org.krmdemo.techlabs.ghapi.FeignCoders.feignDecoder;
 import static org.krmdemo.techlabs.ghapi.FeignCoders.feignEncoder;
 import static org.krmdemo.techlabs.ghapi.GithubApi.Factory.mavenPackageName;
+import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__MAX_PAGE_SZIE;
 import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__PAGE_NUM;
 import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__PER_PAGE;
 
@@ -64,6 +73,7 @@ class GithubApiFeign implements GithubApi {
             .setInitializer(this::loadCurrentRepoMavenPkgOpt)
             .get();
 
+    private final boolean parallel;
     private final String githubToken;
     private final String ownerName;
     private final String repoName;
@@ -76,6 +86,7 @@ class GithubApiFeign implements GithubApi {
      * @param factory real (non-abstract) instance of {@link Factory} with all mandatory properties
      */
     protected GithubApiFeign(Factory factory) {
+        this.parallel = factory.parallel;
         this.githubToken = factory.githubToken;
         this.ownerName = factory.ownerName;
         this.repoName = factory.repoName;
@@ -271,7 +282,48 @@ class GithubApiFeign implements GithubApi {
         return usrPkgVerResult.lastPage();
     }
 
-    // ---------------------------------------------------------------------------------------------
+    @Override
+    public Map<String, PkgVer> userMavenPackageVersionsMap(String packageName) {
+        Map<String, Object> queryMap = linkedMap(
+            nameValue(PARAM_NAME__PAGE_NUM, "1"),
+            nameValue(PARAM_NAME__PER_PAGE, PARAM_NAME__MAX_PAGE_SZIE)
+        );
+        PagingResult<GithubApi.PkgVer> firstPagingResult =
+            pkgVerClient().userMavenPackageVersions(
+                packageName, queryMap);
+        Stream<PagingResult<PkgVer>> restPagingResult =
+            restPageRange(firstPagingResult)
+                .mapToObj(pageNum -> {
+                    queryMap.put(PARAM_NAME__PAGE_NUM, "" + pageNum);
+                    return pkgVerClient().userMavenPackageVersions(packageName, queryMap);
+                });
+        Stream<PagingResult<PkgVer>> pagingResultAll =
+            Stream.concat(Stream.of(firstPagingResult), restPagingResult);
+        if (this.parallel) {
+            return pagingResultAll.parallel()
+                .flatMap(PagingResult::items)
+                .collect(toMap(
+                    PkgVer::name,
+                    Function.identity(),
+                    MergeFunction.OVERWRITE.op(),
+                    ConcurrentHashMap::new
+                ));
+        } else {
+            return pagingResultAll
+                .flatMap(PagingResult::items)
+                .collect(toLinkedMap(PkgVer::name, Function.identity()));
+        }
+    }
+
+    private IntStream restPageRange(PagingResult<?> pagingResult) {
+        if (pagingResult.nextPage() == null || pagingResult.lastPage() == null) {
+            return IntStream.empty();
+        } else {
+            return IntStream.range(pagingResult.nextPage(), pagingResult.lastPage());
+        }
+    }
+
+// ---------------------------------------------------------------------------------------------
 
     static class FactoryImpl extends GithubApi.Factory {
         @Override

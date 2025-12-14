@@ -147,7 +147,7 @@ public class CoreStreamUtils {
     }
 
     /**
-     * This method returns the {@link List}, which appears to be two whole copy of {@code elems}.
+     * This method returns the {@link List}, which appears to be two whole copies of {@code elems}.
      * The order of elements in the first and the second copy remains exactly the same as in original {@link Iterable}.
      *
      * @param elems elements to <i>multiply twice</i>

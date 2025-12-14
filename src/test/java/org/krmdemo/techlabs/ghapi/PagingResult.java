@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__PAGE_NUM;
 import static org.krmdemo.techlabs.ghapi.GithubHeaders.PARAM_NAME__PER_PAGE;
@@ -77,6 +78,16 @@ public class PagingResult<T> {
         this.rateLimitPerHour = builder.rateLimitPerHour;
         this.rateLimitRemaining = builder.rateLimitRemaining;
         this.rateLimitUsed = builder.rateLimitUsed;
+    }
+
+    /**
+     * Getting the items of paging-result as {@link Stream Stream&lt;T&gt;} or
+     * returning an empty stream when {@link #itemsList} is {@code null} or empty.
+     *
+     * @return {@link Stream Stream&lt;T&gt;} of items in this paging result
+     */
+    public Stream<T> items() {
+        return itemsList == null || itemsList.isEmpty() ? Stream.empty() : itemsList.stream();
     }
 
     @Override

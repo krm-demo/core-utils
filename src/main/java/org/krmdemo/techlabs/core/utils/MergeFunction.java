@@ -16,7 +16,7 @@ public enum MergeFunction {
      */
     OVERWRITE {
         @Override
-        <U> BinaryOperator<U> op() {
+        public <U> BinaryOperator<U> op() {
             return (oldValue, newValue) -> newValue;
         }
     },
@@ -27,7 +27,7 @@ public enum MergeFunction {
      */
     IGNORE {
         @Override
-        <U> BinaryOperator<U> op() {
+        public  <U> BinaryOperator<U> op() {
             return (oldValue, newValue) -> oldValue;
         }
     },
@@ -38,7 +38,7 @@ public enum MergeFunction {
      */
     THROW {
         @Override
-        <U> BinaryOperator<U> op() {
+        public <U> BinaryOperator<U> op() {
             return (oldValue, newValue) -> {
                 throw new IllegalStateException(String.format(
                     "attempt to overwrite the value '%s' with the value '%s', which is NOT allowed",
@@ -52,5 +52,5 @@ public enum MergeFunction {
      * @return the merging-function as {@link BinaryOperator}
      * @param <U> the type of value
      */
-    abstract <U> BinaryOperator<U> op();
+    public abstract <U> BinaryOperator<U> op();
 }

@@ -412,6 +412,22 @@ public interface GithubApi {
      */
     int userMavenPackageVersionsCount(String packageName);
 
+    /**
+     * Getting the <b>active</b> versions for GitHub-{@code package} with the given {@code packageName}
+     * as a {@link Map Map&lt;String,PkgVer&gt;} with the name of GitHub-{@code package-version}
+     * as {@link Map.Entry#getKey() a key} and {@link PkgVer} as {@link Map.Entry#getValue a value}.
+     * <hr/>
+     * Unlike the standard API-methods (like {@link PkgVerClient#getUserMavenPackageVersions(String)}
+     * or {@link PkgVerClient#userMavenPackageVersions(String, Map)} with limited number of records per page)
+     * this method fetch all active versions by aggregating all {@link PagingResult}s.
+     *
+     * @param packageName a name of GitHub-{@code package}, which corresponds to {@link Package#name()}
+     * @return <b>active</b> versions for GitHub-{@code package} with the given {@code packageName}
+     *         as a {@link Map Map&lt;String,PkgVer&gt;}
+     *         where {@link Map.Entry#getKey() the key} corresponds to {@link PkgVer#name()}
+     */
+    Map<String, PkgVer> userMavenPackageVersionsMap(String packageName);
+
     // ---------------------------------------------------------------------------------------------
 
     /**
@@ -437,6 +453,7 @@ public interface GithubApi {
     @Setter
     @Accessors(fluent = true, chain = true)
     abstract class Factory {
+        protected boolean parallel;
         protected String githubToken;
         protected String ownerName;
         protected String repoName;

@@ -258,6 +258,20 @@ public class GithubApiTest {
         assertThat(currPkgVerCount_paging).isEqualTo(currPkgVerCount);
     }
 
+    @Test
+    void testUserPackageVersionsMap_sequential() {
+        GithubApi.PkgVerClient pkgVerClient = githubApi.pkgVerClient();
+        Collection<GithubApi.PkgVer> userVersions = pkgVerClient.getUserMavenPackageVersions(CURRENT_GITHUB_PACKAGE_NAME);
+        Map<String, GithubApi.PkgVer> allUserVersions = githubApi.userMavenPackageVersionsMap(CURRENT_GITHUB_PACKAGE_NAME);
+        System.out.println("userVersions.size() = " + userVersions.size());
+        System.out.println("allUserVersions.size() = " + allUserVersions.size());
+    }
+
+    @Test
+    void testPackageVersionsMap_parallel() {
+        // TODO: implement toBuider() and parallel() method on GithubApi interface
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     private static List<GithubApi.Package> mockPackages_noDups() {

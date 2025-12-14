@@ -69,6 +69,11 @@ public class GithubHeaders {
      */
     public final static String PARAM_NAME__PER_PAGE = "per_page";
 
+    /**
+     * HTTP-Query parameter that corresponds to the maximum allowed size of page (pre-defined by GitHub policies)
+     */
+    public final static int PARAM_NAME__MAX_PAGE_SZIE = 100;
+
     static Pattern HEADER_LINK_PATTERN = Pattern.compile("<(?<url>[^><;,]*)>[; ]*rel=\"(?<rel>[a-zA-Z0-9_:-]+)\"[, ]*");
 
     /**
