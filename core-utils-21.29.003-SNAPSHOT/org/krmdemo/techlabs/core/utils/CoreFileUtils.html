@@ -101,9 +101,10 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-23">CoreFileUtils</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-24">CoreFileUtils</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Utility-class that invokes standard JDK utilities, but wraps <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>
+<div class="block">Utility-class to load, to save and to copy files,
+that invokes standard JDK utilities, but wraps <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>
 into <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a> and creates missing parent directories.</div>
 </div>
 </section>
@@ -225,7 +226,7 @@ where each line is an element of returning <a href="https://docs.oracle.com/en/j
 <section class="detail" id="encodeBase64(java.lang.String)">
 <h3>encodeBase64</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-33">encodeBase64</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentToEncode)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-34">encodeBase64</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentToEncode)</span></div>
 <div class="block">Utility-method that provides Base64-encoding of the passed content
 that allows to use it in HTML-attributes
 (for HTTP-URL parameter - additional URL-encoding should be applied).</div>
@@ -242,7 +243,7 @@ that allows to use it in HTML-attributes
 <section class="detail" id="encodeBase64(byte[])">
 <h3>encodeBase64</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-45">encodeBase64</a></span><wbr><span class="parameters">(byte[]&nbsp;bytesArr)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-46">encodeBase64</a></span><wbr><span class="parameters">(byte[]&nbsp;bytesArr)</span></div>
 <div class="block">Utility-method that provides Base64-encoding of the passed array of bytes
 that allows to use it in HTML-attributes
 (for HTTP-URL parameter - additional URL-encoding should be applied).</div>
@@ -259,7 +260,7 @@ that allows to use it in HTML-attributes
 <section class="detail" id="imageFileData64(java.io.File)">
 <h3>imageFileData64</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-59">imageFileData64</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;imageFile)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-60">imageFileData64</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;imageFile)</span></div>
 <div class="block">Load the content of image-file with, encodes its content <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Base64.html#getEncoder()" title="class or interface in java.util" class="external-link"><code>Base64-encoder</code></a>
 and prepend it with corresponding mime-type prefix in order to use that final value
 either in HTML-attributes (for HTTP-URL parameter - additional URL-encoding should be applied).
@@ -278,7 +279,7 @@ For more advanced detection it's recommended to use <a href="https://tika.apache
 <section class="detail" id="pathParts(java.nio.file.Path)">
 <h3>pathParts</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-87">pathParts</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link">Stream</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-88">pathParts</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path)</span></div>
 <div class="block">Getting the sequence of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link"><code>Path</code></a>-components as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link"><code>Stream&lt;String&gt;</code></a>.
 <hr/>
 This operation is inversion of standard static methods <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html#of(java.lang.String,java.lang.String...)" title="class or interface in java.nio.file" class="external-link"><code>Path.of(String, String...)</code></a>
@@ -299,7 +300,7 @@ or <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/ni
 <section class="detail" id="pathPartsList(java.nio.file.Path)">
 <h3>pathPartsList</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-103">pathPartsList</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-104">pathPartsList</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path)</span></div>
 <div class="block">Getting the sequence of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link"><code>Path</code></a>-components as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List&lt;String&gt;</code></a>
 - so, following expressions are identical:<pre><code>     pathPartsList(Path.of("a/b/c"))
      pathPartsList(Path.of("a", "b", "c"))
@@ -319,7 +320,7 @@ or <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/ni
 <section class="detail" id="pathPartsStr(java.nio.file.Path)">
 <h3>pathPartsStr</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-120">pathPartsStr</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-121">pathPartsStr</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path)</span></div>
 <div class="block">Joining the <a href="#pathParts(java.nio.file.Path)"><code>stream of path components</code></a> with <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html#separator" title="class or interface in java.io" class="external-link"><code>File.separator</code></a>
 - so, the assertions like following are always correct:<pre><code>    assertThat(pathPartsStr(Path.of("a/b/c"))).isEqualTo("a/b/c")
 </code></pre>
@@ -340,7 +341,7 @@ just a pure representation of path-parts without additional handling them.</div>
 <section class="detail" id="loadFileAsText(java.lang.String)">
 <h3>loadFileAsText</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-130">loadFileAsText</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pathToLoadStr)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-131">loadFileAsText</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pathToLoadStr)</span></div>
 <div class="block">The same as <a href="#loadFileAsText(java.io.File)"><code>loadFileAsText(File)</code></a>, but accept the path to that file as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a></div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -355,7 +356,7 @@ just a pure representation of path-parts without additional handling them.</div>
 <section class="detail" id="loadFileAsText(java.io.File)">
 <h3>loadFileAsText</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-141">loadFileAsText</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToLoad)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-142">loadFileAsText</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToLoad)</span></div>
 <div class="block">Loading the content of <code>file</code> as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a> (it's allowed to use for text-files only)
 and throws <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a> if the content of file could not be loaded for any reason.</div>
 <dl class="notes">
@@ -371,7 +372,7 @@ and throws <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <section class="detail" id="loadFileAsBytes(java.io.File)">
 <h3>loadFileAsBytes</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-162">loadFileAsBytes</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToLoad)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-163">loadFileAsBytes</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToLoad)</span></div>
 <div class="block">Loading the content of <code>file</code> as <code>byte[]</code>  and throws <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a>
 if the content of file could not be loaded for any reason.</div>
 <dl class="notes">
@@ -387,7 +388,7 @@ if the content of file could not be loaded for any reason.</div>
 <section class="detail" id="loadFileLines(java.nio.file.Path)">
 <h3>loadFileLines</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-183">loadFileLines</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;filePathToLoad)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-184">loadFileLines</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;filePathToLoad)</span></div>
 <div class="block">Loading the content of <code>file</code> as list of lines,
 where each line is an element of returning <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a> of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a>.</div>
 <dl class="notes">
@@ -403,7 +404,7 @@ where each line is an element of returning <a href="https://docs.oracle.com/en/j
 <section class="detail" id="saveFileContent(java.io.File,java.lang.String)">
 <h3>saveFileContent</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-204">saveFileContent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToSave,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-205">saveFileContent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileToSave,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileContent)</span></div>
 <div class="block">Saving the content into the file <code>fileToSave</code> (if the file is not empty - it will be truncated).
 All missing parent directories will be created if necessary.</div>
@@ -421,10 +422,16 @@ All missing parent directories will be created if necessary.</div>
 <section class="detail" id="copyFile(java.io.File,java.io.File)">
 <h3>copyFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-223">copyFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;sourceFile,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-228">copyFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;sourceFile,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;targetFile)</span></div>
 <div class="block">Copy the file <code>sourceFile</code> to the file <code>targetFile</code>
-and creates all missing parent directories if necessary.</div>
+and creates all missing parent directories if necessary.
+An existing file is completely replaced.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>sourceFile</code> - the source file to copy</dd>
+<dd><code>targetFile</code> - the destination file to copy over into</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -432,7 +439,7 @@ and creates all missing parent directories if necessary.</div>
 <section class="detail" id="removePathSilent(java.nio.file.Path)">
 <h3>removePathSilent</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-254">removePathSilent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;pathToRemove)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-259">removePathSilent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;pathToRemove)</span></div>
 <div class="block">The same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Files.html#deleteIfExists(java.nio.file.Path)" title="class or interface in java.nio.file" class="external-link"><code>Files.deleteIfExists(Path)</code></a>, but ignore any kind of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>.
 <hr/>
 <u><i>Note:</i></u> For non-empty directory the method <a href="#removeSilent(java.io.File)"><code>removeSilent(File)</code></a> should be used,
@@ -450,7 +457,7 @@ because this method will always return <code>false</code> for non-empty director
 <section class="detail" id="removeSilent(java.io.File)">
 <h3>removeSilent</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-271">removeSilent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileOrDirToRemove)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/CoreFileUtils.html#line-276">removeSilent</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;fileOrDirToRemove)</span></div>
 <div class="block">Recursively removes either a single file or the whole directory and returns the number of removed items</div>
 <dl class="notes">
 <dt>Parameters:</dt>

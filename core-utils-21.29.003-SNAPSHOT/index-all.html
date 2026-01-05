@@ -173,6 +173,16 @@ into some dedicated text-resource, which are available in classpath at runtime.<
 <div class="block">Copy the file <code>sourceFile</code> to the file <code>targetFile</code>
 and creates all missing parent directories if necessary.</div>
 </dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html#copyResourceToDir(java.lang.String,java.io.File)" class="member-name-link">copyResourceToDir(String, File)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreResourceUtils</a></dt>
+<dd>
+<div class="block">Copy the classpath-resource by path <code>resourcePath</code> to the taget directory <code>targetDir</code>
+and creates all missing parent directories if necessary (including the target one).</div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html#copyResourceToFile(java.lang.String,java.io.File)" class="member-name-link">copyResourceToFile(String, File)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreResourceUtils</a></dt>
+<dd>
+<div class="block">Copy the classpath-resource by path <code>resourcePath</code> into the file <code>targetFile</code>
+and creates all missing parent directories if necessary.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreCollectors.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.utils">CoreCollectors</a> - Class in <a href="org/krmdemo/techlabs/core/utils/package-summary.html">org.krmdemo.techlabs.core.utils</a></dt>
 <dd>
 <div class="block">A factory of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html" title="class or interface in java.util.stream" class="external-link"><code>Collector</code></a>s that allows to collect the stream of values into linked or sorted sets
@@ -184,13 +194,22 @@ and the stream of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/ja
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreFileUtils.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a> - Class in <a href="org/krmdemo/techlabs/core/utils/package-summary.html">org.krmdemo.techlabs.core.utils</a></dt>
 <dd>
-<div class="block">Utility-class that invokes standard JDK utilities, but wraps <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>
+<div class="block">Utility-class to load, to save and to copy files,
+that invokes standard JDK utilities, but wraps <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>
 into <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a> and creates missing parent directories.</div>
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CorePropsUtils.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.utils">CorePropsUtils</a> - Class in <a href="org/krmdemo/techlabs/core/utils/package-summary.html">org.krmdemo.techlabs.core.utils</a></dt>
 <dd>
 <div class="block">Utility-class to work with properties of any Java-object (some extension to JDK's reflection)</div>
 </dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.utils">CoreResourceUtils</a> - Class in <a href="org/krmdemo/techlabs/core/utils/package-summary.html">org.krmdemo.techlabs.core.utils</a></dt>
+<dd>
+<div class="block">Utility-class to load the classpath-resources and copy them to the local file system,
+that invokes standard JDK utilities, but wraps <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>
+into <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a> and creates missing parent directories.</div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html#%3Cinit%3E()" class="member-name-link">CoreResourceUtils()</a> - Constructor for class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreResourceUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" class="type-name-link" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a> - Class in <a href="org/krmdemo/techlabs/core/utils/package-summary.html">org.krmdemo.techlabs.core.utils</a></dt>
 <dd>
 <div class="block">Utility-class that provides methods to transform the stream or var-args-arrays of values into linked or sorted sets
@@ -857,6 +876,8 @@ in <a href="org/krmdemo/techlabs/core/dump/render/Highlight.Target.html#TXT_ANSI
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html#jsonValueFromResource(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)" class="member-name-link">jsonValueFromResource(String, TypeReference)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html#jsonValueFromResource(java.lang.String,java.lang.Class)" class="member-name-link">jsonValueFromResource(String, Class)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html#jsonValueFromString(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)" class="member-name-link">jsonValueFromString(String, TypeReference)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html#jsonValueFromString(java.lang.String,com.fasterxml.jackson.databind.JavaType)" class="member-name-link">jsonValueFromString(String, JavaType)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></dt>
@@ -1364,6 +1385,19 @@ all methods in <a href="org/krmdemo/techlabs/core/dump/ObjectPrinter.html" title
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/render/RenderSpec.Feature.html" class="type-name-link" title="enum class in org.krmdemo.techlabs.core.dump.render">RenderSpec.Feature</a> - Enum Class in <a href="org/krmdemo/techlabs/core/dump/render/package-summary.html">org.krmdemo.techlabs.core.dump.render</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html#resourceAsText(java.lang.String)" class="member-name-link">resourceAsText(String)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreResourceUtils</a></dt>
+<dd>
+<div class="block">Loading the content of classpath-resource by path <code>file</code> as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a>
+(it's allowed to use for text-resources only) and throws <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a>
+if the resource could not be located or its content could not be loaded for any reason.</div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html#resourceAsTextList(java.lang.String...)" class="member-name-link">resourceAsTextList(String...)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreResourceUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html#resourceAsTextOpt(java.lang.String)" class="member-name-link">resourceAsTextOpt(String)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreResourceUtils</a></dt>
+<dd>
+<div class="block">Loading the content of classpath-resource by path <code>file</code> as <code>Optional&lt;String&gt;</code>,
+and the returned value is <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a> if the resource could not be loaded for any reason.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#reversed(int...)" class="member-name-link">reversed(int...)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html#reversed(java.util.List)" class="member-name-link">reversed(List)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></dt>

@@ -117,55 +117,62 @@ and the stream of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/ja
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="CoreFileUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreFileUtils</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Utility-class that invokes standard JDK utilities, but wraps <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>
+<div class="block">Utility-class to load, to save and to copy files,
+that invokes standard JDK utilities, but wraps <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>
 into <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a> and creates missing parent directories.</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="CorePropsUtils.html" title="class in org.krmdemo.techlabs.core.utils">CorePropsUtils</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Utility-class to work with properties of any Java-object (some extension to JDK's reflection)</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="CoreResourceUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreResourceUtils</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">Utility-class to load the classpath-resources and copy them to the local file system,
+that invokes standard JDK utilities, but wraps <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link"><code>IOException</code></a>
+into <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a> and creates missing parent directories.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="CoreStreamUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStreamUtils</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Utility-class that provides methods to transform the stream or var-args-arrays of values into linked or sorted sets
 and stream or var-args-arrays of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>entries</code></a> into linked or sorted map.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="CoreStringUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStringUtils</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="CoreStringUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStringUtils</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Utility-class to work with strings, words and characters
 (some extension to JDK and <code>StringUtils</code>)</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="CountingUtils.html" title="class in org.krmdemo.techlabs.core.utils">CountingUtils</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="CountingUtils.html" title="class in org.krmdemo.techlabs.core.utils">CountingUtils</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Utility-Class to build a counting-map from the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html" title="class or interface in java.util.stream" class="external-link"><code>Stream</code></a> of any objects
 that have properly implemented <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link"><code>Object.equals(Object)</code></a> and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link"><code>Object.hashCode()</code></a>
 (and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html#compareTo(T)" title="class or interface in java.lang" class="external-link"><code>for sorted counting-maps</code></a>).</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Utility class to serialize / de-serialize JSON-Objects and JSON-Arrays
 using <a href="https://github.com/FasterXML/jackson">Jackson Library</a>
 
 TODO: git rid of this class or move it to proper place !!!</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="JacksonUtils.AnyError.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils.AnyError</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">&nbsp;</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="JacksonUtils.JsonError.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils.JsonError</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="JacksonUtils.AnyError.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils.AnyError</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">&nbsp;</div>
-<div class="col-first odd-row-color class-summary class-summary-tab3"><a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab3">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="JacksonUtils.JsonError.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils.JsonError</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">&nbsp;</div>
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="MergeFunction.html" title="enum class in org.krmdemo.techlabs.core.utils">MergeFunction</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">
 <div class="block">This enumeration is used to handle the entries with the same <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html#getKey()" title="class or interface in java.util" class="external-link"><code>key</code></a>,
 when the stream of <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>entries</code></a> are collected into linked map or sorted map.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="PropertiesUtils.html" title="class in org.krmdemo.techlabs.core.utils">PropertiesUtils</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="PropertiesUtils.html" title="class in org.krmdemo.techlabs.core.utils">PropertiesUtils</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Utility-class that simplifies the access to the content of any properties-files at file-system or in classpath.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="RandomHelper.html" title="class in org.krmdemo.techlabs.core.utils">RandomHelper</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Helper-wrapper over standard <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Random.html" title="class or interface in java.util" class="external-link"><code>Random</code></a> to generate random arrays and strings</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="SysDumpUtils.html" title="class in org.krmdemo.techlabs.core.utils">SysDumpUtils</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="SysDumpUtils.html" title="class in org.krmdemo.techlabs.core.utils">SysDumpUtils</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">TODO: provide the comprehensive Java-Doc and reuse <a href="../dump/ObjectPrinter.html" title="interface in org.krmdemo.techlabs.core.dump"><code>ObjectPrinter</code></a> !!!</div>
 </div>
 </div>

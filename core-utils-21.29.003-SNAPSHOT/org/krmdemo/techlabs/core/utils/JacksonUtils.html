@@ -81,6 +81,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#jsonObjFromString(java.lang.String)" tabindex="0">jsonObjFromString(String)</a></li>
 <li><a href="#jsonArrFromString(java.lang.String)" tabindex="0">jsonArrFromString(String)</a></li>
 <li><a href="#jsonTreeFromResource(java.lang.String)" tabindex="0">jsonTreeFromResource(String)</a></li>
+<li><a href="#jsonValueFromResource(java.lang.String,java.lang.Class)" tabindex="0">jsonValueFromResource(String, Class)</a></li>
 <li><a href="#jsonValueFromResource(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)" tabindex="0">jsonValueFromResource(String, TypeReference)</a></li>
 <li><a href="#jsonObjFromResource(java.lang.String)" tabindex="0">jsonObjFromResource(String)</a></li>
 <li><a href="#jsonArrFromResource(java.lang.String)" tabindex="0">jsonArrFromResource(String)</a></li>
@@ -194,13 +195,17 @@ TODO: git rid of this class or move it to proper place !!!</div>
  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#jsonValueFromString(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)" class="member-name-link">jsonValueFromString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent,
- com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#jsonValueFromResource(java.lang.String,java.lang.Class)" class="member-name-link">jsonValueFromResource</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;classValue)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#jsonValueFromString(java.lang.String,com.fasterxml.jackson.databind.JavaType)" class="member-name-link">jsonValueFromString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent,
- com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#jsonValueFromString(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)" class="member-name-link">jsonValueFromString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent,
+ com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#jsonValueFromString(java.lang.String,com.fasterxml.jackson.databind.JavaType)" class="member-name-link">jsonValueFromString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent,
+ com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -285,10 +290,19 @@ TODO: git rid of this class or move it to proper place !!!</div>
 </section>
 </li>
 <li>
-<section class="detail" id="jsonValueFromResource(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)">
+<section class="detail" id="jsonValueFromResource(java.lang.String,java.lang.Class)">
 <h3>jsonValueFromResource</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-127">jsonValueFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;classValue)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="jsonValueFromResource(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)">
+<h3>jsonValueFromResource</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-139">jsonValueFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</span></div>
 </div>
 </section>
@@ -297,7 +311,7 @@ TODO: git rid of this class or move it to proper place !!!</div>
 <section class="detail" id="jsonObjFromResource(java.lang.String)">
 <h3>jsonObjFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-141">jsonObjFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-155">jsonObjFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
@@ -311,7 +325,7 @@ TODO: git rid of this class or move it to proper place !!!</div>
 <section class="detail" id="jsonArrFromResource(java.lang.String)">
 <h3>jsonArrFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-150">jsonArrFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-164">jsonArrFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
@@ -325,7 +339,7 @@ TODO: git rid of this class or move it to proper place !!!</div>
 <section class="detail" id="jsonTreeFromFile(java.io.File)">
 <h3>jsonTreeFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonNode</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-159">jsonTreeFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonNode</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-173">jsonTreeFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>jsonFile</code> - a file that contains JSON-value</dd>
@@ -339,7 +353,7 @@ TODO: git rid of this class or move it to proper place !!!</div>
 <section class="detail" id="jsonValueFromFile(java.io.File,com.fasterxml.jackson.core.type.TypeReference)">
 <h3>jsonValueFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-174">jsonValueFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-188">jsonValueFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile,
  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</span></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
@@ -357,7 +371,7 @@ TODO: git rid of this class or move it to proper place !!!</div>
 <section class="detail" id="jsonObjFromFile(java.io.File)">
 <h3>jsonObjFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-187">jsonObjFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-201">jsonObjFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>jsonFile</code> - a file that contains JSON-Object</dd>
@@ -371,7 +385,7 @@ TODO: git rid of this class or move it to proper place !!!</div>
 <section class="detail" id="jsonArrFromFile(java.io.File)">
 <h3>jsonArrFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-196">jsonArrFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-210">jsonArrFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>jsonFile</code> - a file that contains JSON-Array</dd>
