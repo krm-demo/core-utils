@@ -124,13 +124,27 @@ public class JacksonUtils {
         }
     }
 
+    public static <T> T jsonValueFromResource(String resourcePath, Class<T> classValue) {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {
+            return OBJECT_MAPPER_DUMP.readValue(resourceStream, classValue);
+        } catch (IOException ioEx) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "could not load the value of class <%s> from resource by path '%s'",
+                    classValue, resourcePath), ioEx);
+        }
+    }
+
     public static <T> T jsonValueFromResource(String resourcePath, TypeReference<T> typeRef) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {
             return OBJECT_MAPPER_DUMP.readValue(resourceStream, typeRef);
         } catch (IOException ioEx) {
             throw new IllegalArgumentException(
-                String.format("could not load <%s> from resource by path '%s'", typeRef, resourcePath), ioEx);
+                String.format(
+                    "could not load the value of type <%s> from resource by path '%s'",
+                    typeRef, resourcePath), ioEx);
         }
     }
 

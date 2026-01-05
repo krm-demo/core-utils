@@ -63,7 +63,7 @@ public class CoreFileUtilsTest {
     @Test
     @Order(2) // <-- here we assumed that test-file has been already created
     @DisplayName("Checking CoreFileUtils.copyFile(...)")
-    void testCopy(TestInfo testInfo) {
+    void testCopy() {
         final File fileSource = PATH_TO_SAVE.toFile();
         final File fileTarget = PATH_TO_COPY.toFile();
         copyFile(fileSource, fileTarget);

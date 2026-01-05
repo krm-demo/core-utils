@@ -17,7 +17,8 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 /**
- * Utility-class that invokes standard JDK utilities, but wraps {@link java.io.IOException}
+ * Utility-class to load, to save and to copy files,
+ * that invokes standard JDK utilities, but wraps {@link java.io.IOException}
  * into {@link IllegalStateException} and creates missing parent directories.
  */
 public class CoreFileUtils {
@@ -219,6 +220,10 @@ public class CoreFileUtils {
     /**
      * Copy the file {@code sourceFile} to the file {@code targetFile}
      * and creates all missing parent directories if necessary.
+     * An existing file is completely replaced.
+     *
+     * @param sourceFile the source file to copy
+     * @param targetFile the destination file to copy over into
      */
     public static void copyFile(File sourceFile, File targetFile) {
         if (sourceFile == null || !sourceFile.isFile()) {
@@ -228,7 +233,7 @@ public class CoreFileUtils {
         }
         if (targetFile == null) {
             throw new IllegalStateException(String.format(
-                "could not copy the file '%s' because target file is null", sourceFile));
+                "could not copy the file '%s' because the target file is null", sourceFile));
         }
         try {
             if (targetFile.getParentFile() != null) {
