@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JacksonUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">JacksonUtils.java</span></div><h1>JacksonUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.PrettyPrinter;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.util.DefaultIndenter;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
+/**
+ * Utility class to serialize / de-serialize JSON-Objects and JSON-Arrays
+ * using &lt;a href=&quot;https://github.com/FasterXML/jackson&quot;&gt;Jackson Library&lt;/a&gt;
+ * &lt;hr/&gt;
+ * TODO: git rid of this class or move it to proper place !!!
+ *
+ * @see &lt;a href=&quot;https://github.com/FasterXML/jackson-docs&quot;&gt;
+ *     Jackson Library Documentation
+ * &lt;/a&gt;
+ */
+<span class="fc" id="L43">@Slf4j</span>
+public class JacksonUtils {
+
+    @Getter
+    @ToString
+    @JsonInclude(Include.NON_EMPTY)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class AnyError {
+        private final String exceptionClass;
+        private final String message;
+        private final List&lt;String&gt; stackTrace;
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        public AnyError(@NonNull Exception ex) {</span>
+<span class="fc" id="L55">            this.exceptionClass = ex.getClass().getName();</span>
+<span class="fc" id="L56">            this.message = ex.getMessage();</span>
+<span class="fc" id="L57">            this.stackTrace = ExceptionUtils.getRootCauseStackTraceList(ex);</span>
+<span class="fc" id="L58">        }</span>
+    }
+
+    @Getter @ToString
+    @JsonInclude(Include.NON_EMPTY)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class JsonError extends AnyError {
+        private final String originalMessage;
+        private final String location;
+        public JsonError(JsonProcessingException jsonEx) {
+<span class="nc" id="L68">            super(jsonEx);</span>
+<span class="nc" id="L69">            this.originalMessage = jsonEx.getOriginalMessage();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">            this.location = jsonEx.getLocation() == null ? &quot;&quot; : jsonEx.getLocation().toString();</span>
+<span class="nc" id="L71">        }</span>
+    }
+
+<span class="fc" id="L74">    public static AnyError errorFrom(Exception ex) { return new AnyError(ex); }</span>
+<span class="nc" id="L75">    public static JsonError errorFrom(JsonProcessingException jsonEx) { return new JsonError(jsonEx); }</span>
+
+<span class="fc" id="L77">    private static final ObjectMapper OBJECT_MAPPER_DUMP =</span>
+        new ObjectMapper()
+<span class="fc" id="L79">            .registerModule(new JavaTimeModule())</span>
+<span class="fc" id="L80">            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)</span>
+<span class="fc" id="L81">            .enable(SerializationFeature.INDENT_OUTPUT);</span>
+
+    public static JsonNode jsonTreeFromString(String jsonContent) {
+        try {
+<span class="fc" id="L85">            return OBJECT_MAPPER_DUMP.readTree(jsonContent);</span>
+<span class="nc" id="L86">        } catch (JsonProcessingException jsonEx) {</span>
+<span class="nc" id="L87">            throw new IllegalArgumentException(String.format(</span>
+                &quot;could not read the JSON-Tree:%n---%n'%s'%n---%n&quot;, jsonContent), jsonEx);
+        }
+    }
+
+    public static &lt;T&gt; T jsonValueFromString(String jsonContent, TypeReference&lt;T&gt; typeRef) {
+        try {
+<span class="fc" id="L94">            return OBJECT_MAPPER_DUMP.readValue(jsonContent, typeRef);</span>
+<span class="nc" id="L95">        } catch (JsonProcessingException jsonEx) {</span>
+<span class="nc" id="L96">            throw new IllegalArgumentException(String.format(</span>
+                &quot;could not read by type-ref &lt;%s&gt;:%n---%n'%s'%n---%n&quot;, typeRef, jsonContent), jsonEx);
+        }
+    }
+
+    public static &lt;T&gt; T jsonValueFromString(String jsonContent, JavaType javaType) {
+        try {
+<span class="fc" id="L103">            return OBJECT_MAPPER_DUMP.readValue(jsonContent, javaType);</span>
+<span class="nc" id="L104">        } catch (JsonProcessingException jsonEx) {</span>
+<span class="nc" id="L105">            throw new IllegalArgumentException(String.format(</span>
+                &quot;could not read by java-type &lt;%s&gt;:%n---%n'%s'%n---%n&quot;, javaType, jsonContent), jsonEx);
+        }
+    }
+
+    public static Map&lt;String, Object&gt; jsonObjFromString(String jsonContent) {
+        // automatic casting to &quot;java.util.Map&quot; looks like a magic
+<span class="fc" id="L112">        return jsonValueFromString(jsonContent, new TypeReference&lt;&gt;(){});</span>
+    }
+
+    public static List&lt;Object&gt; jsonArrFromString(String jsonContent) {
+        // automatic casting to &quot;java.util.List&quot; looks like a magic
+<span class="fc" id="L117">        return jsonValueFromString(jsonContent, new TypeReference&lt;&gt;(){});</span>
+    }
+
+    public static JsonNode jsonTreeFromResource(String resourcePath) {
+<span class="fc" id="L121">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
+<span class="fc" id="L122">        try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {</span>
+<span class="fc" id="L123">            return OBJECT_MAPPER_DUMP.readTree(resourceStream);</span>
+<span class="nc" id="L124">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L125">            throw new IllegalArgumentException(String.format(</span>
+                &quot;could not load the JSON-Tree from JSON-resource by path '%s'&quot;, resourcePath), ioEx);
+        }
+    }
+
+    public static &lt;T&gt; T jsonValueFromResource(String resourcePath, Class&lt;T&gt; classValue) {
+<span class="fc" id="L131">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
+<span class="fc" id="L132">        try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {</span>
+<span class="fc" id="L133">            return OBJECT_MAPPER_DUMP.readValue(resourceStream, classValue);</span>
+<span class="nc" id="L134">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L135">            throw new IllegalArgumentException(String.format(</span>
+                &quot;could not load the value of class &lt;%s&gt; from resource by path '%s'&quot;,
+                classValue, resourcePath), ioEx);
+        }
+    }
+
+    public static &lt;T&gt; T jsonValueFromResource(String resourcePath, TypeReference&lt;T&gt; typeRef) {
+<span class="fc" id="L142">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
+<span class="fc" id="L143">        try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {</span>
+<span class="fc" id="L144">            return OBJECT_MAPPER_DUMP.readValue(resourceStream, typeRef);</span>
+<span class="nc" id="L145">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L146">            throw new IllegalArgumentException(String.format(</span>
+                &quot;could not load the value of type &lt;%s&gt; from resource by path '%s'&quot;,
+                typeRef, resourcePath), ioEx);
+        }
+    }
+
+    public static &lt;T&gt; T jsonValueFromResource(String resourcePath, JavaType javaType) {
+<span class="fc" id="L153">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
+<span class="fc" id="L154">        try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {</span>
+<span class="fc" id="L155">            return OBJECT_MAPPER_DUMP.readValue(resourceStream, javaType);</span>
+<span class="nc" id="L156">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L157">            throw new IllegalArgumentException(String.format(</span>
+                &quot;could not load the value of java-type &lt;%s&gt; from resource by path '%s'&quot;,
+                javaType, resourcePath), ioEx);
+        }
+    }
+
+    /**
+     * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
+     * @return de-serialized JSON-Object as {@link Map}
+     */
+    public static Map&lt;String, Object&gt; jsonObjFromResource(String resourcePath) {
+        // automatic casting to &quot;java.util.Map&quot; looks like a magic
+<span class="fc" id="L169">        return jsonValueFromResource(resourcePath, new TypeReference&lt;&gt;(){});</span>
+    }
+
+    /**
+     * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
+     * @return de-serialized JSON-Array as {@link List}
+     */
+    public static List&lt;Object&gt; jsonArrFromResource(String resourcePath) {
+        // automatic casting to &quot;java.util.List&quot; looks like a magic
+<span class="fc" id="L178">        return jsonValueFromResource(resourcePath, new TypeReference&lt;&gt;(){});</span>
+    }
+
+    /**
+     * Loading the JSON-Array from resource with path {@code resourcePath} as {@code List&lt;T&gt;},
+     * where the type of elements is determined by passed {@code itemClass}.
+     *
+     * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
+     * @param itemClass the class of elements in returning list
+     * @return de-serialized JSON-Array as {@link List}
+     * @param &lt;T&gt; type of elements in returning list
+     */
+    public static &lt;T&gt; List&lt;T&gt; jsonArrFromResource(String resourcePath, Class&lt;T&gt; itemClass) {
+<span class="fc" id="L191">        JavaType listType = TypeFactory.defaultInstance().constructCollectionType(List.class, itemClass);</span>
+<span class="fc" id="L192">        return jsonValueFromResource(resourcePath, listType);</span>
+    }
+
+    /**
+     * Loading the JSON-Array from resource with path {@code resourcePath} as {@code List&lt;T&gt;},
+     * where the type of elements is determined by passed java-type {@code itemType}.
+     * &lt;hr/&gt;
+     * This method is similar to {@link #jsonArrFromResource(String, Class)}
+     * but it's mostly for dynamic cases, where no reference to concrete {@link Class}.
+     *
+     * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
+     * @param itemType the java-type of elements in returning list
+     * @return de-serialized JSON-Array as {@link List}
+     * @param &lt;T&gt; type of elements in returning list
+     */
+    public static &lt;T&gt; List&lt;T&gt; jsonArrFromResource(String resourcePath, JavaType itemType) {
+<span class="fc" id="L208">        JavaType listType = TypeFactory.defaultInstance().constructCollectionType(List.class, itemType);</span>
+<span class="fc" id="L209">        return jsonValueFromResource(resourcePath, listType);</span>
+    }
+
+    /**
+     * @param jsonFile a file that contains JSON-value
+     * @return the root node of de-serialized JSON-Tree
+     */
+    public static JsonNode jsonTreeFromFile(File jsonFile) {
+<span class="fc" id="L217">        try (FileInputStream resourceStream = new FileInputStream(jsonFile)) {</span>
+<span class="fc" id="L218">            return OBJECT_MAPPER_DUMP.readTree(resourceStream);</span>
+<span class="nc" id="L219">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L220">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L221">                String.format(&quot;could not load the JSON-Tree from JSON-file '%s'&quot;, jsonFile), ioEx);</span>
+        }
+    }
+
+    /**
+     * @param jsonFile a file that contains JSON-value
+     * @param typeRef a type-reference to cast the de-serialized object to
+     * @return de-serialized JSON-vlaue of type &lt;code&gt;T&lt;/code&gt;
+     * @param &lt;T&gt; the type to de-serialize the JSON-value to
+     */
+    public static &lt;T&gt; T jsonValueFromFile(File jsonFile, TypeReference&lt;T&gt; typeRef) {
+<span class="fc" id="L232">        try (FileInputStream resourceStream = new FileInputStream(jsonFile)) {</span>
+<span class="fc" id="L233">            return OBJECT_MAPPER_DUMP.readValue(resourceStream, typeRef);</span>
+<span class="nc" id="L234">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L235">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L236">                String.format(&quot;could not load &lt;%s&gt; from JSON-file '%s'&quot;, typeRef, jsonFile), ioEx);</span>
+        }
+    }
+
+    /**
+     * @param jsonFile a file that contains JSON-Object
+     * @return de-serialized JSON-Object as {@link Map}
+     */
+    public static Map&lt;String, Object&gt; jsonObjFromFile(File jsonFile) {
+        // automatic casting to &quot;java.util.Map&quot; looks like a magic
+<span class="fc" id="L246">        return jsonValueFromFile(jsonFile, new TypeReference&lt;&gt;(){});</span>
+    }
+
+    /**
+     * @param jsonFile a file that contains JSON-Array
+     * @return de-serialized JSON-Object as {@link List}
+     */
+    public static List&lt;Object&gt; jsonArrFromFile(File jsonFile) {
+        // automatic casting to &quot;java.util.List&quot; looks like a magic
+<span class="fc" id="L255">        return jsonValueFromFile(jsonFile, new TypeReference&lt;&gt;(){});</span>
+    }
+
+<span class="nc" id="L258">    private JacksonUtils() {</span>
+        // prohibit the creation of utility-class instance
+<span class="nc" id="L260">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CoreStringUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">CoreStringUtils.java</span></div><h1>CoreStringUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.krmdemo.techlabs.core.utils.CountingUtils.countingMap;
+
+/**
+ * Utility-class to work with strings, words and characters
+ * (some extension to JDK and {@link org.apache.commons.lang3.StringUtils})
+ */
+public class CoreStringUtils {
+
+    /**
+     * Just a short-cut of JDK-invocation: &lt;pre&gt;{@code
+     *     Collectors.joining(System.lineSeparator())
+     * }&lt;/pre&gt;
+     * @return the {@link Collector} that join the stream of strings with {@link System#lineSeparator()}
+     */
+    public static Collector&lt;CharSequence, ?, String&gt; multiLine() {
+<span class="fc" id="L27">        return Collectors.joining(System.lineSeparator());</span>
+    }
+
+    /**
+     * @param str a string (eventually {@link CharSequence} to get the stream of chars
+     * @return the stream of chars as {@link Stream Stream&amp;lt;Character&amp;gt;}
+     */
+    public static Stream&lt;Character&gt; streamChars(CharSequence str) {
+<span class="fc" id="L35">        return str.chars().mapToObj(ch -&gt; (char)ch);</span>
+    }
+
+    /**
+     * Count the characters in passed string
+     *
+     * @param str a string to count the characters (as {@link CharSequence}
+     * @return a counting-map of characters in passed {@code str}
+     */
+    public static Map&lt;Character, Integer&gt; countingCharsMap(CharSequence str) {
+<span class="fc" id="L45">        return countingMap(streamChars(str));</span>
+    }
+
+    /**
+     * Split the passed sentence on alphanumeric words
+     *
+     * @param sentence a string to sp[lit
+     * @return a {@link Stream Stream&amp;lt;String&amp;gt;} of alphanumeric words
+     */
+    public static Stream&lt;String&gt; splitWords(String sentence) {
+<span class="fc" id="L55">        return Arrays.stream(sentence.split(&quot;\\W&quot;))</span>
+<span class="fc" id="L56">            .map(String::trim)</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            .filter(word -&gt; !word.isEmpty());</span>
+    }
+
+    /**
+     * Split the passed sentence on alphanumeric words
+     *
+     * @param sentence a string to sp[lit
+     * @return a {@link List List&amp;lt;String&amp;gt;} of alphanumeric words
+     */
+    public static List&lt;String&gt; splitWordsList(String sentence) {
+<span class="fc" id="L67">        return splitWords(sentence).collect(Collectors.toList());</span>
+    }
+
+    /**
+     * The same as {@link Collectors#joining(CharSequence)} with empty delimiter,
+     * but the elements of string are concatenated in &lt;b&gt;reversed order&lt;/b&gt;.
+     * &lt;hr/&gt;
+     * &lt;u&gt;&lt;i&gt;Note:&lt;/i&gt;&lt;/u&gt; Not use for large streams, because  {@link StringBuilder#insert(int, Object)}
+     * is much slower than {@link StringBuilder#append(Object)} when the length of buffer is very big.
+     *
+     * @return the result as {@link CharSequence} (no extra copy of the result!)
+     * @param &lt;T&gt; the type of input elements to the reduction operation
+     */
+    public static &lt;T&gt; Collector&lt;T, ?, CharSequence&gt; joiningReversed() {
+<span class="fc" id="L81">        return joiningReversed(&quot;&quot;);</span>
+    }
+
+    /**
+     * The same as {@link Collectors#joining(CharSequence)},
+     * but the elements of string are concatenated in &lt;b&gt;reversed order&lt;/b&gt;.
+     * &lt;hr/&gt;
+     * &lt;u&gt;&lt;i&gt;Note:&lt;/i&gt;&lt;/u&gt; Not use for large streams, because  {@link StringBuilder#insert(int, Object)}
+     * is much slower than {@link StringBuilder#append(Object)} when the length of buffer is very big.
+     *
+     * @return the result as {@link CharSequence} (no extra copy of the result!)
+     * @param &lt;T&gt; the type of input elements to the reduction operation
+     */
+    public static &lt;T&gt; Collector&lt;T, ?, CharSequence&gt; joiningReversed(String delimiter) {
+<span class="fc" id="L95">        return joiningReversed(delimiter, &quot;&quot;, &quot;&quot;);</span>
+    }
+
+    /**
+     * The same as {@link Collectors#joining(CharSequence, CharSequence, CharSequence)},
+     * but the elements of string are concatenated in &lt;b&gt;reversed order&lt;/b&gt;.
+     * &lt;hr/&gt;
+     * &lt;u&gt;&lt;i&gt;Note:&lt;/i&gt;&lt;/u&gt; Not use for large streams, because  {@link StringBuilder#insert(int, Object)}
+     * is much slower than {@link StringBuilder#append(Object)} when the length of buffer is very big.
+     *
+     * @return the result as {@link CharSequence} (no extra copy of the result!)
+     * @param &lt;T&gt; the type of input elements to the reduction operation
+     */
+    public static &lt;T&gt; Collector&lt;T, ?, CharSequence&gt; joiningReversed(String delimiter, String prefix, String suffix) {
+<span class="fc" id="L109">        return Collector.of(</span>
+            StringBuilder::new,
+            (sb, value) -&gt; {
+<span class="fc bfc" id="L112" title="All 4 branches covered.">                if (!sb.isEmpty() &amp;&amp; !delimiter.isEmpty()) {</span>
+<span class="fc" id="L113">                    sb.insert(0, delimiter);</span>
+                }
+<span class="fc" id="L115">                sb.insert(0, value);</span>
+<span class="fc" id="L116">            },</span>
+            (left, right) -&gt; { // the combiner is required for parallel streams
+<span class="fc" id="L118">                right.append(delimiter).append(left); return right;</span>
+            },
+<span class="fc" id="L120">            sb -&gt; sb.insert(0, prefix).append(suffix)</span>
+        );
+    }
+
+    /**
+     * This method could be used to check whether the multi-line output ends with {@link System#lineSeparator() new-line}-symbol(s),
+     * because ib most cases it's quite impossible to realize that fact visually (unless using different background).
+     * &lt;hr/&gt;
+     * TODO: introduce a method to detect extra white-spaces before new-line like {@code git-diff} is doing
+     *
+     * @param str the string to check
+     * @return {@code true} if the passed line is not empty, and it does not end with {@link System#lineSeparator() new-line}-symbol(s)
+     */
+    public static boolean hasNoNewLineAtTheEnd(String str) {
+<span class="fc bfc" id="L134" title="All 4 branches covered.">        return StringUtils.isNotEmpty(str) &amp;&amp; !str.endsWith(System.lineSeparator());</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+<span class="fc" id="L139">    private CoreStringUtils() {</span>
+        // prohibit the creation of utility-class instance
+<span class="fc" id="L141">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

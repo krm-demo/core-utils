@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BuildInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.buildinfo</a> &gt; <span class="el_source">BuildInfo.java</span></div><h1>BuildInfo.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.buildinfo;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.krmdemo.techlabs.core.datetime.DateTimeTriplet;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.NavigableMap;
+
+/**
+ * This interface represents the build-information that is usually collected by build-tool
+ * into some dedicated text-resource, which are available in classpath at runtime.
+ */
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonPropertyOrder({
+    &quot;maven-coordinates&quot;,
+    &quot;resource-path&quot;,
+    &quot;build-date-time&quot;,
+    &quot;project-group&quot;,
+    &quot;project-artifact&quot;,
+    &quot;project-version&quot;,
+    &quot;minimal-jdk-version&quot;,
+    &quot;loading-errors&quot;,
+})
+public interface BuildInfo {
+
+    /**
+     * The path to resource that is used to represent the build-information
+     *
+     * @return either resource-path or any other reference to realize which resource was used for build-info
+     */
+    @JsonGetter(&quot;resource-path&quot;)
+    String getResourcePath();
+
+    /**
+     * Getting a sorted map of build-information properties (not dumped by default).
+     *
+     * @return build-information properties as {@link NavigableMap NavigableMap&amp;lt;String,String&amp;gt;}
+     */
+    @JsonIgnore
+    NavigableMap&lt;String, String&gt; getProjectProps();
+
+    /**
+     * Getting the value of maven-project group ({@code &lt;groupId&gt;}-tag in {@code pom.xml}),
+     * which must also be a part of {@link #getResourcePath() resource-path}.
+     *
+     * @return the value of maven-project group ({@code &lt;groupId&gt;}-tag in {@code pom.xml})
+     */
+    @JsonGetter(&quot;project-group&quot;)
+    String getProjectGroup();
+
+    /**
+     * Getting the value of maven-project artifact ({@code &lt;artifactId&gt;}-tag in {@code pom.xml}),
+     * which must also be a part of {@link #getResourcePath() resource-path}.
+     *
+     * @return the value of maven-project group ({@code &lt;artifactId&gt;}-tag in {@code pom.xml})
+     */
+    @JsonGetter(&quot;project-artifact&quot;)
+    String getProjectArtifact();
+
+    /**
+     * Getting the value of maven-project version ({@code &lt;version&gt;}-tag in {@code pom.xml}),
+     * which must also be a value of corresponding &lt;b&gt;{@code git}&lt;/b&gt;-tag in {@code git}-repository.
+     *
+     * @return the value of maven-project group ({@code &lt;artifactId&gt;}-tag in {@code pom.xml})
+     */
+    @JsonGetter(&quot;project-version&quot;)
+    String getProjectVersion();
+
+    /**
+     * Getting the maven-coordinates - the colon({@code ':'})-separated {@link #getProjectGroup() project-group},
+     * {@link #getProjectArtifact() project-artifact} and {@link #getProjectVersion() project-version},
+     * which is also a &lt;a href=&quot;https://gradle.org/&quot;&gt;Gradle&lt;/a&gt;-style identifier of any project and library.
+     *
+     * @return colon({@code ':'})-separated {@link #getProjectGroup() project-group},
+     *         {@link #getProjectArtifact() project-artifact} and {@link #getProjectVersion() project-version}
+     */
+    @JsonGetter(&quot;maven-coordinates&quot;)
+    default String getMavenCoordinates() {
+<span class="fc" id="L83">        return getProjectGroup() + &quot;:&quot; + getProjectArtifact() + &quot;:&quot; + getProjectVersion();</span>
+    }
+
+    /**
+     * Getting the date-time when the project was built as {@link DateTimeTriplet}.
+     *
+     * @return the data-time, when the build was made, as {@link DateTimeTriplet}
+     */
+    @JsonIgnore
+    DateTimeTriplet getBuildDateTime();
+
+    /**
+     * Getting the build date-time without information about day of week,
+     * because in some cases the information about the day of week is not desired.
+     *
+     * @return formatted build date-time without information about day of week
+     */
+    @JsonGetter(&quot;build-date-time&quot;)
+    default String getBuildDateTimeStr() {
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        return getBuildDateTime() == null ? null : getBuildDateTime().dumpNoWeek();</span>
+    }
+
+    /**
+     * Getting the minimal supported version of JDK, where this library could be used
+     *
+     * @return minimal version of JDK, where this library could be used
+     */
+    @JsonGetter(&quot;minimal-java-version&quot;)
+    String getMinimalJavaVersion();
+
+    /**
+     * Getting the list of loading-errors that was happened on constructing the instance of this object.
+     * In normal scenario such list &lt;u&gt;must be empty!&lt;/u&gt;
+     *
+     * @return if not empty - the list of errors that were discovered when loading the resource-content
+     */
+    @JsonGetter(&quot;loading-errors&quot;)
+    default List&lt;String&gt; getLoadingErrors() {
+<span class="nc" id="L121">        return Collections.emptyList();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
