@@ -299,6 +299,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.krmdemo.techlabs.core.dump.render.Highlight;
 import org.krmdemo.techlabs.core.dump.render.RenderSpec;
+import org.krmdemo.techlabs.core.model.Angle;
 import picocli.CommandLine.Help.Ansi;
 
 import java.io.IOException;
@@ -391,49 +392,6 @@ public class ObjectPrinterTest {
         verifyRendered(sortedSetMyBools, testInfo.getTestMethod().orElseThrow(), "sortedSetMyBools");
 
         System.out.printf("... %s (finished). ...%n", testInfo.getDisplayName());
-    }
-
-    /**
-     * An example of Java-record to demonstrate the usage of Jackson-annotations
-     * &lt;hr/&gt;
-     * The annotation {@link JsonPropertyOrder} is necessary to guarantee the same predefined dump,
-     * which could be un-predictable at different version of JVM if not specified.
-     *
-     * @param degrees an integer value of angle in degrees
-     * @param radians a floating-point value of angle in radians
-     */
-    @JsonPropertyOrder({"degrees", "radians", "formula-sinus", "formula-cosinus", "formulas-result-map"})
-    record Angle(int degrees, double radians) {
-        /**
-         * @param partOfCircle a part of circle (which is better to be a divisor of {@code 360})
-         */
-        Angle(int partOfCircle) {
-            this (360 / partOfCircle, 2 * Math.PI / partOfCircle);
-        }
-        double sinusValue() {
-            return cleanupError(Math.sin(radians));
-        }
-        double cosinusValue() {
-            return cleanupError(Math.cos(radians));
-        }
-
-        @JsonGetter("formula-sinus")
-        String formulaSinus() {
-            return String.format("sin(%d°) = sin(~%.3f) = %.4f", degrees, radians, sinusValue());
-        }
-
-        @JsonGetter("formula-cosinus")
-        String formulaCosinus() {
-            return String.format("cos(%d°) = cos(~%.3f) = %.4f", degrees, radians, cosinusValue());
-        }
-
-        @JsonGetter("formulas-result-map")
-        Map&lt;String, Double&gt; formulasMap() {
-            return linkedMap(
-                nameValue("sin", sinusValue()),
-                nameValue("cos", cosinusValue())
-            );
-        }
     }
 
     private final Angle[] anglesArr = IntStream.of(2, 3, 4, 6, 8, 9, 12, 18)
@@ -605,15 +563,6 @@ public class ObjectPrinterTest {
                 "could not read the content of resource '%s' for class %s",
                 resourcePathStr, getClass().getSimpleName()), ioEx);
         }
-    }
-
-    /**
-     * @param originalValue original value to clean up the error of
-     * @return the value without error (rounding to &lt;b&gt;{@code 12}&lt;/b&gt; digits after floating-point)
-     */
-    private static double cleanupError(double originalValue) {
-        double factor = Math.pow(10, 12);
-        return Math.round(originalValue * factor) / factor;
     }
 
     private final static String SYS_PROP_PICOCLI_ANSI = "picocli.ansi";
