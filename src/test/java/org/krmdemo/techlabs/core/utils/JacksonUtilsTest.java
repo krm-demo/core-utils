@@ -5,23 +5,129 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.FieldSource;
 import org.krmdemo.techlabs.core.dump.DumpUtils;
+import org.krmdemo.techlabs.core.model.Angle;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 import java.util.SequencedSet;
+import java.util.stream.StreamSupport;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toLinkedMap;
 
 /**
  * A unit-test to verify the utility-class {@link JacksonUtils}
  */
 public class JacksonUtilsTest {
+
+    private static final String RESOURCE_PATH__SINGE_RECORD =
+        "org/krmdemo/techlabs/core/dump/testSingleRecord/testSingleRecord--expected.json";
+
+    @Test
+    void testSingleResource_JsonTree() {
+        JsonNode jsonRoot = JacksonUtils.jsonTreeFromResource(RESOURCE_PATH__SINGE_RECORD);
+        assertThat(jsonRoot.getNodeType()).isEqualTo(JsonNodeType.OBJECT);
+        assertThat(jsonRoot.get("degrees").asInt()).isEqualTo(40);
+        assertThat(jsonRoot.get("radians").asDouble()).isEqualTo(0.6981317007977318);
+        assertThat(jsonRoot.get("formulas-result-map").get("sin").asDouble())
+            .isEqualTo(0.642787609687);
+
+        JsonNode jsonRootFromString = JacksonUtils.jsonTreeFromString(
+            CoreResourceUtils.resourceAsText(RESOURCE_PATH__SINGE_RECORD)
+        );
+        assertThat(jsonRootFromString).isEqualTo(jsonRoot);
+    }
+
+    @Test
+    void testSingleResource_JsonObj() {
+        Map<String, Object> jsonObj = JacksonUtils.jsonObjFromResource(RESOURCE_PATH__SINGE_RECORD);
+        assertThat(jsonObj).containsEntry("degrees", "40");
+        assertThat(jsonObj).containsEntry("radians", "0.6981317007977318");
+        @SuppressWarnings("unchecked") Map<String, Object> resultMap =
+            (Map<String, Object>) jsonObj.get("formulas-result-map");
+        assertThat(resultMap).containsEntry("sin", "0.642787609687");
+
+        Map<String, Object> jsonObjFromString = JacksonUtils.jsonObjFromString(
+            CoreResourceUtils.resourceAsText(RESOURCE_PATH__SINGE_RECORD)
+        );
+        assertThat(jsonObjFromString).isEqualTo(jsonObj);
+    }
+
+    @Test
+    void testSingleResource_JsonValue_Class() {
+        Angle angle =  JacksonUtils.jsonValueFromResource(RESOURCE_PATH__SINGE_RECORD, Angle.class);
+        assertThat(angle.degrees()).isEqualTo(40);
+        assertThat(angle.radians()).isEqualTo(0.6981317007977318);
+        assertThat(angle.formulasMap()).containsEntry("sin", 0.642787609687);
+    }
+
+    @Test
+    void testSingleResource_JsonValue_TypeReference() {
+        Angle angle = JacksonUtils.jsonValueFromResource(RESOURCE_PATH__SINGE_RECORD, new TypeReference<>(){});
+        assertThat(angle.degrees()).isEqualTo(40);
+        assertThat(angle.radians()).isEqualTo(0.6981317007977318);
+        assertThat(angle.formulasMap()).containsEntry("sin", 0.642787609687);
+    }
+
+    private static final String RESOURCE_PATH__ARRAY_OF_RECORDS =
+        "org/krmdemo/techlabs/core/dump/testArrayOfRecords/testArrayOfRecords--expected.json";
+
+    @Test
+    void testArrayResource_JsonTree() {
+        JsonNode jsonArr = JacksonUtils.jsonTreeFromResource(RESOURCE_PATH__ARRAY_OF_RECORDS);
+        assertThat(jsonArr.getNodeType()).isEqualTo(JsonNodeType.ARRAY);
+        assertThat(jsonArr.size()).isEqualTo(8);
+        List<Integer> degrees = StreamSupport.stream(jsonArr.spliterator(), false)
+            .map(childNode -> childNode.get("degrees").asInt())
+            .toList();
+        assertThat(degrees).containsExactly(180, 120, 90, 60, 45, 40, 30, 20);
+    }
+
+    @Test
+    void testArrayResource_JsonArr() {
+        List<Object> listObj = JacksonUtils.jsonArrFromResource(RESOURCE_PATH__ARRAY_OF_RECORDS);
+        assertThat(listObj).hasSize(8);
+        List<Integer> degrees = listObj.stream()
+            .map(Map.class::cast)
+            .map(childMap -> childMap.get("degrees"))
+            .map(elem -> Integer.valueOf("" + elem))
+            .toList();
+        assertThat(degrees).containsExactly(180, 120, 90, 60, 45, 40, 30, 20);
+    }
+
+    @Test
+    void testArrayResource_JsonValue_TypeReference() {
+        List<Angle> anglesList = JacksonUtils.jsonValueFromResource(RESOURCE_PATH__ARRAY_OF_RECORDS, new TypeReference<>(){});
+        assertThat(anglesList).hasSize(8);
+        List<Integer> degrees = anglesList.stream().map(Angle::degrees).toList();
+        assertThat(degrees).containsExactly(180, 120, 90, 60, 45, 40, 30, 20);
+    }
+
+    @Test
+    void testArrayResource_JsonArr_Class() {
+        List<Angle> anglesList = JacksonUtils.jsonArrFromResource(RESOURCE_PATH__ARRAY_OF_RECORDS, Angle.class);
+        assertThat(anglesList).hasSize(8);
+        List<Integer> degrees = anglesList.stream().map(Angle::degrees).toList();
+        assertThat(degrees).containsExactly(180, 120, 90, 60, 45, 40, 30, 20);
+    }
+
+    @Test
+    void testArrayResource_JsonArr_JavaType() {
+        JavaType listType = TypeFactory.defaultInstance().constructType(Angle.class);
+        List<Angle> anglesList = JacksonUtils.jsonArrFromResource(RESOURCE_PATH__ARRAY_OF_RECORDS, listType);
+        assertThat(anglesList).hasSize(8);
+        List<Integer> degrees = anglesList.stream().map(Angle::degrees).toList();
+        assertThat(degrees).containsExactly(180, 120, 90, 60, 45, 40, 30, 20);
+    }
 
     @Test
     void testStaticLoad_List_PropsA() {

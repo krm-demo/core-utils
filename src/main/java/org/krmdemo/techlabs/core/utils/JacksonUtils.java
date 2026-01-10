@@ -8,10 +8,12 @@ import com.fasterxml.jackson.core.PrettyPrinter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Getter;
 import lombok.NonNull;
@@ -75,14 +77,15 @@ public class JacksonUtils {
     private static final ObjectMapper OBJECT_MAPPER_DUMP =
         new ObjectMapper()
             .registerModule(new JavaTimeModule())
+            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
             .enable(SerializationFeature.INDENT_OUTPUT);
 
     public static JsonNode jsonTreeFromString(String jsonContent) {
         try {
             return OBJECT_MAPPER_DUMP.readTree(jsonContent);
         } catch (JsonProcessingException jsonEx) {
-            throw new IllegalArgumentException(
-                String.format("could not read the JSON-Tree:%n---%n'%s'%n---%n", jsonContent), jsonEx);
+            throw new IllegalArgumentException(String.format(
+                "could not read the JSON-Tree:%n---%n'%s'%n---%n", jsonContent), jsonEx);
         }
     }
 
@@ -90,8 +93,8 @@ public class JacksonUtils {
         try {
             return OBJECT_MAPPER_DUMP.readValue(jsonContent, typeRef);
         } catch (JsonProcessingException jsonEx) {
-            throw new IllegalArgumentException(
-                String.format("could not read by type-ref <%s>:%n---%n'%s'%n---%n", typeRef, jsonContent), jsonEx);
+            throw new IllegalArgumentException(String.format(
+                "could not read by type-ref <%s>:%n---%n'%s'%n---%n", typeRef, jsonContent), jsonEx);
         }
     }
 
@@ -99,8 +102,8 @@ public class JacksonUtils {
         try {
             return OBJECT_MAPPER_DUMP.readValue(jsonContent, javaType);
         } catch (JsonProcessingException jsonEx) {
-            throw new IllegalArgumentException(
-                String.format("could not read by java-type <%s>:%n---%n'%s'%n---%n", javaType, jsonContent), jsonEx);
+            throw new IllegalArgumentException(String.format(
+                "could not read by java-type <%s>:%n---%n'%s'%n---%n", javaType, jsonContent), jsonEx);
         }
     }
 
@@ -119,8 +122,8 @@ public class JacksonUtils {
         try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {
             return OBJECT_MAPPER_DUMP.readTree(resourceStream);
         } catch (IOException ioEx) {
-            throw new IllegalArgumentException(
-                String.format("could not load the JSON-Tree from JSON-resource by path '%s'", resourcePath), ioEx);
+            throw new IllegalArgumentException(String.format(
+                "could not load the JSON-Tree from JSON-resource by path '%s'", resourcePath), ioEx);
         }
     }
 
@@ -129,10 +132,9 @@ public class JacksonUtils {
         try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {
             return OBJECT_MAPPER_DUMP.readValue(resourceStream, classValue);
         } catch (IOException ioEx) {
-            throw new IllegalArgumentException(
-                String.format(
-                    "could not load the value of class <%s> from resource by path '%s'",
-                    classValue, resourcePath), ioEx);
+            throw new IllegalArgumentException(String.format(
+                "could not load the value of class <%s> from resource by path '%s'",
+                classValue, resourcePath), ioEx);
         }
     }
 
@@ -141,10 +143,20 @@ public class JacksonUtils {
         try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {
             return OBJECT_MAPPER_DUMP.readValue(resourceStream, typeRef);
         } catch (IOException ioEx) {
-            throw new IllegalArgumentException(
-                String.format(
-                    "could not load the value of type <%s> from resource by path '%s'",
-                    typeRef, resourcePath), ioEx);
+            throw new IllegalArgumentException(String.format(
+                "could not load the value of type <%s> from resource by path '%s'",
+                typeRef, resourcePath), ioEx);
+        }
+    }
+
+    public static <T> T jsonValueFromResource(String resourcePath, JavaType javaType) {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {
+            return OBJECT_MAPPER_DUMP.readValue(resourceStream, javaType);
+        } catch (IOException ioEx) {
+            throw new IllegalArgumentException(String.format(
+                "could not load the value of java-type <%s> from resource by path '%s'",
+                javaType, resourcePath), ioEx);
         }
     }
 
@@ -159,11 +171,42 @@ public class JacksonUtils {
 
     /**
      * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
-     * @return de-serialized JSON-Object as {@link List}
+     * @return de-serialized JSON-Array as {@link List}
      */
     public static List<Object> jsonArrFromResource(String resourcePath) {
         // automatic casting to "java.util.List" looks like a magic
         return jsonValueFromResource(resourcePath, new TypeReference<>(){});
+    }
+
+    /**
+     * Loading the JSON-Array from resource with path {@code resourcePath} as {@code List<T>},
+     * where the type of elements is determined by passed {@code itemClass}.
+     *
+     * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
+     * @param itemClass the class of elements in returning list
+     * @return de-serialized JSON-Array as {@link List}
+     * @param <T> type of elements in returning list
+     */
+    public static <T> List<T> jsonArrFromResource(String resourcePath, Class<T> itemClass) {
+        JavaType listType = TypeFactory.defaultInstance().constructCollectionType(List.class, itemClass);
+        return jsonValueFromResource(resourcePath, listType);
+    }
+
+    /**
+     * Loading the JSON-Array from resource with path {@code resourcePath} as {@code List<T>},
+     * where the type of elements is determined by passed java-type {@code itemType}.
+     * <hr/>
+     * This method is similar to {@link #jsonArrFromResource(String, Class)}
+     * but it's mostly for dynamic cases, where no reference to concrete {@link Class}.
+     *
+     * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
+     * @param itemType the java-type of elements in returning list
+     * @return de-serialized JSON-Array as {@link List}
+     * @param <T> type of elements in returning list
+     */
+    public static <T> List<T> jsonArrFromResource(String resourcePath, JavaType itemType) {
+        JavaType listType = TypeFactory.defaultInstance().constructCollectionType(List.class, itemType);
+        return jsonValueFromResource(resourcePath, listType);
     }
 
     /**
