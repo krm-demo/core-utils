@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,6 +18,53 @@ import static org.krmdemo.techlabs.core.utils.CountingUtils.countingMap;
  * (some extension to JDK and {@link org.apache.commons.lang3.StringUtils})
  */
 public class CoreStringUtils {
+
+    /**
+     * Quite the same as JDK's utility-method {@link Objects#requireNonNull(Object, String)},
+     * but in addition to valid non-{@code null} reference the passed string requires to be non-blank
+     * (contains at least one non-whitespace character)
+     *
+     * @param str a string (or any type that extends {@link CharSequence}) that requires to be non-blank
+     * @return the input string {@code str} if it's non-blank
+     * @throws IllegalArgumentException if the input string {@code str} is blank
+     * @see StringUtils#isBlank(CharSequence)
+     */
+    public static <S extends CharSequence> S requiredNonBlank(S str) {
+        return requiredNonBlank(str, "input string must NOT be blank");
+    }
+
+    /**
+     * Quite the same as JDK's utility-method {@link Objects#requireNonNull(Object)},
+     * but in addition to valid non-{@code null} reference the passed string requires to be non-blank
+     * (contains at least one non-whitespace character)
+     *
+     * @param str a string (or any type that extends {@link CharSequence}) that requires to be non-blank
+     * @return the input string {@code str} if it's non-blank
+     * @throws IllegalArgumentException if the input string {@code str} is blank
+     * @see StringUtils#isBlank(CharSequence)
+     */
+    public static <S extends CharSequence> S requiredNonBlank(S str, String errorMessage) {
+        return requiredNonBlank(str, () -> errorMessage);
+    }
+
+    /**
+     * Quite the same as JDK's utility-method {@link Objects#requireNonNull(Object, Supplier)},
+     * but in addition to valid non-{@code null} reference the passed string requires to be non-blank
+     * (contains at least one non-whitespace character)
+     *
+     * @param str a string (or any type that extends {@link CharSequence}) that requires to be non-blank
+     * @param errMsgSupplier a supplier for error message (to postpone the calculation if it's non-trivial)
+     * @return the input string {@code str} if it's non-blank
+     * @throws IllegalArgumentException if the input string {@code str} is blank
+     * @param <S> any type that extends {@link CharSequence}
+     * @see StringUtils#isBlank(CharSequence)
+     */
+    public static <S extends CharSequence> S requiredNonBlank(S str, Supplier<String> errMsgSupplier) {
+        if (StringUtils.isBlank(str)) {
+            throw new IllegalArgumentException(errMsgSupplier.get());
+        }
+        return str;
+    }
 
     /**
      * Just a short-cut of JDK-invocation: <pre>{@code
@@ -123,7 +172,7 @@ public class CoreStringUtils {
 
     /**
      * This method could be used to check whether the multi-line output ends with {@link System#lineSeparator() new-line}-symbol(s),
-     * because ib most cases it's quite impossible to realize that fact visually (unless using different background).
+     * because in most cases it's quite impossible to realize that fact visually (unless using different background).
      * <hr/>
      * TODO: introduce a method to detect extra white-spaces before new-line like {@code git-diff} is doing
      *

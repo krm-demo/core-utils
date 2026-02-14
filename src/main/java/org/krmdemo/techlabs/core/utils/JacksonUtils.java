@@ -127,6 +127,15 @@ public class JacksonUtils {
         }
     }
 
+    /**
+     * Loading the JSON-Value (object, array or primitive) from resource with the path {@code resourcePath}
+     * where passed {@code classValue} represents the class to instantiate.
+     *
+     * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
+     * @param classValue the class to instantiate
+     * @return de-serialized java-object of class {@code classValue}
+     * @param <T> the type of returning object
+     */
     public static <T> T jsonValueFromResource(String resourcePath, Class<T> classValue) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {
@@ -138,6 +147,15 @@ public class JacksonUtils {
         }
     }
 
+    /**
+     * Loading the JSON-Value (object, array or primitive) from resource with the path {@code resourcePath}
+     * where passed {@code typeRef} holds the information of the class to instantiate.
+     *
+     * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
+     * @param typeRef a Jackson's type-reference that holds the information of class @link Class} to instantiate
+     * @return de-serialized java-object of class that is resolved by {@code typeRef}
+     * @param <T> the type of returning object
+     */
     public static <T> T jsonValueFromResource(String resourcePath, TypeReference<T> typeRef) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {
@@ -149,6 +167,19 @@ public class JacksonUtils {
         }
     }
 
+    /**
+     * Loading the JSON-Value (object, array or primitive) from resource with the path {@code resourcePath}
+     * where the type of returning object is determined by passed java-type {@code itemType}.
+     * <hr/>
+     * This method is similar to {@link #jsonValueFromResource(String, Class)}
+     * or {@link #jsonValueFromResource(String, TypeReference)}, but it's mostly for dynamic cases,
+     * where the reference to concrete {@link Class} is not available.
+     *
+     * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
+     * @param javaType a Jackson's java-type to resolve the class of returning object
+     * @return de-serialized java-object of class that is resolved by {@code javaType}
+     * @param <T> the type of returning object
+     */
     public static <T> T jsonValueFromResource(String resourcePath, JavaType javaType) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         try (InputStream resourceStream = classLoader.getResourceAsStream(resourcePath)) {
@@ -162,7 +193,7 @@ public class JacksonUtils {
 
     /**
      * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
-     * @return de-serialized JSON-Object as {@link Map}
+     * @return de-serialized JSON-Object as {@link Map Map&lt;String,Object&gt;}
      */
     public static Map<String, Object> jsonObjFromResource(String resourcePath) {
         // automatic casting to "java.util.Map" looks like a magic
@@ -184,7 +215,7 @@ public class JacksonUtils {
      *
      * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
      * @param itemClass the class of elements in returning list
-     * @return de-serialized JSON-Array as {@link List}
+     * @return de-serialized JSON-Array as {@link List List&lt;T&gt;}
      * @param <T> type of elements in returning list
      */
     public static <T> List<T> jsonArrFromResource(String resourcePath, Class<T> itemClass) {
@@ -197,11 +228,11 @@ public class JacksonUtils {
      * where the type of elements is determined by passed java-type {@code itemType}.
      * <hr/>
      * This method is similar to {@link #jsonArrFromResource(String, Class)}
-     * but it's mostly for dynamic cases, where no reference to concrete {@link Class}.
+     * but it's mostly for dynamic cases, where the reference to concrete {@link Class} is not available.
      *
      * @param resourcePath the path to JSON-resource within the current class-path (no leading slash !!!)
-     * @param itemType the java-type of elements in returning list
-     * @return de-serialized JSON-Array as {@link List}
+     * @param itemType a Jackson's java-type to resolve the class of elements in the returning list
+     * @return de-serialized JSON-Array as {@link List List&lt;T&gt;}
      * @param <T> type of elements in returning list
      */
     public static <T> List<T> jsonArrFromResource(String resourcePath, JavaType itemType) {

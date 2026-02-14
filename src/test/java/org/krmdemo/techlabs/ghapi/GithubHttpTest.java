@@ -270,7 +270,7 @@ public class GithubHttpTest {
     }
 
     // ------------------------------------------------------------------------------------
-    //  TODO: think about move it to a separate utility-class, whih work with URL-params:
+    //  TODO: think about move it to a separate utility-class, which works with URL-params:
     // ------------------------------------------------------------------------------------
 
     public static String urlParams(Map<String, String> paramsMap) {

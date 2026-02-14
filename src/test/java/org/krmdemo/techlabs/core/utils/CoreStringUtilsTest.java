@@ -9,18 +9,42 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.keyValue;
 import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.countingCharsMap;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.hasNoNewLineAtTheEnd;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.joiningReversed;
+import static org.krmdemo.techlabs.core.utils.CoreStringUtils.requiredNonBlank;
 import static org.krmdemo.techlabs.core.utils.CoreStringUtils.splitWordsList;
 
 /**
  * A unit-test to verify the utility-class {@link CoreStringUtils}
  */
 public class CoreStringUtilsTest {
+
+    @Test
+    void testRequiredNonBlank() {
+        assertThat(requiredNonBlank("abc")).isEqualTo("abc");
+        assertThat(requiredNonBlank(".   ")).isEqualTo(".   ");
+        assertThat(requiredNonBlank("\n\t...")).isEqualTo("\n\t...");
+        assertThatIllegalArgumentException().isThrownBy(() -> requiredNonBlank(null));
+        assertThatIllegalArgumentException().isThrownBy(() -> requiredNonBlank(""));
+        assertThatIllegalArgumentException().isThrownBy(() -> requiredNonBlank("\n  \r\t"));
+
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> requiredNonBlank(null, "some direct error message")
+        ).withMessage("some direct error message");
+
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> requiredNonBlank("", () -> "some error message, that is supplied only if blank")
+        ).withMessage("some error message, that is supplied only if blank");
+
+        assertThat(requiredNonBlank("xyz", // if no error - the supplier will not be invoked
+            () -> { throw new IllegalStateException("never thrown"); })
+        ).isEqualTo("xyz");
+    }
 
     @Test
     void testCountingCharsMap() {
