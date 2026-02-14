@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SysDumpUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">SysDumpUtils.java</span></div><h1>SysDumpUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import org.krmdemo.techlabs.core.dump.ObjectPrinter;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
+import static org.krmdemo.techlabs.core.dump.DumpUtils.dumpAsJsonTxt;
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.linkedMap;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
+
+/**
+ * TODO: provide the comprehensive Java-Doc and reuse {@link ObjectPrinter} !!!
+ */
+public class SysDumpUtils {
+
+    public static String dumpSysPropsAsJson() {
+<span class="fc" id="L28">        return valueAsJson(dumpSysProps(), 0);</span>
+    }
+
+    public static String dumpSysPropsExAsJson() {
+<span class="fc" id="L32">        return valueAsJson(dumpSysPropsEx(), 0);</span>
+    }
+
+    public static String dumpEnvVarsAsJson() {
+<span class="fc" id="L36">        return valueAsJson(dumpEnvVars(), 0);</span>
+    }
+
+    public static String dumpEnvVarsExAsJson() {
+<span class="fc" id="L40">        return valueAsJson(dumpEnvVarsEx(), 0);</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @return Java system-properties as a sorted-map
+     */
+    public static NavigableMap&lt;String,String&gt; dumpSysProps() {
+<span class="fc" id="L49">        return sortedMap(System.getProperties().entrySet()</span>
+<span class="fc" id="L50">            .stream()</span>
+<span class="fc" id="L51">            .map(PropertiesUtils::propEntryEsc));</span>
+    }
+
+    /**
+     * @return the same as {@link #dumpEnvVars()}, but the values of {@code xxx.path} properties are transformed to list
+     */
+    public static NavigableMap&lt;String, Object&gt; dumpSysPropsEx() {
+<span class="fc" id="L58">        return dumpSysProps().entrySet().stream()</span>
+<span class="fc" id="L59">            .collect(toSortedMap(SysDumpUtils::transformSysProps));</span>
+    }
+
+    /**
+     * @return environment variables as a sorted-map
+     */
+    public static NavigableMap&lt;String,String&gt; dumpEnvVars() {
+<span class="fc" id="L66">        return new TreeMap&lt;&gt;(System.getenv());</span>
+    }
+
+    /**
+     * @return the same as {@link #dumpEnvVars()}, but the values of {@code xxxPATH} variables are transformed to list
+     */
+    public static NavigableMap&lt;String, Object&gt; dumpEnvVarsEx() {
+<span class="fc" id="L73">        return dumpEnvVars().entrySet().stream()</span>
+<span class="fc" id="L74">            .collect(toSortedMap(SysDumpUtils::transformPathVars));</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    private static Object transformSysProps(Map.Entry&lt;String, ?&gt; entry) {
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (!entry.getKey().toUpperCase().endsWith(&quot;PATH&quot;)) {</span>
+<span class="fc" id="L81">            return entry.getValue();</span>
+        }
+<span class="fc" id="L83">        String pathValue = &quot;&quot; + entry.getValue();</span>
+<span class="fc" id="L84">        return Arrays.stream(pathValue.split(File.pathSeparator)).toList();</span>
+    }
+
+    private static Object transformPathVars(Map.Entry&lt;String, String&gt; entry) {
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (!entry.getKey().toUpperCase().endsWith(&quot;PATH&quot;)) {</span>
+<span class="fc" id="L89">            return entry.getValue();</span>
+        } else {
+<span class="fc" id="L91">            return Arrays.stream(entry.getValue().split(File.pathSeparator)).toList();</span>
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @param file a file to get the file-attributes of
+     * @return the attributes of {@code file} as JSON
+     */
+    public static String fileAttrsAsJson(File file) {
+<span class="fc" id="L102">        return fileAttrsAsJson(file.toPath());</span>
+    }
+
+    /**
+     * @param filePath a path to the file to get the file-attributes of
+     * @return the attributes of {@code file} as JSON
+     */
+    public static String fileAttrsAsJson(Path filePath) {
+        try {
+<span class="nc" id="L111">            BasicFileAttributes fileAtrrs = Files.readAttributes(filePath, BasicFileAttributes.class);</span>
+<span class="nc" id="L112">            return dumpAsJsonTxt(linkedMap(</span>
+<span class="nc" id="L113">                nameValue(&quot;filePath&quot;, filePath),</span>
+<span class="nc" id="L114">                nameValue(&quot;fileSize&quot;, fileAtrrs.size()),</span>
+<span class="nc" id="L115">                nameValue(&quot;creationTime&quot;, fileAtrrs.creationTime()),</span>
+<span class="nc" id="L116">                nameValue(&quot;lastModifiedTime&quot;, fileAtrrs.lastAccessTime()),</span>
+<span class="nc" id="L117">                nameValue(&quot;lastModifiedTime&quot;, fileAtrrs.lastModifiedTime()),</span>
+<span class="nc" id="L118">                nameValue(&quot;isRegular&quot;, fileAtrrs.isRegularFile()),</span>
+<span class="nc" id="L119">                nameValue(&quot;isDirectory&quot;, fileAtrrs.isDirectory()),</span>
+<span class="nc" id="L120">                nameValue(&quot;isSymbolicLink&quot;, fileAtrrs.isSymbolicLink()),</span>
+<span class="nc" id="L121">                nameValue(&quot;isOther&quot;, fileAtrrs.isOther())</span>
+            ));
+<span class="fc" id="L123">        } catch (Exception ex) {</span>
+<span class="fc" id="L124">            return dumpAsJsonTxt(JacksonUtils.errorFrom(ex));</span>
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    public static String seqAsJson(Collection&lt;?&gt; collObj, int indent) {
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">        if (collObj == null) {</span>
+<span class="nc" id="L132">            return &quot;null&quot;;</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">        } else if (collObj.isEmpty()) {</span>
+<span class="nc" id="L134">            return &quot;[]&quot;;</span>
+        }
+<span class="fc" id="L136">        return collObj.stream()</span>
+<span class="fc" id="L137">            .map(item -&gt; valueAsJson(item, indent + INDENT_JSON_PRETTY_PRINT))</span>
+<span class="fc" id="L138">            .collect(Collectors.joining(</span>
+<span class="fc" id="L139">                String.format(&quot;,%n%s&quot;, &quot; &quot;.repeat(indent + INDENT_JSON_PRETTY_PRINT)),</span>
+<span class="fc" id="L140">                String.format(&quot;[%n%s&quot;, &quot; &quot;.repeat(indent + INDENT_JSON_PRETTY_PRINT)),</span>
+<span class="fc" id="L141">                String.format(&quot;%n%s]&quot;, &quot; &quot;.repeat(indent))</span>
+            ));
+    }
+
+    public static String mapAsJson(Map&lt;?, ?&gt; mapObj, int indent) {
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">        if (mapObj == null) {</span>
+<span class="nc" id="L147">            return &quot;null&quot;;</span>
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">        } else if (mapObj.isEmpty()) {</span>
+<span class="nc" id="L149">            return &quot;{}&quot;;</span>
+        }
+<span class="fc" id="L151">        return mapObj.entrySet().stream()</span>
+<span class="fc" id="L152">            .map(e -&gt; entryAsJson(e, indent + INDENT_JSON_PRETTY_PRINT))</span>
+<span class="fc" id="L153">            .collect(Collectors.joining(</span>
+<span class="fc" id="L154">                String.format(&quot;,%n%s&quot;, &quot; &quot;.repeat(indent + INDENT_JSON_PRETTY_PRINT)),</span>
+<span class="fc" id="L155">                String.format(&quot;{%n%s&quot;, &quot; &quot;.repeat(indent + INDENT_JSON_PRETTY_PRINT)),</span>
+<span class="fc" id="L156">                String.format(&quot;%n%s}&quot;, &quot; &quot;.repeat(indent))</span>
+            ));
+    }
+
+    private static String entryAsJson(Map.Entry&lt;?,?&gt; entry, int indent) {
+<span class="fc" id="L161">        String entryKeyStr = &quot;&quot; + entry.getKey();</span>
+<span class="fc" id="L162">        String entryValueStr = valueAsJson(entry.getValue(), indent);</span>
+<span class="fc" id="L163">        return String.format(&quot;\&quot;%s\&quot;: %s&quot;, entryKeyStr, entryValueStr);</span>
+    }
+
+    private static String valueAsJson(Object obj, int indent) {
+<span class="pc bpc" id="L167" title="1 of 5 branches missed.">        return obj == null ? &quot;null&quot; : switch (obj) {</span>
+<span class="fc" id="L168">            case Map&lt;?,?&gt; mapObj -&gt; mapAsJson(mapObj, indent);</span>
+<span class="fc" id="L169">            case Collection&lt;?&gt; seqObj -&gt; seqAsJson(seqObj, indent);</span>
+<span class="fc" id="L170">            default -&gt; String.format(&quot;\&quot;%s\&quot;&quot;, obj); // &lt;-- think about escaping</span>
+        };
+    }
+
+    private static final int INDENT_JSON_PRETTY_PRINT = 2;
+
+    // --------------------------------------------------------------------------------------------
+
+<span class="nc" id="L178">    private SysDumpUtils() {</span>
+        // prohibit the creation of utility-class instance
+<span class="nc" id="L180">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

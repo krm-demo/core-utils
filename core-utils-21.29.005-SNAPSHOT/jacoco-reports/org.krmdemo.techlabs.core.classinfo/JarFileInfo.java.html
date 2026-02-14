@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JarFileInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.classinfo</a> &gt; <span class="el_source">JarFileInfo.java</span></div><h1>JarFileInfo.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.classinfo;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.krmdemo.techlabs.core.utils.PropertiesUtils;
+
+import java.io.IOException;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
+import java.util.stream.Stream;
+
+import static org.krmdemo.techlabs.core.utils.CoreCollectors.toSortedMap;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
+
+@JsonPropertyOrder(alphabetic = true)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public record JarFileInfo(
+    @JsonIgnore JarFile jarFile
+) {
+<span class="fc" id="L27">    public JarFileInfo {</span>
+<span class="fc" id="L28">        Objects.requireNonNull(jarFile);</span>
+<span class="fc" id="L29">    }</span>
+
+    Optional&lt;Manifest&gt; manifest() {
+        try {
+<span class="fc" id="L33">            return Optional.ofNullable(jarFile.getManifest());</span>
+<span class="nc" id="L34">        } catch (IOException e) {</span>
+<span class="nc" id="L35">            return Optional.empty();</span>
+        }
+    }
+
+    @JsonGetter
+    NavigableMap&lt;String, String&gt; getManifestMain() {
+<span class="fc" id="L41">        return sortedMap(manifest().stream()</span>
+<span class="fc" id="L42">            .map(Manifest::getMainAttributes)</span>
+<span class="fc" id="L43">            .flatMap(JarFileInfo::manifestAttrs));</span>
+    }
+
+    @JsonGetter
+    NavigableMap&lt;String, NavigableMap&lt;String, String&gt;&gt; getManifestSections() {
+<span class="fc" id="L48">        return manifest().stream()</span>
+<span class="fc" id="L49">            .map(Manifest::getEntries)</span>
+<span class="fc" id="L50">            .flatMap(JarFileInfo::manifestSections)</span>
+<span class="fc" id="L51">            .collect(toSortedMap(JarFileInfo::attrsEntryMap));</span>
+    }
+
+    private static NavigableMap&lt;String, String&gt; attrsEntryMap(Map.Entry&lt;?,Attributes&gt; attrsEntry) {
+<span class="nc" id="L55">        return sortedMap(manifestAttrs(attrsEntry.getValue()));</span>
+    }
+
+    private static Stream&lt;Map.Entry&lt;String, String&gt;&gt; manifestAttrs(Attributes attrs) {
+<span class="fc" id="L59">        return attrs.entrySet().stream().map(PropertiesUtils::propEntry);</span>
+    }
+
+    private static Stream&lt;Map.Entry&lt;String, Attributes&gt;&gt; manifestSections(Map&lt;String, Attributes&gt; sections) {
+<span class="fc" id="L63">        return sections.entrySet().stream();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

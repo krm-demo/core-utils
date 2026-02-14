@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SystemInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.classinfo</a> &gt; <span class="el_source">SystemInfo.java</span></div><h1>SystemInfo.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.classinfo;
+
+import org.apache.commons.lang3.JavaVersion;
+import org.apache.commons.lang3.SystemProperties;
+import org.apache.commons.lang3.SystemUtils;
+
+import java.nio.file.Path;
+
+/**
+ * A wrapper over {@link org.apache.commons.lang3.SystemUtils},
+ * that allows to access important system properties via singleton instance
+ * &lt;hr/&gt;
+ * TODO: complete it
+ */
+public final class SystemInfo {
+
+<span class="nc" id="L17">    private static final SystemInfo instance = new SystemInfo();</span>
+
+<span class="nc" id="L19">    private final String hostName = SystemUtils.getHostName();</span>
+
+<span class="nc" id="L21">    private final String userName = SystemProperties.getUserName();</span>
+
+<span class="nc" id="L23">    private final Path javaHomePath = SystemUtils.getJavaHomePath();</span>
+
+<span class="nc" id="L25">    private final Path tempDirPath = SystemUtils.getJavaIoTmpDirPath();</span>
+
+<span class="nc" id="L27">    private final Path currentDirPath = SystemUtils.getUserDirPath();</span>
+
+<span class="nc" id="L29">    private final JavaVersion javaVersion =  JavaVersion.valueOf(SystemProperties.getJavaVersion());</span>
+
+
+<span class="nc" id="L32">    private SystemInfo() {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if (instance != null) {</span>
+            // prohibit the subsequent creation of a singleton instance via reflection
+<span class="nc" id="L35">            throw new UnsupportedOperationException(&quot;attempt to duplicate the singleton &quot; + getClass().getName());</span>
+        }
+<span class="nc" id="L37">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

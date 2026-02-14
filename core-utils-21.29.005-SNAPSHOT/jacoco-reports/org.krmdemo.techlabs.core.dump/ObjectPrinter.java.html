@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ObjectPrinter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.dump</a> &gt; <span class="el_source">ObjectPrinter.java</span></div><h1>ObjectPrinter.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.dump;
+
+import org.krmdemo.techlabs.core.dump.json.JsonHtmlDumper;
+import org.krmdemo.techlabs.core.dump.json.JsonSvgDumper;
+import org.krmdemo.techlabs.core.dump.json.JsonTxtDumper;
+import org.krmdemo.techlabs.core.dump.render.Highlight;
+import org.krmdemo.techlabs.core.dump.render.RenderSpec;
+import org.krmdemo.techlabs.core.dump.yaml.YamlHtmlDumper;
+import org.krmdemo.techlabs.core.dump.yaml.YamlSvgDumper;
+import org.krmdemo.techlabs.core.dump.yaml.YamlTxtDumper;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
+import static org.krmdemo.techlabs.core.dump.JacksonTree.DEFAULT_JACKSON_TREE;
+
+/**
+ * Interface to represent any Java-Object in most popular hierarchical structures (JSON and YAML)
+ * and with suitable output formats (TXT, HTML, SVG) with a flexible way to control the highlighting of elements.
+ * Together with 3 most popular Java-API approaches (String, Std-Out and File) we have a multiple ways
+ * and a multiple API-methods that the current interface exposes.
+ * &lt;hr/&gt;
+ * It's also recommended to use methods from corresponding utility-classes.
+ *
+ * @see PrintUtils for standard output into console
+ * @see DumpUtils for output (dump) just as a string
+ * @see ToFileUtils for output into target file at local file-system
+ */
+public interface ObjectPrinter {
+
+    /**
+     * Default instance of {@link StdOut} that uses the default {@link JacksonTree}
+     */
+<span class="fc" id="L38">    StdOut DEFAULT_STD_OUT = new StdOut();</span>
+
+    /**
+     * TODO: clear the debugging garbage below:
+     * &lt;dl&gt;
+     *     &lt;dd&gt;&lt;i&gt;&lt;u&gt;usage {@code #1}:&lt;/u&gt;&lt;/i&gt;&lt;/dd&gt;
+     *     &lt;dt&gt;
+     *         description of usage &lt;b&gt;#1&lt;/b&gt;&lt;br/&gt;
+     *         ... some details ...
+     *     &lt;/dt&gt;
+     *     &lt;dd&gt;&lt;i&gt;&lt;u&gt;usage {@code #2}:&lt;/u&gt;&lt;/i&gt;&lt;/dd&gt;
+     *     &lt;dt&gt;
+     *         description of usage &lt;b&gt;{@code #2}&lt;/b&gt;
+     *         &lt;pre&gt;some explanation inside PRE&lt;/pre&gt;
+     *     &lt;/dt&gt;
+     *     &lt;dd&gt;&lt;i&gt;&lt;u&gt;usage #3&lt;/u&gt;&lt;/i&gt;&lt;/dd&gt;
+     *     &lt;dt&gt;{@snippet class=&quot;org.krmdemo.techlabs.core.dump.ObjectPrinterTest&quot;}&lt;/dt&gt;
+     *     &lt;dd&gt;&lt;i&gt;&lt;u&gt;usage {@code #4} (snippet with fragment):&lt;/u&gt;&lt;/i&gt;&lt;/dd&gt;
+     *     &lt;dt&gt;{@snippet class=&quot;org.krmdemo.techlabs.core.dump.ToFileUtils&quot; region=&quot;saveAsJsonTxt&quot;}&lt;/dt&gt;
+     * &lt;/dl&gt;
+     *
+     * @param objToPrint an instance of Java-Object to print
+     * @param renderSpec rendering details and highlight-rules
+     */
+    void printAsJsonTxt(Object objToPrint, RenderSpec renderSpec);
+
+    void printAsJsonHtml(Object objToPrint, RenderSpec renderSpec);
+
+    void printAsJsonSvg(Object objToPrint, RenderSpec renderSpec);
+
+    void printAsYamlTxt(Object objToPrint, RenderSpec renderSpec);
+
+    void printAsYamlHtml(Object objToPrint, RenderSpec renderSpec);
+
+    void printAsYamlSvg(Object objToPrint, RenderSpec renderSpec);
+
+    default void printAsJsonTxt(Object objToPrint) {
+<span class="fc" id="L75">        printAsJsonTxt(objToPrint, new RenderSpec(Highlight.NONE));  // &lt;-- TODO: think about passing &quot;Highlight.DEFAULT&quot;</span>
+<span class="fc" id="L76">    }</span>
+
+    default void printAsJsonHtml(Object objToPrint) {
+<span class="nc" id="L79">        printAsJsonHtml(objToPrint, new RenderSpec(Highlight.NONE));</span>
+<span class="nc" id="L80">    }</span>
+
+    default void printAsJsonSvg(Object objToPrint) {
+<span class="nc" id="L83">        printAsJsonSvg(objToPrint, new RenderSpec(Highlight.NONE));</span>
+<span class="nc" id="L84">    }</span>
+
+    default void printAsYamlTxt(Object objToPrint) {
+<span class="fc" id="L87">        printAsYamlTxt(objToPrint, new RenderSpec(Highlight.NONE));  // &lt;-- TODO: think about passing &quot;Highlight.DEFAULT&quot;</span>
+<span class="fc" id="L88">    }</span>
+
+    default void printAsYamlHtml(Object objToPrint) {
+<span class="nc" id="L91">        printAsYamlHtml(objToPrint, new RenderSpec(Highlight.NONE));</span>
+<span class="nc" id="L92">    }</span>
+
+    default void printAsYamlSvg(Object objToPrint) {
+<span class="nc" id="L95">        printAsYamlSvg(objToPrint, new RenderSpec(Highlight.NONE));</span>
+<span class="nc" id="L96">    }</span>
+
+    /**
+     * This Java-record is a kind of element in multidimensional virtual methods' table,
+     * which acts as a bridge between two hierarchies of different implementations of:&lt;ul&gt;
+     *     &lt;li&gt;{@link TreeDumper.Node} (the default factory is {@link JacksonTree#DEFAULT_JACKSON_TREE})&lt;/li&gt;
+     *     &lt;li&gt;{@link ObjectPrinter} - {@link StdOut StdOut}, {@link ToString ToString} and {@link ToFile ToFile}&lt;/li&gt;
+     * &lt;/ul&gt;
+     * Further interaction two hierarchies are performed via well known and very popular
+     * &lt;a href=&quot;https://en.wikipedia.org/wiki/Visitor_pattern&quot;&gt;Visitor pattern&lt;/a&gt;
+     *
+     * @param dumperNodeFunc a factory to create a root {@link TreeDumper.Node} from the object to dump
+     * @param dumperFactory a factory to create a proper instance of {@link TreeDumper}
+     */
+<span class="fc" id="L110">    record UnitOp(</span>
+        Function&lt;Object, TreeDumper.Node&gt; dumperNodeFunc,
+        BiFunction&lt;PrintStream, RenderSpec, TreeDumper&gt; dumperFactory
+    ) {
+        void printStdOut(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L115">            print(System.out, objToPrint, renderSpec);</span>
+<span class="fc" id="L116">        }</span>
+        void print(PrintStream out, Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L118">            TreeDumper.Node root = dumperNodeFunc.apply(objToPrint);</span>
+<span class="fc" id="L119">            TreeDumper dumper = dumperFactory.apply(out, renderSpec);</span>
+<span class="fc" id="L120">            dumper.acceptRoot(root);</span>
+<span class="fc" id="L121">        }</span>
+    }
+
+    /**
+     *
+     */
+    class StdOut implements ObjectPrinter {
+        private final Function&lt;Object, TreeDumper.Node&gt; dumperNodeFunc;
+
+        public StdOut() {
+<span class="fc" id="L131">            this(DEFAULT_JACKSON_TREE::dumperNode);</span>
+<span class="fc" id="L132">        }</span>
+
+<span class="fc" id="L134">        public StdOut(Function&lt;Object, TreeDumper.Node&gt; dumperNodeFunc) {</span>
+<span class="fc" id="L135">            this.dumperNodeFunc = dumperNodeFunc;</span>
+<span class="fc" id="L136">        }</span>
+
+        @Override
+        public void printAsJsonTxt(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L140">            UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonTxtDumper::new);</span>
+<span class="fc" id="L141">            unitOp.printStdOut(objToPrint, renderSpec);</span>
+<span class="fc" id="L142">        }</span>
+
+        @Override
+        public void printAsJsonHtml(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L146">            UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonHtmlDumper::new);</span>
+<span class="fc" id="L147">            unitOp.printStdOut(objToPrint, renderSpec);</span>
+<span class="fc" id="L148">        }</span>
+
+        @Override
+        public void printAsJsonSvg(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L152">            UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonSvgDumper::new);</span>
+<span class="nc" id="L153">            unitOp.printStdOut(objToPrint, renderSpec);</span>
+<span class="nc" id="L154">        }</span>
+
+        @Override
+        public void printAsYamlTxt(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L158">            UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlTxtDumper::new);</span>
+<span class="fc" id="L159">            unitOp.printStdOut(objToPrint, renderSpec);</span>
+<span class="fc" id="L160">        }</span>
+
+        @Override
+        public void printAsYamlHtml(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L164">            UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlHtmlDumper::new);</span>
+<span class="nc" id="L165">            unitOp.printStdOut(objToPrint, renderSpec);</span>
+<span class="nc" id="L166">        }</span>
+
+        @Override
+        public void printAsYamlSvg(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L170">            UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlSvgDumper::new);</span>
+<span class="nc" id="L171">            unitOp.printStdOut(objToPrint, renderSpec);</span>
+<span class="nc" id="L172">        }</span>
+    }
+
+    /**
+     *
+     */
+    class ToString implements ObjectPrinter {
+<span class="fc" id="L179">        private final StringBuilderOut out = StringBuilderOut.create();</span>
+        private final Function&lt;Object, TreeDumper.Node&gt; dumperNodeFunc;
+
+        public ToString() {
+<span class="fc" id="L183">            this(DEFAULT_JACKSON_TREE::dumperNode);</span>
+<span class="fc" id="L184">        }</span>
+
+<span class="fc" id="L186">        public ToString(Function&lt;Object, TreeDumper.Node&gt; dumperNodeFunc) {</span>
+<span class="fc" id="L187">            this.dumperNodeFunc = dumperNodeFunc;</span>
+<span class="fc" id="L188">        }</span>
+
+        public StringBuilder stringBuilder() {
+<span class="nc" id="L191">            return this.out.stringBuilder();</span>
+        }
+
+        @Override
+        public String toString() {
+<span class="fc" id="L196">            return this.out.toString();</span>
+        }
+
+        @Override
+        public void printAsJsonTxt(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L201">            UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonTxtDumper::new);</span>
+<span class="fc" id="L202">            unitOp.print(this.out, objToPrint, renderSpec);</span>
+<span class="fc" id="L203">        }</span>
+
+        @Override
+        public void printAsJsonHtml(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L207">            UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonHtmlDumper::new);</span>
+<span class="fc" id="L208">            unitOp.print(this.out, objToPrint, renderSpec);</span>
+<span class="fc" id="L209">        }</span>
+
+        @Override
+        public void printAsJsonSvg(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L213">            UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonSvgDumper::new);</span>
+<span class="fc" id="L214">            unitOp.print(this.out, objToPrint, renderSpec);</span>
+<span class="fc" id="L215">        }</span>
+
+        @Override
+        public void printAsYamlTxt(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L219">            UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlTxtDumper::new);</span>
+<span class="fc" id="L220">            unitOp.print(this.out, objToPrint, renderSpec);</span>
+<span class="fc" id="L221">        }</span>
+
+        @Override
+        public void printAsYamlHtml(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L225">            UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlHtmlDumper::new);</span>
+<span class="fc" id="L226">            unitOp.print(this.out, objToPrint, renderSpec);</span>
+<span class="fc" id="L227">        }</span>
+
+        @Override
+        public void printAsYamlSvg(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L231">            UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlSvgDumper::new);</span>
+<span class="fc" id="L232">            unitOp.print(this.out, objToPrint, renderSpec);</span>
+<span class="fc" id="L233">        }</span>
+    }
+
+    /**
+     *
+     */
+    class ToFile implements ObjectPrinter {
+        private final File file;
+        private final Function&lt;Object, TreeDumper.Node&gt; dumperNodeFunc;
+
+        public ToFile(File file) {
+<span class="nc" id="L244">            this(file, DEFAULT_JACKSON_TREE::dumperNode);</span>
+<span class="nc" id="L245">        }</span>
+
+<span class="nc" id="L247">        public ToFile(File file, Function&lt;Object, TreeDumper.Node&gt; dumperNodeFunc) {</span>
+<span class="nc" id="L248">            this.file = file;</span>
+<span class="nc" id="L249">            this.dumperNodeFunc = dumperNodeFunc;</span>
+<span class="nc" id="L250">        }</span>
+
+        PrintStream filePrintStream() {
+            try {
+<span class="nc" id="L254">                return new PrintStream(new FileOutputStream(file));</span>
+<span class="nc" id="L255">            } catch (IOException ioEx) {</span>
+<span class="nc" id="L256">                throw new IllegalStateException(&quot;could not print to file &quot; + file, ioEx);</span>
+            }
+        }
+
+        @Override
+        public void printAsJsonTxt(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L262">            UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonTxtDumper::new);</span>
+<span class="nc" id="L263">            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);</span>
+<span class="nc" id="L264">        }</span>
+
+        @Override
+        public void printAsJsonHtml(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L268">            UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonHtmlDumper::new);</span>
+<span class="nc" id="L269">            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);</span>
+<span class="nc" id="L270">        }</span>
+
+        @Override
+        public void printAsJsonSvg(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L274">            UnitOp unitOp = new UnitOp(dumperNodeFunc, JsonSvgDumper::new);</span>
+<span class="nc" id="L275">            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);</span>
+<span class="nc" id="L276">        }</span>
+
+        @Override
+        public void printAsYamlTxt(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L280">            UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlTxtDumper::new);</span>
+<span class="nc" id="L281">            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);</span>
+<span class="nc" id="L282">        }</span>
+
+        @Override
+        public void printAsYamlHtml(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L286">            UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlHtmlDumper::new);</span>
+<span class="nc" id="L287">            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);</span>
+<span class="nc" id="L288">        }</span>
+
+        @Override
+        public void printAsYamlSvg(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L292">            UnitOp unitOp = new UnitOp(dumperNodeFunc, YamlSvgDumper::new);</span>
+<span class="nc" id="L293">            unitOp.print(this.filePrintStream(), objToPrint, renderSpec);</span>
+<span class="nc" id="L294">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

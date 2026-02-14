@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DumpUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.dump</a> &gt; <span class="el_source">DumpUtils.java</span></div><h1>DumpUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.dump;
+
+import org.krmdemo.techlabs.core.dump.render.RenderSpec;
+
+/**
+ * Utility-class that is a static facade of {@link ObjectPrinter.ToString},
+ * where the serializing of an object is provided with {@link JacksonTree}.
+ * &lt;hr/&gt;
+ * Set of methods with the second {@link RenderSpec} arguments
+ * allow to suppress the default highlighting by providing {@code new RenderSpec(Highlight.HONE, ...)}.
+ */
+<span class="nc" id="L12">public class DumpUtils {</span>
+
+    /**
+     * @param objToDump object to dump
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
+     * @return JSON-representation of an object in text-format as {@link String}
+     */
+    public static String dumpAsJsonTxt(Object objToDump, RenderSpec renderSpec) {
+<span class="fc" id="L20">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="fc" id="L21">        printer.printAsJsonTxt(objToDump, renderSpec);</span>
+<span class="fc" id="L22">        return printer.toString();</span>
+    }
+
+    /**
+     * @param objToDump object to dump
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
+     * @return JSON-representation of an object in HTML-format as {@link String}
+     */
+    public static String dumpAsJsonHtml(Object objToDump, RenderSpec renderSpec) {
+<span class="fc" id="L31">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="fc" id="L32">        printer.printAsJsonHtml(objToDump, renderSpec);</span>
+<span class="fc" id="L33">        return printer.toString();</span>
+    }
+
+    /**
+     * @param objToDump object to dump
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
+     * @return JSON-representation of an object in SVG-format as {@link String}
+     */
+    public static String dumpAsJsonSvg(Object objToDump, RenderSpec renderSpec) {
+<span class="fc" id="L42">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="fc" id="L43">        printer.printAsJsonSvg(objToDump, renderSpec);</span>
+<span class="fc" id="L44">        return printer.toString();</span>
+    }
+
+    /**
+     * @param objToDump object to dump
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
+     * @return YAML-representation of an object in text-format as {@link String}
+     */
+    public static String dumpAsYamlTxt(Object objToDump, RenderSpec renderSpec) {
+<span class="fc" id="L53">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="fc" id="L54">        printer.printAsYamlTxt(objToDump, renderSpec);</span>
+<span class="fc" id="L55">        return printer.toString();</span>
+    }
+
+    /**
+     * @param objToDump object to dump
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
+     * @return YAML-representation of an object in HTML-format as {@link String}
+     */
+    public static String dumpAsYamlHtml(Object objToDump, RenderSpec renderSpec) {
+<span class="fc" id="L64">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="fc" id="L65">        printer.printAsYamlHtml(objToDump, renderSpec);</span>
+<span class="fc" id="L66">        return printer.toString();</span>
+    }
+
+    /**
+     * @param objToDump object to dump
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
+     * @return YAML-representation of an object in SVG-format as {@link String}
+     */
+    public static String dumpAsYamlSvg(Object objToDump, RenderSpec renderSpec) {
+<span class="fc" id="L75">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="fc" id="L76">        printer.printAsYamlSvg(objToDump, renderSpec);</span>
+<span class="fc" id="L77">        return printer.toString();</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @param objToDump object to dump with default highlighting
+     * @return JSON-representation of an object in text-format as {@link String}
+     */
+    public static String dumpAsJsonTxt(Object objToDump) {
+<span class="fc" id="L87">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="fc" id="L88">        printer.printAsJsonTxt(objToDump);</span>
+<span class="fc" id="L89">        return printer.toString();</span>
+    }
+
+    /**
+     * @param objToDump object to dump with default highlighting
+     * @return JSON-representation of an object in HTML-format as {@link String}
+     */
+    public static String dumpAsJsonHtml(Object objToDump) {
+<span class="nc" id="L97">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="nc" id="L98">        printer.printAsJsonHtml(objToDump);</span>
+<span class="nc" id="L99">        return printer.toString();</span>
+    }
+
+    /**
+     * @param objToDump object to dump with default highlighting
+     * @return JSON-representation of an object in SVG-format as {@link String}
+     */
+    public static String dumpAsJsonSvg(Object objToDump) {
+<span class="nc" id="L107">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="nc" id="L108">        printer.printAsJsonSvg(objToDump);</span>
+<span class="nc" id="L109">        return printer.toString();</span>
+    }
+
+    /**
+     * @param objToDump object to dump with default highlighting
+     * @return YAML-representation of an object in text-format as {@link String}
+     */
+    public static String dumpAsYamlTxt(Object objToDump) {
+<span class="fc" id="L117">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="fc" id="L118">        printer.printAsYamlTxt(objToDump);</span>
+<span class="fc" id="L119">        return printer.toString();</span>
+    }
+
+    /**
+     * @param objToDump object to dump with default highlighting
+     * @return YAML-representation of an object in HTML-format as {@link String}
+     */
+    public static String dumpAsYamlHtml(Object objToDump) {
+<span class="nc" id="L127">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="nc" id="L128">        printer.printAsYamlHtml(objToDump);</span>
+<span class="nc" id="L129">        return printer.toString();</span>
+    }
+
+    /**
+     * @param objToDump object to dump with default highlighting
+     * @return YAML-representation of an object in SVG-format as {@link String}
+     */
+    public static String dumpAsYamlSvg(Object objToDump) {
+<span class="nc" id="L137">        ObjectPrinter.ToString printer = new ObjectPrinter.ToString();</span>
+<span class="nc" id="L138">        printer.printAsYamlSvg(objToDump);</span>
+<span class="nc" id="L139">        return printer.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

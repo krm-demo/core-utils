@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MavenBuildInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.buildinfo</a> &gt; <span class="el_source">MavenBuildInfo.java</span></div><h1>MavenBuildInfo.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.buildinfo;
+
+import org.apache.commons.lang3.StringUtils;
+import org.krmdemo.techlabs.core.datetime.CoreDateTimeUtils;
+import org.krmdemo.techlabs.core.datetime.DateTimeTriplet;
+import org.krmdemo.techlabs.core.dump.DumpUtils;
+import org.krmdemo.techlabs.core.utils.PropertiesUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.NavigableMap;
+
+/**
+ * Implementation of {@link BuildInfo} with build-information that is loaded from properties-file,
+ * that is expected to be at classpath as a resource with path: &lt;pre&gt;{@code
+ * /META-INF/maven/'project-group'/'project-artifact'/maven-project.properties
+ * }&lt;/pre&gt;
+ * ... where &lt;ul&gt;
+ *     &lt;li&gt;{@code 'project-group'} - maven-project group&lt;/li&gt;
+ *     &lt;li&gt;{@code 'project-artifact'} - maven-project artifact&lt;/li&gt;
+ * &lt;/ul&gt;
+ */
+public class MavenBuildInfo implements BuildInfo {
+
+    /**
+     * Property-name that holds the value of maven-project group  ({@code &lt;groupId&gt;}-tag in {@code pom.xml})
+     */
+    private final static String PROP_NAME__PROJECT_GROUP = &quot;maven-project.group&quot;;
+
+    /**
+     * Property-name that holds the value of maven-project group  ({@code &lt;artifactId&gt;}-tag in {@code pom.xml})
+     */
+    private final static String PROP_NAME__PROJECT_ARTIFACT = &quot;maven-project.artifact&quot;;
+
+    /**
+     * Property-name that holds the value of maven-project group  ({@code &lt;version&gt;}-tag in {@code pom.xml})
+     */
+    private final static String PROP_NAME__PROJECT_VERSION = &quot;maven-project.version&quot;;
+
+    /**
+     * Property-name that represents the minimal JDK-version to use this library
+     */
+    private final static String PROP_NAME__MINIMAL_JAVA_VERSION = &quot;minimal.java.version&quot;;
+
+
+    /**
+     * Property-name that represents the date-time when the project of this library was built.
+     * &lt;hr/&gt;
+     * The format of string-value corresponds to {@link java.time.format.DateTimeFormatter#ISO_INSTANT ISO_INSTANT},
+     * which is also available in build-property {@code &quot;maven.build.timestamp.format&quot;}.
+     */
+    private final static String PROP_NAME__PROJECT_BUILD_DATE_TIME = &quot;maven-project.build-date-time&quot;;
+
+    private final String projectGroup;
+    private final String projectArtifact;
+    private final NavigableMap&lt;String, String&gt; mvnPropsMap;
+    private final String resourcePath;
+
+    private final DateTimeTriplet buildDateTime;
+<span class="fc" id="L61">    private final List&lt;String&gt; loadingErrors = new ArrayList&lt;&gt;();</span>
+
+    /**
+     * Loading the build-information from properties-file, whose resource-path
+     * depends on passed {@code mavenProjectGroup} and {@code mavenProjectArtifact}
+     *
+     * @param mavenProjectGroup maven-project group ({@code &lt;groupId&gt;}-tag in {@code pom.xml} of maven-project)
+     * @param mavenProjectArtifact maven-project artifact ({@code &lt;artifactId&gt;}-tag in {@code pom.xml} of maven-project)
+     */
+<span class="fc" id="L70">    public MavenBuildInfo(String mavenProjectGroup, String mavenProjectArtifact) {</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (StringUtils.isBlank(mavenProjectGroup)) {</span>
+<span class="nc" id="L72">            throw new IllegalArgumentException(&quot;'mavenProjectGroup' must not be blank&quot;);</span>
+        }
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (StringUtils.isBlank(mavenProjectArtifact)) {</span>
+<span class="nc" id="L75">            throw new IllegalArgumentException(&quot;'mavenProjectArtifact' must not be blank&quot;);</span>
+        }
+<span class="fc" id="L77">        this.projectGroup = mavenProjectGroup.trim();</span>
+<span class="fc" id="L78">        this.projectArtifact = mavenProjectArtifact.trim();</span>
+<span class="fc" id="L79">        this.resourcePath = String.format(</span>
+            &quot;/META-INF/maven/%s/%s/maven-project.properties&quot;,
+            mavenProjectGroup, mavenProjectArtifact
+        );
+<span class="fc" id="L83">        this.mvnPropsMap = PropertiesUtils.propsMapResource(resourcePath);</span>
+<span class="fc" id="L84">        this.buildDateTime = parseBuildDateTime();</span>
+<span class="fc" id="L85">        checkForErrors();</span>
+
+<span class="fc" id="L87">    }</span>
+
+    private DateTimeTriplet parseBuildDateTime() {
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (mvnPropsMap.containsKey(PROP_NAME__PROJECT_BUILD_DATE_TIME)) {</span>
+<span class="fc" id="L91">            errorMsg(String.format(&quot;no property '%s' to get the build date-time value&quot;,</span>
+                PROP_NAME__PROJECT_BUILD_DATE_TIME));
+<span class="fc" id="L93">            return null;</span>
+        }
+        try {
+<span class="nc" id="L96">            return CoreDateTimeUtils.parseIsoInstant(mvnPropsMap.get(PROP_NAME__PROJECT_BUILD_DATE_TIME));</span>
+<span class="fc" id="L97">        } catch (Exception ex) {</span>
+<span class="fc" id="L98">            errorMsg(String.format(&quot;could not parse the property '%s' to get the build date-time value - %s&quot;,</span>
+<span class="fc" id="L99">                PROP_NAME__PROJECT_BUILD_DATE_TIME, ex.getMessage()));</span>
+<span class="fc" id="L100">            return null;</span>
+        }
+    }
+
+    private void checkForErrors() {
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">        if (this.mvnPropsMap.isEmpty()) {</span>
+<span class="nc" id="L106">            errorMsg(String.format(</span>
+                &quot;loaded props-map is empty - most probably the resource '%s' is not available&quot;,
+                this.resourcePath
+            ));
+<span class="nc" id="L110">            return;</span>
+        }
+<span class="fc" id="L112">        String projectGroupValue = this.mvnPropsMap.get(PROP_NAME__PROJECT_GROUP);</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        if (!this.projectGroup.equals(projectGroupValue)) {</span>
+<span class="fc" id="L114">            errorMsg(String.format(</span>
+                &quot;value of maven-project group '%s' in resource '%s' does not equal to expected value '%s'&quot;,
+                this.projectGroup, this.resourcePath, projectGroupValue
+            ));
+        }
+<span class="fc" id="L119">        String projectArtifactValue = this.mvnPropsMap.get(PROP_NAME__PROJECT_ARTIFACT);</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (!this.projectArtifact.equals(projectArtifactValue)) {</span>
+<span class="fc" id="L121">            errorMsg(String.format(</span>
+                &quot;value of maven-project artifact '%s' in resource '%s' does not equal to expected value '%s'&quot;,
+                this.projectArtifact, this.resourcePath, projectArtifactValue
+            ));
+        }
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if (StringUtils.isBlank(this.getProjectVersion())) {</span>
+<span class="nc" id="L127">            errorMsg(String.format(</span>
+                &quot;value of maven-project version (property '%s') is blank - most probably the resource '%s' is corrupted&quot;,
+                PROP_NAME__PROJECT_VERSION, this.resourcePath
+            ));
+        }
+<span class="fc" id="L132">    }</span>
+
+    private void errorMsg(String errorMsg) {
+<span class="fc" id="L135">        this.loadingErrors.add(errorMsg);</span>
+<span class="fc" id="L136">    }</span>
+
+    @Override
+    public String getProjectGroup() {
+<span class="fc" id="L140">        return this.projectGroup;</span>
+    }
+
+    @Override
+    public String getProjectArtifact() {
+<span class="fc" id="L145">        return this.projectArtifact;</span>
+    }
+
+    @Override
+    public NavigableMap&lt;String, String&gt; getProjectProps() {
+<span class="fc" id="L150">        return Collections.unmodifiableNavigableMap(mvnPropsMap);</span>
+    }
+
+    @Override
+    public String getResourcePath() {
+<span class="fc" id="L155">        return this.resourcePath;</span>
+    }
+
+    @Override
+    public String getProjectVersion() {
+<span class="fc" id="L160">        return this.mvnPropsMap.get(PROP_NAME__PROJECT_VERSION);</span>
+    }
+
+    @Override
+    public DateTimeTriplet getBuildDateTime() {
+<span class="fc" id="L165">        return this.buildDateTime;</span>
+    }
+
+    @Override
+    public String getMinimalJavaVersion() {
+<span class="fc" id="L170">        return this.mvnPropsMap.get(PROP_NAME__MINIMAL_JAVA_VERSION);</span>
+    }
+
+    @Override
+    public List&lt;String&gt; getLoadingErrors() {
+<span class="fc" id="L175">        return Collections.unmodifiableList(this.loadingErrors);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L180">        return DumpUtils.dumpAsYamlTxt(this);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

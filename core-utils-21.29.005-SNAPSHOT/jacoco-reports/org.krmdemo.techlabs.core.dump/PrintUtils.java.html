@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PrintUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.dump</a> &gt; <span class="el_source">PrintUtils.java</span></div><h1>PrintUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.dump;
+
+import org.krmdemo.techlabs.core.dump.render.RenderSpec;
+
+/**
+ * Utility-class that is a static facade of {@link ObjectPrinter#DEFAULT_STD_OUT},
+ * where the serializing of an object is provided with {@link JacksonTree}.
+ * &lt;hr/&gt;
+ * Set of methods with the second {@link RenderSpec} arguments
+ * allow to suppress the default highlighting by providing {@code new RenderSpec(Highlight.HONE, ...)}.
+ */
+<span class="nc" id="L12">public class PrintUtils {</span>
+
+    /**
+     * @param objToPrint object to print into standard output
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
+     */
+    public static void printAsJsonTxt(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L19">        ObjectPrinter.DEFAULT_STD_OUT.printAsJsonTxt(objToPrint, renderSpec);</span>
+<span class="fc" id="L20">    }</span>
+
+    /**
+     * @param objToPrint object to print into standard output
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
+     */
+    public static void printAsJsonHtml(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L27">        ObjectPrinter.DEFAULT_STD_OUT.printAsJsonHtml(objToPrint, renderSpec);</span>
+<span class="fc" id="L28">    }</span>
+
+    /**
+     * @param objToPrint object to print into standard output
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles JSON-elements
+     */
+    public static void printAsJsonSvg(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L35">        ObjectPrinter.DEFAULT_STD_OUT.printAsJsonSvg(objToPrint, renderSpec);</span>
+<span class="nc" id="L36">    }</span>
+
+    /**
+     * @param objToPrint object to print into standard output
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
+     */
+    public static void printAsYamlTxt(Object objToPrint, RenderSpec renderSpec) {
+<span class="fc" id="L43">        ObjectPrinter.DEFAULT_STD_OUT.printAsYamlTxt(objToPrint, renderSpec);</span>
+<span class="fc" id="L44">    }</span>
+
+    /**
+     * @param objToPrint object to print into standard output
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
+     */
+    public static void printAsYamlHtml(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L51">        ObjectPrinter.DEFAULT_STD_OUT.printAsYamlHtml(objToPrint, renderSpec);</span>
+<span class="nc" id="L52">    }</span>
+
+    /**
+     * @param objToPrint object to print into standard output
+     * @param renderSpec an instance of {@link RenderSpec} to customize some styles YAML-elements
+     */
+    public static void printAsYamlSvg(Object objToPrint, RenderSpec renderSpec) {
+<span class="nc" id="L59">        ObjectPrinter.DEFAULT_STD_OUT.printAsYamlSvg(objToPrint, renderSpec);</span>
+<span class="nc" id="L60">    }</span>
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * @param objToPrint object to print into standard output with default highlighting
+     */
+    public static void printAsJsonTxt(Object objToPrint) {
+<span class="nc" id="L68">        ObjectPrinter.DEFAULT_STD_OUT.printAsJsonTxt(objToPrint);</span>
+<span class="nc" id="L69">    }</span>
+
+    /**
+     * @param objToPrint object to print into standard output with default highlighting
+     */
+    public static void printAsJsonHtml(Object objToPrint) {
+<span class="nc" id="L75">        ObjectPrinter.DEFAULT_STD_OUT.printAsJsonHtml(objToPrint);</span>
+<span class="nc" id="L76">    }</span>
+
+    /**
+     * @param objToPrint object to print into standard output with default highlighting
+     */
+    public static void printAsJsonSvg(Object objToPrint) {
+<span class="nc" id="L82">        ObjectPrinter.DEFAULT_STD_OUT.printAsJsonSvg(objToPrint);</span>
+<span class="nc" id="L83">    }</span>
+
+    /**
+     * @param objToPrint object to print into standard output with default highlighting
+     */
+    public static void printAsYamlTxt(Object objToPrint) {
+<span class="nc" id="L89">        ObjectPrinter.DEFAULT_STD_OUT.printAsYamlTxt(objToPrint);</span>
+<span class="nc" id="L90">    }</span>
+
+    /**
+     * @param objToPrint object to print into standard output with default highlighting
+     */
+    public static void printAsYamlHtml(Object objToPrint) {
+<span class="nc" id="L96">        ObjectPrinter.DEFAULT_STD_OUT.printAsYamlHtml(objToPrint);</span>
+<span class="nc" id="L97">    }</span>
+
+    /**
+     * @param objToPrint object to print into standard output with default highlighting
+     */
+    public static void printAsYamlSvg(Object objToPrint) {
+<span class="nc" id="L103">        ObjectPrinter.DEFAULT_STD_OUT.printAsYamlSvg(objToPrint);</span>
+<span class="nc" id="L104">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

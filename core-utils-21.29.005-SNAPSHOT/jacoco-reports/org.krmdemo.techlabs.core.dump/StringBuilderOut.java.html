@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StringBuilderOut.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.dump</a> &gt; <span class="el_source">StringBuilderOut.java</span></div><h1>StringBuilderOut.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.dump;
+
+import org.apache.commons.io.output.StringBuilderWriter;
+import org.apache.commons.io.output.WriterOutputStream;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.stream.Stream;
+
+/**
+ * A {@link PrintWriter} over {@link StringBuilderWriter} that could simplify
+ * the substitution of {@link System#out} and {@link System#err} in unit-tests,
+ * and it's also used by other classes of the current package.
+ */
+public class StringBuilderOut extends PrintStream implements CharSequence {
+    private final StringBuilderWriter sbw;
+
+    StringBuilderOut(StringBuilderWriter sbw) {
+<span class="fc" id="L22">        super(outputStream(sbw));</span>
+<span class="fc" id="L23">        this.sbw = sbw;</span>
+<span class="fc" id="L24">    }</span>
+
+    static OutputStream outputStream(Writer originWriter) {
+        try {
+<span class="fc" id="L28">            return WriterOutputStream.builder()</span>
+<span class="fc" id="L29">                .setWriter(originWriter)</span>
+<span class="fc" id="L30">                .setWriteImmediately(true)</span>
+<span class="fc" id="L31">                .get();</span>
+<span class="nc" id="L32">        } catch (IOException ioEx) {</span>
+<span class="nc" id="L33">            throw new IllegalArgumentException(</span>
+                &quot;could not create a wrapper over originWriter - &quot; + originWriter,
+                ioEx);
+        }
+    }
+
+    public static StringBuilderOut create() {
+<span class="fc" id="L40">        return new StringBuilderOut(new StringBuilderWriter());</span>
+    }
+
+    public StringBuilder stringBuilder() {
+<span class="fc" id="L44">        return sbw.getBuilder();</span>
+    }
+
+    public void clear() {
+<span class="fc" id="L48">        stringBuilder().setLength(0);</span>
+<span class="fc" id="L49">    }</span>
+
+    public int length() {
+<span class="fc" id="L52">        return stringBuilder().length();</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L57">        return stringBuilder().toString();</span>
+    }
+
+    public Stream&lt;String&gt; lines() {
+<span class="fc" id="L61">        return toString().lines();</span>
+    }
+
+    public int linesCount() {
+<span class="fc" id="L65">        return Math.toIntExact(lines().count());</span>
+    }
+
+    @Override
+    public char charAt(int index) {
+<span class="nc" id="L70">        return stringBuilder().charAt(index);</span>
+    }
+
+    @Override
+    public CharSequence subSequence(int start, int end) {
+<span class="nc" id="L75">        return stringBuilder().subSequence(start, end);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

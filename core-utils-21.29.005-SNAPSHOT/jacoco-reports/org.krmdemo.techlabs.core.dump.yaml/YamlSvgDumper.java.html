@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>YamlSvgDumper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.dump.yaml</a> &gt; <span class="el_source">YamlSvgDumper.java</span></div><h1>YamlSvgDumper.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.dump.yaml;
+
+import org.krmdemo.techlabs.core.dump.StringBuilderOut;
+import org.krmdemo.techlabs.core.dump.TreeDumper;
+import org.krmdemo.techlabs.core.dump.render.Highlight;
+import org.krmdemo.techlabs.core.dump.render.RenderSpec;
+
+import java.io.PrintStream;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Objects;
+
+/**
+ * Implementation of {@link TreeDumper} that dumps into the passed {@link PrintStream}
+ * the tree of a {@link Highlight.Structure#YAML YAML} logical structure
+ * in {@link Highlight.Target#SVG_ATTRS SVG-Attrs} target format (SVG-Class is coming soon).
+ */
+public class YamlSvgDumper implements TreeDumper {
+
+    final PrintStream out;
+    final RenderSpec renderSpec;
+<span class="fc" id="L24">    final Deque&lt;String&gt; currentPath = new ArrayDeque&lt;&gt;();</span>
+
+<span class="fc" id="L26">    int totalRowCount = 0;</span>
+<span class="fc" id="L27">    int currentRowLen = 0;</span>
+<span class="fc" id="L28">    int maxRowLen = 0;</span>
+
+<span class="fc" id="L30">    public YamlSvgDumper(PrintStream out, RenderSpec renderSpec) {</span>
+<span class="fc" id="L31">        this.out = Objects.requireNonNull(out);</span>
+<span class="fc" id="L32">        this.renderSpec = Objects.requireNonNull(renderSpec);</span>
+<span class="fc" id="L33">    }</span>
+
+    @Override
+    public void acceptRoot(Node rootNode) {
+<span class="fc" id="L37">        PrintStream innerOut = StringBuilderOut.create();</span>
+<span class="fc" id="L38">        YamlSvgDumper innerDumper = new YamlSvgDumper(innerOut, renderSpec);</span>
+<span class="fc" id="L39">        rootNode.visit(innerDumper);</span>
+<span class="fc" id="L40">        out.println(renderSpec.dumpOuterSvg(</span>
+<span class="fc" id="L41">            innerOut.toString(), Highlight.Structure.YAML,</span>
+            14, innerDumper.maxRowLen, innerDumper.totalRowCount));
+<span class="fc" id="L43">    }</span>
+
+    private void addWidth(int delta) {
+<span class="fc" id="L46">        this.currentRowLen += delta;</span>
+<span class="fc" id="L47">        this.maxRowLen = Math.max(this.maxRowLen, this.currentRowLen);</span>
+<span class="fc" id="L48">    }</span>
+
+    private void addIndentWidth() {
+<span class="fc" id="L51">        addWidth(2 * currentPath.size());</span>
+<span class="fc" id="L52">    }</span>
+
+    @Override
+    public void acceptNull() {
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (currentPath.isEmpty()) {</span>
+<span class="nc" id="L57">            out.print(svgRowStart());</span>
+        }
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (parentIsMapping()) {</span>
+<span class="fc" id="L60">            out.print(' ');</span>
+<span class="fc" id="L61">            addWidth(1);</span>
+        }
+<span class="fc" id="L63">        out.print(renderSpec.highlightNullSvgAttrs(Highlight.Structure.YAML));</span>
+<span class="fc" id="L64">        addWidth(4); // &lt;-- null</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (currentPath.isEmpty()) {</span>
+<span class="nc" id="L66">            out.print(svgRowEnd());</span>
+        }
+<span class="fc" id="L68">    }</span>
+
+    @Override
+    public void acceptScalar(ScalarNode scalarNode) {
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (currentPath.isEmpty()) {</span>
+<span class="nc" id="L73">            out.print(svgRowStart());</span>
+        }
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (parentIsMapping()) {</span>
+<span class="fc" id="L76">            out.print(' ');</span>
+<span class="fc" id="L77">            addWidth(1);</span>
+        }
+<span class="fc" id="L79">        out.print(renderSpec.highlightValueSvgAttrs(Highlight.Structure.YAML, scalarNode.text()));</span>
+<span class="fc" id="L80">        addWidth(scalarNode.text().length()); // &lt;-- value</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (currentPath.isEmpty()) {</span>
+<span class="nc" id="L82">            out.print(svgRowEnd());</span>
+        }
+<span class="fc" id="L84">    }</span>
+
+    @Override
+    public void acceptSequence(SequenceNode sequenceNode) {
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (currentPath.isEmpty()) {</span>
+<span class="fc" id="L89">            out.print(svgRowStart());</span>
+        }
+<span class="fc" id="L91">        int count = 0;</span>
+<span class="fc" id="L92">        Iterator&lt;Node&gt; itNode = sequenceNode.sequenceItems().iterator();</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        while (itNode.hasNext()) {</span>
+<span class="fc bfc" id="L94" title="All 4 branches covered.">            if (count &gt; 0 || parentIsMapping()) {</span>
+<span class="fc" id="L95">                out.println(svgRowEnd());</span>
+<span class="fc" id="L96">                out.print(svgRowStart());</span>
+<span class="fc" id="L97">                out.print(indent());</span>
+<span class="fc" id="L98">                addIndentWidth();</span>
+            }
+<span class="fc" id="L100">            out.print(dashSpace());  // &lt;-- no effect on max-width</span>
+<span class="fc" id="L101">            addWidth(2);</span>
+<span class="fc" id="L102">            count++;</span>
+<span class="fc" id="L103">            currentPath.addLast(String.format(&quot;[%d]&quot;, count));</span>
+<span class="fc" id="L104">            itNode.next().visit(this);</span>
+<span class="fc" id="L105">            currentPath.removeLast();</span>
+        }
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        if (count == 0) {</span>
+<span class="fc" id="L108">            out.print(emptySequence());</span>
+<span class="fc" id="L109">            addWidth(3);</span>
+        }
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (currentPath.isEmpty()) {</span>
+<span class="fc" id="L112">            out.print(svgRowEnd());</span>
+        }
+<span class="fc" id="L114">    }</span>
+
+    @Override
+    public void acceptMappings(MappingsNode mappingsNode) {
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (currentPath.isEmpty()) {</span>
+<span class="fc" id="L119">            out.print(svgRowStart());</span>
+        }
+<span class="fc" id="L121">        int count = 0;</span>
+<span class="fc" id="L122">        Iterator&lt;Map.Entry&lt;String, Node&gt;&gt; itEntry = mappingsNode.mappingsItems().iterator();</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        while (itEntry.hasNext()) {</span>
+<span class="fc bfc" id="L124" title="All 4 branches covered.">            if (count &gt; 0 || parentIsMapping()) {</span>
+<span class="fc" id="L125">                out.println(svgRowEnd());</span>
+<span class="fc" id="L126">                out.print(svgRowStart());</span>
+<span class="fc" id="L127">                out.print(indent());</span>
+<span class="fc" id="L128">                addIndentWidth();</span>
+            }
+<span class="fc" id="L130">            count++;</span>
+<span class="fc" id="L131">            Map.Entry&lt;String, Node&gt; entry = itEntry.next();</span>
+<span class="fc" id="L132">            currentPath.addLast(String.format(&quot;(%s)&quot;, entry.getKey()));</span>
+<span class="fc" id="L133">            out.print(renderSpec.highlightKeySvgAttrs(Highlight.Structure.YAML, entry.getKey()));</span>
+<span class="fc" id="L134">            out.print(colon());</span>
+<span class="fc" id="L135">            addWidth(1 + entry.getKey().length());</span>
+<span class="fc" id="L136">            entry.getValue().visit(this);</span>
+<span class="fc" id="L137">            currentPath.removeLast();</span>
+<span class="fc" id="L138">        }</span>
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">        if (count == 0) {</span>
+<span class="nc" id="L140">            out.print(emptyMappings());</span>
+<span class="nc" id="L141">            addWidth(3);</span>
+        }
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (currentPath.isEmpty()) {</span>
+<span class="fc" id="L144">            out.print(svgRowEnd());</span>
+        }
+<span class="fc" id="L146">    }</span>
+
+    private boolean parentIsMapping() {
+<span class="fc bfc" id="L149" title="All 4 branches covered.">        return !currentPath.isEmpty() &amp;&amp; currentPath.getLast().endsWith(&quot;)&quot;);</span>
+    }
+
+    private String svgRowStart() {
+<span class="fc" id="L153">        return String.format(&quot;&quot;&quot;</span>
+            &lt;tspan class=&quot;yaml-svg-row yaml-svg-row-%d&quot; x=&quot;0&quot; dy=&quot;1.2em&quot;&gt;&quot;&quot;&quot;,
+<span class="fc" id="L155">            totalRowCount++</span>
+        );
+    }
+
+    private String svgRowEnd() {
+<span class="fc" id="L160">        this.currentRowLen = 0;</span>
+<span class="fc" id="L161">        return &quot;&lt;/tspan&gt;&quot;;</span>
+    }
+
+    private String indent() {
+<span class="fc" id="L165">        return &quot;  &quot;.repeat(currentPath.size());</span>
+    }
+
+    private String dashSpace() {
+<span class="fc" id="L169">        return renderSpec.highlightSyntaxSvgAttrs(Highlight.Structure.YAML, &quot;- &quot;);</span>
+    }
+
+    private String colon() {
+<span class="fc" id="L173">        return renderSpec.highlightSyntaxSvgAttrs(Highlight.Structure.YAML, ':');</span>
+    }
+
+    private String emptySequence() {
+<span class="fc" id="L177">        return renderSpec.highlightSyntaxSvgAttrs(Highlight.Structure.YAML, &quot; []&quot;);</span>
+    }
+
+    private String emptyMappings() {
+<span class="nc" id="L181">        return renderSpec.highlightSyntaxSvgAttrs(Highlight.Structure.YAML, &quot; {}&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

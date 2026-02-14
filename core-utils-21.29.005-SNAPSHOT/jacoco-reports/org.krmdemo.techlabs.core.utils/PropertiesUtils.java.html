@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PropertiesUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core-utils</a> &gt; <a href="index.source.html" class="el_package">org.krmdemo.techlabs.core.utils</a> &gt; <span class="el_source">PropertiesUtils.java</span></div><h1>PropertiesUtils.java</h1><pre class="source lang-java linenums">package org.krmdemo.techlabs.core.utils;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.text.StringEscapeUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.Objects;
+import java.util.Properties;
+import java.util.stream.Stream;
+
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.nameValue;
+import static org.krmdemo.techlabs.core.utils.CoreStreamUtils.sortedMap;
+
+/**
+ * Utility-class that simplifies the access to the content of any properties-files at file-system or in classpath.
+ */
+public class PropertiesUtils {
+
+    /**
+     * @param propsFile the properties-file to load from file-system
+     * @return the loaded properties as {@link NavigableMap sorted-map}
+     */
+    public static NavigableMap&lt;String, String&gt; propsMapFromFile(File propsFile) {
+<span class="fc" id="L30">        return sortedMap(propEntriesFromFile(propsFile));</span>
+    }
+
+    /**
+     * @param propsResourcePath the path to properties-file in classpath
+     * @return the loaded properties as {@link NavigableMap sorted-map}
+     */
+    public static NavigableMap&lt;String, String&gt; propsMapResource(String propsResourcePath) {
+<span class="fc" id="L38">        return sortedMap(propEntriesResource(propsResourcePath));</span>
+    }
+
+    /**
+     * @param propsURL {@link URL} to properties-file
+     * @return the loaded properties as {@link NavigableMap sorted-map}
+     */
+    public static NavigableMap&lt;String, String&gt; propsMapFromURL(URL propsURL) {
+<span class="nc" id="L46">        return sortedMap(propEntriesFromURL(propsURL));</span>
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    public static Stream&lt;Map.Entry&lt;String, String&gt;&gt; propEntriesFromFile(File propsFile) {
+<span class="fc" id="L52">        try (InputStream propsInputStream = new FileInputStream(propsFile)) {</span>
+<span class="fc" id="L53">            Properties props = new Properties();</span>
+<span class="fc" id="L54">            props.load(propsInputStream);</span>
+<span class="fc" id="L55">            return props.entrySet().stream().map(PropertiesUtils::propEntry);</span>
+<span class="nc" id="L56">        } catch (IOException ex) {</span>
+<span class="nc" id="L57">            return Stream.empty();</span>
+        }
+    }
+
+    public static Stream&lt;Map.Entry&lt;String, String&gt;&gt; propEntriesResource(String propsResourcePath) {
+        try {
+<span class="fc" id="L63">            return propEntriesFromURL(IOUtils.resourceToURL(propsResourcePath));</span>
+<span class="nc" id="L64">        } catch (IOException ex) {</span>
+<span class="nc" id="L65">            return Stream.empty();</span>
+        }
+    }
+
+    public static Stream&lt;Map.Entry&lt;String, String&gt;&gt; propEntriesFromURL(URL propsURL) {
+<span class="fc" id="L70">        try (InputStream propsInputStream = propsURL.openStream()) {</span>
+<span class="fc" id="L71">            Properties props = new Properties();</span>
+<span class="fc" id="L72">            props.load(propsInputStream);</span>
+<span class="fc" id="L73">            return props.entrySet().stream().map(PropertiesUtils::propEntry);</span>
+<span class="nc" id="L74">        } catch (IOException ex) {</span>
+<span class="nc" id="L75">            return Stream.empty();</span>
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * The same as {@link #propEntry(Map.Entry)}, but the values of properties
+     * are escaped with {@link StringEscapeUtils#escapeJava(String)}, which is very useful
+     * and convenient when the content of the result map is going to be represented as JSON or YAML,
+     * but some values like {@link System#lineSeparator()} requires to be escaped.
+     *
+     * @param entry the entry of type {@link Map.Entry Map.Entry&amp;lt;Object,Object&amp;gt;}
+     * @return an instance of type {@link Map.Entry Map.Entry&amp;lt;String,String&amp;gt;}
+     */
+    public static Map.Entry&lt;String, String&gt; propEntryEsc(Map.Entry&lt;?,?&gt; entry) {
+<span class="fc" id="L91">        return propEntryEsc(entry.getKey(), entry.getValue());</span>
+    }
+
+    /**
+     * The same as {@link #propEntry(Object, Object)}, but the values of properties
+     * are escaped with {@link StringEscapeUtils#escapeJava(String)}, which is very useful
+     * and convenient when the content of the result map is going to be represented as JSON or YAML,
+     * but some values like {@link System#lineSeparator()} requires to be escaped.
+     *
+     * @param propName name of property as {@link Object} (the legacy of no generics in {@link Properties}-class)
+     * @param propValue value of property as {@link Object} (the legacy of no generics in {@link Properties}-class)
+     * @return an instance of type {@link Map.Entry Map.Entry&amp;lt;String,String&amp;gt;}
+     */
+    public static Map.Entry&lt;String, String&gt; propEntryEsc(Object propName, Object propValue) {
+<span class="fc" id="L105">        return nameValue(</span>
+<span class="fc" id="L106">            Objects.toString(propName),</span>
+<span class="fc" id="L107">            StringEscapeUtils.escapeJava(Objects.toString(propValue))</span>
+        );
+    }
+
+    /**
+     * Transforms the entry of type {@link Map.Entry Map.Entry&amp;lt;Object,Object&amp;gt;}
+     * into the entry of type {@link Map.Entry Map.Entry&amp;lt;String,String&amp;gt;}
+     * with use of standard transformation via {@link Objects#toString(Object)}
+     *
+     * @param entry the entry of type {@link Map.Entry Map.Entry&amp;lt;Object,Object&amp;gt;}
+     * @return the entry of type {@link Map.Entry Map.Entry&amp;lt;String,String&amp;gt;}
+     */
+    public static Map.Entry&lt;String, String&gt; propEntry(Map.Entry&lt;?,?&gt; entry) {
+<span class="fc" id="L120">        return propEntry(entry.getKey(), entry.getValue());</span>
+    }
+
+    /**
+     * A factory-method produce an instance of type {@link Map.Entry Map.Entry&amp;lt;String,String&amp;gt;}
+     *
+     * @param propName name of property as {@link Object} (the legacy of no generics in {@link Properties}-class)
+     * @param propValue value of property as {@link Object} (the legacy of no generics in {@link Properties}-class)
+     * @return an instance of type {@link Map.Entry Map.Entry&amp;lt;String,String&amp;gt;}
+     */
+    public static Map.Entry&lt;String, String&gt; propEntry(Object propName, Object propValue) {
+<span class="fc" id="L131">        return nameValue(</span>
+<span class="fc" id="L132">            Objects.toString(propName),</span>
+<span class="fc" id="L133">            Objects.toString(propValue)</span>
+        );
+    }
+
+    // --------------------------------------------------------------------------------------------
+
+<span class="nc" id="L139">    private PropertiesUtils() {</span>
+        // prohibit the creation of utility-class instance
+<span class="nc" id="L141">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
