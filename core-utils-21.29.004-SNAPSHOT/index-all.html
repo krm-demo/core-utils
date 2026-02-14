@@ -607,7 +607,7 @@ which must also be a value of corresponding <b><code>git</code></b>-tag in <code
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreStringUtils.html#hasNoNewLineAtTheEnd(java.lang.String)" class="member-name-link">hasNoNewLineAtTheEnd(String)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStringUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStringUtils</a></dt>
 <dd>
 <div class="block">This method could be used to check whether the multi-line output ends with <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/System.html#lineSeparator()" title="class or interface in java.lang" class="external-link"><code>new-line</code></a>-symbol(s),
-because ib most cases it's quite impossible to realize that fact visually (unless using different background).</div>
+because in most cases it's quite impossible to realize that fact visually (unless using different background).</div>
 </dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/render/Highlight.html#highlight(org.krmdemo.techlabs.core.dump.render.Highlight.Rule...)" class="member-name-link">highlight(Highlight.Rule...)</a> - Static method in class org.krmdemo.techlabs.core.dump.render.<a href="org/krmdemo/techlabs/core/dump/render/Highlight.html" title="class in org.krmdemo.techlabs.core.dump.render">Highlight</a></dt>
 <dd>
@@ -885,11 +885,20 @@ in <a href="org/krmdemo/techlabs/core/dump/render/Highlight.Target.html#TXT_ANSI
 <dt><a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html#jsonValueFromFile(java.io.File,com.fasterxml.jackson.core.type.TypeReference)" class="member-name-link">jsonValueFromFile(File, TypeReference)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html#jsonValueFromResource(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)" class="member-name-link">jsonValueFromResource(String, TypeReference)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Loading the JSON-Value (object, array or primitive) from resource with the path <code>resourcePath</code>
+where passed <code>typeRef</code> holds the information of the class to instantiate.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html#jsonValueFromResource(java.lang.String,com.fasterxml.jackson.databind.JavaType)" class="member-name-link">jsonValueFromResource(String, JavaType)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Loading the JSON-Value (object, array or primitive) from resource with the path <code>resourcePath</code>
+where the type of returning object is determined by passed java-type <code>itemType</code>.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html#jsonValueFromResource(java.lang.String,java.lang.Class)" class="member-name-link">jsonValueFromResource(String, Class)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Loading the JSON-Value (object, array or primitive) from resource with the path <code>resourcePath</code>
+where passed <code>classValue</code> represents the class to instantiate.</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html#jsonValueFromString(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)" class="member-name-link">jsonValueFromString(String, TypeReference)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html#jsonValueFromString(java.lang.String,com.fasterxml.jackson.databind.JavaType)" class="member-name-link">jsonValueFromString(String, JavaType)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/JacksonUtils.html" title="class in org.krmdemo.techlabs.core.utils">JacksonUtils</a></dt>
@@ -1397,6 +1406,24 @@ all methods in <a href="org/krmdemo/techlabs/core/dump/ObjectPrinter.html" title
 <dd>&nbsp;</dd>
 <dt><a href="org/krmdemo/techlabs/core/dump/render/RenderSpec.Feature.html" class="type-name-link" title="enum class in org.krmdemo.techlabs.core.dump.render">RenderSpec.Feature</a> - Enum Class in <a href="org/krmdemo/techlabs/core/dump/render/package-summary.html">org.krmdemo.techlabs.core.dump.render</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStringUtils.html#requiredNonBlank(S)" class="member-name-link">requiredNonBlank(S)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStringUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStringUtils</a></dt>
+<dd>
+<div class="block">Quite the same as JDK's utility-method <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html#requireNonNull(T,java.lang.String)" title="class or interface in java.util" class="external-link"><code>Objects.requireNonNull(Object, String)</code></a>,
+but in addition to valid non-<code>null</code> reference the passed string requires to be non-blank
+(contains at least one non-whitespace character)</div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStringUtils.html#requiredNonBlank(S,java.lang.String)" class="member-name-link">requiredNonBlank(S, String)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStringUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStringUtils</a></dt>
+<dd>
+<div class="block">Quite the same as JDK's utility-method <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html#requireNonNull(T)" title="class or interface in java.util" class="external-link"><code>Objects.requireNonNull(Object)</code></a>,
+but in addition to valid non-<code>null</code> reference the passed string requires to be non-blank
+(contains at least one non-whitespace character)</div>
+</dd>
+<dt><a href="org/krmdemo/techlabs/core/utils/CoreStringUtils.html#requiredNonBlank(S,java.util.function.Supplier)" class="member-name-link">requiredNonBlank(S, Supplier)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreStringUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreStringUtils</a></dt>
+<dd>
+<div class="block">Quite the same as JDK's utility-method <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html#requireNonNull(T,java.util.function.Supplier)" title="class or interface in java.util" class="external-link"><code>Objects.requireNonNull(Object, Supplier)</code></a>,
+but in addition to valid non-<code>null</code> reference the passed string requires to be non-blank
+(contains at least one non-whitespace character)</div>
+</dd>
 <dt><a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html#resourceAsText(java.lang.String)" class="member-name-link">resourceAsText(String)</a> - Static method in class org.krmdemo.techlabs.core.utils.<a href="org/krmdemo/techlabs/core/utils/CoreResourceUtils.html" title="class in org.krmdemo.techlabs.core.utils">CoreResourceUtils</a></dt>
 <dd>
 <div class="block">Loading the content of classpath-resource by path <code>file</code> as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a>

@@ -210,15 +210,24 @@ where the type of elements is determined by passed <code>itemClass</code>.</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#jsonValueFromResource(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)" class="member-name-link">jsonValueFromResource</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Loading the JSON-Value (object, array or primitive) from resource with the path <code>resourcePath</code>
+where passed <code>typeRef</code> holds the information of the class to instantiate.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#jsonValueFromResource(java.lang.String,com.fasterxml.jackson.databind.JavaType)" class="member-name-link">jsonValueFromResource</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
  com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Loading the JSON-Value (object, array or primitive) from resource with the path <code>resourcePath</code>
+where the type of returning object is determined by passed java-type <code>itemType</code>.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#jsonValueFromResource(java.lang.String,java.lang.Class)" class="member-name-link">jsonValueFromResource</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;classValue)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Loading the JSON-Value (object, array or primitive) from resource with the path <code>resourcePath</code>
+where passed <code>classValue</code> represents the class to instantiate.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#jsonValueFromString(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)" class="member-name-link">jsonValueFromString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;jsonContent,
  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</code></div>
@@ -314,8 +323,19 @@ where the type of elements is determined by passed <code>itemClass</code>.</div>
 <section class="detail" id="jsonValueFromResource(java.lang.String,java.lang.Class)">
 <h3>jsonValueFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-130">jsonValueFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-139">jsonValueFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;classValue)</span></div>
+<div class="block">Loading the JSON-Value (object, array or primitive) from resource with the path <code>resourcePath</code>
+where passed <code>classValue</code> represents the class to instantiate.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><span id="jsonValueFromResource(java.lang.String,java.lang.Class)-type-param-T"><code>T</code> - the type of returning object</span></dd>
+<dt>Parameters:</dt>
+<dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
+<dd><code>classValue</code> - the class to instantiate</dd>
+<dt>Returns:</dt>
+<dd>de-serialized java-object of class <code>classValue</code></dd>
+</dl>
 </div>
 </section>
 </li>
@@ -323,8 +343,19 @@ where the type of elements is determined by passed <code>itemClass</code>.</div>
 <section class="detail" id="jsonValueFromResource(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)">
 <h3>jsonValueFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-141">jsonValueFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-159">jsonValueFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</span></div>
+<div class="block">Loading the JSON-Value (object, array or primitive) from resource with the path <code>resourcePath</code>
+where passed <code>typeRef</code> holds the information of the class to instantiate.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><span id="jsonValueFromResource(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)-type-param-T"><code>T</code> - the type of returning object</span></dd>
+<dt>Parameters:</dt>
+<dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
+<dd><code>typeRef</code> - a Jackson's type-reference that holds the information of class @link Class} to instantiate</dd>
+<dt>Returns:</dt>
+<dd>de-serialized java-object of class that is resolved by <code>typeRef</code></dd>
+</dl>
 </div>
 </section>
 </li>
@@ -332,8 +363,23 @@ where the type of elements is determined by passed <code>itemClass</code>.</div>
 <section class="detail" id="jsonValueFromResource(java.lang.String,com.fasterxml.jackson.databind.JavaType)">
 <h3>jsonValueFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-152">jsonValueFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-183">jsonValueFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
  com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</span></div>
+<div class="block">Loading the JSON-Value (object, array or primitive) from resource with the path <code>resourcePath</code>
+where the type of returning object is determined by passed java-type <code>itemType</code>.
+<hr/>
+This method is similar to <a href="#jsonValueFromResource(java.lang.String,java.lang.Class)"><code>jsonValueFromResource(String, Class)</code></a>
+or <a href="#jsonValueFromResource(java.lang.String,com.fasterxml.jackson.core.type.TypeReference)"><code>jsonValueFromResource(String, TypeReference)</code></a>, but it's mostly for dynamic cases,
+where the reference to concrete <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link"><code>Class</code></a> is not available.</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><span id="jsonValueFromResource(java.lang.String,com.fasterxml.jackson.databind.JavaType)-type-param-T"><code>T</code> - the type of returning object</span></dd>
+<dt>Parameters:</dt>
+<dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
+<dd><code>javaType</code> - a Jackson's java-type to resolve the class of returning object</dd>
+<dt>Returns:</dt>
+<dd>de-serialized java-object of class that is resolved by <code>javaType</code></dd>
+</dl>
 </div>
 </section>
 </li>
@@ -341,12 +387,12 @@ where the type of elements is determined by passed <code>itemClass</code>.</div>
 <section class="detail" id="jsonObjFromResource(java.lang.String)">
 <h3>jsonObjFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-167">jsonObjFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-198">jsonObjFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
 <dt>Returns:</dt>
-<dd>de-serialized JSON-Object as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link"><code>Map</code></a></dd>
+<dd>de-serialized JSON-Object as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link"><code>Map&lt;String,Object&gt;</code></a></dd>
 </dl>
 </div>
 </section>
@@ -355,7 +401,7 @@ where the type of elements is determined by passed <code>itemClass</code>.</div>
 <section class="detail" id="jsonArrFromResource(java.lang.String)">
 <h3>jsonArrFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-176">jsonArrFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-207">jsonArrFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
@@ -369,7 +415,7 @@ where the type of elements is determined by passed <code>itemClass</code>.</div>
 <section class="detail" id="jsonArrFromResource(java.lang.String,java.lang.Class)">
 <h3>jsonArrFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-190">jsonArrFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-221">jsonArrFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;itemClass)</span></div>
 <div class="block">Loading the JSON-Array from resource with path <code>resourcePath</code> as <code>List&lt;T&gt;</code>,
 where the type of elements is determined by passed <code>itemClass</code>.</div>
@@ -380,7 +426,7 @@ where the type of elements is determined by passed <code>itemClass</code>.</div>
 <dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
 <dd><code>itemClass</code> - the class of elements in returning list</dd>
 <dt>Returns:</dt>
-<dd>de-serialized JSON-Array as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a></dd>
+<dd>de-serialized JSON-Array as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List&lt;T&gt;</code></a></dd>
 </dl>
 </div>
 </section>
@@ -389,21 +435,21 @@ where the type of elements is determined by passed <code>itemClass</code>.</div>
 <section class="detail" id="jsonArrFromResource(java.lang.String,com.fasterxml.jackson.databind.JavaType)">
 <h3>jsonArrFromResource</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-207">jsonArrFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-238">jsonArrFromResource</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourcePath,
  com.fasterxml.jackson.databind.JavaType&nbsp;itemType)</span></div>
 <div class="block">Loading the JSON-Array from resource with path <code>resourcePath</code> as <code>List&lt;T&gt;</code>,
 where the type of elements is determined by passed java-type <code>itemType</code>.
 <hr/>
 This method is similar to <a href="#jsonArrFromResource(java.lang.String,java.lang.Class)"><code>jsonArrFromResource(String, Class)</code></a>
-but it's mostly for dynamic cases, where no reference to concrete <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link"><code>Class</code></a>.</div>
+but it's mostly for dynamic cases, where the reference to concrete <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link"><code>Class</code></a> is not available.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><span id="jsonArrFromResource(java.lang.String,com.fasterxml.jackson.databind.JavaType)-type-param-T"><code>T</code> - type of elements in returning list</span></dd>
 <dt>Parameters:</dt>
 <dd><code>resourcePath</code> - the path to JSON-resource within the current class-path (no leading slash !!!)</dd>
-<dd><code>itemType</code> - the java-type of elements in returning list</dd>
+<dd><code>itemType</code> - a Jackson's java-type to resolve the class of elements in the returning list</dd>
 <dt>Returns:</dt>
-<dd>de-serialized JSON-Array as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List</code></a></dd>
+<dd>de-serialized JSON-Array as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link"><code>List&lt;T&gt;</code></a></dd>
 </dl>
 </div>
 </section>
@@ -412,7 +458,7 @@ but it's mostly for dynamic cases, where no reference to concrete <a href="https
 <section class="detail" id="jsonTreeFromFile(java.io.File)">
 <h3>jsonTreeFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonNode</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-216">jsonTreeFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.fasterxml.jackson.databind.JsonNode</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-247">jsonTreeFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>jsonFile</code> - a file that contains JSON-value</dd>
@@ -426,7 +472,7 @@ but it's mostly for dynamic cases, where no reference to concrete <a href="https
 <section class="detail" id="jsonValueFromFile(java.io.File,com.fasterxml.jackson.core.type.TypeReference)">
 <h3>jsonValueFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-231">jsonValueFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-262">jsonValueFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile,
  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeRef)</span></div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
@@ -444,7 +490,7 @@ but it's mostly for dynamic cases, where no reference to concrete <a href="https
 <section class="detail" id="jsonObjFromFile(java.io.File)">
 <h3>jsonObjFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-244">jsonObjFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-275">jsonObjFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>jsonFile</code> - a file that contains JSON-Object</dd>
@@ -458,7 +504,7 @@ but it's mostly for dynamic cases, where no reference to concrete <a href="https
 <section class="detail" id="jsonArrFromFile(java.io.File)">
 <h3>jsonArrFromFile</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-253">jsonArrFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/org/krmdemo/techlabs/core/utils/JacksonUtils.html#line-284">jsonArrFromFile</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;jsonFile)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>jsonFile</code> - a file that contains JSON-Array</dd>

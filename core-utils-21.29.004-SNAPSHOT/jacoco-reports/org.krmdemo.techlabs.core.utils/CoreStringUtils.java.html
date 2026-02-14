@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,13 +20,60 @@ import static org.krmdemo.techlabs.core.utils.CountingUtils.countingMap;
 public class CoreStringUtils {
 
     /**
+     * Quite the same as JDK's utility-method {@link Objects#requireNonNull(Object, String)},
+     * but in addition to valid non-{@code null} reference the passed string requires to be non-blank
+     * (contains at least one non-whitespace character)
+     *
+     * @param str a string (or any type that extends {@link CharSequence}) that requires to be non-blank
+     * @return the input string {@code str} if it's non-blank
+     * @throws IllegalArgumentException if the input string {@code str} is blank
+     * @see StringUtils#isBlank(CharSequence)
+     */
+    public static &lt;S extends CharSequence&gt; S requiredNonBlank(S str) {
+<span class="fc" id="L33">        return requiredNonBlank(str, &quot;input string must NOT be blank&quot;);</span>
+    }
+
+    /**
+     * Quite the same as JDK's utility-method {@link Objects#requireNonNull(Object)},
+     * but in addition to valid non-{@code null} reference the passed string requires to be non-blank
+     * (contains at least one non-whitespace character)
+     *
+     * @param str a string (or any type that extends {@link CharSequence}) that requires to be non-blank
+     * @return the input string {@code str} if it's non-blank
+     * @throws IllegalArgumentException if the input string {@code str} is blank
+     * @see StringUtils#isBlank(CharSequence)
+     */
+    public static &lt;S extends CharSequence&gt; S requiredNonBlank(S str, String errorMessage) {
+<span class="fc" id="L47">        return requiredNonBlank(str, () -&gt; errorMessage);</span>
+    }
+
+    /**
+     * Quite the same as JDK's utility-method {@link Objects#requireNonNull(Object, Supplier)},
+     * but in addition to valid non-{@code null} reference the passed string requires to be non-blank
+     * (contains at least one non-whitespace character)
+     *
+     * @param str a string (or any type that extends {@link CharSequence}) that requires to be non-blank
+     * @param errMsgSupplier a supplier for error message (to postpone the calculation if it's non-trivial)
+     * @return the input string {@code str} if it's non-blank
+     * @throws IllegalArgumentException if the input string {@code str} is blank
+     * @param &lt;S&gt; any type that extends {@link CharSequence}
+     * @see StringUtils#isBlank(CharSequence)
+     */
+    public static &lt;S extends CharSequence&gt; S requiredNonBlank(S str, Supplier&lt;String&gt; errMsgSupplier) {
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (StringUtils.isBlank(str)) {</span>
+<span class="fc" id="L64">            throw new IllegalArgumentException(errMsgSupplier.get());</span>
+        }
+<span class="fc" id="L66">        return str;</span>
+    }
+
+    /**
      * Just a short-cut of JDK-invocation: &lt;pre&gt;{@code
      *     Collectors.joining(System.lineSeparator())
      * }&lt;/pre&gt;
      * @return the {@link Collector} that join the stream of strings with {@link System#lineSeparator()}
      */
     public static Collector&lt;CharSequence, ?, String&gt; multiLine() {
-<span class="fc" id="L27">        return Collectors.joining(System.lineSeparator());</span>
+<span class="fc" id="L76">        return Collectors.joining(System.lineSeparator());</span>
     }
 
     /**
@@ -32,7 +81,7 @@ public class CoreStringUtils {
      * @return the stream of chars as {@link Stream Stream&amp;lt;Character&amp;gt;}
      */
     public static Stream&lt;Character&gt; streamChars(CharSequence str) {
-<span class="fc" id="L35">        return str.chars().mapToObj(ch -&gt; (char)ch);</span>
+<span class="fc" id="L84">        return str.chars().mapToObj(ch -&gt; (char)ch);</span>
     }
 
     /**
@@ -42,7 +91,7 @@ public class CoreStringUtils {
      * @return a counting-map of characters in passed {@code str}
      */
     public static Map&lt;Character, Integer&gt; countingCharsMap(CharSequence str) {
-<span class="fc" id="L45">        return countingMap(streamChars(str));</span>
+<span class="fc" id="L94">        return countingMap(streamChars(str));</span>
     }
 
     /**
@@ -52,9 +101,9 @@ public class CoreStringUtils {
      * @return a {@link Stream Stream&amp;lt;String&amp;gt;} of alphanumeric words
      */
     public static Stream&lt;String&gt; splitWords(String sentence) {
-<span class="fc" id="L55">        return Arrays.stream(sentence.split(&quot;\\W&quot;))</span>
-<span class="fc" id="L56">            .map(String::trim)</span>
-<span class="fc bfc" id="L57" title="All 2 branches covered.">            .filter(word -&gt; !word.isEmpty());</span>
+<span class="fc" id="L104">        return Arrays.stream(sentence.split(&quot;\\W&quot;))</span>
+<span class="fc" id="L105">            .map(String::trim)</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">            .filter(word -&gt; !word.isEmpty());</span>
     }
 
     /**
@@ -64,7 +113,7 @@ public class CoreStringUtils {
      * @return a {@link List List&amp;lt;String&amp;gt;} of alphanumeric words
      */
     public static List&lt;String&gt; splitWordsList(String sentence) {
-<span class="fc" id="L67">        return splitWords(sentence).collect(Collectors.toList());</span>
+<span class="fc" id="L116">        return splitWords(sentence).collect(Collectors.toList());</span>
     }
 
     /**
@@ -78,7 +127,7 @@ public class CoreStringUtils {
      * @param &lt;T&gt; the type of input elements to the reduction operation
      */
     public static &lt;T&gt; Collector&lt;T, ?, CharSequence&gt; joiningReversed() {
-<span class="fc" id="L81">        return joiningReversed(&quot;&quot;);</span>
+<span class="fc" id="L130">        return joiningReversed(&quot;&quot;);</span>
     }
 
     /**
@@ -92,7 +141,7 @@ public class CoreStringUtils {
      * @param &lt;T&gt; the type of input elements to the reduction operation
      */
     public static &lt;T&gt; Collector&lt;T, ?, CharSequence&gt; joiningReversed(String delimiter) {
-<span class="fc" id="L95">        return joiningReversed(delimiter, &quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L144">        return joiningReversed(delimiter, &quot;&quot;, &quot;&quot;);</span>
     }
 
     /**
@@ -106,24 +155,24 @@ public class CoreStringUtils {
      * @param &lt;T&gt; the type of input elements to the reduction operation
      */
     public static &lt;T&gt; Collector&lt;T, ?, CharSequence&gt; joiningReversed(String delimiter, String prefix, String suffix) {
-<span class="fc" id="L109">        return Collector.of(</span>
+<span class="fc" id="L158">        return Collector.of(</span>
             StringBuilder::new,
             (sb, value) -&gt; {
-<span class="fc bfc" id="L112" title="All 4 branches covered.">                if (!sb.isEmpty() &amp;&amp; !delimiter.isEmpty()) {</span>
-<span class="fc" id="L113">                    sb.insert(0, delimiter);</span>
+<span class="fc bfc" id="L161" title="All 4 branches covered.">                if (!sb.isEmpty() &amp;&amp; !delimiter.isEmpty()) {</span>
+<span class="fc" id="L162">                    sb.insert(0, delimiter);</span>
                 }
-<span class="fc" id="L115">                sb.insert(0, value);</span>
-<span class="fc" id="L116">            },</span>
+<span class="fc" id="L164">                sb.insert(0, value);</span>
+<span class="fc" id="L165">            },</span>
             (left, right) -&gt; { // the combiner is required for parallel streams
-<span class="fc" id="L118">                right.append(delimiter).append(left); return right;</span>
+<span class="fc" id="L167">                right.append(delimiter).append(left); return right;</span>
             },
-<span class="fc" id="L120">            sb -&gt; sb.insert(0, prefix).append(suffix)</span>
+<span class="fc" id="L169">            sb -&gt; sb.insert(0, prefix).append(suffix)</span>
         );
     }
 
     /**
      * This method could be used to check whether the multi-line output ends with {@link System#lineSeparator() new-line}-symbol(s),
-     * because ib most cases it's quite impossible to realize that fact visually (unless using different background).
+     * because in most cases it's quite impossible to realize that fact visually (unless using different background).
      * &lt;hr/&gt;
      * TODO: introduce a method to detect extra white-spaces before new-line like {@code git-diff} is doing
      *
@@ -131,14 +180,14 @@ public class CoreStringUtils {
      * @return {@code true} if the passed line is not empty, and it does not end with {@link System#lineSeparator() new-line}-symbol(s)
      */
     public static boolean hasNoNewLineAtTheEnd(String str) {
-<span class="fc bfc" id="L134" title="All 4 branches covered.">        return StringUtils.isNotEmpty(str) &amp;&amp; !str.endsWith(System.lineSeparator());</span>
+<span class="fc bfc" id="L183" title="All 4 branches covered.">        return StringUtils.isNotEmpty(str) &amp;&amp; !str.endsWith(System.lineSeparator());</span>
     }
 
     // --------------------------------------------------------------------------------------------
 
-<span class="fc" id="L139">    private CoreStringUtils() {</span>
+<span class="fc" id="L188">    private CoreStringUtils() {</span>
         // prohibit the creation of utility-class instance
-<span class="fc" id="L141">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
+<span class="fc" id="L190">        throw new UnsupportedOperationException(&quot;Cannot instantiate utility-class &quot; + getClass().getName());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
